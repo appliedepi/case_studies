@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "case_studies",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\npacman::p_load(\n  rio,\n  here,\n  janitor,\n  DT,\n  tidyverse\n)\n\nSee Fulton County Espanol\n\n\n\nName\nLink\nTopics\nGeography\nScale\nTool\nLanguage\n\n\n\n\nFulton\nFulton\nOutbreak; GIS;\nUSA\nLocal\nR\nEnglish\n\n\nOswego\nOswego\nOutbreak\nUSA\nLocal\nR\nSpanish\n\n\n\n\ntable_cases &lt;- tribble(\n  ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,\n  \"Fulton COVID-19\", [Fulton](fulton.qmd#fulton), \"USA\", \"Local\", \"R\", \"English\", \"Outbreak reports; GIS; epidemic curves\",\n  \"Oswego ES\", \"Link\", \"USA\", \"Local\", \"R\", \"Spanish\", \"Outbreak response\"\n)\n\n\nDT::datatable(table_cases)\n\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\nSee Chapter 2\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "4  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "fulton.html#sec-fulton-en",
+    "href": "fulton.html#sec-fulton-en",
+    "title": "2  Fulton County COVID-19",
+    "section": "2.1 English",
+    "text": "2.1 English\nThis page contains the Fulton County COVID-19 case study (all languages)\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "fulton.html#sec-fulton-es",
+    "href": "fulton.html#sec-fulton-es",
+    "title": "2  Fulton County COVID-19",
+    "section": "2.2 Spanish",
+    "text": "2.2 Spanish"
+  },
+  {
+    "objectID": "oswego.html",
+    "href": "oswego.html",
+    "title": "3  Oswego",
+    "section": "",
+    "text": "This page contains the Oswego case study (all languages)\n\n1 + 1\n\n[1] 2"
+  }
+]

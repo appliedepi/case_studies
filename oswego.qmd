@@ -1,0 +1,10 @@
+# Oswego {#sec-oswego}
+
+This page contains the Oswego case study (all languages)
+
+```{r}
+1 + 1
+```
+
+
+

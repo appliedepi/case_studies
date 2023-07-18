@@ -1,0 +1,40 @@
+# Preface {.unnumbered}
+
+This is a Quarto book.
+
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+```{r}
+pacman::p_load(
+  rio,
+  here,
+  janitor,
+  DT,
+  tidyverse
+)
+```
+
+See [Fulton County Espanol](fulton.qmd#fulton-es)
+
+| Name   | Link                        | Topics         | Geography | Scale | Tool | Language |
+|---------|-------------------|-------|-----------|---------|---------|---------|
+| Fulton | [Fulton](fulton.qmd#fulton) | Outbreak; GIS; | USA       | Local | R    | English  |
+| Oswego | [Oswego](oswego.qmd#oswego) | Outbreak       | USA       | Local | R    | Spanish  |
+
+```{r, eval=F}
+table_cases <- tribble(
+  ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,
+  "Fulton COVID-19", [Fulton](fulton.qmd#fulton), "USA", "Local", "R", "English", "Outbreak reports; GIS; epidemic curves",
+  "Oswego ES", "Link", "USA", "Local", "R", "Spanish", "Outbreak response"
+)
+```
+
+Filterable version of table (but will need to insert weblinks, not references)
+
+```{r, eval=F}
+DT::datatable(table_cases, escape = F)
+```
+
+```{r}
+1 + 1
+```
