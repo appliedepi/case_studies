@@ -23,7 +23,14 @@ This is a static table to test links:
 | Fulton | [Fulton](fulton.qmd#fulton) | Outbreak; GIS; | USA       | Local | R    | English  |
 | Oswego | [Oswego](oswego.qmd#oswego) | Outbreak       | USA       | Local | R    | Spanish  |
 
-This is a dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the `tribble()` function seems to break the table. An alternative would be to put the whole website address (e.g. www.appliedepi.org/case/oswego...) but we won't know this till the end.
+
+Can we incorporate a keywords column??
+Otherwise have Search bar for whole book, like we do for the Epi R Handbook.
+
+
+This is an attempt dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the `tribble()` function seems to break the table. An alternative would be to put the whole website address (e.g. www.appliedepi.org/case/oswego...) but we won't know this till the end.
+
+Putting internal links in DT does not seem to work. Might need to think of other solution...
 
 ```{r, eval=F, echo=T}
 table_cases <- tribble(

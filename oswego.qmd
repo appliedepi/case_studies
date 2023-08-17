@@ -2,11 +2,17 @@
 
 ## Overview
 
+**Case study characteristics**
 Name: Oswego  
 Language: Spanish  
 Tool: R  
 Location: United States  
 Disease: TBD  
+Keywords:  
+
+Acknowledgements
+Tutorial authors:  
+Data source:  
 
 
 ## Instructions  
