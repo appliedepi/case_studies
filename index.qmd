@@ -1,10 +1,8 @@
-# Preface {.unnumbered}
+# Landing page {.unnumbered}
 
-This is a Quarto book.
+This is a Quarto book. To learn more about Quarto books visit <https://quarto.org/docs/books>.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
-
-```{r}
+```{r, echo=F}
 pacman::p_load(
   rio,
   here,
@@ -14,18 +12,24 @@ pacman::p_load(
 )
 ```
 
-See [Fulton County Espanol](fulton.qmd#fulton-es)
+This is an internal link: See [Fulton County Espanol](fulton.qmd#fulton-es)
+
+This is another kind of internal link that makes use of a tag: \@sec-fulton
+
+This is a static table to test links:
 
 | Name   | Link                        | Topics         | Geography | Scale | Tool | Language |
-|---------|-------------------|-------|-----------|---------|---------|---------|
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | Fulton | [Fulton](fulton.qmd#fulton) | Outbreak; GIS; | USA       | Local | R    | English  |
 | Oswego | [Oswego](oswego.qmd#oswego) | Outbreak       | USA       | Local | R    | Spanish  |
 
-```{r, eval=F}
+This is a dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the `tribble()` function seems to break the table. An alternative would be to put the whole website address (e.g. www.appliedepi.org/case/oswego...) but we won't know this till the end.
+
+```{r, eval=F, echo=T}
 table_cases <- tribble(
   ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,
-  "Fulton COVID-19", [Fulton](fulton.qmd#fulton), "USA", "Local", "R", "English", "Outbreak reports; GIS; epidemic curves",
-  "Oswego ES", "Link", "USA", "Local", "R", "Spanish", "Outbreak response"
+  "Fulton COVID-19", @sec-fulton, "USA", "Local", "R", "English", "Outbreak reports; GIS; epidemic curves",
+  "Oswego ES", [Oswego](oswego.qmd#oswego), "USA", "Local", "R", "Spanish", "Outbreak response"
 )
 ```
 
@@ -33,8 +37,4 @@ Filterable version of table (but will need to insert weblinks, not references)
 
 ```{r, eval=F}
 DT::datatable(table_cases, escape = F)
-```
-
-```{r}
-1 + 1
 ```

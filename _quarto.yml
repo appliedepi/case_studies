@@ -2,8 +2,8 @@ project:
   type: book
 
 book:
-  title: "case_studies"
-  author: "Norah Jones"
+  title: "Applied Epi Case Studies"
+  author: "Applied Epi"
   date: "7/18/2023"
   chapters:
     - index.qmd
