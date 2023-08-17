@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -178,8 +144,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-fulton-en" id="toc-sec-fulton-en" class="nav-link active" data-scroll-target="#sec-fulton-en"><span class="header-section-number">2.1</span> English</a></li>
-  <li><a href="#sec-fulton-es" id="toc-sec-fulton-es" class="nav-link" data-scroll-target="#sec-fulton-es"><span class="header-section-number">2.2</span> Spanish</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">2.1</span> Overview</a></li>
+  <li><a href="#introduction-to-this-case-study-script" id="toc-introduction-to-this-case-study-script" class="nav-link" data-scroll-target="#introduction-to-this-case-study-script"><span class="header-section-number">2.2</span> Introduction to this case study script</a></li>
+  <li><a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis"><span class="header-section-number">3</span> Descriptive analysis</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.1</span> Summary</a></li>
+  <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time"><span class="header-section-number">3.2</span> Time</a></li>
+  <li><a href="#place" id="toc-place" class="nav-link" data-scroll-target="#place"><span class="header-section-number">3.3</span> Place</a></li>
+  <li><a href="#person" id="toc-person" class="nav-link" data-scroll-target="#person"><span class="header-section-number">3.4</span> Person</a>
+  <ul class="collapse">
+  <li><a href="#risk-factors-for-mortality" id="toc-risk-factors-for-mortality" class="nav-link" data-scroll-target="#risk-factors-for-mortality"><span class="header-section-number">3.4.1</span> Risk factors for mortality</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">4</span> Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#person-1" id="toc-person-1" class="nav-link" data-scroll-target="#person-1"><span class="header-section-number">4.1</span> Person</a></li>
+  <li><a href="#time-1" id="toc-time-1" class="nav-link" data-scroll-target="#time-1"><span class="header-section-number">4.2</span> Time</a></li>
+  <li><a href="#place-1" id="toc-place-1" class="nav-link" data-scroll-target="#place-1"><span class="header-section-number">4.3</span> Place</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -188,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-fulton" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton County COVID-19</span></span></h1>
+<h1 class="title"><span id="sec-fulton-en" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton County COVID-19</span></span></h1>
 </div>
 
 
@@ -203,20 +185,699 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="sec-fulton-en" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="sec-fulton-en"><span class="header-section-number">2.1</span> English</h2>
-<p>This page contains the Fulton County COVID-19 case study (all languages)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<section id="overview" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">2.1</span> Overview</h2>
+<p><strong>Case study characteristics</strong> Name: Fulton<br>
+Language: English<br>
+Tool: R<br>
+Location: United States<br>
+Disease: COVID-19<br>
+Keywords:</p>
+<p><strong>Acknowledgements</strong><br>
+Tutorial authors: Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer<br>
+Data source: Anonymised and jittered data provided by Fulton County for training purposes</p>
 </section>
-<section id="sec-fulton-es" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="sec-fulton-es"><span class="header-section-number">2.2</span> Spanish</h2>
+<section id="introduction-to-this-case-study-script" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="introduction-to-this-case-study-script"><span class="header-section-number">2.2</span> Introduction to this case study script</h2>
+<p>This is a an example R-markdown script which demonstrates how to create an automated outbreak situation report for COVID-19 in Fulton county, USA. The data used are anonymised and fake (scrambled), for example purposes only.</p>
+<ul>
+<li>We demonstrate how to import, clean and analyse your data.<br>
+</li>
+<li>Analysis is organised by time, place and person.
+<ul>
+<li>For the purpose of the case study we separate this by descriptive analysis and visualisation (normally this would be mixed together of course)
+<ul>
+<li>The visualisation section is organised in to place, time and person. This is to simplify flow for didactic delivery.<br>
+</li>
+</ul></li>
+<li>Analysis is loosely based off the monthly <a href="https://www.fultoncountyga.gov/covid-19/epidemiology-reports">epidemiology reports</a> for Fulton county<br>
+</li>
+</ul></li>
+<li>Text within &lt;! &gt; will not show in your final document.
+<ul>
+<li>The other parts such as slashes (///), dashes (-) and tildes (~) are just aesthetic</li>
+<li>These comments are used to explain the code chunks.<br>
+</li>
+<li>We refer to functions in curly brackets, e.g.&nbsp;{dplyr} and functions end in brackets, e.g.&nbsp;count()<br>
+</li>
+<li>This comment will not show up when you knit the document.<br>
+</li>
+<li>You can delete them if you want.<br>
+</li>
+</ul></li>
+<li>Feedback &amp; suggestions are welcome at the <a href="https://github.com/appliedepi/emory_training/issues">GitHub issues page</a>
+<ul>
+<li>Alternatively email us at: <a href="mailto:epiRhandbook@gmail.com">epirhandbook@gmail.com</a></li>
+</ul></li>
+</ul>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This comment will not show up when you knit the document.
+A comment with a title with slashes indicates a name of a code chunk.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// setup \\\
+--------------------------------------------------------------------------------
+
+Several packages are required for different aspects of analysis with *R*. 
+You will need to install these before starting. 
+
+We install and load packages using the {pacman} package. Its p_load() command
+will install packages if necessary and load them for use in the current session.
+
+This might prove difficult if you have limited administrative rights for your 
+computer. Making sure your IT-department gives you the correct access can save a 
+lot of headache. 
+
+See this handbook pages on the basics of installing packages and running R from 
+network drives (company computers) for more detail. 
+
+https://epirhandbook.com/r-basics.html#installation
+https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div style="page-break-after: always;"></div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// table_of_contents \\\
+--------------------------------------------------------------------------------
+This chunk adds a table of contents to your report using the {officedown} package. 
+You can also add in a list of tables and figures. 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell">
+<div class="cell-output-display">
+
+</div>
+<div class="cell-output-display">
+
+</div>
+<div class="cell-output-display">
+
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// define_reporting_periods \\\
+--------------------------------------------------------------------------------
+Here we use the date you want to report on, defined in parameters (params) at
+top of script to create a date object for filtering datasets, plots/tables, etc.
+
+We also create a week object to make grouping data easier. In this scenario we
+have defined the week to start on Wednesdays as this is when Fulton County
+releases their reports (but you can choose any other day of the week too).
+
+From these we are then able to define periods 14 and 28 days prior to our
+report date. We can also make the appropriate labels to auto-populate
+table titles.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// import \\\
+--------------------------------------------------------------------------------
+
+We use the {rio} package for importing our example data - it is very versatile 
+and can read in most file types. 
+
+We use the {here} package for defining the path to our file. This is important 
+for sharing your script with others (by email or on Sharepoint) - if you used an
+"absolute" path, they would need to update the script to match their computer. 
+
+This way your whole R-project folder can be zipped up and moved somewhere else. 
+
+For more details see: 
+https://epirhandbook.com/import-and-export.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// browse_data \\\
+--------------------------------------------------------------------------------
+
+Here we take a look at the raw data to get a feel for what needs cleaning. 
+
+We first use the in-built browser with the {base} function View(). 
+
+Then we can use the {base} function summary(), but probably the most comprehensive 
+overview is with the {skimr} function. 
+You can also view distinct values for variables using the {base} unique() function. 
+
+For more details see: 
+https://epirhandbook.com/cleaning-data-and-core-functions.html#review
+https://epirhandbook.com/descriptive-tables.html#browse-data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// clean_colnames \\\
+--------------------------------------------------------------------------------
+
+Here we are going to clean the column names of our data set - and store as a new
+dataset called "linelist". 
+
+It is possible to use the {janitor} package for automated cleaning of variable 
+names - but as there are only a few variables that we want to rename, 
+here we will demonstrate using {dplyr} select() function for manually renaming.
+
+Select() can be used either to retain specific columns or to rename them by using
+the syntax New name = Old name. 
+
+For more details see: 
+https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// clean_dates \\\
+--------------------------------------------------------------------------------
+
+Here we are going to clean the date variables 
+
+The {base} way to convert columns to Date class is with as.Date(). If the
+current format is YYYY-MM-DD or YYYY/MM/DD then no other arguments are needed. 
+If the format is different, specify it to format= (for more detail see: 
+https://epirhandbook.com/working-with-dates.html#convert-to-date )
+
+Below we also introduce using across() from {dplyr}, which allows you to apply a
+function across multiple specified columns. See
+https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// clean_numerics \\\
+--------------------------------------------------------------------------------
+
+Here we are going to clean all numeric variables, as well as create some new 
+variables based on difference between dates. 
+
+First we will ensure that age is numeric and then fix those with incorrectly 
+entered dates (notice that one individual was -20 years old). 
+
+Then we show how to create new numeric variables for the number of days between 
+two dates. 
+
+For more details see: 
+https://epirhandbook.com/cleaning-data-and-core-functions.html#num_cats
+https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
+
+Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
+and handles dates better.  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// clean_categories \\\
+--------------------------------------------------------------------------------
+
+create age groups based on the age variable using 
+the age_categories() function from {epikit}. It is also possible to create 
+age groups using the {dplyr} case_when() function - but is more involved. 
+
+For more details see: 
+https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-and-transformation
+https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
+https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// vector_vars \\\
+--------------------------------------------------------------------------------
+
+Here we are going to store a list of variable names that we can then use for 
+iterating later on rather than typing them out each time. 
+In this example we are going to take all the symptom variables and store them in 
+a vector. 
+It is also possible to simply type these out with quotation marks within a c(...)
+argument. 
+
+For more details see: 
+https://epirhandbook.com/iteration-loops-and-lists.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// duplicated \\\
+--------------------------------------------------------------------------------
+
+Here we remove the duplicates based on having the same pid, gender and date of 
+birth. 
+Note that this might exclude those which are legitimately reported twice - i.e. 
+those who recovered and were reinfected. To deal with these you could create a 
+composite variable of the identifiers of interest, flag the duplicates there and 
+then add an additional argument for having a report date within six months. 
+
+For more details see: 
+https://epirhandbook.com/de-duplication.html 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// filter \\\
+--------------------------------------------------------------------------------
+
+Here we are going to filter our data set to only keep relevant cases for analysis. 
+We keep those that are reported before our surveillance cut-off date and those 
+that are entered as a confirmed case. 
+
+For more details see: 
+https://epirhandbook.com/cleaning-data-and-core-functions.html#filter-rows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+</section>
+<section id="descriptive-analysis" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Descriptive analysis</h1>
+<p>This section will be analysing data by time, place, and person to produce descriptive tables.</p>
+<section id="summary" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.1</span> Summary</h2>
+<ul>
+<li>As of June 23 2021, Fulton County has recorded 81757 confirmed cases of COVID-19.<br>
+</li>
+<li>As of June 23 2021, Fulton County has recorded 1701 (2.1%) deaths.<br>
+</li>
+<li>Among all confirmed cases of COVID-19 in Fulton County, 5277 (6.5%) required hospitalization.</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="time" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="time"><span class="header-section-number">3.2</span> Time</h2>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// epiweek_table \\\
+--------------------------------------------------------------------------------
+
+Here we use the {janitor} tabyl() function to get case counts by calendar week 
+(as well as the percentage these contribute to the overall). 
+
+We then create use {flextable} to produce a clean output table. 
+
+For more details see: 
+https://epirhandbook.com/descriptive-tables.html
+https://epirhandbook.com/tables-for-presentation.html
+https://epirhandbook.com/descriptive-tables.html#tbl_janitor
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-tab.cap="COVID-19 case counts by calendar week in Fulton County" data-tab.id="timetab">
+<div class="cell-output cell-output-error">
+<pre><code>Error in opts_current_table(): if a label (epiweek_table) is defined, chunk option `tbl-cap` should also be defined.</code></pre>
+</div>
+</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Note that tab.caps cannot have any special characters in them (e.g. "_") otherwise
+referencing as below does not work. 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<p>As you can see from above in Table @ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in December 2020.</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="place" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="place"><span class="header-section-number">3.3</span> Place</h2>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// zip_counts \\\
+--------------------------------------------------------------------------------
+
+Here we use {dplyr} functions to get case counts based on ZIP Code and the 
+time periods created in the define_reporting_periods code chunk above. 
+We store as an object called zip_counts so that it can be merged with population
+in the chunks below. 
+
+For more details see: 
+https://epirhandbook.com/descriptive-tables.html#dplyr-package
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// zip_join \\\
+--------------------------------------------------------------------------------
+
+Here, use {dplyr} functions to extract the population counts from our shapefile, 
+and then merge these with our zip_counts from above. 
+N.b. the left_join() functions preserves all the rows from the first dataset 
+provided and only merges the rows from the second that match. 
+We then calculate incidence per 10,000 population. 
+
+For more details see: 
+https://epirhandbook.com/descriptive-tables.html#dplyr-package
+https://epirhandbook.com/joining-data.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// zip_table \\\
+--------------------------------------------------------------------------------
+
+Here we use {flextable} to produce a publication-ready table. We also demonstrate
+how to colour cells based on their values, defining the cut-offs in advance using
+{dplyr} case_when(). Colours are called here using HEX-codes but can also be 
+referred to by name. 
+
+For more details see: 
+https://epirhandbook.com/tables-for-presentation.html
+https://colorbrewer2.org/#type=sequential&scheme=Reds&n=3
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-tab.cap="COVID-19 new case counts by ZIP-code" data-tab.id="ziptab">
+<div class="cell-output cell-output-error">
+<pre><code>Error in opts_current_table(): if a label (zip_table) is defined, chunk option `tbl-cap` should also be defined.</code></pre>
+</div>
+</div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The tag below will change the page to landscape in the word document output. 
+This is part of the {officer} package - and is accompanied by a second tag below
+to stop the landscape orientation. 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!---BLOCK_LANDSCAPE_START--->
+</section>
+<section id="person" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="person"><span class="header-section-number">3.4</span> Person</h2>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// demographics_tab \\\
+--------------------------------------------------------------------------------
+
+Here we use {purrr} to iterate over demographics variables (defined in the 
+vector_vars code chunk) - to produce tables of counts and percentages for cases
+and deaths. 
+
+We use {dplyr} bind_rows() and bind_cols() to combine the various smaller dataframes
+of counts in to one large table. 
+
+And then we colour in our {flextable} with different criteria for each of the 
+demographic variables of interest. 
+
+For more details see: 
+https://epirhandbook.com/tables-for-presentation.html
+https://epirhandbook.com/iteration-loops-and-lists.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-tab.cap="Cumulative and recent confirmed COVID-19 case and death counts by gender, age, and race/ethnicity in Fulton County, Georgia. Past 28 day period refers to May 27-June 23, 2021" data-tab.id="demogtab">
+<div class="cell-output cell-output-error">
+<pre><code>Error in opts_current_table(): if a label (demographics_tab) is defined, chunk option `tbl-cap` should also be defined.</code></pre>
+</div>
+</div>
+<!---BLOCK_LANDSCAPE_STOP--->
+<section id="risk-factors-for-mortality" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="risk-factors-for-mortality"><span class="header-section-number">3.4.1</span> Risk factors for mortality</h3>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// rf_unknowns \\\
+--------------------------------------------------------------------------------
+
+Here we need to define our variables of interest to investigate as risk factors. 
+We then need to swap factor levels so that the appropriate levels are selected 
+as the exposure level in regression. 
+We then need to keep only complete cases (i.e. that don't have any missings
+for any of the variables of interest). 
+Finally, we  use the {labelled} package to assign text for each variable name to appear 
+in output tables. 
+
+For more details see: 
+https://epirhandbook.com/univariate-and-multivariable-regression.html#store-explanatory-variables
+https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
+http://larmarange.github.io/labelled/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// simple_stats \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to do simple statistical tests using the {gtsummary} 
+package. We can define which tests to run for which variables and then modify the 
+table format afterwards, also using {gtsummary}. The syntax for formatting is 
+similar to {flextable} and as this needs to be in {flextable} for MS word anyway, 
+you could also do all the formatting using {flextable}.  
+
+For more details see: 
+https://epirhandbook.com/simple-statistical-tests.html#stats_gt
+https://epirhandbook.com/tables-for-presentation.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-tab.cap="Demographic characteristics and association with mortality among COVID-19 cases" data-tab.id="statstab">
+<div class="cell-output cell-output-error">
+<pre><code>Error in opts_current_table(): if a label (simple_stats) is defined, chunk option `tbl-cap` should also be defined.</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// regression \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to do univariate regression to produce odds ratios with 
+{gtsummary}. We first create a regression table, then a counts table and then 
+finally merge the two and format the output. 
+Note that a cox regression taking into account observation time might be a 
+more appropriate analysis given the question on mortality - you could do this 
+using {gtsummary} but take a look at the epiRhandbook page on survival analysis.
+
+For more details see: 
+https://epirhandbook.com/univariate-and-multivariable-regression.html
+https://epirhandbook.com/survival-analysis.html
+https://epirhandbook.com/tables-for-presentation.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-tab.cap="Univariate regression investigating associations with mortality among COVID-19 cases" data-tab.id="regrtab">
+<div class="cell-output cell-output-error">
+<pre><code>Error in opts_current_table(): if a label (regression) is defined, chunk option `tbl-cap` should also be defined.</code></pre>
+</div>
+</div>
+<p>As seen in Table @ref(tab:regrtab), mortality was associated with being male (OR 2.02; 95% CI 1.44, 2.85), being white (OR 1.61; 95% CI 1.08, 2.36)and longer hospital stays (OR 1.14; 95% CI 1.12, 1.17).</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="visualisation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Visualisation</h1>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// ggplot_theme \\\
+--------------------------------------------------------------------------------
+
+Here we define a {ggplot2} theme (which is applied to all plots) and then define 
+some details for theme which can be applied to plots when needed. 
+
+For more details see: 
+https://epirhandbook.com/ggplot-basics.html#ggplot_basics_themes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<section id="person-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="person-1"><span class="header-section-number">4.1</span> Person</h2>
+<p>As we see below in Figure @ref(fig:agehospplot) there appears to be an association between older age, length of hospital stay and mortality. We saw this in Table @ref(tab:regrtab) as well for the individual associations, although we did not check for interaction and confounding.</p>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// age_hosp_died \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot points with {ggplot2}. 
+
+For more details see: 
+https://epirhandbook.com/ggplot-basics.html#geoms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-fig.id="agehospplot">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/age_hosp_died-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Duration of admission among hospitalized COVID-19 patients</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// ethnicity_counts \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot bar charts with {ggplot2}. 
+
+For more details see: 
+https://epirhandbook.com/ggplot-basics.html#geoms
+https://epirhandbook.com/ggplot-tips.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-fig.id="ethnicityplot">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/ethnicity_counts-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">COVID-19 cases by ethnicity</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// age_pyramid \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot age pyramids using the {apyramid} package and edit
+it with {ggplot2]. 
+
+For more details see: 
+https://epirhandbook.com/demographic-pyramids-and-likert-scales.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-fig.id="agepyramid">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/age_pyramid-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Age and Gender of COVID-19 cases, Fulton County</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="time-1" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="time-1"><span class="header-section-number">4.2</span> Time</h2>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// epicurve \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot epicurves using the {incidence2} package and edit
+it with {ggplot2]. 
+
+For more details see: 
+https://epirhandbook.com/epidemic-curves.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-fig.id="epicurve">
+<div class="cell-output cell-output-error">
+<pre><code>Error in `plot()`:
+! Arguments in `...` must be used.
+✖ Problematic argument:
+• n.breaks = 24
+ℹ Did you misspell an argument name?</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="place-1" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="place-1"><span class="header-section-number">4.3</span> Place</h2>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// crs \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to set the coordinate reference system for shapefiles using
+{sf}, as well as define an sf data frame with points from latitude longitude coordinates. 
+
+The reason to transform the shapefile here is because it was originally in a 
+different reference system than the gps points. We also filter out points that 
+are wrong (very far from Georgia state)
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#visualizing-spatial-data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// basemap \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to download map tiles using {ggspatial}. This is different
+to the demonstration in the handbook, however this is because the option shown 
+here allows for saving tiles (for offline use) as well as combining with other 
+{ggplot2} layers. 
+
+Once downloaded the tiles (images) we plot these as a "basemap" with {ggplot2} 
+which also includes a scalebar (for distance reference) and instructions for where
+to include legends in plots added on top. 
+
+Most often tiles from OpenStreetMap are used - but here we use Carto tiles as it 
+results in more visually appealing maps. 
+
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#basemaps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// points_map \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot points of cases on top of our basemap and colour
+the points by a variable. 
+
+Note this differs from the handbook as we plot with {sf} points which have a 
+coordinate reference system - whereas the handbook plots simply from a data.frame
+using {ggplot2} geom_point(). 
+
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<div class="cell" data-fig.id="pointmap">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/points_map-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">New COVID-19 cases (06/10-06/23) by ethnicity in Fulton County</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// choropleth_map_join \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to merge pre-existing data with a shapefile using {dplyr}
+left_join(). In this example we use our previously created data of counts per 
+zip code. Once merged this data can then be used for plotting. 
+Note that this code chunk is not evaluated (eval = FALSE) and is just to show 
+the code. 
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#choropleth-maps
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<p><!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// choropleth_map_over \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to count the number of points that fall within a polygon
+(in this case our shapefile of zip codes), using {sf} st_intersects(). 
+Then we use {ggplot2} to fill in the polygons based on these computed values. 
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#mapping-with-ggplot2 
+https://epirhandbook.com/gis-basics.html#choropleth-maps
+https://epirhandbook.com/gis-basics.html#spatial-joins
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --></p>
+<div class="cell" data-fig.id="choromap">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/choropleth_map_over-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">COVID-19 case incidence (per 100,000) by Zip Code (06/10-06/23) in Fulton County</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// bivar_map \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to create a bivariate map with {ggplot2} for investigating
+two categorical variables at the same time. To do this we use a function from the
+{epichecks} package on github to combine two colour schemes (which are chosen from 
+the {colorpsace} package), and then merge these with our shapefile based on the 
+categories of interest - we can then use the hex colours to fill in the plot. 
+We plot the legend separately and then combine using {patchwork}. 
+
+For more details see: 
+https://epirhandbook.com/ggplot-tips.html?q=patchwork#combine-plots
+http://colorspace.r-forge.r-project.org/articles/hcl_palettes.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --></p>
+<div class="cell" data-fig.id="bivarmap">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/bivar_map-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">COVID-19 case incidence (per 100,000) by proportion of ethnic minority cases and Zip Code (06/10-06/23) in Fulton County</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+<p><!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// heatmap \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to create a point density map (or heatmap). To do this we 
+use the {ggplot2} stat_density_2d(). However, to account for distance (i.e. to have
+cases per kilometer or mile squared) we need to calculate how many latitute/longitude
+units correspond to one kilometre (or mile). 
+We do this based on the extent of our bounding box and the {sf} st_distance() 
+function. 
+We demonstrate colouring based on viridis palettes. 
+
+For more details see: 
+https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
+https://bids.github.io/colormap/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ --></p>
+<div class="cell" data-fig.id="bivarmap">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fulton_files/figure-html/heatmap-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Density map - New COVID-19 cases (06/10-06/23) in Fulton County</figcaption>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

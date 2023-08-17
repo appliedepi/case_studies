@@ -147,14 +147,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fulton.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton County COVID-19</span></span></a>
+  <a href="./fulton-en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton (EN)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./oswego.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Oswego</span></span></a>
+  <a href="./oswego-es.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Oswego (ES)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -218,8 +218,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="landing-page" class="level1 unnumbered">
 <h1 class="unnumbered">Landing page</h1>
 <p>This is a Quarto book. To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="uri">https://quarto.org/docs/books</a>.</p>
-<p>This is an internal link: See <a href="./fulton.html#fulton-es">Fulton County Espanol</a></p>
-<p>This is another kind of internal link that makes use of a tag: @sec-fulton</p>
+<p>This is an internal link: See <a href="fulton.qmd#fulton-en">Fulton County English</a></p>
+<p>This is another kind of internal link that makes use of a tag: @sec-fulton-en</p>
 <p>This is a static table to test links:</p>
 <table class="table">
 <thead>
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>Fulton</td>
-<td><a href="./fulton.html#fulton">Fulton</a></td>
+<td><a href="fulton.qmd#fulton-en">Fulton</a></td>
 <td>Outbreak; GIS;</td>
 <td>USA</td>
 <td>Local</td>
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Oswego</td>
-<td><a href="./oswego.html#oswego">Oswego</a></td>
+<td><a href="oswego.qmd#oswego-es">Oswego</a></td>
 <td>Outbreak</td>
 <td>USA</td>
 <td>Local</td>
@@ -254,7 +254,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>This is a dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the <code>tribble()</code> function seems to break the table. An alternative would be to put the whole website address (e.g.&nbsp;www.appliedepi.org/case/oswego…) but we won’t know this till the end.</p>
+<p>Can we incorporate a keywords column?? Otherwise have Search bar for whole book, like we do for the Epi R Handbook.</p>
+<p>This is an attempt dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the <code>tribble()</code> function seems to break the table. An alternative would be to put the whole website address (e.g.&nbsp;www.appliedepi.org/case/oswego…) but we won’t know this till the end.</p>
+<p>Putting internal links in DT does not seem to work. Might need to think of other solution…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>table_cases <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Name, <span class="sc">~</span>Link, <span class="sc">~</span>Geography, <span class="sc">~</span>Scale, <span class="sc">~</span>Tool, <span class="sc">~</span>Language, <span class="sc">~</span>Topics,</span>

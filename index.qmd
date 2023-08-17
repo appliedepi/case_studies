@@ -12,16 +12,16 @@ pacman::p_load(
 )
 ```
 
-This is an internal link: See [Fulton County Espanol](fulton.qmd#fulton-es)
+This is an internal link: See [Fulton County English](fulton.qmd#fulton-en)
 
-This is another kind of internal link that makes use of a tag: \@sec-fulton
+This is another kind of internal link that makes use of a tag: \@sec-fulton-en
 
 This is a static table to test links:
 
 | Name   | Link                        | Topics         | Geography | Scale | Tool | Language |
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|
-| Fulton | [Fulton](fulton.qmd#fulton) | Outbreak; GIS; | USA       | Local | R    | English  |
-| Oswego | [Oswego](oswego.qmd#oswego) | Outbreak       | USA       | Local | R    | Spanish  |
+| Fulton | [Fulton](fulton.qmd#fulton-en) | Outbreak; GIS; | USA       | Local | R    | English  |
+| Oswego | [Oswego](oswego.qmd#oswego-es) | Outbreak       | USA       | Local | R    | Spanish  |
 
 
 Can we incorporate a keywords column??
