@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Applied Epi Case Studies",
     "section": "",
-    "text": "Landing page\nThis is a Quarto book. To learn more about Quarto books visit https://quarto.org/docs/books.\nThis is an internal link: See Fulton County English\nThis is another kind of internal link that makes use of a tag: @sec-fulton-en\nThis is a static table to test links:\n\n\n\nName\nLink\nTopics\nGeography\nScale\nTool\nLanguage\n\n\n\n\nFulton\nFulton\nOutbreak; GIS;\nUSA\nLocal\nR\nEnglish\n\n\nOswego\nOswego\nOutbreak\nUSA\nLocal\nR\nSpanish\n\n\n\nCan we incorporate a keywords column?? Otherwise have Search bar for whole book, like we do for the Epi R Handbook.\nThis is an attempt dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the tribble() function seems to break the table. An alternative would be to put the whole website address (e.g. www.appliedepi.org/case/oswego…) but we won’t know this till the end.\nPutting internal links in DT does not seem to work. Might need to think of other solution…\n\ntable_cases &lt;- tribble(\n  ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,\n  \"Fulton COVID-19\", @sec-fulton, \"USA\", \"Local\", \"R\", \"English\", \"Outbreak reports; GIS; epidemic curves\",\n  \"Oswego ES\", [Oswego](oswego.qmd#oswego), \"USA\", \"Local\", \"R\", \"Spanish\", \"Outbreak response\"\n)\n\nFilterable version of table (but will need to insert weblinks, not references)\n\nDT::datatable(table_cases, escape = F)"
+    "text": "Case-studies Open Repository\nObjective: This open repository of case studies can be used as a guide on how to implement different epidemiological methods in different situations using a variety of tools\nThis is an internal link: See Fulton County English\nThis is another kind of internal link that makes use of a tag: Chapter 2\nThis is a static table to test links:\nFilterable version of table (but will need to insert weblinks, not references as they do not seem to work)"
   },
   {
     "objectID": "intro.html",
@@ -193,14 +193,14 @@
     "href": "fulton-en.html#summary",
     "title": "2  Fulton (EN)",
     "section": "3.1 Summary",
-    "text": "3.1 Summary\n\nAs of June 23 2021, Fulton County has recorded 81757 confirmed cases of COVID-19.\n\nAs of June 23 2021, Fulton County has recorded 1701 (2.1%) deaths.\n\nAmong all confirmed cases of COVID-19 in Fulton County, 5277 (6.5%) required hospitalization."
+    "text": "3.1 Summary\n\nAs of giugno 23 2021, Fulton County has recorded 81757 confirmed cases of COVID-19.\n\nAs of giugno 23 2021, Fulton County has recorded 1701 (2.1%) deaths.\n\nAmong all confirmed cases of COVID-19 in Fulton County, 5277 (6.5%) required hospitalization."
   },
   {
     "objectID": "fulton-en.html#time",
     "href": "fulton-en.html#time",
     "title": "2  Fulton (EN)",
     "section": "3.2 Time",
-    "text": "3.2 Time\n\n\n\n\nError in opts_current_table(): if a label (epiweek_table) is defined, chunk option `tbl-cap` should also be defined.\n\n\n\nAs you can see from above in Table @ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in December 2020."
+    "text": "3.2 Time\n\n\n\n\nError in opts_current_table(): if a label (epiweek_table) is defined, chunk option `tbl-cap` should also be defined.\n\n\n\nAs you can see from above in Table @ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in dicembre 2020."
   },
   {
     "objectID": "fulton-en.html#place",
@@ -228,7 +228,7 @@
     "href": "fulton-en.html#time-1",
     "title": "2  Fulton (EN)",
     "section": "4.2 Time",
-    "text": "4.2 Time\n\n\n\nError in `plot()`:\n! Arguments in `...` must be used.\n✖ Problematic argument:\n• n.breaks = 24\nℹ Did you misspell an argument name?"
+    "text": "4.2 Time\n\n\n\nError in incidence(): As of incidence 2.0.0, `na_as_group` is no longer a valid parameter name. See `help('incidence')` for supported parameters.\n\n\nError in eval(expr, envir, enclos): oggetto 'SunWeeks' non trovato"
   },
   {
     "objectID": "fulton-en.html#place-1",
@@ -278,5 +278,12 @@
     "title": "3  Oswego (ES)",
     "section": "3.6 Cuarta Parte - Conclusión",
     "text": "3.6 Cuarta Parte - Conclusión\n\n\n\n\n\nLo siguiente se cita textualmente del informe preparado por el Dr. Rubin:\nEl helado fue preparado por el Petrie hermanas de la siguiente manera: En la tarde del 17 de abril la leche cruda de la La granja Petrie en Lycoming se desbordó al baño maría se le agrega azúcar y huevos y un poco de harina para darle cuerpo a la mezcla. El se prepararon helado de chocolate y vainilla por separado.\nEl chocolate de Hershey era necesariamente añadido a la mezcla de chocolate. A las 6 pm. los dos las mezclas se llevaban en recipientes tapados al sótano de la iglesia y se dejó reposar durante la noche. Presuntamente no fueron tocados por nadie. durante este período.\nEn la mañana del 18 de abril, el Sr. Coe agregó cinco onzas de vainilla y dos latas de leche condensada a la mezcla de vainilla y tres onzas de vainilla y una lata de leche condensada a la mezcla de chocolate. Luego el helado de vainilla se transfirió a un lata de congelación y se coloca en un congelador eléctrico durante 20 minutos, después de lo cual el helado de vainilla se sacó de la lata del congelador y se envasó en otra lata que había sido previamente lavado con agua hirviendo. Entonces el chocolate la mezcla se puso en la lata del congelador que había sido se enjuaga con agua del grifo y se deja congelardurante 20 minutos.”\nAl concluir esto, ambos las latas se taparon y se colocaron en grandes recipientes de madera recipientes llenos de hielo. Como señaló, el helado de chocolate permaneció en el una lata de congelador.\nTodos los manipuladores del helado fueron examinados. Sin lesiones externas ni respiratorias altas se notaron infecciones. Cultivos de nariz y garganta fueron tomados de dos individuos que prepararon el helado.\nLos exámenes bacteriológicos fueron hechos por el División de Laboratorios e Investigación, Albany, en ambos helados. Su informe es el siguiente:\n‘Un gran número de Staphylococcus aureus y albus se encontraron en la muestra de hielo de vainilla crema. Sólo unos pocos estafilococos fueron demostrado en el helado de chocolate.’\nInforme de los cultivos de nariz y garganta de Los Petries que prepararon el helado decía lo siguiente:\nPresencia de Staphylococcus aureus y hemolítica del cultivo nasal y Staphylococcus albus del cultivo faríngeo de Gracia Petrie. Tambien Staphylococcus albus del cultivo de la nariz de Marian Petrie. Los estreptococos hemolíticos no eran del tipo generalmente asociado con infecciones en el hombre.\nDiscusión sobre la fuente: la fuente de contaminación bacteriana del helado de vainilla no está claro. Cualquiera que sea el método de la introducción de los estafilococos, parece razonable suponer que debe haber ocurrido entre la tarde del 17 de abril y la mañana del 18 de abril. Sin motivo de contaminación Se conoce la peculiaridad del helado de vainilla. “Al dispensar los helados, la misma cuchara se utilizó. Por lo tanto, no es improbable suponer que alguna contaminación al helado de chocolate crema ocurrió de esta manera. Esto parecería ser la explicación más plausible para la enfermedad en los tres individuos que no comieron el helado de vainilla.\nMedidas de Control: El 19 de mayo, todo el helado restantes fue condenado. Todos los demás alimentos en el la cena de la iglesia había sido consumida.\nConclusiones: Un brote de gastroenteritis ocurrió después de una cena en la iglesia en Lycoming. La causa del brote fue helado de vainilla por contaminado. El método de contaminación de helado no se entiende claramente.\nSi el estafilococo dio positivo de la nariz y la garganta de los cultivos realizados en la familia Petrie haba todo lo que tenga que ver con la contaminación es un asunto por nexo epidemiológico.\nNota: El paciente #52 era un niño que mientras viendo el procedimiento de congelación se le dio una plato de helado de vainilla a las 11:00 am en abril 18."
+  },
+  {
+    "objectID": "index.html#authors",
+    "href": "index.html#authors",
+    "title": "Applied Epi Case Studies",
+    "section": "Authors",
+    "text": "Authors"
   }
 ]

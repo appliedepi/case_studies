@@ -1,51 +1,71 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 # Fulton (EN) {#sec-fulton-en}
 
 ## Overview
 
-**Case study characteristics**
-Name: Fulton  
-Language: English  
-Tool: R  
-Location: United States  
-Disease: COVID-19  
-Keywords:  
+**Case study characteristics** Name: Fulton\
+Language: English\
+Tool: R\
+Location: United States\
+Disease: COVID-19\
+Keywords:
 
-**Acknowledgements**  
-Tutorial authors: Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer  
-Data source: Anonymised and jittered data provided by Fulton County for training purposes  
+**Acknowledgements**\
+Tutorial authors: Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer\
+Data source: Anonymised and jittered data provided by Fulton County for training purposes
 
+## Instructions
 
-## Instructions  
+### Getting Help
 
-### Getting Help  
+There are several ways to get help:
 
-There are several ways to get help:  
+1)  Look for the "hints" and solutions (see below)
+2)  Post a question in [Applied Epi Community](www.community.appliedepi.org) with reference to this case study
 
-1) Look for the "hints" and solutions (see below)
-2) Post a question in [Applied Epi Community](www.community.appliedepi.org) with reference to this case study
+#### Hints and Solutions
 
-#### Hints and Solutions  
 Here is what the "helpers" look like:
 
+```{=html}
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
 -->
+```
 <details>
 
-<summary style='text-decoration: underline; color: darkgreen;'>`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint</summary>
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
 </br>
 
-Here you will see a helpful hint!  
+Here you will see a helpful hint!
 
 </br>
+
 </details>
 
+```{=html}
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
-
+```
 <details>
-<summary style='text-decoration: underline; color: red;'>`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)</summary>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
 </br>
 
 ```{r eval = F, echo=T}
@@ -56,49 +76,46 @@ ebola_linelist %>%
   )
 ```
 
-Here is more explanation about why the solution works.  
+Here is more explanation about why the solution works.
 
 </br>
+
 </details>
+
+```{=html}
 <!--
 NOTE: End of solution
 -->
+```
+#### Posting a question in the Community Forum
 
-#### Posting a question in the Community Forum 
-
-... description here about posting in Community...  
-
-
-
+... description here about posting in Community...
 
 ## Introduction to this case study script
 
-This is a an example R-markdown script which demonstrates how to create an 
-automated outbreak situation report for COVID-19 in Fulton county, USA. The data used are anonymised and fake (scrambled), for example purposes only.  
+This is a an example R-markdown script which demonstrates how to create an automated outbreak situation report for COVID-19 in Fulton county, USA. The data used are anonymised and fake (scrambled), for example purposes only.
 
-- We demonstrate how to import, clean and analyse your data.  
-- Analysis is organised by time, place and person.  
-     - For the purpose of the case study we separate this by descriptive analysis
-     and visualisation (normally this would be mixed together of course)    
-          - The visualisation section is organised in to place, time and person.
-          This is to simplify flow for didactic delivery.  
-     - Analysis is loosely based off the monthly [epidemiology reports](https://www.fultoncountyga.gov/covid-19/epidemiology-reports) 
-     for Fulton county  
-- Text within <! > will not show in your final document.  
-     - The other parts such as slashes (///), dashes (-) and tildes (~) are just aesthetic
-     - These comments are used to explain the code chunks.   
-     - We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()  
-     - This comment will not show up when you knit the document.  
-     - You can delete them if you want.  
-- Feedback & suggestions are welcome at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)  
-     - Alternatively email us at: [epirhandbook@gmail.com](mailto:epiRhandbook@gmail.com)  
+-   We demonstrate how to import, clean and analyse your data.\
+-   Analysis is organised by time, place and person.
+    -   For the purpose of the case study we separate this by descriptive analysis and visualisation (normally this would be mixed together of course)
+        -   The visualisation section is organised in to place, time and person. This is to simplify flow for didactic delivery.\
+    -   Analysis is loosely based off the monthly [epidemiology reports](https://www.fultoncountyga.gov/covid-19/epidemiology-reports) for Fulton county\
+-   Text within \<! \> will not show in your final document.
+    -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
+    -   These comments are used to explain the code chunks.\
+    -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
+    -   This comment will not show up when you knit the document.\
+    -   You can delete them if you want.\
+-   Feedback & suggestions are welcome at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)
+    -   Alternatively email us at: [epirhandbook\@gmail.com](mailto:epiRhandbook@gmail.com)
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This comment will not show up when you knit the document.
 A comment with a title with slashes indicates a name of a code chunk.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// setup \\\
 --------------------------------------------------------------------------------
@@ -119,7 +136,7 @@ network drives (company computers) for more detail.
 https://epirhandbook.com/r-basics.html#installation
 https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r setup, include=FALSE}
 
 # hide all code chunks in the output, but show errors 
@@ -167,15 +184,16 @@ pacman::p_load_gh(
 
 ```
 
+\pagebreak
 
-\pagebreak 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// table_of_contents \\\
 --------------------------------------------------------------------------------
 This chunk adds a table of contents to your report using the {officedown} package. 
 You can also add in a list of tables and figures. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r table_of_contents}
 
 # table of contents based on headings 
@@ -189,9 +207,9 @@ block_toc(style = "Image Caption")
 
 ```
 
-\pagebreak 
+\pagebreak
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// define_reporting_periods \\\
 --------------------------------------------------------------------------------
@@ -206,7 +224,7 @@ From these we are then able to define periods 14 and 28 days prior to our
 report date. We can also make the appropriate labels to auto-populate
 table titles.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r define_reporting_periods}
 
 # create a date object from the parameter
@@ -249,7 +267,7 @@ full_period_labels <- str_c(
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// import \\\
 --------------------------------------------------------------------------------
@@ -266,7 +284,7 @@ This way your whole R-project folder can be zipped up and moved somewhere else.
 For more details see: 
 https://epirhandbook.com/import-and-export.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r import}
   
 # import the raw case data set
@@ -285,7 +303,7 @@ shapefile <- read_sf(
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// browse_data \\\
 --------------------------------------------------------------------------------
@@ -302,7 +320,7 @@ For more details see:
 https://epirhandbook.com/cleaning-data-and-core-functions.html#review
 https://epirhandbook.com/descriptive-tables.html#browse-data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r browse_data, eval = FALSE}
 
 # view your whole dataset interactively (in an excel style format)
@@ -336,7 +354,7 @@ purrr::map(
   )
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// clean_colnames \\\
 --------------------------------------------------------------------------------
@@ -354,7 +372,7 @@ the syntax New name = Old name.
 For more details see: 
 https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r clean_colnames}
 
 # create a new object called linelist and assign linelist_raw with renamed columns
@@ -401,7 +419,7 @@ linelist <- linelist_raw %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// clean_dates \\\
 --------------------------------------------------------------------------------
@@ -419,7 +437,7 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r clean_dates}
 
 linelist <- linelist %>% 
@@ -468,7 +486,7 @@ linelist <- linelist %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// clean_numerics \\\
 --------------------------------------------------------------------------------
@@ -489,7 +507,7 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
 Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
 and handles dates better.  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r clean_numerics}
 
 # Age 
@@ -537,7 +555,7 @@ linelist <- linelist %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// clean_categories \\\
 --------------------------------------------------------------------------------
@@ -551,7 +569,7 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-a
 https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
 https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r clean_categories}
 
 linelist <- linelist %>% 
@@ -577,10 +595,10 @@ linelist <- linelist %>%
       ) %>% 
      
      #replace one value and leave the rest, across multiple variables 
-     mutate(across(
-       .cols = c(contact_hh, contains("sym_")),
-       .funs = ~if_else(.x == "Unk", "Unknown", .x)
-     )) %>% 
+     # mutate(across(
+     #   .cols = c(contact_hh, contains("sym_")),
+     #   .funs = ~if_else(.x == "Unk", "Unknown", .x)
+     # )) %>% 
 
      # create a composite category from race and ethnicitiy  
           #  (nb. this sets those that are non-specified in eth to non-hispanic)
@@ -656,7 +674,7 @@ linelist <- linelist %>%
      ))
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// vector_vars \\\
 --------------------------------------------------------------------------------
@@ -671,7 +689,7 @@ argument.
 For more details see: 
 https://epirhandbook.com/iteration-loops-and-lists.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r vector_vars}
 
 # define a list of variables for looping over later
@@ -686,7 +704,7 @@ demographic_vars <- c("gender", "age_group", "eth_race")
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// duplicated \\\
 --------------------------------------------------------------------------------
@@ -701,7 +719,7 @@ then add an additional argument for having a report date within six months.
 For more details see: 
 https://epirhandbook.com/de-duplication.html 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r duplicated}
 
 # get a data frame of all the duplicates 
@@ -716,7 +734,7 @@ linelist <- linelist %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// filter \\\
 --------------------------------------------------------------------------------
@@ -728,7 +746,7 @@ that are entered as a confirmed case.
 For more details see: 
 https://epirhandbook.com/cleaning-data-and-core-functions.html#filter-rows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r filter}
 
 # store those which do not meet our filter criteria 
@@ -745,25 +763,21 @@ linelist <- linelist %>%
                  !is.na(date_report))
 ```
 
+# Descriptive analysis
 
-# Descriptive analysis 
+This section will be analysing data by time, place, and person to produce descriptive tables.
 
-This section will be analysing data by time, place, and person to produce descriptive 
-tables. 
+## Summary
 
-## Summary 
+-   As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has recorded `r nrow(linelist)` confirmed cases of COVID-19.\
+-   As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has recorded `r fmt_count(linelist, died == "Yes")` deaths.\
+-   Among all confirmed cases of COVID-19 in Fulton County, `r fmt_count(linelist, hospitalized == "Yes")` required hospitalization.
 
-- As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has 
-recorded `r nrow(linelist)` confirmed cases of COVID-19.  
-- As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has 
-recorded `r fmt_count(linelist, died == "Yes")` deaths.  
-- Among all confirmed cases of COVID-19 in Fulton County, `r fmt_count(linelist, hospitalized == "Yes")`
-required hospitalization. 
+\pagebreak
 
-\pagebreak 
+## Time
 
-## Time 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// epiweek_table \\\
 --------------------------------------------------------------------------------
@@ -778,7 +792,7 @@ https://epirhandbook.com/descriptive-tables.html
 https://epirhandbook.com/tables-for-presentation.html
 https://epirhandbook.com/descriptive-tables.html#tbl_janitor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r epiweek_table, tab.cap="COVID-19 case counts by calendar week in Fulton County", tab.id="timetab"}
 
 # save a quick descriptive table of number of cases reported by week
@@ -803,17 +817,19 @@ epiweek_table %>%
 
 ```
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Note that tab.caps cannot have any special characters in them (e.g. "_") otherwise
 referencing as below does not work. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+```
+As you can see from above in Table \@ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in `r filter(epiweek_table, epiweek != "Total") %>% summarise(which.max(n)) %>% pull() %>% epiweek_table[., "epiweek"] %>% as.Date() %>% format(., format = "%B %Y")`.
 
-As you can see from above in Table \@ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in `r filter(epiweek_table, epiweek != "Total") %>% summarise(which.max(n)) %>% pull() %>% epiweek_table[., "epiweek"] %>% as.Date() %>% format(., format = "%B %Y")`. 
+\pagebreak
 
-\pagebreak 
+## Place
 
-## Place 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// zip_counts \\\
 --------------------------------------------------------------------------------
@@ -826,7 +842,7 @@ in the chunks below.
 For more details see: 
 https://epirhandbook.com/descriptive-tables.html#dplyr-package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r zip_counts}
 
 zip_counts <- linelist %>% 
@@ -844,6 +860,7 @@ zip_counts <- linelist %>%
 
 ```
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// zip_join \\\
 --------------------------------------------------------------------------------
@@ -858,7 +875,7 @@ For more details see:
 https://epirhandbook.com/descriptive-tables.html#dplyr-package
 https://epirhandbook.com/joining-data.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r zip_join}
 
 # extract population counts for each zip from the shapefile
@@ -898,6 +915,7 @@ zip_counts <- left_join(zip_counts,
     ))
 ```
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// zip_table \\\
 --------------------------------------------------------------------------------
@@ -911,7 +929,7 @@ For more details see:
 https://epirhandbook.com/tables-for-presentation.html
 https://colorbrewer2.org/#type=sequential&scheme=Reds&n=3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r zip_table, tab.cap = "COVID-19 new case counts by ZIP-code", tab.id = "ziptab"}
 
 
@@ -980,17 +998,18 @@ zip_counts %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The tag below will change the page to landscape in the word document output. 
 This is part of the {officer} package - and is accompanied by a second tag below
 to stop the landscape orientation. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 <!---BLOCK_LANDSCAPE_START--->
 
-## Person 
+## Person
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// demographics_tab \\\
 --------------------------------------------------------------------------------
@@ -1009,7 +1028,7 @@ For more details see:
 https://epirhandbook.com/tables-for-presentation.html
 https://epirhandbook.com/iteration-loops-and-lists.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r demographics_tab, tab.cap = str_c("Cumulative and recent confirmed COVID-19 case and death counts by gender, age, and race/ethnicity in Fulton County, Georgia. Past 28 day period refers to ", full_period_labels), tab.id = "demogtab"}
 
 # get counts tables for measures of interest 
@@ -1232,6 +1251,7 @@ demographics_counts %>%
 
 ### Risk factors for mortality
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// rf_unknowns \\\
 --------------------------------------------------------------------------------
@@ -1249,7 +1269,7 @@ https://epirhandbook.com/univariate-and-multivariable-regression.html#store-expl
 https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
 http://larmarange.github.io/labelled/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r rf_unknowns}
 
 # define variables of interest (save typing them out later) 
@@ -1300,7 +1320,7 @@ rf_data <- rf_data %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// simple_stats \\\
 --------------------------------------------------------------------------------
@@ -1315,7 +1335,7 @@ For more details see:
 https://epirhandbook.com/simple-statistical-tests.html#stats_gt
 https://epirhandbook.com/tables-for-presentation.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r simple_stats, tab.cap = "Demographic characteristics and association with mortality among COVID-19 cases", tab.id = "statstab"}
 
 rf_data %>%
@@ -1349,10 +1369,10 @@ rf_data %>%
   # make header text bold (using {flextable})
   bold(part = "header")
 ```
-  
 
-\pagebreak 
+\pagebreak
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// regression \\\
 --------------------------------------------------------------------------------
@@ -1369,7 +1389,7 @@ https://epirhandbook.com/univariate-and-multivariable-regression.html
 https://epirhandbook.com/survival-analysis.html
 https://epirhandbook.com/tables-for-presentation.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r regression, tab.cap = "Univariate regression investigating associations with mortality among COVID-19 cases", tab.id = "regrtab"}
 
 # produce table with regression estimates
@@ -1427,15 +1447,13 @@ tbl_merge(list(cross_tab, regress_tab)) %>%
   set_table_properties(layout = "autofit")
 ```
 
-As seen in Table \@ref(tab:regrtab), mortality was associated with being male 
-`r inline_text(regress_tab, variable = gender, level = "Male", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`, being white `r inline_text(regress_tab, variable = eth_race, level = "White, NH", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`and longer 
-hospital stays `r inline_text(regress_tab, variable = days_hosp, pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`.
+As seen in Table \@ref(tab:regrtab), mortality was associated with being male `r inline_text(regress_tab, variable = gender, level = "Male", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`, being white `r inline_text(regress_tab, variable = eth_race, level = "White, NH", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`and longer hospital stays `r inline_text(regress_tab, variable = days_hosp, pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`.
 
-\pagebreak 
+\pagebreak
 
-# Visualisation 
+# Visualisation
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// ggplot_theme \\\
 --------------------------------------------------------------------------------
@@ -1446,7 +1464,7 @@ some details for theme which can be applied to plots when needed.
 For more details see: 
 https://epirhandbook.com/ggplot-basics.html#ggplot_basics_themes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r ggplot_theme}
 
 # Set default options for plots and charts
@@ -1462,15 +1480,11 @@ epicurve_theme <- theme(
   axis.line = element_line(colour = "black"))
 ```
 
+## Person
 
-## Person 
+As we see below in Figure \@ref(fig:agehospplot) there appears to be an association between older age, length of hospital stay and mortality. We saw this in Table \@ref(tab:regrtab) as well for the individual associations, although we did not check for interaction and confounding.
 
-As we see below in Figure \@ref(fig:agehospplot) there appears to be an 
-association between older age, length of hospital stay and mortality. 
-We saw this in Table \@ref(tab:regrtab) as well for the individual associations, 
-although we did not check for interaction and confounding. 
-
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// age_hosp_died \\\
 --------------------------------------------------------------------------------
@@ -1480,7 +1494,7 @@ Here we demonstrate how to plot points with {ggplot2}.
 For more details see: 
 https://epirhandbook.com/ggplot-basics.html#geoms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r age_hosp_died, fig.cap = "Duration of admission among hospitalized COVID-19 patients", fig.id = "agehospplot"}
 
 # open a plot with the linelist data
@@ -1511,8 +1525,9 @@ ggplot(data = linelist) +
   epicurve_theme
 ```
 
-\pagebreak 
+\pagebreak
 
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// ethnicity_counts \\\
 --------------------------------------------------------------------------------
@@ -1523,7 +1538,7 @@ For more details see:
 https://epirhandbook.com/ggplot-basics.html#geoms
 https://epirhandbook.com/ggplot-tips.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r ethnicity_counts, fig.cap = "COVID-19 cases by ethnicity", fig.id = "ethnicityplot"}
 
 # open a plot with the linelist data
@@ -1558,9 +1573,9 @@ ggplot(linelist) +
 
 ```
 
+\pagebreak
 
-\pagebreak 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// age_pyramid \\\
 --------------------------------------------------------------------------------
@@ -1571,7 +1586,7 @@ it with {ggplot2].
 For more details see: 
 https://epirhandbook.com/demographic-pyramids-and-likert-scales.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r age_pyramid, fig.cap = "Age and Gender of COVID-19 cases, Fulton County", fig.id = "agepyramid"}
 
 # prepare dataset
@@ -1617,11 +1632,11 @@ age_pyramid(
 
 ```
 
+\pagebreak
 
-\pagebreak 
+## Time
 
-## Time 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// epicurve \\\
 --------------------------------------------------------------------------------
@@ -1632,7 +1647,7 @@ it with {ggplot2].
 For more details see: 
 https://epirhandbook.com/epidemic-curves.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r epicurve, fig.cap = "COVID-19 cases by week and race/ethnicity in Fulton County", fig.id = "epicurve"}
 
 # create an "incidence" object (with number of cases by week)
@@ -1672,11 +1687,11 @@ plot(SunWeeks,
   epicurve_theme
 ```
 
+\pagebreak
 
-\pagebreak 
+## Place
 
-## Place  
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// crs \\\
 --------------------------------------------------------------------------------
@@ -1691,7 +1706,7 @@ are wrong (very far from Georgia state)
 For more details see: 
 https://epirhandbook.com/gis-basics.html#visualizing-spatial-data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r crs}
 
 # change shapefile coordinate reference system to WGS84
@@ -1721,7 +1736,7 @@ linelist_sf <- linelist %>%
 
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// basemap \\\
 --------------------------------------------------------------------------------
@@ -1742,7 +1757,7 @@ results in more visually appealing maps.
 For more details see: 
 https://epirhandbook.com/gis-basics.html#basemaps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r basemap}
 
 # get the bounding box for the shapefile 
@@ -1783,7 +1798,7 @@ basemap <- ggplot() +
   )
 ```
 
-
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// points_map \\\
 --------------------------------------------------------------------------------
@@ -1799,7 +1814,7 @@ using {ggplot2} geom_point().
 For more details see: 
 https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r points_map, fig.cap = str_c("New COVID-19 cases (", recent_period_labels, ") by  ethnicity in Fulton County"), fig.id  = "pointmap"}
 
 # plot the basemap 
@@ -1825,10 +1840,10 @@ basemap +
   #            alpha = 0.5)
 
 ```
- 
- 
-\pagebreak 
 
+\pagebreak
+
+```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// choropleth_map_join \\\
 --------------------------------------------------------------------------------
@@ -1842,7 +1857,7 @@ the code.
 For more details see: 
 https://epirhandbook.com/gis-basics.html#choropleth-maps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r choropleth_map_join, eval = FALSE}
 
 # combine counts data with shapefile 
@@ -1854,9 +1869,9 @@ shapefile <- left_join(shapefile,
   # change the name ofthe recent_inc column to incidence
   rename(incidence = recent_inc)
 ```
- 
- 
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```{=html}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// choropleth_map_over \\\
 --------------------------------------------------------------------------------
 
@@ -1869,7 +1884,7 @@ https://epirhandbook.com/gis-basics.html#mapping-with-ggplot2
 https://epirhandbook.com/gis-basics.html#choropleth-maps
 https://epirhandbook.com/gis-basics.html#spatial-joins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
- 
+```
 ```{r choropleth_map_over, fig.cap = str_c("COVID-19 case incidence (per 100,000) by Zip Code (", recent_period_labels, ") in Fulton County"), fig.id  = "choromap"}
 
 # prepare counts for plotting 
@@ -1946,11 +1961,11 @@ basemap +
   labs(fill = "Confirmed cases per \n 100,000 by Zip code")
 
 ```
- 
- 
-\pagebreak 
 
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\pagebreak
+
+```{=html}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// bivar_map \\\
 --------------------------------------------------------------------------------
 
@@ -1965,7 +1980,7 @@ For more details see:
 https://epirhandbook.com/ggplot-tips.html?q=patchwork#combine-plots
 http://colorspace.r-forge.r-project.org/articles/hcl_palettes.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
- 
+```
 ```{r bivar_map, fig.cap = str_c("COVID-19 case incidence (per 100,000) by proportion of ethnic minority cases and Zip Code (", recent_period_labels, ") in Fulton County"), fig.id  = "bivarmap"}
 
 # prepare data for plotting 
@@ -2080,10 +2095,10 @@ bivar_map + legend + plot_layout(design = layout)
 
 ```
 
+\pagebreak
 
-\pagebreak 
-
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```{=html}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// heatmap \\\
 --------------------------------------------------------------------------------
 
@@ -2099,7 +2114,7 @@ For more details see:
 https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
 https://bids.github.io/colormap/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
+```
 ```{r heatmap, fig.cap = str_c("Density map - New COVID-19 cases (", recent_period_labels, ") in Fulton County"), fig.id  = "bivarmap"}
 
 # calculate coordinate units per distance

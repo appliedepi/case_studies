@@ -1,6 +1,10 @@
-# Landing page {.unnumbered}
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 
-This is a Quarto book. To learn more about Quarto books visit <https://quarto.org/docs/books>.
+# Case-studies Open Repository {.unnumbered}
 
 ```{r, echo=F}
 pacman::p_load(
@@ -12,27 +16,30 @@ pacman::p_load(
 )
 ```
 
+**Objective**: This open repository of case studies can be used as a guide on how to implement different epidemiological methods in different situations using a variety of tools
+
+# How to use this repository {.unnumbered}
+
+# Acknowledgements {.unnumbered}
+
+## Authors {.unnumbered}
+
+
+# List of Case-studies {.unnumbered}
+
+
 This is an internal link: See [Fulton County English](fulton.qmd#fulton-en)
 
-This is another kind of internal link that makes use of a tag: \@sec-fulton-en
+This is another kind of internal link that makes use of a tag: [Chapter -@sec-fulton-en]
 
 This is a static table to test links:
 
-| Name   | Link                        | Topics         | Geography | Scale | Tool | Language |
+| Name   | Link                           | Topics         | Geography | Scale | Tool | Language |
 |-----------|-----------|-----------|-----------|-----------|-----------|-----------|
 | Fulton | [Fulton](fulton.qmd#fulton-en) | Outbreak; GIS; | USA       | Local | R    | English  |
 | Oswego | [Oswego](oswego.qmd#oswego-es) | Outbreak       | USA       | Local | R    | Spanish  |
 
-
-Can we incorporate a keywords column??
-Otherwise have Search bar for whole book, like we do for the Epi R Handbook.
-
-
-This is an attempt dynamic table made using {DT} - LINKS TO CHAPTERS DO NOT WORK because putting a @ or a @ inside the `tribble()` function seems to break the table. An alternative would be to put the whole website address (e.g. www.appliedepi.org/case/oswego...) but we won't know this till the end.
-
-Putting internal links in DT does not seem to work. Might need to think of other solution...
-
-```{r, eval=F, echo=T}
+```{r, eval=F, echo=F}
 table_cases <- tribble(
   ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,
   "Fulton COVID-19", @sec-fulton, "USA", "Local", "R", "English", "Outbreak reports; GIS; epidemic curves",
@@ -40,8 +47,22 @@ table_cases <- tribble(
 )
 ```
 
-Filterable version of table (but will need to insert weblinks, not references)
+```{r, echo=F}
+table_cases <- tribble(
+  ~Name, ~Link, ~Geography, ~Scale, ~Tool, ~Language, ~Topics,
+  "Fulton COVID-19", "<a @sec-fulton-en>Fulton</a>", "USA", "Local", "R", "English", "Outbreak reports; GIS; epidemic curves", "Oswego ES", "<a @sec-oswego>Oswego</a>", "USA", "Local", "R", "Spanish", "Outbreak response"
+  )
 
-```{r, eval=F}
-DT::datatable(table_cases, escape = F)
+table_cases <- table_cases %>% 
+  mutate(across(.cols = everything(),
+                .fns = ~as.factor(.x)))
+
+```
+
+Filterable version of table (but will need to insert weblinks, not references as they do not seem to work)
+
+```{r, echo = F, eval = T}
+
+DT::datatable(table_cases, escape = F, filter = "top")
+
 ```

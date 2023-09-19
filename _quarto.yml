@@ -4,7 +4,8 @@ project:
 book:
   title: "Applied Epi Case Studies"
   author: "Applied Epi"
-  date: "7/18/2023"
+  date: "10/09/2023"
+  cover-image: Applied_Epi_logo.png
   chapters:
     - index.qmd
     - intro.qmd
