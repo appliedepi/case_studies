@@ -214,25 +214,102 @@ Icon  |Meaning
 
 Please email contact@appliedepi.org with questions about the use of these materials for academic courses and epidemiologist training programs.
 
+##  Feedback & suggestions
+
+-   You can write feedback and suggestions on this case study at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)
+-   Alternatively email us at: [epirhandbook\@gmail.com](mailto:epiRhandbook@gmail.com)
+
+
+
+\pagebreak
+
+```{=html}
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// table_of_contents \\\
+--------------------------------------------------------------------------------
+This chunk adds a table of contents to your report using the {officedown} package. 
+You can also add in a list of tables and figures. 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+```
+```{r table_of_contents}
+
+# table of contents based on headings 
+block_toc() 
+
+# list of tables 
+block_toc(style = "Table Caption")
+
+# list of figures 
+block_toc(style = "Image Caption")
+
+```
+
+\pagebreak
+
+> Version XXX, DATE OF LAST UPDATE
+
+
+## Disclaimer 
+
+<!-- HERE YOU CAN WRITE A DISCLAIMER ABOUT THE DATA USED, COPYRIGHT, LICENCE -->
+
+\pagebreak
+
+
+## Revisions
+
+<!-- HERE LIST THE DIFFERENT REVISIONS MADE TO THE FIRST VERSION OF THE CASE STUDY
+
+FOR EXAMPLE:
+
+September 2024: Addition of another variable to assess the impact of previous infection on the risk of hospitalisation
+
+-->
+
+\pagebreak
+
+## Guidance
+
+### Previous level of expertise assumed
+<!-- ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
+
+- EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
+- SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R)
+
+INCLUDE REFERENCES IF POSSIBLE
+
+-->
+
+### Preparation for the case study
+
+<!-- INCLUDE THE STEPS
+
+-->
+
+
+
+
+
+
+
 
 
 ## Introduction to this case study script
 
-This is a an example R-markdown script which demonstrates how to create a XXXXXX. The data used are anonymised and fake (scrambled), for example purposes only.
+<!-- HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
+      1. Background
+      2. Objectives
+      3. What the users of the case study will learn
+      4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
+      Take into account that: 
 
--   We demonstrate how to import, clean and analyse your data.\
--   Analysis is organised by time, place and person.
-    -   For the purpose of the case study we separate this by descriptive analysis and visualisation (normally this would be mixed together of course)
-        -   The visualisation section is organised in to place, time and person. This is to simplify flow for didactic delivery.\
-    -   Analysis is loosely based off the monthly [epidemiology reports](https://www.fultoncountyga.gov/covid-19/epidemiology-reports) for Fulton county\
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
     -   These comments are used to explain the code chunks.\
     -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
     -   This comment will not show up when you knit the document.\
-    -   You can delete them if you want.\
--   Feedback & suggestions are welcome at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)
-    -   Alternatively email us at: [epirhandbook\@gmail.com](mailto:epiRhandbook@gmail.com)
+    -   You can delete them if you want.\ -->
+
 
 ```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -263,29 +340,6 @@ https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```
 
-
-\pagebreak
-
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// table_of_contents \\\
---------------------------------------------------------------------------------
-This chunk adds a table of contents to your report using the {officedown} package. 
-You can also add in a list of tables and figures. 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r table_of_contents}
-
-# table of contents based on headings 
-block_toc() 
-
-# list of tables 
-block_toc(style = "Table Caption")
-
-# list of figures 
-block_toc(style = "Image Caption")
-
-```
 
 \pagebreak
 
