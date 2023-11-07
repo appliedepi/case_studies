@@ -4,36 +4,16 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Considerations for standardised coding in this case-study template
-
-
-## General coding framework
-
-* When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}
-* Use a vertical approach to writing coding - easier to read
-* Use spaces in your code
-* Use lowercase and underscores in your object names
-* For quick tabulations Use tabyl() from {janitor}, not table() from {base}
-* Use the magrittr pipe %>%, not the native pipe
-* Use  <-   not =
-
-
-## Vocabulary
-
-* Use **“Data frame”** instead of “dataset”
-* Use **“Import (data)”** - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).
-* Use the word **“load”** for packages, as it aligns with the nomenclature of the p_load() function (or “install”, for the step prior to loading)
-* Use **“Quotation marks”** vs. “Inverted commas” - “inverted” is a complicated word for non-native English speakers
-* **Columns & Rows** vs. Variables & Observations
-
-
-
-<!-- Some considerations about about this quarto template 
+<!-- This is a Template that can be used to create an R case study in markdown 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
     -   These comments are used to explain the code chunks.\
     -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
     -   This comment will not show up when you knit the document.\
+    
+    -TERMINOLOGY
+    
+    
     -   You can delete them if you want.\ -->
 
 
@@ -191,8 +171,8 @@ WRITE ANY REVISIONS MADE TO THE CASE STUDY
 ### Previous level of expertise assumed
 ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
 
-* EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
-* SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R) (RMARKDOWN)
+- EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
+- SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R) (RMARKDOWN)
 
 INCLUDE REFERENCES IF POSSIBLE
 
