@@ -125,6 +125,8 @@ Here is more explanation about why the solution works.
 NOTE: End of solution
 -->
 ```
+
+
 #### Posting a question in the Community Forum
 
 ... description here about posting in Community... TO BE COMPLETED BY APPLIED EPI
@@ -214,7 +216,7 @@ EXAMPLE:
 
 
 
-## Introduction to this case study script
+## Objectives of this case study 
 
 HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
       1. Background
@@ -222,15 +224,6 @@ HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
       3. What the users of the case study will learn
       4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
       
-
-
-## To get started 
-
-GUIDE THE USER ON HOW TO DO THE SET UP TO START THE ANALYSIS. FOR EXAMPLE:
-
-1. Load the list of packages needed
-2. Create a project
-3. ....
 
 
 ## Specific to the case study
