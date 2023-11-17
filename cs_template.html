@@ -79,18 +79,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<!-- This is a Template that can be used to create an R case study in markdown 
+<section id="considerations-for-standardised-coding-in-this-case-study-template" class="level1">
+<h1>Considerations for standardised coding in this case-study template</h1>
+<section id="general-coding-framework" class="level2">
+<h2 class="anchored" data-anchor-id="general-coding-framework">General coding framework</h2>
+<ul>
+<li>When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}</li>
+<li>Use a vertical approach to writing coding - easier to read</li>
+<li>Use spaces in your code</li>
+<li>Use lowercase and underscores in your object names</li>
+<li>For quick tabulations Use tabyl() from {janitor}, not table() from {base}</li>
+<li>Use the magrittr pipe %&gt;%, not the native pipe</li>
+<li>Use &lt;- not =</li>
+</ul>
+</section>
+<section id="vocabulary" class="level2">
+<h2 class="anchored" data-anchor-id="vocabulary">Vocabulary</h2>
+<ul>
+<li>Use <strong>“Data frame”</strong> instead of “dataset”</li>
+<li>Use <strong>“Import (data)”</strong> - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).</li>
+<li>Use the word <strong>“load”</strong> for packages, as it aligns with the nomenclature of the p_load() function (or “install”, for the step prior to loading)</li>
+<li>Use <strong>“Quotation marks”</strong> vs.&nbsp;“Inverted commas” - “inverted” is a complicated word for non-native English speakers</li>
+<li><strong>Columns &amp; Rows</strong> vs.&nbsp;Variables &amp; Observations</li>
+</ul>
+<!-- Some considerations about about this quarto template 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
     -   These comments are used to explain the code chunks.\
     -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
     -   This comment will not show up when you knit the document.\
-    
-    -TERMINOLOGY
-    
-    
     -   You can delete them if you want.\ -->
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
+</section>
+</section>
 <section id="sec-name-lan" class="level1">
 <h1>Name of case study</h1>
 <section id="overview" class="level2">
@@ -149,22 +170,7 @@ NOTE: End of solution
 </section>
 <section id="posting-a-question-in-the-community-forum" class="level4">
 <h4 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h4>
-<p>… description here about posting in Community…</p>
-</section>
-<section id="quiz-questions" class="level4">
-<h4 class="anchored" data-anchor-id="quiz-questions">Quiz questions</h4>
-<p>Please complete the quiz questions that you encounter throughout the tutorial. <strong>Answering will help you</strong> to comprehend the material, and will also help us to improve the exercises for future students.</p>
-<p>To practice, please answer the following questions:</p>
-<div class="cell">
-<div class="cell-output cell-output-error">
-<pre><code>Error in quiz(question_radio("When should I view the red 'helper' code?", : non trovo la funzione "quiz"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-error">
-<pre><code>Error in question_numeric("How anxious are you about beginning this tutorial - on a scale from 1 (least anxious) to 10 (most anxious)?", : non trovo la funzione "question_numeric"</code></pre>
-</div>
-</div>
+<p>… description here about posting in Community… TO BE COMPLETED BY APPLIED EPI</p>
 </section>
 <section id="icons" class="level4">
 <h4 class="anchored" data-anchor-id="icons">Icons</h4>
@@ -222,70 +228,78 @@ NOTE: End of solution
 <li>Alternatively email us at: <a href="mailto:epiRhandbook@gmail.com">epirhandbook@gmail.com</a></li>
 </ul>
 <div style="page-break-after: always;"></div>
-<blockquote class="blockquote">
-<p>Version XXX, DATE OF LAST UPDATE</p>
-</blockquote>
+</section>
+<section id="version-xxx" class="level2">
+<h2 class="anchored" data-anchor-id="version-xxx">Version XXX</h2>
+<p>Write DATE OF LAST UPDATE</p>
 </section>
 <section id="disclaimer" class="level2">
 <h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
-<!-- HERE YOU CAN WRITE A DISCLAIMER ABOUT THE DATA USED, COPYRIGHT, LICENCE -->
+<p>HERE YOU CAN WRITE ANY APPROPRIATE DISCLAIMER</p>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="revisions" class="level2">
 <h2 class="anchored" data-anchor-id="revisions">Revisions</h2>
-
-<!-- (MAKE A TABLE) HERE LIST THE DIFFERENT REVISIONS MADE TO THE FIRST VERSION OF THE CASE STUDY
-
-FOR EXAMPLE:
-
-September 2024: Addition of another variable to assess the impact of previous infection on the risk of hospitalisation
-
--->
+<p>WRITE ANY REVISIONS MADE TO THE CASE STUDY</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: left;">Changes made</th>
+<th style="text-align: right;">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="guidance" class="level2">
 <h2 class="anchored" data-anchor-id="guidance">Guidance</h2>
 <section id="previous-level-of-expertise-assumed" class="level3">
 <h3 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h3>
-<!-- ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
-
-- EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
-- SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R) (RMARKDOWN)
-
-INCLUDE REFERENCES IF POSSIBLE
-
--->
+<p>ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:</p>
+<ul>
+<li>EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS).</li>
+<li>SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R) (RMARKDOWN)</li>
+</ul>
+<p>INCLUDE REFERENCES IF POSSIBLE</p>
 </section>
 <section id="preparation-for-the-case-study" class="level3">
 <h3 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h3>
-
-<!-- INCLUDE THE STEPS NEEDED TO START REPLICATING THE ANALYSIS OF THE CASE STUDY
-
-EXAMPLE:
-
-1. Download folder named XXX and extract contents in the local laptop
-2. Create an Rstudio project in the folder XXX (they already come with the project)
-3. Subfolder data contains XXXX
-4. Subfolder scripts should be used to save any scripts related to the analysis
-5. Subfolder outputs will be used to store all outputs (tables, graphs, documents) that are the result of the analysis
-
--->
+<p>INCLUDE THE STEPS NEEDED TO START REPLICATING THE ANALYSIS OF THE CASE STUDY</p>
+<p>EXAMPLE:</p>
+<ol type="1">
+<li>Download folder named XXX and extract contents in the local laptop</li>
+<li>Create an Rstudio project in the folder XXX (they already come with the project)</li>
+<li>Subfolder data contains XXXX</li>
+<li>Subfolder scripts should be used to save any scripts related to the analysis</li>
+<li>Subfolder outputs will be used to store all outputs (tables, graphs, documents) that are the result of the analysis</li>
+</ol>
 </section>
 </section>
-<section id="introduction-to-this-case-study-script" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-this-case-study-script">Introduction to this case study script</h2>
-<!-- HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
-      1. Background
-      2. Objectives/Learning outcomes
-      3. What the users of the case study will learn
-      4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
-      Take into account that: -->
-</section>
-<section id="common-part-loading-packages-and-importing-data" class="level2">
-<h2 class="anchored" data-anchor-id="common-part-loading-packages-and-importing-data">Common part (loading packages and importing data)</h2>
+<section id="objectives-of-this-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h2>
+<p>HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING: 1. Background 2. Objectives/Learning outcomes 3. What the users of the case study will learn 4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents</p>
 </section>
 <section id="specific-to-the-case-study" class="level2">
 <h2 class="anchored" data-anchor-id="specific-to-the-case-study">Specific to the case study</h2>
+<p>HERE ADD THE DIFFERENT SECTIONS OF THE CASE STUDY. PLEASE INCLUDE QUESTIONS WITH HINTS AND SOLUTIONS AS SHOWN ABOVE.</p>
 </section>
 </section>
 

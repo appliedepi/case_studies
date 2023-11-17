@@ -43,7 +43,21 @@ editor_options:
 
 ## Overview
 
- **Case study characteristics** Name: XXX\ -->
+ **Case study characteristics** 
+|                              |      |
+|------------------------------|:-----|
+| **Name**                     |      |
+| **Language**                 |      |
+| **Tool**                     |      | <!-- Specify tool (e.g., R, Excel, STATA...) -->
+| **Location**                 |      |
+| **Scale**                    |      | <!-- Local, Regional, National or Global -->
+| **Diseases**                 |      | <!-- Specify pathogen -->
+| **Keywords**                 |      | <!-- Examples: Outbreak investigation, GIS, TSA... -->
+| **Technical complexity**     |      | <!-- Basic, Intermidiate or High -->
+| **Methodolocial complexity** |      | <!-- Basic, Intermidiate or High -->
+ 
+ 
+ Name: XXX\ -->
 Language: XXXX\
 Tool: R\ <!-- Specify tool (e.g., R, Excel, STATA...) -->
 Location: XXXX\
@@ -53,9 +67,10 @@ Keywords:  <!-- Examples: Outbreak investigation, GIS, TSA... -->
 Technical complexity: Basic/intermidiate/advanced 
 Methodological complexity: Basic/intermidiate/advanced 
 
-**Acknowledgements**\
-Tutorial authors: XXXX\
-Data source: XXXXX
+***Authorship***\
+Original authors: Centre for Disease Prevention and Control (CDC)\
+Data source: Epi Info, version 3.5.4 (CDC)
+Adapted to R by: Leonel Lerebours Nadal y Alberto Mateo Urdiales
 
 ## Instructions
 
@@ -146,16 +161,17 @@ Icon  |Meaning
 `r fontawesome::fa("window-restore", fill = "darkgrey")`|Change to another window  
 `r fontawesome::fa("bookmark", fill = "orange")`|Remember this for later  
 
-### License
+### Terms of Use
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a> Applied Epi Incorporated, 2022 <br />This work is licensed by Applied Epi Incorporated under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
-Please email contact@appliedepi.org with questions about the use of these materials for academic courses and epidemiologist training programs.
+<!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
 
 ##  Feedback & suggestions
 
--   You can write feedback and suggestions on this case study at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)
--   Alternatively email us at: [epirhandbook\@gmail.com](mailto:epiRhandbook@gmail.com)
+-   You can write feedback and suggestions on this case study at the
+    [GitHub issues
+    page](https://github.com/appliedepi/case_studies)
+-   Alternatively email us at:
+    [contact\@appliedepi.org](mailto:contact@appliedepi.org)
 
 
 
@@ -190,6 +206,15 @@ WRITE ANY REVISIONS MADE TO THE CASE STUDY
 
 ## Guidance
 
+## Objectives of this case study 
+
+HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
+      1. Background
+      2. Objectives/Learning outcomes
+      3. What the users of the case study will learn
+      4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
+      
+
 ### Previous level of expertise assumed
 ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
 
@@ -216,14 +241,7 @@ EXAMPLE:
 
 
 
-## Objectives of this case study 
 
-HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
-      1. Background
-      2. Objectives/Learning outcomes
-      3. What the users of the case study will learn
-      4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
-      
 
 
 ## Specific to the case study
