@@ -26,6 +26,8 @@ editor_options:
 * Use **“Quotation marks”** vs. “Inverted commas” - “inverted” is a complicated word for non-native English speakers
 * **Columns & Rows** vs. Variables & Observations
 
+## Structure
+If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the "::: {.panel-tabset}" option. More information on how to create a tab separted layout with Quarto can be found in this [link](https://quarto.org/docs/interactive/layout.html)
 
 
 <!-- Some considerations about about this quarto template 
@@ -57,7 +59,7 @@ editor_options:
 | **Methodolocial complexity** |      | <!-- Basic, Intermidiate or High -->
  
  
- Name: XXX\ -->
+Name: XXX\ -->
 Language: XXXX\
 Tool: R\ <!-- Specify tool (e.g., R, Excel, STATA...) -->
 Location: XXXX\
