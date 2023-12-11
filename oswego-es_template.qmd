@@ -794,13 +794,6 @@ DT::datatable(oswego_db)
 
 ::: {style="display: flex; padding: 15px;"}
 ```{=html}
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Useis-logo.png"
-  
-  style="width: 100%; 
-  margin-bottom: 15px; 
-  margin-top: 15px;" />
-```
-```{=html}
 <img src="https://www.r-project.org/logo/Rlogo.png"
   style="width: 41%; 
   margin-bottom: 15px;
