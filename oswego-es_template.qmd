@@ -224,12 +224,15 @@ Antes de iniciar este estudio de caso, le aconsejamos que:
 5.  En la subcarpeta **outputs** encontrará todos los gráficos y tablas
     generadas en el anlálisis.
 
+::: {.panel-tabset}
+
 ## **Primera parte - Antecedentes**
 
 ::: {style="display: flex; padding-left: 10px;"}
-<img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 30%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px;"/>
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Oswego_County_New_York_incorporated_and_unincorporated_areas_Oswego_highlighted.svg/800px-Oswego_County_New_York_incorporated_and_unincorporated_areas_Oswego_highlighted.svg.png" style="width: 25%; height: 100%; margin-bottom: 50px; margin-top: 50px;"/>\
+<img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 100%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px; align: centre"/>
 :::
+
+
 
 El 19 de abril de 1940, el oficial de salud local en el pueblo de
 **Lycoming**, condado de **Oswego, Nueva York**, informó de la
@@ -249,6 +252,8 @@ conocidas que asistieron a la cena, recopilando información sobre los
 ocurrencia y tiempo de aparición de los síntomas, y alimentos
 consumidos. de las 75 personas entrevistados, **46** personas
 presentaron síntomas de enfermedad gastrointestinal.
+
+
 
 #### **Pregunta 1: ¿Ante que tipo de situación está presente el Dr Rubin?**.
 
@@ -319,9 +324,6 @@ NOTE: End of solution
 ```
 #### **Pregunta 2: Los pasos de una investigación de brote son:**.
 
-::: {style="display: flex; padding-left: 10px;"}
-<img src="https://d3i71xaburhd42.cloudfront.net/ae6dc97f53bc4c2994523a6306288ac05fdaf9f1/3-Figure1-1.png" style="width: 30%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px;"/>\
-:::
 
 ```{=html}
 <!--
@@ -386,10 +388,6 @@ NOTE: End of solution
 ```
 ### **Descripción clínica**de los casos
 
-::: {style="display: flex; padding-right: 10px;"}
-<img src="https://drive.google.com/uc?id=1lY-NkKInQAQ9Idgk3IueSe9roqN2b0qP" style="width: 30%; margin-bottom: 50px; margin-top: 20px; padding-right: 20px"/>
-<img src="https://drive.google.com/uc?id=1l_2RUqclqK9M8dboxzm2yF3VK3KnU7U3" style="width: 30%; height: 100%; margin-bottom: 50px; margin-top: 20px;"/>\
-:::
 
 El inicio de la enfermedad en todos los casos fue **agudo**,
 caracterizada principalmente por **náuseas**, **vómitos**, **diarrea** y
@@ -569,15 +567,13 @@ vez de agregados, nos ayudan entre otras cosas porque:
 NOTE: End of solution
 -->
 ```
+
+
+
 ## **Segunda parte - El Evento**
 
 ### **Descripción de la Cena**
 
-::: {style="display: flex; padding: 10px;"}
-<img src="https://drive.google.com/uc?id=1lSnQzpfrVpUmM1rA6DRhDINLYSx-gJ5P" style="width: 30%; margin-bottom: 20px; margin-top: 5px;"/>
-<img src="https://drive.google.com/uc?id=1lUu4JRI7alLebB4qGiFLXTUZasxfJgq-" style="width: 30%; height: 100%; margin-bottom: 20px; margin-top: 5px;"/>
-<img src="https://drive.google.com/uc?id=1lXNtWuxA2nLskAEDHlPkhvW8R1fhS8e7" style="width: 30%; height: 100%; margin-bottom: 20px; margin-top: 5px;"/>
-:::
 
 La investigación del Dr. Rubin también implicó averiguar más detalles
 sobre la cena. Después de hablar con los organizadores, descubrió que la
@@ -1503,3 +1499,5 @@ con la contaminación es un asunto por nexo epidemiológico.
 Nota: El paciente #52 era un niño que mientras viendo el procedimiento
 de congelación se le dio una plato de helado de vainilla a las 11:00 am
 en abril 18.
+
+:::

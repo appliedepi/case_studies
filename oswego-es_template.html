@@ -84,18 +84,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p><strong>Case study characteristics</strong><br>
-Name: Oswego<br>
-Language: Spanish/Español<br>
-Tool: R<br>
-Location: United States<br>
-Scale: Local<br>
-Disease: Gastrointestinal<br>
-Keywords: Gastrointestinal;Outbreak investigation;<br>
-Technical complexity: Intermidiate Methodological complexity: Intermidiate<br>
 </p>
-<p><strong>Acknowledgements</strong><br>
-Tutorial authors: XXXX<br>
-Data source: XXXXX</p>
+<table class="table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Name</strong></td>
+<td style="text-align: left;">Oswego</td>
+</tr>
+<tr class="even">
+<td><strong>Tool</strong></td>
+<td style="text-align: left;">R</td>
+</tr>
+<tr class="odd">
+<td><strong>Language</strong></td>
+<td style="text-align: left;">Spanish/Español</td>
+</tr>
+<tr class="even">
+<td><strong>Location</strong></td>
+<td style="text-align: left;">United States</td>
+</tr>
+<tr class="odd">
+<td><strong>Scale</strong></td>
+<td style="text-align: left;">Local</td>
+</tr>
+<tr class="even">
+<td><strong>Diseases</strong></td>
+<td style="text-align: left;">Gastrointestinal</td>
+</tr>
+<tr class="odd">
+<td><strong>Keywords</strong></td>
+<td style="text-align: left;">Gastrointestinal;Outbreak investigation</td>
+</tr>
+<tr class="even">
+<td><strong>Technical complexity</strong></td>
+<td style="text-align: left;">Intermidiate</td>
+</tr>
+<tr class="odd">
+<td><strong>Methodolocial complexity</strong></td>
+<td style="text-align: left;">Intermidiate</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Authorship</em></strong><br>
+Original authors: XXXX<br>
+Data source: XXXXX Adapted by: XXXX</p>
 </section>
 <section id="instructions" class="level2">
 <h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
@@ -151,8 +187,8 @@ NOTE: End of solution
 <p>You will see these icons throughout the exercises:</p>
 <table class="table">
 <colgroup>
-<col style="width: 31%">
-<col style="width: 68%">
+<col style="width: 35%">
+<col style="width: 64%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -189,8 +225,9 @@ NOTE: End of solution
 </table>
 </section>
 </section>
-<section id="license" class="level3">
-<h3 class="anchored" data-anchor-id="license">License</h3>
+<section id="terms-of-use" class="level3">
+<h3 class="anchored" data-anchor-id="terms-of-use">Terms of use</h3>
+<p>This case study has been adapted from an existing tutorial on Epi Info created by the Centre for Disease Prevention and Control (CDC). Epi Info™ is a trademark of CDC. Epi Info™ programs are provided in the public domain to promote public health. Programs might be freely translated, copied, or distributed. No warranty is made or implied for use of the software for any particular purpose.</p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"></a> Applied Epi Incorporated, 2022 <br>This work is licensed by Applied Epi Incorporated under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
 <p>Please email contact@appliedepi.org with questions about the use of these materials for academic courses and epidemiologist training programs.</p>
 </section>
@@ -198,8 +235,8 @@ NOTE: End of solution
 <section id="feedback-suggestions" class="level2">
 <h2 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h2>
 <ul>
-<li>You can write feedback and suggestions on this case study at the <a href="https://github.com/appliedepi/emory_training/issues">GitHub issues page</a></li>
-<li>Alternatively email us at: <a href="mailto:epiRhandbook@gmail.com">epirhandbook@gmail.com</a></li>
+<li>You can write feedback and suggestions on this case study at the <a href="https://github.com/appliedepi/case_studies">GitHub issues page</a></li>
+<li>Alternatively email us at: <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a></li>
 </ul>
 <div style="page-break-after: always;"></div>
 </section>
@@ -245,6 +282,17 @@ NOTE: End of solution
 </section>
 <section id="guía" class="level2">
 <h2 class="anchored" data-anchor-id="guía">Guía</h2>
+</section>
+<section id="objetivos-de-este-estudio-de-caso" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-de-este-estudio-de-caso">Objetivos de este estudio de caso</h2>
+<p>Los objetivos de este estudio de caso son:</p>
+<ol type="1">
+<li>Entender los diferentes pasos en la investigación de un brote de casos de enfermedad gastrointestinal</li>
+<li>Adquirir confianza en el manejo de datos de un listado nominal con el software estadístico R</li>
+<li>Adquirir experience en el análisis descriptivo en R, particularmente curvas epidémicas</li>
+<li>Adquirir experience construyendo tablas 2x2 con exposición y desenlace que nos permitan calcular medidas de asociación</li>
+<li>Aplicar los conocimientos adquiridos a posibles actividades de control y prevención de brotes infecciosos de origen alimentario</li>
+</ol>
 <section id="conocimientos-previos-asumidos" class="level3">
 <h3 class="anchored" data-anchor-id="conocimientos-previos-asumidos">Conocimientos previos asumidos</h3>
 <p>En este estudio de caso se asume un conocimiento básico de los principios fundamental de la investigación epidemiológica de brotes gastrointestinales. Se asume también un conocimiento básico de R.</p>
@@ -260,23 +308,12 @@ NOTE: End of solution
 <li>Deberá crear un script dentro de la carpeta <strong>scripts</strong> en el que usted escribe el código para el análisis. Puede utilizar el script que ya está presente llamado “01_oswego_sol” que contiene el código de análisis si se encuentra atascado o si quiere comparar el código que usted realiza con la solución.</li>
 <li>En la subcarpeta <strong>outputs</strong> encontrará todos los gráficos y tablas generadas en el anlálisis.</li>
 </ol>
-</section>
-</section>
-<section id="objetivos-de-este-estudio-de-caso" class="level2">
-<h2 class="anchored" data-anchor-id="objetivos-de-este-estudio-de-caso">Objetivos de este estudio de caso</h2>
-<p>Los objetivos de este estudio de caso son:</p>
-<ol type="1">
-<li>Entender los diferentes pasos en la investigación de un brote de casos de enfermedad gastrointestinal</li>
-<li>Adquirir confianza en el manejo de datos de un listado nominal con el software estadístico R</li>
-<li>Adquirir experience en el análisis descriptivo en R, particularmente curvas epidémicas</li>
-<li>Aplicar los conocimientos adquiridos a posibles actividades de control y prevención de brotes infecciosos de origen alimentario</li>
-</ol>
-</section>
-<section id="primera-parte---antecedentes" class="level2">
-<h2 class="anchored" data-anchor-id="primera-parte---antecedentes"><strong>Primera parte - Antecedentes</strong></h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href=""><strong>Primera parte - Antecedentes</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href=""><strong>Segunda parte - El Evento</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href=""><strong>Tercera parte - Análisis</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href=""><strong>Cuarta Parte - Conclusión</strong></a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div style="display: flex; padding-left: 10px;">
-<p><img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 30%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px;"> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Oswego_County_New_York_incorporated_and_unincorporated_areas_Oswego_highlighted.svg/800px-Oswego_County_New_York_incorporated_and_unincorporated_areas_Oswego_highlighted.svg.png" style="width: 25%; height: 100%; margin-bottom: 50px; margin-top: 50px;"><br>
-</p>
+<p><img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 100%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px; align: centre"></p>
 </div>
 <p>El 19 de abril de 1940, el oficial de salud local en el pueblo de <strong>Lycoming</strong>, condado de <strong>Oswego, Nueva York</strong>, informó de la ocurrencia de un brote de enfermedad gastrointestinal al Distrito de Salud Oficial en <strong>Siracusa</strong>. Dr.&nbsp;A. M. Rubin, epidemiólogo en formación, fue asignado para investigar lo ocurrido.</p>
 <p>Cuando el <strong>Dr.&nbsp;Rubin</strong> llegó al campo, determinó a través del oficial de salud que todas las personas que enfermaron había asistido a una cena en <strong>la iglesia</strong> celebrada la noche anterior, <strong>18 de abril</strong>. Otra información importante fue que los familiares que no asistieron a la cena, no enfermaron.</p>
@@ -322,10 +359,6 @@ NOTE: End of solution
 </section>
 <section id="pregunta-2-los-pasos-de-una-investigación-de-brote-son." class="level4">
 <h4 class="anchored" data-anchor-id="pregunta-2-los-pasos-de-una-investigación-de-brote-son."><strong>Pregunta 2: Los pasos de una investigación de brote son:</strong>.</h4>
-<div style="display: flex; padding-left: 10px;">
-<p><img src="https://d3i71xaburhd42.cloudfront.net/ae6dc97f53bc4c2994523a6306288ac05fdaf9f1/3-Figure1-1.png" style="width: 30%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px;"><br>
-</p>
-</div>
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
 -->
@@ -365,10 +398,6 @@ NOTE: End of solution
 </section>
 <section id="descripción-clínicade-los-casos" class="level3">
 <h3 class="anchored" data-anchor-id="descripción-clínicade-los-casos"><strong>Descripción clínica</strong>de los casos</h3>
-<div style="display: flex; padding-right: 10px;">
-<p><img src="https://drive.google.com/uc?id=1lY-NkKInQAQ9Idgk3IueSe9roqN2b0qP" style="width: 30%; margin-bottom: 50px; margin-top: 20px; padding-right: 20px"> <img src="https://drive.google.com/uc?id=1l_2RUqclqK9M8dboxzm2yF3VK3KnU7U3" style="width: 30%; height: 100%; margin-bottom: 50px; margin-top: 20px;"><br>
-</p>
-</div>
 <p>El inicio de la enfermedad en todos los casos fue <strong>agudo</strong>, caracterizada principalmente por <strong>náuseas</strong>, <strong>vómitos</strong>, <strong>diarrea</strong> y <strong>dolor abdominal</strong>. Ninguno de los enfermos personas reportaron tener un nivel elevado temperatura; todos se recuperaron dentro de las <strong>24 a 30 horas</strong>.</p>
 <p>Aproximadamente el 20% de los enfermos que visitaron al médico no se les realizó examen de muestras fecales para el examen bacteriológico.</p>
 <section id="pregunta-3-enumere-las-grandes-categorías-de-agentes-causales-de-enfermedades-que-se-deben-considerar-en-el-diagnóstico-diferencial-de-un-brote-de-enfermedad-gastrointestinal-como-el-de-oswego" class="level4">
@@ -460,14 +489,10 @@ NOTE: End of solution
 -->
 </section>
 </section>
-</section>
-<section id="segunda-parte---el-evento" class="level2">
-<h2 class="anchored" data-anchor-id="segunda-parte---el-evento"><strong>Segunda parte - El Evento</strong></h2>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <section id="descripción-de-la-cena" class="level3">
 <h3 class="anchored" data-anchor-id="descripción-de-la-cena"><strong>Descripción de la Cena</strong></h3>
-<div style="display: flex; padding: 10px;">
-<p><img src="https://drive.google.com/uc?id=1lSnQzpfrVpUmM1rA6DRhDINLYSx-gJ5P" style="width: 30%; margin-bottom: 20px; margin-top: 5px;"> <img src="https://drive.google.com/uc?id=1lUu4JRI7alLebB4qGiFLXTUZasxfJgq-" style="width: 30%; height: 100%; margin-bottom: 20px; margin-top: 5px;"> <img src="https://drive.google.com/uc?id=1lXNtWuxA2nLskAEDHlPkhvW8R1fhS8e7" style="width: 30%; height: 100%; margin-bottom: 20px; margin-top: 5px;"></p>
-</div>
 <p>La investigación del Dr.&nbsp;Rubin también implicó averiguar más detalles sobre la cena. Después de hablar con los organizadores, descubrió que la cena se celebró en el sótano del iglesia del pueblo. Los alimentos fueron aportados por numerosos miembros de la congregación. La cena comenzaba a las 6:00 p.m. y continuó hasta 11.00 pm.</p>
 <p>La comida estaba esparcida sobre una mesa y fue consumida durante un período de varias horas. Los datos sobre el inicio de la enfermedad y los alimentos consumidos por cada una de las 75 personas entrevistados se proporcionan en la listado adjunto.</p>
 <p>La hora aproximada de participación en el evento solo se recolectó aproximadamente la mitad de las personas que tuvo una enfermedad gastrointestinal.</p>
@@ -579,9 +604,8 @@ NOTE: End of solution
 <h4 class="anchored" data-anchor-id="versión-digital"><strong>Versión digital</strong></h4>
 </section>
 </section>
-</section>
-<section id="tercera-parte---análisis" class="level2">
-<h2 class="anchored" data-anchor-id="tercera-parte---análisis"><strong>Tercera parte - Análisis</strong></h2>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <section id="apoyo-en-análisis-de-los-datos" class="level3">
 <h3 class="anchored" data-anchor-id="apoyo-en-análisis-de-los-datos">Apoyo en análisis de los datos</h3>
 <div style="display: flex; padding: 15px;">
@@ -979,9 +1003,8 @@ NOTE: End of solution
 -->
 </section>
 </section>
-</section>
-<section id="cuarta-parte---conclusión" class="level2">
-<h2 class="anchored" data-anchor-id="cuarta-parte---conclusión"><strong>Cuarta Parte - Conclusión</strong></h2>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div style="display: flex; padding: 15px;">
 <img src="https://drive.google.com/uc?id=1kei3qEfl3iSd8lSV7EfW7qPVNNISlPkc" style="width: 100%; 
   margin-bottom: 15px; 
@@ -1008,6 +1031,10 @@ NOTE: End of solution
 <p><strong>Conclusiones:</strong> Un brote de gastroenteritis ocurrió después de una cena en la iglesia en Lycoming. La causa del brote fue helado de vainilla por contaminado. El método de contaminación de helado no se entiende claramente.</p>
 <p>Si el estafilococo dio positivo de la nariz y la garganta de los cultivos realizados en la familia Petrie haba todo lo que tenga que ver con la contaminación es un asunto por nexo epidemiológico.</p>
 <p>Nota: El paciente #52 era un niño que mientras viendo el procedimiento de congelación se le dio una plato de helado de vainilla a las 11:00 am en abril 18.</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 
