@@ -1,15 +1,19 @@
 ---
-output: html_document
+output:  html_document
 editor_options: 
   chunk_output_type: console
 editor: 
   markdown: 
     wrap: 72
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
 ---
 
-# Oswego (ES) {#sec-oswego}
+# Oswego (ES) {#sec-oswego} 
 
-## Overview
+## Overview {.unnumbered}
 
 **Case study characteristics**\
 
@@ -26,17 +30,19 @@ editor:
 | **Methodolocial complexity** | Intermidiate                            |
 
 ***Authorship***\
-Original authors: XXXX\
-Data source: XXXXX Adapted by: XXXX
+Original authors: Centre for Disease Prevention and Control (CDC)\
+Data source: Epi Info, version 3.5.4 (CDC)\
+Adapted to R by: Leonel Lerebours Nadal y Alberto Mateo Urdiales
 
 ```{r, echo=FALSE, include=FALSE, warning=FALSE}
 Sys.setlocale(category = "LC_ALL", locale = "Spanish")
+pacman::p_load(webexercises)
 
 ```
 
-## Instructions
+## Instructions {.unnumbered}
 
-### Getting Help
+### Getting Help {.unnumbered}
 
 There are several ways to get help:
 
@@ -45,7 +51,7 @@ There are several ways to get help:
     Community](www.community.appliedepi.org) with reference to this case
     study
 
-#### Hints and Solutions
+#### Hints and Solutions {.unnumbered}
 
 Here is what the "helpers" look like:
 
@@ -105,12 +111,12 @@ Here is more explanation about why the solution works.
 NOTE: End of solution
 -->
 ```
-#### Posting a question in the Community Forum
+#### Posting a question in the Community Forum {.unnumbered}
 
 ... description here about posting in Community... TO BE COMPLETED BY
 APPLIED EPI
 
-#### Icons
+#### Icons {.unnumbered}
 
 You will see these icons throughout the exercises:
 
@@ -123,7 +129,7 @@ You will see these icons throughout the exercises:
 | `r fontawesome::fa("window-restore", fill = "darkgrey")` | Change to another window |
 | `r fontawesome::fa("bookmark", fill = "orange")`         | Remember this for later  |
 
-### Terms of use
+### Terms of use {.unnumbered}
 
 This case study has been adapted from an existing tutorial on Epi Info
 created by the Centre for Disease Prevention and Control (CDC). Epi
@@ -143,7 +149,7 @@ Please email contact\@appliedepi.org with questions about the use of
 these materials for academic courses and epidemiologist training
 programs.
 
-## Feedback & suggestions
+## Feedback & suggestions {.unnumbered}
 
 -   You can write feedback and suggestions on this case study at the
     [GitHub issues page](https://github.com/appliedepi/case_studies)
@@ -152,11 +158,11 @@ programs.
 
 \pagebreak
 
-## Version 1
+## Version 1 {.unnumbered}
 
 16 November 2023
 
-## Disclaimer
+## Disclaimer {.unnumbered}
 
 Esto es un estudio de caso diseñado por el Centre for Disease Prevention
 and Control (CDC) como tutorial de Epi Info. Puede consultar más
@@ -165,7 +171,7 @@ detalles en este
 
 \pagebreak
 
-## Revisions
+## Revisions {.unnumbered}
 
 WRITE ANY REVISIONS MADE TO THE CASE STUDY
 
@@ -177,9 +183,9 @@ WRITE ANY REVISIONS MADE TO THE CASE STUDY
 
 \pagebreak
 
-## Guía
+## Guía {.unnumbered}
 
-## Objetivos de este estudio de caso
+## Objetivos de este estudio de caso {.unnumbered}
 
 Los objetivos de este estudio de caso son:
 
@@ -194,13 +200,13 @@ Los objetivos de este estudio de caso son:
 5.  Aplicar los conocimientos adquiridos a posibles actividades de
     control y prevención de brotes infecciosos de origen alimentario
 
-### Conocimientos previos asumidos
+### Conocimientos previos asumidos {.unnumbered}
 
 En este estudio de caso se asume un conocimiento básico de los
 principios fundamental de la investigación epidemiológica de brotes
 gastrointestinales. Se asume también un conocimiento básico de R.
 
-### Preparation for the case study
+### Preparation for the case study {.unnumbered}
 
 Antes de iniciar este estudio de caso, le aconsejamos que:
 
@@ -226,7 +232,7 @@ Antes de iniciar este estudio de caso, le aconsejamos que:
 
 ::: {.panel-tabset}
 
-## **Primera parte - Antecedentes**
+## **Primera parte - Antecedentes** {.unnumbered}
 
 ::: {style="display: flex; padding-left: 10px;"}
 <img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 100%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px; align: centre"/>
@@ -255,18 +261,33 @@ presentaron síntomas de enfermedad gastrointestinal.
 
 
 
-#### **Pregunta 1: ¿Ante que tipo de situación está presente el Dr Rubin?**.
+#### **Pregunta 1** {.unnumbered}
 
-1)  Una epidemia\
-2)  Una serie de casos\
-3)  Un brote\
-4)  No se puede establecer
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+opts <- c(
+  "Una epidemia",
+  "Una serie de casos",
+  answer = "Un brote",
+  "No se puede establecer"
+)
+
+
+cat("¿Ante que tipo de situación está presente el Dr Rubin?", longmcq(opts))
+
+```
+:::
+
+
+
 
 ```{=html}
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
 -->
 ```
+
 <details>
 
 <summary style="text-decoration: underline; color: darkgreen;">
@@ -285,23 +306,18 @@ encontrar la definición que se ajusta más a la situación descrita
 
 </details>
 
-```{=html}
-<!--
-NOTE: Below is the solution (all within details tags collapsed)
--->
-```
+
 <details>
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click para ver la solución
+`r fontawesome::fa("check", fill = "red")`Click para ver la explicación
 (¡Inténtelo usted primero!)
 
 </summary>
 
 </br>
 
-La solucion es numero 3 - Un brote.
 
 Numero 1 - No es la respuesta correcta; revisa el concepto de epidemia,
 tiene que ver con la cantidad de personas afectadas.
@@ -317,62 +333,37 @@ pasos del trabajo de campo.
 
 </details>
 
-```{=html}
-<!--
-NOTE: End of solution
--->
+
+#### **Pregunta 2** {.unnumbered}
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+opts_2 <- c(
+  "Determinar la existencia del brote, análisis descriptivo, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final",
+  "Una serie de casos",
+  answer = "Determinar la existencia del brote, confirmar diagnóstico, contar casos, análisis descriptivo, determinar quién está a riesgo de enfermar, desarrollar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final",
+  "Determinar la existencia del brote, confirmar el diagnóstico, controlar brote, comunicar brote, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final"
+)
+
+
+cat("Los pasos de una investigación de brote son:", longmcq(opts_2))
+
 ```
-#### **Pregunta 2: Los pasos de una investigación de brote son:**.
+:::
 
-
-```{=html}
-<!--
-NOTE: Below is the hint (all within details tags collapsed)
--->
-```
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click para leer una
-pista
-
-</summary>
-
-</br>
-
-Piense en la sequencia de pasos que deben sucederse para capturar la
-magnitud de un brote, resolverlo y mantener informada a la población
-afectada </br>
-
-</details>
-
-```{=html}
-<!--
-NOTE: Below is the solution (all within details tags collapsed)
--->
-```
 <details>
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click para ver la solución
+`r fontawesome::fa("check", fill = "red")`Click para ver la explicación
 (¡Inténtelo usted primero!)
 
 </summary>
 
 </br>
 
-1.  Determinar la existencia de un brote
-2.  Confirmar el diagnóstico
-3.  Determinar el número de casos
-4.  Organizar la información en términos de tiempo, lugar y persona
-5.  Determinar quiénes están en riesgo de enfermarse
-6.  Hipótesis
-7.  Análisis de los datos
-8.  Medidas de control
-9.  Conclusiones y recomendaciones
-10. Informe final
 
 Puede utilizar el sitio de la OPS para profundizar sobre el tema
 [Enlace](https://www3.paho.org/hq/index.php?option=com_content&view=article&id=10543:2015-capitulo-iii-investigacion-brotes-personas&Itemid=0&lang=es#gsc.tab=0)
@@ -381,12 +372,8 @@ Puede utilizar el sitio de la OPS para profundizar sobre el tema
 
 </details>
 
-```{=html}
-<!--
-NOTE: End of solution
--->
-```
-### **Descripción clínica**de los casos
+
+### **Descripción clínica**de los casos {.unnumbered}
 
 
 El inicio de la enfermedad en todos los casos fue **agudo**,
@@ -398,7 +385,10 @@ un nivel elevado temperatura; todos se recuperaron dentro de las **24 a
 Aproximadamente el 20% de los enfermos que visitaron al médico no se les
 realizó examen de muestras fecales para el examen bacteriológico.
 
-#### **Pregunta 3: Enumere las grandes categorías de agentes causales de enfermedades que se deben considerar en el diagnóstico diferencial de un brote de enfermedad gastrointestinal como el de Oswego**
+#### **Pregunta 3** {.unnumbered}
+
+Enumere una de las grandes categorías de agentes causales de enfermedades que se deben considerar en el diagnóstico diferencial de un brote de enfermedad gastrointestinal como el de Oswego:\
+`r fitb(c("Bacterias", "Virus", "Parásitos", "Toxinas"), ignore_case = TRUE, ignore_ws = TRUE, width = "10")` 
 
 ```{=html}
 <!--
@@ -409,7 +399,7 @@ NOTE: Below is the solution (all within details tags collapsed)
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click para ver la solución
+`r fontawesome::fa("check", fill = "red")`Click para ver la explicación de la solución
 (¡Inténtelo usted primero!)
 
 </summary>
@@ -437,7 +427,11 @@ Los investigadores en Oswego, desconocen el agente causal, pero
 sospechan de que la génesis de este brote fue través de los alimentos
 como vehiculo de transmisión entre los afectados.
 
-#### **Pregunta 4: En lenguaje epidemiológico, ¿Qué es un vehículo? ¿Qué es un vector? ¿Cuáles son otros modos?**
+#### **Pregunta 4** {.unnumbered}
+
+En lenguaje epidemiológico, ¿Qué es un vehículo? ¿Qué es un vector? ¿Cuáles son otros modos?
+
+Piense en estos conceptos y cuando esté listo, vea la solución propuesta
 
 ```{=html}
 <!--
@@ -491,7 +485,10 @@ El Dr. Rubin decidió administrar un cuestionario a los participantes de
 la cena de la iglesia para averiguar qué alimento podía estar asociado
 al desarrollo de los síntomas
 
-#### **Pregunta 5: Si fuese usted el que administra el cuestionario, ¿qué información recopilaría? Agrupa la información en categorías.**
+#### **Pregunta 5** {.unnumbered}
+
+Si fuese usted el que administra el cuestionario, ¿qué información recopilaría? Agrupa la información en categorías. Una vez que haya escrito sus categorías, puede ver abajo la solución.
+
 
 ```{=html}
 <!--
@@ -531,48 +528,31 @@ Además de decidir la información que quería recolectar, el Dr. Rubin
 decidió recolectó los datos entrevistados a través de un listado
 nominal.
 
-#### **Pregunta 6: ¿En que nos ayuda un listado nominal?.**
+#### **Pregunta 6** {.unnumbered}
 
-```{=html}
-<!--
-NOTE: Below is the solution (all within details tags collapsed)
--->
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+opts_6 <- c(
+  "Organizar los datos y describirlos por tiempo, lugar y persona",
+  "Clasificar a los individuos como casos, no casos y sospechosos",
+  answer = "A diagnosticar a los pacientes",
+  "A manejar un documento dinámico que se puede actualizar constantemente"
+)
+
+
+cat("¿En que NO nos ayuda un listado nominal?", longmcq(opts_6))
+
 ```
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click para ver la solución
-(¡Inténtelo usted primero!)
-
-</summary>
-
-</br>
-
-Durante la investigación de un brote, los datos en listado nominal, en
-vez de agregados, nos ayudan entre otras cosas porque:
-
--   Nos permite organizar y revisar los datos sobre tiempo, lugar un
-    persona de forma rápida
--   Podemos clasificar por grupos a los invividuos (casos confirmados,
-    sospechosos y no casos)
--   Es dinámico y se puede actualizar constantemente
-
-</br>
-
-</details>
-
-```{=html}
-<!--
-NOTE: End of solution
--->
-```
+:::
 
 
 
-## **Segunda parte - El Evento**
+**Por favor, continue el caso entrando en la pestaña "Segunda parte - El Evento" en la parte superior**
 
-### **Descripción de la Cena**
+## **Segunda parte - El Evento {.unnumbered}
+
+### **Descripción de la Cena** {.unnumbered}
 
 
 La investigación del Dr. Rubin también implicó averiguar más detalles
@@ -590,7 +570,9 @@ La hora aproximada de participación en el evento solo se recolectó
 aproximadamente la mitad de las personas que tuvo una enfermedad
 gastrointestinal.
 
-#### **Pregunta 7: ¿Cuál es el valor de una curva epidémica en la investigación de un brote?**
+#### **Pregunta 7** {.unnumbered}
+
+¿Cuál es el valor de una curva epidémica en la investigación de un brote?
 
 ```{=html}
 <!--
@@ -624,7 +606,9 @@ investigan brotes:
 NOTE: End of solution
 -->
 ```
-#### **Pregunta 8: ¿Qué nos dice el siguiente gráfico?**
+#### **Pregunta 8** {.unnumbered}
+
+ ¿Qué nos dice el siguiente gráfico?
 
 ```{r, echo=FALSE, fig.align='center', fig.height=4, fig.width=6, warning=FALSE, message=FALSE}
 
@@ -694,7 +678,9 @@ La curva epidémica nos dice que:
 NOTE: End of solution
 -->
 ```
-#### **Pregunta 9: ¿Hay algún caso en el que los tiempos de inicio no coincidan con los generales? ¿experiencia? ¿Cómo podrían explicarse?**
+#### **Pregunta 9** {.unnumbered}
+
+¿Hay algún caso en el que los tiempos de inicio no coincidan con los generales? ¿experiencia? ¿Cómo podrían explicarse?
 
 ```{=html}
 <!--
@@ -746,7 +732,9 @@ NOTE: End of solution
 ```
 :::
 
-#### **Pregunta 9: ¿Cómo podrían presentarse mejor los datos en el listado nominal de participantes?**
+#### **Pregunta 10** {.unnumbered} 
+
+¿Cómo podrían presentarse mejor los datos en el listado nominal de participantes?
 
 ```{=html}
 <!--
@@ -979,7 +967,7 @@ epidemiologos](https://epirhandbook.com/es/ggplot-basics.html)
 
 <br> <br>
 
-#### **Pregunta 10: ¿Cuantos casos tenian el dato de incubación?**
+#### **Pregunta 10: ¿Cuantos casos tenian el dato de incubación?** {.unnumbered}
 
 ```{=html}
 <!--
