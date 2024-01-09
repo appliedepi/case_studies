@@ -173,8 +173,6 @@ detalles en este
 
 ## Revisions {.unnumbered}
 
-WRITE ANY REVISIONS MADE TO THE CASE STUDY
-
 | Date        | Changes made        | Version |
 |-------------|:--------------------|--------:|
 | 16 November | Adapted to template |       1 |
