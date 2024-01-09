@@ -1,0 +1,71 @@
+---
+title: "Untitled"
+author: "Alberto Mateo Urdiales"
+date: "2023-12-17"
+output: webexercises::webexercises_default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars,  echo = FALSE, results = 'asis'}
+pacman::p_load("webexercises")
+
+
+opts <- c("install.package", 
+            "install.packages", 
+            answer = "library", 
+            "libraries")
+
+q1 <- mcq(opts)
+
+cat("What function loads a package that is already on your computer?", q1)
+```
+
+```{r,echo=F}
+
+opts_p <- c(
+   "the probability that the null hypothesis is true",
+   answer = "the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true",
+   "the probability of making an error in your conclusion"
+)
+
+
+```
+
+`r longmcq(opts_p)`
+
+## Multiple Choice (`mcq()`)
+
+- "Never gonna give you up, never gonna: `r mcq(c("let you go", "turn you down", "run away", answer = "let you down"))`"
+- "I `r mcq(c(answer = "bless the rains", "guess it rains", "sense the rain"))` down in Africa" -Toto
+
+```{r, results="asis", echo=FALSE}
+opts <- c(
+  "Una epidemia",
+  "Una serie de casos",
+  answer = "Un brote",
+  "No se puede establecer"
+)
+
+
+cat("¿Ante que tipo de situación está presente el Dr Rubin?", longmcq(opts))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
