@@ -2,12 +2,18 @@
 output: html_document
 editor_options: 
   chunk_output_type: console
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
 ---
 
-# Considerations for standardised coding in this case-study template
+# Case study template instructions
+
+## Section 1. Considerations for standardised coding in this case-study template
 
 
-## General coding framework
+### General coding framework if using R
 
 * When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}
 * Use a vertical approach to writing coding - easier to read
@@ -18,7 +24,7 @@ editor_options:
 * Use  <-   not =
 
 
-## Vocabulary
+### Vocabulary
 
 * Use **“Data frame”** instead of “dataset”
 * Use **“Import (data)”** - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).
@@ -26,8 +32,39 @@ editor_options:
 * Use **“Quotation marks”** vs. “Inverted commas” - “inverted” is a complicated word for non-native English speakers
 * **Columns & Rows** vs. Variables & Observations
 
-## Structure
+### Structure
 If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the "::: {.panel-tabset}" option. More information on how to create a tab separted layout with Quarto can be found in this [link](https://quarto.org/docs/interactive/layout.html)
+
+
+### Including figures
+When including figures make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto's [guide](https://quarto.org/docs/authoring/figures.html)
+
+### Questions 
+Please, include questions throughout the case study. If the questions included are open questions, you can use the "Hints and Solutions" feature included in this template to suggest answers/reflections. If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their [website](https://psyteachr.github.io/webexercises/articles/webexercises.html) and in their [GitHub](https://github.com/psyteachr/webexercises).
+
+To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.
+
+Here you find an example of a multiple choice question:
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+opts <- c(
+  "Infectious period",
+  "Susceptibility",
+  answer = "Incubation period",
+  "Communicability period"
+)
+
+
+cat("The time elapsed between exposure to a pathogen and the appearence of symptoms is known as:", longmcq(opts))
+
+```
+:::
+
+
+### Unnumbered sections
+Use {.unnumbered} after every heading so that they are not numbered in the final rendering 
 
 
 <!-- Some considerations about about this quarto template 
@@ -41,42 +78,46 @@ If your case study is long, consider it dividing it into different parts and sep
 
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
-# Name of case study {#sec-name-lan}
 
-## Overview
+## Section 2. Fixed sections in the case study
 
- **Case study characteristics** 
-|                              |      |
+### Name of case study {#sec-name-lan}
+
+### Overview {.unnumbered}
+
+
+
+|**Case study characteristics**|      |
 |------------------------------|:-----|
-| **Name**                     |      |
-| **Language**                 |      |
-| **Tool**                     |      | <!-- Specify tool (e.g., R, Excel, STATA...) -->
-| **Location**                 |      |
-| **Scale**                    |      | <!-- Local, Regional, National or Global -->
-| **Diseases**                 |      | <!-- Specify pathogen -->
-| **Keywords**                 |      | <!-- Examples: Outbreak investigation, GIS, TSA... -->
-| **Technical complexity**     |      | <!-- Basic, Intermidiate or High -->
-| **Methodolocial complexity** |      | <!-- Basic, Intermidiate or High -->
+| Name:                     |      |
+| Language:                 |      |
+| Tool:                     |      | 
+| Location:                 |      |
+| Scale:                    |      | 
+| Diseases:                 |      | 
+| Keywords:                 |      | 
+| Technical complexity:     |      | 
+| Methodolocial complexity: |      | 
  
  
 Name: XXX\ -->
 Language: XXXX\
-Tool: R\ <!-- Specify tool (e.g., R, Excel, STATA...) -->
+Tool: Specify tool (e.g., R, Excel, STATA...)\
 Location: XXXX\
-Scale: XXXX\ <!-- Local, Regional, National or Global -->
-Disease: XXXXX\ <!-- Specify pathogen -->
-Keywords:  <!-- Examples: Outbreak investigation, GIS, TSA... -->
-Technical complexity: Basic/intermidiate/advanced 
+Scale: XXXX (Local, Regional, National or Global)\ 
+Disease: XXXXX (Specify pathogen)\ 
+Keywords:  (Examples: Outbreak investigation, GIS, TSA...)\ 
+Technical complexity: Basic/intermidiate/advanced\
 Methodological complexity: Basic/intermidiate/advanced 
 
 ***Authorship***\
-Original authors: Centre for Disease Prevention and Control (CDC)\
-Data source: Epi Info, version 3.5.4 (CDC)
-Adapted to R by: Leonel Lerebours Nadal y Alberto Mateo Urdiales
+Original authors:   XXXX\
+Data source: XXXX\
+Adapted by: XXXX\
 
-## Instructions
+### Instructions
 
-### Getting Help
+#### Getting Help
 
 There are several ways to get help:
 
@@ -86,6 +127,8 @@ There are several ways to get help:
 #### Hints and Solutions
 
 Here is what the "helpers" look like:
+
+<!--Note that this is the way of including hints and explanations to the solutions -->
 
 ```{=html}
 <!--
@@ -117,7 +160,7 @@ NOTE: Below is the solution (all within details tags collapsed)
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
 
 </summary>
 
@@ -143,6 +186,8 @@ NOTE: End of solution
 -->
 ```
 
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+
 
 #### Posting a question in the Community Forum
 
@@ -163,11 +208,11 @@ Icon  |Meaning
 `r fontawesome::fa("window-restore", fill = "darkgrey")`|Change to another window  
 `r fontawesome::fa("bookmark", fill = "orange")`|Remember this for later  
 
-### Terms of Use
+#### Terms of Use
 
 <!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
 
-##  Feedback & suggestions
+###  Feedback & suggestions
 
 -   You can write feedback and suggestions on this case study at the
     [GitHub issues
@@ -180,19 +225,19 @@ Icon  |Meaning
 
 \pagebreak
 
-## Version XXX
+### Version XXX
 
 Write DATE OF LAST UPDATE
 
 
-## Disclaimer 
+### Disclaimer 
 
 HERE YOU CAN WRITE ANY APPROPRIATE DISCLAIMER
 
 \pagebreak
 
 
-## Revisions
+### Revisions
 WRITE ANY REVISIONS MADE TO THE CASE STUDY
 
 | Date    | Changes made | Version| 
@@ -206,9 +251,9 @@ WRITE ANY REVISIONS MADE TO THE CASE STUDY
 
 \pagebreak
 
-## Guidance
+### Guidance
 
-## Objectives of this case study 
+#### Objectives of this case study 
 
 HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
       1. Background
@@ -217,7 +262,7 @@ HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
       4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
       
 
-### Previous level of expertise assumed
+#### Previous level of expertise assumed
 ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
 
 * EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
@@ -227,7 +272,7 @@ INCLUDE REFERENCES IF POSSIBLE
 
 
 
-### Preparation for the case study
+#### Preparation for the case study
 
 INCLUDE THE STEPS NEEDED TO START REPLICATING THE ANALYSIS OF THE CASE STUDY
 
@@ -241,12 +286,7 @@ EXAMPLE:
 
 
 
-
-
-
-
-
-## Specific to the case study
+## Section 3. Specific to the case study
 
 HERE ADD THE DIFFERENT SECTIONS OF THE CASE STUDY. PLEASE INCLUDE QUESTIONS WITH HINTS AND SOLUTIONS AS SHOWN ABOVE.
 

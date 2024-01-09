@@ -69,6 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="cs_template_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="webex.css">
 </head>
 
 <body class="fullcontent">
@@ -79,10 +80,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="considerations-for-standardised-coding-in-this-case-study-template" class="level1">
-<h1>Considerations for standardised coding in this case-study template</h1>
-<section id="general-coding-framework" class="level2">
-<h2 class="anchored" data-anchor-id="general-coding-framework">General coding framework</h2>
+<section id="case-study-template-instructions" class="level1">
+<h1>Case study template instructions</h1>
+<section id="section-1.-considerations-for-standardised-coding-in-this-case-study-template" class="level2">
+<h2 class="anchored" data-anchor-id="section-1.-considerations-for-standardised-coding-in-this-case-study-template">Section 1. Considerations for standardised coding in this case-study template</h2>
+<section id="general-coding-framework-if-using-r" class="level3">
+<h3 class="anchored" data-anchor-id="general-coding-framework-if-using-r">General coding framework if using R</h3>
 <ul>
 <li>When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}</li>
 <li>Use a vertical approach to writing coding - easier to read</li>
@@ -93,8 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use &lt;- not =</li>
 </ul>
 </section>
-<section id="vocabulary" class="level2">
-<h2 class="anchored" data-anchor-id="vocabulary">Vocabulary</h2>
+<section id="vocabulary" class="level3">
+<h3 class="anchored" data-anchor-id="vocabulary">Vocabulary</h3>
 <ul>
 <li>Use <strong>“Data frame”</strong> instead of “dataset”</li>
 <li>Use <strong>“Import (data)”</strong> - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).</li>
@@ -102,6 +105,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Use <strong>“Quotation marks”</strong> vs.&nbsp;“Inverted commas” - “inverted” is a complicated word for non-native English speakers</li>
 <li><strong>Columns &amp; Rows</strong> vs.&nbsp;Variables &amp; Observations</li>
 </ul>
+</section>
+<section id="structure" class="level3">
+<h3 class="anchored" data-anchor-id="structure">Structure</h3>
+<p>If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the “::: {.panel-tabset}” option. More information on how to create a tab separted layout with Quarto can be found in this <a href="https://quarto.org/docs/interactive/layout.html">link</a></p>
+</section>
+<section id="including-figures" class="level3">
+<h3 class="anchored" data-anchor-id="including-figures">Including figures</h3>
+<p>When including figures make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto’s <a href="https://quarto.org/docs/authoring/figures.html">guide</a></p>
+</section>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<p>Please, include questions throughout the case study using the {webexercises} package. You can find information and examples on how to use this package in their <a href="https://psyteachr.github.io/webexercises/articles/webexercises.html">website</a> and in their <a href="https://github.com/psyteachr/webexercises">GitHub</a>.</p>
+<p>To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.</p>
+<p>Here you find an example of a multiple choice question:</p>
+<div class="webex-check">
+The time elapsed between exposure to a pathogen and the appearence of symptoms is known as:
+<div id="radio_IVLKLHJPLB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Infectious period</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Susceptibility</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value="answer"> <span>Incubation period</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Communicability period</span></label>
+</div>
+</div>
+</section>
+<section id="unnumbered-sections" class="level3">
+<h3 class="anchored" data-anchor-id="unnumbered-sections">Unnumbered sections</h3>
+<p>Use {.unnumbered} after every heading so that they are not numbered in the final rendering</p>
 <!-- Some considerations about about this quarto template 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
@@ -112,29 +139,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 </section>
 </section>
-<section id="sec-name-lan" class="level1">
-<h1>Name of case study</h1>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><strong>Case study characteristics</strong> Name: XXX&nbsp;–&gt; Language: XXXX<br>
-Tool: R&nbsp;<!-- Specify tool (e.g., R, Excel, STATA...) --> Location: XXXX<br>
-Scale: XXXX&nbsp;<!-- Local, Regional, National or Global --> Disease: XXXXX&nbsp;<!-- Specify pathogen --> Keywords: <!-- Examples: Outbreak investigation, GIS, TSA... --> Technical complexity: Basic/intermidiate/advanced Methodological complexity: Basic/intermidiate/advanced</p>
-<p><strong>Acknowledgements</strong><br>
-Tutorial authors: XXXX<br>
-Data source: XXXXX</p>
+<section id="section-2.-fixed-sections-in-the-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="section-2.-fixed-sections-in-the-case-study">Section 2. Fixed sections in the case study</h2>
+<section id="sec-name-lan" class="level3">
+<h3 class="anchored" data-anchor-id="sec-name-lan">Name of case study</h3>
 </section>
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<section id="getting-help" class="level3">
-<h3 class="anchored" data-anchor-id="getting-help">Getting Help</h3>
+<section id="overview" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="overview">Overview</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Case study characteristics</strong></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Name:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Language:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Tool:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Location:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Scale:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Diseases:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Keywords:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td>Technical complexity:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td>Methodolocial complexity:</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>Name: XXX&nbsp;–&gt; Language: XXXX<br>
+Tool: Specify tool (e.g., R, Excel, STATA…)<br>
+Location: XXXX<br>
+Scale: XXXX (Local, Regional, National or Global)&nbsp; Disease: XXXXX (Specify pathogen)&nbsp; Keywords: (Examples: Outbreak investigation, GIS, TSA…)&nbsp; Technical complexity: Basic/intermidiate/advanced<br>
+Methodological complexity: Basic/intermidiate/advanced</p>
+<p><strong><em>Authorship</em></strong><br>
+Original authors: XXXX<br>
+Data source: XXXX<br>
+Adapted by: XXXX<br>
+</p>
+</section>
+<section id="instructions" class="level3">
+<h3 class="anchored" data-anchor-id="instructions">Instructions</h3>
+<section id="getting-help" class="level4">
+<h4 class="anchored" data-anchor-id="getting-help">Getting Help</h4>
 <p>There are several ways to get help:</p>
 <ol type="1">
 <li>Look for the “hints” and solutions (see below)</li>
 <li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
 </ol>
-<section id="hints-and-solutions" class="level4">
-<h4 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h4>
+</section>
+<section id="hints-and-explanation-of-the-solutions" class="level4">
+<h4 class="anchored" data-anchor-id="hints-and-explanation-of-the-solutions">Hints and Explanation of the solutions</h4>
 <p>Here is what the “helpers” look like:</p>
+<!--Note that this is the way of including hints and explanations to the solutions -->
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
 -->
@@ -147,11 +229,11 @@ NOTE: Below is the hint (all within details tags collapsed)
 <p><br></p>
 </details>
 <!--
-NOTE: Below is the solution (all within details tags collapsed)
+NOTE: Below is the explanation to the solution (all within details tags collapsed)
 -->
 <details>
 <summary style="text-decoration: underline; color: red;">
-<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a explanation of the solution</p>
 </summary>
 <p><br></p>
 <div class="cell">
@@ -214,32 +296,30 @@ NOTE: End of solution
 </tbody>
 </table>
 </section>
-</section>
-<section id="license" class="level3">
-<h3 class="anchored" data-anchor-id="license">License</h3>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a> Applied Epi Incorporated, 2022 <br>This work is licensed by Applied Epi Incorporated under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
-<p>Please email contact@appliedepi.org with questions about the use of these materials for academic courses and epidemiologist training programs.</p>
+<section id="terms-of-use" class="level4">
+<h4 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h4>
+<!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
 </section>
 </section>
-<section id="feedback-suggestions" class="level2">
-<h2 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h2>
+<section id="feedback-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h3>
 <ul>
-<li>You can write feedback and suggestions on this case study at the <a href="https://github.com/appliedepi/emory_training/issues">GitHub issues page</a></li>
-<li>Alternatively email us at: <a href="mailto:epiRhandbook@gmail.com">epirhandbook@gmail.com</a></li>
+<li>You can write feedback and suggestions on this case study at the <a href="https://github.com/appliedepi/case_studies">GitHub issues page</a></li>
+<li>Alternatively email us at: <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a></li>
 </ul>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="version-xxx" class="level2">
-<h2 class="anchored" data-anchor-id="version-xxx">Version XXX</h2>
+<section id="version-xxx" class="level3">
+<h3 class="anchored" data-anchor-id="version-xxx">Version XXX</h3>
 <p>Write DATE OF LAST UPDATE</p>
 </section>
-<section id="disclaimer" class="level2">
-<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
+<section id="disclaimer" class="level3">
+<h3 class="anchored" data-anchor-id="disclaimer">Disclaimer</h3>
 <p>HERE YOU CAN WRITE ANY APPROPRIATE DISCLAIMER</p>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="revisions" class="level2">
-<h2 class="anchored" data-anchor-id="revisions">Revisions</h2>
+<section id="revisions" class="level3">
+<h3 class="anchored" data-anchor-id="revisions">Revisions</h3>
 <p>WRITE ANY REVISIONS MADE TO THE CASE STUDY</p>
 <table class="table">
 <thead>
@@ -269,10 +349,14 @@ NOTE: End of solution
 </table>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="guidance" class="level2">
-<h2 class="anchored" data-anchor-id="guidance">Guidance</h2>
-<section id="previous-level-of-expertise-assumed" class="level3">
-<h3 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h3>
+<section id="guidance" class="level3">
+<h3 class="anchored" data-anchor-id="guidance">Guidance</h3>
+<section id="objectives-of-this-case-study" class="level4">
+<h4 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h4>
+<p>HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING: 1. Background 2. Objectives/Learning outcomes 3. What the users of the case study will learn 4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents</p>
+</section>
+<section id="previous-level-of-expertise-assumed" class="level4">
+<h4 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h4>
 <p>ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:</p>
 <ul>
 <li>EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS).</li>
@@ -280,8 +364,8 @@ NOTE: End of solution
 </ul>
 <p>INCLUDE REFERENCES IF POSSIBLE</p>
 </section>
-<section id="preparation-for-the-case-study" class="level3">
-<h3 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h3>
+<section id="preparation-for-the-case-study" class="level4">
+<h4 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h4>
 <p>INCLUDE THE STEPS NEEDED TO START REPLICATING THE ANALYSIS OF THE CASE STUDY</p>
 <p>EXAMPLE:</p>
 <ol type="1">
@@ -293,18 +377,221 @@ NOTE: End of solution
 </ol>
 </section>
 </section>
-<section id="objectives-of-this-case-study" class="level2">
-<h2 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h2>
-<p>HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING: 1. Background 2. Objectives/Learning outcomes 3. What the users of the case study will learn 4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents</p>
 </section>
-<section id="specific-to-the-case-study" class="level2">
-<h2 class="anchored" data-anchor-id="specific-to-the-case-study">Specific to the case study</h2>
+<section id="section-3.-specific-to-the-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="section-3.-specific-to-the-case-study">Section 3. Specific to the case study</h2>
 <p>HERE ADD THE DIFFERENT SECTIONS OF THE CASE STUDY. PLEASE INCLUDE QUESTIONS WITH HINTS AND SOLUTIONS AS SHOWN ABOVE.</p>
 </section>
 </section>
 
 </main>
 <!-- /main column -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
