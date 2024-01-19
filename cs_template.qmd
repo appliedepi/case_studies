@@ -10,6 +10,7 @@ format:
 
 # Case study template instructions
 
+
 ## Section 1. Considerations for standardised coding in this case-study template
 
 
@@ -38,6 +39,12 @@ If your case study is long, consider it dividing it into different parts and sep
 
 ### Including figures
 When including figures make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto's [guide](https://quarto.org/docs/authoring/figures.html)
+
+You can also use the code below to insert an image that has been saved in a subfolder, as per this example.
+
+```{r script-example, fig.margin = TRUE, echo = TRUE, fig.width = 3, out.width = "25%", fig.cap = ""}
+knitr::include_graphics("images/Applied_Epi_logo.png", error = F)
+```
 
 ### Questions 
 Please, include questions throughout the case study. If the questions included are open questions, you can use the "Hints and Solutions" feature included in this template to suggest answers/reflections. If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their [website](https://psyteachr.github.io/webexercises/articles/webexercises.html) and in their [GitHub](https://github.com/psyteachr/webexercises).
@@ -81,7 +88,7 @@ Use {.unnumbered} after every heading so that they are not numbered in the final
 
 ## Section 2. Fixed sections in the case study
 
-### Name of case study {#sec-name-lan}
+### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {#sec-name-lan}
 
 ### Overview {.unnumbered}
 
@@ -97,18 +104,20 @@ Use {.unnumbered} after every heading so that they are not numbered in the final
 | Diseases:                 |      | 
 | Keywords:                 |      | 
 | Technical complexity:     |      | 
-| Methodolocial complexity: |      | 
+| Methodological complexity:|      | 
  
- 
-Name: XXX\ -->
-Language: XXXX\
+
+*On how to fill the table*
+
+Name: (Of the case study)\ -->
+Language: Full name of the language (e.g., English, Spanish, French....)\
 Tool: Specify tool (e.g., R, Excel, STATA...)\
-Location: XXXX\
-Scale: XXXX (Local, Regional, National or Global)\ 
-Disease: XXXXX (Specify pathogen)\ 
+Location: Geographical country where the case study is based at \
+Scale: Local, Regional, National or Global\ 
+Disease: Specify pathogen\ 
 Keywords:  (Examples: Outbreak investigation, GIS, TSA...)\ 
-Technical complexity: Basic/intermidiate/advanced\
-Methodological complexity: Basic/intermidiate/advanced 
+Technical complexity: Basic/intermediate/advanced\
+Methodological complexity: Basic/intermediate/advanced 
 
 ***Authorship***\
 Original authors:   XXXX\
@@ -195,19 +204,6 @@ NOTE: End of solution
 
 
 
-#### Icons  
-
-You will see these icons throughout the exercises:
-
-Icon  |Meaning
-------|--------------------
-`r fontawesome::fa("eye", fill = "darkblue")`|Observe  
-`r fontawesome::fa("exclamation", fill = "red")`|Alert!  
-`r fontawesome::fa("pen", fill = "brown")`|An informative note  
-`r fontawesome::fa("terminal", fill = "black")`|Time for you to code!  
-`r fontawesome::fa("window-restore", fill = "darkgrey")`|Change to another window  
-`r fontawesome::fa("bookmark", fill = "orange")`|Remember this for later  
-
 #### Terms of Use
 
 <!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
@@ -225,20 +221,11 @@ Icon  |Meaning
 
 \pagebreak
 
-### Version XXX
+### Version and revisions
 
-Write DATE OF LAST UPDATE
+Write date of first version
 
-
-### Disclaimer 
-
-HERE YOU CAN WRITE ANY APPROPRIATE DISCLAIMER
-
-\pagebreak
-
-
-### Revisions
-WRITE ANY REVISIONS MADE TO THE CASE STUDY
+Write any revisions made to the case study
 
 | Date    | Changes made | Version| 
 |---------|:-------------|-------:|
@@ -246,10 +233,8 @@ WRITE ANY REVISIONS MADE TO THE CASE STUDY
 |         |              |        |
 |         |              |        |
 
-
-
-
 \pagebreak
+
 
 ### Guidance
 

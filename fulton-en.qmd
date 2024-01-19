@@ -2,33 +2,47 @@
 output: html_document
 editor_options: 
   chunk_output_type: console
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
 ---
 
 # Fulton (EN) {#sec-fulton-en}
 
-## Overview
+### Overview {.unnumbered}
 
-**Case study characteristics** Name: Fulton\
-Language: English\
-Tool: R\
-Location: United States\
-Disease: COVID-19\
-Keywords:
 
-**Acknowledgements**\
-Tutorial authors: Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer\
-Data source: Anonymised and jittered data provided by Fulton County for training purposes
 
-## Instructions
+|**Case study characteristics**|      |
+|------------------------------|:-----|
+| Name:                     |   Fulton County   |
+| Language:                 |   English   |
+| Tool:                     |   R   | 
+| Location:                 |   United States   |
+| Scale:                    |   Local   | 
+| Diseases:                 |   COVID-19   | 
+| Keywords:                 |   COVID-19; SARS-COV-2; Outbreak   | 
+| Technical complexity:     |   Intermediate   | 
+| Methodological complexity:|   Basic   | 
 
-### Getting Help
 
+***Authorship***\
+Original authors:   Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer\
+Data source: Anonymised and jittered data provided by Fulton County for training purposes\
+Adapted by: Alberto Mateo Urdiales to the case study template\
+
+
+## Instructions {.unnumbered}
+
+### Getting Help {.unnumbered}
+ 
 There are several ways to get help:
 
 1)  Look for the "hints" and solutions (see below)
 2)  Post a question in [Applied Epi Community](www.community.appliedepi.org) with reference to this case study
 
-#### Hints and Solutions
+#### Hints and Solutions {.unnumbered}
 
 Here is what the "helpers" look like:
 
@@ -87,61 +101,92 @@ Here is more explanation about why the solution works.
 NOTE: End of solution
 -->
 ```
-#### Posting a question in the Community Forum
+#### Posting a question in the Community Forum {.unnumbered}
 
 ... description here about posting in Community...
 
-## Introduction to this case study script
 
-This is a an example R-markdown script which demonstrates how to create an automated outbreak situation report for COVID-19 in Fulton county, USA. The data used are anonymised and fake (scrambled), for example purposes only.
+#### Terms of Use {.unnumbered}
 
--   We demonstrate how to import, clean and analyse your data.\
--   Analysis is organised by time, place and person.
-    -   For the purpose of the case study we separate this by descriptive analysis and visualisation (normally this would be mixed together of course)
-        -   The visualisation section is organised in to place, time and person. This is to simplify flow for didactic delivery.\
-    -   Analysis is loosely based off the monthly [epidemiology reports](https://www.fultoncountyga.gov/covid-19/epidemiology-reports) for Fulton county\
--   Text within \<! \> will not show in your final document.
-    -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
-    -   These comments are used to explain the code chunks.\
-    -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
-    -   This comment will not show up when you knit the document.\
-    -   You can delete them if you want.\
--   Feedback & suggestions are welcome at the [GitHub issues page](https://github.com/appliedepi/emory_training/issues)
-    -   Alternatively email us at: [epirhandbook\@gmail.com](mailto:epiRhandbook@gmail.com)
+XXXXXXXXXXXXXXXXXXXXX
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-This comment will not show up when you knit the document.
-A comment with a title with slashes indicates a name of a code chunk.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// setup \\\
---------------------------------------------------------------------------------
 
-Several packages are required for different aspects of analysis with *R*. 
-You will need to install these before starting. 
+###  Feedback & suggestions {.unnumbered}
 
-We install and load packages using the {pacman} package. Its p_load() command
-will install packages if necessary and load them for use in the current session.
+-   You can write feedback and suggestions on this case study at the
+    [GitHub issues
+    page](https://github.com/appliedepi/case_studies)
+-   Alternatively email us at:
+    [contact\@appliedepi.org](mailto:contact@appliedepi.org)
 
-This might prove difficult if you have limited administrative rights for your 
-computer. Making sure your IT-department gives you the correct access can save a 
-lot of headache. 
+\pagebreak
 
-See this handbook pages on the basics of installing packages and running R from 
-network drives (company computers) for more detail. 
+### Version 1.0 {.unnumbered}
 
-https://epirhandbook.com/r-basics.html#installation
-https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r setup, include=FALSE}
 
-# hide all code chunks in the output, but show errors 
-     # nb. warnings and messages still shown
-knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
+*January 2024 update*: By Alberto Mateo Urdiales to adapt it to the case study template
+
+### Version and revisions
+
+The first version was written by Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer in 20XX.
+
+
+| Date    | Changes made | Version| Author| 
+|---------|:-------------|-------:|-------|
+|Jan 2024 | Adapted to case study template| 1.1 | Alberto Mateo Urdiales |
+|         |              |        |
+|         |              |        |
+
+
+\pagebreak
+
+### Guidance {.unnumbered}
+
+#### Background and Objectives of this case study  {.unnumbered}
+
+This is a an example R-markdown script which demonstrates how to create an automated outbreak situation report for COVID-19 in Fulton county, USA. The data used comes from an anonymised and fake (scrambled) linelist of COVID-19 cases in Fulton county from the beginning of the pandemic (early 2020) until July 2021.
+
+The overall objective is to create an automatic and dynamic report that shows the COVID-19 epidemiological situation in Fulton County. 
+
+In this case study you will learn:
+
+-   How to import, clean and analyse your data.\
+-   Carry out descrptive analysis by time, place and person.\
+-   Use the above to **create an automatic and dynamic report** in word using Rmarkdown.\
+
+For the purpose of the case study we separate this by descriptive analysis and visualisation (normally this would be mixed together of course). 
+The visualisation section is organised in to place, time and person. This is to simplify flow for didactic delivery.\
+Analysis is loosely based off the monthly [epidemiology reports](https://www.fultoncountyga.gov/covid-19/epidemiology-reports) for Fulton county\
+
+
+#### Previous level of expertise assumed {.unnumbered}
+
+Users should have some prior experience with R, including:
+
+  - R basics: Several packages are required for different aspects of analysis with *R*. You will need to install these before starting.
+    We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. This might prove difficult if you have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See this handbook pages on the basics of installing packages and running R from  network drives (company computers) for more detail. 
+    https://epirhandbook.com/r-basics.html#installation
+    https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
+    
+  - R projects: See Chapter [6 R Projects](https://epirhandbook.com/en/r-projects.html) from the EpiRhandbook
+    
+  - Import and export of data: See Chapter[7 Import and export](https://epirhandbook.com/en/import-and-export.html)
+    
+
+
+#### Preparation for the case study {.unnumbered}
+
+1. Download folder fulton_en and extract contents in the local laptop
+2. Open the Rstudio project inside the folder called *fulton_en.Rproj*
+3. Subfolder *data* contains fulton COVID-19 data needed for the analysis
+4. Subfolder *solution_materials* has the Rmd document with the solution and the Word document with the output requested
+5. Open a new Rmarkdown file in RStudio and save it in the root folder *fulton_en*. If you have any doubts about how to create an Rmarkdown follow the EpiRhandbook instructors [here](https://epirhandbook.com/en/reports-with-r-markdown.html?q=rmar#install-rmarkdown-r-package)
+6. This Rmarkdown file will be the file used throughout the case study and, rendering it will produce the weekly report in word format
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE ,  # hide all code chunks in output
+                      eval = FALSE,
                       error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
                       warning = FALSE, # do not show warnings in the output word doc 
                       message = FALSE, # do not show  messages in the output word doc
@@ -149,6 +194,27 @@ knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
                       fig.height = 7,        # Figure height
                       fig.topcaption = TRUE  # show figure titles on top of plot
                      )
+```
+
+
+# Import data and cleaning {.unnumbered}
+
+## **Step 1: Install/load packages** {.unnumbered}
+
+Install the following packages that will be needed to carry out the analysis: officedown, officer, rio, here, skimr, janitor, lubridate, epikit, tidyverse, flextable, sf, scales, gtsummary, labelled, ggspatial, patchwork, apyramid and incidence2.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r setup, echo=TRUE, eval=FALSE}
 
 # Ensures the package "pacman" is installed
 if (!require("pacman")) {
@@ -176,56 +242,148 @@ pacman::p_load(
   incidence2  # plotting epicurves
 )
 
+```
 
-## load packages from github
-pacman::p_load_gh(
-     "R4IDSR/epichecks"   # bivariate colour maps 
+
+</br>
+
+</details>
+
+
+\pagebreak
+
+
+## **Step 2: Data import** {.unnumbered}
+
+a) Import the COVID-19 linelist called *covid_example_data.xlsx* that can be found in the following path: *data/covid_example_data/*. 
+b) Import also the shapefile named *FultonCountyZipCodes.shp* found in *data/covid_example_data/covid_shapefile/* needed to create a map of the cases in Fulton County. 
+c) Explore the linelist  to understand better the data.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r import, echo=TRUE, eval=FALSE}
+##############        IMPORTING DATA     ##############        
+
+# We use the {rio} package for importing our example data - it is very versatile 
+# and can read in most file types. 
+# 
+# We use the {here} package for defining the path to our file. This is important 
+# for sharing your script with others (by email or on Sharepoint) - if you used an
+# "absolute" path, they would need to update the script to match their computer. 
+# 
+# This way your whole R-project folder can be zipped up and moved somewhere else. 
+# 
+# For more details see: 
+# https://epirhandbook.com/import-and-export.html
+
+  
+  #import the raw case data set
+  # define the path using {here} then pass that to the {rio} import function
+  # specify the sheet to read using which (default is to read first sheet)
+linelist_raw <- rio::import(
+  file = here::here("data", "fulton-en", "covid_example_data", "covid_example_data.xlsx"),
+  which = "in"
 )
 
+# import shapefile
+  # for mapping and for extracting population counts for zipcodes
+shapefile <- read_sf(
+  here::here("data", "fulton-en", "covid_example_data", "covid_shapefile", "FultonCountyZipCodes.shp")
+)
+
+##############        EXPLORING THE DATA     ##############        
+
+# Here we take a look at the raw data to get a feel for what needs cleaning. 
+# 
+# We first use the in-built browser with the {base} function View(). 
+# 
+# Then we can use the {base} function summary(), but probably the most comprehensive 
+# overview is with the {skimr} function. 
+# You can also view distinct values for variables using the {base} unique() function. 
+# 
+# For more details see: 
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#review
+# https://epirhandbook.com/descriptive-tables.html#browse-data
+
+# view your whole dataset interactively (in an excel style format)
+View(linelist_raw)
+
+# get summary: 
+# mean, median and max values of numeric variables
+# counts for categorical variables
+# also gives number of NAs
+summary(linelist_raw)
+
+# get information about each variable in a dataset 
+# nb. “POSIXct” is a type of raw date class 
+skim(linelist_raw)
+
+# view unique values contained in variables - useful for categorical variables
+# you can run this for any column -- just replace the column name
+unique(linelist_raw$case_gender) 
+
+
+# we can also loop through all categorical variables to look at all possibilities
+# see later in the script for introductions to using iteration
+purrr::map(
+  # all column names (inputs)
+  .x = linelist_raw %>% 
+    select(where(is_character)) %>% 
+    names(), 
+  # applies select() then unique() to each column
+  .f = ~select(linelist_raw, .x) %>% 
+    unique()
+  )
+
+
 ```
 
-\pagebreak
+</br>
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// table_of_contents \\\
---------------------------------------------------------------------------------
-This chunk adds a table of contents to your report using the {officedown} package. 
-You can also add in a list of tables and figures. 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r table_of_contents}
+</details>
 
-# table of contents based on headings 
-block_toc() 
 
-# list of tables 
-block_toc(style = "Table Caption")
+## **Step 3: Data cleaning** {.unnumbered}
 
-# list of figures 
-block_toc(style = "Image Caption")
+a) Create an object called *surveillance_date* defined as 7 days prior to the reporting date (30 June 2021). Then, create another object rounding it to the closest Wednesday. Create two sequences of dates, one as the 14 days prior to the *surveillance_date* and another as 14-28 days prior to the same date. We will use these througout the case study
+b) Clean the column names 
+c) Ensure that dates are considered dates by R
+d) Clean date columns dealing with values that are not compatible with the period under analysis (early 2020 to July 2021)
+e) Create an column named "epiweek" using the report date which rounds the report date to the nearest week, taking "Wednesday" as the start of the week.
+f) Deduplicate data
 
-```
+<details>
 
-\pagebreak
+<summary style="text-decoration: underline; color: red;">
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// define_reporting_periods \\\
---------------------------------------------------------------------------------
-Here we use the date you want to report on, defined in parameters (params) at
-top of script to create a date object for filtering datasets, plots/tables, etc.
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
 
-We also create a week object to make grouping data easier. In this scenario we
-have defined the week to start on Wednesdays as this is when Fulton County
-releases their reports (but you can choose any other day of the week too).
+</summary>
 
-From these we are then able to define periods 14 and 28 days prior to our
-report date. We can also make the appropriate labels to auto-populate
-table titles.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r define_reporting_periods}
+</br>
+```{r , echo=TRUE, eval=FALSE}
+
+
+##############       DEFINE DATES     ##############        
+
+# Here we use the date you want to report on, defined in parameters (params) at
+# top of script to create a date object for filtering datasets, plots/tables, etc.
+# 
+# We also create a week object to make grouping data easier. In this scenario we
+# have defined the week to start on Wednesdays as this is when Fulton County
+# releases their reports (but you can choose any other day of the week too).
+# 
+# From these we are then able to define periods 14 and 28 days prior to our
+# report date. We can also make the appropriate labels to auto-populate
+# table titles.
 
 # create a date object from the parameter
 # Minus 7 days surveillance date to account for lag in reporting lab results
@@ -265,115 +423,22 @@ full_period_labels <- str_c(
   format(surveillance_week, format = "%B %d, %Y")
 )
 
-```
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// import \\\
---------------------------------------------------------------------------------
+##############        CLEAN NAMES     ##############        
 
-We use the {rio} package for importing our example data - it is very versatile 
-and can read in most file types. 
+# Here we are going to clean the column names of our data set - and store as a new
+# dataset called "linelist". 
+# 
+# It is possible to use the {janitor} package for automated cleaning of variable 
+# names - but as there are only a few variables that we want to rename, 
+# here we will demonstrate using {dplyr} select() function for manually renaming.
+# 
+# Select() can be used either to retain specific columns or to rename them by using
+# the syntax New name = Old name. 
+# 
+# For more details see: 
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
 
-We use the {here} package for defining the path to our file. This is important 
-for sharing your script with others (by email or on Sharepoint) - if you used an
-"absolute" path, they would need to update the script to match their computer. 
-
-This way your whole R-project folder can be zipped up and moved somewhere else. 
-
-For more details see: 
-https://epirhandbook.com/import-and-export.html
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r import}
-  
-# import the raw case data set
-  # define the path using {here} then pass that to the {rio} import function
-  # specify the sheet to read using which (default is to read first sheet)
-linelist_raw <- rio::import(
-  file = here::here("data", "fulton-en", "covid_example_data", "covid_example_data.xlsx"),
-  which = "in"
-)
-
-# import shapefile
-  # for mapping and for extracting population counts for zipcodes
-shapefile <- read_sf(
-  here::here("data", "fulton-en", "covid_example_data", "covid_shapefile", "FultonCountyZipCodes.shp")
-)
-
-```
-
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// browse_data \\\
---------------------------------------------------------------------------------
-
-Here we take a look at the raw data to get a feel for what needs cleaning. 
-
-We first use the in-built browser with the {base} function View(). 
-
-Then we can use the {base} function summary(), but probably the most comprehensive 
-overview is with the {skimr} function. 
-You can also view distinct values for variables using the {base} unique() function. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#review
-https://epirhandbook.com/descriptive-tables.html#browse-data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r browse_data, eval = FALSE}
-
-# view your whole dataset interactively (in an excel style format)
-View(linelist_raw)
-
-# get summary: 
-# mean, median and max values of numeric variables
-# counts for categorical variables
-# also gives number of NAs
-summary(linelist_raw)
-
-# get information about each variable in a dataset 
-# nb. “POSIXct” is a type of raw date class 
-skim(linelist_raw)
-
-# view unique values contained in variables - useful for categorical variables
-# you can run this for any column -- just replace the column name
-unique(linelist_raw$case_gender) 
-
-
-# we can also loop through all categorical variables to look at all possibilities
-# see later in the script for introductions to using iteration
-purrr::map(
-  # all column names (inputs)
-  .x = linelist_raw %>% 
-    select(where(is_character)) %>% 
-    names(), 
-  # applies select() then unique() to each column
-  .f = ~select(linelist_raw, .x) %>% 
-    unique()
-  )
-```
-
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_colnames \\\
---------------------------------------------------------------------------------
-
-Here we are going to clean the column names of our data set - and store as a new
-dataset called "linelist". 
-
-It is possible to use the {janitor} package for automated cleaning of variable 
-names - but as there are only a few variables that we want to rename, 
-here we will demonstrate using {dplyr} select() function for manually renaming.
-
-Select() can be used either to retain specific columns or to rename them by using
-the syntax New name = Old name. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r clean_colnames}
 
 # create a new object called linelist and assign linelist_raw with renamed columns
 linelist <- linelist_raw %>% 
@@ -417,28 +482,20 @@ linelist <- linelist_raw %>%
     lon                 = longitude_JITT
     )
 
-```
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_dates \\\
---------------------------------------------------------------------------------
+##############        CLEAN DATES     ##############        
 
-Here we are going to clean the date variables 
+# Here we are going to clean the date variables 
+# 
+# The {base} way to convert columns to Date class is with as.Date(). If the
+# current format is YYYY-MM-DD or YYYY/MM/DD then no other arguments are needed. 
+# If the format is different, specify it to format= (for more detail see: 
+# https://epirhandbook.com/working-with-dates.html#convert-to-date )
+# 
+# Below we also introduce using across() from {dplyr}, which allows you to apply a
+# function across multiple specified columns. See
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
 
-The {base} way to convert columns to Date class is with as.Date(). If the
-current format is YYYY-MM-DD or YYYY/MM/DD then no other arguments are needed. 
-If the format is different, specify it to format= (for more detail see: 
-https://epirhandbook.com/working-with-dates.html#convert-to-date )
-
-Below we also introduce using across() from {dplyr}, which allows you to apply a
-function across multiple specified columns. See
-https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r clean_dates}
 
 linelist <- linelist %>% 
   # convert all date columns to date type 
@@ -484,31 +541,24 @@ linelist <- linelist %>%
                           week_start = 3)
   )
 
-```
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_numerics \\\
---------------------------------------------------------------------------------
+##############        CLEAN NUMERICS     ##############        
 
-Here we are going to clean all numeric variables, as well as create some new 
-variables based on difference between dates. 
-
-First we will ensure that age is numeric and then fix those with incorrectly 
-entered dates (notice that one individual was -20 years old). 
-
-Then we show how to create new numeric variables for the number of days between 
-two dates. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#num_cats
-https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
-
-Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
-and handles dates better.  
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r clean_numerics}
+# Here we are going to clean all numeric variables, as well as create some new 
+# variables based on difference between dates. 
+# 
+# First we will ensure that age is numeric and then fix those with incorrectly 
+# entered dates (notice that one individual was -20 years old). 
+# 
+# Then we show how to create new numeric variables for the number of days between 
+# two dates. 
+# 
+# For more details see: 
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#num_cats
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
+# 
+# Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
+# and handles dates better.  
 
 # Age 
 ############
@@ -523,7 +573,8 @@ linelist <- linelist %>%
     age = if_else(age < 0 & is.na(date_dob), NA_real_, age)
   )
 
-     
+ 
+    
 # Calculating time differences 
 ##############################
 
@@ -553,24 +604,18 @@ linelist <- linelist %>%
 # (are you calculating them correctly?)
 # summary(linelist$days_hosp)
 
-```
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_categories \\\
---------------------------------------------------------------------------------
+##############        CLEAN CATEGORIES     ##############        
 
-create age groups based on the age variable using 
-the age_categories() function from {epikit}. It is also possible to create 
-age groups using the {dplyr} case_when() function - but is more involved. 
 
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-and-transformation
-https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
-https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r clean_categories}
+# create age groups based on the age variable using 
+# the age_categories() function from {epikit}. It is also possible to create 
+# age groups using the {dplyr} case_when() function - but is more involved. 
+# 
+# For more details see: 
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-and-transformation
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
+# https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
 
 linelist <- linelist %>% 
      
@@ -672,7 +717,60 @@ linelist <- linelist %>%
                     confirmed_case, contains("sym_")), 
           .fns = ~fct_relevel(.x, "Yes", "No", "Unknown")
      ))
+
+##############       DEDUPLICATE     ##############        
+
+
+# Here we remove the duplicates based on having the same pid, gender and date of 
+# birth. 
+# Note that this might exclude those which are legitimately reported twice - i.e. 
+# those who recovered and were reinfected. To deal with these you could create a 
+# composite variable of the identifiers of interest, flag the duplicates there and 
+# then add an additional argument for having a report date within six months. 
+# 
+# For more details see: 
+# https://epirhandbook.com/de-duplication.html 
+
+
+# get a data frame of all the duplicates 
+     # this is mostly to inspect manually, but can be used for analysing those dropped
+duplicates <- linelist %>% 
+     get_dupes(pid, gender, date_dob)
+
+linelist <- linelist %>% 
+  ## find duplicates based on unique ID, gender and date of birth 
+  ## only keep the first occurrence 
+  distinct(pid, gender, date_dob, .keep_all = TRUE)
+
+
+##############       FILTER     ##############        
+
+
+# Here we are going to filter our data set to only keep relevant cases for analysis. 
+# We keep those that are reported before our surveillance cut-off date and those 
+# that are entered as a confirmed case. 
+# 
+# For more details see: 
+# https://epirhandbook.com/cleaning-data-and-core-functions.html#filter-rows
+
+# store those which do not meet our filter criteria 
+dropped <- linelist %>% 
+     filter(confirmed_case != "Yes" |
+              date_report > surveillance_date & 
+                !is.na(date_report))
+
+
+# drop the cases that dont meet the criteria 
+linelist <- linelist %>% 
+     filter(confirmed_case == "Yes" & 
+              date_report <= surveillance_date & 
+                 !is.na(date_report))
+
 ```
+
+</br>
+
+</details>
 
 ```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -690,7 +788,7 @@ For more details see:
 https://epirhandbook.com/iteration-loops-and-lists.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```
-```{r vector_vars}
+```{r vector_vars, echo=F}
 
 # define a list of variables for looping over later
 symptom_vars <- linelist %>% 
@@ -704,64 +802,6 @@ demographic_vars <- c("gender", "age_group", "eth_race")
 
 ```
 
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// duplicated \\\
---------------------------------------------------------------------------------
-
-Here we remove the duplicates based on having the same pid, gender and date of 
-birth. 
-Note that this might exclude those which are legitimately reported twice - i.e. 
-those who recovered and were reinfected. To deal with these you could create a 
-composite variable of the identifiers of interest, flag the duplicates there and 
-then add an additional argument for having a report date within six months. 
-
-For more details see: 
-https://epirhandbook.com/de-duplication.html 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r duplicated}
-
-# get a data frame of all the duplicates 
-     # this is mostly to inspect manually, but can be used for analysing those dropped
-duplicates <- linelist %>% 
-     get_dupes(pid, gender, date_dob)
-
-linelist <- linelist %>% 
-  ## find duplicates based on unique ID, gender and date of birth 
-  ## only keep the first occurrence 
-  distinct(pid, gender, date_dob, .keep_all = TRUE)
-
-```
-
-```{=html}
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// filter \\\
---------------------------------------------------------------------------------
-
-Here we are going to filter our data set to only keep relevant cases for analysis. 
-We keep those that are reported before our surveillance cut-off date and those 
-that are entered as a confirmed case. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#filter-rows
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-```
-```{r filter}
-
-# store those which do not meet our filter criteria 
-dropped <- linelist %>% 
-     filter(confirmed_case != "Yes" |
-              date_report > surveillance_date & 
-                !is.na(date_report))
-
-
-# drop the cases that dont meet the criteria 
-linelist <- linelist %>% 
-     filter(confirmed_case == "Yes" & 
-              date_report <= surveillance_date & 
-                 !is.na(date_report))
-```
 
 # Descriptive analysis
 
@@ -769,9 +809,7 @@ This section will be analysing data by time, place, and person to produce descri
 
 ## Summary
 
--   As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has recorded `r nrow(linelist)` confirmed cases of COVID-19.\
--   As of `r format(surveillance_date, format = "%B %d %Y")`, Fulton County has recorded `r fmt_count(linelist, died == "Yes")` deaths.\
--   Among all confirmed cases of COVID-19 in Fulton County, `r fmt_count(linelist, hospitalized == "Yes")` required hospitalization.
+
 
 \pagebreak
 
@@ -823,7 +861,7 @@ Note that tab.caps cannot have any special characters in them (e.g. "_") otherwi
 referencing as below does not work. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```
-As you can see from above in Table \@ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in `r filter(epiweek_table, epiweek != "Total") %>% summarise(which.max(n)) %>% pull() %>% epiweek_table[., "epiweek"] %>% as.Date() %>% format(., format = "%B %Y")`.
+
 
 \pagebreak
 
@@ -1029,7 +1067,7 @@ https://epirhandbook.com/tables-for-presentation.html
 https://epirhandbook.com/iteration-loops-and-lists.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```
-```{r demographics_tab, tab.cap = str_c("Cumulative and recent confirmed COVID-19 case and death counts by gender, age, and race/ethnicity in Fulton County, Georgia. Past 28 day period refers to ", full_period_labels), tab.id = "demogtab"}
+```{r demographics_tab}
 
 # get counts tables for measures of interest 
 ############################################
@@ -1447,8 +1485,6 @@ tbl_merge(list(cross_tab, regress_tab)) %>%
   set_table_properties(layout = "autofit")
 ```
 
-As seen in Table \@ref(tab:regrtab), mortality was associated with being male `r inline_text(regress_tab, variable = gender, level = "Male", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`, being white `r inline_text(regress_tab, variable = eth_race, level = "White, NH", pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`and longer hospital stays `r inline_text(regress_tab, variable = days_hosp, pattern = "(OR {estimate}; 95% CI {conf.low}, {conf.high})")`.
-
 \pagebreak
 
 # Visualisation
@@ -1815,7 +1851,7 @@ For more details see:
 https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```
-```{r points_map, fig.cap = str_c("New COVID-19 cases (", recent_period_labels, ") by  ethnicity in Fulton County"), fig.id  = "pointmap"}
+```{r points_map}
 
 # plot the basemap 
 basemap + 

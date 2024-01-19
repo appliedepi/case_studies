@@ -1,0 +1,3 @@
+```{r script-example, fig.margin = TRUE, echo = FALSE, fig.width = 3, out.width = "85%", fig.cap = ""}
+knitr::include_graphics("images/show_na_argument.png", error = F)
+```

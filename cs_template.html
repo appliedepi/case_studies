@@ -113,16 +113,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="including-figures" class="level3">
 <h3 class="anchored" data-anchor-id="including-figures">Including figures</h3>
 <p>When including figures make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto’s <a href="https://quarto.org/docs/authoring/figures.html">guide</a></p>
+<p>You can also use the code below to insert an image that has been saved in a subfolder, as per this example.</p>
+<div class="cell" data-fig.margin="true">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/Applied_Epi_logo.png"</span>, <span class="at">error =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="images/Applied_Epi_logo.png" class="img-fluid" style="width:25.0%"></p>
+</div>
+</div>
 </section>
 <section id="questions" class="level3">
 <h3 class="anchored" data-anchor-id="questions">Questions</h3>
-<p>Please, include questions throughout the case study using the {webexercises} package. You can find information and examples on how to use this package in their <a href="https://psyteachr.github.io/webexercises/articles/webexercises.html">website</a> and in their <a href="https://github.com/psyteachr/webexercises">GitHub</a>.</p>
+<p>Please, include questions throughout the case study. If the questions included are open questions, you can use the “Hints and Solutions” feature included in this template to suggest answers/reflections. If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their <a href="https://psyteachr.github.io/webexercises/articles/webexercises.html">website</a> and in their <a href="https://github.com/psyteachr/webexercises">GitHub</a>.</p>
 <p>To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.</p>
 <p>Here you find an example of a multiple choice question:</p>
 <div class="webex-check">
 The time elapsed between exposure to a pathogen and the appearence of symptoms is known as:
-<div id="radio_IVLKLHJPLB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Infectious period</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Susceptibility</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value="answer"> <span>Incubation period</span></label><label><input type="radio" autocomplete="off" name="radio_IVLKLHJPLB" value=""> <span>Communicability period</span></label>
+<div id="radio_HQGHJAUBOQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HQGHJAUBOQ" value=""> <span>Infectious period</span></label><label><input type="radio" autocomplete="off" name="radio_HQGHJAUBOQ" value=""> <span>Susceptibility</span></label><label><input type="radio" autocomplete="off" name="radio_HQGHJAUBOQ" value="answer"> <span>Incubation period</span></label><label><input type="radio" autocomplete="off" name="radio_HQGHJAUBOQ" value=""> <span>Communicability period</span></label>
 </div>
 </div>
 </section>
@@ -213,8 +220,8 @@ Adapted by: XXXX<br>
 <li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
 </ol>
 </section>
-<section id="hints-and-explanation-of-the-solutions" class="level4">
-<h4 class="anchored" data-anchor-id="hints-and-explanation-of-the-solutions">Hints and Explanation of the solutions</h4>
+<section id="hints-and-solutions" class="level4">
+<h4 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h4>
 <p>Here is what the “helpers” look like:</p>
 <!--Note that this is the way of including hints and explanations to the solutions -->
 <!--
@@ -229,19 +236,19 @@ NOTE: Below is the hint (all within details tags collapsed)
 <p><br></p>
 </details>
 <!--
-NOTE: Below is the explanation to the solution (all within details tags collapsed)
+NOTE: Below is the solution (all within details tags collapsed)
 -->
 <details>
 <summary style="text-decoration: underline; color: red;">
-<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a explanation of the solution</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is more explanation about why the solution works.</p>
 <p><br></p>
@@ -249,6 +256,7 @@ NOTE: Below is the explanation to the solution (all within details tags collapse
 <!--
 NOTE: End of solution
 -->
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
 </section>
 <section id="posting-a-question-in-the-community-forum" class="level4">
 <h4 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h4>

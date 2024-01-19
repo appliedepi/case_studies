@@ -9,7 +9,7 @@ book:
   - index.qmd
   - intro.qmd
   - fulton-en.qmd
-  - oswego-es_template.qmd
+  - oswego-es.qmd
   - summary.qmd
   - references.qmd
 bibliography: references.bib
