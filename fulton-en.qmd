@@ -230,7 +230,6 @@ pacman::p_load(
   janitor,    # data cleaning and tables
   lubridate,  # working with dates
   epikit,     # age_categories() function
-  tidyverse,  # data management and visualization
   flextable,  # converting tables to pretty images
   sf,         # manage spatial data using a Simple Feature format
   scales,     # define colour schemes for flextables 
@@ -239,7 +238,9 @@ pacman::p_load(
   ggspatial,  # basemaps and scalebars 
   patchwork,  # combining multiple ggplots 
   apyramid,   # plotting age pyramids 
-  incidence2  # plotting epicurves
+  incidence2,  # plotting epicurves
+  tidyverse  # data management and visualization
+
 )
 
 ```
@@ -803,17 +804,40 @@ demographic_vars <- c("gender", "age_group", "eth_race")
 ```
 
 
-# Descriptive analysis
+# Create a report with descriptive analysis of the data {.unnumbered}
 
-This section will be analysing data by time, place, and person to produce descriptive tables.
+In this section we will see how to create an automatic and dynamic report to present a descriptive analysis of the data previously imported and cleaned.
 
-## Summary
+## **Step 4: Start the report with a summary of the findings** {.unnumbered}
+
+a) Write in rmarkdown three bullet points summarising the data we imported, showing the number of cases by the date of analysis, the number of hospitalisations and the number of deaths.
+
+b) Write it in a dynamic way, so that the dates and numbers are updated automatically if you get a new updated dataset
 
 
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+This is an example of how the code should look like in your rmarkdown file:
+
+```{r, echo = FALSE, eval=TRUE, out.width = "1000px"}
+knitr::include_graphics("images/Summary_fulton.png", error = F, )
+```
+
+</br>
+</details>
 
 \pagebreak
 
-## Time
+## **Step 5. Analysis by time** {.unnumbered}
 
 ```{=html}
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -8,6 +8,8 @@ output:
             keep_md: TRUE
 params: 
      surveillance_date: 2021-06-30
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -26,7 +28,7 @@ knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
                       warning = FALSE, # do not show warnings in the output word doc 
                       message = FALSE, # do not show  messages in the output word doc
                       fig.width = 7,         # Figure width
-                      fig.height = 7,        # Figure height
+                      fig.height = 6,        # Figure height
                       fig.topcaption = TRUE  # show figure titles on top of plot
                      )
 
@@ -44,7 +46,6 @@ pacman::p_load(
   janitor,    # data cleaning and tables
   lubridate,  # working with dates
   epikit,     # age_categories() function
-  tidyverse,  # data management and visualization
   flextable,  # converting tables to pretty images
   sf,         # manage spatial data using a Simple Feature format
   scales,     # define colour schemes for flextables 
@@ -53,7 +54,8 @@ pacman::p_load(
   ggspatial,  # basemaps and scalebars 
   patchwork,  # combining multiple ggplots 
   apyramid,   # plotting age pyramids 
-  incidence2  # plotting epicurves
+  tidyverse  # data management and visualization
+
 )
 
 
@@ -473,12 +475,12 @@ linelist <- linelist %>%
         sym_myalgia = str_to_title(sym_myalgia),
       ) %>% 
      
-     #replace one value and leave the rest, across multiple variables 
-     mutate(across(
+     #replace one value and leave the rest, across multiple variables
+      mutate(across(
        .cols = c(contact_hh, contains("sym_")),
-       .funs = ~if_else(.x == "Unk", "Unknown", .x)
+       .fns  = ~if_else(.x == "Unk", "Unknown", .x)
      )) %>% 
-
+     
      # create a composite category from race and ethnicitiy  
           #  (nb. this sets those that are non-specified in eth to non-hispanic)
      mutate(eth_race = case_when(
@@ -686,18 +688,6 @@ epiweek_table <- linelist %>%
   adorn_totals() %>%  
   # change from proportions to percentages (do not add a % sign)
   adorn_pct_formatting(affix_sign = FALSE)
-  
-
-# Make the table presentable for report, using {flextable} functions
-epiweek_table %>% 
-  # rename columns
-  select(
-    "Calendar Week" = epiweek,
-    "Cases (n)" = n,
-    "Percent (%)" = percent) %>% 
-  # produce styled output table with auto-adjusted column widths
-  qflextable()
-
 ```
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -705,7 +695,60 @@ Note that tab.caps cannot have any special characters in them (e.g. "_") otherwi
 referencing as below does not work. 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// epicurve \\\
+--------------------------------------------------------------------------------
+
+Here we demonstrate how to plot epicurves using the {incidence2} package and edit
+it with {ggplot2]. 
+
+For more details see: 
+https://epirhandbook.com/epidemic-curves.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+```{r epicurve, fig.cap = "COVID-19 cases by week and hospitalisation status in Fulton County", fig.id = "epicurve"}
+
+# create a sequence of dates for the x axis label
+covid_weeks <- seq.Date(
+     from = as_date(floor_date(min(linelist$date_onset, na.rm = TRUE), week_start = 3)),
+     to = as_date(ceiling_date(max(linelist$date_onset, na.rm = TRUE), week_start = 3)),
+     by = "month"
+    
+)
+
+
+ggplot(
+     data = linelist,
+     mapping = aes(
+          x = date_onset,
+          fill = hospitalized
+     )) + 
+     
+     geom_histogram() + 
+     
+     scale_x_date(
+          breaks = covid_weeks,
+          labels = label_date_short()
+     ) +
+     
+     labs(
+          x = "",
+          y = "Weekly number of cases",
+          fill = "Hospitalised",
+          caption = paste0("Data as of ", format(surveillance_date, "%d %b %Y"), ". ",
+                           fmt_count(linelist, is.na(date_onset))," with missing date of onset")
+          
+     ) + 
+     theme_bw()
+
+```
+
+
 As you can see from above in Table \@ref(tab:timetab) we can see clear trends in reporting patterns - cases increase in waves and peak in `r filter(epiweek_table, epiweek != "Total") %>% summarise(which.max(n)) %>% pull() %>% epiweek_table[., "epiweek"] %>% as.Date() %>% format(., format = "%B %Y")`. 
+
+
+
 
 \pagebreak 
 
@@ -1368,45 +1411,6 @@ We saw this in Table \@ref(tab:regrtab) as well for the individual associations,
 although we did not check for interaction and confounding. 
 
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// age_hosp_died \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to plot points with {ggplot2}. 
-
-For more details see: 
-https://epirhandbook.com/ggplot-basics.html#geoms
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r age_hosp_died, fig.cap = "Duration of admission among hospitalized COVID-19 patients", fig.id = "agehospplot"}
-
-# open a plot with the linelist data
-ggplot(data = linelist) +
-  # add points 
-  geom_point(
-    mapping = aes(
-      # plot age on the x and days hospitalised on the y axis 
-      x = age,
-      y = days_hosp,
-      # color points by outcome
-      color = died),  
-    # all points 3x size
-    size = 3, 
-    # opacity of 30% (i.e. relatively see-through)
-    alpha = 0.3) +      
-  # make the x and y axes start at the origin 
-  scale_y_continuous(expand = c(0, 0)) + 
-  scale_x_continuous(expand = c(0, 0)) + 
-  # add in labels 
-  labs(
-    x = "Age (years)",
-    y = "Duration (days)",
-    caption = "Fictional COVID-19 data",
-    color = "Deceased"
-    ) + 
-  # apply the theme we defined in ggplot_theme code chunk above 
-  epicurve_theme
-```
 
 \pagebreak 
 
@@ -1519,541 +1523,5 @@ age_pyramid(
 
 ## Time 
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// epicurve \\\
---------------------------------------------------------------------------------
 
-Here we demonstrate how to plot epicurves using the {incidence2} package and edit
-it with {ggplot2]. 
 
-For more details see: 
-https://epirhandbook.com/epidemic-curves.html
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r epicurve, fig.cap = "COVID-19 cases by week and race/ethnicity in Fulton County", fig.id = "epicurve"}
-
-# create an "incidence" object (with number of cases by week)
-SunWeeks <- incidence(
-  # define dataset
-  x = linelist,    
-  # date column
-  date_index = date_onset,   
-  # bin interval (day which week starts on)
-  interval = "Sunday weeks", 
-  # grouping variable
-  groups = eth_race,
-  # wether to include missings as a group (or drop) 
-  na_as_group = TRUE)
-
-
-# plot epicurve 
-plot(SunWeeks,
-  fill = eth_race,
-  date_format = "%a %d %b %Y\n (Week %W)",
-  # how many axis labels to include 
-  n.breaks = 24,
-  # angle of date labels)
-  angle = 30) +
-  scale_y_continuous(
-    # make the y axis start at the origin
-    expand = c(0, 0),
-    # define where to label y axis 
-    breaks = seq(0, 2000, 250)) +
-  # update legend label 
-  labs(fill = "Race and\nEthnicity") + 
-  # move the legend to the bottom 
-  theme(legend.position = "bottom", 
-        # remove the outside box (axes added back in via epicurve_theme)
-        panel.border = element_blank()) +
-  # apply the theme we defined in ggplot_theme code chunk above
-  epicurve_theme
-```
-
-
-\pagebreak 
-
-## Place  
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// crs \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to set the coordinate reference system for shapefiles using
-{sf}, as well as define an sf data frame with points from latitude longitude coordinates. 
-
-The reason to transform the shapefile here is because it was originally in a 
-different reference system than the gps points. We also filter out points that 
-are wrong (very far from Georgia state)
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#visualizing-spatial-data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r crs}
-
-# change shapefile coordinate reference system to WGS84
-shapefile <- st_transform(shapefile, crs = 4326)
-
-
-# convert linelist data frame into sf object (with georeference points)
-linelist_sf <- linelist %>%
-  # remove rows missing gps coordinates
-  drop_na(lat, lon) %>%
-  filter(
-    # drop those with wrong GPS points
-    lat >= 33 & lat <= 35,
-    lon >= -85 & lon <= -84,
-    # drop those outside the last 2 weeks 
-    date_report %in% recent_period
-  ) %>%
-  # create an sf object
-  st_as_sf(
-    # define the coordinates based on lat/long variables
-    coords = c("lon", "lat"),
-    # set the coordinate reference system to WGS84
-    crs = 4326,
-    # do not change string variables to factors 
-    stringsAsFactors = FALSE
-  )
-
-```
-
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// basemap \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to download map tiles using {ggspatial}. This is different
-to the demonstration in the handbook, however this is because the option shown 
-here allows for saving tiles (for offline use) as well as combining with other 
-{ggplot2} layers. 
-
-Once downloaded the tiles (images) we plot these as a "basemap" with {ggplot2} 
-which also includes a scalebar (for distance reference) and instructions for where
-to include legends in plots added on top. 
-
-Most often tiles from OpenStreetMap are used - but here we use Carto tiles as it 
-results in more visually appealing maps. 
-
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#basemaps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r basemap}
-
-# get the bounding box for the shapefile 
-bounding_box <- shapefile %>% 
-  st_bbox()
-
-# plot a base map including scale bar 
-basemap <- ggplot() +
-  # change the bounding box to an sf object
-  # this defines the area to download map tiles for
-  geom_sf(data = st_as_sfc(bounding_box)) +
-  # download map tiles and add to the plot
-  annotation_map_tile(
-    # define what map tiles to use
-    type =  "cartolight",
-    # define folder to store tile images 
-    cachedir = here::here("data", "map_tiles"),
-    # define if should download tiles each time
-    forcedownload = FALSE,
-    # hide messages about download status and zoom
-    progress = "none" ) +
-  # add a scalebar in miles
-  annotation_scale(unit_category = "imperial") +
-  # remove all axes, labels and legends 
-  theme_void() +
-  # define where to put the legend 
-  theme(
-    # define position (percentages of the axes)
-    legend.position = c(0.2, 0.85),
-    # define the colour of the legend background
-    legend.box.background = element_rect(
-      fill = "white",
-      colour = NA)
-    ) + 
-  # add in a note at the bottom of plots to show it is fake data
-  labs(
-    caption = "Fictional COVID-19 data",
-  )
-```
-
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// points_map \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to plot points of cases on top of our basemap and colour
-the points by a variable. 
-
-Note this differs from the handbook as we plot with {sf} points which have a 
-coordinate reference system - whereas the handbook plots simply from a data.frame
-using {ggplot2} geom_point(). 
-
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r points_map, fig.cap = str_c("New COVID-19 cases (", recent_period_labels, ") by  ethnicity in Fulton County"), fig.id  = "pointmap"}
-
-# plot the basemap 
-basemap + 
-  # add the shapefile on top with no fill and black borders
-  geom_sf(data = shapefile, fill = NA, colour = "black") +
-  # plot points from linelist coloured by ethnicity
-  # (order the factor so that the most frequent group is plotted first)
-  geom_sf(data = linelist_sf, 
-          mapping = aes(colour = fct_infreq(eth_race))) + 
-  # choose colour combination 
-  scale_colour_brewer(palette = "Set1") +
-  # change the legend label
-  labs(colour = "Ethnicity")
-
-
-## Note: if you didnt have your gps points in an sf object you could use geom_point()
-  # geom_point(data = linelist %>% 
-  #              filter(lat >= 33 & lat <= 35, 
-  #                     lon >= -85 & lon <= -84 & 
-  #                     date_report %in% recent_period),
-  #            aes(x = lon, y = lat, colour = eth_race),
-  #            alpha = 0.5)
-
-```
- 
- 
-\pagebreak 
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// choropleth_map_join \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to merge pre-existing data with a shapefile using {dplyr}
-left_join(). In this example we use our previously created data of counts per 
-zip code. Once merged this data can then be used for plotting. 
-Note that this code chunk is not evaluated (eval = FALSE) and is just to show 
-the code. 
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#choropleth-maps
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r choropleth_map_join, eval = FALSE}
-
-# combine counts data with shapefile 
-shapefile <- left_join(shapefile, 
-                       # drop the population variable (otherwise duplicated)
-                       select(zip_counts, -Population), 
-                       # zip (or ZipCode in the shapefile) variable is the unique identifier
-                       by = c("ZipCode" = "zip")) %>% 
-  # change the name ofthe recent_inc column to incidence
-  rename(incidence = recent_inc)
-```
- 
- 
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// choropleth_map_over \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to count the number of points that fall within a polygon
-(in this case our shapefile of zip codes), using {sf} st_intersects(). 
-Then we use {ggplot2} to fill in the polygons based on these computed values. 
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#mapping-with-ggplot2 
-https://epirhandbook.com/gis-basics.html#choropleth-maps
-https://epirhandbook.com/gis-basics.html#spatial-joins
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
- 
-```{r choropleth_map_over, fig.cap = str_c("COVID-19 case incidence (per 100,000) by Zip Code (", recent_period_labels, ") in Fulton County"), fig.id  = "choromap"}
-
-# prepare counts for plotting 
-#############################
-
-# get counts of points within polygons
-shapefile <- shapefile %>%
-  # add a column to the shapefile with counts
-  mutate(
-    # see which points are in which zip code polygon
-    cases = st_intersects(., linelist_sf) %>% 
-            # count how many are in each
-            lengths()
-    )
-
-
-# calculate incidence in shapefiledata
-shapefile <- shapefile %>% 
-  mutate(
-    # divide cases by population 
-    incidence = round(cases / Population * 100000, digits = 1), 
-    # clean up calculations 
-    incidence = case_when(
-           # fix the outliers: set infinity to NA and cases less than 10 to NA
-           cases < 10             ~ NA_real_,
-           is.infinite(incidence) ~ NA_real_,  ## nb. infinite due to zero denominator
-           TRUE                   ~ incidence)
-    )
-
-
-# define breaks (for plotting groups)
-breakers <- shapefile %>% 
-  # change shapefile to a tibble (otherwise geometry pulled with)
-  as_tibble() %>% 
-  # only keep zips with more than ten cases
-  filter(cases > 10) %>% 
-  # pull the incidence column
-  select(incidence) %>% 
-  # define grouping cut-offs based on quartiles of observations 
-  quantile(probs = seq(0, 1, 0.25), na.rm = TRUE) 
-
-# create a factor variable for incidence
-shapefile <- shapefile %>% 
-  mutate(
-    # define groups using the cut function 
-    incidence_cats = cut(incidence,
-                         # cut-offs as defined above (including zero)
-                         breaks = c(0, breakers), 
-                         # add labels by using the cut-offs
-                         labels = str_glue("<={breakers}"))
-    )
-
-# plot choropleth map 
-#####################
-
-# plot basemap 
-basemap + 
-  # add in shapefile (with black borders) colour by incidence categories
-  geom_sf(data = shapefile, 
-          aes(fill = incidence_cats),
-          colour = "black") + 
-  # define colour scheme 
-  scale_fill_brewer(palette = "YlGn", 
-                    # edit legend labels to the categories defined
-                    # rename the missing group to be fewer than 10 cases
-                    labels = c(
-                      levels(shapefile$incidence_cats),
-                      "Fewer than 10 cases")) + 
-  # add in text labels for each zip code 
-  geom_sf_text(data = shapefile, 
-               aes(label = ZipCode), 
-               check_overlap = TRUE) + 
-  # change the legend title 
-  labs(fill = "Confirmed cases per \n 100,000 by Zip code")
-
-```
- 
- 
-\pagebreak 
-
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// bivar_map \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to create a bivariate map with {ggplot2} for investigating
-two categorical variables at the same time. To do this we use a function from the
-{epichecks} package on github to combine two colour schemes (which are chosen from 
-the {colorpsace} package), and then merge these with our shapefile based on the 
-categories of interest - we can then use the hex colours to fill in the plot. 
-We plot the legend separately and then combine using {patchwork}. 
-
-For more details see: 
-https://epirhandbook.com/ggplot-tips.html?q=patchwork#combine-plots
-http://colorspace.r-forge.r-project.org/articles/hcl_palettes.html
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
- 
-```{r bivar_map, fig.cap = str_c("COVID-19 case incidence (per 100,000) by proportion of ethnic minority cases and Zip Code (", recent_period_labels, ") in Fulton County"), fig.id  = "bivarmap"}
-
-# prepare data for plotting 
-#############################
-
-
-shapefile <- shapefile %>%
-  mutate(
-    # get counts of the number of non-white cases in each polygon
-    case_eth = st_intersects(.,
-                           filter(
-                             linelist_sf,
-                             eth_race != "White, NH"
-                             )) %>%
-                            lengths(),
-    case_eth_perc = case_eth / cases * 100, 
-    case_eth_perc = if_else(case_eth == 0, 0, case_eth_perc),
-    case_eth_cats = cut(case_eth_perc, 
-                        breaks = c(0, 1, 25, 50, 75, 100), 
-                        include.lowest = TRUE,
-                        labels = c("0%", "25%", "50%", "75%", "100%")), 
-    incidence_cats = fct_explicit_na(incidence_cats, 
-                                     na_level = "Under 10 cases"), 
-    incidence_cats = fct_relevel(incidence_cats, 
-                                 "Under 10 cases", 
-                                 after = 0)
-    )
-
-
-# define your colour palette  
-col_grps <- make_colours(
-  og_pal1 = "PinkYl", 
-  og_pal2 = "YlGnBu",
-  num1 = 6,
-  num2 = 5)
-
-# create a unique identifier by combining the row and columnn labels
-col_grps <- col_grps %>% 
-  mutate(merger = str_glue("{rws}-{cls}")) 
-
-# create a unique identifier by combining category levels in shapefile
-shapefile <- shapefile %>% 
-  mutate(merger = str_glue("{as.numeric(incidence_cats)}-{as.numeric(case_eth_cats)}"))
-
-
-# join colours to shapefile 
-shapefile <- left_join(shapefile, col_grps, by = "merger")
-
-
-# plot bivariate choropleth map 
-###############################
-
-bivar_map <- basemap + 
-  # fill shape with the colours column 
-  geom_sf(data = shapefile, 
-          aes(fill = clrs), 
-          color = "black", 
-          size = 0.1) + 
-  # fill polygons by the colours as they are named clrs column
-  scale_fill_identity(drop = FALSE, 
-          na.value = "grey90")
-
-
-
-
-# plot the legend separately 
-# use the col_grps dataset (colour scheme generated by make_colours function)
-# use the counts for rows and columns and fill by the clrs columns
-legend <- ggplot(
-    data = col_grps,
-    mapping = aes(
-      x = cls,
-      y = rws,
-      fill = clrs)) +
-  # create a tile plot (boxes)
-  geom_tile() +
-  # fill tiles by the colour names in clr 
-  scale_fill_identity() + 
-  # label the axis ticks from 0 to the number of levels
-  scale_x_continuous(
-    breaks = c(1:5),
-    labels = levels(shapefile$case_eth_cats), 
-    ) +
-  scale_y_continuous(
-    breaks = c(1:6),
-    labels = levels(shapefile$incidence_cats)
-    ) +
-  # make tiles boxes
-  coord_fixed() + 
-  # label axes 
-  labs(x = "Ethnic minorities (%)", y = "Incidence (per 100k)") + 
-  # make simple theme and set text size 
-  theme_minimal(base_size = 18) + 
-  # rotate the xaxis labels 
-  theme(axis.text.x = element_text(angle = 45))
-
-
-
-
-# using {patchwork} - set the plot layout area 
-# The map goes from top left at 1,1 to bottom right at 10,10
-# the legend sits within that as a smaller box 
-# (think of this as upside-down cartesian coordinates)
-layout <- c(
-  area(t = 1, l = 1, b = 10, r = 10),
-  area(t = 1, l = 2, b = 4, r = 4)
-  )
-
-
-# combine the map and the legend with the above layout
-bivar_map + legend + plot_layout(design = layout)
-
-```
-
-
-\pagebreak 
-
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// heatmap \\\
---------------------------------------------------------------------------------
-
-Here we demonstrate how to create a point density map (or heatmap). To do this we 
-use the {ggplot2} stat_density_2d(). However, to account for distance (i.e. to have
-cases per kilometer or mile squared) we need to calculate how many latitute/longitude
-units correspond to one kilometre (or mile). 
-We do this based on the extent of our bounding box and the {sf} st_distance() 
-function. 
-We demonstrate colouring based on viridis palettes. 
-
-For more details see: 
-https://epirhandbook.com/gis-basics.html#contoured-density-heatmaps
-https://bids.github.io/colormap/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r heatmap, fig.cap = str_c("Density map - New COVID-19 cases (", recent_period_labels, ") in Fulton County"), fig.id  = "bivarmap"}
-
-# calculate coordinate units per distance
-#########################################
-
-# define x and y minimum/maximum coordinates based on bounding box of base map
-xmin <- st_point(c(bounding_box$xmin, bounding_box$ymin))
-xmax <- st_point(c(bounding_box$xmax, bounding_box$ymin))
-ymin <- xmin
-ymax <- st_point(c(bounding_box$xmin, bounding_box$ymax))
-                 
-
-# create sf points (with coordinate reference system WGS84) for the x and y axis
-xaxis <- st_sfc(xmin, xmax, crs = 4326)
-yaxis <- st_sfc(ymin, ymax, crs = 4326)
-                 
-# calculate the distance in metres on the axes of your based on longitude and latitude
-# i.e. how many metres on your x axis and how many on your y
-xdist <- st_distance(xaxis)[2] %>% units::set_units("miles")
-ydist <- st_distance(yaxis)[2] %>% units::set_units("miles")
-
-# calculate how many lat/long units there are on each axis 
-xunits <- st_distance(xmin, xmax)
-yunits <- st_distance(ymin, ymax)
-
-
-# divide the difference in latitude or longitude by the corresponding distance
-# returns the number of units per distance of interest (i.e. coord units per mile)
-xfact <- as.numeric(xunits / xdist)
-yfact <- as.numeric(yunits / ydist)
-
-
-# plot heat map
-###############
-
-basemap + 
-  # add in shapefile not filled with black border
-  geom_sf(data = shapefile, fill = NA, colour = "black") +
-  # add in a density layer 
-  stat_density_2d(
-        # using the sf formatted linelist
-        data = linelist_sf,
-        aes(
-          # extract the lat lon from geometry (list column)
-          x = purrr::map_dbl(geometry, ~.[1]),
-          y = purrr::map_dbl(geometry, ~.[2]), 
-          # fill based on the calculated density
-          fill = after_stat(level)
-          ),
-        # define the shape to use for smoothing
-        geom = "polygon",
-        # define whether to show legend (removed as uninformative)
-        show.legend = FALSE,
-        # bandwith (distance squared) 
-        h = c(xfact, yfact)
-        ) + 
-  # define fill palette (viridis continuous) 
-  scale_fill_viridis_c(option = "C")
-
-```

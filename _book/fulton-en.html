@@ -194,21 +194,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-2-data-import" id="toc-step-2-data-import" class="nav-link" data-scroll-target="#step-2-data-import"><strong>Step 2: Data import</strong></a></li>
   <li><a href="#step-3-data-cleaning" id="toc-step-3-data-cleaning" class="nav-link" data-scroll-target="#step-3-data-cleaning"><strong>Step 3: Data cleaning</strong></a></li>
   </ul></li>
-  <li><a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis"><span class="header-section-number">3</span> Descriptive analysis</a>
+  <li><a href="#create-a-report-with-descriptive-analysis-of-the-data" id="toc-create-a-report-with-descriptive-analysis-of-the-data" class="nav-link" data-scroll-target="#create-a-report-with-descriptive-analysis-of-the-data">Create a report with descriptive analysis of the data</a>
   <ul class="collapse">
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">3.1</span> Summary</a></li>
-  <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time"><span class="header-section-number">3.2</span> Time</a></li>
-  <li><a href="#place" id="toc-place" class="nav-link" data-scroll-target="#place"><span class="header-section-number">3.3</span> Place</a></li>
-  <li><a href="#person" id="toc-person" class="nav-link" data-scroll-target="#person"><span class="header-section-number">3.4</span> Person</a>
+  <li><a href="#step-4-start-the-report-with-a-summary-of-the-findings" id="toc-step-4-start-the-report-with-a-summary-of-the-findings" class="nav-link" data-scroll-target="#step-4-start-the-report-with-a-summary-of-the-findings"><strong>Step 4: Start the report with a summary of the findings</strong></a></li>
+  <li><a href="#time" id="toc-time" class="nav-link" data-scroll-target="#time"><span class="header-section-number">2.1</span> Time</a></li>
+  <li><a href="#place" id="toc-place" class="nav-link" data-scroll-target="#place"><span class="header-section-number">2.2</span> Place</a></li>
+  <li><a href="#person" id="toc-person" class="nav-link" data-scroll-target="#person"><span class="header-section-number">2.3</span> Person</a>
   <ul class="collapse">
-  <li><a href="#risk-factors-for-mortality" id="toc-risk-factors-for-mortality" class="nav-link" data-scroll-target="#risk-factors-for-mortality"><span class="header-section-number">3.4.1</span> Risk factors for mortality</a></li>
+  <li><a href="#risk-factors-for-mortality" id="toc-risk-factors-for-mortality" class="nav-link" data-scroll-target="#risk-factors-for-mortality"><span class="header-section-number">2.3.1</span> Risk factors for mortality</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">4</span> Visualisation</a>
+  <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">3</span> Visualisation</a>
   <ul class="collapse">
-  <li><a href="#person-1" id="toc-person-1" class="nav-link" data-scroll-target="#person-1"><span class="header-section-number">4.1</span> Person</a></li>
-  <li><a href="#time-1" id="toc-time-1" class="nav-link" data-scroll-target="#time-1"><span class="header-section-number">4.2</span> Time</a></li>
-  <li><a href="#place-1" id="toc-place-1" class="nav-link" data-scroll-target="#place-1"><span class="header-section-number">4.3</span> Place</a></li>
+  <li><a href="#person-1" id="toc-person-1" class="nav-link" data-scroll-target="#person-1"><span class="header-section-number">3.1</span> Person</a></li>
+  <li><a href="#time-1" id="toc-time-1" class="nav-link" data-scroll-target="#time-1"><span class="header-section-number">3.2</span> Time</a></li>
+  <li><a href="#place-1" id="toc-place-1" class="nav-link" data-scroll-target="#place-1"><span class="header-section-number">3.3</span> Place</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -993,15 +993,32 @@ https://epirhandbook.com/iteration-loops-and-lists.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 </section>
 </section>
-<section id="descriptive-analysis" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Descriptive analysis</h1>
-<p>This section will be analysing data by time, place, and person to produce descriptive tables.</p>
-<section id="summary" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.1</span> Summary</h2>
+<section id="create-a-report-with-descriptive-analysis-of-the-data" class="level1 unnumbered">
+<h1 class="unnumbered">Create a report with descriptive analysis of the data</h1>
+<p>In this section we will see how to create an automatic and dynamic report to present a descriptive analysis of the data previously imported and cleaned.</p>
+<section id="step-4-start-the-report-with-a-summary-of-the-findings" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="step-4-start-the-report-with-a-summary-of-the-findings"><strong>Step 4: Start the report with a summary of the findings</strong></h2>
+<ol type="a">
+<li><p>Write in rmarkdown three bullet points summarising the data we imported, showing the number of cases by the date of analysis, the number of hospitalisations and the number of deaths.</p></li>
+<li><p>Write it in a dynamic way, so that the dates and numbers are updated automatically if you get a new updated dataset</p></li>
+</ol>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>This is an example of how the code should look like in your rmarkdown file:</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="images/Summary_fulton.png" class="img-fluid" width="800"></p>
+</div>
+</div>
+<br>
+</details>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="time" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="time"><span class="header-section-number">3.2</span> Time</h2>
+<section id="time" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="time"><span class="header-section-number">2.1</span> Time</h2>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// epiweek_table \\\
@@ -1044,8 +1061,8 @@ referencing as below does not work.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <div style="page-break-after: always;"></div>
 </section>
-<section id="place" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="place"><span class="header-section-number">3.3</span> Place</h2>
+<section id="place" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="place"><span class="header-section-number">2.2</span> Place</h2>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// zip_counts \\\
@@ -1210,8 +1227,8 @@ to stop the landscape orientation.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 <!---BLOCK_LANDSCAPE_START--->
 </section>
-<section id="person" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="person"><span class="header-section-number">3.4</span> Person</h2>
+<section id="person" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="person"><span class="header-section-number">2.3</span> Person</h2>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// demographics_tab \\\
@@ -1447,8 +1464,8 @@ https://epirhandbook.com/iteration-loops-and-lists.html
 <span id="cb9-213"><a href="#cb9-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_table_properties</span>(<span class="at">layout =</span> <span class="st">"autofit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!---BLOCK_LANDSCAPE_STOP--->
-<section id="risk-factors-for-mortality" class="level3" data-number="3.4.1">
-<h3 data-number="3.4.1" class="anchored" data-anchor-id="risk-factors-for-mortality"><span class="header-section-number">3.4.1</span> Risk factors for mortality</h3>
+<section id="risk-factors-for-mortality" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="risk-factors-for-mortality"><span class="header-section-number">2.3.1</span> Risk factors for mortality</h3>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// rf_unknowns \\\
@@ -1638,8 +1655,8 @@ https://epirhandbook.com/tables-for-presentation.html
 </section>
 </section>
 </section>
-<section id="visualisation" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Visualisation</h1>
+<section id="visualisation" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Visualisation</h1>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// ggplot_theme \\\
 --------------------------------------------------------------------------------
@@ -1663,8 +1680,8 @@ https://epirhandbook.com/ggplot-basics.html#ggplot_basics_themes
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="dv">3</span>), </span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"black"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="person-1" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="person-1"><span class="header-section-number">4.1</span> Person</h2>
+<section id="person-1" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="person-1"><span class="header-section-number">3.1</span> Person</h2>
 <p>As we see below in Figure @ref(fig:agehospplot) there appears to be an association between older age, length of hospital stay and mortality. We saw this in Table @ref(tab:regrtab) as well for the individual associations, although we did not check for interaction and confounding.</p>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// age_hosp_died \\\
@@ -1800,8 +1817,8 @@ https://epirhandbook.com/demographic-pyramids-and-likert-scales.html
 </div>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="time-1" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="time-1"><span class="header-section-number">4.2</span> Time</h2>
+<section id="time-1" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="time-1"><span class="header-section-number">3.2</span> Time</h2>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// epicurve \\\
 --------------------------------------------------------------------------------
@@ -1851,8 +1868,8 @@ https://epirhandbook.com/epidemic-curves.html
 </div>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="place-1" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="place-1"><span class="header-section-number">4.3</span> Place</h2>
+<section id="place-1" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="place-1"><span class="header-section-number">3.3</span> Place</h2>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// crs \\\
 --------------------------------------------------------------------------------
