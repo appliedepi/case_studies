@@ -34,7 +34,7 @@ format:
 * **Columns & Rows** vs. Variables & Observations
 
 ### Structure
-If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the "::: {.panel-tabset}" option. More information on how to create a tab separted layout with Quarto can be found in this [link](https://quarto.org/docs/interactive/layout.html)
+If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the "::: {.panel-tabset}" option. More information on how to create a tab separated layout with Quarto can be found in the section "Tabset Panel" on this website: [link](https://quarto.org/docs/interactive/layout.html)
 
 
 ### Including figures
@@ -46,8 +46,8 @@ You can also use the code below to insert an image that has been saved in a subf
 knitr::include_graphics("images/Applied_Epi_logo.png", error = F)
 ```
 
-### Questions 
-Please, include questions throughout the case study. If the questions included are open questions, you can use the "Hints and Solutions" feature included in this template to suggest answers/reflections. If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their [website](https://psyteachr.github.io/webexercises/articles/webexercises.html) and in their [GitHub](https://github.com/psyteachr/webexercises).
+### Including questions 
+Please, include questions throughout the case study. If the questions included are "open", you can use the "Hints and Solutions" feature included in this template to suggest answers/reflections or propose coding solutions. If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their [website](https://psyteachr.github.io/webexercises/articles/webexercises.html) and in their [GitHub](https://github.com/psyteachr/webexercises).
 
 To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.
 
@@ -116,8 +116,15 @@ Location: Geographical country where the case study is based at \
 Scale: Local, Regional, National or Global\ 
 Disease: Specify pathogen\ 
 Keywords:  (Examples: Outbreak investigation, GIS, TSA...)\ 
-Technical complexity: Basic/intermediate/advanced\
-Methodological complexity: Basic/intermediate/advanced 
+Technical complexity: 
+  * Basic: Involves importing and cleaning data, common visualisations and/or descriptive analysis\
+  * Intermediate: Includes linkage of several datasets, changing the shape of data, more complex visualisations, simple statistical analysis (e.g., uni/multivariate regression), simple iterations (e.g., loops) and/or creation of automatic reports\
+  *Advanced: Management of large databases or download of databases from repositories, more complex iterations, use of specific packages and functions (e.g., for survival analysis or TSA) and/or complex automatic reports\
+  
+Methodological complexity:
+  *Basic: Case study includes only descriptive analysis and/or hypothesis testing (e.g., Chi square, student t test..)\
+  *Intermediate: Case study includes more complex methods such as univariate/multivariate regression analysis, standardisation and/or alert thresholds, for example\
+  *Advanced: Case study includes complex methods that are outside routine field epidemiology. For example, Time series analysis, survival analysis, multilevel analysis etc.\
 
 ***Authorship***\
 Original authors:   XXXX\
