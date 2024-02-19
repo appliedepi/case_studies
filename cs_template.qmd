@@ -33,8 +33,6 @@ format:
 * Use **“Quotation marks”** vs. “Inverted commas” - “inverted” is a complicated word for non-native English speakers
 * **Columns & Rows** vs. Variables & Observations
 
-### Structure
-If your case study is long, consider it dividing it into different parts and separate the layout with tabs using the "::: {.panel-tabset}" option. More information on how to create a tab separated layout with Quarto can be found in the section "Tabset Panel" on this website: [link](https://quarto.org/docs/interactive/layout.html)
 
 
 ### Including figures
@@ -88,7 +86,7 @@ Use {.unnumbered} after every heading so that they are not numbered in the final
 
 ## Section 2. Fixed sections in the case study
 
-### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {#sec-name-lan}
+### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {.unnumbered}    
 
 ### Overview {.unnumbered}
 
@@ -247,7 +245,7 @@ Write any revisions made to the case study
 
 #### Objectives of this case study 
 
-HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
+Here write an introduction to the case study specifying:
       1. Background
       2. Objectives/Learning outcomes
       3. What the users of the case study will learn
@@ -255,20 +253,20 @@ HERE WRITE AN INTRODUCTION TO THE CASE STUDY, SPECIFYING:
       
 
 #### Previous level of expertise assumed
-ADD INFORMATION OF PREVIOUS EXPERTISE NEEDED TO FOLLOW THE CASE STUDY. THIS INCLUDES EXPERTISE ON:
 
-* EPIDEMIOLOGICAL EXPERIENCE (e.g, KNOWLEDGE OF THE FOUNDATIONS OF SURVIVAL ANALYSIS). 
-* SOFTWARE EXPERIENCE (e.g., BASIC KNOWLEDGE OF R) (RMARKDOWN)
+Add information of previous expertise needed to follow the case study. This includes expertise on:
 
-INCLUDE REFERENCES IF POSSIBLE
+* Epidemiological experience (e.g., knowledge of the foundations of survival analysis)
+* Software experience (e.g, basic knowledge of R or Rmarkdown)
 
+If appropriate and possible, include references  that can help the user to understand the level of expertise assumed
 
 
 #### Preparation for the case study
 
-INCLUDE THE STEPS NEEDED TO START REPLICATING THE ANALYSIS OF THE CASE STUDY
+Include the stepts needed to start replicating the analysis of the case study
 
-EXAMPLE:
+For example:
 
 1. Download folder named XXX and extract contents in the local laptop
 2. Create an Rstudio project in the folder XXX (they already come with the project)
@@ -280,5 +278,26 @@ EXAMPLE:
 
 ## Section 3. Specific to the case study
 
-HERE ADD THE DIFFERENT SECTIONS OF THE CASE STUDY. PLEASE INCLUDE QUESTIONS WITH HINTS AND SOLUTIONS AS SHOWN ABOVE.
+Finally, add the different sections of the case study. Remember to include questions +/- hints and solutions as appropriate. 
 
+We acknowledge that every case study is different, so we trust you to give it the most relevant structure. However, consider including the following sections:
+
+1. Data import\
+If using R, we recommend to use the import() function from the {rio} package to import data, and the here() function from the {here} package to recreate the file path in a reproducible way.
+
+2. Data cleaning and preparation\
+If using R, we prefer, to use {dplyr} functions linked through the {magrittr} pipe. 
+
+3. Descriptive analysis\
+If relevant, include a section on descriptive analysis divided into three parts: time, place, person. If using R, for the graphs, we recommend using {ggplot2}. For tables, {flextable}
+
+4. Analysis
+If appropriate include in a separate section more advanced analysis, such as multivariate regression, time series analysis or survival analysis.
+
+5. Interpretation and reflection
+Include this section if relevant
+
+
+For case studies in R: remember to be consistent with the style represented by the [EpiRhandbook](https://epirhandbook.com/en/).
+
+Thank you for your work!

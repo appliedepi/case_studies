@@ -104,20 +104,17 @@ https://epirhandbook.com/import-and-export.html
 
 ```{r import}
   
-# import the raw case data set
   # define the path using {here} then pass that to the {rio} import function
-  # specify the sheet to read using which (default is to read first sheet)
+  # specify the sheet to read using "which" (default is to read first sheet)
 linelist_raw <- rio::import(
   file = here::here("data", "covid_example_data", "covid_example_data.xlsx"),
   which = "in"
 )
 
-# import shapefile
-  # for extracting population counts for zipcodes and mapping
+# import shapefile for extracting population counts for zipcodes
 shapefile <- read_sf(
   here::here("data", "covid_example_data", "covid_shapefile", "FultonCountyZipCodes.shp")
 )
-
 ```
 
 
@@ -143,20 +140,14 @@ https://epirhandbook.com/descriptive-tables.html#browse-data
 # view your whole dataset interactively (in an excel style format)
 View(linelist_raw)
 
-# get summary: 
-# mean, median and max values of numeric variables
-# counts for categorical variables
-# also gives number of NAs
+# get mean, median and max values of numeric variables; counts for categorical variables and NAs with summary
 summary(linelist_raw)
 
 # get information about each variable in a dataset 
-# nb. “POSIXct” is a type of raw date class 
 skim(linelist_raw)
 
 # view unique values contained in variables - useful for categorical variables
-# you can run this for any column -- just replace the column name
 unique(linelist_raw$case_gender) 
-
 
 # we can also loop through all categorical variables to look at all possibilities
 # see later in the script for introductions to using iteration
@@ -254,7 +245,6 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
 linelist <- linelist_raw %>% 
   # use select() to retain columns and rename them 
      # NEW name = OLD name
-     # aligned for readability
   select( 
     pid                 = PID,
     date_report         = reprt_creationdt_FALSE,      
@@ -264,19 +254,9 @@ linelist <- linelist_raw %>%
     race                = case_race,
     eth                 = case_eth,
     zip                 = case_zip,
-    # county              = case_county,
-    # district            = case_district,
-    # state               = case_state,
     contact_id          = Contact_id, 
     date_onset          = sym_startdt_FALSE,
-    sym_fever,
-    sym_subjfever,
-    sym_myalgia,
-    sym_losstastesmell,
-    sym_sorethroat,
-    sym_cough,
-    sym_headache,
-    sym_resolved,
+    starts_with("sym"),
     date_recovery       = sym_resolveddt_FALSE, 
     contact_hh          = contact_household,
     hospitalized,  
@@ -291,6 +271,34 @@ linelist <- linelist_raw %>%
     lat                 = latitude_JITT,
     lon                 = longitude_JITT
     )
+
+```
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/// duplicated \\\
+--------------------------------------------------------------------------------
+
+Here we remove the duplicates based on having the same pid, gender and date of 
+birth. 
+Note that this might exclude those which are legitimately reported twice - i.e. 
+those who recovered and were reinfected. To deal with these you could create a 
+composite variable of the identifiers of interest, flag the duplicates there and 
+then add an additional argument for having a report date within six months. 
+
+For more details see: 
+https://epirhandbook.com/de-duplication.html 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+```{r duplicated}
+
+# get a data frame of all the duplicates. This is mostly to inspect manually, but can be used for analysing those dropped
+duplicates <- linelist %>% 
+     get_dupes(pid, gender, date_dob)
+
+# find duplicates based on unique ID, gender and date of birth. Only keep the first occurrence 
+linelist <- linelist %>% 
+  distinct(pid, gender, date_dob, .keep_all = TRUE)
 
 ```
 
@@ -315,43 +323,27 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
 
 ```{r clean_dates}
 
+# To convert every date column into a date we can use the as.Date() function (or lubridate functions such as dmy() within mutate() for each date column, but we can also apply this function automatically to all date columns using the code below
+
 linelist <- linelist %>% 
-  # convert all date columns to date type 
-  # note that dates must be formatted correctly - in some cases date parsers from lubridate can be used here
-  mutate(
-    date_report =       as.Date(date_report),
-    date_dob =          as.Date(date_dob),
-    date_onset =        as.Date(date_onset)
-    # date_recovery =     as.Date(date_recovery),
-    # date_hospitalized = as.Date(date_hospitalized),
-    # date_discharge =    as.Date(date_discharge),
-    # date_died =         as.Date(date_died),
-    # date_positive =     as.Date(date_positive)
-  ) %>% 
-  
-  # we can do this in a much faster way by by using across()
-  # the apply the as.Date() function to every column with "date" in the name
-  # contains() is a tidyselect function (see the handbook for details)
-  # the top mutate can be deleted now!
   mutate(across(
     .cols = contains("date"),
     .fns = ~as.Date(.x)
   )) %>%
   
-  # remove onset dates prior to 2020
+  # mark as missing onset dates prior to 2020
   mutate(across(
     .cols = c(date_report, date_onset, date_hospitalized, date_discharge, date_died),
     .fns  = ~replace(.x, .x < as.Date("2020-01-01"), NA)
     )) %>% 
 
-  # remove dates after the surveillance_date (for this report) from all date columns
+  # mark as missing dates after the surveillance_date (for this report) from all date columns
   mutate(across(
     .cols = contains("date"),
     .fns  =  ~replace(.x, .x > surveillance_date, NA)
     )) %>%
      
-  # create an "epiweek" column from the report date 
-  # floor_date() rounds down to the closest week
+  # create an "epiweek" column from the report date. Use floor_date() to round down      to the closest week
   mutate(epiweek = floor_date(date_report,
                           # round by weeks
                           unit = "week", 
@@ -424,9 +416,6 @@ linelist <- linelist %>%
     days_hosp = replace(days_hosp, days_hosp > 60, NA)
   )
 
-## it's a good habit to make sure the variables you're generating seem realistic
-# (are you calculating them correctly?)
-# summary(linelist$days_hosp)
 
 ```
 
@@ -490,13 +479,6 @@ linelist <- linelist %>%
           TRUE                                                ~ "Unknown"
      )) %>% 
      
-     ## change from upper-case to lower case (with leading capital)
-     # mutate(across(
-     #   .cols = c(county, state),
-     #   .fns = str_to_title
-     # )) %>% 
-     # 
-     
      # recode with searching for string patterns
      # (from "No-Asymptomatic"/"Yes-Symptomatic"/"Unknown")
      mutate(contact_id = case_when(
@@ -506,12 +488,6 @@ linelist <- linelist %>%
        TRUE                              ~ "Unknown"
      )) %>% 
   
-     # # this section does the same as above, but takes advantage of the way the data is formatted
-     # # data is formatted as "Yes/No-A/Symptomatic"
-     # # remove text from a string (everything after the dash) - this uses regular expressions (regex)
-     # # see handbook section on regex for understanding how this works
-     # mutate(contact_id = str_remove(linelist$contact_id, "-.*")) %>% 
-
      # recode with searching for string patterns 
      mutate(sym_resolved = case_when(
           str_detect(sym_resolved, "Yes")     ~ "Yes", 
@@ -552,34 +528,6 @@ linelist <- linelist %>%
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// duplicated \\\
---------------------------------------------------------------------------------
-
-Here we remove the duplicates based on having the same pid, gender and date of 
-birth. 
-Note that this might exclude those which are legitimately reported twice - i.e. 
-those who recovered and were reinfected. To deal with these you could create a 
-composite variable of the identifiers of interest, flag the duplicates there and 
-then add an additional argument for having a report date within six months. 
-
-For more details see: 
-https://epirhandbook.com/de-duplication.html 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-```{r duplicated}
-
-# get a data frame of all the duplicates 
-     # this is mostly to inspect manually, but can be used for analysing those dropped
-duplicates <- linelist %>% 
-     get_dupes(pid, gender, date_dob)
-
-linelist <- linelist %>% 
-  ## find duplicates based on unique ID, gender and date of birth 
-  ## only keep the first occurrence 
-  distinct(pid, gender, date_dob, .keep_all = TRUE)
-
-```
-
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /// filter \\\

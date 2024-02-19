@@ -192,7 +192,6 @@ knitr::opts_chunk$set(echo = TRUE ,  # hide all code chunks in output
                      )
 ```
 
-::: {.panel-tabset}
 
 # Import data and cleaning {.unnumbered}
 
@@ -272,7 +271,6 @@ c) Explore the linelist  to understand better the data.
 
 
 ::: {.webex-check}
-
 ```{r, results="asis", echo=FALSE, eval=TRUE}
 opts2.1 <- c(
   "48",
@@ -296,9 +294,6 @@ opts2.2 <- c(
 cat("Question 2.2: How many columns are of class numeric?", longmcq(opts2.2))
 
 ```
-
-
-
 :::
 
 
@@ -316,64 +311,31 @@ cat("Question 2.2: How many columns are of class numeric?", longmcq(opts2.2))
 ```{r import, echo=TRUE, eval=FALSE}
 ##############        IMPORTING DATA     ##############        
 
-# We use the {rio} package for importing our example data - it is very versatile 
-# and can read in most file types. 
-# 
-# We use the {here} package for defining the path to our file. This is important 
-# for sharing your script with others (by email or on Sharepoint) - if you used an
-# "absolute" path, they would need to update the script to match their computer. 
-# 
-# This way your whole R-project folder can be zipped up and moved somewhere else. 
-# 
-# For more details see: 
-# https://epirhandbook.com/import-and-export.html
-
-  
-  #import the raw case data set
   # define the path using {here} then pass that to the {rio} import function
-  # specify the sheet to read using which (default is to read first sheet)
+  # specify the sheet to read using "which" (default is to read first sheet)
 linelist_raw <- rio::import(
-  file = here::here("data", "fulton-en", "covid_example_data", "covid_example_data.xlsx"),
+  file = here::here("data", "covid_example_data", "covid_example_data.xlsx"),
   which = "in"
 )
 
-# import shapefile
-  # for extracting population counts for zipcodes and mapping
+# import shapefile for extracting population counts for zipcodes
 shapefile <- read_sf(
-  here::here("data", "fulton-en", "covid_example_data", "covid_shapefile", "FultonCountyZipCodes.shp")
+  here::here("data",  "covid_example_data", "covid_shapefile", "FultonCountyZipCodes.shp")
 )
 
 ##############        EXPLORING THE DATA     ##############        
 
-# Here we take a look at the raw data to get a feel for what needs cleaning. 
-# 
-# We first use the in-built browser with the {base} function View(). 
-# 
-# Then we can use the {base} function summary(), but probably the most comprehensive 
-# overview is with the {skimr} function. 
-# You can also view distinct values for variables using the {base} unique() function. 
-# 
-# For more details see: 
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#review
-# https://epirhandbook.com/descriptive-tables.html#browse-data
-
 # view your whole dataset interactively (in an excel style format)
 View(linelist_raw)
 
-# get summary: 
-# mean, median and max values of numeric variables
-# counts for categorical variables
-# also gives number of NAs
+# get mean, median and max values of numeric variables; counts for categorical variables and NAs with summary
 summary(linelist_raw)
 
 # get information about each variable in a dataset 
-# nb. “POSIXct” is a type of raw date class 
 skim(linelist_raw)
 
 # view unique values contained in variables - useful for categorical variables
-# you can run this for any column -- just replace the column name
 unique(linelist_raw$case_gender) 
-
 
 # we can also loop through all categorical variables to look at all possibilities
 # see later in the script for introductions to using iteration
@@ -387,7 +349,6 @@ purrr::map(
     unique()
   )
 
-
 ```
 
 </br>
@@ -397,42 +358,11 @@ purrr::map(
 
 ## **Step 3: Data cleaning** {.unnumbered}
 
-a) Create an object called *surveillance_date* defined as 7 days prior to the reporting date (30 June 2021). Then, create another object rounding it to the closest Wednesday. Create two sequences of dates, one as the 14 days prior to the *surveillance_date* and another as 14-28 days prior to the same date. We will use these throughout the case study
-b) Clean the column names
-c) Ensure that dates are considered dates by R
-d) Clean date columns dealing with values that are not compatible with the period under analysis (early 2020 to July 2021)
-e) Clean the rest of columns, ensuring that missing values are considered NA by R, ensuring that data values are plausible (e.g., no negative age) and recoding data into new variables as you see appropriate.
-f) Create a column named "epiweek" using the report date which rounds the report date to the nearest week, taking "Wednesday" as the start of the week.
-g) Remove duplicates from the data
-h) Filter the data to keep only confirmed cases whose date of report is not above the date of the report (June 30, 2021). Consider also keeping recors with missing date of report.
 
+### **Step 3.1: Create date objects** {.unnumbered}
 
-::: {.webex-check}
+Create an object called *surveillance_date* defined as 7 days prior to the reporting date (30 June 2021). Then, create another object rounding it to the closest Wednesday. Create two daily sequences of dates, one as the 14 days prior to the *surveillance_date* and another as 14-28 days prior to the same date. We will use these throughout the case study
 
-```{r, results="asis", echo=FALSE, eval=TRUE}
-opts3.1 <- c(
-  answer = "28",
-  "31",
-  "38",
-  "124"
-)
-
-
-cat("Question 3.1: How many duplicated rows were present in the raw data?", longmcq(opts3.1))
-
-
-opts2.2 <- c(
-  "82101",
-  answer = "81757",
-  "80567",
-  "81954"
-)
-
-
-cat("Question 3.2: How many rows has the cleaned version of the data, with only confirmed cases on or before the date of report?", longmcq(opts3.2))
-
-```
-:::
 
 <details>
 
@@ -443,22 +373,11 @@ cat("Question 3.2: How many rows has the cleaned version of the data, with only 
 </summary>
 
 </br>
+
 ```{r , echo=TRUE, eval=FALSE}
 
 
 ##############       DEFINE DATES     ##############        
-
-# Here we create a date object (surveillance date), which is the day of the report minus 7
-# days to take into account delay in reporting. This object can be used throughout 
-# the document for filtering datasets, plots/tables, etc. 
-# 
-# We also create a week object to make grouping data easier. In this scenario we 
-# have defined the week to start on Wednesdays as this is when Fulton County 
-# releases their reports (but you can choose any other day of the week too). 
-# 
-# From these we are then able to define periods 14 and 28 days prior to our 
-# report date. We can also make the appropriate labels to auto-populate
-# table titles.
 
 # create a date object for the surveillance
 # Minus 7 days from the date of report (see YAML) to account for lag in reporting lab results
@@ -498,28 +417,32 @@ full_period_labels <- str_c(
   format(surveillance_week, format = "%B %d, %Y")
 )
 
+```
+</br>
+
+</details>
+
+### **Step 3.2: Clean names and remove duplicated rows** {.unnumbered}
+Clean the column names ensuring that names do not contain special characters and remove rows that have duplicated information on: patient id, gender and date of birth. 
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, eval=FALSE}
 
 ##############        CLEAN NAMES     ##############        
-
-# Here we are going to clean the column names of our data set - and store as a new
-# dataset called "linelist". 
-# 
-# It is possible to use the {janitor} package for automated cleaning of variable 
-# names - but as there are only a few variables that we want to rename, 
-# here we will demonstrate using {dplyr} select() function for manually renaming.
-# 
-# Select() can be used either to retain specific columns or to rename them by using
-# the syntax New name = Old name. 
-# 
-# For more details see: 
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
-
 
 # create a new object called linelist and assign linelist_raw with renamed columns
 linelist <- linelist_raw %>% 
   # use select() to retain columns and rename them 
      # NEW name = OLD name
-     # aligned for readability
   select( 
     pid                 = PID,
     date_report         = reprt_creationdt_FALSE,      
@@ -529,11 +452,9 @@ linelist <- linelist_raw %>%
     race                = case_race,
     eth                 = case_eth,
     zip                 = case_zip,
-    # county              = case_county,
-    # district            = case_district,
-    # state               = case_state,
     contact_id          = Contact_id, 
     date_onset          = sym_startdt_FALSE,
+    start
     sym_fever,
     sym_subjfever,
     sym_myalgia,
@@ -558,57 +479,74 @@ linelist <- linelist_raw %>%
     )
 
 
+
+##############       REMOVE DUPLICATES     ##############        
+
+# get a data frame of all the duplicates. This is mostly to inspect manually, but can be used for analysing those dropped
+duplicates <- linelist %>% 
+     get_dupes(pid, gender, date_dob)
+
+# find duplicates based on unique ID, gender and date of birth. Only keep the first occurrence 
+linelist <- linelist %>% 
+  distinct(pid, gender, date_dob, .keep_all = TRUE)
+
+```
+</br>
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.2 <- c(
+  answer = "28",
+  "31",
+  "38",
+  "124"
+)
+
+
+cat("Question 3.2: How many duplicated rows were present in the raw data?", longmcq(opts3.2))
+
+```
+:::
+
+### **Step 3.3: Clean dates** {.unnumbered}
+
+a) Ensure that dates are considered dates by R
+b) Clean date columns dealing with values that are not compatible with the period under analysis (early 2020 to July 2021)
+c) Create a column named "epiweek" using the report date which rounds the report date to the nearest week, taking "Wednesday" as the start of the week.
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
+
 ##############        CLEAN DATES     ##############        
 
-# Here we are going to clean the date variables 
-# 
-# The {base} way to convert columns to Date class is with as.Date(). If the
-# current format is YYYY-MM-DD or YYYY/MM/DD then no other arguments are needed. 
-# If the format is different, specify it to format= (for more detail see: 
-# https://epirhandbook.com/working-with-dates.html#convert-to-date )
-# 
-# Below we also introduce using across() from {dplyr}, which allows you to apply a
-# function across multiple specified columns. See
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_across
-
+# To convert every date column into a date we can use the as.Date() function (or lubridate functions such as dmy() within mutate() for each date column, but we can also apply this function automatically to all date columns using the code below
 
 linelist <- linelist %>% 
-  # convert all date columns to date type 
-  # note that dates must be formatted correctly - in some cases date parsers from lubridate can be used here
-  mutate(
-    date_report =       as.Date(date_report),
-    date_dob =          as.Date(date_dob),
-    date_onset =        as.Date(date_onset)
-    # date_recovery =     as.Date(date_recovery),
-    # date_hospitalized = as.Date(date_hospitalized),
-    # date_discharge =    as.Date(date_discharge),
-    # date_died =         as.Date(date_died),
-    # date_positive =     as.Date(date_positive)
-  ) %>% 
-  
-  # we can do this in a much faster way by by using across()
-  # the apply the as.Date() function to every column with "date" in the name
-  # contains() is a tidyselect function (see the handbook for details)
-  # the top mutate can be deleted now!
   mutate(across(
     .cols = contains("date"),
     .fns = ~as.Date(.x)
   )) %>%
   
-  # remove onset dates prior to 2020
+  # mark as missing onset dates prior to 2020
   mutate(across(
     .cols = c(date_report, date_onset, date_hospitalized, date_discharge, date_died),
     .fns  = ~replace(.x, .x < as.Date("2020-01-01"), NA)
     )) %>% 
 
-  # remove dates after the surveillance_date (for this report) from all date columns
+  # mark as missing dates after the surveillance_date (for this report) from all date columns
   mutate(across(
     .cols = contains("date"),
     .fns  =  ~replace(.x, .x > surveillance_date, NA)
     )) %>%
      
-  # create an "epiweek" column from the report date 
-  # floor_date() rounds down to the closest week
+  # create an "epiweek" column from the report date. Use floor_date() to round down to the closest week
   mutate(epiweek = floor_date(date_report,
                           # round by weeks
                           unit = "week", 
@@ -616,24 +554,43 @@ linelist <- linelist %>%
                           week_start = 3)
   )
 
+```
+</br>
+</details>
 
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.3 <- c(
+  "base::as.Date()",
+  "lubridate::as_date()", 
+  "lubridate::ymd()", 
+  answer = "lubridate::dmy()" 
+)
+
+
+cat("Question 3.3: Which one of the following could NOT be used to transform the column sym_startdt_FALSE from the raw data frame into a date object?", longmcq(opts3.3))
+
+```
+:::
+
+
+### **Step 3.4: Clean other columns** {.unnumbered}
+
+
+Clean the rest of columns, ensuring that missing values are considered NA by R, ensuring that data values are plausible (e.g., no negative age) and recoding data into new variables as you see appropriate.
+
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
 ##############        CLEAN NUMERICS     ##############        
 
-# Here we are going to clean all numeric variables, as well as create some new 
-# variables based on difference between dates. 
-# 
-# First we will ensure that age is numeric and then fix those with incorrectly 
-# entered dates (notice that one individual was -20 years old). 
-# 
-# Then we show how to create new numeric variables for the number of days between 
-# two dates. 
-# 
-# For more details see: 
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#num_cats
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
-# 
-# Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
-# and handles dates better.  
 
 # Age 
 ############
@@ -675,22 +632,8 @@ linelist <- linelist %>%
     days_hosp = replace(days_hosp, days_hosp > 60, NA)
   )
 
-## it's a good habit to make sure the variables you're generating seem realistic
-# (are you calculating them correctly?)
-# summary(linelist$days_hosp)
-
 
 ##############        CLEAN CATEGORIES     ##############        
-
-
-# create age groups based on the age variable using 
-# the age_categories() function from {epikit}. It is also possible to create 
-# age groups using the {dplyr} case_when() function - but is more involved. 
-# 
-# For more details see: 
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-and-transformation
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
-# https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
 
 linelist <- linelist %>% 
      
@@ -714,17 +657,9 @@ linelist <- linelist %>%
         sym_myalgia = str_to_title(sym_myalgia),
       ) %>% 
      
-     #replace one value and leave the rest, across multiple variables 
-     # mutate(across(
-     #   .cols = c(contact_hh, contains("sym_")),
-     #   .funs = ~if_else(.x == "Unk", "Unknown", .x)
-     # )) %>% 
 
      # create a composite category from race and ethnicitiy  
-          #  (nb. this sets those that are non-specified in eth to non-hispanic)
      mutate(eth_race = case_when(
-       # we evaluate if ethnicity is HISPANIC/LATINO **FIRST**
-       # case_when() evaluates in order (if, else if, else if, ... else)
           eth  == "HISPANIC/LATINO"                           ~ "Hispanic, all races", 
           race == "ASIAN"                                     ~ "Asian, NH", 
           race == "BLACK"                                     ~ "Black, NH",
@@ -735,13 +670,6 @@ linelist <- linelist %>%
           TRUE                                                ~ "Unknown"
      )) %>% 
      
-     ## change from upper-case to lower case (with leading capital)
-     # mutate(across(
-     #   .cols = c(county, state),
-     #   .fns = str_to_title
-     # )) %>% 
-     # 
-     
      # recode with searching for string patterns
      # (from "No-Asymptomatic"/"Yes-Symptomatic"/"Unknown")
      mutate(contact_id = case_when(
@@ -751,12 +679,6 @@ linelist <- linelist %>%
        TRUE                              ~ "Unknown"
      )) %>% 
   
-     # # this section does the same as above, but takes advantage of the way the data is formatted
-     # # data is formatted as "Yes/No-A/Symptomatic"
-     # # remove text from a string (everything after the dash) - this uses regular expressions (regex)
-     # # see handbook section on regex for understanding how this works
-     # mutate(contact_id = str_remove(linelist$contact_id, "-.*")) %>% 
-
      # recode with searching for string patterns 
      mutate(sym_resolved = case_when(
           str_detect(sym_resolved, "Yes")     ~ "Yes", 
@@ -793,40 +715,47 @@ linelist <- linelist %>%
           .fns = ~fct_relevel(.x, "Yes", "No", "Unknown")
      ))
 
-##############       REMOVE DUPLICATES     ##############        
+
+```
+</br>
+</details>
 
 
-# Here we remove the duplicates based on having the same pid, gender and date of 
-# birth. 
-# Note that this might exclude those which are legitimately reported twice - i.e. 
-# those who recovered and were reinfected. To deal with these you could create a 
-# composite variable of the identifiers of interest, flag the duplicates there and 
-# then add an additional argument for having a report date within six months. 
-# 
-# For more details see: 
-# https://epirhandbook.com/de-duplication.html 
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.4 <- c(
+  "logical",
+  "character",
+  answer = "factor",
+  "integer"
+)
 
 
-# get a data frame of all the duplicates 
-     # this is mostly to inspect manually, but can be used for analysing those dropped
-duplicates <- linelist %>% 
-     get_dupes(pid, gender, date_dob)
+cat("Question 3.4: A column that has ordinal data, what class should it have?", longmcq(opts3.4))
 
-linelist <- linelist %>% 
-  ## find duplicates based on unique ID, gender and date of birth 
-  ## only keep the first occurrence 
-  distinct(pid, gender, date_dob, .keep_all = TRUE)
+```
+:::
 
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+</details>
+
+
+### **Step 3.5: Filter data frame** {.unnumbered}
+
+Filter the data to keep only confirmed cases whose date of report is not above the date of the report (June 30, 2021). Consider also keeping recors with missing date of report.
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
 
 ##############       FILTER     ##############        
-
-
-# Here we are going to filter our data set to only keep relevant cases for analysis. 
-# We keep those that are reported before our surveillance cut-off date and those 
-# that are entered as a confirmed case. 
-# 
-# For more details see: 
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#filter-rows
 
 # store those which do not meet our filter criteria 
 dropped <- linelist %>% 
@@ -842,13 +771,12 @@ linelist <- linelist %>%
                  !is.na(date_report))
 
 ```
-
 </br>
-
 </details>
 
 
 **Please, continue the case study by clicking in the tab above named: "Descriptive analysis"**
+
 
 # Descriptive analysis {.unnumbered}
 
@@ -863,35 +791,28 @@ b) Write it in a dynamic way, so that the dates and numbers are updated automati
 
 
 <details>
-
 <summary style="text-decoration: underline; color: red;">
-
 `r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
 </summary>
-
 </br>
-
 This is an example of how the code should look like in your rmarkdown file:
-
 ```{r, echo = FALSE, eval=TRUE, out.width = "1000px"}
 knitr::include_graphics("images/Summary_fulton.png", error = F, )
 ```
-
 </br>
 </details>
 
 \pagebreak
 
+
 ## **Step 5. Analysis by time** {.unnumbered}
 
-a) Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County
 
-b) Create an epicurve by reporting week, with the colour of the bins based on whether the cases were hospitalised or not
+### **Step 5.1: Table weekly number of cases** {.unnumbered}
 
+Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County
 
 ::: {.webex-check}
-
 ```{r, results="asis", echo=FALSE, eval=TRUE}
 opts5.1 <- c(
   "The week starting on March 02, 2021",
@@ -907,28 +828,11 @@ cat("Question 5.1: During which week do we observe the peak in cases by date of 
 :::
 
 <details>
-
 <summary style="text-decoration: underline; color: red;">
-
 `r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
 </summary>
-
 </br>
 ```{r, echo=TRUE, eval=FALSE}
-
-############ CREATE EPIWEEK TABLE ###################  
-
-# Here we use the {janitor} tabyl() function to get case counts by calendar week 
-# (as well as the percentage these contribute to the overall). 
-# 
-# We then create use {flextable} to produce a clean output table. 
-# 
-# For more details see: 
-# https://epirhandbook.com/descriptive-tables.html
-# https://epirhandbook.com/tables-for-presentation.html
-# https://epirhandbook.com/descriptive-tables.html#tbl_janitor
-
 # save a quick descriptive table of number of cases reported by week
 epiweek_table <- linelist %>% 
   # get counts and percentages 
@@ -942,13 +846,21 @@ epiweek_table <- linelist %>%
 epiweek_flextable <- epiweek_table %>% 
      qflextable()
 
-############ CREATE EPICURVE ###################  
-# Here we demonstrate how to plot epicurves using the {ggplot2} package.
-# 
-# For more details see: 
-# https://epirhandbook.com/epidemic-curves.html
+```
+</br>
+</details>
+
+### **Step 5.2: Epicurve** {.unnumbered}
+
+Create an epicurve by reporting week, with the colour of the bins based on whether the cases were hospitalised or not
 
 
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
      # we first define the dataset to be used, the x axis which will be reporting week and the colour (fill) of the bins which will depend on hospitalisation outcome
 ggplot(
      data = linelist,
@@ -978,8 +890,6 @@ ggplot(
      theme_bw()
 
 ```
-
-
 </br>
 </details>
 
@@ -989,16 +899,12 @@ ggplot(
 
 ## **Step 6. Analysis by person** {.unnumbered}
 
-a) Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.
 
-b) Create an age pyramid with the percentage of cases by age group and sex.
+### **Step 6.1: Table with demographic information** {.unnumbered}
 
-c) Create a scatter plot showing the relation between age and duration of hospital stay. Colour the points based on whether cases died or not. 
-
-d) Create a bar stacked bar plot showing the absolute number of cases by race and vital status
+Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.
 
 ::: {.webex-check}
-
 ```{r, results="asis", echo=FALSE, eval=TRUE}
 opts6.1 <- c(
   "0-9",
@@ -1025,34 +931,11 @@ cat("Question 6.2: In which race do we observe the largest proportion of deaths 
 
 
 <details>
-
 <summary style="text-decoration: underline; color: red;">
-
 `r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
 </summary>
-
 </br>
-
 ```{r, echo=TRUE, eval=FALSE}
-
-#################### A) TABLE WITH DEMOGRAPHIC CHARACTERISTICS ####################
-
-# Here we use {purrr} to iterate over demographics variables (defined in the 
-# vector_vars code chunk) - to produce tables of counts and percentages for cases
-# and deaths. 
-# 
-# We use {dplyr} bind_rows() and bind_cols() to combine the various smaller dataframes
-# of counts in to one large table. 
-# 
-# And then we colour in our {flextable} with different criteria for each of the 
-# demographic variables of interest. 
-# 
-# For more details see: 
-# https://epirhandbook.com/tables-for-presentation.html
-# https://epirhandbook.com/iteration-loops-and-lists.html
-
-
 # get counts tables for measures of interest 
 ############################################
 
@@ -1074,27 +957,6 @@ dem_eth_race <- linelist %>%
 
 # bind all tables together
 total_cases <- bind_rows(list(dem_gender, dem_age, dem_eth_race))
-
-# type out the variables of interest
-demographic_vars <- c("gender", "age_group", "eth_race")
-
-# the above can also be done iteratively (we are repeating code)
-# this uses the {purrr} package to iterate over each variable
-# counts of total cases 
-total_cases <- purrr::map(
-  # for each variable listed
-  .x = demographic_vars,
-  # create a table  
-  .f = ~tabyl(linelist, .x) %>%
-        # only keep variables of interest and rename the variable column 
-        # this is so that they are all the same for row binding 
-        select("Characteristic" = .x,
-               n_cases_total = n,
-               perc_cases_total = percent)
-  ) %>% 
-  # combine rows in to one dataframe
-  bind_rows()
-
 
 # counts of new cases (last 28 days) 
 recent_cases <- purrr::map(
@@ -1165,7 +1027,6 @@ overall <- linelist %>%
   )
 
 
-
 # merge tables together 
 #######################
 
@@ -1176,10 +1037,8 @@ demographics_counts <- bind_cols(total_cases, recent_cases, total_deaths, recent
     .cols = contains("perc"),
     .fns = ~round(.x * 100, digits = 1)
     )) 
-
 # add in the totals row at the top of the merged demographics table
 demographics_counts <- bind_rows(overall, demographics_counts)
-
 
 
 # define colour scheme 
@@ -1271,15 +1130,20 @@ demographics_counts %>%
   # decrease the fontsize in the header and body for aesthetic purposes in the document
   fontsize(part = "all", size = 8)
 
+```
+</br>
+</details>
 
-#################### B) AGE PYRAMID ####################
+### **Step 6.2: Age pyramid** {.unnumbered}
 
-# Here we demonstrate how to plot age pyramids using the {apyramid} package and edit
-# it with {ggplot2]. 
-# 
-# For more details see: 
-# https://epirhandbook.com/demographic-pyramids-and-likert-scales.html
+Create an age pyramid with the percentage of cases by age group and sex. 
 
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
 # prepare dataset
 
 # start a new dataframe (as dont want to overwrite the original)
@@ -1320,14 +1184,25 @@ age_pyramid(
         nrow()
       )
     )
+```
+</br>
+</details>
+
+
+
+
+### **Step 6.3: Scatter plot** {.unnumbered}
+
+Create a scatter plot showing the relation between age and duration of hospital stay. Colour the points based on whether cases died or not. 
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
 
 #################### C) SCATTER PLOT ####################
-
-# Here we demonstrate how to plot points with {ggplot2}. 
-# 
-# For more details see: 
-# https://epirhandbook.com/ggplot-basics.html#geoms
-
 # open a plot with the linelist data
 ggplot(data = linelist) +
   # add points 
@@ -1354,14 +1229,21 @@ ggplot(data = linelist) +
     ) + 
      theme_bw()
 
-#################### D) BAR PLOT BY RACE ####################
+```
+</br>
+</details>
 
-# Here we demonstrate how to plot bar charts with {ggplot2}. 
-# 
-# For more details see: 
-# https://epirhandbook.com/ggplot-basics.html#geoms
-# https://epirhandbook.com/ggplot-tips.html
 
+### **Step 6.4: Bar plot** {.unnumbered}
+
+Create a bar stacked bar plot showing the absolute number of cases by race and vital status
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
 # open a plot with the linelist data
 ggplot(linelist) +
   # add bars 
@@ -1392,7 +1274,6 @@ ggplot(linelist) +
   # apply a defined theme
      theme_bw()
 ```
-
 </br>
 </details>
 
@@ -1404,7 +1285,6 @@ ggplot(linelist) +
 Create a table by zip code in which you show the incidence in the most recent 14 days period, the incidence in the previous 14 days period and the percentage change in incidence between these periods.
 
 ::: {.webex-check}
-
 ```{r, results="asis", echo=FALSE, eval=TRUE}
 opts7.1 <- c(
   "+20%",
@@ -1419,31 +1299,14 @@ cat("Question 7.1: What is the change in incidence observed between periods in t
 :::
 
 
-
 <details>
-
 <summary style="text-decoration: underline; color: red;">
-
 `r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
 </summary>
-
 </br>
-
-
 ```{r, echo=TRUE, eval=FALSE}
 
 ################### TABLE BY ZIP CODE
-
-# /// zip_counts \\\
-# 
-# # Here we use {dplyr} functions to get case counts based on ZIP Code and the 
-# time periods created in the define_reporting_periods code chunk above. 
-# We store as an object called zip_counts so that it can be merged with population
-# in the chunks below. 
-# 
-# For more details see: 
-# https://epirhandbook.com/descriptive-tables.html#dplyr-package
 
 zip_counts <- linelist %>% 
   group_by(zip) %>% 
@@ -1457,19 +1320,6 @@ zip_counts <- linelist %>%
   mutate(
     perc_change = round((recent - previous) / previous * 100, digits = 1)
     )
-
-
-# /// zip_join \\\
-# 
-# Here, use {dplyr} functions to extract the population counts from our shapefile, 
-# and then merge these with our zip_counts from above. 
-# N.b. the left_join() functions preserves all the rows from the first dataset 
-# provided and only merges the rows from the second that match. 
-# We then calculate incidence per 10,000 population. 
-# 
-# For more details see: 
-# https://epirhandbook.com/descriptive-tables.html#dplyr-package
-# https://epirhandbook.com/joining-data.html
 
 # extract population counts for each zip from the shapefile
 zip_pop <- shapefile %>% 
@@ -1507,20 +1357,6 @@ zip_counts <- left_join(zip_counts,
       TRUE                     ~ perc_change
     ))
 
-# /// zip_table \\\
-# 
-# Here we use {flextable} to produce a publication-ready table. We also demonstrate
-# how to colour cells based on their values, defining the cut-offs in advance using
-# {dplyr} case_when(). Colours are called here using HEX-codes but can also be 
-# referred to by name. 
-# 
-# For more details see: 
-# https://epirhandbook.com/tables-for-presentation.html
-# https://colorbrewer2.org/#type=sequential&scheme=Reds&n=3
-
-# pick colours (uncomment next to lines)
-# RColorBrewer::brewer.pal(3, "RdYlGn") %>% 
-#   scales::show_col()
 
 # choose colours to fill in cells  
 row_colour <- case_when(
@@ -1599,7 +1435,6 @@ a) Create a table in which you assess, with the appropriate statistical tests, w
 b) For each of the variables used in the table that you just created, carry out univariate regression using each demographic variable as the independent variable and the outcome (dead, not dead) as the dependent variables. Create a table with the estimates -alongside 95% CI - of the estimates.
 
 ::: {.webex-check}
-
 ```{r, results="asis", echo=FALSE, eval=TRUE}
 opts8.1 <- c(
   "It was a risk factor for mortality",
@@ -1615,32 +1450,12 @@ cat("Question 8.1: According to the results of the univariate analysis, how was 
 
 
 <details>
-
 <summary style="text-decoration: underline; color: red;">
-
 `r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
 </summary>
-
 </br>
 ```{r, echo=TRUE, eval=FALSE}
 
-################### A) TABLE WITH DEMOGRAPHIC DIFFERENCES BY VITAL STATUS #################
-
-# /// rf_unknowns \\\
-# 
-# Here we need to define our variables of interest to investigate as risk factors. 
-# We then need to swap factor levels so that the appropriate levels are selected 
-# as the exposure level in regression. 
-# We then need to keep only complete cases (i.e. that don't have any missings
-# for any of the variables of interest). 
-# Finally, we  use the {labelled} package to assign text for each variable name to appear 
-# in output tables. 
-# 
-# For more details see: 
-# https://epirhandbook.com/univariate-and-multivariable-regression.html#store-explanatory-variables
-# https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
-# http://larmarange.github.io/labelled/
 
 # define a list of variables for looping over later
 symptom_vars <- linelist %>% 
@@ -1696,19 +1511,6 @@ rf_data <- rf_data %>%
   )
 
 
-# <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# /// simple_stats \\\
-# --------------------------------------------------------------------------------
-# 
-# Here we demonstrate how to do simple statistical tests using the {gtsummary} 
-# package. We can define which tests to run for which variables and then modify the 
-# table format afterwards, also using {gtsummary}. The syntax for formatting is 
-# similar to {flextable} and as this needs to be in {flextable} for MS word anyway, 
-# you could also do all the formatting using {flextable}.  
-# 
-# For more details see: 
-# https://epirhandbook.com/simple-statistical-tests.html#stats_gt
-# https://epirhandbook.com/tables-for-presentation.html
 
 rf_data %>%
   # keep variables of interest
@@ -1743,19 +1545,6 @@ rf_data %>%
 
 ###################### B) UNIVARIATE REGRESSION ANALYSIS ####################################
 
-# /// regression \\\
-# 
-# Here we demonstrate how to do univariate regression to produce odds ratios with 
-# {gtsummary}. We first create a regression table, then a counts table and then 
-# finally merge the two and format the output. 
-# Note that a cox regression taking into account observation time might be a 
-# more appropriate analysis given the question on mortality - you could do this 
-# using {gtsummary} but take a look at the epiRhandbook page on survival analysis.
-# 
-# For more details see: 
-# https://epirhandbook.com/univariate-and-multivariable-regression.html
-# https://epirhandbook.com/survival-analysis.html
-# https://epirhandbook.com/tables-for-presentation.html
 
 # produce table with regression estimates
 regress_tab <- rf_data %>%
@@ -1814,6 +1603,27 @@ tbl_merge(list(cross_tab, regress_tab)) %>%
 </br>
 </details>
 
+# Interpretation and reflection {.unnumbered}
 
-:::
+Now that you have finished this case study, reflect on the different steps taken and how they can be relevant for your day to day work. You may do so by asking yourself the following questions:
+
+
+**Data quality and limitations**\
+
+-   What was the quality of the COVID-19 raw data imported? How does it compare with the data that you deal with in your job?\
+-   What were the main limitations of the data on the analysis and interpretation on the COVID-19 outbreak in Fulton? How could data quality be improved?\
+
+**Analysis**\
+
+-   Did the case study follow the structure that you would have chosen to create a report in a situation similar to the one in Fulton?\
+-   Is there any further analysis that you would include in a report like this one? Would you know how to carry it out in R?    
+
+**R code**\
+
+-   What were the parts of code that you enjoyed the most? And the most challenging?\ 
+-   Do you have the information required to build on what you've learnt?\
+-   How can you embed what you have learnt in your day to day work?\
+
+
+
 
