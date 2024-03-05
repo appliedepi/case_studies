@@ -1,9 +1,0 @@
-# Acknowledgements
-
-This is a book created from markdown and executable code.
-
-
-
-```{r}
-1 + 1
-```
