@@ -584,12 +584,12 @@ Analysis is loosely based off the monthly <a href="https://www.fultoncountyga.go
 <p>Explore the linelist to understand better the data.</p>
 <div class="webex-check">
 Question 2.1: How many rows are present in linelist_raw?
-<div id="radio_EVUGMHIJCE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EVUGMHIJCE" value=""> <span>48</span></label><label><input type="radio" autocomplete="off" name="radio_EVUGMHIJCE" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_EVUGMHIJCE" value="answer"> <span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_EVUGMHIJCE" value=""> <span>5</span></label>
+<div id="radio_XGKPCAHJGD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XGKPCAHJGD" value=""> <span>48</span></label><label><input type="radio" autocomplete="off" name="radio_XGKPCAHJGD" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_XGKPCAHJGD" value="answer"> <span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_XGKPCAHJGD" value=""> <span>5</span></label>
 </div>
 Question 2.2: How many columns are of class numeric?
-<div id="radio_RODRQHDENU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RODRQHDENU" value=""> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_RODRQHDENU" value="answer"> <span>4</span></label><label><input type="radio" autocomplete="off" name="radio_RODRQHDENU" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_RODRQHDENU" value=""> <span>31</span></label>
+<div id="radio_XGUMUTRYRX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XGUMUTRYRX" value=""> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_XGUMUTRYRX" value="answer"> <span>4</span></label><label><input type="radio" autocomplete="off" name="radio_XGUMUTRYRX" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_XGUMUTRYRX" value=""> <span>31</span></label>
 </div>
 </div>
 <details>
@@ -625,45 +625,43 @@ Question 2.2: How many columns are of class numeric?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">##############       DEFINE DATES     ##############        </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create a date object for the surveillance</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Minus 7 days from the date of report (see YAML) to account for lag in reporting lab results</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>surveillance_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2021-06-30"</span>) <span class="sc">-</span> <span class="dv">7</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create an epiweek object from the date </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># floor_date() rounds down to the closest week here</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>surveillance_week <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(surveillance_date,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># round by weeks</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">unit =</span> <span class="st">"week"</span>, </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># define week to start on Wednesday</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">week_start =</span> <span class="dv">3</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># define recent (past 14 days) and previous (28 to 14 days prior)</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>recent_period   <span class="ot">&lt;-</span> <span class="fu">seq</span>(surveillance_week  <span class="sc">-</span> <span class="dv">13</span>, surveillance_week, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>previous_period <span class="ot">&lt;-</span> <span class="fu">seq</span>(surveillance_week  <span class="sc">-</span> <span class="dv">27</span>, surveillance_week <span class="sc">-</span> <span class="dv">14</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># define a text label of date range for the recent period (for table headers)</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>recent_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(recent_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>), </span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">max</span>(recent_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># define text label of date range for previous period (for table headers) </span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>previous_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(previous_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>), </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">max</span>(previous_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># define a label for past 28 days (for table captions)</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>full_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(previous_period), <span class="at">format =</span> <span class="st">"%B %d"</span>), </span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(surveillance_week, <span class="at">format =</span> <span class="st">"%B %d, %Y"</span>)</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a date object for the surveillance</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Minus 7 days from the date of report (see YAML) to account for lag in reporting lab results</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>surveillance_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2021-06-30"</span>) <span class="sc">-</span> <span class="dv">7</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create an epiweek object from the date </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># floor_date() rounds down to the closest week here</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>surveillance_week <span class="ot">&lt;-</span> <span class="fu">floor_date</span>(surveillance_date,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># round by weeks</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">unit =</span> <span class="st">"week"</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># define week to start on Wednesday</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">week_start =</span> <span class="dv">3</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># define recent (past 14 days) and previous (28 to 14 days prior)</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>recent_period   <span class="ot">&lt;-</span> <span class="fu">seq</span>(surveillance_week  <span class="sc">-</span> <span class="dv">13</span>, surveillance_week, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>previous_period <span class="ot">&lt;-</span> <span class="fu">seq</span>(surveillance_week  <span class="sc">-</span> <span class="dv">27</span>, surveillance_week <span class="sc">-</span> <span class="dv">14</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># define a text label of date range for the recent period (for table headers)</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>recent_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(recent_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>), </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">max</span>(recent_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># define text label of date range for previous period (for table headers) </span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>previous_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(previous_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>), </span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">max</span>(previous_period), <span class="at">format =</span> <span class="st">"%m/%d"</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># define a label for past 28 days (for table captions)</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>full_period_labels <span class="ot">&lt;-</span> <span class="fu">str_glue</span>(</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(<span class="fu">min</span>(previous_period), <span class="at">format =</span> <span class="st">"%B %d"</span>), </span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="st">"-"</span>, </span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">format</span>(surveillance_week, <span class="at">format =</span> <span class="st">"%B %d, %Y"</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
@@ -687,21 +685,19 @@ Question 2.2: How many columns are of class numeric?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">### **Step 3.3: Clean names and remove duplicated rows** {.unnumbered}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a new object called linelist and assign linelist_raw with renamed columns</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="co"># NEW name = OLD name</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>( </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_report         =</span> reprt_creationdt_false,      </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_dob            =</span> case_dob_false,              </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_onset          =</span> sym_startdt_false,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_recovery       =</span> sym_resolveddt_false, </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_hospitalized   =</span> hosp_admidt_false,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_discharge      =</span> hosp_dischdt_false,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_died           =</span> died_dt_false,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_positive       =</span> pos_sampledt_false</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="co"># NEW name = OLD name</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>( </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_report         =</span> reprt_creationdt_false,      </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_dob            =</span> case_dob_false,              </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_onset          =</span> sym_startdt_false,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_recovery       =</span> sym_resolveddt_false, </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_hospitalized   =</span> hosp_admidt_false,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_discharge      =</span> hosp_dischdt_false,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_died           =</span> died_dt_false,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_positive       =</span> pos_sampledt_false</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <br>
 </details>
@@ -735,8 +731,8 @@ Question 2.2: How many columns are of class numeric?
 </details>
 <div class="webex-check">
 Question 3.2: How many duplicated rows were present in the raw data?
-<div id="radio_OZQUVLMIQG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OZQUVLMIQG" value="answer"> <span>28</span></label><label><input type="radio" autocomplete="off" name="radio_OZQUVLMIQG" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_OZQUVLMIQG" value=""> <span>38</span></label><label><input type="radio" autocomplete="off" name="radio_OZQUVLMIQG" value=""> <span>124</span></label>
+<div id="radio_QWZWNCBVEU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QWZWNCBVEU" value="answer"> <span>28</span></label><label><input type="radio" autocomplete="off" name="radio_QWZWNCBVEU" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_QWZWNCBVEU" value=""> <span>38</span></label><label><input type="radio" autocomplete="off" name="radio_QWZWNCBVEU" value=""> <span>124</span></label>
 </div>
 </div>
 </section>
@@ -818,8 +814,8 @@ Question 3.2: How many duplicated rows were present in the raw data?
 </details>
 <div class="webex-check">
 Question 3.3: Which one of the following could NOT be used to transform the column sym_startdt_FALSE from the raw data frame into a date object?
-<div id="radio_JIYWTEPEBR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JIYWTEPEBR" value=""> <span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_JIYWTEPEBR" value=""> <span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_JIYWTEPEBR" value=""> <span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_JIYWTEPEBR" value="answer"> <span>lubridate::dmy()</span></label>
+<div id="radio_CFGODFCDKX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CFGODFCDKX" value=""> <span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_CFGODFCDKX" value=""> <span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_CFGODFCDKX" value=""> <span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_CFGODFCDKX" value="answer"> <span>lubridate::dmy()</span></label>
 </div>
 </div>
 </section>
@@ -854,6 +850,11 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 <li>Create a new column with the length of hospitalization in days, calculated as the time difference between date of hospitalization and the recently created date of outcome.</li>
 <li>In this newly created column mark as missing cases in which the difference between the date of hospitalization and the date of death/discharge was longer than 60 days or lower than 0 days</li>
 </ul>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
+</summary>
+<p><br></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     </span>
@@ -877,15 +878,12 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 <span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">days_hosp =</span> <span class="fu">replace</span>(days_hosp, days_hosp <span class="sc">&gt;</span> <span class="dv">60</span>, <span class="cn">NA</span>)</span>
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<br>
+</details>
 </section>
 <section id="step-3.7-create-age-groups" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="step-3.7-create-age-groups"><strong>Step 3.7: Create age groups</strong></h3>
-<p>Clean age by:</p>
-<ul>
-<li>Transform the column <strong>case_age</strong> into numeric</li>
-<li>Mark as missing those with negative ages</li>
-<li>Create a column with 10 year age groups up until 70 (and 70+ afterwards) using the age_group() function from the package {epikit}. You can also use any other alternative</li>
-</ul>
+<p>Create a column with 10 year age groups up until 70 (and 70+ afterwards) using the age_group() function from the package {epikit}. You can also use any other alternative</p>
 <details>
 <summary style="text-decoration: underline; color: red;">
 <svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -893,22 +891,14 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 <p><br></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure that age is a numeric variable</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">case_age =</span> <span class="fu">as.numeric</span>(case_age),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># set those with negative ages and missing DOB to missing </span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># otherwise just leave the age value as is</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>          <span class="co"># nb. NA_real_ just ensures the variable class is not changed</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">case_age =</span> <span class="fu">if_else</span>(case_age <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(date_dob), <span class="cn">NA_real_</span>, case_age)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>     <span class="co"># create age group variable</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">age_group =</span> <span class="fu">age_categories</span>(case_age,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># define break points</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>),</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># whether last break should be highest category</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">ceiling =</span> <span class="cn">FALSE</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>     ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>     <span class="co"># create age group variable</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">age_group =</span> <span class="fu">age_categories</span>(case_age,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># define break points</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># whether last break should be highest category</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">ceiling =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <br>
 </details>
@@ -989,8 +979,9 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 <ul>
 <li>Should have a category for those whose race is “Asian”, another for those whose race is “Black” and another for those whose race is “White”.</li>
 <li>Create an “Other” category for the rest of races and an “Unknown” category for those with missing race</li>
-<li>Ensure all categories have consisent cases</li>
+<li>Ensure all categories have consistent cases</li>
 </ul></li>
+<li>Transform the newly formed column into a factor with the “Unknown” category as the last level</li>
 </ul>
 <details>
 <summary style="text-decoration: underline; color: red;">
@@ -999,26 +990,28 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 <p><br></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>linelist <span class="ot">&lt;-</span> linelist <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># create a composite category from race and ethnicitiy  </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">eth_race =</span> <span class="fu">case_when</span>(</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>          eth  <span class="sc">==</span> <span class="st">"HISPANIC/LATINO"</span>                           <span class="sc">~</span> <span class="st">"Hispanic, all races"</span>, </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"ASIAN"</span>                                     <span class="sc">~</span> <span class="st">"Asian, NH"</span>, </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"BLACK"</span>                                     <span class="sc">~</span> <span class="st">"Black, NH"</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"WHITE"</span>                                     <span class="sc">~</span> <span class="st">"White, NH"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># find all instances of NATIVE (covers AMERICAN INDIAN/ALASKA NATIVE **AND** NATIVE HAWAIIAN/PACIFIC ISLANDER)</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">str_detect</span>(race, <span class="st">"NATIVE"</span>)                          <span class="sc">~</span> <span class="st">"Other, NH"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"OTHER"</span>                                     <span class="sc">~</span> <span class="st">"Other, NH"</span>, </span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span>                                                <span class="sc">~</span> <span class="st">"Unknown"</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>     )) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="co"># create a composite category from race and ethnicitiy  </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">eth_race =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>          eth  <span class="sc">==</span> <span class="st">"HISPANIC/LATINO"</span>                           <span class="sc">~</span> <span class="st">"Hispanic, all races"</span>, </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"ASIAN"</span>                                     <span class="sc">~</span> <span class="st">"Asian, NH"</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"BLACK"</span>                                     <span class="sc">~</span> <span class="st">"Black, NH"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"WHITE"</span>                                     <span class="sc">~</span> <span class="st">"White, NH"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># find all instances of NATIVE (covers AMERICAN INDIAN/ALASKA NATIVE **AND** NATIVE HAWAIIAN/PACIFIC ISLANDER)</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>          <span class="fu">str_detect</span>(race, <span class="st">"NATIVE"</span>)                          <span class="sc">~</span> <span class="st">"Other, NH"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>          race <span class="sc">==</span> <span class="st">"OTHER"</span>                                     <span class="sc">~</span> <span class="st">"Other, NH"</span>, </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>          <span class="cn">TRUE</span>                                                <span class="sc">~</span> <span class="st">"Unknown"</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>     )) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">eth_race =</span> <span class="fu">factor</span>(eth_race, <span class="at">levels=</span><span class="fu">c</span>(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Black, NH"</span>, <span class="st">"White, NH"</span>, <span class="st">"Hispanic, all races"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>          <span class="st">"Asian, NH"</span>, <span class="st">"Other, NH"</span>, <span class="st">"Unknown"</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>     )))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <br>
 </details>
 <div class="webex-check">
 Question 3.4: A column that has ordinal data, what class should it have?
-<div id="radio_RTPONCQWUB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RTPONCQWUB" value=""> <span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_RTPONCQWUB" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_RTPONCQWUB" value="answer"> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_RTPONCQWUB" value=""> <span>integer</span></label>
+<div id="radio_RHSKRWGWQS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RHSKRWGWQS" value=""> <span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_RHSKRWGWQS" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_RHSKRWGWQS" value="answer"> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_RHSKRWGWQS" value=""> <span>integer</span></label>
 </div>
 </div>
 <details>
@@ -1054,7 +1047,6 @@ Question 3.4: A column that has ordinal data, what class should it have?
 </div>
 <br>
 </details>
-<p><strong>Please, continue the case study by clicking in the tab above named: “Descriptive analysis”</strong></p>
 </section>
 </section>
 </section>
@@ -1088,8 +1080,8 @@ Question 3.4: A column that has ordinal data, what class should it have?
 <p>Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County</p>
 <div class="webex-check">
 Question 5.1: During which week do we observe the peak in cases by date of reporting?
-<div id="radio_FDXYFXXVMS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FDXYFXXVMS" value=""> <span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_FDXYFXXVMS" value=""> <span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_FDXYFXXVMS" value=""> <span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_FDXYFXXVMS" value="answer"> <span>The week starting on December 30, 2020</span></label>
+<div id="radio_HLZZJFSJLM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HLZZJFSJLM" value=""> <span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_HLZZJFSJLM" value=""> <span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_HLZZJFSJLM" value=""> <span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_HLZZJFSJLM" value="answer"> <span>The week starting on December 30, 2020</span></label>
 </div>
 </div>
 <details>
@@ -1163,12 +1155,12 @@ Question 5.1: During which week do we observe the peak in cases by date of repor
 <p>Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.</p>
 <div class="webex-check">
 Question 6.1: In which age group do we observe the largest proportion of cumulative cases?
-<div id="radio_GPPDWIDRUO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GPPDWIDRUO" value=""> <span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_GPPDWIDRUO" value=""> <span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_GPPDWIDRUO" value="answer"> <span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_GPPDWIDRUO" value=""> <span>70+</span></label>
+<div id="radio_YAYGVCNAXY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YAYGVCNAXY" value=""> <span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_YAYGVCNAXY" value=""> <span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_YAYGVCNAXY" value="answer"> <span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_YAYGVCNAXY" value=""> <span>70+</span></label>
 </div>
 Question 6.2: In which race do we observe the largest proportion of deaths in the last 28 days?
-<div id="radio_JCCFDNWXNF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JCCFDNWXNF" value="answer"> <span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_JCCFDNWXNF" value=""> <span>White</span></label><label><input type="radio" autocomplete="off" name="radio_JCCFDNWXNF" value=""> <span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_JCCFDNWXNF" value=""> <span>Hispanic</span></label>
+<div id="radio_AJRFCBASOH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AJRFCBASOH" value="answer"> <span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_AJRFCBASOH" value=""> <span>White</span></label><label><input type="radio" autocomplete="off" name="radio_AJRFCBASOH" value=""> <span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_AJRFCBASOH" value=""> <span>Hispanic</span></label>
 </div>
 </div>
 <details>
@@ -1515,8 +1507,8 @@ Question 6.2: In which race do we observe the largest proportion of deaths in th
 <p>Create a table by zip code in which you show the incidence in the most recent 14 days period, the incidence in the previous 14 days period and the percentage change in incidence between these periods.</p>
 <div class="webex-check">
 Question 7.1: What is the change in incidence observed between periods in the zip code number 30337?
-<div id="radio_IWNCSLBCTI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IWNCSLBCTI" value=""> <span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_IWNCSLBCTI" value=""> <span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_IWNCSLBCTI" value="answer"> <span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_IWNCSLBCTI" value=""> <span>-25%</span></label>
+<div id="radio_BMOIKQMARN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BMOIKQMARN" value=""> <span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_BMOIKQMARN" value=""> <span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_BMOIKQMARN" value="answer"> <span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_BMOIKQMARN" value=""> <span>-25%</span></label>
 </div>
 </div>
 <details>
@@ -1638,7 +1630,6 @@ Question 7.1: What is the change in incidence observed between periods in the zi
 </div>
 <br>
 </details>
-<p><strong>Please, continue the case study by clicking in the tab above named: “Analysis of mortality”</strong></p>
 </section>
 </section>
 <section id="analysis-of-mortality" class="level1 unnumbered">
@@ -1652,8 +1643,8 @@ Question 7.1: What is the change in incidence observed between periods in the zi
 </ol>
 <div class="webex-check">
 Question 8.1: According to the results of the univariate analysis, how was having a sore throat associated with mortality from Covid-19
-<div id="radio_DXAHQDQFZN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DXAHQDQFZN" value=""> <span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_DXAHQDQFZN" value="answer"> <span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_DXAHQDQFZN" value=""> <span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_DXAHQDQFZN" value=""> <span>Impossible to know</span></label>
+<div id="radio_FBANWWCWRW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FBANWWCWRW" value=""> <span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_FBANWWCWRW" value="answer"> <span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_FBANWWCWRW" value=""> <span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_FBANWWCWRW" value=""> <span>Impossible to know</span></label>
 </div>
 </div>
 <details>
