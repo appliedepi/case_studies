@@ -439,10 +439,6 @@ Create an object called *surveillance_date* defined as 7 days prior to the repor
 </br>
 
 ```{r , echo=TRUE, eval=FALSE}
-
-
-##############       DEFINE DATES     ##############        
-
 # create a date object for the surveillance
 # Minus 7 days from the date of report (see YAML) to account for lag in reporting lab results
 surveillance_date <- as.Date("2021-06-30") - 7
@@ -480,7 +476,6 @@ full_period_labels <- str_glue(
   "-", 
   format(surveillance_week, format = "%B %d, %Y")
 )
-
 ```
 </br>
 
@@ -508,8 +503,6 @@ Clean the column names ensuring that names do not contain special characters. Re
 
 </br>
 ```{r , echo=TRUE, eval=FALSE}
-### **Step 3.3: Clean names and remove duplicated rows** {.unnumbered}
-# create a new object called linelist and assign linelist_raw with renamed columns
 linelist <- linelist_raw %>% 
      clean_names() %>% 
      # NEW name = OLD name
@@ -766,11 +759,7 @@ linelist <- linelist %>%
 
 ### **Step 3.7: Create age groups** {.unnumbered}
 
-Clean age by:
-
-*   Transform the column **case_age** into numeric
-*   Mark as missing those with negative ages
-*   Create a column with 10 year age groups up until 70 (and 70+ afterwards) using the age_group() function from the package {epikit}. You can also use any other alternative
+Create a column with 10 year age groups up until 70 (and 70+ afterwards) using the age_group() function from the package {epikit}. You can also use any other alternative
 
 <details>
 <summary style="text-decoration: underline; color: red;">
@@ -780,14 +769,6 @@ Clean age by:
 ```{r, echo=TRUE, eval=FALSE}
 
 linelist <- linelist %>%
-  mutate(
-    # ensure that age is a numeric variable
-    case_age = as.numeric(case_age),
-    # set those with negative ages and missing DOB to missing 
-    # otherwise just leave the age value as is
-          # nb. NA_real_ just ensures the variable class is not changed
-    case_age = if_else(case_age < 0 & is.na(date_dob), NA_real_, case_age)
-  ) %>% 
      # create age group variable
      mutate(
        age_group = age_categories(case_age,
@@ -883,7 +864,8 @@ The linelist contains a column for ethnicity (**case_eth**) and a column for rac
 *   Contain a category "Hispanic, all races" when **case_eth** is "HISPANIC/LATINO". For those cases where this condition is not met: 
       *   Should have a category for those whose race is "Asian", another for those whose race is "Black" and another for those whose race is "White".
       *   Create an "Other" category for the rest of races and an "Unknown" category for those with missing race
-      *   Ensure all categories have consisent cases
+      *   Ensure all categories have consistent cases
+*   Transform the newly formed column into a factor with the "Unknown" category as the last level
 
 
 <details>
@@ -894,9 +876,7 @@ The linelist contains a column for ethnicity (**case_eth**) and a column for rac
 ```{r , echo=TRUE, eval=FALSE}
 
 linelist <- linelist %>% 
-     
-    
-     # create a composite category from race and ethnicitiy  
+          # create a composite category from race and ethnicitiy  
      mutate(eth_race = case_when(
           eth  == "HISPANIC/LATINO"                           ~ "Hispanic, all races", 
           race == "ASIAN"                                     ~ "Asian, NH", 
@@ -906,7 +886,11 @@ linelist <- linelist %>%
           str_detect(race, "NATIVE")                          ~ "Other, NH",
           race == "OTHER"                                     ~ "Other, NH", 
           TRUE                                                ~ "Unknown"
-     )) 
+     )) %>% 
+     mutate(eth_race = factor(eth_race, levels=c(
+          "Black, NH", "White, NH", "Hispanic, all races",
+          "Asian, NH", "Other, NH", "Unknown"
+     )))
 ```
 </br>
 </details>

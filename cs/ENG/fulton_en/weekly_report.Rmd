@@ -113,7 +113,7 @@ linelist_raw <- rio::import(
 
 # import population data by zipcode to calculate incidence
 pop <- import(
-     here("data", "covid_example_data", "fulton_population.csv")
+     here("data", "covid_example_data", "fulton_population.xlsx")
 )
 ```
 
@@ -219,7 +219,7 @@ dataset called "linelist".
 
 It is possible to use the {janitor} package for automated cleaning of variable 
 names - and rename() from {dplyr} for manually renaming.
-
+2
 For more details see: 
 https://epirhandbook.com/cleaning-data-and-core-functions.html#column-names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -273,12 +273,12 @@ linelist <- linelist %>%
 
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// Establishing the right class of columns \\\
+/// column_class \\\
 --------------------------------------------------------------------------------
 
 Here we are going to make sure that date columns are considered dates by R, that
 age is a numeric column and that the zip code is a factor column. We are also 
-going to remove values that are incongruent (e.g. negative age). 
+going to remove values that are inconsistent (e.g. negative age). 
 
 We'll carry out these changes using across() from {dplyr}, which allows you to apply a
 function across multiple specified columns. See
@@ -408,14 +408,6 @@ https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-a
 
 ```{r}
 linelist <- linelist %>%
-  mutate(
-    # ensure that age is a numeric variable
-    case_age = as.numeric(case_age),
-    # set those with negative ages and missing DOB to missing 
-    # otherwise just leave the age value as is
-          # nb. NA_real_ just ensures the variable class is not changed
-    case_age = if_else(case_age < 0 & is.na(date_dob), NA_real_, case_age)
-  ) %>% 
      # create age group variable
      mutate(
        age_group = age_categories(case_age,
@@ -427,48 +419,15 @@ linelist <- linelist %>%
 ```
 
 
-
-
-
-
-
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_numerics \\\
+/// recode_categorical \\\
 --------------------------------------------------------------------------------
 
-Here we are going to clean all numeric variables, as well as create some new 
-variables based on difference between dates. 
-
-First we will ensure that age is numeric and then fix those with incorrectly 
-entered dates (notice that one individual was -20 years old). 
-
-Then we show how to create new numeric variables for the number of days between 
-two dates. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#num_cats
-https://epirhandbook.com/cleaning-data-and-core-functions.html#clean_case_when
-
+Here we are going to clean all character and categorical columns recoding missing to an "Unknown" category and re-ordering the levels of some of the factor columns 
 Note the use of if_else() from {dplyr}, which is faster than {base}'s ifelse()
 and handles dates better.  
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-
-
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/// clean_categories \\\
---------------------------------------------------------------------------------
-
-create age groups based on the age variable using 
-the age_categories() function from {epikit}. It is also possible to create 
-age groups using the {dplyr} case_when() function - but is more involved. 
-
-For more details see: 
-https://epirhandbook.com/cleaning-data-and-core-functions.html#column-creation-and-transformation
-https://epirhandbook.com/cleaning-data-and-core-functions.html#re-code-values
-https://epirhandbook.com/characters-and-strings.html?q=regex#regular-expressions-regex
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 ```{r clean_categories}
 
@@ -520,7 +479,13 @@ linelist <- linelist %>%
      
 ```
 
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/// eth_race \\\
+--------------------------------------------------------------------------------
 
+Here we create a new column merging information from the ethnicity column and the race column
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 ```{r}
      
     
@@ -531,15 +496,20 @@ linelist <- linelist %>%
      mutate(eth_race = case_when(
        # we evaluate if ethnicity is HISPANIC/LATINO **FIRST**
        # case_when() evaluates in order (if, else if, else if, ... else)
-          eth  == "HISPANIC/LATINO"                           ~ "Hispanic, all races", 
-          race == "ASIAN"                                     ~ "Asian, NH", 
-          race == "BLACK"                                     ~ "Black, NH",
-          race == "WHITE"                                     ~ "White, NH",
+          case_eth  == "HISPANIC/LATINO"                           ~ "Hispanic, all races", 
+          case_race == "ASIAN"                                     ~ "Asian, NH", 
+          case_race == "BLACK"                                     ~ "Black, NH",
+          case_race == "WHITE"                                     ~ "White, NH",
       # find all instances of NATIVE (covers AMERICAN INDIAN/ALASKA NATIVE **AND** NATIVE HAWAIIAN/PACIFIC ISLANDER)
-          str_detect(race, "NATIVE")                          ~ "Other, NH",
-          race == "OTHER"                                     ~ "Other, NH", 
+          str_detect(case_race, "NATIVE")                          ~ "Other, NH",
+          case_race == "OTHER"                                     ~ "Other, NH", 
           TRUE                                                ~ "Unknown"
      )) %>% 
+     
+     mutate(eth_race = factor(eth_race, levels=c(
+          "Black, NH", "White, NH", "Hispanic, all races",
+          "Asian, NH", "Other, NH", "Unknown"
+     )))
 ```
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -723,8 +693,8 @@ Table \@ref(tab:demogtab) shows the demographic characteristics of the cumulativ
 # we generate 3 summary tables and bind them together
 # summary demographic table for gender
 dem_gender <- linelist %>% 
-  tabyl(gender) %>% 
-  select(Characteristic = gender, n, percent)
+  tabyl(case_gender) %>% 
+  select(Characteristic = case_gender, n, percent)
 
 # summary demographic table for age
 dem_age <- linelist %>% 
@@ -741,7 +711,7 @@ total_cases <- bind_rows(list(dem_gender, dem_age, dem_eth_race))
 
 
 # type out the variables of interest
-demographic_vars <- c("gender", "age_group", "eth_race")
+demographic_vars <- c("case_gender", "age_group", "eth_race")
 
 # the above can also be done iteratively (we are repeating code)
 # this uses the {purrr} package to iterate over each variable
@@ -962,7 +932,7 @@ https://epirhandbook.com/demographic-pyramids-and-likert-scales.html
 # start a new dataframe (as dont want to overwrite the original)
 linelist_2g <- linelist %>% 
   # update the gender and age_group columns
-  mutate(across(.cols = c(gender, age_group), 
+  mutate(across(.cols = c(case_gender, age_group), 
                 .fns = ~{
                   # replace "Unknown" with NA
                   .x = na_if(.x, "Unknown") 
@@ -974,7 +944,7 @@ linelist_2g <- linelist %>%
 age_pyramid(
   data = linelist_2g,
   age_group = "age_group",
-  split_by = "gender",
+  split_by = "case_gender",
   # Show as percentages of total cases
   proportional = TRUE,
   # remove guide line for mid-point
@@ -993,7 +963,7 @@ age_pyramid(
     caption = str_glue(
       "{missing} cases missing either age or gender are not shown. \n Fictional COVID-19 data",
       missing = linelist_2g %>%
-        filter(is.na(gender) | is.na(age_group)) %>%
+        filter(is.na(case_gender) | is.na(age_group)) %>%
         nrow()
       )
     )
@@ -1024,7 +994,7 @@ ggplot(data = linelist) +
   geom_point(
     mapping = aes(
       # plot age on the x and days hospitalised on the y axis 
-      x = age,
+      x = case_age,
       y = days_hosp,
       # color points by outcome
       color = died),  
@@ -1123,7 +1093,7 @@ https://epirhandbook.com/descriptive-tables.html#dplyr-package
 ```{r zip_counts}
 
 zip_counts <- linelist %>% 
-  group_by(zip) %>% 
+  group_by(case_zip) %>% 
   # count cases in the appropriate period 
   summarise(
     recent   = sum(date_report %in% recent_period),
@@ -1154,20 +1124,11 @@ https://epirhandbook.com/joining-data.html
 
 ```{r zip_join}
 
-# extract population counts for each zip from the shapefile
-zip_pop <- shapefile %>% 
-  # change to tibble (otherwise geo-data gets pulled with)
-  as_tibble() %>% 
-  # only keep zip code and population counts
-  select(ZipCode, Population) %>% 
-  # add a row with overall counts
-  adorn_totals()
-  
 # merge case counts and population counts
 # zip (or ZipCode in the shapefile) variable is the unique identifier
 zip_counts <- left_join(zip_counts, 
-                        zip_pop, 
-                        by = c("zip" = "ZipCode")
+                        pop, 
+                        by = c("case_zip" = "ZipCode")
                         ) %>% 
   # calculate the incidence 
   mutate(across(
@@ -1227,7 +1188,7 @@ row_colour <- case_when(
 
 zip_counts %>% 
   # keep the columns of interest and define order
-  select(zip, recent, recent_inc, previous, previous_inc, perc_change) %>% 
+  select(case_zip, recent, recent_inc, previous, previous_inc, perc_change) %>% 
   # initiate {flextable} to produce styled output table
   flextable() %>% 
   # fill in cells - choose the column and then pass our colour-scheme defined above
@@ -1247,7 +1208,7 @@ zip_counts %>%
   # redefine column names based on original names
     # note the different syntax to dplyr::select, here it is old_name = new_name
   set_header_labels(
-    zip          = "Zip Code", 
+    case_zip          = "Zip Code", 
     recent       = "n", 
     recent_inc   = "Incidence", 
     previous     = "n", 
@@ -1311,7 +1272,7 @@ symptom_vars <- linelist %>%
 
 
 # define variables of interest (save typing them out later) 
-descriptive_vars <- c("gender", 
+descriptive_vars <- c("case_gender", 
                       "age_group",
                       "eth_race",
                       symptom_vars,
@@ -1321,28 +1282,28 @@ descriptive_vars <- c("gender",
 # filter dataset  
 rf_data <- linelist %>% 
   # only keep variables of interest
-  select(died_covid, age, all_of(descriptive_vars)) %>% 
+  select(died_covid, case_age, all_of(descriptive_vars)) %>% 
   # set unknown back to NA for all factor variables
   mutate(across(
     .cols = where(is.factor),
     .fns = ~fct_recode(.x, NULL = "Unknown"))) %>% 
   # flip factor levels (so that the reference values are correct)
   mutate(eth_race = fct_infreq(eth_race)) %>% 
-  mutate(gender = fct_relevel(gender, "Female", "Male")) %>% 
+  mutate(gender = fct_relevel(case_gender, "Female", "Male")) %>% 
   mutate(across(all_of(c("died_covid", symptom_vars, "hospitalized")), 
                 ~fct_relevel(.x, "No", "Yes")
                 )) %>% 
   # only keep rows with complete data for all variables of interest
   # note that this will drop rows where **ANY** of the listed variables are NA
-  drop_na(any_of(c("died_covid", "age", descriptive_vars)))
+  drop_na(any_of(c("died_covid", "case_age", descriptive_vars)))
 
 
 # define variable labels to show in output tables 
 rf_data <- rf_data %>%
   set_variable_labels(
     died_covid = "Died",
-    age = "Age (years)",
-    gender = "Gender",
+    case_age = "Age (years)",
+    case_gender = "Gender",
     age_group = "Age group (years)",
     eth_race = "Ethnicity",
     sym_fever = "Fever",
@@ -1378,7 +1339,7 @@ https://epirhandbook.com/tables-for-presentation.html
 
 rf_data %>%
   # keep variables of interest
-  select(died_covid, gender, eth_race, age, days_hosp) %>%
+  select(died_covid, gender, eth_race, case_age, days_hosp) %>%
   # produce summary table and specify grouping variable
   tbl_summary(
     by = died_covid
