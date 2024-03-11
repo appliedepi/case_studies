@@ -83,6 +83,8 @@ Here you find an example of a multiple choice question:
 ::: {.webex-check}
 
 ```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
 opts <- c(
   "Infectious period",
   "Susceptibility",
