@@ -17,3 +17,6 @@ These folder contains the material to be downloaded by participants to follow th
 * A project file
 * A data subfolder
 * A subfolder with the solution materials
+
+# The case studies template
+The template to be used by case study creators. The [cs_template.qmd](./case_template/cs_template.qmd) file contains the code that renders the [cs_template.html](./case_template/cs_template.html) output. This file contains all the instructions to create a case study that is coherent with the style and structure of Applied Epi case studies.
