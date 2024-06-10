@@ -10,21 +10,21 @@ format:
 
 # Fulton (EN) {#sec-fulton-en}
 
-### Overview {.unnumbered}
+## Overview {.unnumbered}
 
 
 
 |**Case study characteristics**|      |
 |------------------------------|:-----|
-| Name:                     |   Fulton County   |
-| Language:                 |   English   |
-| Tool:                     |   R   | 
-| Location:                 |   United States   |
-| Scale:                    |   Local   | 
-| Diseases:                 |   COVID-19   | 
-| Keywords:                 |   COVID-19; SARS-COV-2; Outbreak   | 
-| Technical complexity:|   Intermediate   |
-| Methodological complexity:|Basic |
+| **Name**                     |   Fulton County   |
+| **Language**                 |   English   |
+| **Tool**                     |   R   | 
+| **Location**                 |   United States   |
+| **Scale**                    |   Local   | 
+| **Diseases**                 |   COVID-19   | 
+| **Keywords**                 |   COVID-19; SARS-COV-2; Outbreak   | 
+| **Technical complexity**|   Intermediate   |
+| **Methodological complexity**|Basic |
 
 
 ***Authorship***\

@@ -7,14 +7,14 @@ book:
   cover-image: Applied_Epi_logo.png
   chapters:
   - index.qmd
-  - pages/intro.qmd
   - pages/fulton-en.qmd
   - pages/oswego-es.qmd
-  - pages/summary.qmd
-  - pages/references.qmd
 bibliography: references.bib
 format:
   html:
+    toc: true
+    number-sections: false
+    number-depth: 0
     css:
     - webex.css
     include-after-body:

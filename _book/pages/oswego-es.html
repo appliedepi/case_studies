@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Applied Epi Case Studies - 3&nbsp; Oswego (ES)</title>
+<title>Applied Epi Case Studies - Oswego (ES)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -64,7 +64,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/summary.html" rel="next">
 <link href="../pages/fulton-en.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -81,7 +80,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,8 +95,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -106,13 +113,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/oswego-es.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Oswego (ES)</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/oswego-es.html"><span class="chapter-title">Oswego (ES)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -121,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Applied Epi Case Studies</a> 
@@ -136,44 +143,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Case-studies Open Repository</span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case-studies Open Repository</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Acknowledgements</span></span></a>
+  <a href="../pages/fulton-en.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fulton (EN)</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/fulton-en.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton (EN)</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/oswego-es.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Oswego (ES)</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">References</span></a>
+  <a href="../pages/oswego-es.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Oswego (ES)</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -204,7 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-oswego" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Oswego (ES)</span></span></h1>
+<h1 class="title"><span id="sec-oswego" class="quarto-section-identifier"><span class="chapter-title">Oswego (ES)</span></span></h1>
 </div>
 
 
@@ -217,7 +203,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="overview" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
@@ -452,7 +440,11 @@ NOTE: End of solution
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-fig.margin="true">
 <div class="cell-output-display">
-<p><img src="case_studies/ESP/oswego_cs_es/images/Primera_parte_iglesia.jpg" class="img-fluid" style="width:35.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="case_studies/ESP/oswego_cs_es/images/Primera_parte_iglesia.jpg" class="img-fluid figure-img" style="width:35.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El 19 de abril de 1940, el oficial de salud local en el pueblo de <strong>Lycoming</strong>, condado de <strong>Oswego, Nueva York</strong>, informó de la ocurrencia de un brote de enfermedad gastrointestinal al Distrito de Salud Oficial en <strong>Siracusa</strong>. Dr.&nbsp;A. M. Rubin, epidemiólogo en formación, fue asignado para investigar lo ocurrido.</p>
@@ -462,8 +454,8 @@ NOTE: End of solution
 <h4 class="unnumbered anchored" data-anchor-id="pregunta-1"><strong>Pregunta 1</strong></h4>
 <div class="webex-check">
 ¿Ante que tipo de situación está presente el Dr Rubin?
-<div id="radio_GWQLDRMKFP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GWQLDRMKFP" value=""> <span>Una epidemia</span></label><label><input type="radio" autocomplete="off" name="radio_GWQLDRMKFP" value=""> <span>Una serie de casos</span></label><label><input type="radio" autocomplete="off" name="radio_GWQLDRMKFP" value="answer"> <span>Un brote</span></label><label><input type="radio" autocomplete="off" name="radio_GWQLDRMKFP" value=""> <span>No se puede establecer</span></label>
+<div id="radio_NIAUCVYVIF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NIAUCVYVIF" value=""> <span>Una epidemia</span></label><label><input type="radio" autocomplete="off" name="radio_NIAUCVYVIF" value=""> <span>Una serie de casos</span></label><label><input type="radio" autocomplete="off" name="radio_NIAUCVYVIF" value="answer"> <span>Un brote</span></label><label><input type="radio" autocomplete="off" name="radio_NIAUCVYVIF" value=""> <span>No se puede establecer</span></label>
 </div>
 </div>
 <!--
@@ -491,8 +483,8 @@ NOTE: Below is the hint (all within details tags collapsed)
 <h4 class="unnumbered anchored" data-anchor-id="pregunta-2"><strong>Pregunta 2</strong></h4>
 <div class="webex-check">
 Los pasos de una investigación de brote son:
-<div id="radio_ZUGKQAOLMM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZUGKQAOLMM" value=""> <span>Determinar la existencia del brote, análisis descriptivo, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label><label><input type="radio" autocomplete="off" name="radio_ZUGKQAOLMM" value=""> <span>Una serie de casos</span></label><label><input type="radio" autocomplete="off" name="radio_ZUGKQAOLMM" value="answer"> <span>Determinar la existencia del brote, confirmar diagnóstico, contar casos, análisis descriptivo, determinar quién está a riesgo de enfermar, desarrollar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label><label><input type="radio" autocomplete="off" name="radio_ZUGKQAOLMM" value=""> <span>Determinar la existencia del brote, confirmar el diagnóstico, controlar brote, comunicar brote, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label>
+<div id="radio_OYNGUHRDEF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OYNGUHRDEF" value=""> <span>Determinar la existencia del brote, análisis descriptivo, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label><label><input type="radio" autocomplete="off" name="radio_OYNGUHRDEF" value=""> <span>Una serie de casos</span></label><label><input type="radio" autocomplete="off" name="radio_OYNGUHRDEF" value="answer"> <span>Determinar la existencia del brote, confirmar diagnóstico, contar casos, análisis descriptivo, determinar quién está a riesgo de enfermar, desarrollar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label><label><input type="radio" autocomplete="off" name="radio_OYNGUHRDEF" value=""> <span>Determinar la existencia del brote, confirmar el diagnóstico, controlar brote, comunicar brote, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final</span></label>
 </div>
 </div>
 <details>
@@ -583,8 +575,8 @@ NOTE: End of solution
 <h4 class="unnumbered anchored" data-anchor-id="pregunta-6"><strong>Pregunta 6</strong></h4>
 <div class="webex-check">
 ¿En que NO nos ayuda un listado nominal?
-<div id="radio_HTWAAUXRFR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HTWAAUXRFR" value=""> <span>Organizar los datos y describirlos por tiempo, lugar y persona</span></label><label><input type="radio" autocomplete="off" name="radio_HTWAAUXRFR" value=""> <span>Clasificar a los individuos como casos, no casos y sospechosos</span></label><label><input type="radio" autocomplete="off" name="radio_HTWAAUXRFR" value="answer"> <span>A diagnosticar a los pacientes</span></label><label><input type="radio" autocomplete="off" name="radio_HTWAAUXRFR" value=""> <span>A manejar un documento dinámico que se puede actualizar constantemente</span></label>
+<div id="radio_YQLDPXXZJX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YQLDPXXZJX" value=""> <span>Organizar los datos y describirlos por tiempo, lugar y persona</span></label><label><input type="radio" autocomplete="off" name="radio_YQLDPXXZJX" value=""> <span>Clasificar a los individuos como casos, no casos y sospechosos</span></label><label><input type="radio" autocomplete="off" name="radio_YQLDPXXZJX" value="answer"> <span>A diagnosticar a los pacientes</span></label><label><input type="radio" autocomplete="off" name="radio_YQLDPXXZJX" value=""> <span>A manejar un documento dinámico que se puede actualizar constantemente</span></label>
 </div>
 </div>
 <p><strong>Por favor, continue el caso entrando en la pestaña “Segunda parte - El Evento” en la parte superior</strong></p>
@@ -627,7 +619,7 @@ NOTE: End of solution
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="oswego-es_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="oswego-es_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -671,8 +663,8 @@ NOTE: End of solution
 -->
 </section>
 </section>
-<section id="listado-nominal-de-individuos-del-brote-de-gastroenteritis-oswego-nueva-york-1940" class="level3" data-number="3.0.1">
-<h3 data-number="3.0.1" class="anchored" data-anchor-id="listado-nominal-de-individuos-del-brote-de-gastroenteritis-oswego-nueva-york-1940"><span class="header-section-number">3.0.1</span> <strong>Listado nominal de individuos del brote de gastroenteritis, Oswego, Nueva York, 1940</strong></h3>
+<section id="listado-nominal-de-individuos-del-brote-de-gastroenteritis-oswego-nueva-york-1940" class="level3">
+<h3 class="anchored" data-anchor-id="listado-nominal-de-individuos-del-brote-de-gastroenteritis-oswego-nueva-york-1940"><strong>Listado nominal de individuos del brote de gastroenteritis, Oswego, Nueva York, 1940</strong></h3>
 <div style="display: flex; padding-left: 1px;">
 <img src="https://drive.google.com/uc?id=1oeaPv092Lu5Af-iykR_i53wuPThs8mlz" style="width: 60%; 
   margin-bottom: 1px; 
@@ -705,22 +697,22 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="versión-digital" class="level4" data-number="3.0.1.1">
-<h4 data-number="3.0.1.1" class="anchored" data-anchor-id="versión-digital"><span class="header-section-number">3.0.1.1</span> <strong>Versión digital</strong></h4>
+<section id="versión-digital" class="level4">
+<h4 class="anchored" data-anchor-id="versión-digital"><strong>Versión digital</strong></h4>
 </section>
 </section>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<section id="apoyo-en-análisis-de-los-datos" class="level3" data-number="3.0.2">
-<h3 data-number="3.0.2" class="anchored" data-anchor-id="apoyo-en-análisis-de-los-datos"><span class="header-section-number">3.0.2</span> Apoyo en análisis de los datos</h3>
+<section id="apoyo-en-análisis-de-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="apoyo-en-análisis-de-los-datos">Apoyo en análisis de los datos</h3>
 <div style="display: flex; padding: 15px;">
 <img src="https://www.r-project.org/logo/Rlogo.png" style="width: 41%; 
   margin-bottom: 15px;
   margin-top: 15px;">
 </div>
 <p>Ahora vamos a comenzar con uno de los pasos más importantes en la investigación de brote, el análisis de los datos donde a través de este vamos a determinar cual o cuales son las posibles causas del brote, medidas a tomar entre otros pasos. ¡También vamos a usar un poco de R para ayudar con este proceso de análisis!.</p>
-<section id="siempre-que-sea-posible-utilizando-el-listado-nominal-actualizado-calcule-los-períodos-de-incubación-e-ilustre-su-distribución-con-un-gráfico-apropiado." class="level4" data-number="3.0.2.1">
-<h4 data-number="3.0.2.1" class="anchored" data-anchor-id="siempre-que-sea-posible-utilizando-el-listado-nominal-actualizado-calcule-los-períodos-de-incubación-e-ilustre-su-distribución-con-un-gráfico-apropiado."><span class="header-section-number">3.0.2.1</span> Siempre que sea posible, utilizando el listado nominal actualizado, calcule los períodos de incubación e ilustre su distribución con un gráfico apropiado.</h4>
+<section id="siempre-que-sea-posible-utilizando-el-listado-nominal-actualizado-calcule-los-períodos-de-incubación-e-ilustre-su-distribución-con-un-gráfico-apropiado." class="level4">
+<h4 class="anchored" data-anchor-id="siempre-que-sea-posible-utilizando-el-listado-nominal-actualizado-calcule-los-períodos-de-incubación-e-ilustre-su-distribución-con-un-gráfico-apropiado.">Siempre que sea posible, utilizando el listado nominal actualizado, calcule los períodos de incubación e ilustre su distribución con un gráfico apropiado.</h4>
 <p><br> <br></p>
 <p>Para contestar esta pregunta, vamos hacer los siguientes pasos usando R:</p>
 <p><br> <br></p>
@@ -823,10 +815,15 @@ NOTE: Below is the solution (all within details tags collapsed)
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 53 rows containing non-finite values (`stat_count()`).</code></pre>
+<pre><code>Warning: Removed 53 rows containing non-finite outside the scale range
+(`stat_count()`).</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="oswego-es_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="oswego-es_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Si quieres asignar este gráfico a un objeto, solo tienes que en la primera línea del código </span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#usar un nombre (como grafico1) y escribir el signo de asignación (&lt;-)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -857,8 +854,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="pregunta-11-determine-el-rango-y-la-mediana-del-período-de-incubación" class="level4" data-number="3.0.2.2">
-<h4 data-number="3.0.2.2" class="anchored" data-anchor-id="pregunta-11-determine-el-rango-y-la-mediana-del-período-de-incubación"><span class="header-section-number">3.0.2.2</span> <strong>Pregunta 11: Determine el rango y la mediana del período de incubación</strong></h4>
+<section id="pregunta-11-determine-el-rango-y-la-mediana-del-período-de-incubación" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-11-determine-el-rango-y-la-mediana-del-período-de-incubación"><strong>Pregunta 11: Determine el rango y la mediana del período de incubación</strong></h4>
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
@@ -891,8 +888,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="pregunta-12-cómo-ayuda-la-información-sobre-el-período-de-incubación-y-los-datos-sobre-síntomas-a-establecer-diagnósticos-diferenciales-de-la-enfermedad-si-es-necesario-consulte-adjunto-compendio-de-enfermedades-gastrointestinales-agudas-transmitidas-por-los-alimentos" class="level4" data-number="3.0.2.3">
-<h4 data-number="3.0.2.3" class="anchored" data-anchor-id="pregunta-12-cómo-ayuda-la-información-sobre-el-período-de-incubación-y-los-datos-sobre-síntomas-a-establecer-diagnósticos-diferenciales-de-la-enfermedad-si-es-necesario-consulte-adjunto-compendio-de-enfermedades-gastrointestinales-agudas-transmitidas-por-los-alimentos"><span class="header-section-number">3.0.2.3</span> <strong>Pregunta 12: ¿Cómo ayuda la información sobre el período de incubación y los datos sobre síntomas a establecer diagnósticos diferenciales de la enfermedad? (Si es necesario, consulte adjunto Compendio de enfermedades gastrointestinales agudas transmitidas por los alimentos)</strong></h4>
+<section id="pregunta-12-cómo-ayuda-la-información-sobre-el-período-de-incubación-y-los-datos-sobre-síntomas-a-establecer-diagnósticos-diferenciales-de-la-enfermedad-si-es-necesario-consulte-adjunto-compendio-de-enfermedades-gastrointestinales-agudas-transmitidas-por-los-alimentos" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-12-cómo-ayuda-la-información-sobre-el-período-de-incubación-y-los-datos-sobre-síntomas-a-establecer-diagnósticos-diferenciales-de-la-enfermedad-si-es-necesario-consulte-adjunto-compendio-de-enfermedades-gastrointestinales-agudas-transmitidas-por-los-alimentos"><strong>Pregunta 12: ¿Cómo ayuda la información sobre el período de incubación y los datos sobre síntomas a establecer diagnósticos diferenciales de la enfermedad? (Si es necesario, consulte adjunto Compendio de enfermedades gastrointestinales agudas transmitidas por los alimentos)</strong></h4>
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
@@ -913,8 +910,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="pregunta-13-usando-los-datos-del-listado-complete-la-tabla-a-continuación.-cúal-o-cuales-alimentos-pudieron-ser-el-vehículo-más-probable-de-infección" class="level4" data-number="3.0.2.4">
-<h4 data-number="3.0.2.4" class="anchored" data-anchor-id="pregunta-13-usando-los-datos-del-listado-complete-la-tabla-a-continuación.-cúal-o-cuales-alimentos-pudieron-ser-el-vehículo-más-probable-de-infección"><span class="header-section-number">3.0.2.4</span> <strong>Pregunta 13: Usando los datos del listado, complete la tabla a continuación. ¿Cúal o cuales alimentos pudieron ser el vehículo más probable de infección?</strong></h4>
+<section id="pregunta-13-usando-los-datos-del-listado-complete-la-tabla-a-continuación.-cúal-o-cuales-alimentos-pudieron-ser-el-vehículo-más-probable-de-infección" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-13-usando-los-datos-del-listado-complete-la-tabla-a-continuación.-cúal-o-cuales-alimentos-pudieron-ser-el-vehículo-más-probable-de-infección"><strong>Pregunta 13: Usando los datos del listado, complete la tabla a continuación. ¿Cúal o cuales alimentos pudieron ser el vehículo más probable de infección?</strong></h4>
 <p><br> <br></p>
 <p>Para contestar esta pregunta, intente hacer los siguientes pasos usando R con el mismo script que creaste anteriormente:</p>
 <ol type="1">
@@ -1033,8 +1030,8 @@ NOTE: End of solution
 -->
 <p>Para más detalles de como trabajar con transformación de datos y tablas, ver el <a href="https://epirhandbook.com/es/descriptive-tables.html">capítulo 17 del libro de R para epidemiologos</a></p>
 </section>
-<section id="pregunta-15-resuma-las-investigaciones-adicionales-que-deben-llevarse-a-cabo." class="level4" data-number="3.0.2.5">
-<h4 data-number="3.0.2.5" class="anchored" data-anchor-id="pregunta-15-resuma-las-investigaciones-adicionales-que-deben-llevarse-a-cabo."><span class="header-section-number">3.0.2.5</span> <strong>Pregunta 15: Resuma las investigaciones adicionales que deben llevarse a cabo.</strong></h4>
+<section id="pregunta-15-resuma-las-investigaciones-adicionales-que-deben-llevarse-a-cabo." class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-15-resuma-las-investigaciones-adicionales-que-deben-llevarse-a-cabo."><strong>Pregunta 15: Resuma las investigaciones adicionales que deben llevarse a cabo.</strong></h4>
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
@@ -1056,8 +1053,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="pregunta-16-qué-medidas-de-control-sugeriría" class="level4" data-number="3.0.2.6">
-<h4 data-number="3.0.2.6" class="anchored" data-anchor-id="pregunta-16-qué-medidas-de-control-sugeriría"><span class="header-section-number">3.0.2.6</span> <strong>Pregunta 16: ¿Qué medidas de control sugeriría?</strong></h4>
+<section id="pregunta-16-qué-medidas-de-control-sugeriría" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-16-qué-medidas-de-control-sugeriría"><strong>Pregunta 16: ¿Qué medidas de control sugeriría?</strong></h4>
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
@@ -1080,8 +1077,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 NOTE: End of solution
 -->
 </section>
-<section id="pregunta-17-por-qué-fue-importante-trabajar-en-este-brote" class="level4" data-number="3.0.2.7">
-<h4 data-number="3.0.2.7" class="anchored" data-anchor-id="pregunta-17-por-qué-fue-importante-trabajar-en-este-brote"><span class="header-section-number">3.0.2.7</span> <strong>Pregunta 17: ¿Por qué fue importante trabajar en este brote?</strong></h4>
+<section id="pregunta-17-por-qué-fue-importante-trabajar-en-este-brote" class="level4">
+<h4 class="anchored" data-anchor-id="pregunta-17-por-qué-fue-importante-trabajar-en-este-brote"><strong>Pregunta 17: ¿Por qué fue importante trabajar en este brote?</strong></h4>
 <!--
 NOTE: Below is the solution (all within details tags collapsed)
 -->
@@ -1633,10 +1630,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1646,8 +1660,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1659,7 +1682,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1703,6 +1849,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1728,6 +1875,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1789,17 +1962,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../pages/fulton-en.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Fulton (EN)</span></span>
+      <a href="../pages/fulton-en.html" class="pagination-link" aria-label="Fulton (EN)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Fulton (EN)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/summary.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
