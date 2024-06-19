@@ -47,9 +47,9 @@ See below the list of case studies available in the repository
 
 ```{r echo = F}
 table_cases <- tribble(
-  ~Name, ~Link, ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Keywords, ~Technical_Complexity, ~Methodological_Complexity,
-  "Fulton", 'pages/fulton-en.html', "English", "R", "United States", "Local", "COVID-19", "COVID-19; SARS-COV-2; Outbreak", "Intermediate", "Basic",  
-  "Oswego ES", "pages/oswego-es.html", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Gastrointestinal;Brote", "Intermedio", "Intermedio"
+  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Keywords, ~Technical_Complexity, ~Methodological_Complexity, 
+  "Fulton", 'pages/fulton-en.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "COVID-19; SARS-COV-2; Outbreak", "Intermediate", "Basic",  
+  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Gastrointestinal;Brote", "Intermedio", "Intermedio"
 )
 
 ```

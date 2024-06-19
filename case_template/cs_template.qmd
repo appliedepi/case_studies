@@ -10,6 +10,14 @@ format:
 
 # Case study template instructions
 
+Please, use this template to guide you through creating or adapting a case study for Applied Epi. This template helps to create the website page section that will host the case study.
+Alongside the case study guide, you should prepare in a zipped folder all the necessary materials available to download for anyone who wants to complete the case study. This zipped folder should contain three different subfolders:
+
+-   data: with all the necessary data to complete the case study
+-   outputs: a folder where the participant will be asked to store outputs from the case study analysis (e.g., plots, tables...)
+-   scripts: an empty folder where participants can save the scripts (if needed) for the case study
+-   backup: a folder with the solution script (if appropriate)
+
 
 ## Section 1. Considerations for standardised coding in this case-study template
 

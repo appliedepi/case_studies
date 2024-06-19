@@ -1,0 +1,1772 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+---
+
+# R Practical {#sec-rpractical}
+## Data importing, cleaning and basic descriptives
+
+## Overview {.unnumbered}
+
+This case study has been created for the ECDC fellowship Introductory Course
+
+***Authorship***\
+Original author:   Xanthi Andrianou\
+Data source: Anonymised and jittered data provided by ECDC for training purposes\
+Adapted by: Alberto Mateo Urdiales\
+
+
+## Instructions {.unnumbered}
+
+### Getting Help {.unnumbered}
+ 
+There are several ways to get help:
+
+1)  Look for the "hints" and solutions (see below)
+2)  Post a question in [Applied Epi Community](www.community.appliedepi.org) with reference to this case study
+
+#### Hints and Solutions {.unnumbered}
+
+Here is what the "helpers" look like:
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Here you will see a helpful hint!
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r eval = F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Here is more explanation about why the solution works.
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: End of solution
+-->
+```
+#### Posting a question in the Community Forum {.unnumbered}
+
+... description here about posting in Community...
+
+
+#### Terms of Use {.unnumbered}
+
+XXXXXXXXXXXXXXXXXXXXX
+
+
+###  Feedback & suggestions {.unnumbered}
+
+-   You can write feedback and suggestions on this case study at the
+    [GitHub issues
+    page](https://github.com/appliedepi/case_studies)
+-   Alternatively email us at:
+    [contact\@appliedepi.org](mailto:contact@appliedepi.org)
+
+\pagebreak
+
+### Version and revisions
+
+The first version was written by Xanthi Andrianou in October 2023.
+
+
+| Date    | Changes made | Version| Author| 
+|---------|:-------------|-------:|-------|
+|June 2024 | Adapted to case study template| 1.1 | Alberto Mateo Urdiales |
+|         |              |        |
+|         |              |        |
+
+
+\pagebreak
+
+### Guidance {.unnumbered}
+
+#### Background  {.unnumbered}
+
+This practical R exercise is based on a scenario that requires the **analysis of surveillance data** coming from two sources: **cases-based** information reported by countries and **aggregated** case data collected from open sources. The datasets have been created to resemble the data collected during monitoring of mpox in Europe in 2022. 
+
+#### Scenario and objectives
+
+
+E-pox has been reported in 5 countries for the first time in 2022. We have collected aggregated case numbers from open sources, and we have also reported case-based data. The objectives of the practical are the following:
+1.	Explore different types of files and how they can be imported in R
+2.	Perform basic data cleaning, e.g., changing the variable type, recode variables, aggregate and filter
+3.	Perform a basic descriptive analysis using tables and graphs
+
+
+#### Previous level of expertise assumed {.unnumbered}
+
+For this case study, it is assumed that participants understand the basics of Rstudio layout and the different components (i.e., scripts, Console, Environment and Files, plots packages and help panes). If you are new to R or unfamiliar with this, we recommend that you read chapter 3 of the EpiRhandbook on [R basics](https://epirhandbook.com/en/new_pages/basics.html) 
+
+#### Preparation for the case study {.unnumbered}
+
+1. Download folder *fulton_en* and extract contents in the local laptop
+2. Open the Rstudio project inside the folder called *fulton_en.Rproj*
+3. Inside the folder you can find the Rmd and the word output (weekly report). You can also find a word template that will be used as the template for the report. The Rmd and the output are there to help you if you struggle, but you should try to recreate these yourself following this case study.
+3. Subfolder *data* contains fulton COVID-19 data needed for the analysis
+4. Subfolder *solution_materials* has a copy of the Rmd document with the solution and a copy Word document with the output requested
+5. Open a new Rmarkdown file in RStudio and save it in the root folder *fulton_en*. If you have any doubts about how to create an Rmarkdown follow the EpiRhandbook instructors [here](https://epirhandbook.com/en/reports-with-r-markdown.html?q=rmar#install-rmarkdown-r-package)
+6. This Rmarkdown file will be the file used throughout the case study and, rendering it will produce the weekly report in word format
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE ,  # hide all code chunks in output
+                      eval = FALSE,
+                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
+                      warning = FALSE, # do not show warnings in the output word doc 
+                      message = FALSE, # do not show  messages in the output word doc
+                      fig.width = 7,         # Figure width
+                      fig.height = 7,        # Figure height
+                      fig.topcaption = TRUE  # show figure titles on top of plot
+                     )
+```
+
+
+# Import data and cleaning {.unnumbered}
+
+
+## **Step 1: Rmarkdown set up** {.unnumbered}
+
+Remember that this case study is created in Rmarkdown and that code goes within "chunks", which is different from a standard R script. The first steps will be to define the language in which you want the report, the default chunk options and to install/load the necessary packages. 
+
+
+### **Step 1.1: Define R language** {.unnumbered}
+
+Depending on where you are and how to carried out R installation, your language "locale" might be different from the language of the report that you want to produce. For example, a french person might have a french "locale". If that is the case, when creating a graph by day of the week, Monday will be displayed as "lundi". If that french person wants to create an English report, as for this case study, the language "locale" should be changed.
+
+Task: Ensure your "locale" is in English and change it into English if it is not.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, eval=FALSE}
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+
+```
+
+</br>
+
+</details>
+
+
+### **Step 1.2: Default chunk options** {.unnumbered}
+
+Change the default chunk options of your Rmarkdown script to:
+
+a) hide all code chunks in the report
+b) do not show messages or warnings
+c) show errors if they appear, but to not stop the rendering
+d) set up the default figure width to 7 and the figure height to 6
+e) to show the figure titles on top of the plots by default
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r setup, echo=TRUE, eval=FALSE}
+# hide all code chunks in the output, but show errors 
+knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
+                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
+                      warning = FALSE, # do not show warnings in the output word doc 
+                      message = FALSE, # do not show  messages in the output word doc
+                      fig.width = 7,         # Figure width
+                      fig.height = 6,        # Figure height
+                      fig.topcaption = TRUE  # show figure titles on top of plot
+                     )
+
+```
+
+</br>
+
+</details>
+
+
+### **Step 1.3: Install/load packages** {.unnumbered}
+
+Install the following packages that will be needed to carry out the analysis: officedown, officer, rio, here, skimr, janitor, lubridate, epikit, tidyverse, flextable, sf, scales, gtsummary, labelled, ggspatial, patchwork, apyramid and incidence2.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  officedown, # format MS word document output
+  officer,    # add table of contents to output
+  rio,        # importing data  
+  here,       # relative file pathways 
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # age_categories() function
+  flextable,  # converting tables to pretty images
+  sf,         # manage spatial data using a Simple Feature format
+  scales,     # define colour schemes for flextables 
+  gtsummary,  # summary statistics, tests and regressions 
+  labelled,   # create variable labels to be displayed in table outputs
+  ggspatial,  # basemaps and scalebars 
+  patchwork,  # combining multiple ggplots 
+  apyramid,   # plotting age pyramids 
+  tidyverse  # data management and visualization
+
+)
+
+
+```
+</br>
+
+</details>
+
+
+\pagebreak
+
+
+## **Step 2: Data import and exploration** {.unnumbered}
+
+
+### **Step 2.1: Data import** {.unnumbered}
+
+a) Import the COVID-19 linelist called *covid_example_data.xlsx* that can be found in the following path: *data/covid_example_data/*. 
+b) Import also the csv files named *fulton_population.csv* found in *data/covid_example_data* needed to retrieve the population in Fulton County.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution code (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+linelist_raw <- rio::import(
+  file = here::here("data", "covid_example_data", "covid_example_data.xlsx"),
+  which = "in"
+)
+
+# import population data by zipcode to calculate incidence
+pop <- import(
+     here("data", "covid_example_data", "fulton_population.csv")
+)
+
+```
+</br>
+
+</details>
+
+
+### **Step 2.2: Data exploration** {.unnumbered}
+
+Explore the linelist  to understand better the data.
+
+
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts2.1 <- c(
+  "48",
+  "31",
+  answer = "82101",
+  "5"
+)
+
+
+cat("Question 2.1: How many rows are present in linelist_raw?", longmcq(opts2.1))
+
+
+opts2.2 <- c(
+  "8",
+  answer = "4",
+  "19",
+  "31"
+)
+
+
+cat("Question 2.2: How many columns are of class numeric?", longmcq(opts2.2))
+
+```
+:::
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution code (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r import, echo=TRUE, eval=FALSE}
+# view your whole dataset interactively (in an excel style format)
+View(linelist_raw)
+
+# get mean, median and max values of numeric variables; counts for categorical variables and NAs with summary
+summary(linelist_raw)
+
+# get information about each variable in a dataset 
+skim(linelist_raw)
+
+# view unique values contained in variables - useful for categorical variables
+unique(linelist_raw$case_gender) 
+```
+
+</br>
+
+</details>
+
+
+## **Step 3: Data cleaning** {.unnumbered}
+
+
+### **Step 3.1: Create date objects** {.unnumbered}
+
+Create an object called *surveillance_date* defined as 7 days prior to the reporting date (30 June 2021). Then, create another object rounding it to the closest Wednesday. Create two daily sequences of dates, one as the 14 days prior to the *surveillance_date* and another as 14-28 days prior to the same date. We will use these throughout the case study
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# create a date object for the surveillance
+# Minus 7 days from the date of report (see YAML) to account for lag in reporting lab results
+surveillance_date <- as.Date("2021-06-30") - 7
+
+# create an epiweek object from the date 
+# floor_date() rounds down to the closest week here
+surveillance_week <- floor_date(surveillance_date,
+                          # round by weeks
+                          unit = "week", 
+                          # define week to start on Wednesday
+                          week_start = 3)
+
+# define recent (past 14 days) and previous (28 to 14 days prior)
+recent_period   <- seq(surveillance_week  - 13, surveillance_week, by = 1)
+previous_period <- seq(surveillance_week  - 27, surveillance_week - 14, by = 1)
+
+# define a text label of date range for the recent period (for table headers)
+recent_period_labels <- str_glue(
+  format(min(recent_period), format = "%m/%d"), 
+  "-", 
+  format(max(recent_period), format = "%m/%d")
+)
+
+# define text label of date range for previous period (for table headers) 
+previous_period_labels <- str_glue(
+  format(min(previous_period), format = "%m/%d"), 
+  "-", 
+  format(max(previous_period), format = "%m/%d")
+)
+
+
+# define a label for past 28 days (for table captions)
+full_period_labels <- str_glue(
+  format(min(previous_period), format = "%B %d"), 
+  "-", 
+  format(surveillance_week, format = "%B %d, %Y")
+)
+```
+</br>
+
+</details>
+
+### **Step 3.2: Clean column names** {.unnumbered}
+Clean the column names ensuring that names do not contain special characters. Rename the following columns from the raw data: 
+
+* Date of report (reprt_creationdt_FALSE) to date_report
+* Date of birth (case_dob_FALSE) to date_dob
+* Date of symptom onset (sym_startdt_FALSE) to date_onset
+* Date of positive testing (pos_sampledt_FALSE) to date_positive
+* Date of recovery (sym_resolveddt_FALSE) to date_recovery
+* Date of hospitalisation (hosp_admidt_FALSE)  to date_hospitalized
+* Date of discharge (hosp_dischdt_FALSE) to date_discharge
+* Date of death (died_dt_FALSE) to date_died
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, eval=FALSE}
+linelist <- linelist_raw %>% 
+     clean_names() %>% 
+     # NEW name = OLD name
+  rename( 
+    date_report         = reprt_creationdt_false,      
+    date_dob            = case_dob_false,              
+    date_onset          = sym_startdt_false,
+    date_recovery       = sym_resolveddt_false, 
+    date_hospitalized   = hosp_admidt_false,
+    date_discharge      = hosp_dischdt_false,
+    date_died           = died_dt_false,
+    date_positive       = pos_sampledt_false
+    )
+```
+</br>
+</details>
+
+
+### **Step 3.3: Remove duplicated rows** {.unnumbered}
+
+Remove rows that have duplicated information on: patient id, gender and date of birth. Keep duplicates in a separate dataframe.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To store duplicates in a new dataframe you can use the function get_dupes() from the {janitor} package
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, eval=FALSE}
+# get a data frame of all the duplicates. This is mostly to inspect manually, but can be used for analysing those dropped
+duplicates <- linelist %>% 
+     get_dupes(pid, case_gender, date_dob)
+
+# find duplicates based on unique ID, gender and date of birth. Only keep the first occurrence 
+linelist <- linelist %>% 
+  distinct(pid, case_gender, date_dob, .keep_all = TRUE)
+
+```
+</br>
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.2 <- c(
+  answer = "28",
+  "31",
+  "38",
+  "124"
+)
+
+
+cat("Question 3.2: How many duplicated rows were present in the raw data?", longmcq(opts3.2))
+
+```
+:::
+
+
+
+### **Step 3.4: Change column class and remove data inconsistencies** {.unnumbered}
+
+Using the across() function from {dplyr} make the following:
+
+a) Ensure that dates are considered dates by R
+b) Clean date columns dealing with values that are not compatible with the period under analysis (early 2020 to July 2021)
+c) Make the column age of numeric class
+d) Set us NA those with negative ages and missing Date of birth
+e) Make the zip code column a factor class column
+
+
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+</summary>
+</br>
+
+The across() allows to apply the same modification to multiple columns in an easy way. So, these two options are equivalent:
+
+```{r, echo=TRUE, eval=FALSE}
+
+# Without across()
+
+linelist <- linelist %>% 
+  mutate(date_report = as.Date(date_report)) %>% 
+  mutate(date_dob = as.Date(date_dob)) %>% 
+  mutate(date_onset = as.Date(date_onset)) %>% 
+  mutate(date_hospitalized = as.Date(date_hospitalized)) %>% 
+  mutate(date_discharge = as.Date(date_discharge)) %>% 
+  mutate(date_died = as.Date(date_died)) %>% 
+  mutate(date_positive = as.Date(date_positive))
+
+
+# With across()
+
+linelist <- linelist %>% 
+  mutate(across(.cols = contains("date"), .fns = ~as.Date(.x)))
+
+
+
+```
+
+
+You can read more about across() in the EpiRhandbook [section](https://epirhandbook.com/en/cleaning-data-and-core-functions.html?q=across#clean_across)
+
+</br>
+</details>
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
+linelist <- linelist %>% 
+  mutate(across(
+    .cols = contains("date"),
+    .fns = ~as.Date(.x)
+  )) %>%
+  
+  # mark as missing onset dates prior to 2020
+  mutate(across(
+    .cols = c(date_report, date_onset, date_hospitalized, date_discharge, date_died),
+    .fns  = ~replace(.x, .x < as.Date("2020-01-01"), NA)
+    )) %>% 
+
+  # mark as missing dates after the surveillance_date (for this report) from all date columns
+  mutate(across(
+    .cols = contains("date"),
+    .fns  =  ~replace(.x, .x > surveillance_date, NA)
+    )) %>%
+     
+  # transform age into numeric class
+  mutate(
+    # ensure that age is a numeric variable
+    case_age = as.numeric(case_age),
+    # set those with negative ages and missing DOB to missing 
+    # otherwise just leave the age value as is
+          # nb. NA_real_ just ensures the variable class is not changed
+    case_age = if_else(case_age < 0 & is.na(date_dob), NA_real_, case_age)
+  ) %>% 
+     
+  # create a factor from a default numeric class
+  mutate(case_zip = as_factor(case_zip)) 
+
+```
+</br>
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.3 <- c(
+  "base::as.Date()",
+  "lubridate::as_date()", 
+  "lubridate::ymd()", 
+  answer = "lubridate::dmy()" 
+)
+
+
+cat("Question 3.3: Which one of the following could NOT be used to transform the column sym_startdt_FALSE from the raw data frame into a date object?", longmcq(opts3.3))
+
+```
+:::
+
+
+### **Step 3.5: Create a column for weeks** {.unnumbered}
+
+Create a column named "epiweek" using the function floor_date() from the {lubridate} package rounding the report date to the nearest week, taking "Wednesday" as the start of the week.
+
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
+linelist <- linelist %>% 
+  # create an "epiweek" column from the report date. Use floor_date() to round down to the closest week
+  mutate(epiweek = floor_date(date_report,
+                          # round by weeks
+                          unit = "week", 
+                          # define week to start on Wednesday
+                          week_start = 3)
+  )
+
+```
+</br>
+</details>
+
+### **Step 3.6: Create time difference columns** {.unnumbered}
+
+In this step we ask you to create columns with various time differences that will be used later on in the case study. Please, try to create:
+
+*   A column with the number (numeric) of days from date of symptom onset to the date of hospitalization
+*   In this new column, set as missing those cases where the difference is longer than 30 days (interval is too long for the hospitalization to be due to the infection), and those less than 0 (cannot be hospitalized before the symptom onset)
+*   Using the function coalesce() from {dplyr} create a new column for the date of outcome among hospitalized cases, using date of death or date of discharge, depending on whether cases died or not
+*   Create a new column with the length of hospitalization in days, calculated as the time difference between date of hospitalization and the recently created date of outcome. 
+*   In this newly created column mark as missing cases in which the difference between the date of hospitalization and the date of death/discharge was longer than 60 days or lower than 0 days
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+linelist <- linelist %>%
+     
+  # delay from onset to hospitalization
+  mutate(
+    # calculate time differences
+    days_onset_hosp = as.numeric(date_hospitalized - date_onset),
+    # set those under 0 or over 30 to missing
+    days_onset_hosp = replace(days_onset_hosp, days_onset_hosp < 0, NA),
+    days_onset_hosp = replace(days_onset_hosp, days_onset_hosp > 30, NA)
+  ) %>%
+     
+  # length of hospitalization
+  mutate(
+    # create outcome date based on whether died or was discharged
+    date_outcome = coalesce(date_died, date_discharge),
+    # calculate time difference
+    days_hosp = as.numeric(date_outcome - date_hospitalized),
+    # set those under 0 or over 60 to missing
+    days_hosp = replace(days_hosp, days_hosp < 0, NA),
+    days_hosp = replace(days_hosp, days_hosp > 60, NA)
+  )
+```
+</br>
+</details>
+
+### **Step 3.7: Create age groups** {.unnumbered}
+
+Create a column with 10 year age groups up until 70 (and 70+ afterwards) using the age_group() function from the package {epikit}. You can also use any other alternative
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+
+linelist <- linelist %>%
+     # create age group variable
+     mutate(
+       age_group = age_categories(case_age,
+        # define break points
+        c(0, 10, 20, 30, 40, 50, 60, 70),
+        # whether last break should be highest category
+        ceiling = FALSE
+     ))
+
+```
+</br>
+</details>
+
+
+### **Step 3.8: Recode character/categorical columns** {.unnumbered}
+
+Recode the following columns:
+
+
+*   In the column named **died_covid** recode the category "Under Review" to "Unknown"
+*   In the column named **confirmed_case** recode the category "Pending" to "Unknown"
+*   Force categorical columns to use consistent cases 
+*   Across character/factor columns recode the category "Unk" to "Unknown"
+*   Across the different character/factor columns recode NA to "Unknown"
+*   In the column named **sym_resolved** recode categories into "Yes", "No" or "Unknown"
+*   Transform the gender column into a factor with these levels: "Female", "Male" and "Unknown"
+*   Transform all columns that have the categories: "Yes", "No" and "Unknown" into factors with the order of the levels as "Yes", "No" and "Unknown"
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+
+linelist <- linelist %>% 
+     
+     # recode one value and leave the rest as they are 
+     mutate(
+       died_covid = if_else(died_covid == "Under Review",
+                            "Unknown", died_covid), 
+       confirmed_case = if_else(confirmed_case == "Pending", 
+                                "Unknown", confirmed_case), 
+     
+        # force categorical variables to use consistent cases (this can be done for others) 
+        sym_myalgia = str_to_title(sym_myalgia),
+      ) %>% 
+     
+     #replace one value and leave the rest, across multiple variables
+      mutate(across(
+       .cols = c(contact_household, contains("sym_")),
+       .fns  = ~if_else(.x == "Unk", "Unknown", .x)
+     )) %>% 
+     
+        # replace missing with "Unknown" where relevant 
+     mutate(across(
+       .cols = c(case_gender, case_race, case_eth, case_zip,
+                 contact_id, contact_household, 
+                 hospitalized, died, died_covid, confirmed_case,
+                 contains("sym_"), age_group),
+       .fns  = ~fct_na_value_to_level(.x, level = "Unknown")
+     )) %>% 
+     
+          # recode with searching for string patterns 
+     mutate(sym_resolved = case_when(
+          str_detect(sym_resolved, "Yes")     ~ "Yes", 
+          str_detect(sym_resolved, "No")      ~ "No", 
+          str_detect(sym_resolved, "Unknown") ~ "Unknown", 
+          TRUE                                ~ "Unknown"
+     )) %>% 
+     
+      # set levels of a factor (define order)
+     mutate(case_gender      = fct_relevel(case_gender, "Female", "Male", "Unknown")) %>% 
+     
+          # set levels of all factors that are yes/no/unknown 
+     mutate(across(
+          .cols = c(contact_household, hospitalized, died, died_covid,
+                    confirmed_case, contains("sym_")), 
+          .fns = ~fct_relevel(.x, "Yes", "No", "Unknown")
+     )) 
+
+```
+</br>
+</details>
+
+
+
+### **Step 3.9: Merge ethnicity and race** {.unnumbered}
+
+The linelist contains a column for ethnicity (**case_eth**) and a column for race (**case_race**). Create a new column merging information from these two existing columns. The new column should:
+
+*   Contain a category "Hispanic, all races" when **case_eth** is "HISPANIC/LATINO". For those cases where this condition is not met: 
+      *   Should have a category for those whose race is "Asian", another for those whose race is "Black" and another for those whose race is "White".
+      *   Create an "Other" category for the rest of races and an "Unknown" category for those with missing race
+      *   Ensure all categories have consistent cases
+*   Transform the newly formed column into a factor with the "Unknown" category as the last level
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
+
+linelist <- linelist %>% 
+          # create a composite category from race and ethnicitiy  
+     mutate(eth_race = case_when(
+          eth  == "HISPANIC/LATINO"                           ~ "Hispanic, all races", 
+          race == "ASIAN"                                     ~ "Asian, NH", 
+          race == "BLACK"                                     ~ "Black, NH",
+          race == "WHITE"                                     ~ "White, NH",
+      # find all instances of NATIVE (covers AMERICAN INDIAN/ALASKA NATIVE **AND** NATIVE HAWAIIAN/PACIFIC ISLANDER)
+          str_detect(race, "NATIVE")                          ~ "Other, NH",
+          race == "OTHER"                                     ~ "Other, NH", 
+          TRUE                                                ~ "Unknown"
+     )) %>% 
+     mutate(eth_race = factor(eth_race, levels=c(
+          "Black, NH", "White, NH", "Hispanic, all races",
+          "Asian, NH", "Other, NH", "Unknown"
+     )))
+```
+</br>
+</details>
+
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts3.4 <- c(
+  "logical",
+  "character",
+  answer = "factor",
+  "integer"
+)
+
+
+cat("Question 3.4: A column that has ordinal data, what class should it have?", longmcq(opts3.4))
+
+```
+:::
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+</details>
+
+
+### **Step 3.10: Filter data frame** {.unnumbered}
+
+Filter the data to keep only confirmed cases whose date of report is not above the date of the report (June 30, 2021). Consider also keeping records with missing date of report.
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r , echo=TRUE, eval=FALSE}
+
+##############       FILTER     ##############        
+
+# store those which do not meet our filter criteria 
+dropped <- linelist %>% 
+     filter(confirmed_case != "Yes" |
+              date_report > surveillance_date & 
+                !is.na(date_report))
+
+
+# drop the cases that dont meet the criteria 
+linelist <- linelist %>% 
+     filter(confirmed_case == "Yes" & 
+              date_report <= surveillance_date & 
+                 !is.na(date_report))
+
+```
+</br>
+</details>
+
+
+# Descriptive analysis {.unnumbered}
+
+In this section we will see how to create an automatic and dynamic report to present a descriptive analysis of the data previously imported and cleaned.
+
+## **Step 4: Start the report with a summary of the findings** {.unnumbered}
+
+a) Write in rmarkdown three bullet points summarising the data we imported, showing the number of cases by the date of analysis, the number of hospitalisations and the number of deaths.
+
+b) Write it in a dynamic way, so that the dates and numbers are updated automatically if you get a new updated dataset
+
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+This is an example of how the code should look like in your rmarkdown file:
+```{r, echo = FALSE, eval=TRUE, out.width = "1000px"}
+knitr::include_graphics("images/Summary_fulton.png", error = F)
+```
+</br>
+</details>
+
+\pagebreak
+
+
+## **Step 5. Analysis by time** {.unnumbered}
+
+
+### **Step 5.1: Table weekly number of cases** {.unnumbered}
+
+Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts5.1 <- c(
+  "The week starting on March 02, 2021",
+  "The week starting on December 16, 2020",
+  "The week starting on January 13, 2021",
+  answer =  "The week starting on December 30, 2020"
+)
+
+
+cat("Question 5.1: During which week do we observe the peak in cases by date of reporting?", longmcq(opts5.1))
+
+```
+:::
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+# save a quick descriptive table of number of cases reported by week
+epiweek_table <- linelist %>% 
+  # get counts and percentages 
+  tabyl(epiweek) %>% 
+  # add the overall counts as a row
+  adorn_totals() %>%  
+  # change from proportions to percentages (do not add a % sign)
+  adorn_pct_formatting(affix_sign = FALSE) 
+
+# transform it into flextable for better visualisation
+epiweek_flextable <- epiweek_table %>% 
+     qflextable()
+
+```
+</br>
+</details>
+
+### **Step 5.2: Epicurve** {.unnumbered}
+
+Create an epicurve by reporting week, with the colour of the bins based on whether the cases were hospitalised or not
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+     # we first define the dataset to be used, the x axis which will be reporting week and the colour (fill) of the bins which will depend on hospitalisation outcome
+ggplot(
+     data = linelist,
+     mapping = aes(
+          x = epiweek,
+          fill = hospitalized
+     )) + 
+     
+     geom_histogram() + 
+     
+     # we define that we want breaks by month and formated with scales::label_date_short()
+     scale_x_date(
+          date_breaks = "month",
+          labels = label_date_short()
+     ) +
+     
+     # we change the name of the different elements of the graph
+     labs(
+          x = "",
+          y = "Weekly number of cases",
+          fill = "Hospitalised",
+          caption = paste0("Data as of ", format(surveillance_date, "%d %b %Y"))
+          
+     ) + 
+     
+     # we apply one of the predefined themes
+     theme_bw()
+
+```
+</br>
+</details>
+
+
+
+\pagebreak
+
+## **Step 6. Analysis by person** {.unnumbered}
+
+
+### **Step 6.1: Table with demographic information** {.unnumbered}
+
+Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts6.1 <- c(
+  "0-9",
+  "30-39",
+  answer =  "20-29",
+ "70+"
+)
+
+
+cat("Question 6.1: In which age group do we observe the largest proportion of cumulative cases?", longmcq(opts6.1))
+
+
+opts6.2 <- c(
+ answer =  "Black",
+  "White",
+  "Asian",
+ "Hispanic"
+)
+
+
+cat("Question 6.2: In which race do we observe the largest proportion of deaths in the last 28 days?", longmcq(opts6.2))
+```
+:::
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+# get counts tables for measures of interest 
+############################################
+
+# we generate 3 summary tables and bind them together
+# summary demographic table for gender
+dem_gender <- linelist %>% 
+  tabyl(gender) %>% 
+  select(Characteristic = gender, n, percent)
+
+# summary demographic table for age
+dem_age <- linelist %>% 
+  tabyl(age_group) %>% 
+  select(Characteristic = age_group, n, percent)
+
+# summary demographic table for ethnicity and race
+dem_eth_race <- linelist %>% 
+  tabyl(eth_race) %>% 
+  select(Characteristic = eth_race, n, percent)
+
+# bind all tables together
+total_cases <- bind_rows(list(dem_gender, dem_age, dem_eth_race))
+
+# counts of new cases (last 28 days) 
+recent_cases <- purrr::map(
+  # for each variable listed
+  .x = demographic_vars, 
+  # filter the linelist for dates on or after 28 days ago
+  .f = ~filter(linelist, 
+          date_report >= (surveillance_date - 28)) %>% 
+        # get counts based on filtered data
+        tabyl(.x) %>% 
+        # nb we dont keep the characteristic column because it would be duplicated
+        select(n_cases_recent = n,
+               perc_cases_recent = percent)
+  ) %>%
+  bind_rows()
+
+# counts of total deaths 
+total_deaths <- purrr::map(
+  # for each variable listed
+  .x = demographic_vars, 
+  # filter for those who died 
+  .f = ~filter(linelist, 
+          died_covid == "Yes") %>% 
+        # get counts based on filtered data 
+        tabyl(.x, show_na = TRUE) %>%
+        select(n_deaths_total = n, perc_deaths_total = percent)
+  ) %>% 
+  bind_rows()
+
+# counts of new deaths (last 28 days)
+recent_deaths <- purrr::map(
+  # for each variable listed
+  .x = demographic_vars, 
+  # filter to those who died in the last 28 days
+  .f = ~filter(linelist, 
+          died_covid == "Yes" & 
+          date_died >= (surveillance_date - 28)) %>% 
+        # get counts based on filtered data
+        tabyl(.x) %>% 
+        select(n_deaths_recent = n, perc_deaths_recent = percent) %>% 
+        # add in a variable column (used for colouring later) 
+        mutate(variable = .x)
+  ) %>% 
+  bind_rows()
+
+
+# total counts for all of the above measures (not by demographic)
+overall <- linelist %>% 
+  summarise(
+    # add in row label 
+    Characteristic = "Total",
+    # counts of total cases 
+    n_cases_total = n(),
+    # leave all percentages empty (would just be 100)
+    perc_cases_total  = NA, 
+    # counts of new cases (last 28 days) 
+    n_cases_recent = sum(date_report >= (surveillance_date - 28)), 
+    perc_cases_recent  = NA, 
+    # counts of total deaths 
+    n_deaths_total = sum(died_covid == "Yes"), 
+    perc_deaths_total = NA, 
+    # counts of new deaths (last 28 days)
+    n_deaths_recent = sum(died_covid == "Yes" & 
+                          date_died >= (surveillance_date - 28)),
+    perc_deaths_recent = NA, 
+    # add in a variable column (used for colouring later) 
+    variable = "Overall"
+  )
+
+
+# merge tables together 
+#######################
+
+# combine all the demographic tables - side by side
+demographics_counts <- bind_cols(total_cases, recent_cases, total_deaths, recent_deaths) %>% 
+  # mutate each of the proportion columns to be percentages
+  mutate(across(
+    .cols = contains("perc"),
+    .fns = ~round(.x * 100, digits = 1)
+    )) 
+# add in the totals row at the top of the merged demographics table
+demographics_counts <- bind_rows(overall, demographics_counts)
+
+
+# define colour scheme 
+######################
+
+# get the column numbers that are percentages (based on the name) 
+percentage_cols <- names(demographics_counts) %>% 
+  str_detect("perc") %>% 
+  which()
+
+# define colour cut-offs for gender column 
+gender_colours <- scales::col_bin(
+  # choose colours 
+  palette = c("#91CF60", "#FC8D59"), 
+  # choose min and max (range)
+  domain  = c(0, 100),
+  # choose how to split (in this case above and below 50)
+  bins    = 2
+)
+
+# define colour cut-offs for age column 
+age_colours <- scales::col_bin(
+  # choose colours
+  palette = c("#91CF60","#FFFFBF", "#FC8D59"),
+  # choose min and max (range)
+  domain  = c(0, 100), 
+  # choose cut-off categories 
+  bins    = c(0, 5, 20, 100)
+)
+
+# define colour cut-offs for ethnicity column 
+eth_colours <- scales::col_bin(
+  palette = c("#91CF60","#FFFFBF", "#FC8D59"),
+  domain  = c(0, 100), 
+  bins    = c(0, 10, 40, 100)
+)
+
+
+# create styled table  
+######################
+
+demographics_counts %>%
+  # initiate flextable to produce styled output table
+  flextable(
+    # retain variable column for formatting but do not display it
+    col_keys = names(demographics_counts)[-10]
+  ) %>%
+  # redefine column names based on original names
+  set_header_labels(
+    "n_cases_total"       = "Total Confirmed Cases",
+    "perc_cases_total" = "% of Total Cases",
+    "n_cases_recent"       = "Confirmed Cases past 28 days",
+    "perc_cases_recent" = "% of Confirmed Cases past 28 days",
+    "n_deaths_total"       = "Total Confirmed Deaths",
+    "perc_deaths_total" = "% of Total Deaths",
+    "n_deaths_recent"       = "Confirmed Deaths past 28 days",
+    "perc_deaths_recent" = "% of Confirmed Deaths past 28 days"
+  ) %>%
+  # move the header text to the centre
+  align(align = "center", part = "header") %>%
+  # make header text bold
+  bold(part = "header") %>%
+  # make the totals row bold (i.e. first row)
+  bold(i = 1, part = "body") %>%
+  # fill in the cells
+  # choose the rows with gender counts
+  bg(i = ~variable == "gender",
+     # choose the columns with percentages in them
+     j = percentage_cols,
+     # fill in based on previous defined cut-offs
+     bg = gender_colours) %>%
+  bg(i = ~variable == "age_group",
+     j = percentage_cols, bg = age_colours) %>%
+  bg(i = ~variable == "eth_race",
+     j = percentage_cols, bg = eth_colours) %>%
+  # add horizontal lines after the cells with totals and unknowns
+    # (short-cut to find row ending of each demographic variable)
+  hline(i = ~Characteristic %in% c("Total", "Unknown")) %>%
+  # add in footnotes for rows counting unknowns (reference in first column)
+  footnote(i = ~Characteristic == "Unknown", j = 1, part = "body", ref_symbols = c("a"),
+           value = as_paragraph("Unknown includes cases not yet interviewed")) %>%
+  # add in footnote for deaths counts (ref in the header)
+  footnote(i = 1, j = c(6, 8), part = "header", ref_symbols = c("b"),
+           value = as_paragraph("Deaths refer to all persons who had a positive PCR test result
+                                for Covid-19 and there is evidence that COVID-19 was the cause of
+                                death or a significant contributor to their death.")) %>%
+  # make your table fit to the maximum width of the word document
+  set_table_properties(layout = "autofit") %>% 
+  # decrease the fontsize in the header and body for aesthetic purposes in the document
+  fontsize(part = "all", size = 8)
+
+```
+</br>
+</details>
+
+### **Step 6.2: Age pyramid** {.unnumbered}
+
+Create an age pyramid with the percentage of cases by age group and sex. 
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+# prepare dataset
+
+# start a new dataframe (as dont want to overwrite the original)
+linelist_2g <- linelist %>% 
+  # update the gender and age_group columns
+  mutate(across(.cols = c(gender, age_group), 
+                .fns = ~{
+                  # replace "Unknown" with NA
+                  .x = na_if(.x, "Unknown") 
+                  # drop "Unknown" from the factor levels 
+                  .x = fct_drop(.x)
+                }))
+
+# plot age pyramid 
+age_pyramid(
+  data = linelist_2g,
+  age_group = "age_group",
+  split_by = "gender",
+  # Show as percentages of total cases
+  proportional = TRUE,
+  # remove guide line for mid-point
+  show_midpoint = FALSE) +
+  # set theme to basic 
+  theme_minimal() +
+  # add labels 
+  labs(
+    title = "",
+    subtitle = ,
+    x = "Age group",
+    y = "Percent of total",
+    fill = "Gender",
+    # use str_glue to set dynamic captions 
+    # {missing} is defined in the second argument below
+    caption = str_glue(
+      "{missing} cases missing either age or gender are not shown. \n Fictional COVID-19 data",
+      missing = linelist_2g %>%
+        filter(is.na(gender) | is.na(age_group)) %>%
+        nrow()
+      )
+    )
+```
+</br>
+</details>
+
+
+
+
+### **Step 6.3: Scatter plot** {.unnumbered}
+
+Create a scatter plot showing the relation between age and duration of hospital stay. Colour the points based on whether cases died or not. 
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+
+#################### C) SCATTER PLOT ####################
+# open a plot with the linelist data
+ggplot(data = linelist) +
+  # add points 
+  geom_point(
+    mapping = aes(
+      # plot age on the x and days hospitalised on the y axis 
+      x = age,
+      y = days_hosp,
+      # color points by outcome
+      color = died),  
+    # all points 3x size
+    size = 3, 
+    # opacity of 30% (i.e. relatively see-through)
+    alpha = 0.3) +      
+  # make the x and y axes start at the origin 
+  scale_y_continuous(expand = c(0, 0)) + 
+  scale_x_continuous(expand = c(0, 0)) + 
+  # add in labels 
+  labs(
+    x = "Age (years)",
+    y = "Duration (days)",
+    caption = "Fulton COVID-19 data",
+    color = "Deceased"
+    ) + 
+     theme_bw()
+
+```
+</br>
+</details>
+
+
+### **Step 6.4: Bar plot** {.unnumbered}
+
+Create a bar stacked bar plot showing the absolute number of cases by race and vital status
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+# open a plot with the linelist data
+ggplot(linelist) +
+  # add bars 
+  geom_bar(
+    mapping = aes(
+      # plot the number of cases by ethnicity (ordered in reverse frequency)
+      x = fct_rev(fct_infreq(eth_race)),
+      # stack bars and colour by died (ordered in reverse frequency)
+      fill = fct_rev(fct_infreq(died))
+    )
+  ) +
+  # flip the x and y axes 
+  coord_flip() +
+  # make the x axes start at the origin (nb axes flipped)
+  scale_y_continuous(expand = c(0, 0), 
+                     # define where to label xaxis (nb axes flipped )
+                     breaks = seq(from = 0,
+                                  to = 35000,
+                                  by = 5000)) + 
+  # add in labels 
+  labs(
+    # set the axes titles (nb axes flipped)
+    x = "Race and Ethnicity",
+    y = "Cases (n)",
+    caption = "Fictional COVID-19 data",
+    fill = "Deceased"
+    ) + 
+  # apply a defined theme
+     theme_bw()
+```
+</br>
+</details>
+
+
+\pagebreak
+
+## **Step 7. Analysis by place** {.unnumbered}
+
+Create a table by zip code in which you show the incidence in the most recent 14 days period, the incidence in the previous 14 days period and the percentage change in incidence between these periods.
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts7.1 <- c(
+  "+20%",
+  "+36%",
+  answer =  "-62.5%",
+ "-25%"
+)
+
+
+cat("Question 7.1: What is the change in incidence observed between periods in the zip code number 30337?", longmcq(opts7.1))
+```
+:::
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+
+################### TABLE BY ZIP CODE
+
+zip_counts <- linelist %>% 
+  group_by(zip) %>% 
+  # count cases in the appropriate period 
+  summarise(
+    recent   = sum(date_report %in% recent_period),
+    previous = sum(date_report %in% previous_period)
+  ) %>% 
+  adorn_totals() %>% 
+  # a percentage change column and round the digits
+  mutate(
+    perc_change = round((recent - previous) / previous * 100, digits = 1)
+    )
+
+# extract population counts for each zip from the shapefile
+zip_pop <- shapefile %>% 
+  # change to tibble (otherwise geo-data gets pulled with)
+  as_tibble() %>% 
+  # only keep zip code and population counts
+  select(ZipCode, Population) %>% 
+  # add a row with overall counts
+  adorn_totals()
+  
+# merge case counts and population counts
+# zip (or ZipCode in the shapefile) variable is the unique identifier
+zip_counts <- left_join(zip_counts, 
+                        zip_pop, 
+                        by = c("zip" = "ZipCode")
+                        ) %>% 
+  # calculate the incidence 
+  mutate(across(
+      # for each period (recent and previous)
+      .cols = c(recent, previous), 
+      # divide each variable by population (and round the outcome)
+      .fns = ~round(.x / Population * 10000, digits = 1), 
+      # for each period create a new variable with _inc on the end
+      .names = "{.col}_inc"), 
+    
+    # replace NAs in incidence with 0
+    across(
+      .cols = contains("inc"),
+      .fns = ~replace_na(.x, 0)),
+    
+    perc_change = case_when(
+      # fix the outliers: set missing to 0 and infinity (divided by 0) to 100
+      is.na(perc_change)       ~ 0,
+      is.infinite(perc_change) ~ 100, 
+      TRUE                     ~ perc_change
+    ))
+
+
+# choose colours to fill in cells  
+row_colour <- case_when(
+  # those less than zero will be green (decreasing cases)
+  zip_counts$perc_change < 0 ~ "#91CF60", 
+  # over zero red (increasing)
+  zip_counts$perc_change > 0 ~ "#FC8D59", 
+  # missing or zero orange
+  TRUE                       ~ "#FFFFBF")
+
+
+zip_counts %>% 
+  # keep the columns of interest and define order
+  select(zip, recent, recent_inc, previous, previous_inc, perc_change) %>% 
+  # initiate {flextable} to produce styled output table
+  flextable() %>% 
+  # fill in cells - choose the column and then pass our colour-scheme defined above
+  bg(j = "perc_change", 
+     bg = row_colour
+     ) %>% 
+  # add in a header for labeling counts and incidence by period 
+    # note the empty columns ("") to fit to the original table headers
+  add_header_row(
+    values = c("", 
+               str_c("Recent 14-day reporting period\n", recent_period_labels), 
+               "", 
+               str_c("Previous 14-day reporting period\n", previous_period_labels), 
+               "", 
+               "Change between reporting periods"
+               )) %>% 
+  # redefine column names based on original names
+    # note the different syntax to dplyr::select, here it is old_name = new_name
+  set_header_labels(
+    zip          = "Zip Code", 
+    recent       = "n", 
+    recent_inc   = "Incidence", 
+    previous     = "n", 
+    previous_inc = "Incidence", 
+    perc_change  = "%"
+  ) %>% 
+  # combine the headers cells for the appropriate periods 
+  # (i defines rows, j defines columns)
+  merge_at(i = 1, j = 2:3, part = "header") %>% 
+  merge_at(i = 1, j = 4:5, part = "header") %>% 
+  # move the header text to the centre
+  align(align = "center", part = "header") %>% 
+  # make header text bold 
+  bold(part = "header") %>% 
+  # make the row with totals in it bold (i.e. the last row in the dataframe)
+  bold(i = nrow(zip_counts), part = "body") %>% 
+  # add in footnotes for variables (referencing the header cells)
+  footnote(j = c(3, 5), part = "header", ref_symbols = c("a"),
+           value = as_paragraph("Incidence calculated as cases per 10,000 population by zip code")) %>% 
+  footnote(j = 6, part = "header", ref_symbols = c("b"),
+           value = as_paragraph("These reflect the percentage increase or decrease of new diagnoses 
+                                between the 14 days preceding the past 7 days and the 14 days
+                                preceding that.")) %>% 
+  # make your table fit to the maximum width of the word document
+  set_table_properties(layout = "autofit")
+
+```
+</br>
+</details>
+
+
+# Analysis of mortality {.unnumbered}
+
+In this section we will show how to include in the report an analysis of the risk factors for Covid-19 mortality.
+
+## **Step 8. Analysis of risk factors for mortality** {.unnumbered}
+
+a) Create a table in which you assess, with the appropriate statistical tests, whether the demographic characteristics of those dying from Covid-19 are significantly different from cases who did not die from it.
+
+b) For each of the variables used in the table that you just created, carry out univariate regression using each demographic variable as the independent variable and the outcome (dead, not dead) as the dependent variables. Create a table with the estimates -alongside 95% CI - of the estimates.
+
+::: {.webex-check}
+```{r, results="asis", echo=FALSE, eval=TRUE}
+opts8.1 <- c(
+  "It was a risk factor for mortality",
+ answer =   "It was a protective factor for mortality",
+  "It was not associated with mortality",
+ "Impossible to know"
+)
+
+
+cat("Question 8.1: According to the results of the univariate analysis, how was having a sore throat associated with mortality from Covid-19", longmcq(opts8.1))
+```
+:::
+
+
+<details>
+<summary style="text-decoration: underline; color: red;">
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+</summary>
+</br>
+```{r, echo=TRUE, eval=FALSE}
+
+
+# define a list of variables for looping over later
+symptom_vars <- linelist %>% 
+     # choose all columns that contain "sym_" in the name but exclude "sym_resolved"
+     select(c(contains("sym_"), -sym_resolved)) %>% 
+     # pull the names out 
+     names()
+
+# define variables of interest (save typing them out later) 
+descriptive_vars <- c("gender", 
+                      "age_group",
+                      "eth_race",
+                      symptom_vars,
+                      "hospitalized",
+                      "days_hosp")
+
+# filter dataset  
+rf_data <- linelist %>% 
+  # only keep variables of interest
+  select(died_covid, age, all_of(descriptive_vars)) %>% 
+  # set unknown back to NA for all factor variables
+  mutate(across(
+    .cols = where(is.factor),
+    .fns = ~fct_recode(.x, NULL = "Unknown"))) %>% 
+  # flip factor levels (so that the reference values are correct)
+  mutate(eth_race = fct_infreq(eth_race)) %>% 
+  mutate(gender = fct_relevel(gender, "Female", "Male")) %>% 
+  mutate(across(all_of(c("died_covid", symptom_vars, "hospitalized")), 
+                ~fct_relevel(.x, "No", "Yes")
+                )) %>% 
+  # only keep rows with complete data for all variables of interest
+  # note that this will drop rows where **ANY** of the listed variables are NA
+  drop_na(any_of(c("died_covid", "age", descriptive_vars)))
+
+
+# define variable labels to show in output tables 
+rf_data <- rf_data %>%
+  set_variable_labels(
+    died_covid = "Died",
+    age = "Age (years)",
+    gender = "Gender",
+    age_group = "Age group (years)",
+    eth_race = "Ethnicity",
+    sym_fever = "Fever",
+    sym_subjfever = "Subjective fever",
+    sym_myalgia = "Myalgia",
+    sym_losstastesmell = "Loss taste/smell",
+    sym_sorethroat = "Sore throat",
+    sym_cough = "Cough",
+    sym_headache = "Headache",
+    hospitalized = "Hospitalized",
+    days_hosp = "Days in hospital"
+  )
+
+
+
+rf_data %>%
+  # keep variables of interest
+  select(died_covid, gender, eth_race, age, days_hosp) %>%
+  # produce summary table and specify grouping variable
+  tbl_summary(
+    by = died_covid
+  ) %>%
+  # specify what test to perform
+  add_p(
+    list(
+      all_continuous() ~ "kruskal.test",
+      eth_race ~ "kruskal.test",
+      all_dichotomous() ~ "chisq.test"
+    )
+  ) %>%
+  # edit what the column headers say (using {gtsummary})
+  # nb. {n} automatically shows the number in that group and \n is a linebreak
+  modify_header(update = list(
+    stat_1 ~ "**Dead**\n (N={n})",
+    stat_2 ~ "**Alive**\n (N={n})"
+  )) %>%
+  # edit what it says in the footnote (using {gtsummary})
+  modify_footnote(update = list(
+    all_stat_cols() ~ "n (%) for categorical;\n median (IQR) for continuous",
+    p.value ~ "Pearson's Chi-squared test for dichotomous;\n Kruskal-Wallis rank sum test for continuous and categorical"
+  )) %>%
+  # change to flextable format
+  as_flex_table() %>%
+  # make header text bold (using {flextable})
+  bold(part = "header")
+
+###################### B) UNIVARIATE REGRESSION ANALYSIS ####################################
+
+
+# produce table with regression estimates
+regress_tab <- rf_data %>%
+  # drop variables not interested in 
+  select(-age_group) %>%
+  # produce univariate table
+  tbl_uvregression(
+    # define outcome variable
+    y = died_covid, 
+    # define regression want to run (generalised linear model)
+    method = glm, 
+    # define what type of glm want to run (logistic)
+    method.args = list(family = binomial), 
+    # exponentiate to produce odds ratios (rather than log odds)
+    exponentiate = TRUE, 
+    # do not show the overall counts (this is done in cross_tab below)
+    hide_n = TRUE,
+    ## uncomment this line if you want to not show reference rows
+    # show_single_row = c(symptom_vars, gender, hospitalized),
+    ## note: NULL at the end allows you to have a comma before a commented out row
+    NULL
+  )
+
+# produce table with counts by outcome (using the data fed to the regression above)
+cross_tab <- regress_tab$inputs$data %>%
+  tbl_summary(
+    # group by outcome 
+    by = died_covid,
+    ## uncomment this line if you only want to show the "Male" row for gender
+    ## this would be run if you also uncommented the single_row in regression above
+    # value = list(gender ~"Male"),
+    ## show all levels (otherwise only shows the "Yes" level)
+    type = list(all_dichotomous() ~ "categorical"),
+    ## note: NULL at the end allows you to have a comma before a commented out row
+    NULL
+  )
+
+# combine tables 
+tbl_merge(list(cross_tab, regress_tab)) %>%
+  # edit what it says in the grouping headers 
+  modify_spanning_header(update = list(
+    c("stat_1_1","stat_2_1") ~ "Died",
+    c("estimate_2", "ci_2", "p.value_2") ~ "Univariate regression")
+    ) %>% 
+  # edit what it says in the footnote (using {gtsummary})
+  modify_footnote(update = list(
+    all_stat_cols() ~ "n (%) for categorical;\n median (IQR) for continuous")
+    ) %>% 
+  # change to flextable format
+  as_flex_table() %>%
+  # make header text bold (using {flextable})
+  bold(part = "header") %>% 
+  # make your table fit to the maximum width of the word document
+  set_table_properties(layout = "autofit")
+```
+</br>
+</details>
+
+# Interpretation and reflection {.unnumbered}
+
+Now that you have finished this case study, reflect on the different steps taken and how they can be relevant for your day to day work. You may do so by asking yourself the following questions:
+
+
+**Data quality and limitations**\
+
+-   What was the quality of the COVID-19 raw data imported? How does it compare with the data that you deal with in your job?\
+-   What were the main limitations of the data on the analysis and interpretation on the COVID-19 outbreak in Fulton? How could data quality be improved?\
+
+**Analysis**\
+
+-   Did the case study follow the structure that you would have chosen to create a report in a situation similar to the one in Fulton?\
+-   Is there any further analysis that you would include in a report like this one? Would you know how to carry it out in R?    
+
+**R code**\
+
+-   What were the parts of code that you enjoyed the most? And the most challenging?\ 
+-   Do you have the information required to build on what you've learnt?\
+-   How can you embed what you have learnt in your day to day work?\
+
+
+
+
