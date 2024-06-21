@@ -1,0 +1,507 @@
+[
+  {
+    "DateRep": "2022-01-17",
+    "Country": "CountryA",
+    "Cases": 2
+  },
+  {
+    "DateRep": "2022-01-24",
+    "Country": "CountryA",
+    "Cases": 4
+  },
+  {
+    "DateRep": "2022-01-31",
+    "Country": "CountryA",
+    "Cases": 11
+  },
+  {
+    "DateRep": "2022-02-07",
+    "Country": "CountryA",
+    "Cases": 18
+  },
+  {
+    "DateRep": "2022-02-14",
+    "Country": "CountryA",
+    "Cases": 40
+  },
+  {
+    "DateRep": "2022-02-21",
+    "Country": "CountryA",
+    "Cases": 64
+  },
+  {
+    "DateRep": "2022-02-28",
+    "Country": "CountryA",
+    "Cases": 105
+  },
+  {
+    "DateRep": "2022-03-07",
+    "Country": "CountryA",
+    "Cases": 164
+  },
+  {
+    "DateRep": "2022-03-14",
+    "Country": "CountryA",
+    "Cases": 213
+  },
+  {
+    "DateRep": "2022-03-21",
+    "Country": "CountryA",
+    "Cases": 284
+  },
+  {
+    "DateRep": "2022-03-28",
+    "Country": "CountryA",
+    "Cases": 366
+  },
+  {
+    "DateRep": "2022-04-04",
+    "Country": "CountryA",
+    "Cases": 442
+  },
+  {
+    "DateRep": "2022-04-11",
+    "Country": "CountryA",
+    "Cases": 526
+  },
+  {
+    "DateRep": "2022-04-18",
+    "Country": "CountryA",
+    "Cases": 587
+  },
+  {
+    "DateRep": "2022-04-25",
+    "Country": "CountryA",
+    "Cases": 630
+  },
+  {
+    "DateRep": "2022-05-02",
+    "Country": "CountryA",
+    "Cases": 673
+  },
+  {
+    "DateRep": "2022-05-09",
+    "Country": "CountryA",
+    "Cases": 711
+  },
+  {
+    "DateRep": "2022-05-16",
+    "Country": "CountryA",
+    "Cases": 739
+  },
+  {
+    "DateRep": "2022-05-23",
+    "Country": "CountryA",
+    "Cases": 758
+  },
+  {
+    "DateRep": "2022-05-30",
+    "Country": "CountryA",
+    "Cases": 769
+  },
+  {
+    "DateRep": "2022-06-06",
+    "Country": "CountryA",
+    "Cases": 775
+  },
+  {
+    "DateRep": "2022-06-13",
+    "Country": "CountryA",
+    "Cases": 777
+  },
+  {
+    "DateRep": "2022-06-20",
+    "Country": "CountryA",
+    "Cases": 779
+  },
+  {
+    "DateRep": "2022-06-27",
+    "Country": "CountryA",
+    "Cases": 780
+  },
+  {
+    "DateRep": "2022-07-11",
+    "Country": "CountryA",
+    "Cases": 782
+  },
+  {
+    "DateRep": "2022-07-18",
+    "Country": "CountryA",
+    "Cases": 783
+  },
+  {
+    "DateRep": "2022-08-01",
+    "Country": "CountryA",
+    "Cases": 785
+  },
+  {
+    "DateRep": "2022-08-08",
+    "Country": "CountryA",
+    "Cases": 786
+  },
+  {
+    "DateRep": "2022-01-17",
+    "Country": "CountryB",
+    "Cases": 3
+  },
+  {
+    "DateRep": "2022-01-24",
+    "Country": "CountryB",
+    "Cases": 6
+  },
+  {
+    "DateRep": "2022-01-31",
+    "Country": "CountryB",
+    "Cases": 17
+  },
+  {
+    "DateRep": "2022-02-07",
+    "Country": "CountryB",
+    "Cases": 27
+  },
+  {
+    "DateRep": "2022-02-14",
+    "Country": "CountryB",
+    "Cases": 30
+  },
+  {
+    "DateRep": "2022-02-21",
+    "Country": "CountryB",
+    "Cases": 46
+  },
+  {
+    "DateRep": "2022-02-28",
+    "Country": "CountryB",
+    "Cases": 62
+  },
+  {
+    "DateRep": "2022-03-07",
+    "Country": "CountryB",
+    "Cases": 86
+  },
+  {
+    "DateRep": "2022-03-14",
+    "Country": "CountryB",
+    "Cases": 116
+  },
+  {
+    "DateRep": "2022-03-21",
+    "Country": "CountryB",
+    "Cases": 155
+  },
+  {
+    "DateRep": "2022-03-28",
+    "Country": "CountryB",
+    "Cases": 201
+  },
+  {
+    "DateRep": "2022-04-04",
+    "Country": "CountryB",
+    "Cases": 241
+  },
+  {
+    "DateRep": "2022-04-11",
+    "Country": "CountryB",
+    "Cases": 277
+  },
+  {
+    "DateRep": "2022-04-18",
+    "Country": "CountryB",
+    "Cases": 304
+  },
+  {
+    "DateRep": "2022-04-25",
+    "Country": "CountryB",
+    "Cases": 329
+  },
+  {
+    "DateRep": "2022-05-02",
+    "Country": "CountryB",
+    "Cases": 347
+  },
+  {
+    "DateRep": "2022-05-09",
+    "Country": "CountryB",
+    "Cases": 359
+  },
+  {
+    "DateRep": "2022-05-16",
+    "Country": "CountryB",
+    "Cases": 370
+  },
+  {
+    "DateRep": "2022-05-23",
+    "Country": "CountryB",
+    "Cases": 380
+  },
+  {
+    "DateRep": "2022-05-30",
+    "Country": "CountryB",
+    "Cases": 383
+  },
+  {
+    "DateRep": "2022-06-06",
+    "Country": "CountryB",
+    "Cases": 393
+  },
+  {
+    "DateRep": "2022-06-13",
+    "Country": "CountryB",
+    "Cases": 399
+  },
+  {
+    "DateRep": "2022-06-20",
+    "Country": "CountryB",
+    "Cases": 404
+  },
+  {
+    "DateRep": "2022-06-27",
+    "Country": "CountryB",
+    "Cases": 409
+  },
+  {
+    "DateRep": "2022-07-04",
+    "Country": "CountryB",
+    "Cases": 412
+  },
+  {
+    "DateRep": "2022-08-01",
+    "Country": "CountryB",
+    "Cases": 415
+  },
+  {
+    "DateRep": "2022-01-24",
+    "Country": "CountryD",
+    "Cases": 1
+  },
+  {
+    "DateRep": "2022-01-31",
+    "Country": "CountryD",
+    "Cases": 3
+  },
+  {
+    "DateRep": "2022-02-07",
+    "Country": "CountryD",
+    "Cases": 6
+  },
+  {
+    "DateRep": "2022-02-14",
+    "Country": "CountryD",
+    "Cases": 10
+  },
+  {
+    "DateRep": "2022-02-21",
+    "Country": "CountryD",
+    "Cases": 17
+  },
+  {
+    "DateRep": "2022-02-28",
+    "Country": "CountryD",
+    "Cases": 32
+  },
+  {
+    "DateRep": "2022-03-07",
+    "Country": "CountryD",
+    "Cases": 46
+  },
+  {
+    "DateRep": "2022-03-14",
+    "Country": "CountryD",
+    "Cases": 62
+  },
+  {
+    "DateRep": "2022-03-21",
+    "Country": "CountryD",
+    "Cases": 83
+  },
+  {
+    "DateRep": "2022-03-28",
+    "Country": "CountryD",
+    "Cases": 106
+  },
+  {
+    "DateRep": "2022-04-04",
+    "Country": "CountryD",
+    "Cases": 128
+  },
+  {
+    "DateRep": "2022-04-11",
+    "Country": "CountryD",
+    "Cases": 151
+  },
+  {
+    "DateRep": "2022-04-18",
+    "Country": "CountryD",
+    "Cases": 163
+  },
+  {
+    "DateRep": "2022-04-25",
+    "Country": "CountryD",
+    "Cases": 177
+  },
+  {
+    "DateRep": "2022-05-02",
+    "Country": "CountryD",
+    "Cases": 188
+  },
+  {
+    "DateRep": "2022-05-09",
+    "Country": "CountryD",
+    "Cases": 194
+  },
+  {
+    "DateRep": "2022-05-16",
+    "Country": "CountryD",
+    "Cases": 199
+  },
+  {
+    "DateRep": "2022-05-23",
+    "Country": "CountryD",
+    "Cases": 204
+  },
+  {
+    "DateRep": "2022-05-30",
+    "Country": "CountryD",
+    "Cases": 207
+  },
+  {
+    "DateRep": "2022-06-06",
+    "Country": "CountryD",
+    "Cases": 209
+  },
+  {
+    "DateRep": "2022-06-13",
+    "Country": "CountryD",
+    "Cases": 210
+  },
+  {
+    "DateRep": "2022-06-20",
+    "Country": "CountryD",
+    "Cases": 213
+  },
+  {
+    "DateRep": "2022-06-27",
+    "Country": "CountryD",
+    "Cases": 214
+  },
+  {
+    "DateRep": "2022-07-04",
+    "Country": "CountryD",
+    "Cases": 215
+  },
+  {
+    "DateRep": "2022-07-25",
+    "Country": "CountryD",
+    "Cases": 216
+  },
+  {
+    "DateRep": "2022-08-01",
+    "Country": "CountryD",
+    "Cases": 217
+  },
+  {
+    "DateRep": "2022-01-24",
+    "Country": "CountryE",
+    "Cases": 2
+  },
+  {
+    "DateRep": "2022-01-31",
+    "Country": "CountryE",
+    "Cases": 6
+  },
+  {
+    "DateRep": "2022-02-07",
+    "Country": "CountryE",
+    "Cases": 7
+  },
+  {
+    "DateRep": "2022-02-21",
+    "Country": "CountryE",
+    "Cases": 13
+  },
+  {
+    "DateRep": "2022-02-28",
+    "Country": "CountryE",
+    "Cases": 25
+  },
+  {
+    "DateRep": "2022-03-07",
+    "Country": "CountryE",
+    "Cases": 32
+  },
+  {
+    "DateRep": "2022-03-14",
+    "Country": "CountryE",
+    "Cases": 40
+  },
+  {
+    "DateRep": "2022-03-21",
+    "Country": "CountryE",
+    "Cases": 53
+  },
+  {
+    "DateRep": "2022-03-28",
+    "Country": "CountryE",
+    "Cases": 59
+  },
+  {
+    "DateRep": "2022-04-04",
+    "Country": "CountryE",
+    "Cases": 72
+  },
+  {
+    "DateRep": "2022-04-11",
+    "Country": "CountryE",
+    "Cases": 80
+  },
+  {
+    "DateRep": "2022-04-18",
+    "Country": "CountryE",
+    "Cases": 88
+  },
+  {
+    "DateRep": "2022-04-25",
+    "Country": "CountryE",
+    "Cases": 98
+  },
+  {
+    "DateRep": "2022-05-02",
+    "Country": "CountryE",
+    "Cases": 105
+  },
+  {
+    "DateRep": "2022-05-09",
+    "Country": "CountryE",
+    "Cases": 108
+  },
+  {
+    "DateRep": "2022-05-16",
+    "Country": "CountryE",
+    "Cases": 110
+  },
+  {
+    "DateRep": "2022-05-30",
+    "Country": "CountryE",
+    "Cases": 114
+  },
+  {
+    "DateRep": "2022-07-04",
+    "Country": "CountryE",
+    "Cases": 117
+  },
+  {
+    "DateRep": "2022-07-18",
+    "Country": "CountryE",
+    "Cases": 118
+  },
+  {
+    "DateRep": "2022-08-08",
+    "Country": "CountryE",
+    "Cases": 121
+  },
+  {
+    "DateRep": "2022-08-22",
+    "Country": "CountryE",
+    "Cases": 123
+  }
+]
