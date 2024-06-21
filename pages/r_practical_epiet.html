@@ -260,11 +260,11 @@ NOTE: End of solution
 <section id="preparation-for-the-case-study" class="level4">
 <h4 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h4>
 <ol type="1">
-<li><p>Download folder named R_practical and extract contents in the local laptop</p></li>
-<li><p>Create an Rstudio project in the folder R_practical. If you are unsure on how to do that, read the EpiRhandbook on <a href="https://epirhandbook.com/en/new_pages/r_projects.html">R projects</a></p></li>
-<li><p>Inside “R_practical”: Subfolder “data” contains two folders: “raw” and “clean”. The “raw” folder contains the raw data you will use in this case study. You should see six different files, three called <em>E_pox_aggregated_data</em> and three <em>E_pox_case_based_data</em>. Each has a specific file type. The “clean” subfolder should be empty. You will store here clean versions of your data frames.</p></li>
-<li><p>Inside “R_practical”: Subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” where you can find solution scripts in case you are stuck at any point or if you want to compare your own script with the solution one.</p></li>
-<li><p>Inside “R_practical”: Subfolder “outputs” will be used to store all outputs (tables, graphs, documents) that are the result of the analysis</p></li>
+<li><p>Download folder named r_practical and extract contents in the local laptop</p></li>
+<li><p>Create an Rstudio project in the folder r_practical. If you are unsure on how to do that, read the EpiRhandbook on <a href="https://epirhandbook.com/en/new_pages/r_projects.html">R projects</a></p></li>
+<li><p>Inside “r_practical”: Subfolder “data” contains the raw data you will use in this case study. You should see six different files, three called <em>E_pox_aggregated_data</em> and three <em>E_pox_case_based_data</em>. Each has a specific file type.</p></li>
+<li><p>Inside “r_practical”: Subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” where you can find a solution Rmarkdown script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.</p></li>
+<li><p>Inside “r_practical”: Subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.</p></li>
 </ol>
 <!-- This is where we load the data so that the outputs are shown, but remains not visible when rendering
 
@@ -279,7 +279,7 @@ NOTE: End of solution
 <h2 class="anchored" data-anchor-id="step-1-getting-ready-for-importing-the-data"><strong>Step 1: Getting ready for importing the data</strong></h2>
 <section id="step-1.1-create-a-new-r-script" class="level3">
 <h3 class="anchored" data-anchor-id="step-1.1-create-a-new-r-script">Step 1.1: Create a new R script</h3>
-<p>Once you have created an Rproject inside the “R_practical” folder (as specified in the second point of the section <strong>Preparation for the case study</strong>). Create a new script with the name <em>E_pox_Rpractical</em> and save it in the subfolder “scripts”. If you are familiar with Rmarkdown, you may decide to use this type of file instead of an R script.</p>
+<p>Once you have created an Rproject inside the “r_practical” folder (as specified in the second point of the section <strong>Preparation for the case study</strong>). Create a new script with the name <em>mpox_rpractical</em> and save it in the subfolder “scripts”. If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script.</p>
 </section>
 <section id="step-1.2-define-r-language" class="level3">
 <h3 class="anchored" data-anchor-id="step-1.2-define-r-language">Step 1.2: Define R language</h3>
@@ -418,20 +418,20 @@ NOTE: End of solution
 </details>
 <div class="webex-check">
 How many columns does the aggregated data frame have?
-<div id="radio_ZCWYYAPYOS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZCWYYAPYOS" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_ZCWYYAPYOS" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_ZCWYYAPYOS" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_ZCWYYAPYOS" value=""> <span>101</span></label>
+<div id="radio_JSJSWKLHTE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JSJSWKLHTE" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_JSJSWKLHTE" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_JSJSWKLHTE" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_JSJSWKLHTE" value=""> <span>101</span></label>
 </div>
 </div>
 <div class="webex-check">
 What is the class of the column DateOfNotification in the case-based data?
-<div id="radio_NTJXHOSDOI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NTJXHOSDOI" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_NTJXHOSDOI" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_NTJXHOSDOI" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_NTJXHOSDOI" value=""> <span>Factor</span></label>
+<div id="radio_ACGAJRCAPW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ACGAJRCAPW" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_ACGAJRCAPW" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_ACGAJRCAPW" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_ACGAJRCAPW" value=""> <span>Factor</span></label>
 </div>
 </div>
 <div class="webex-check">
 For how many cases is the HIV status Unknown or missing?
-<div id="radio_ODWXTSZESE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ODWXTSZESE" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_ODWXTSZESE" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_ODWXTSZESE" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_ODWXTSZESE" value=""> <span>446</span></label>
+<div id="radio_FDEGQCGTLF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FDEGQCGTLF" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_FDEGQCGTLF" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_FDEGQCGTLF" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_FDEGQCGTLF" value=""> <span>446</span></label>
 </div>
 </div>
 </section>
@@ -544,20 +544,20 @@ For how many cases is the HIV status Unknown or missing?
 </details>
 <div class="webex-check">
 How many male cases we have in the data frame?
-<div id="radio_LOIASUENVZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LOIASUENVZ" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_LOIASUENVZ" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_LOIASUENVZ" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_LOIASUENVZ" value=""> <span>1523</span></label>
+<div id="radio_UFMAHSPBJU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UFMAHSPBJU" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_UFMAHSPBJU" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_UFMAHSPBJU" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_UFMAHSPBJU" value=""> <span>1523</span></label>
 </div>
 </div>
 <div class="webex-check">
 Which week has the largest number of cases?
-<div id="radio_SYZMJWSGUR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SYZMJWSGUR" value="answer"> <span>2022-04-11</span></label><label><input type="radio" autocomplete="off" name="radio_SYZMJWSGUR" value=""> <span>2022-07-25</span></label><label><input type="radio" autocomplete="off" name="radio_SYZMJWSGUR" value=""> <span>2022-02-28</span></label><label><input type="radio" autocomplete="off" name="radio_SYZMJWSGUR" value=""> <span>2022-05-09</span></label>
+<div id="radio_ZKKMEGMQIN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZKKMEGMQIN" value="answer"> <span>2022-04-11</span></label><label><input type="radio" autocomplete="off" name="radio_ZKKMEGMQIN" value=""> <span>2022-07-25</span></label><label><input type="radio" autocomplete="off" name="radio_ZKKMEGMQIN" value=""> <span>2022-02-28</span></label><label><input type="radio" autocomplete="off" name="radio_ZKKMEGMQIN" value=""> <span>2022-05-09</span></label>
 </div>
 </div>
 <div class="webex-check">
 How many cases with missing age are present?
-<div id="radio_DXRRUVQMCT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DXRRUVQMCT" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_DXRRUVQMCT" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_DXRRUVQMCT" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_DXRRUVQMCT" value=""> <span>396</span></label>
+<div id="radio_ABWSSFOJCB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ABWSSFOJCB" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_ABWSSFOJCB" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_ABWSSFOJCB" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_ABWSSFOJCB" value=""> <span>396</span></label>
 </div>
 </div>
 </section>
@@ -610,8 +610,8 @@ How many cases with missing age are present?
 </details>
 <div class="webex-check">
 What’s the country with the largest percentage of cases?
-<div id="radio_JYJMTHMEAH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JYJMTHMEAH" value=""> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_JYJMTHMEAH" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_JYJMTHMEAH" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_JYJMTHMEAH" value="answer"> <span>A</span></label>
+<div id="radio_CEHWGNJYPD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CEHWGNJYPD" value=""> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_CEHWGNJYPD" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_CEHWGNJYPD" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_CEHWGNJYPD" value="answer"> <span>A</span></label>
 </div>
 </div>
 <details>
@@ -630,23 +630,23 @@ What’s the country with the largest percentage of cases?
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ask R to print the table</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>cb_country_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="jmqxbcdqhv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#jmqxbcdqhv table {
+<div id="puptfyvuur" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#puptfyvuur table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jmqxbcdqhv thead, #jmqxbcdqhv tbody, #jmqxbcdqhv tfoot, #jmqxbcdqhv tr, #jmqxbcdqhv td, #jmqxbcdqhv th {
+#puptfyvuur thead, #puptfyvuur tbody, #puptfyvuur tfoot, #puptfyvuur tr, #puptfyvuur td, #puptfyvuur th {
   border-style: none;
 }
 
-#jmqxbcdqhv p {
+#puptfyvuur p {
   margin: 0;
   padding: 0;
 }
 
-#jmqxbcdqhv .gt_table {
+#puptfyvuur .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -672,12 +672,12 @@ What’s the country with the largest percentage of cases?
   border-left-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_caption {
+#puptfyvuur .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jmqxbcdqhv .gt_title {
+#puptfyvuur .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -689,7 +689,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-width: 0;
 }
 
-#jmqxbcdqhv .gt_subtitle {
+#puptfyvuur .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -701,7 +701,7 @@ What’s the country with the largest percentage of cases?
   border-top-width: 0;
 }
 
-#jmqxbcdqhv .gt_heading {
+#puptfyvuur .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -713,13 +713,13 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_bottom_border {
+#puptfyvuur .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_col_headings {
+#puptfyvuur .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -734,7 +734,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_col_heading {
+#puptfyvuur .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -754,7 +754,7 @@ What’s the country with the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#jmqxbcdqhv .gt_column_spanner_outer {
+#puptfyvuur .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -766,15 +766,15 @@ What’s the country with the largest percentage of cases?
   padding-right: 4px;
 }
 
-#jmqxbcdqhv .gt_column_spanner_outer:first-child {
+#puptfyvuur .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jmqxbcdqhv .gt_column_spanner_outer:last-child {
+#puptfyvuur .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jmqxbcdqhv .gt_column_spanner {
+#puptfyvuur .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -786,11 +786,11 @@ What’s the country with the largest percentage of cases?
   width: 100%;
 }
 
-#jmqxbcdqhv .gt_spanner_row {
+#puptfyvuur .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jmqxbcdqhv .gt_group_heading {
+#puptfyvuur .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -816,7 +816,7 @@ What’s the country with the largest percentage of cases?
   text-align: left;
 }
 
-#jmqxbcdqhv .gt_empty_group_heading {
+#puptfyvuur .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -831,15 +831,15 @@ What’s the country with the largest percentage of cases?
   vertical-align: middle;
 }
 
-#jmqxbcdqhv .gt_from_md > :first-child {
+#puptfyvuur .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jmqxbcdqhv .gt_from_md > :last-child {
+#puptfyvuur .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jmqxbcdqhv .gt_row {
+#puptfyvuur .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,7 +858,7 @@ What’s the country with the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#jmqxbcdqhv .gt_stub {
+#puptfyvuur .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -871,7 +871,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#jmqxbcdqhv .gt_stub_row_group {
+#puptfyvuur .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -885,15 +885,15 @@ What’s the country with the largest percentage of cases?
   vertical-align: top;
 }
 
-#jmqxbcdqhv .gt_row_group_first td {
+#puptfyvuur .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jmqxbcdqhv .gt_row_group_first th {
+#puptfyvuur .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jmqxbcdqhv .gt_summary_row {
+#puptfyvuur .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -903,16 +903,16 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#jmqxbcdqhv .gt_first_summary_row {
+#puptfyvuur .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_first_summary_row.thick {
+#puptfyvuur .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jmqxbcdqhv .gt_last_summary_row {
+#puptfyvuur .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -922,7 +922,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_grand_summary_row {
+#puptfyvuur .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -932,7 +932,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#jmqxbcdqhv .gt_first_grand_summary_row {
+#puptfyvuur .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -942,7 +942,7 @@ What’s the country with the largest percentage of cases?
   border-top-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_last_grand_summary_row_top {
+#puptfyvuur .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -952,11 +952,11 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_striped {
+#puptfyvuur .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jmqxbcdqhv .gt_table_body {
+#puptfyvuur .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -965,7 +965,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_footnotes {
+#puptfyvuur .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -979,7 +979,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_footnote {
+#puptfyvuur .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -988,7 +988,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#jmqxbcdqhv .gt_sourcenotes {
+#puptfyvuur .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1002,7 +1002,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#jmqxbcdqhv .gt_sourcenote {
+#puptfyvuur .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1010,63 +1010,63 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#jmqxbcdqhv .gt_left {
+#puptfyvuur .gt_left {
   text-align: left;
 }
 
-#jmqxbcdqhv .gt_center {
+#puptfyvuur .gt_center {
   text-align: center;
 }
 
-#jmqxbcdqhv .gt_right {
+#puptfyvuur .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jmqxbcdqhv .gt_font_normal {
+#puptfyvuur .gt_font_normal {
   font-weight: normal;
 }
 
-#jmqxbcdqhv .gt_font_bold {
+#puptfyvuur .gt_font_bold {
   font-weight: bold;
 }
 
-#jmqxbcdqhv .gt_font_italic {
+#puptfyvuur .gt_font_italic {
   font-style: italic;
 }
 
-#jmqxbcdqhv .gt_super {
+#puptfyvuur .gt_super {
   font-size: 65%;
 }
 
-#jmqxbcdqhv .gt_footnote_marks {
+#puptfyvuur .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jmqxbcdqhv .gt_asterisk {
+#puptfyvuur .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jmqxbcdqhv .gt_indent_1 {
+#puptfyvuur .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jmqxbcdqhv .gt_indent_2 {
+#puptfyvuur .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jmqxbcdqhv .gt_indent_3 {
+#puptfyvuur .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jmqxbcdqhv .gt_indent_4 {
+#puptfyvuur .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jmqxbcdqhv .gt_indent_5 {
+#puptfyvuur .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1238,8 +1238,8 @@ What’s the country with the largest percentage of cases?
 </details>
 <div class="webex-check">
 Which country had the latest date of notification?
-<div id="radio_CAIROUSKRB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CAIROUSKRB" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_CAIROUSKRB" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_CAIROUSKRB" value="answer"> <span>E</span></label><label><input type="radio" autocomplete="off" name="radio_CAIROUSKRB" value=""> <span>B</span></label>
+<div id="radio_WYAATZNDQK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WYAATZNDQK" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_WYAATZNDQK" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_WYAATZNDQK" value="answer"> <span>E</span></label><label><input type="radio" autocomplete="off" name="radio_WYAATZNDQK" value=""> <span>B</span></label>
 </div>
 </div>
 <details>
@@ -1311,8 +1311,8 @@ Which country had the latest date of notification?
 </details>
 <div class="webex-check">
 Which demographic group is more affected by Mpox?
-<div id="radio_VVMFIKXTHV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VVMFIKXTHV" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_VVMFIKXTHV" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_VVMFIKXTHV" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_VVMFIKXTHV" value="answer"> <span>Males 30-39</span></label>
+<div id="radio_YNMHVXMEQM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YNMHVXMEQM" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_YNMHVXMEQM" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_YNMHVXMEQM" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_YNMHVXMEQM" value="answer"> <span>Males 30-39</span></label>
 </div>
 </div>
 <details>
@@ -1400,8 +1400,8 @@ Which demographic group is more affected by Mpox?
 </details>
 <div class="webex-check">
 Are there significant differences in HIV status across cases according to their sexual orientation ?
-<div id="radio_XCZDTZALEU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XCZDTZALEU" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_XCZDTZALEU" value="answer"> <span>No</span></label>
+<div id="radio_YPQUWQJZQW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YPQUWQJZQW" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_YPQUWQJZQW" value="answer"> <span>No</span></label>
 </div>
 </div>
 <details>
@@ -1454,23 +1454,23 @@ Are there significant differences in HIV status across cases according to their 
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>tab_outcome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="locdficwrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#locdficwrs table {
+<div id="mifftcuobr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mifftcuobr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#locdficwrs thead, #locdficwrs tbody, #locdficwrs tfoot, #locdficwrs tr, #locdficwrs td, #locdficwrs th {
+#mifftcuobr thead, #mifftcuobr tbody, #mifftcuobr tfoot, #mifftcuobr tr, #mifftcuobr td, #mifftcuobr th {
   border-style: none;
 }
 
-#locdficwrs p {
+#mifftcuobr p {
   margin: 0;
   padding: 0;
 }
 
-#locdficwrs .gt_table {
+#mifftcuobr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1496,12 +1496,12 @@ Are there significant differences in HIV status across cases according to their 
   border-left-color: #D3D3D3;
 }
 
-#locdficwrs .gt_caption {
+#mifftcuobr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#locdficwrs .gt_title {
+#mifftcuobr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1513,7 +1513,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-width: 0;
 }
 
-#locdficwrs .gt_subtitle {
+#mifftcuobr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1525,7 +1525,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-width: 0;
 }
 
-#locdficwrs .gt_heading {
+#mifftcuobr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1537,13 +1537,13 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#locdficwrs .gt_bottom_border {
+#mifftcuobr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#locdficwrs .gt_col_headings {
+#mifftcuobr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1558,7 +1558,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#locdficwrs .gt_col_heading {
+#mifftcuobr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1578,7 +1578,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#locdficwrs .gt_column_spanner_outer {
+#mifftcuobr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1590,15 +1590,15 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 4px;
 }
 
-#locdficwrs .gt_column_spanner_outer:first-child {
+#mifftcuobr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#locdficwrs .gt_column_spanner_outer:last-child {
+#mifftcuobr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#locdficwrs .gt_column_spanner {
+#mifftcuobr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1610,11 +1610,11 @@ Are there significant differences in HIV status across cases according to their 
   width: 100%;
 }
 
-#locdficwrs .gt_spanner_row {
+#mifftcuobr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#locdficwrs .gt_group_heading {
+#mifftcuobr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1640,7 +1640,7 @@ Are there significant differences in HIV status across cases according to their 
   text-align: left;
 }
 
-#locdficwrs .gt_empty_group_heading {
+#mifftcuobr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1655,15 +1655,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: middle;
 }
 
-#locdficwrs .gt_from_md > :first-child {
+#mifftcuobr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#locdficwrs .gt_from_md > :last-child {
+#mifftcuobr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#locdficwrs .gt_row {
+#mifftcuobr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1682,7 +1682,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#locdficwrs .gt_stub {
+#mifftcuobr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1695,7 +1695,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#locdficwrs .gt_stub_row_group {
+#mifftcuobr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,15 +1709,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: top;
 }
 
-#locdficwrs .gt_row_group_first td {
+#mifftcuobr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#locdficwrs .gt_row_group_first th {
+#mifftcuobr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#locdficwrs .gt_summary_row {
+#mifftcuobr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1727,16 +1727,16 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#locdficwrs .gt_first_summary_row {
+#mifftcuobr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#locdficwrs .gt_first_summary_row.thick {
+#mifftcuobr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#locdficwrs .gt_last_summary_row {
+#mifftcuobr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1746,7 +1746,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#locdficwrs .gt_grand_summary_row {
+#mifftcuobr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1756,7 +1756,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#locdficwrs .gt_first_grand_summary_row {
+#mifftcuobr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1766,7 +1766,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-color: #D3D3D3;
 }
 
-#locdficwrs .gt_last_grand_summary_row_top {
+#mifftcuobr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1776,11 +1776,11 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#locdficwrs .gt_striped {
+#mifftcuobr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#locdficwrs .gt_table_body {
+#mifftcuobr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1789,7 +1789,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#locdficwrs .gt_footnotes {
+#mifftcuobr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1803,7 +1803,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#locdficwrs .gt_footnote {
+#mifftcuobr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1812,7 +1812,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#locdficwrs .gt_sourcenotes {
+#mifftcuobr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1826,7 +1826,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#locdficwrs .gt_sourcenote {
+#mifftcuobr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1834,63 +1834,63 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#locdficwrs .gt_left {
+#mifftcuobr .gt_left {
   text-align: left;
 }
 
-#locdficwrs .gt_center {
+#mifftcuobr .gt_center {
   text-align: center;
 }
 
-#locdficwrs .gt_right {
+#mifftcuobr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#locdficwrs .gt_font_normal {
+#mifftcuobr .gt_font_normal {
   font-weight: normal;
 }
 
-#locdficwrs .gt_font_bold {
+#mifftcuobr .gt_font_bold {
   font-weight: bold;
 }
 
-#locdficwrs .gt_font_italic {
+#mifftcuobr .gt_font_italic {
   font-style: italic;
 }
 
-#locdficwrs .gt_super {
+#mifftcuobr .gt_super {
   font-size: 65%;
 }
 
-#locdficwrs .gt_footnote_marks {
+#mifftcuobr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#locdficwrs .gt_asterisk {
+#mifftcuobr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#locdficwrs .gt_indent_1 {
+#mifftcuobr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#locdficwrs .gt_indent_2 {
+#mifftcuobr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#locdficwrs .gt_indent_3 {
+#mifftcuobr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#locdficwrs .gt_indent_4 {
+#mifftcuobr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#locdficwrs .gt_indent_5 {
+#mifftcuobr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1944,23 +1944,23 @@ Are there significant differences in HIV status across cases according to their 
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>tab_hiv_sor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="tegcguivcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tegcguivcq table {
+<div id="prbrwcxtok" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#prbrwcxtok table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tegcguivcq thead, #tegcguivcq tbody, #tegcguivcq tfoot, #tegcguivcq tr, #tegcguivcq td, #tegcguivcq th {
+#prbrwcxtok thead, #prbrwcxtok tbody, #prbrwcxtok tfoot, #prbrwcxtok tr, #prbrwcxtok td, #prbrwcxtok th {
   border-style: none;
 }
 
-#tegcguivcq p {
+#prbrwcxtok p {
   margin: 0;
   padding: 0;
 }
 
-#tegcguivcq .gt_table {
+#prbrwcxtok .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1986,12 +1986,12 @@ Are there significant differences in HIV status across cases according to their 
   border-left-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_caption {
+#prbrwcxtok .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tegcguivcq .gt_title {
+#prbrwcxtok .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2003,7 +2003,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-width: 0;
 }
 
-#tegcguivcq .gt_subtitle {
+#prbrwcxtok .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2015,7 +2015,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-width: 0;
 }
 
-#tegcguivcq .gt_heading {
+#prbrwcxtok .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2027,13 +2027,13 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_bottom_border {
+#prbrwcxtok .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_col_headings {
+#prbrwcxtok .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2048,7 +2048,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_col_heading {
+#prbrwcxtok .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2068,7 +2068,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#tegcguivcq .gt_column_spanner_outer {
+#prbrwcxtok .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2080,15 +2080,15 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 4px;
 }
 
-#tegcguivcq .gt_column_spanner_outer:first-child {
+#prbrwcxtok .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tegcguivcq .gt_column_spanner_outer:last-child {
+#prbrwcxtok .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tegcguivcq .gt_column_spanner {
+#prbrwcxtok .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2100,11 +2100,11 @@ Are there significant differences in HIV status across cases according to their 
   width: 100%;
 }
 
-#tegcguivcq .gt_spanner_row {
+#prbrwcxtok .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tegcguivcq .gt_group_heading {
+#prbrwcxtok .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2130,7 +2130,7 @@ Are there significant differences in HIV status across cases according to their 
   text-align: left;
 }
 
-#tegcguivcq .gt_empty_group_heading {
+#prbrwcxtok .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2145,15 +2145,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: middle;
 }
 
-#tegcguivcq .gt_from_md > :first-child {
+#prbrwcxtok .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tegcguivcq .gt_from_md > :last-child {
+#prbrwcxtok .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tegcguivcq .gt_row {
+#prbrwcxtok .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2172,7 +2172,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#tegcguivcq .gt_stub {
+#prbrwcxtok .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2185,7 +2185,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#tegcguivcq .gt_stub_row_group {
+#prbrwcxtok .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2199,15 +2199,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: top;
 }
 
-#tegcguivcq .gt_row_group_first td {
+#prbrwcxtok .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tegcguivcq .gt_row_group_first th {
+#prbrwcxtok .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tegcguivcq .gt_summary_row {
+#prbrwcxtok .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2217,16 +2217,16 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#tegcguivcq .gt_first_summary_row {
+#prbrwcxtok .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_first_summary_row.thick {
+#prbrwcxtok .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tegcguivcq .gt_last_summary_row {
+#prbrwcxtok .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2236,7 +2236,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_grand_summary_row {
+#prbrwcxtok .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2246,7 +2246,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#tegcguivcq .gt_first_grand_summary_row {
+#prbrwcxtok .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2256,7 +2256,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_last_grand_summary_row_top {
+#prbrwcxtok .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2266,11 +2266,11 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_striped {
+#prbrwcxtok .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tegcguivcq .gt_table_body {
+#prbrwcxtok .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2279,7 +2279,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_footnotes {
+#prbrwcxtok .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2293,7 +2293,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_footnote {
+#prbrwcxtok .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2302,7 +2302,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#tegcguivcq .gt_sourcenotes {
+#prbrwcxtok .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2316,7 +2316,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#tegcguivcq .gt_sourcenote {
+#prbrwcxtok .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2324,63 +2324,63 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#tegcguivcq .gt_left {
+#prbrwcxtok .gt_left {
   text-align: left;
 }
 
-#tegcguivcq .gt_center {
+#prbrwcxtok .gt_center {
   text-align: center;
 }
 
-#tegcguivcq .gt_right {
+#prbrwcxtok .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tegcguivcq .gt_font_normal {
+#prbrwcxtok .gt_font_normal {
   font-weight: normal;
 }
 
-#tegcguivcq .gt_font_bold {
+#prbrwcxtok .gt_font_bold {
   font-weight: bold;
 }
 
-#tegcguivcq .gt_font_italic {
+#prbrwcxtok .gt_font_italic {
   font-style: italic;
 }
 
-#tegcguivcq .gt_super {
+#prbrwcxtok .gt_super {
   font-size: 65%;
 }
 
-#tegcguivcq .gt_footnote_marks {
+#prbrwcxtok .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tegcguivcq .gt_asterisk {
+#prbrwcxtok .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tegcguivcq .gt_indent_1 {
+#prbrwcxtok .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tegcguivcq .gt_indent_2 {
+#prbrwcxtok .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tegcguivcq .gt_indent_3 {
+#prbrwcxtok .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tegcguivcq .gt_indent_4 {
+#prbrwcxtok .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tegcguivcq .gt_indent_5 {
+#prbrwcxtok .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2479,8 +2479,8 @@ Are there significant differences in HIV status across cases according to their 
 </details>
 <div class="webex-check">
 Is there a difference in the delay from diagnosis to notification by country?
-<div id="radio_DSFVFTDZRS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DSFVFTDZRS" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_DSFVFTDZRS" value="answer"> <span>No</span></label>
+<div id="radio_RGTMJVZNPK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RGTMJVZNPK" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_RGTMJVZNPK" value="answer"> <span>No</span></label>
 </div>
 </div>
 <details>
@@ -2585,6 +2585,12 @@ Is there a difference in the delay from diagnosis to notification by country?
 <h3 class="anchored" data-anchor-id="step-5.2-compare-case-based-and-aggregated-data">Step 5.2: Compare case-based and aggregated data</h3>
 <p><strong>Task</strong>: Create a plot comparing the number of cases reported to through the case-based flow and through the aggregated flow in each country.</p>
 <p>NOTE: Take into consideration that the column on cases in the aggregated data frame reports the <em>cumulative</em> number of cases.</p>
+<div class="webex-check">
+Which country is not reporting aggregated data?
+<div id="radio_CTEUSBLKID" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CTEUSBLKID" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_CTEUSBLKID" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_CTEUSBLKID" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_CTEUSBLKID" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_CTEUSBLKID" value=""> <span>E</span></label>
+</div>
+</div>
 <details>
 <summary style="text-decoration: underline; color: red;">
 <p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
@@ -2652,7 +2658,7 @@ Is there a difference in the delay from diagnosis to notification by country?
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

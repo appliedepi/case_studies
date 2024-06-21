@@ -1,6 +1,6 @@
 ---
 title: "Mpox: Importing, cleaning and describing data"
-author: "Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)"
+author: "Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group). Adapted by Alberto Mateo Urdiales"
 site: "bookdown::bookdown_site"
 output:
   bookdown::gitbook:
@@ -188,8 +188,6 @@ agg_data <- agg_data_raw_csv %>%
 ```
 
 # Basic descriptives of the case-based data
-
-Total number of cases: `r nrow(CB_Data)`
 
 ## Summary of the characteristics of the cases (tables and graphs)
 
