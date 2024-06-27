@@ -152,13 +152,13 @@ The first version was written by Xanthi Andrianou in October 2021.
 \pagebreak
 
 
-### Guidance
+## **Guidance**
 
-#### Background
+### Background
 
 The practical is based on a scenario that requires the **analysis of surveillance data** coming from two sources: **case-based information** reported by countries and **aggregated** case data collected from open sources. The datasets have been created to resemble the data collected during monitoring of mpox in Europe in 2022. 
 
-#### Scenario and objectives
+### Scenario and objectives
 
 Mpox has been reported in 5 countries for the first time in 2022. We have collected aggregated case numbers from open sources, and we have also reported case-based data. The objectives of the practical are the following:
 1.	Explore different types of files and how they can be imported in R
@@ -166,14 +166,14 @@ Mpox has been reported in 5 countries for the first time in 2022. We have collec
 3.	Perform a basic descriptive analysis using tables and graphs
 
 
-#### Previous level of expertise assumed
+### Previous level of expertise assumed
 
 To follow this case study you should be already familiar with the layout of Rstudio and on basic R concepts, such as packages, functions and arguments.
 
 If you feel you need to familiarise a bit further with these aspects, read the EpiRhandbook chapter on [R basics](https://epirhandbook.com/en/new_pages/basics.html)
 
 
-#### Preparation for the case study
+### Preparation for the case study
 
 1. Download folder named r_practical and extract contents in the local laptop
 
@@ -215,13 +215,13 @@ pacman::p_load(
   tidyverse  # data management and visualization
 )
 
-cb_data_raw_csv <- import("../cs/ENG/r_practical/data/raw/E_pox_case_based_data.csv")
-cb_data_raw_json <- import("../cs/ENG/r_practical/data/raw/E_pox_case_based_data.json")
-cb_data_raw_xlsx <- import("../cs/ENG/r_practical/data/raw/E_pox_case_based_data.xlsx")
+cb_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.csv")
+cb_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.json")
+cb_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.xlsx")
 
-agg_data_raw_csv <- import("../cs/ENG/r_practical/data/raw/E_pox_aggregated_data.csv")
-agg_data_raw_json <- import("../cs/ENG/r_practical/data/raw/E_pox_aggregated_data.json")
-agg_data_raw_xlsx <- import("../cs/ENG/r_practical/data/raw/E_pox_aggregated_data.xlsx")
+agg_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.csv")
+agg_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.json")
+agg_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.xlsx")
 ```
 
 
@@ -343,14 +343,14 @@ There are several ways in which you can import the different data frames. Inside
 ```{r , echo=TRUE, eval=FALSE}
 # Importing ------------------------------------------------------
 # Case-based data
-cb_data_raw_csv <- import("data/raw/E_pox_case_based_data.csv")
-cb_data_raw_json <- import("data/raw/E_pox_case_based_data.json")
-cb_data_raw_xlsx <- import("data/raw/E_pox_case_based_data.xlsx")
+cb_data_raw_csv <- import("data/E_pox_case_based_data.csv")
+cb_data_raw_json <- import("data/E_pox_case_based_data.json")
+cb_data_raw_xlsx <- import("data/E_pox_case_based_data.xlsx")
 
 # Aggregated data
-agg_data_raw_csv <- import("data/raw/E_pox_aggregated_data.csv")
-agg_data_raw_json <- import("data/raw/E_pox_aggregated_data.json")
-agg_data_raw_xlsx <- import("data/raw/E_pox_aggregated_data.xlsx")
+agg_data_raw_csv <- import("data/E_pox_aggregated_data.csv")
+agg_data_raw_json <- import("data/E_pox_aggregated_data.json")
+agg_data_raw_xlsx <- import("data/E_pox_aggregated_data.xlsx")
 
 ```
 </br>

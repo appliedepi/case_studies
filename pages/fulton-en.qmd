@@ -969,7 +969,7 @@ b) Write it in a dynamic way, so that the dates and numbers are updated automati
 </br>
 This is an example of how the code should look like in your rmarkdown file:
 ```{r, echo = FALSE, eval=TRUE, out.width = "1000px"}
-knitr::include_graphics("images/Summary_fulton.png", error = F)
+knitr::include_graphics("cs/ENG/fulton_en/images/Summary_fulton.png", error = F)
 ```
 </br>
 </details>
