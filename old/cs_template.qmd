@@ -8,6 +8,109 @@ format:
     include-after-body: webex.js
 ---
 
+# Case study template instructions
+
+Please, use this template to guide you through creating or adapting a case study for Applied Epi. This template helps to create the website page section that will host the case study.
+Alongside the case study guide, you should prepare in a zipped folder all the necessary materials available to download for anyone who wants to complete the case study. This zipped folder should contain three different subfolders:
+
+-   data: with all the necessary data to complete the case study
+-   outputs: a folder where the participant will be asked to store outputs from the case study analysis (e.g., plots, tables...)
+-   scripts: an empty folder where participants can save the scripts (if needed) for the case study
+-   backup: a folder with the solution script (if appropriate)
+
+
+## Section 1. Considerations for standardised coding in this case-study template
+
+
+### General coding framework if using R
+
+* When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}
+* Use a vertical approach to writing coding - easier to read
+* Use spaces in your code
+* Use lowercase and underscores in your object names
+* For quick tabulations Use tabyl() from {janitor}, not table() from {base}
+* Use the magrittr pipe %>%, not the native pipe
+* Use  <-   not =  
+* Write out argument names, like this:  
+
+```{r, echo=T, eval=F}
+ggplot(
+  data = surv,
+  mapping = aes(
+    x = district,
+    y = sex)+
+geom_histogram()
+
+```
+
+
+
+### Vocabulary  
+
+* **“Object”** - not “variable”  
+* **“Package”** - an R package such as {dplyr}, or {janitor}. Do not use the word “library” or “libraries” to describe a single package. To reduce confusion, the “library” should refer to the folder called “library” where the R packages are stored in the computer.  
+* **“Function”** - a function like filter(), select(), geom_histogram(), etc.  
+* **“Command”** - code that runs to complete a given task. E.g. a ggplot() command may contain multiple functions connected by + symbols, a cleaning “command” may contain many functions connected by pipes.  
+* **“Argument”** - the specifications provided to a function e.g. data = , mapping = , collapse = , etc. (should always be written with = for clarity)  
+* **“Operator”** - As in the “assignment operator” or the “pipe operator”. Using “symbol” is OK, but not “pipe character” or “ assignment function”  
+* **“Save”** - reserve this word for exporting a file outside of R, such as for ggsave() or the {flextable} function save_as_docx(). Can be synonymous with “export”.  
+* **“Create”**, “Assign as” and “Define as” - use these words to refer to defining an object within R, using the assignment operator <-   
+* **“Import (data)”** - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).  
+* **“Load (packages)”** - use the word “load” for packages, as it aligns with the nomenclature of the p_load() function (or “install”, for the step prior to loading)  
+* **“RStudio project”** - not an “R Project”.  
+* **“Quotation marks”** vs. “Inverted commas” - “inverted” is a complicated word for non-native English speakers  
+* **Columns & Rows** vs. Variables & Observations. Structurally we talk about “columns and rows” but abstractly we talk about variables and observations.  
+ 
+
+
+
+
+
+
+### Including figures
+When including figures, make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto's [guide](https://quarto.org/docs/authoring/figures.html)
+
+You can also use the code below to insert an image that has been saved in a subfolder, as per this example.
+
+```{r script-example, fig.margin = TRUE, echo = TRUE, fig.width = 3, out.width = "25%", fig.cap = ""}
+knitr::include_graphics("images/Applied_Epi_logo.png", error = F)
+```
+
+### Including questions 
+
+Please, include questions throughout the case study. 
+
+If the questions included are "open", you can use the "Hints and Solutions" feature included in this template to suggest answers/reflections or propose coding solutions.  
+
+If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their [website](https://psyteachr.github.io/webexercises/articles/webexercises.html) and in their [GitHub](https://github.com/psyteachr/webexercises).
+
+To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.
+
+Here you find an example of a multiple choice question:
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Infectious period",
+  "Susceptibility",
+  answer = "Incubation period",
+  "Communicability period"
+)
+
+
+cat("The time elapsed between exposure to a pathogen and the appearence of symptoms is known as:", longmcq(opts))
+
+```
+:::
+
+
+### Unnumbered sections
+Use {.unnumbered} after every heading so that they are not numbered in the final rendering 
+
+
 <!-- Some considerations about about this quarto template 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
@@ -20,7 +123,7 @@ format:
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
 
-## Fixed sections in the case study
+## Section 2. Fixed sections in the case study
 
 ### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {.unnumbered}    
 
@@ -216,7 +319,7 @@ For example:
 
 
 
-## Specific to the case study
+## Section 3. Specific to the case study
 
 Finally, add the different sections of the case study. Remember to include questions +/- hints and solutions as appropriate. 
 
