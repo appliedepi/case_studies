@@ -1,0 +1,79 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Case-studies Open Repository 
+
+
+```{r, echo=F}
+pacman::p_load(
+  rio,
+  here,
+  janitor,
+  DT,
+  tidyverse
+)
+```
+
+
+**Objective** : In this repository can help you to develop your epidemiological through case studies covering common epidemiological situations and methods.
+
+**Written by epidemiologists, for epidemiologists**
+
+[**Applied Epi**](https://www.appliedepi.org/) is a nonprofit organisation and grassroots movement of frontline epis from around the world. We write in our spare time to offer this resource to the community. Your encouragement and feedback is most welcome:
+
+-   Visit our [**website**](https://www.appliedepi.org/) and [**join our contact list**](https://docs.google.com/forms/d/e/1FAIpQLSdtk7Mg32lYQ3ucbIM-kIwIRxgRwDfG5TJHsVAbFjQ1i6fwiw/viewform?usp=send_form)
+
+-   **contact\@appliedepi.org**, tweet [**\@appliedepi**](https://x.com/appliedepi), or [**LinkedIn**](https://www.linkedin.com/company/appliedepi/?originalSubdomain=it)
+
+-   Submit issues to our **Github repository**
+
+# How to use this repository 
+
+- Look at different case studies that we offer in the **Table** located in the @sec-locs.
+
+- Filter the table by language, topic, difficulty or any of the other options to choose the case study you are intersted in.
+
+- Click on the link which will bring you the page of the specific case study and follow the instructions.
+
+# Acknowledgements 
+
+## Authors 
+
+# List of Case-studies {#sec-locs}
+
+See below the list of case studies available in the repository
+
+
+
+```{r echo = F}
+table_cases <- tribble(
+  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Keywords, ~Technical_Complexity, ~Methodological_Complexity, 
+  "Fulton", 'pages/fulton-en.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "COVID-19; SARS-COV-2; Outbreak", "Intermediate", "Basic",  
+  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Gastrointestinal;Brote", "Intermedio", "Intermedio"
+)
+
+```
+
+```{r, echo = F, eval = T}
+
+# Render the table with DT, making the 'Link' column clickable with custom text
+datatable(table_cases, escape = FALSE, filter = "top", options = list(
+  columnDefs = list(
+    list(targets = 2, render = JS(
+      "function(data, type, row, meta) {
+        if(type === 'display') {
+          var linkText = 'Link'; // Use the 'Name' column as the display text
+          data = '<a href=\"' + data + '\">' + linkText + '</a>';
+        }
+        return data;
+      }"
+    ))
+  )
+), callback = JS("table.page.len(5).draw();"))
+
+```
+

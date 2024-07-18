@@ -82,7 +82,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="sec-rpractical" class="level1">
-<h1>R basics practical</h1>
+<h1>R basics practical (ENG)</h1>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Case study characteristics</strong></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Name</strong></td>
+<td style="text-align: left;">R practical</td>
+</tr>
+<tr class="even">
+<td><strong>Language</strong></td>
+<td style="text-align: left;">English</td>
+</tr>
+<tr class="odd">
+<td><strong>Tool</strong></td>
+<td style="text-align: left;">R</td>
+</tr>
+<tr class="even">
+<td><strong>Location</strong></td>
+<td style="text-align: left;">EU</td>
+</tr>
+<tr class="odd">
+<td><strong>Scale</strong></td>
+<td style="text-align: left;">International</td>
+</tr>
+<tr class="even">
+<td><strong>Diseases</strong></td>
+<td style="text-align: left;">Mpox</td>
+</tr>
+<tr class="odd">
+<td><strong>Keywords</strong></td>
+<td style="text-align: left;">Mpox; Cleaning; Descriptives</td>
+</tr>
+<tr class="even">
+<td><strong>Technical complexity</strong></td>
+<td style="text-align: left;">Basic</td>
+</tr>
+<tr class="odd">
+<td><strong>Methodological complexity</strong></td>
+<td style="text-align: left;">Basic</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Authorship</em></strong><br>
+Original authors: Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)<br>
+Data source: Fictional data provided by ECDC EI Group for training purposes<br>
+Adapted by: Alberto Mateo Urdiales to the case study template<br>
+</p>
+<section id="instructions" class="level3">
+<h3 class="anchored" data-anchor-id="instructions">Instructions</h3>
+<section id="getting-help" class="level4">
+<h4 class="anchored" data-anchor-id="getting-help">Getting Help</h4>
+<p>There are several ways to get help:</p>
+<ol type="1">
+<li>Look for the “hints” and solutions (see below)</li>
+<li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
+</ol>
+</section>
+<section id="hints-and-solutions" class="level4">
+<h4 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h4>
+<p>Here is what the “helpers” look like:</p>
+<!--Note that this is the way of including hints and explanations to the solutions -->
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Here you will see a helpful hint!</p>
+<p><br></p>
+</details>
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is more explanation about why the solution works.</p>
+<p><br></p>
+</details>
+<!--
+NOTE: End of solution
+-->
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+</section>
+<section id="posting-a-question-in-the-community-forum" class="level4">
+<h4 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h4>
+<p>… description here about posting in Community… TO BE COMPLETED BY APPLIED EPI</p>
+</section>
+<section id="terms-of-use" class="level4">
+<h4 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h4>
+<!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
+</section>
+</section>
+<section id="feedback-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h3>
+<ul>
+<li>You can write feedback and suggestions on this case study at the <a href="https://github.com/appliedepi/case_studies">GitHub issues page</a></li>
+<li>Alternatively email us at: <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a></li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="version-and-revisions" class="level3">
+<h3 class="anchored" data-anchor-id="version-and-revisions">Version and revisions</h3>
+<p>The first version was written by Xanthi Andrianou in October 2021.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: left;">Changes made</th>
+<th style="text-align: right;">Version</th>
+<th>Author</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>June 2024</td>
+<td style="text-align: left;">Adapted to case study template</td>
+<td style="text-align: right;">1.1</td>
+<td>Alberto Mateo Urdiales</td>
+</tr>
+<tr class="even">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="guidance" class="level2">
+<h2 class="anchored" data-anchor-id="guidance"><strong>Guidance</strong></h2>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
 <p>The practical is based on a scenario that requires the <strong>analysis of surveillance data</strong> coming from two sources: <strong>case-based information</strong> reported by countries and <strong>aggregated</strong> case data collected from open sources. The datasets have been created to resemble the data collected during monitoring of mpox in Europe in 2022.</p>
@@ -102,12 +264,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Download folder named r_practical and extract contents in the local laptop</p></li>
 <li><p>Create an Rstudio project in the folder r_practical. If you are unsure on how to do that, read the EpiRhandbook on <a href="https://epirhandbook.com/en/new_pages/r_projects.html">R projects</a></p></li>
 <li><p>Inside “r_practical”: Subfolder “data” contains the raw data you will use in this case study. You should see six different files, three called <em>E_pox_aggregated_data</em> and three <em>E_pox_case_based_data</em>. Each has a specific file type.</p></li>
-<li><p>Inside “r_practical”: Subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” where you can find a solution Rmarkdown script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.</p></li>
+<li><p>Inside “r_practical”: Subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” where you can find a solution R script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.</p></li>
 <li><p>Inside “r_practical”: Subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.</p></li>
 </ol>
 <!-- This is where we load the data so that the outputs are shown, but remains not visible when rendering
 
 -->
+</section>
 </section>
 </section>
 <section id="import-and-explore-data" class="level1 unnumbered">
@@ -128,11 +291,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see your language locale</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To change it into English</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">"LC_ALL"</span>, <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see your language locale</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To change it into English</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">"LC_ALL"</span>, <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
@@ -155,21 +318,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># importing data  </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  skimr,      <span class="co"># get overview of data</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># working with dates</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  epikit,     <span class="co"># to create age categories</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  gtsummary,  <span class="co"># summary statistics, tests and regressions </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  apyramid,   <span class="co"># plotting age pyramids </span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># importing data  </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  skimr,      <span class="co"># get overview of data</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># working with dates</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  epikit,     <span class="co"># to create age categories</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  gtsummary,  <span class="co"># summary statistics, tests and regressions </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  apyramid,   <span class="co"># plotting age pyramids </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
@@ -187,16 +350,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing ------------------------------------------------------</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-based data</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cb_data_raw_csv <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.csv"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cb_data_raw_json <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.json"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cb_data_raw_xlsx <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.xlsx"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregated data</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>agg_data_raw_csv <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.csv"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>agg_data_raw_json <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.json"</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>agg_data_raw_xlsx <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing ------------------------------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-based data</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cb_data_raw_csv <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.csv"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>cb_data_raw_json <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.json"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cb_data_raw_xlsx <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_case_based_data.xlsx"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregated data</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>agg_data_raw_csv <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.csv"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>agg_data_raw_json <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.json"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>agg_data_raw_xlsx <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/E_pox_aggregated_data.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
@@ -225,50 +388,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different case-based data frames</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_csv)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_json)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_xlsx)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different categories of gender and clinical columns in one of the cb data frames</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, Gender)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, ClinicalSymptoms)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, Outcome)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, HIVStatus)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, SexualOrientation)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different aggregated data frames</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_csv)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_json)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_xlsx)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove json and xlsx files as they are exactly the same as the csv ones. Within rm() we ask for the objects containing the pattern "json" or "xlsx" to be removed from the environment</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">pattern =</span> <span class="st">"json|xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different case-based data frames</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_csv)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_json)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data_raw_xlsx)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different categories of gender and clinical columns in one of the cb data frames</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, Gender)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, ClinicalSymptoms)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, Outcome)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, HIVStatus)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data_raw_csv, SexualOrientation)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the different aggregated data frames</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_csv)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_json)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(agg_data_raw_xlsx)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove json and xlsx files as they are exactly the same as the csv ones. Within rm() we ask for the objects containing the pattern "json" or "xlsx" to be removed from the environment</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">pattern =</span> <span class="st">"json|xlsx"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
 <div class="webex-check">
 How many columns does the aggregated data frame have?
-<div id="radio_XPVWQWYXVU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XPVWQWYXVU" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_XPVWQWYXVU" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_XPVWQWYXVU" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_XPVWQWYXVU" value=""> <span>101</span></label>
+<div id="radio_WBOSYMWEAQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WBOSYMWEAQ" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_WBOSYMWEAQ" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_WBOSYMWEAQ" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_WBOSYMWEAQ" value=""> <span>101</span></label>
 </div>
 </div>
 <div class="webex-check">
 What is the class of the column DateOfNotification in the case-based data?
-<div id="radio_WTYHNYNIQZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WTYHNYNIQZ" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_WTYHNYNIQZ" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_WTYHNYNIQZ" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_WTYHNYNIQZ" value=""> <span>Factor</span></label>
+<div id="radio_EEHMXFWZWV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EEHMXFWZWV" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_EEHMXFWZWV" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_EEHMXFWZWV" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_EEHMXFWZWV" value=""> <span>Factor</span></label>
 </div>
 </div>
 <div class="webex-check">
 For how many cases is the HIV status Unknown or missing?
-<div id="radio_HJEQBFGZPR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HJEQBFGZPR" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_HJEQBFGZPR" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_HJEQBFGZPR" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_HJEQBFGZPR" value=""> <span>446</span></label>
+<div id="radio_XHZBFVUXUY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XHZBFVUXUY" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_XHZBFVUXUY" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_XHZBFVUXUY" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_XHZBFVUXUY" value=""> <span>446</span></label>
 </div>
 </div>
 </section>
@@ -309,92 +472,92 @@ For how many cases is the HIV status Unknown or missing?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called cb_data which is the clean version of the raw data, applying the cleaning functions</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cb_data <span class="ot">&lt;-</span> cb_data_raw_csv <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> <span class="co"># standardises names and puts all into lower case </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(Note: after this point all column names have changed)</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_of_notification =</span> <span class="fu">ymd</span>(date_of_notification)) <span class="sc">%&gt;%</span>  <span class="co">#transform ONE column into date</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"date"</span>), </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ymd</span>(.x))) <span class="sc">%&gt;%</span>  <span class="co">#transforms ALL columns starting with "date" into dates</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_of_notification, <span class="co"># create week column with Monday start</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                              <span class="at">unit =</span> <span class="st">"week"</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                              <span class="at">week_start =</span> <span class="st">"Monday"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">==</span> <span class="st">""</span>, <span class="cn">NA</span>, .x)))  <span class="sc">%&gt;%</span> <span class="co">#transforms empty cells into NA across all character columns</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">recode</span>(gender,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"Female"</span>,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Male"</span>,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"O"</span> <span class="ot">=</span> <span class="st">"Other"</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"UNK"</span> <span class="ot">=</span> <span class="st">"Unknown"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">==</span> <span class="st">"UNK"</span>, <span class="st">"Unknown"</span>, .x)))  <span class="sc">%&gt;%</span> <span class="co">#transforms UNK to Unknown across all character columns</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">ifelse</span>(outcome <span class="sc">==</span> <span class="st">"A"</span>, <span class="st">"Alive"</span>, outcome)) <span class="sc">%&gt;%</span>   <span class="co">#we can recode as well with ifelse if we want to change only one or two categories</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hiv_status =</span> <span class="fu">case_when</span>(hiv_status <span class="sc">==</span> <span class="st">"NEG"</span> <span class="sc">~</span> <span class="st">"Negative"</span>,    <span class="co">#for more complex recoding better case_when</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>                                hiv_status <span class="sc">==</span> <span class="st">"POS"</span> <span class="sc">~</span> <span class="st">"Positive"</span>,</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span>                <span class="sc">~</span> <span class="st">"Unknown/missing"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexual_orientation =</span> <span class="fu">case_when</span>(sexual_orientation <span class="sc">==</span> <span class="st">"BISEXUAL"</span> <span class="sc">~</span> <span class="st">"Bisexual"</span>,</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"HETERO"</span> <span class="sc">~</span> <span class="st">"Heterosexual"</span>,</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"MSM"</span> <span class="sc">~</span> <span class="st">"MSM/homo or bisexual male"</span>,</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span>                        <span class="sc">~</span>  <span class="st">"Unknown/missing"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">age_categories</span>(age, </span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">lower =</span> <span class="dv">0</span>,      <span class="co">#set up the lower age</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">upper =</span> <span class="dv">70</span>,     <span class="co">#set up the upper age</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">by =</span> <span class="dv">10</span>))       <span class="co">#set up the age breaks</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that all changes have been made correctly</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data)</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, gender)</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, clinical_symptoms)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, outcome)</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, hiv_status)</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, sexual_orientation)</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, week_date)</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, age_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called cb_data which is the clean version of the raw data, applying the cleaning functions</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>cb_data <span class="ot">&lt;-</span> cb_data_raw_csv <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> <span class="co"># standardises names and puts all into lower case </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(Note: after this point all column names have changed)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_of_notification =</span> <span class="fu">ymd</span>(date_of_notification)) <span class="sc">%&gt;%</span>  <span class="co">#transform ONE column into date</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"date"</span>), </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ymd</span>(.x))) <span class="sc">%&gt;%</span>  <span class="co">#transforms ALL columns starting with "date" into dates</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_of_notification, <span class="co"># create week column with Monday start</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                              <span class="at">unit =</span> <span class="st">"week"</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                              <span class="at">week_start =</span> <span class="st">"Monday"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">==</span> <span class="st">""</span>, <span class="cn">NA</span>, .x)))  <span class="sc">%&gt;%</span> <span class="co">#transforms empty cells into NA across all character columns</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">recode</span>(gender,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"Female"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Male"</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"O"</span> <span class="ot">=</span> <span class="st">"Other"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"UNK"</span> <span class="ot">=</span> <span class="st">"Unknown"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">==</span> <span class="st">"UNK"</span>, <span class="st">"Unknown"</span>, .x)))  <span class="sc">%&gt;%</span> <span class="co">#transforms UNK to Unknown across all character columns</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">ifelse</span>(outcome <span class="sc">==</span> <span class="st">"A"</span>, <span class="st">"Alive"</span>, outcome)) <span class="sc">%&gt;%</span>   <span class="co">#we can recode as well with ifelse if we want to change only one or two categories</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hiv_status =</span> <span class="fu">case_when</span>(hiv_status <span class="sc">==</span> <span class="st">"NEG"</span> <span class="sc">~</span> <span class="st">"Negative"</span>,    <span class="co">#for more complex recoding better case_when</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>                                hiv_status <span class="sc">==</span> <span class="st">"POS"</span> <span class="sc">~</span> <span class="st">"Positive"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>                                <span class="cn">TRUE</span>                <span class="sc">~</span> <span class="st">"Unknown/missing"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexual_orientation =</span> <span class="fu">case_when</span>(sexual_orientation <span class="sc">==</span> <span class="st">"BISEXUAL"</span> <span class="sc">~</span> <span class="st">"Bisexual"</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"HETERO"</span> <span class="sc">~</span> <span class="st">"Heterosexual"</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"MSM"</span> <span class="sc">~</span> <span class="st">"MSM/homo or bisexual male"</span>,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>                                        <span class="cn">TRUE</span>                        <span class="sc">~</span>  <span class="st">"Unknown/missing"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">age_categories</span>(age, </span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">lower =</span> <span class="dv">0</span>,      <span class="co">#set up the lower age</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">upper =</span> <span class="dv">70</span>,     <span class="co">#set up the upper age</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">by =</span> <span class="dv">10</span>))       <span class="co">#set up the age breaks</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that all changes have been made correctly</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cb_data)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, gender)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, clinical_symptoms)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, outcome)</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, hiv_status)</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, sexual_orientation)</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, week_date)</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(cb_data, age_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
 <div class="webex-check">
 How many male cases we have in the data frame?
-<div id="radio_LEHYKMGVZU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LEHYKMGVZU" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_LEHYKMGVZU" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_LEHYKMGVZU" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_LEHYKMGVZU" value=""> <span>1523</span></label>
+<div id="radio_QXSPPCLDAF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QXSPPCLDAF" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_QXSPPCLDAF" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_QXSPPCLDAF" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_QXSPPCLDAF" value=""> <span>1523</span></label>
 </div>
 </div>
 <div class="webex-check">
 Which week has the largest number of cases?
-<div id="radio_OKGCRGMQKU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OKGCRGMQKU" value="answer"> <span>2022-04-11</span></label><label><input type="radio" autocomplete="off" name="radio_OKGCRGMQKU" value=""> <span>2022-07-25</span></label><label><input type="radio" autocomplete="off" name="radio_OKGCRGMQKU" value=""> <span>2022-02-28</span></label><label><input type="radio" autocomplete="off" name="radio_OKGCRGMQKU" value=""> <span>2022-05-09</span></label>
+<div id="radio_MFBPZYGHSN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MFBPZYGHSN" value="answer"> <span>2022-04-11</span></label><label><input type="radio" autocomplete="off" name="radio_MFBPZYGHSN" value=""> <span>2022-07-25</span></label><label><input type="radio" autocomplete="off" name="radio_MFBPZYGHSN" value=""> <span>2022-02-28</span></label><label><input type="radio" autocomplete="off" name="radio_MFBPZYGHSN" value=""> <span>2022-05-09</span></label>
 </div>
 </div>
 <div class="webex-check">
 How many cases with missing age are present?
-<div id="radio_UKBJJKGXQP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UKBJJKGXQP" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_UKBJJKGXQP" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_UKBJJKGXQP" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_UKBJJKGXQP" value=""> <span>396</span></label>
+<div id="radio_KBJWCKBBZW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KBJWCKBBZW" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_KBJWCKBBZW" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_KBJWCKBBZW" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_KBJWCKBBZW" value=""> <span>396</span></label>
 </div>
 </div>
 </section>
@@ -412,21 +575,21 @@ How many cases with missing age are present?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check class of date of reporting column</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(agg_data_raw_csv<span class="sc">$</span>DateRep) <span class="co">#It is a date, so we do not need to change its class</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called agg_data which is the clean version of the raw data, applying the cleaning functions</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>agg_data <span class="ot">&lt;-</span> agg_data_raw_csv <span class="sc">%&gt;%</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> <span class="co"># standardises names and puts all into lower case </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(Note: after this point all column names have changed)</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_rep, <span class="co"># create week column with Monday start</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">unit =</span> <span class="st">"week"</span>,</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                              <span class="at">week_start =</span> <span class="st">"Monday"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check class of date of reporting column</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(agg_data_raw_csv<span class="sc">$</span>DateRep) <span class="co">#It is a date, so we do not need to change its class</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called agg_data which is the clean version of the raw data, applying the cleaning functions</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>agg_data <span class="ot">&lt;-</span> agg_data_raw_csv <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> <span class="co"># standardises names and puts all into lower case </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#(Note: after this point all column names have changed)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_rep, <span class="co"># create week column with Monday start</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                              <span class="at">unit =</span> <span class="st">"week"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>                              <span class="at">week_start =</span> <span class="st">"Monday"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
 </details>
@@ -447,8 +610,8 @@ How many cases with missing age are present?
 </details>
 <div class="webex-check">
 What’s the country with the largest percentage of cases?
-<div id="radio_BACFJDUXTH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BACFJDUXTH" value=""> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_BACFJDUXTH" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_BACFJDUXTH" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_BACFJDUXTH" value="answer"> <span>A</span></label>
+<div id="radio_KHCLUIYFVL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KHCLUIYFVL" value=""> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_KHCLUIYFVL" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_KHCLUIYFVL" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_KHCLUIYFVL" value="answer"> <span>A</span></label>
 </div>
 </div>
 <details>
@@ -457,33 +620,33 @@ What’s the country with the largest percentage of cases?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an object with the table</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cb_country_table <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country) <span class="sc">%&gt;%</span> <span class="co">#select the column that we want to use in the table</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>() <span class="co"># create the table</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ask R to print the table</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>cb_country_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an object with the table</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cb_country_table <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country) <span class="sc">%&gt;%</span> <span class="co">#select the column that we want to use in the table</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_summary</span>() <span class="co"># create the table</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ask R to print the table</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>cb_country_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="uiqbrzopdy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uiqbrzopdy table {
+<div id="kwggimzhjh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kwggimzhjh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uiqbrzopdy thead, #uiqbrzopdy tbody, #uiqbrzopdy tfoot, #uiqbrzopdy tr, #uiqbrzopdy td, #uiqbrzopdy th {
+#kwggimzhjh thead, #kwggimzhjh tbody, #kwggimzhjh tfoot, #kwggimzhjh tr, #kwggimzhjh td, #kwggimzhjh th {
   border-style: none;
 }
 
-#uiqbrzopdy p {
+#kwggimzhjh p {
   margin: 0;
   padding: 0;
 }
 
-#uiqbrzopdy .gt_table {
+#kwggimzhjh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -509,12 +672,12 @@ What’s the country with the largest percentage of cases?
   border-left-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_caption {
+#kwggimzhjh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uiqbrzopdy .gt_title {
+#kwggimzhjh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -526,7 +689,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-width: 0;
 }
 
-#uiqbrzopdy .gt_subtitle {
+#kwggimzhjh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -538,7 +701,7 @@ What’s the country with the largest percentage of cases?
   border-top-width: 0;
 }
 
-#uiqbrzopdy .gt_heading {
+#kwggimzhjh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -550,13 +713,13 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_bottom_border {
+#kwggimzhjh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_col_headings {
+#kwggimzhjh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -571,7 +734,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_col_heading {
+#kwggimzhjh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -591,7 +754,7 @@ What’s the country with the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#uiqbrzopdy .gt_column_spanner_outer {
+#kwggimzhjh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -603,15 +766,15 @@ What’s the country with the largest percentage of cases?
   padding-right: 4px;
 }
 
-#uiqbrzopdy .gt_column_spanner_outer:first-child {
+#kwggimzhjh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uiqbrzopdy .gt_column_spanner_outer:last-child {
+#kwggimzhjh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uiqbrzopdy .gt_column_spanner {
+#kwggimzhjh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -623,11 +786,11 @@ What’s the country with the largest percentage of cases?
   width: 100%;
 }
 
-#uiqbrzopdy .gt_spanner_row {
+#kwggimzhjh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uiqbrzopdy .gt_group_heading {
+#kwggimzhjh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -653,7 +816,7 @@ What’s the country with the largest percentage of cases?
   text-align: left;
 }
 
-#uiqbrzopdy .gt_empty_group_heading {
+#kwggimzhjh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -668,15 +831,15 @@ What’s the country with the largest percentage of cases?
   vertical-align: middle;
 }
 
-#uiqbrzopdy .gt_from_md > :first-child {
+#kwggimzhjh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uiqbrzopdy .gt_from_md > :last-child {
+#kwggimzhjh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uiqbrzopdy .gt_row {
+#kwggimzhjh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -695,7 +858,7 @@ What’s the country with the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#uiqbrzopdy .gt_stub {
+#kwggimzhjh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -708,7 +871,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#uiqbrzopdy .gt_stub_row_group {
+#kwggimzhjh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -722,15 +885,15 @@ What’s the country with the largest percentage of cases?
   vertical-align: top;
 }
 
-#uiqbrzopdy .gt_row_group_first td {
+#kwggimzhjh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uiqbrzopdy .gt_row_group_first th {
+#kwggimzhjh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uiqbrzopdy .gt_summary_row {
+#kwggimzhjh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -740,16 +903,16 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#uiqbrzopdy .gt_first_summary_row {
+#kwggimzhjh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_first_summary_row.thick {
+#kwggimzhjh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uiqbrzopdy .gt_last_summary_row {
+#kwggimzhjh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -759,7 +922,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_grand_summary_row {
+#kwggimzhjh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -769,7 +932,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#uiqbrzopdy .gt_first_grand_summary_row {
+#kwggimzhjh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -779,7 +942,7 @@ What’s the country with the largest percentage of cases?
   border-top-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_last_grand_summary_row_top {
+#kwggimzhjh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -789,11 +952,11 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_striped {
+#kwggimzhjh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uiqbrzopdy .gt_table_body {
+#kwggimzhjh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -802,7 +965,7 @@ What’s the country with the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_footnotes {
+#kwggimzhjh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -816,7 +979,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_footnote {
+#kwggimzhjh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -825,7 +988,7 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#uiqbrzopdy .gt_sourcenotes {
+#kwggimzhjh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -839,7 +1002,7 @@ What’s the country with the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#uiqbrzopdy .gt_sourcenote {
+#kwggimzhjh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -847,63 +1010,63 @@ What’s the country with the largest percentage of cases?
   padding-right: 5px;
 }
 
-#uiqbrzopdy .gt_left {
+#kwggimzhjh .gt_left {
   text-align: left;
 }
 
-#uiqbrzopdy .gt_center {
+#kwggimzhjh .gt_center {
   text-align: center;
 }
 
-#uiqbrzopdy .gt_right {
+#kwggimzhjh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uiqbrzopdy .gt_font_normal {
+#kwggimzhjh .gt_font_normal {
   font-weight: normal;
 }
 
-#uiqbrzopdy .gt_font_bold {
+#kwggimzhjh .gt_font_bold {
   font-weight: bold;
 }
 
-#uiqbrzopdy .gt_font_italic {
+#kwggimzhjh .gt_font_italic {
   font-style: italic;
 }
 
-#uiqbrzopdy .gt_super {
+#kwggimzhjh .gt_super {
   font-size: 65%;
 }
 
-#uiqbrzopdy .gt_footnote_marks {
+#kwggimzhjh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uiqbrzopdy .gt_asterisk {
+#kwggimzhjh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uiqbrzopdy .gt_indent_1 {
+#kwggimzhjh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uiqbrzopdy .gt_indent_2 {
+#kwggimzhjh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uiqbrzopdy .gt_indent_3 {
+#kwggimzhjh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uiqbrzopdy .gt_indent_4 {
+#kwggimzhjh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uiqbrzopdy .gt_indent_5 {
+#kwggimzhjh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -977,31 +1140,31 @@ What’s the country with the largest percentage of cases?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>epicurve_epox <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> cb_data,          <span class="co">#data to be used</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">aes</span>(<span class="at">x =</span> week_date)) <span class="sc">+</span>    <span class="co">#with geom_histogram() you only need to assign the x axis</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>,                   <span class="co">#binwidth 7 ensures that the width represents 7 days</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"darkgreen"</span>,               <span class="co">#colour inside the bins</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>,                  <span class="co">#outline colour of the bins</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span>                    <span class="co">#transparency of the bins</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported in 2022"</span>) <span class="sc">+</span>  <span class="co">#add a title</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>                                  <span class="co">#assign a predefined theme</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis text</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y axis </span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))   <span class="co">#rotate the x axis text</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>epicurve_epox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>epicurve_epox <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> cb_data,          <span class="co">#data to be used</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">aes</span>(<span class="at">x =</span> week_date)) <span class="sc">+</span>    <span class="co">#with geom_histogram() you only need to assign the x axis</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>,                   <span class="co">#binwidth 7 ensures that the width represents 7 days</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"darkgreen"</span>,               <span class="co">#colour inside the bins</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>,                  <span class="co">#outline colour of the bins</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span>                    <span class="co">#transparency of the bins</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported in 2022"</span>) <span class="sc">+</span>  <span class="co">#add a title</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>                                  <span class="co">#assign a predefined theme</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis text</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y axis </span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))   <span class="co">#rotate the x axis text</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>epicurve_epox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1025,103 +1188,35 @@ What’s the country with the largest percentage of cases?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> cb_data,  <span class="co">#data to be used</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">aes</span>(<span class="at">x =</span> week_date,       </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> country)) <span class="sc">+</span>   <span class="co">#now the fill needs to be inside aes()  </span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>,                   <span class="co">#binwidth 7 ensures that the width represents 7 days</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>,                  <span class="co">#outline colour of the bins</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span>                    <span class="co">#transparency of the bins</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span>                       <span class="co">#we change the predefined colours</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported by country in 2022"</span>) <span class="sc">+</span>  <span class="co">#add a title</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>                                  <span class="co">#assign a predefined theme</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,             <span class="co">#legend position to the bottom</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis text</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y axis </span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>),   <span class="co">#rotate the x axis text</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())         <span class="co">#remove title of legend</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><br></p>
-</details>
-</section>
-<section id="step-4.4-heat-plot-with-number-of-cases-by-country-and-week-of-notification" class="level3">
-<h3 class="anchored" data-anchor-id="step-4.4-heat-plot-with-number-of-cases-by-country-and-week-of-notification">Step 4.4: Heat plot with number of cases by country and week of notification</h3>
-<p>Heat plots are a type of plots that are gaining popularity in epidemiology. In our case, they can be useful to understand how the epidemic evolved in different countries.</p>
-<p><strong>Task</strong>: Using the case-based data, create a heat plot with the number of cases by country and week of notification.</p>
-<details>
-<summary style="text-decoration: underline; color: darkgreen;">
-<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
-</summary>
-<p><br></p>
-<p>In this case you will need to aggregate your data by country and week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the <a href="https://epirhandbook.com/en/new_pages/grouping.html">Grouping data</a> chapter of the EpiRhandbook. Then, use the geom geom_tile() to create a heat plot. If you’re unsure on how to do this, read the EpiRhanbook section on [Heat Plots]https://epirhandbook.com/en/new_pages/heatmaps.html)</p>
-<p><br></p>
-</details>
-<div class="webex-check">
-Which country had the latest date of notification?
-<div id="radio_XLMOGXDYIF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XLMOGXDYIF" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_XLMOGXDYIF" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_XLMOGXDYIF" value="answer"> <span>E</span></label><label><input type="radio" autocomplete="off" name="radio_XLMOGXDYIF" value=""> <span>B</span></label>
-</div>
-</div>
-<details>
-<summary style="text-decoration: underline; color: red;">
-<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
-</summary>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>hp_epox <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span> <span class="co">#we first group the data by country and week of notification</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country, week_date) <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> cb_data,  <span class="co">#data to be used</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">aes</span>(<span class="at">x =</span> week_date,       </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> country)) <span class="sc">+</span>   <span class="co">#now the fill needs to be inside aes()  </span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_cases =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#now we can use the pipe to directly plot the resulting data from the grouping</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">7</span>,                   <span class="co">#binwidth 7 ensures that the width represents 7 days</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>,                  <span class="co">#outline colour of the bins</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span>                    <span class="co">#transparency of the bins</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week_date,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> country,           <span class="co">#we want the countries to be in the y axis</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> n_cases)) <span class="sc">+</span>     <span class="co">#the colour of the tiles should depend on the number of cases</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span>   <span class="co">#this is the outline colour of each tile</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(            <span class="co">#here we define the colours we want to use in the gradient</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"lightgreen"</span>,</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Mpox cases by country and week of notification"</span>,</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Number of cases"</span>                               </span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,             <span class="co">#legend position to the bottom</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y </span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))   <span class="co">#rotate the x axis text</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>hp_epox </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span>                       <span class="co">#we change the predefined colours</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported by country in 2022"</span>) <span class="sc">+</span>  <span class="co">#add a title</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span>                                  <span class="co">#assign a predefined theme</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,             <span class="co">#legend position to the bottom</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis text</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y axis </span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>),   <span class="co">#rotate the x axis text</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>())         <span class="co">#remove title of legend</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1129,13 +1224,12 @@ Which country had the latest date of notification?
 <p><br></p>
 </details>
 </section>
-<section id="step-4.5-demographic-characteristics" class="level3">
-<h3 class="anchored" data-anchor-id="step-4.5-demographic-characteristics">Step 4.5: Demographic characteristics</h3>
-<p>Now that we have created some outputs by time and place, we should focus on the “person” element. The two most important demographic characteristics are usually age and gender. One way to represent both at the same time would be to create an age pyramid of the cases with these two characteristics. In the case we are seeing, we may also want to explore the sexual orientation of cases.</p>
+<section id="step-4.4-demographic-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.4-demographic-characteristics">Step 4.4: Demographic characteristics</h3>
+<p>Now that we have created some outputs by time and place, we should focus on the “person” element. The two most important demographic characteristics are usually age and gender. In the case we are seeing, we may also want to explore the sexual orientation of cases.</p>
 <p><strong>Task</strong>:</p>
 <ul>
 <li><p>Explore the number of cases by age group and gender.</p></li>
-<li><p>Using the case-based data, create an age pyramid plot by age group and gender filtering only male and female cases.</p></li>
 <li><p>Create a table with number and percentages of cases by sexual orientation</p></li>
 </ul>
 <details>
@@ -1148,8 +1242,8 @@ Which country had the latest date of notification?
 </details>
 <div class="webex-check">
 Which demographic group is more affected by Mpox?
-<div id="radio_PIQPBMGJTI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PIQPBMGJTI" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_PIQPBMGJTI" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_PIQPBMGJTI" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_PIQPBMGJTI" value="answer"> <span>Males 30-39</span></label>
+<div id="radio_MVXMEPCWMF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MVXMEPCWMF" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_MVXMEPCWMF" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_MVXMEPCWMF" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_MVXMEPCWMF" value="answer"> <span>Males 30-39</span></label>
 </div>
 </div>
 <details>
@@ -1180,46 +1274,506 @@ Which demographic group is more affected by Mpox?
        70+   9  0.0045  0.0045067601
       &lt;NA&gt;   3  0.0015            NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating the age and gender pyramid</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table with sexual orientation </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>agegender_pyramid <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tab_sor <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span> </span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender<span class="sc">==</span><span class="st">"Female"</span><span class="sc">|</span>gender<span class="sc">==</span><span class="st">"Male"</span>) <span class="sc">%&gt;%</span> <span class="co">#we first filter the data to keep cases with gender male or female</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sexual_orientation) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(age_group) <span class="sc">%&gt;%</span>  <span class="co">#we now remove those with missing age</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create age gender pyramid</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">age_pyramid</span>(</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="st">"age_group"</span>,    <span class="co"># Specify column containing age groups</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_by =</span> <span class="st">"gender"</span>,        <span class="co"># Splitting by Gender</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_midpoint =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>    <span class="co"># don't show midpoint on the graph:</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">""</span>,                  <span class="co">#in age pyramid, the axis are flipped</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Number of cases"</span>,</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Gender"</span>)       <span class="co"># so that gender has upper G</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>agegender_pyramid</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">list</span>(sexual_orientation <span class="sc">~</span> <span class="st">"Sexual Orientation"</span>)) </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>tab_sor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div id="oomynwwdhv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oomynwwdhv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#oomynwwdhv thead, #oomynwwdhv tbody, #oomynwwdhv tfoot, #oomynwwdhv tr, #oomynwwdhv td, #oomynwwdhv th {
+  border-style: none;
+}
+
+#oomynwwdhv p {
+  margin: 0;
+  padding: 0;
+}
+
+#oomynwwdhv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#oomynwwdhv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oomynwwdhv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oomynwwdhv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oomynwwdhv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oomynwwdhv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oomynwwdhv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oomynwwdhv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oomynwwdhv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#oomynwwdhv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#oomynwwdhv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oomynwwdhv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oomynwwdhv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oomynwwdhv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oomynwwdhv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oomynwwdhv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#oomynwwdhv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#oomynwwdhv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#oomynwwdhv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oomynwwdhv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#oomynwwdhv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oomynwwdhv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oomynwwdhv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oomynwwdhv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oomynwwdhv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oomynwwdhv .gt_left {
+  text-align: left;
+}
+
+#oomynwwdhv .gt_center {
+  text-align: center;
+}
+
+#oomynwwdhv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oomynwwdhv .gt_font_normal {
+  font-weight: normal;
+}
+
+#oomynwwdhv .gt_font_bold {
+  font-weight: bold;
+}
+
+#oomynwwdhv .gt_font_italic {
+  font-style: italic;
+}
+
+#oomynwwdhv .gt_super {
+  font-size: 65%;
+}
+
+#oomynwwdhv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#oomynwwdhv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#oomynwwdhv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#oomynwwdhv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#oomynwwdhv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#oomynwwdhv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#oomynwwdhv .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header gt_col_headings">
+<th id="<strong>Characteristic</strong>" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="<strong>N = 2,000</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>N = 2,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Sexual Orientation</td>
+<td class="gt_row gt_center" headers="stat_0"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Bisexual</td>
+<td class="gt_row gt_center" headers="stat_0">7 (0.4%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Heterosexual</td>
+<td class="gt_row gt_center" headers="stat_0">46 (2.3%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;MSM/homo or bisexual male</td>
+<td class="gt_row gt_center" headers="stat_0">833 (42%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown/missing</td>
+<td class="gt_row gt_center" headers="stat_0">1,114 (56%)</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="2" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+</tr>
+</tfoot>
+
+</table>
+
 </div>
 </div>
 </div>
 <p><br></p>
 </details>
 </section>
-<section id="step-4.6-clinical-characteristics" class="level3">
-<h3 class="anchored" data-anchor-id="step-4.6-clinical-characteristics">Step 4.6: Clinical characteristics</h3>
+<section id="step-4.5-clinical-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.5-clinical-characteristics">Step 4.5: Clinical characteristics</h3>
 <p>Now, let’s summarise the main clinical information that we have in our case-based data frame.</p>
 <p><strong>Tasks</strong>:</p>
 <ul>
@@ -1237,8 +1791,8 @@ Which demographic group is more affected by Mpox?
 </details>
 <div class="webex-check">
 Are there significant differences in HIV status across cases according to their sexual orientation ?
-<div id="radio_HGLJUGIVFY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HGLJUGIVFY" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_HGLJUGIVFY" value="answer"> <span>No</span></label>
+<div id="radio_WCTUTPMZKM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WCTUTPMZKM" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_WCTUTPMZKM" value="answer"> <span>No</span></label>
 </div>
 </div>
 <details>
@@ -1277,7 +1831,7 @@ Are there significant differences in HIV status across cases according to their 
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1291,23 +1845,23 @@ Are there significant differences in HIV status across cases according to their 
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>tab_outcome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="kalgjwwzqh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kalgjwwzqh table {
+<div id="lwvgxaxjry" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lwvgxaxjry table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kalgjwwzqh thead, #kalgjwwzqh tbody, #kalgjwwzqh tfoot, #kalgjwwzqh tr, #kalgjwwzqh td, #kalgjwwzqh th {
+#lwvgxaxjry thead, #lwvgxaxjry tbody, #lwvgxaxjry tfoot, #lwvgxaxjry tr, #lwvgxaxjry td, #lwvgxaxjry th {
   border-style: none;
 }
 
-#kalgjwwzqh p {
+#lwvgxaxjry p {
   margin: 0;
   padding: 0;
 }
 
-#kalgjwwzqh .gt_table {
+#lwvgxaxjry .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1333,12 +1887,12 @@ Are there significant differences in HIV status across cases according to their 
   border-left-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_caption {
+#lwvgxaxjry .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kalgjwwzqh .gt_title {
+#lwvgxaxjry .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1350,7 +1904,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-width: 0;
 }
 
-#kalgjwwzqh .gt_subtitle {
+#lwvgxaxjry .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1362,7 +1916,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-width: 0;
 }
 
-#kalgjwwzqh .gt_heading {
+#lwvgxaxjry .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1374,13 +1928,13 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_bottom_border {
+#lwvgxaxjry .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_col_headings {
+#lwvgxaxjry .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1395,7 +1949,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_col_heading {
+#lwvgxaxjry .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1415,7 +1969,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#kalgjwwzqh .gt_column_spanner_outer {
+#lwvgxaxjry .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1427,15 +1981,15 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 4px;
 }
 
-#kalgjwwzqh .gt_column_spanner_outer:first-child {
+#lwvgxaxjry .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kalgjwwzqh .gt_column_spanner_outer:last-child {
+#lwvgxaxjry .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kalgjwwzqh .gt_column_spanner {
+#lwvgxaxjry .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1447,11 +2001,11 @@ Are there significant differences in HIV status across cases according to their 
   width: 100%;
 }
 
-#kalgjwwzqh .gt_spanner_row {
+#lwvgxaxjry .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kalgjwwzqh .gt_group_heading {
+#lwvgxaxjry .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1477,7 +2031,7 @@ Are there significant differences in HIV status across cases according to their 
   text-align: left;
 }
 
-#kalgjwwzqh .gt_empty_group_heading {
+#lwvgxaxjry .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1492,15 +2046,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: middle;
 }
 
-#kalgjwwzqh .gt_from_md > :first-child {
+#lwvgxaxjry .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kalgjwwzqh .gt_from_md > :last-child {
+#lwvgxaxjry .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kalgjwwzqh .gt_row {
+#lwvgxaxjry .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1519,7 +2073,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#kalgjwwzqh .gt_stub {
+#lwvgxaxjry .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1532,7 +2086,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#kalgjwwzqh .gt_stub_row_group {
+#lwvgxaxjry .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1546,15 +2100,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: top;
 }
 
-#kalgjwwzqh .gt_row_group_first td {
+#lwvgxaxjry .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kalgjwwzqh .gt_row_group_first th {
+#lwvgxaxjry .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kalgjwwzqh .gt_summary_row {
+#lwvgxaxjry .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1564,16 +2118,16 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#kalgjwwzqh .gt_first_summary_row {
+#lwvgxaxjry .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_first_summary_row.thick {
+#lwvgxaxjry .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kalgjwwzqh .gt_last_summary_row {
+#lwvgxaxjry .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1583,7 +2137,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_grand_summary_row {
+#lwvgxaxjry .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1593,7 +2147,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#kalgjwwzqh .gt_first_grand_summary_row {
+#lwvgxaxjry .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1603,7 +2157,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_last_grand_summary_row_top {
+#lwvgxaxjry .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1613,11 +2167,11 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_striped {
+#lwvgxaxjry .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kalgjwwzqh .gt_table_body {
+#lwvgxaxjry .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1626,7 +2180,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_footnotes {
+#lwvgxaxjry .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1640,7 +2194,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_footnote {
+#lwvgxaxjry .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1649,7 +2203,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#kalgjwwzqh .gt_sourcenotes {
+#lwvgxaxjry .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1663,7 +2217,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#kalgjwwzqh .gt_sourcenote {
+#lwvgxaxjry .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1671,63 +2225,63 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#kalgjwwzqh .gt_left {
+#lwvgxaxjry .gt_left {
   text-align: left;
 }
 
-#kalgjwwzqh .gt_center {
+#lwvgxaxjry .gt_center {
   text-align: center;
 }
 
-#kalgjwwzqh .gt_right {
+#lwvgxaxjry .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kalgjwwzqh .gt_font_normal {
+#lwvgxaxjry .gt_font_normal {
   font-weight: normal;
 }
 
-#kalgjwwzqh .gt_font_bold {
+#lwvgxaxjry .gt_font_bold {
   font-weight: bold;
 }
 
-#kalgjwwzqh .gt_font_italic {
+#lwvgxaxjry .gt_font_italic {
   font-style: italic;
 }
 
-#kalgjwwzqh .gt_super {
+#lwvgxaxjry .gt_super {
   font-size: 65%;
 }
 
-#kalgjwwzqh .gt_footnote_marks {
+#lwvgxaxjry .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kalgjwwzqh .gt_asterisk {
+#lwvgxaxjry .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kalgjwwzqh .gt_indent_1 {
+#lwvgxaxjry .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kalgjwwzqh .gt_indent_2 {
+#lwvgxaxjry .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kalgjwwzqh .gt_indent_3 {
+#lwvgxaxjry .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kalgjwwzqh .gt_indent_4 {
+#lwvgxaxjry .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kalgjwwzqh .gt_indent_5 {
+#lwvgxaxjry .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1781,23 +2335,23 @@ Are there significant differences in HIV status across cases according to their 
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>tab_hiv_sor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="qcpyjsfmnd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qcpyjsfmnd table {
+<div id="xdcfrzozaz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xdcfrzozaz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qcpyjsfmnd thead, #qcpyjsfmnd tbody, #qcpyjsfmnd tfoot, #qcpyjsfmnd tr, #qcpyjsfmnd td, #qcpyjsfmnd th {
+#xdcfrzozaz thead, #xdcfrzozaz tbody, #xdcfrzozaz tfoot, #xdcfrzozaz tr, #xdcfrzozaz td, #xdcfrzozaz th {
   border-style: none;
 }
 
-#qcpyjsfmnd p {
+#xdcfrzozaz p {
   margin: 0;
   padding: 0;
 }
 
-#qcpyjsfmnd .gt_table {
+#xdcfrzozaz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1823,12 +2377,12 @@ Are there significant differences in HIV status across cases according to their 
   border-left-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_caption {
+#xdcfrzozaz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qcpyjsfmnd .gt_title {
+#xdcfrzozaz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1840,7 +2394,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-width: 0;
 }
 
-#qcpyjsfmnd .gt_subtitle {
+#xdcfrzozaz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1852,7 +2406,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-width: 0;
 }
 
-#qcpyjsfmnd .gt_heading {
+#xdcfrzozaz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1864,13 +2418,13 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_bottom_border {
+#xdcfrzozaz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_col_headings {
+#xdcfrzozaz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1885,7 +2439,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_col_heading {
+#xdcfrzozaz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1905,7 +2459,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#qcpyjsfmnd .gt_column_spanner_outer {
+#xdcfrzozaz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1917,15 +2471,15 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 4px;
 }
 
-#qcpyjsfmnd .gt_column_spanner_outer:first-child {
+#xdcfrzozaz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qcpyjsfmnd .gt_column_spanner_outer:last-child {
+#xdcfrzozaz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qcpyjsfmnd .gt_column_spanner {
+#xdcfrzozaz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1937,11 +2491,11 @@ Are there significant differences in HIV status across cases according to their 
   width: 100%;
 }
 
-#qcpyjsfmnd .gt_spanner_row {
+#xdcfrzozaz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qcpyjsfmnd .gt_group_heading {
+#xdcfrzozaz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1967,7 +2521,7 @@ Are there significant differences in HIV status across cases according to their 
   text-align: left;
 }
 
-#qcpyjsfmnd .gt_empty_group_heading {
+#xdcfrzozaz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1982,15 +2536,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: middle;
 }
 
-#qcpyjsfmnd .gt_from_md > :first-child {
+#xdcfrzozaz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qcpyjsfmnd .gt_from_md > :last-child {
+#xdcfrzozaz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qcpyjsfmnd .gt_row {
+#xdcfrzozaz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2009,7 +2563,7 @@ Are there significant differences in HIV status across cases according to their 
   overflow-x: hidden;
 }
 
-#qcpyjsfmnd .gt_stub {
+#xdcfrzozaz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2022,7 +2576,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#qcpyjsfmnd .gt_stub_row_group {
+#xdcfrzozaz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2036,15 +2590,15 @@ Are there significant differences in HIV status across cases according to their 
   vertical-align: top;
 }
 
-#qcpyjsfmnd .gt_row_group_first td {
+#xdcfrzozaz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qcpyjsfmnd .gt_row_group_first th {
+#xdcfrzozaz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qcpyjsfmnd .gt_summary_row {
+#xdcfrzozaz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2054,16 +2608,16 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#qcpyjsfmnd .gt_first_summary_row {
+#xdcfrzozaz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_first_summary_row.thick {
+#xdcfrzozaz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qcpyjsfmnd .gt_last_summary_row {
+#xdcfrzozaz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2073,7 +2627,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_grand_summary_row {
+#xdcfrzozaz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2083,7 +2637,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#qcpyjsfmnd .gt_first_grand_summary_row {
+#xdcfrzozaz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2093,7 +2647,7 @@ Are there significant differences in HIV status across cases according to their 
   border-top-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_last_grand_summary_row_top {
+#xdcfrzozaz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2103,11 +2657,11 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_striped {
+#xdcfrzozaz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qcpyjsfmnd .gt_table_body {
+#xdcfrzozaz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2116,7 +2670,7 @@ Are there significant differences in HIV status across cases according to their 
   border-bottom-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_footnotes {
+#xdcfrzozaz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2130,7 +2684,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_footnote {
+#xdcfrzozaz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2139,7 +2693,7 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#qcpyjsfmnd .gt_sourcenotes {
+#xdcfrzozaz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2153,7 +2707,7 @@ Are there significant differences in HIV status across cases according to their 
   border-right-color: #D3D3D3;
 }
 
-#qcpyjsfmnd .gt_sourcenote {
+#xdcfrzozaz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2161,63 +2715,63 @@ Are there significant differences in HIV status across cases according to their 
   padding-right: 5px;
 }
 
-#qcpyjsfmnd .gt_left {
+#xdcfrzozaz .gt_left {
   text-align: left;
 }
 
-#qcpyjsfmnd .gt_center {
+#xdcfrzozaz .gt_center {
   text-align: center;
 }
 
-#qcpyjsfmnd .gt_right {
+#xdcfrzozaz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qcpyjsfmnd .gt_font_normal {
+#xdcfrzozaz .gt_font_normal {
   font-weight: normal;
 }
 
-#qcpyjsfmnd .gt_font_bold {
+#xdcfrzozaz .gt_font_bold {
   font-weight: bold;
 }
 
-#qcpyjsfmnd .gt_font_italic {
+#xdcfrzozaz .gt_font_italic {
   font-style: italic;
 }
 
-#qcpyjsfmnd .gt_super {
+#xdcfrzozaz .gt_super {
   font-size: 65%;
 }
 
-#qcpyjsfmnd .gt_footnote_marks {
+#xdcfrzozaz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qcpyjsfmnd .gt_asterisk {
+#xdcfrzozaz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qcpyjsfmnd .gt_indent_1 {
+#xdcfrzozaz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qcpyjsfmnd .gt_indent_2 {
+#xdcfrzozaz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qcpyjsfmnd .gt_indent_3 {
+#xdcfrzozaz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qcpyjsfmnd .gt_indent_4 {
+#xdcfrzozaz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qcpyjsfmnd .gt_indent_5 {
+#xdcfrzozaz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2292,13 +2846,14 @@ Are there significant differences in HIV status across cases according to their 
 </details>
 </section>
 </section>
-<section id="step-5-optional-data-quality-check" class="level2">
-<h2 class="anchored" data-anchor-id="step-5-optional-data-quality-check"><strong>Step 5: (Optional) Data quality check</strong></h2>
-<p>If you have time, let’s now undertake some data quality analysis. We will check two things:</p>
+<section id="step-5-optional-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-optional-analysis"><strong>Step 5: Optional analysis</strong></h2>
+<p>If you have time, let’s now undertake some further analysis. First we will look at data quality. We will check two things:</p>
 <ol type="1">
 <li><p>In the case-based data, what’s the delay between symptom onset, diagnosis and notification?</p></li>
 <li><p>Are numbers from case-based data consistent with the aggregated data?</p></li>
 </ol>
+<p>Then, we will test your skills in data visualisation creating a heat plot.</p>
 <section id="step-5.1-delay-between-date-of-onset-diagnosis-and-notification" class="level3">
 <h3 class="anchored" data-anchor-id="step-5.1-delay-between-date-of-onset-diagnosis-and-notification">Step 5.1: Delay between date of onset, diagnosis and notification</h3>
 <p><strong>Tasks</strong></p>
@@ -2316,8 +2871,8 @@ Are there significant differences in HIV status across cases according to their 
 </details>
 <div class="webex-check">
 Is there a difference in the delay from diagnosis to notification by country?
-<div id="radio_DTYVTEEOBR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DTYVTEEOBR" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_DTYVTEEOBR" value="answer"> <span>No</span></label>
+<div id="radio_ACCOKWRQVN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ACCOKWRQVN" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_ACCOKWRQVN" value="answer"> <span>No</span></label>
 </div>
 </div>
 <details>
@@ -2410,7 +2965,7 @@ Is there a difference in the delay from diagnosis to notification by country?
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2424,8 +2979,8 @@ Is there a difference in the delay from diagnosis to notification by country?
 <p>NOTE: Take into consideration that the column on cases in the aggregated data frame reports the <em>cumulative</em> number of cases.</p>
 <div class="webex-check">
 Which country is not reporting aggregated data?
-<div id="radio_VZADEVFKOW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VZADEVFKOW" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_VZADEVFKOW" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_VZADEVFKOW" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_VZADEVFKOW" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_VZADEVFKOW" value=""> <span>E</span></label>
+<div id="radio_XAHDZKVFIM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XAHDZKVFIM" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_XAHDZKVFIM" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_XAHDZKVFIM" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_XAHDZKVFIM" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_XAHDZKVFIM" value=""> <span>E</span></label>
 </div>
 </div>
 <details>
@@ -2495,7 +3050,75 @@ Which country is not reporting aggregated data?
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="step-5.3-heat-plot-with-number-of-cases-by-country-and-week-of-notification" class="level3">
+<h3 class="anchored" data-anchor-id="step-5.3-heat-plot-with-number-of-cases-by-country-and-week-of-notification">Step 5.3: Heat plot with number of cases by country and week of notification</h3>
+<p>Heat plots are a type of plots that are gaining popularity in epidemiology. In our case, they can be useful to understand how the epidemic evolved in different countries.</p>
+<p><strong>Task</strong>: Using the case-based data, create a heat plot with the number of cases by country and week of notification.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>In this case you will need to aggregate your data by country and week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the <a href="https://epirhandbook.com/en/new_pages/grouping.html">Grouping data</a> chapter of the EpiRhandbook. Then, use the geom geom_tile() to create a heat plot. If you’re unsure on how to do this, read the EpiRhanbook section on [Heat Plots]https://epirhandbook.com/en/new_pages/heatmaps.html)</p>
+<p><br></p>
+</details>
+<div class="webex-check">
+Which country had the latest date of notification?
+<div id="radio_WVUEYKUXBW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WVUEYKUXBW" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_WVUEYKUXBW" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_WVUEYKUXBW" value="answer"> <span>E</span></label><label><input type="radio" autocomplete="off" name="radio_WVUEYKUXBW" value=""> <span>B</span></label>
+</div>
+</div>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hp_epox <span class="ot">&lt;-</span> cb_data <span class="sc">%&gt;%</span> <span class="co">#we first group the data by country and week of notification</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country, week_date) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_cases =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#now we can use the pipe to directly plot the resulting data from the grouping</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week_date,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> country,           <span class="co">#we want the countries to be in the y axis</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> n_cases)) <span class="sc">+</span>     <span class="co">#the colour of the tiles should depend on the number of cases</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span>   <span class="co">#this is the outline colour of each tile</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(            <span class="co">#here we define the colours we want to use in the gradient</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Mpox cases by country and week of notification"</span>,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Number of cases"</span>                               </span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,             <span class="co">#legend position to the bottom</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y </span></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))   <span class="co">#rotate the x axis text</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>hp_epox </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="r_practical_epiet_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
