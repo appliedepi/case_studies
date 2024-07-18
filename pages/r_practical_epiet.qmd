@@ -181,7 +181,7 @@ If you feel you need to familiarise a bit further with these aspects, read the E
 
 3. Inside "r_practical": Subfolder "data" contains the raw data you will use in this case study. You should see six different files, three called *E_pox_aggregated_data* and three *E_pox_case_based_data*. Each has a specific file type. 
 
-4. Inside "r_practical": Subfolder "scripts" should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called "backup" where you can find a solution Rmarkdown script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.
+4. Inside "r_practical": Subfolder "scripts" should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called "backup" where you can find a solution R script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.
 
 5. Inside "r_practical": Subfolder "outputs" can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.
 
@@ -918,108 +918,15 @@ epicurve_epox_country
 
 </details>
 
-### Step 4.4: Heat plot with number of cases by country and week of notification
 
 
-Heat plots are a type of plots that are gaining popularity in epidemiology. In our case, they can be useful to understand how the epidemic evolved in different countries.
+### Step 4.4: Demographic characteristics
 
-**Task**: Using the case-based data, create a heat plot with the number of cases by country and week of notification. 
-
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-In this case you will need to aggregate your data by country and week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the [Grouping data](https://epirhandbook.com/en/new_pages/grouping.html) chapter of the EpiRhandbook.
-Then, use the geom geom_tile() to create a heat plot. If you're unsure on how to do this, read the EpiRhanbook section on [Heat Plots]https://epirhandbook.com/en/new_pages/heatmaps.html)
-
-</br>
-
-</details>
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  "A",
-  "D",
-  answer = "E",
-  "B"
-)
-
-
-cat("Which country had the latest date of notification?", longmcq(opts))
-
-```
-:::
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-hp_epox <- cb_data %>% #we first group the data by country and week of notification
-  
-  group_by(country, week_date) %>% 
-  
-  summarise(n_cases = n(), .groups = "drop") %>% 
-
-  #now we can use the pipe to directly plot the resulting data from the grouping
-  
-  ggplot(aes(x = week_date,
-           y = country,           #we want the countries to be in the y axis
-           fill = n_cases)) +     #the colour of the tiles should depend on the number of cases
-  
-  geom_tile(colour = "black") +   #this is the outline colour of each tile
-  
-  scale_fill_gradient(            #here we define the colours we want to use in the gradient
-    low = "lightgreen",
-    high = "red") +
-  
-  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
-  
-  labs(
-    title= "Mpox cases by country and week of notification",
-    fill = "Number of cases"                               
-  ) +
-  
-  theme_bw() +
-  
-  theme(legend.position = "bottom",             #legend position to the bottom
-        axis.text = element_text(size=9),       #define the font size of the axis
-        axis.title = element_blank(),           #remove the titles of the x and y 
-        axis.text.x = element_text(angle=90))   #rotate the x axis text
-    
-hp_epox 
-```
-</br>
-
-</details>
-
-
-
-### Step 4.5: Demographic characteristics
-
-Now that we have created some outputs by time and place, we should focus on the "person" element. The two most important demographic characteristics are usually age and gender. One way to represent both at the same time would be to create an age pyramid of the cases with these two characteristics.
-In the case we are seeing, we may also want to explore the sexual orientation of cases.
+Now that we have created some outputs by time and place, we should focus on the "person" element. The two most important demographic characteristics are usually age and gender. In the case we are seeing, we may also want to explore the sexual orientation of cases.
 
 **Task**: 
 
 -   Explore the number of cases by age group and gender. 
-
--   Using the case-based data, create an age pyramid plot by age group and gender filtering only male and female cases.
 
 -   Create a table with number and percentages of cases by sexual orientation
 
@@ -1074,33 +981,15 @@ cat("Which demographic group is more affected by Mpox?", longmcq(opts))
 tabyl(cb_data, gender)
 tabyl(cb_data, age_group)
 
-#Creating the age and gender pyramid
+# Table with sexual orientation 
 
-agegender_pyramid <- cb_data %>%
+tab_sor <- cb_data %>% 
   
-  filter(gender=="Female"|gender=="Male") %>% #we first filter the data to keep cases with gender male or female
+  select(sexual_orientation) %>% 
   
-  drop_na(age_group) %>%  #we now remove those with missing age
-  
-  # Create age gender pyramid
-  age_pyramid(
-  
-  age_group = "age_group",    # Specify column containing age groups
-  
-  split_by = "gender",        # Splitting by Gender
-  
-  show_midpoint = FALSE) +    # don't show midpoint on the graph:
-  
-  theme_bw() +
-  
-  theme(legend.position = "bottom") +
-  
-  labs(x="",                  #in age pyramid, the axis are flipped
-       y= "Number of cases",
-       fill = "Gender")       # so that gender has upper G
+  tbl_summary(label = list(sexual_orientation ~ "Sexual Orientation")) 
 
-
-agegender_pyramid
+tab_sor
 ```
 </br>
 
@@ -1109,7 +998,7 @@ agegender_pyramid
 
 
 
-### Step 4.6: Clinical characteristics
+### Step 4.5: Clinical characteristics
 
 Now, let's summarise the main clinical information that we have in our case-based data frame.
 
@@ -1226,13 +1115,15 @@ tab_hiv_sor
 
 
 
-## **Step 5: (Optional) Data quality check**
+## **Step 5: Optional analysis**
 
-If you have time, let's now undertake some data quality analysis. We will check two things:
+If you have time, let's now undertake some further analysis. First we will look at data quality. We will check two things:
 
 1. In the case-based data, what's the delay between symptom onset, diagnosis and notification?
 
 2. Are numbers from case-based data consistent with the aggregated data?
+
+Then, we will test your skills in data visualisation creating a heat plot.
 
 
 ### Step 5.1: Delay between date of onset, diagnosis and notification
@@ -1457,6 +1348,96 @@ graph_comp <- ggplot(data = total_data,
         axis.ticks.x = element_blank())     # we also remove the ticks for aesthetic purposes
 
 graph_comp
+```
+</br>
+
+</details>
+
+### Step 5.3: Heat plot with number of cases by country and week of notification
+
+
+Heat plots are a type of plots that are gaining popularity in epidemiology. In our case, they can be useful to understand how the epidemic evolved in different countries.
+
+**Task**: Using the case-based data, create a heat plot with the number of cases by country and week of notification. 
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+In this case you will need to aggregate your data by country and week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the [Grouping data](https://epirhandbook.com/en/new_pages/grouping.html) chapter of the EpiRhandbook.
+Then, use the geom geom_tile() to create a heat plot. If you're unsure on how to do this, read the EpiRhanbook section on [Heat Plots]https://epirhandbook.com/en/new_pages/heatmaps.html)
+
+</br>
+
+</details>
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "A",
+  "D",
+  answer = "E",
+  "B"
+)
+
+
+cat("Which country had the latest date of notification?", longmcq(opts))
+
+```
+:::
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+hp_epox <- cb_data %>% #we first group the data by country and week of notification
+  
+  group_by(country, week_date) %>% 
+  
+  summarise(n_cases = n(), .groups = "drop") %>% 
+
+  #now we can use the pipe to directly plot the resulting data from the grouping
+  
+  ggplot(aes(x = week_date,
+           y = country,           #we want the countries to be in the y axis
+           fill = n_cases)) +     #the colour of the tiles should depend on the number of cases
+  
+  geom_tile(colour = "black") +   #this is the outline colour of each tile
+  
+  scale_fill_gradient(            #here we define the colours we want to use in the gradient
+    low = "lightgreen",
+    high = "red") +
+  
+  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
+  
+  labs(
+    title= "Mpox cases by country and week of notification",
+    fill = "Number of cases"                               
+  ) +
+  
+  theme_bw() +
+  
+  theme(legend.position = "bottom",             #legend position to the bottom
+        axis.text = element_text(size=9),       #define the font size of the axis
+        axis.title = element_blank(),           #remove the titles of the x and y 
+        axis.text.x = element_text(angle=90))   #rotate the x axis text
+    
+hp_epox 
 ```
 </br>
 
