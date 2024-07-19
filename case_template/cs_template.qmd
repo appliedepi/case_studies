@@ -20,11 +20,10 @@ format:
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
 
-## Fixed sections in the case study
 
-### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {.unnumbered}    
+# Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {.unnumbered}    
 
-### Overview {.unnumbered}
+## Overview {.unnumbered}
 
 
 
@@ -65,9 +64,9 @@ Original authors:   XXXX\
 Data source: XXXX\
 Adapted by: XXXX\
 
-### Instructions
+## Instructions
 
-#### Getting Help
+### Getting Help
 
 There are several ways to get help:
 
@@ -76,7 +75,7 @@ There are several ways to get help:
 
 
 
-#### Hints and Solutions
+### Hints and Solutions
 
 Here is what the "helpers" look like:
 
@@ -143,13 +142,13 @@ NOTE: End of solution
 <!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
 
 
-#### Posting a question in the Community Forum
+### Posting a question in the Community Forum
 
 ... description here about posting in Community... TO BE COMPLETED BY APPLIED EPI
 
 
 
-#### Terms of Use
+### Terms of Use
 
 <!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
 
@@ -181,9 +180,9 @@ Write any revisions made to the case study
 \pagebreak
 
 
-### Guidance
+## Guidance
 
-#### Objectives of this case study 
+### Objectives of this case study 
 
 Here write an introduction to the case study specifying:
       1. Background
@@ -192,7 +191,7 @@ Here write an introduction to the case study specifying:
       4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
       
 
-#### Previous level of expertise assumed
+### Previous level of expertise assumed
 
 Add information of previous expertise needed to follow the case study. This includes expertise on:
 
@@ -202,7 +201,7 @@ Add information of previous expertise needed to follow the case study. This incl
 If appropriate and possible, include references  that can help the user to understand the level of expertise assumed
 
 
-#### Preparation for the case study
+### Preparation for the case study
 
 Include the steps needed to start replicating the analysis of the case study
 

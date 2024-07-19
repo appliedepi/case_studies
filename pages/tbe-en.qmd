@@ -2,12 +2,19 @@
 output: html_document
 editor_options: 
   chunk_output_type: console
+execute:
+  warning: false
+  error: false
 format: 
   html: 
     css: webex.css
     include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
+```{=html}
 <!-- Some considerations about about this quarto template 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
@@ -15,53 +22,51 @@ format:
     -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
     -   This comment will not show up when you knit the document.\
     -   You can delete them if you want.\ -->
-
-
+```
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
+# TBE - Linear regression (ENG) {.unnumbered}
 
-### TBE - Linear regression (ENG) {.unnumbered}    
+## Overview {.unnumbered}
 
-### Overview {.unnumbered}
-
-
-
-|**Case study characteristics**|      |
-|------------------------------|:-----|
-| Name:                     |  TBE - linear regression    |
-| Language:                 |   English   |
-| Tool:                     |   R   | 
-| Location:                 |   Germany   |
-| Scale:                    |    National  | 
-| Diseases:                 |   TBE   | 
-| Keywords:                 |   TBE; Linear Regression; R   | 
-| Technical complexity:     |  Intermediate    | 
-| Methodological complexity:|   Intermediate   | 
- 
+| **Case study characteristics** |                           |
+|--------------------------------|:--------------------------|
+| Name:                          | TBE - linear regression   |
+| Language:                      | English                   |
+| Tool:                          | R; DAGitty                         |
+| Location:                      | Germany                   |
+| Scale:                         | National                  |
+| Diseases:                      | TBE                       |
+| Keywords:                      | TBE; Linear Regression; R |
+| Technical complexity:          | Intermediate              |
+| Methodological complexity:     | Intermediate              |
 
 ***Authorship***\
-Original authors:   Teresa Nygren (RKI), Alicia Barrasa Blanco (UK FETP), Jan Walter (RKI) and Achim Dörre (RKI)\
-Data source: Data was fictional; inspired by Nygren et al. Tick-borne encephalitis: acute clinical manifestations and severity in 581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr 1;86(4):369-75\
-Adapted by: Liese Van Gompel (MediPIET), Joana Gomes Dias (ECDC),  Chiara Entradi (ECDC) and Alberto Mateo Urdiales (ISS)\
+Original authors: Teresa Nygren (RKI), Alicia Barrasa Blanco (UK FETP),
+Jan Walter (RKI) and Achim Dörre (RKI)\
+Data source: Data is fictional and was inspired by Nygren et al.
+Tick-borne encephalitis: acute clinical manifestations and severity in
+581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr
+1;86(4):369-75\
+Adapted by: Liese Van Gompel (MediPIET), Joana Gomes Dias (ECDC), Chiara
+Entradi (ECDC) and Alberto Mateo Urdiales (ISS)\
 
-### Instructions
+## Instructions
 
-#### Getting Help
+### Getting Help
 
 There are several ways to get help:
 
 1)  Look for the "hints" and solutions (see below)
-2)  Post a question in [Applied Epi Community](www.community.appliedepi.org) with reference to this case study
+2)  Post a question in [Applied Epi
+    Community](www.community.appliedepi.org) with reference to this case
+    study
 
-
-
-#### Hints and Solutions
+### Hints and Solutions
 
 Here is what the "helpers" look like:
 
 <!--Note that this is the way of including hints and explanations to the solutions -->
-
-
 
 ```{=html}
 <!--
@@ -118,30 +123,77 @@ Here is more explanation about why the solution works.
 NOTE: End of solution
 -->
 ```
-
 <!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
-
 
 #### Posting a question in the Community Forum
 
-... description here about posting in Community... TO BE COMPLETED BY APPLIED EPI
-
-
+... description here about posting in Community... TO BE COMPLETED BY
+APPLIED EPI
 
 #### Terms of Use
 
+**Disclaimer**: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes.
+This case study was first introduced in 2022 (see Copyright and Licence agreement for more information).
 
 
-###  Feedback & suggestions
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>
+
+### Feedback & suggestions
 
 -   You can write feedback and suggestions on this case study at the
-    [GitHub issues
-    page](https://github.com/appliedepi/case_studies)
+    [GitHub issues page](https://github.com/appliedepi/case_studies)
 -   Alternatively email us at:
     [contact\@appliedepi.org](mailto:contact@appliedepi.org)
-
-
-
 
 \pagebreak
 
@@ -151,72 +203,881 @@ Write date of first version
 
 Write any revisions made to the case study
 
-| Date    | Changes made | Author| 
-|---------|:-------------|-------:|
-|  2023   |  Revision R code  | Liese Van Gompel (MediPIET)       |
-|  2024   |  Revision R code  |   Joana Gomes Dias and Chiara Entradi (ECDC)     |
-|  2024   |  Revision of structure, format and R code  | Alberto Mateo Urdiales (ISS)    |
+| Date | Changes made                             |                                     Author |
+|---------------------|:-------------------------------|------------------:|
+| 2023 | Revision R code                          |                Liese Van Gompel (MediPIET) |
+| 2024 | Revision R code                          | Joana Gomes Dias and Chiara Entradi (ECDC) |
+| 2024 | Revision of structure, format and R code |               Alberto Mateo Urdiales (ISS) |
 
 \pagebreak
 
+## Guidance
 
-### Guidance
+### Objectives of this case study
 
-#### Objectives of this case study 
+At the end of the case study, participants should be able to:
 
-Here write an introduction to the case study specifying:
-      1. Background
-      2. Objectives/Learning outcomes
-      3. What the users of the case study will learn
-      4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents
-      
+-   Use directed acyclic graphs (DAG) to identify variables suitable to control for confounding;
+-   To perform linear regression in R;
+-   To write down the associated models and interpret them.
 
-#### Previous level of expertise assumed
+### Previous level of expertise assumed
 
-Add information of previous expertise needed to follow the case study. This includes expertise on:
+Participants are expected to be familiar with directed acyclic graphs (DAGs) and the use of DAGitty (a browser-based environment for creating DAGS) for the first part; and with data management as well as descriptive and stratified analysis in R for the second part.
 
-* Epidemiological experience (e.g., knowledge of the foundations of survival analysis)
-* Software experience (e.g, basic knowledge of R or Rmarkdown)
+### Preparation for the case study
 
-If appropriate and possible, include references  that can help the user to understand the level of expertise assumed
-
-
-#### Preparation for the case study
-
-Include the steps needed to start replicating the analysis of the case study
+Include the steps needed to start replicating the analysis of the case
+study
 
 For example:
 
-1. Download folder named XXXX and extract contents in the local laptop
-2. Create an Rstudio project in the folder XXXX (they already come with the project)
-3. Subfolder data contains XXXX
-4. Subfolder scripts should be used to save any scripts related to the analysis
-5. Subfolder outputs will be used to store all outputs (tables, graphs, documents) that are the result of the analysis
+1.  Download folder named tbe_en and extract contents in the local laptop
+
+2. Create an Rstudio project in the folder tbe_en. If you are unsure on how to do that, read the EpiRhandbook on [R projects](https://epirhandbook.com/en/new_pages/r_projects.html)
+
+3. Inside "tbe_en": Subfolder "data" contains the raw data you will use in this case study called *tbe.RDS*
+
+4.  Subfolder scripts should be used to save any scripts related to the
+    analysis
+    
+5.  Subfolder outputs will be used to store all outputs (tables, graphs,
+    documents) that are the result of the analysis
+
+6. You will also find inside "tbe_en" a word document called *starter_guide_DAGitty.docx* in case you need help using this website
+
+# Introduction to the case study
+Tick-borne encephalitis (TBE) is a vaccine-preventable, tick-borne viral infection. The typical disease course is biphasic, consisting of a first phase with general symptoms such as headache and fever, a symptom-free interval, and a second phase with neurological manifestations. Severity ranges from mild symptoms over meningitis to severe meningoencephalitis or -myelitis. Overall, 70–95% of infections remain sub-clinical and <1% die.
+Age, monophasic course, central nervous system (CNS) comorbidities, and general comorbidities were found to be independently associated with severe TBE in some analysis. Results were inconsistent regarding diabetes, male sex and other factors. Further possible predictors include blood type, ticks’ blood meal duration (proxy: large tick at removal), immunosuppression, autoimmune diseases, and chronic inflammatory comorbidities. 
+In Germany, laboratory diagnosis of acute TBE became statutorily notifiable in 2001. From 2018-2020, intensified surveillance was conducted. Primary aims were to assess clinical manifestations, health care utilisation, informal care, treatment practices, quality of life, and sick leave, as well as to identify factors associated with TBE severity
+
+**Note**: This introduction has been adapted from [Nygren et al. Tick-borne encephalitis: acute clinical manifestations and severity in 581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr 1;86(4):369-75](https://linkinghub.elsevier.com/retrieve/pii/S0163-4453(23)00088-9)
+
+
+# Overall goal
+
+You are one of the epidemiologists in charge of the intensified surveillance system. Your boss asks you to test a hypothesis that **high blood pressure** may also be causal for severe TBE. As one of the outcomes you will look at the days spent in hospital. 
+
+## **Goal 1: Draw a Directed Acyclic Graph (DAG)**
+
+Since you are interested in a causal question, please draw a DAG. If you want to use a computer, you may try [http://www.dagitty.net/](http://www.dagitty.net/)  Which variables would you need to adjust for?
+If you are new to DAGitty you can find a few helpful information in the document called *starter_guide_DAGitty.docx* present in the "tbe_en" folder you have downloaded in your laptop.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+When planning the study, the epidemiologist considered this DAG:
+
+![](../images/tbe/tbe_dag.png)
+
+
+![](../images/tbe/legend_dag.png)
+
+</br>
+
+</details>
 
 
 
-## Specific to the case study
+According to this DAG you should adjust for TBE diagnosis, TBE vaccination, age, large tick (=large viral load), monophasic course, other comorbidities and sex. 
 
-Finally, add the different sections of the case study. Remember to include questions +/- hints and solutions as appropriate. 
+TBE Diagnosis is controlled by design (only cases are included).
 
-We acknowledge that every case study is different, so we trust you to give it the most relevant structure. However, consider including the following sections:
-
-1. Data import\
-If using R, we recommend to use the import() function from the {rio} package to import data, and the here() function from the {here} package to recreate the file path in a reproducible way.
-
-2. Data cleaning and preparation\
-If using R, we prefer, to use {dplyr} functions linked through the {magrittr} pipe. 
-
-3. Descriptive analysis\
-If relevant, include a section on descriptive analysis divided into three parts: time, place, person. If using R, for the graphs, we recommend using {ggplot2}. For tables, {flextable}
-
-4. Analysis
-If appropriate include in a separate section more advanced analysis, such as multivariate regression, time series analysis or survival analysis.
-
-5. Interpretation and reflection
-Include this section if relevant
+Probably your DAG will look differently. This is absolutely fine, since there is not only one possible DAG. But you should be able to justify your DAG based on the existing evidence. 
 
 
-For case studies in R: remember to be consistent with the style represented by the [EpiRhandbook](https://epirhandbook.com/en/).
 
-Thank you for your work!
+
+
+## **Goal 2: Perform linear regression in R**
+
+Now we will work on the data frame provided which includes data for 523 patients who have been hospitalized with TBE in the years 2018 to 2020 in Germany and for whom data were collected. 
+
+The following variables are provided:
+
+*Table 1: Data dictionary for the dataframe “tbe.RDS”:*
+
+|**Variable** |	**Description**|	**Values**|
+|-------------|:---------------|:-----------|
+|age	        |age in years             |	continuous|
+|hyper        |hypertension             |	1= yes, 0=no|
+|vac	        |vaccinated against TBE   |	1= yes, 0=no|
+|mono	        |monophasic disease course|	1= yes, 0=no|
+|other        |	other comorbidities     |	1= yes, 0=no|
+|tick         |	large tick at removal   |	1= yes, 0=no|
+|sex          |	sex                     |	1= female, 0= male|
+|hospd        |	length of hospitalization in days|	continuous|
+
+
+### **Step 1: Set up**
+
+#### Step 1.1: Create a new R script
+
+Once you have created an Rproject inside the "tbe_en" folder (as specified in the second point of the section **Preparation for the case study**). Create a new script with the name *tbe_lr* and save it in the subfolder "scripts".
+If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script.
+
+#### Step 1.2: Define R language
+
+Depending on where you are and how to carried out R installation, your language "locale" might be different from the language of the graphs that you want to produce. For example, a french person might have a french "locale". If that is the case, when creating a graph by day of the week, Monday will be displayed as "lundi". If that french person wants to create an English report, as for this case study, the language "locale" should be changed.
+
+**Task**: Ensure your "locale" is in English and change it into English if it is not. If you don't know how to do this try finding it online (searching for online help is an important skill for R users!). Otherwise, see the solution below
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, results = 'hide'}
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+
+```
+
+</br>
+
+</details>
+
+
+#### Step 1.3: Install/load packages
+
+Install and load the following packages: rio, skimr, janitor, gtsummary, broom, ggfortify, ggh4x and tidyverse.
+
+You can find more about installing/loading packages in the [Packages](https://epirhandbook.com/en/new_pages/basics.html#packages) section of the EpiRhandbook. 
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. But other packages such as {MASS} do also have a function called select(). This could create headaches if you want to subset columns using dplyr's select() but R thinks you're calling MASS's select() (we call this masking - dplyr's select() is masked by MASS's select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always "prevail".
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  gtsummary,  # summary statistics, tests and regressions 
+  broom,      # to generate tidy tibbles of regression analysis
+  ggfortify,  # data visualisation for statistical analysis results
+  ggh4x,      # a ggplot extension package used for advanced plotting
+  tidyverse  # data management and visualization
+)
+
+```
+</br>
+
+</details>
+
+### **Step 2: Import and explore data**
+```{r, include=FALSE}
+tbe <- import("../cs/ENG/tbe_en/data/tbe.RDS")
+```
+#### Step 2.1: Import the data and brief exploration
+
+Import the data frame called "tbe.RDS" inside the "data" subfolder. If you are working within a project, finding the path to the dataframe should be relatively straightfoward. A ".RDS" file is a R object file. You can import this dataframe using the readRDS() function from {base}. However, we recommend that you use the **import()** function from {rio} because, as you may remember, this function will recognise the file type and import it whether the file is from R, Stata, excel or many others. If you have any doubts about importing review the [Import and export](https://epirhandbook.com/en/new_pages/importing.html#import-data) chapter of the EpiRhandbook.
+
+
+Then, explore the data trying to answer the following questions:
+
+-   How many columns and rows are present?
+
+-   What class are the columns?
+
+-   What is the completeness rate of the columns?
+
+-   How many categories are present in the nominal columns?
+
+-   What is the range in the numeric columns? Do they make sense?
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+An efficient way to explore data is to use the function skim() from the {skimr} package, as it gives you all the information needed with only one command. Of course, there are several alternatives. 
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide', eval=FALSE}
+# Import the data
+
+tbe <- import("data/tbe.RDS")
+```
+
+```{r , echo=TRUE}
+
+# Explore the dataframe
+skim(tbe)
+```
+</br>
+
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "523",
+  "2",
+  answer = "8",
+  "6"
+)
+
+
+cat("How many columns does the dataframe have?", longmcq(opts))
+
+```
+:::
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "958",
+  answer = "22",
+  "18",
+  "39"
+)
+
+
+cat("How many rows have missing the column 'Other comorbidities'?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "119",
+  "191",
+  "332",
+  "285"
+)
+
+
+cat("How many cases have hypertension?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "0",
+  "6",
+  "2",
+  "8"
+)
+
+
+cat("How many character columns does the dataframe have?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "There is no difference between these classes, those are synonims",
+  "Character columns contain text, whereas factors contain numbers",
+  "Factors are used when we have more than 5 categories of data",
+  answer = "Both classes contain text, but factors are used when there are a limited number of unique character strings and they often represent categorical data"
+)
+
+
+cat("What is the difference between a column of class 'character' and a column of class 'factor'?", longmcq(opts))
+
+```
+:::
+
+
+Normally, at this point we would start **cleaning** our data. Fortunately for you, the tbe_en has already been cleaned, so you can jump directly to the fun part. However, feel free to rename/recode or change any aspect of the dataframe to accomodate it to your personal preferences.
+
+
+#### Step 2.3: Histogram with length of hospitalisation
+
+Create an histogram with the distribution of the length of hospitalisation in days (column *hosp*). Try adding the normal curve to this histogram.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are many ways to create an histogram in R, but try using the package {ggplot2}. You can have a look at the 
+[ggplot basics](https://epirhandbook.com/new_pages/ggplot_basics.html) chapter of the EpiRhandbook if you struggle.
+
+Adding the normal curve to the histogram may prove quite challenging. Do not worry if you don't manage. One hint is that, in the histogram, you will need to display the **density** and not the frequency count. Also, ask a *seach engine* or any *AI platform* if they can help you. Most of us use these tools on a daily basis to ask for help.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Create the histogram with the length of hospitalisation adding a  normal curve
+
+tbe %>%                                  #we call the data first and we pass it into ggplot with the pipe operator
+  
+  ggplot(mapping = aes(x = hospd)) +     #when drawing an histogram we only need to specify the x axis   
+  
+  geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
+  
+  #the function below will add the normal curve. 
+  stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(tbe$hospd, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) # Identify the colour and line width of the normal curve
+```
+</br>
+
+</details>
+
+
+Now, that was tough! But we're here to push you out of your comfort zone. Let's go into more detail about what we have done.
+
+By now, you should feel comfortable creating a basic histogram using ggplot, so let's focus on the new things.
+We have added another aesthetic to the geom_histogram() in which we specify that we want plotted the density and not the frequency count. **Why is that?** Displaying the density is more appropriate  when we want to focus on the shape of the data, as we can see the underlying probability distribution more clearly. 
+
+But, **what is actually the density?** The density represents the relative frequency, what we do is scale the y-axis so that the area under the histogram equals 1, normalising the histogram to represent probabilities (density) rather than raw counts. In fact, look at how the y-axis changes when you represent the density and when you represent the counts. 
+
+Finally, **why are we putting two dots before and after density in the aes()?** The double dots before and after ..density.. are a special syntax used within ggplot2. They indicate an internal variable that ggplot2 calculates during the plotting process. So, ggplot2 normally calculates the density for histograms, but it does not display it unless you specify it (with this syntax).
+
+
+#### Step 2.4: Inspect factor columns
+
+As we saw before, we have 6 factor columns representing categorical variables in our dataframe. Although we looked at them with the skim() function, explore them further with the tabyl() function from the {janitor} package.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To save time, try to always use functions that allow you to apply the same function to many different objects (e.g., multiple columns) simultaneously. You can achieve this using several approaches, for example *loops*, *lapply* or *purrr*. Here we give the solution with *purrr*, so if you want to explore further purrr have a look at the dedicated [section](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) in the EpiRhandbook.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Inspect all factor columns at once
+
+### One by one
+
+tabyl(tbe, hyper)
+
+tabyl(tbe, vac)
+
+#### All at once
+
+tbe %>% 
+  
+  select(where(is.factor)) %>% #we first select only the columns that are of class 'factor'
+  
+  map(.f = tabyl)              #inside map() from {purrr} we specify the function we want to apply to the entire dataframe
+
+```
+</br>
+
+</details>
+
+#### Step 2.4: Create a cross-table and calculate a statistical test
+
+Let's say that we now want to explore whether sex is associated with hypertension.
+To find out this, create a cross-table displaying these two variables and calculate the appropriate statistical test to know if there is a statistical association between them.
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are several ways in which you can do this. You could, for example, create the cross-table with tabyl() and then separately calculate the statistical test. The easiest way would be to use the tbl_summary() function from the {gtsummary} package, which allows you to do both, the cross tabulation and the statistical tests, in the same command. You should be familiar with this package by now, but if you need a little refresher have a look at the dedicated [chapter](https://epirhandbook.com/new_pages/stat_tests.html#stats_gt) of the EpiRhandbook.
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Cross-table -------------------------------------------------------------
+
+tbe %>% 
+  select(hyper, sex) %>%   #we select the columns we are interested in
+  tbl_summary(by = hyper) %>% #we specify that we want by hypertension status
+  add_p()                     # adding this command will calculate the most appropriate statistical test
+
+```
+</br>
+
+</details>
+
+
+As you can see, there isn't a significant association between sex and hypertension. 
+
+### **Step 3: Check if there a linear association between length of hospitalisation and age**
+
+Age is a potential confounder for a more severe course of TBE involving a longer stay in hospital, for which we would like to adjust. Since age is a continuous variable, we could include it in the regression model in various ways (e.g. as a continuous variable, in categories, by transforming it, etc.). In order to decide this, we need to analyze the association of age with the length of hospitalisation.
+
+
+#### Step 3.1: Inspect a potential linear association
+
+Please first have a look at the relationship between age and length of hospitalization using a scatterplot. 
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Scatterplot for linear association ------------------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+    
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalization in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+</br>
+
+</details>
+
+
+What do you think? Is there an association? How can you be sure? Add a linear model trend line to help you with the interpretation. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+For the trend line, you can add a geom_smooth() geometry. Look up the documentation for geom_smooth (you can type ?geom_smooth in the console and press "Enter") and search for the methods option.For a linear trend line you can assign the methods argument to “lm” (linear model).
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Scatterplot for linear association with trend line ------------------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalization in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+</br>
+
+</details>
+
+You have visual evidence of a linear association of age with the duration of hospitalization. Therefore, it seems reasonable to include age as a continuous variable in the analysis.
+
+Now, we will see how to perform linear regression with R.
+
+
+
+#### Step 3.2: Univariate linear regression between length of hospitalisation and age
+
+Now, try running a linear regression model using the *tbe* data, with length of hospitalisation (hospd) as the dependent variable and age as the independent variable. Assign this model to an object named: *age_hospd_lm* If this is the first time doing regression in R, have a look at the [Univariate](https://epirhandbook.com/new_pages/regression.html#univariate) regression chapter of the EpiRhandbook.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You could use the lm() function from {base} to analyze the linear association between age and length of hospitalization. The syntax is: lm(outcome/dependent variable ~ exposure/independent variable, data = dataframe) You can print the model output in a subsequent command using the summary() function. However, the tidy() function from {broom} provides an overview which can be more easily compiled and used in down-stream analyses if needed.
+
+
+The approach described above is the {base} R approach. You can also perform univariate regression analysis using the function tbl_uvregression() from the {gtsummary} package. If you want to explore this alternative approach further read the dedicated EpiRhandbook [chapter](https://epirhandbook.com/new_pages/regression.html#reg_gt_uni)
+</br>
+
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+)
+
+cat("Based on the results of this model, is there a significant association between age and hospd?", longmcq(opts))
+
+```
+:::
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "0.372",
+  "24.5",
+  "0.271",
+  "1.42"
+)
+
+cat("How much does an additional year of age increase length of hospitalisation (in days)?", longmcq(opts))
+
+```
+:::
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "65%",
+  "15%",
+  answer = "27%",
+  "99%"
+  
+)
+
+cat("What % of the variability in length of hospitalisation can be explained by age?", longmcq(opts))
+
+```
+:::
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Univariate regression analysis between hospd and age ------------------------------------------
+
+# Run the linear regression and assign the output to age_hospd_lm
+age_hospd_lm <- lm(hospd ~ age, data = tbe)
+
+# Print the results using the summary() function
+summary(age_hospd_lm)
+
+# Get the results of the regression analysis with the tidy() function as a data.frame
+results_age_hospd_lm <- tidy(age_hospd_lm)
+
+results_age_hospd_lm
+```
+
+
+</br>
+
+</details>
+
+Now let's go through the outputs of the model. 
+We will first review the outputs of the tidy() function. As explained before, the advantage of using tidy() is that we can save the output as an object for further manipulation. Also, tidy() keeps what we would normally need in epidemiology for the interpretation of the model:
+
+We have four columns and two rows. The rows refer to the **intercept** (baseline value for hospd when age is zero: 24.5) and our only exposure/predictor (age). 
+In most cases, you will be mostly interested in the row for **age** (your predictor) and in the columns **estimate** and **p.value**. The **estimate** of age tells us the estimated change in hospd for a one-unit increase in age. Here, it’s approximately 0.37. The column **p.value** tells us whether this estimate is statistically significant.
+
+If you want to know what the other columns are, keep reading. 
+
+The column **std.error** provides an estimate of the variability or uncertainty associated with the estimate. In this case it means that the estimated effect of age on hospitalisation duration (hospd) is expected to vary by about 0.0278 days (on average) due to sampling variability. Finally, the **statistic** column gives us a value of the statistical test (t-test in this case) used to ascertain if the estimate is significantly different from 0 (normally you can ignore this column). 
+
+
+You may have noticed that the summary() output has more information than the tidy() output. Here we leave a brief explanation on what each part of the output means:
+
+
+**Call:** This line shows the formula used for the regression model. 
+
+**Residuals:** These are the differences between the actual hospd values and the predicted values from the regression model. The summary provides statistics like minimum, median, and maximum residuals.
+
+**Coefficients:** This is the bit that interests us the most: 
+
+-   **Intercept**: The estimated intercept (baseline value) for hospd when age is zero. In this case, it’s approximately 24.53.
+-   **Age:** The estimated change in hospd for a one-unit increase in age. Here, it’s approximately 0.37. The t-value and **p-value** indicate whether this coefficient is statistically significant.
+
+**Significance Codes:** Indicate whether the p-value is highly significant (*** p < 0.001) or only marginally significant (* p<0.05)
+
+**Residual Standard Error:** This measures the average deviation of the observed hospd values from the regression line. In this case, it’s approximately 11.61.
+
+**Multiple and Adjusted R-squared:** These values (0.2711 and 0.269) represent the proportion of variance in hospd explained by the linear relationship with age. Higher values indicate better fit. The adjusted one is adjusted for the number of predictors.
+
+**F-statistic and p-value:** The F-statistic tests whether the overall model (including all predictors) is significant. A low p-value (like yours, < 2.2e-16) indicates that the model is significant.
+
+
+#### (Optional) Step 3.3: Check if the association between age and length of hospitalisation varies by sex
+
+Check visually whether the association between age and hospd differs by sex
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may choose to create separate graphs adding a facet_grid() to your ggplot() (try looking up the syntax yourself). You may also decide to use colour coding to differentiate between factor levels of sex. For the latter, where do you think you should specify the colour, inside or outside the aes()? Read this [section](https://epirhandbook.com/new_pages/ggplot_basics.html#ggplotgroups) of the EpiRhandbook if you have doubts.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# As separate graphs ------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  facet_grid(~sex)  +                   # adding this function will generate a separate graph for each category of sex
+
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalization in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+
+
+# Same graphs with different colours ------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd,
+                       colour = sex )) + #we add the colour in the aes so that it varies according to the categories of sex   
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalization in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+
+
+</br>
+
+</details>
+
+
+
+
+-   **What do you observe?**
+The lines for female and male patients have different slopes, indicating that the association between age and hospitalization days is modified by age.
+
+-   **Why does this matter?**
+Since there are different effects of age on the length of the hospitalization by sex, you may want to control for this.
