@@ -20,9 +20,7 @@ format:
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
 
-## Fixed sections in the case study
-
-### Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA) {.unnumbered}    
+### TBE - Linear regression (ENG) {.unnumbered}    
 
 ### Overview {.unnumbered}
 
@@ -30,40 +28,21 @@ format:
 
 |**Case study characteristics**|      |
 |------------------------------|:-----|
-| Name:                     |      |
-| Language:                 |      |
-| Tool:                     |      | 
-| Location:                 |      |
-| Scale:                    |      | 
-| Diseases:                 |      | 
-| Keywords:                 |      | 
-| Technical complexity:     |      | 
-| Methodological complexity:|      | 
+| Name:                     |  TBE - linear regression    |
+| Language:                 |   English   |
+| Tool:                     |   R   | 
+| Location:                 |   Germany   |
+| Scale:                    |    National  | 
+| Diseases:                 |   TBE   | 
+| Keywords:                 |   TBE; Linear Regression; R   | 
+| Technical complexity:     |  Intermediate    | 
+| Methodological complexity:|   Intermediate   | 
  
 
-*On how to fill the table*
-
-Name: (Of the case study)\ -->
-Language: Full name of the language (e.g., English, Spanish, French....)\
-Tool: Specify tool (e.g., R, Excel, STATA...)\
-Location: Geographical country where the case study is based at \
-Scale: Local, Regional, National or Global\ 
-Disease: Specify pathogen\ 
-Keywords:  (Examples: Outbreak investigation, GIS, TSA...)\ 
-Technical complexity: 
-  * Basic: Involves importing and cleaning data, common visualisations and/or descriptive analysis\
-  * Intermediate: Includes linkage of several datasets, changing the shape of data, more complex visualisations, simple statistical analysis (e.g., uni/multivariate regression), simple iterations (e.g., loops) and/or creation of automatic reports\
-  *Advanced: Management of large databases or download of databases from repositories, more complex iterations, use of specific packages and functions (e.g., for survival analysis or TSA) and/or complex automatic reports\
-  
-Methodological complexity:
-  *Basic: Case study includes only descriptive analysis and/or hypothesis testing (e.g., Chi square, student t test..)\
-  *Intermediate: Case study includes more complex methods such as univariate/multivariate regression analysis, standardisation and/or alert thresholds, for example\
-  *Advanced: Case study includes complex methods that are outside routine field epidemiology. For example, Time series analysis, survival analysis, multilevel analysis etc.\
-
 ***Authorship***\
-Original authors:   XXXX\
-Data source: XXXX\
-Adapted by: XXXX\
+Original authors:   Teresa Nygren (RKI), Alicia Barrasa Blanco (UK FETP), Jan Walter (RKI) and Achim Dörre (RKI)\
+Data source: Data was fictional; inspired by Nygren et al. Tick-borne encephalitis: acute clinical manifestations and severity in 581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr 1;86(4):369-75\
+Adapted by: Liese Van Gompel (MediPIET), Joana Gomes Dias (ECDC),  Chiara Entradi (ECDC) and Alberto Mateo Urdiales (ISS)\
 
 ### Instructions
 
@@ -151,7 +130,7 @@ NOTE: End of solution
 
 #### Terms of Use
 
-<!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
+
 
 ###  Feedback & suggestions
 
@@ -174,9 +153,9 @@ Write any revisions made to the case study
 
 | Date    | Changes made | Author| 
 |---------|:-------------|-------:|
-|         |              |        |
-|         |              |        |
-|         |              |        |
+|  2023   |  Revision R code  | Liese Van Gompel (MediPIET)       |
+|  2024   |  Revision R code  |   Joana Gomes Dias and Chiara Entradi (ECDC)     |
+|  2024   |  Revision of structure, format and R code  | Alberto Mateo Urdiales (ISS)    |
 
 \pagebreak
 
