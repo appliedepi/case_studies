@@ -398,8 +398,8 @@ pacman::p_load(
   janitor,    # data cleaning and tables
   gtsummary,  # summary statistics, tests and regressions 
   broom,      # to generate tidy tibbles of regression analysis
+  rstatix,    # for statistics, including statistical tests
   ggfortify,  # data visualisation for statistical analysis results
-  ggh4x,      # a ggplot extension package used for advanced plotting
   tidyverse  # data management and visualization
 )
 
@@ -567,7 +567,7 @@ cat("What is the difference between a column of class 'character' and a column o
 Normally, at this point we would start **cleaning** our data. Fortunately for you, the tbe_en has already been cleaned, so you can jump directly to the fun part. However, feel free to rename/recode or change any aspect of the dataframe to accomodate it to your personal preferences.
 
 
-#### Step 2.3: Histogram with length of hospitalisation
+#### Step 2.3: Histogram with length of hospitalisation 
 
 Create an histogram with the distribution of the length of hospitalisation in days (column *hosp*). Try adding the normal curve to this histogram.
 
@@ -735,7 +735,7 @@ tbe %>%
 
 As you can see, there isn't a significant association between sex and hypertension. 
 
-### **Step 3: Check if there a linear association between length of hospitalisation and age**
+### **Step 3: Check if there is a linear association between length of hospitalisation and age**
 
 Age is a potential confounder for a more severe course of TBE involving a longer stay in hospital, for which we would like to adjust. Since age is a continuous variable, we could include it in the regression model in various ways (e.g. as a continuous variable, in categories, by transforming it, etc.). In order to decide this, we need to analyze the association of age with the length of hospitalisation.
 
@@ -1081,3 +1081,154 @@ The lines for female and male patients have different slopes, indicating that th
 
 -   **Why does this matter?**
 Since there are different effects of age on the length of the hospitalization by sex, you may want to control for this.
+
+
+### **Step 4: Check if there is a difference in length of hospitalisation by hypertension status**
+
+We can check whether TBE cases with high blood pressure have a significant longer stay in hospital compared with those without high blood pressure either by carrying out a simple statistical test or through univariate regression. We will do both
+
+#### Step 4.1: Simple statistical test
+
+
+One way would be to carry out a **simple statistical test** which enables us to ascertain if there is a significant difference between groups. As you know, the choice of statistical test will be determined by the number of groups that we have and the nature of the variables. If you don't remember well how to choose the appropriate statistical test have a look at this [BMJ article](https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/13-study-design-and-choosing-statisti)
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Chi-square or Fisher's exact test",
+  "ANOVA or Kruskal Wallis",
+  answer = "Student t test or Mann Whitney/Wilcoxon rank-sum test",
+  "McNemar's test or Spears Rank"
+)
+
+cat("What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
+
+```
+:::
+
+
+In this case we have independent data, two groups (hypertension yes/no) and a quantitative dependent (outcome) variable (length of hospitalisation), so we will choose either a **t-test** or **Wilcoxon rank-sum test** (also known as Mann-Whitney). We'd do a t-test if length of hospitalisation is normally distributed and Wilcoxon if it isn't.
+
+**Task** Check visually whether length of hospitalisation is normally distributed. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+A simple way to check this is by generating a histogram for “hospd” using ggplot(). Stratification by “hyper” is easily done by adding a facet_grid() to your ggplot, as we have already seen with scatterplot. Looking at the frecuency distribution of "hospd" by "hypertension" can already give us an idea of whether the data is normally distributed or not.
+
+However, if we want to to add a normal curve, we'd need to plot the density and not the frequency, as you may rembember from the histogram we built above in Step 2.3. 
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Plot the frecuency distribution by hypertension status
+tbe %>%
+  
+  ggplot(mapping = aes(x = hospd)) +
+  
+    geom_histogram() + 
+    
+    facet_grid(~hyper) # add facet_grid() to get a graph for each hyper status
+
+
+# Plot the density and add a  normal curve
+
+tbe %>%                                  
+  
+  ggplot(mapping = aes(x = hospd, fill = hyper)) +  #remember that for bars, fill is is the interior colour     
+  
+    geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
+  
+    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
+
+    #the function below will add the normal curve. 
+    stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(tbe$hospd, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) + # Identify the colour and line width of the normal curve
+    labs(
+      x = "Length of hospitalization in days",
+      y = "Density"
+      )
+
+```
+
+
+</br>
+
+</details>
+
+
+From the graphs looks like the data is normally distributed, but there is a test we can do to determine this: **Shapiro-Wilk test**. 
+
+**Task**: Use the Shapiro test to determine whether length of hospitalisation comes from a normally-distributed population.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can choose {base} functions to carry out the Shapiro test (and any other statistical test) or functions from the {rstatix} package. Here we will use the latter, because {rstatix} has a syntax that is compatible with {dplyr}, which can be an advantage. In any case the name of the functions are very similar. For example, using {base} the Shapiro test function is shapiro.test(); and with {rstatix} the same function is written as: shapiro_test() 
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+
+tbe %>%
+  
+  group_by(hyper) %>% #we first group by out independent or exposure variable
+  
+  
+  shapiro_test(hospd)  # this function performs the Shapiro-Wilk test for all groups separately
+```
+
+
+</br>
+
+</details>
+
+
+The null hypothesis of Shapiro'test is that data is normally distributed, as our results were non-significant (p>0.05) we cannot reject such null hypothesis. In other words, we can conclude that data is normally distributed.
+
+*Note*: A statistician or an epidemiologist pretending to be a statistician would feel very uncomfortable by the conclusion written above. When we are unable to reject a null hypothesis we cannot conclude that this hypothesis (in this case that data is normally distributed) is true, but we should simply state that we were unable to reject it. However, in practical terms, by carrying out a Shapiro test we are assuming that the data is normally distributed....so word it as you like, but the consequences are the same.
