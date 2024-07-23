@@ -485,7 +485,7 @@ opts <- c(
 )
 
 
-cat("How many columns does the dataframe have?", longmcq(opts))
+cat("QUESTION: How many columns does the dataframe have?", longmcq(opts))
 
 ```
 :::
@@ -504,7 +504,7 @@ opts <- c(
 )
 
 
-cat("How many rows have missing the column 'Other comorbidities'?", longmcq(opts))
+cat("QUESTION: How many rows have missing the column 'Other comorbidities'?", longmcq(opts))
 
 ```
 :::
@@ -522,7 +522,7 @@ opts <- c(
 )
 
 
-cat("How many cases have hypertension?", longmcq(opts))
+cat("QUESTION: How many cases have hypertension?", longmcq(opts))
 
 ```
 :::
@@ -540,7 +540,7 @@ opts <- c(
 )
 
 
-cat("How many character columns does the dataframe have?", longmcq(opts))
+cat("QUESTION: How many character columns does the dataframe have?", longmcq(opts))
 
 ```
 :::
@@ -558,7 +558,7 @@ opts <- c(
 )
 
 
-cat("What is the difference between a column of class 'character' and a column of class 'factor'?", longmcq(opts))
+cat("QUESTION: What is the difference between a column of class 'character' and a column of class 'factor'?", longmcq(opts))
 
 ```
 :::
@@ -878,7 +878,7 @@ opts <- c(
   "No"
 )
 
-cat("Based on the results of this model, is there a significant association between age and hospd?", longmcq(opts))
+cat("QUESTION: Based on the results of this model, is there a significant association between age and hospd?", longmcq(opts))
 
 ```
 :::
@@ -896,7 +896,7 @@ opts <- c(
   "1.42"
 )
 
-cat("How much does an additional year of age increase length of hospitalisation (in days)?", longmcq(opts))
+cat("QUESTION: How much does an additional year of age increase length of hospitalisation (in days)?", longmcq(opts))
 
 ```
 :::
@@ -915,7 +915,7 @@ opts <- c(
   
 )
 
-cat("What % of the variability in length of hospitalisation can be explained by age?", longmcq(opts))
+cat("QUESTION: What % of the variability in length of hospitalisation can be explained by age?", longmcq(opts))
 
 ```
 :::
@@ -1104,7 +1104,7 @@ opts <- c(
   "McNemar's test or Spears Rank"
 )
 
-cat("What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
+cat("QUESTION: What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
 
 ```
 :::
@@ -1196,7 +1196,7 @@ From the graphs looks like the data is normally distributed, but there is a test
 
 </br>
 
-You can choose {base} functions to carry out the Shapiro test (and any other statistical test) or functions from the {rstatix} package. Here we will use the latter, because {rstatix} has a syntax that is compatible with {dplyr}, which can be an advantage. In any case the name of the functions are very similar. For example, using {base} the Shapiro test function is shapiro.test(); and with {rstatix} the same function is written as: shapiro_test() 
+You can choose {base} functions to carry out the Shapiro test (and any other statistical test) or functions from the {rstatix} package. Here we will use the latter, because {rstatix} has a syntax that is compatible with {dplyr}, which can be an advantage. In any case the name of the functions are very similar. For example, using {base} the Shapiro test function is shapiro.test(); and with {rstatix} the same function is written as: shapiro_test(). If you want to know more about how to carry out simple statistical tests in R, read the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html)
 
 </br>
 
@@ -1214,7 +1214,7 @@ You can choose {base} functions to carry out the Shapiro test (and any other sta
 </br>
 
 ```{r , echo=TRUE}
-
+# Apply the Shapiro test
 tbe %>%
   
   group_by(hyper) %>% #we first group by out independent or exposure variable
@@ -1232,3 +1232,98 @@ tbe %>%
 The null hypothesis of Shapiro'test is that data is normally distributed, as our results were non-significant (p>0.05) we cannot reject such null hypothesis. In other words, we can conclude that data is normally distributed.
 
 *Note*: A statistician or an epidemiologist pretending to be a statistician would feel very uncomfortable by the conclusion written above. When we are unable to reject a null hypothesis we cannot conclude that this hypothesis (in this case that data is normally distributed) is true, but we should simply state that we were unable to reject it. However, in practical terms, by carrying out a Shapiro test we are assuming that the data is normally distributed....so word it as you like, but the consequences are the same.
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Student t-test",
+  "Wilcoxon rank-sum test"
+  
+)
+
+cat("QUESTION: Now that we know that the data is normally distributed, what test should we carry out?", longmcq(opts))
+
+```
+:::
+
+**Task** Carry out the statistical test to ascertain if there are significant differences in length of hospitalisation according to hypertension status
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Apply the Student t-test
+tbe %>%
+  
+  t_test(hospd ~ hyper)  # we write first our dependent variable and then the exposure one
+```
+
+
+</br>
+
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+  
+)
+
+cat("QUESTION: Is there a significant difference in the length of hospitalisation among patients with and without hypertension?", longmcq(opts))
+
+```
+:::
+
+
+*Note*: In large datasets (as this one) the Shapiro-Wilk test may reject the normality hypothesis even though the deviation from the normal distribution is rather small. In this case you may still choose to calculate the t-test despite the violation of the normality assumption. This is acceptable because for large samples, the error imposed by t-test approximation is negligible.
+
+
+#### Step 4.2: Univariate linear regression
+
+
+Carry out a univariate linear regression to check whether hypertension is associated with length of hospitalisation.
+By now you should be able to do this on your own, but if you have any doubts look at Step 3.2 or to the [Regression Chapter](https://epirhandbook.com/new_pages/regression.html) of the EpiRhandbook.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#First we write the formula (lm stands for linear model) and assign the model to an object
+hyper_hospd_lm <- lm(hospd ~ hyper, data= tbe)
+
+# Generate the model parameters
+tidy(hyper_hospd_lm)                        #remember that we can also get them with the function summary()
+```
+
+
+</br>
+
+</details>
+
+
