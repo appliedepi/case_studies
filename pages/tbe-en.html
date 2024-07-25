@@ -68,6 +68,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="tbe-en_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="tbe-en_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="webex.css">
 </head>
@@ -264,7 +293,7 @@ NOTE: End of solution
 </tr>
 <tr class="odd">
 <td>2024</td>
-<td style="text-align: left;">Revision of structure, format and R code</td>
+<td style="text-align: left;">Revision of content, structure, R code and adaptation of format to Applied Epi’s template of case studies</td>
 <td style="text-align: right;">Alberto Mateo Urdiales (ISS)</td>
 </tr>
 </tbody>
@@ -657,33 +686,33 @@ NOTE: End of solution
 <p><br></p>
 </details>
 <div class="webex-check">
-How many columns does the dataframe have?
-<div id="radio_MRJLJJWQCN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MRJLJJWQCN" value=""> <span>523</span></label><label><input type="radio" autocomplete="off" name="radio_MRJLJJWQCN" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_MRJLJJWQCN" value="answer"> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_MRJLJJWQCN" value=""> <span>6</span></label>
+QUESTION: How many columns does the dataframe have?
+<div id="radio_ZXRHBNYYOY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZXRHBNYYOY" value=""> <span>523</span></label><label><input type="radio" autocomplete="off" name="radio_ZXRHBNYYOY" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_ZXRHBNYYOY" value="answer"> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_ZXRHBNYYOY" value=""> <span>6</span></label>
 </div>
 </div>
 <div class="webex-check">
-How many rows have missing the column ‘Other comorbidities’?
-<div id="radio_BQQOKPUDCL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BQQOKPUDCL" value=""> <span>958</span></label><label><input type="radio" autocomplete="off" name="radio_BQQOKPUDCL" value="answer"> <span>22</span></label><label><input type="radio" autocomplete="off" name="radio_BQQOKPUDCL" value=""> <span>18</span></label><label><input type="radio" autocomplete="off" name="radio_BQQOKPUDCL" value=""> <span>39</span></label>
+QUESTION: How many rows have missing the column ‘Other comorbidities’?
+<div id="radio_ESMCZSMLWX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ESMCZSMLWX" value=""> <span>958</span></label><label><input type="radio" autocomplete="off" name="radio_ESMCZSMLWX" value="answer"> <span>22</span></label><label><input type="radio" autocomplete="off" name="radio_ESMCZSMLWX" value=""> <span>18</span></label><label><input type="radio" autocomplete="off" name="radio_ESMCZSMLWX" value=""> <span>39</span></label>
 </div>
 </div>
 <div class="webex-check">
-How many cases have hypertension?
-<div id="radio_BJGLXLLKPX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BJGLXLLKPX" value="answer"> <span>119</span></label><label><input type="radio" autocomplete="off" name="radio_BJGLXLLKPX" value=""> <span>191</span></label><label><input type="radio" autocomplete="off" name="radio_BJGLXLLKPX" value=""> <span>332</span></label><label><input type="radio" autocomplete="off" name="radio_BJGLXLLKPX" value=""> <span>285</span></label>
+QUESTION: How many cases have hypertension?
+<div id="radio_QUTIUSKFND" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QUTIUSKFND" value="answer"> <span>119</span></label><label><input type="radio" autocomplete="off" name="radio_QUTIUSKFND" value=""> <span>191</span></label><label><input type="radio" autocomplete="off" name="radio_QUTIUSKFND" value=""> <span>332</span></label><label><input type="radio" autocomplete="off" name="radio_QUTIUSKFND" value=""> <span>285</span></label>
 </div>
 </div>
 <div class="webex-check">
-How many character columns does the dataframe have?
-<div id="radio_KYKGDJZADJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KYKGDJZADJ" value="answer"> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_KYKGDJZADJ" value=""> <span>6</span></label><label><input type="radio" autocomplete="off" name="radio_KYKGDJZADJ" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_KYKGDJZADJ" value=""> <span>8</span></label>
+QUESTION: How many character columns does the dataframe have?
+<div id="radio_JFMTLPCDGG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JFMTLPCDGG" value="answer"> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_JFMTLPCDGG" value=""> <span>6</span></label><label><input type="radio" autocomplete="off" name="radio_JFMTLPCDGG" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_JFMTLPCDGG" value=""> <span>8</span></label>
 </div>
 </div>
 <div class="webex-check">
-What is the difference between a column of class ‘character’ and a column of class ‘factor’?
-<div id="radio_ANMPUAFGUL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ANMPUAFGUL" value=""> <span>There is no difference between these classes, those are synonims</span></label><label><input type="radio" autocomplete="off" name="radio_ANMPUAFGUL" value=""> <span>Character columns contain text, whereas factors contain numbers</span></label><label><input type="radio" autocomplete="off" name="radio_ANMPUAFGUL" value=""> <span>Factors are used when we have more than 5 categories of data</span></label><label><input type="radio" autocomplete="off" name="radio_ANMPUAFGUL" value="answer"> <span>Both classes contain text, but factors are used when there are a limited number of unique character strings and they often represent categorical data</span></label>
+QUESTION: What is the difference between a column of class ‘character’ and a column of class ‘factor’?
+<div id="radio_OATPYNETLD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OATPYNETLD" value=""> <span>There is no difference between these classes, those are synonims</span></label><label><input type="radio" autocomplete="off" name="radio_OATPYNETLD" value=""> <span>Character columns contain text, whereas factors contain numbers</span></label><label><input type="radio" autocomplete="off" name="radio_OATPYNETLD" value=""> <span>Factors are used when we have more than 5 categories of data</span></label><label><input type="radio" autocomplete="off" name="radio_OATPYNETLD" value="answer"> <span>Both classes contain text, but factors are used when there are a limited number of unique character strings and they often represent categorical data</span></label>
 </div>
 </div>
 <p>Normally, at this point we would start <strong>cleaning</strong> our data. Fortunately for you, the tbe_en has already been cleaned, so you can jump directly to the fun part. However, feel free to rename/recode or change any aspect of the dataframe to accomodate it to your personal preferences.</p>
@@ -757,24 +786,64 @@ What is the difference between a column of class ‘character’ and a column of
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">### One by one</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(tbe, hyper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> hyper   n   percent
-    no 404 0.7724665
-   yes 119 0.2275335</code></pre>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">hyper</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.7724665</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yes</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: right;">0.2275335</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(tbe, vac)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> vac   n    percent
-  no 503 0.96175908
- yes  20 0.03824092</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### All at once</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span> </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">%&gt;%</span> <span class="co">#we first select only the columns that are of class 'factor'</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="at">.f =</span> tabyl)              <span class="co">#inside map() from {purrr} we specify the function we want to apply to the entire dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(tbe, vac)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">vac</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">no</td>
+<td style="text-align: right;">503</td>
+<td style="text-align: right;">0.9617591</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yes</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.0382409</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### All at once</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.factor)) <span class="sc">%&gt;%</span> <span class="co">#we first select only the columns that are of class 'factor'</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="at">.f =</span> tabyl)              <span class="co">#inside map() from {purrr} we specify the function we want to apply to the entire dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$hyper
  .x[[i]]   n   percent
@@ -828,30 +897,30 @@ $sex
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-table -------------------------------------------------------------</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span> </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hyper, sex) <span class="sc">%&gt;%</span>   <span class="co">#we select the columns we are interested in</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> hyper) <span class="sc">%&gt;%</span> <span class="co">#we specify that we want by hypertension status</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()                     <span class="co"># adding this command will calculate the most appropriate statistical test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-table -------------------------------------------------------------</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hyper, sex) <span class="sc">%&gt;%</span>   <span class="co">#we select the columns we are interested in</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> hyper) <span class="sc">%&gt;%</span> <span class="co">#we specify that we want by hypertension status</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_p</span>()                     <span class="co"># adding this command will calculate the most appropriate statistical test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="mtngcequry" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mtngcequry table {
+<div id="eyqepgeyaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#eyqepgeyaj table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mtngcequry thead, #mtngcequry tbody, #mtngcequry tfoot, #mtngcequry tr, #mtngcequry td, #mtngcequry th {
+#eyqepgeyaj thead, #eyqepgeyaj tbody, #eyqepgeyaj tfoot, #eyqepgeyaj tr, #eyqepgeyaj td, #eyqepgeyaj th {
   border-style: none;
 }
 
-#mtngcequry p {
+#eyqepgeyaj p {
   margin: 0;
   padding: 0;
 }
 
-#mtngcequry .gt_table {
+#eyqepgeyaj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -877,12 +946,12 @@ $sex
   border-left-color: #D3D3D3;
 }
 
-#mtngcequry .gt_caption {
+#eyqepgeyaj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mtngcequry .gt_title {
+#eyqepgeyaj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -894,7 +963,7 @@ $sex
   border-bottom-width: 0;
 }
 
-#mtngcequry .gt_subtitle {
+#eyqepgeyaj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -906,7 +975,7 @@ $sex
   border-top-width: 0;
 }
 
-#mtngcequry .gt_heading {
+#eyqepgeyaj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -918,13 +987,13 @@ $sex
   border-right-color: #D3D3D3;
 }
 
-#mtngcequry .gt_bottom_border {
+#eyqepgeyaj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mtngcequry .gt_col_headings {
+#eyqepgeyaj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -939,7 +1008,7 @@ $sex
   border-right-color: #D3D3D3;
 }
 
-#mtngcequry .gt_col_heading {
+#eyqepgeyaj .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -959,7 +1028,7 @@ $sex
   overflow-x: hidden;
 }
 
-#mtngcequry .gt_column_spanner_outer {
+#eyqepgeyaj .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -971,15 +1040,15 @@ $sex
   padding-right: 4px;
 }
 
-#mtngcequry .gt_column_spanner_outer:first-child {
+#eyqepgeyaj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mtngcequry .gt_column_spanner_outer:last-child {
+#eyqepgeyaj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mtngcequry .gt_column_spanner {
+#eyqepgeyaj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -991,11 +1060,11 @@ $sex
   width: 100%;
 }
 
-#mtngcequry .gt_spanner_row {
+#eyqepgeyaj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mtngcequry .gt_group_heading {
+#eyqepgeyaj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,7 +1090,7 @@ $sex
   text-align: left;
 }
 
-#mtngcequry .gt_empty_group_heading {
+#eyqepgeyaj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1036,15 +1105,15 @@ $sex
   vertical-align: middle;
 }
 
-#mtngcequry .gt_from_md > :first-child {
+#eyqepgeyaj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mtngcequry .gt_from_md > :last-child {
+#eyqepgeyaj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mtngcequry .gt_row {
+#eyqepgeyaj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1063,7 +1132,7 @@ $sex
   overflow-x: hidden;
 }
 
-#mtngcequry .gt_stub {
+#eyqepgeyaj .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1076,7 +1145,7 @@ $sex
   padding-right: 5px;
 }
 
-#mtngcequry .gt_stub_row_group {
+#eyqepgeyaj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1090,15 +1159,15 @@ $sex
   vertical-align: top;
 }
 
-#mtngcequry .gt_row_group_first td {
+#eyqepgeyaj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mtngcequry .gt_row_group_first th {
+#eyqepgeyaj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mtngcequry .gt_summary_row {
+#eyqepgeyaj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1108,16 +1177,16 @@ $sex
   padding-right: 5px;
 }
 
-#mtngcequry .gt_first_summary_row {
+#eyqepgeyaj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mtngcequry .gt_first_summary_row.thick {
+#eyqepgeyaj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mtngcequry .gt_last_summary_row {
+#eyqepgeyaj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1127,7 +1196,7 @@ $sex
   border-bottom-color: #D3D3D3;
 }
 
-#mtngcequry .gt_grand_summary_row {
+#eyqepgeyaj .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1137,7 +1206,7 @@ $sex
   padding-right: 5px;
 }
 
-#mtngcequry .gt_first_grand_summary_row {
+#eyqepgeyaj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1147,7 +1216,7 @@ $sex
   border-top-color: #D3D3D3;
 }
 
-#mtngcequry .gt_last_grand_summary_row_top {
+#eyqepgeyaj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1157,11 +1226,11 @@ $sex
   border-bottom-color: #D3D3D3;
 }
 
-#mtngcequry .gt_striped {
+#eyqepgeyaj .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mtngcequry .gt_table_body {
+#eyqepgeyaj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1170,7 +1239,7 @@ $sex
   border-bottom-color: #D3D3D3;
 }
 
-#mtngcequry .gt_footnotes {
+#eyqepgeyaj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1184,7 +1253,7 @@ $sex
   border-right-color: #D3D3D3;
 }
 
-#mtngcequry .gt_footnote {
+#eyqepgeyaj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1193,7 +1262,7 @@ $sex
   padding-right: 5px;
 }
 
-#mtngcequry .gt_sourcenotes {
+#eyqepgeyaj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1207,7 +1276,7 @@ $sex
   border-right-color: #D3D3D3;
 }
 
-#mtngcequry .gt_sourcenote {
+#eyqepgeyaj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1215,72 +1284,72 @@ $sex
   padding-right: 5px;
 }
 
-#mtngcequry .gt_left {
+#eyqepgeyaj .gt_left {
   text-align: left;
 }
 
-#mtngcequry .gt_center {
+#eyqepgeyaj .gt_center {
   text-align: center;
 }
 
-#mtngcequry .gt_right {
+#eyqepgeyaj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mtngcequry .gt_font_normal {
+#eyqepgeyaj .gt_font_normal {
   font-weight: normal;
 }
 
-#mtngcequry .gt_font_bold {
+#eyqepgeyaj .gt_font_bold {
   font-weight: bold;
 }
 
-#mtngcequry .gt_font_italic {
+#eyqepgeyaj .gt_font_italic {
   font-style: italic;
 }
 
-#mtngcequry .gt_super {
+#eyqepgeyaj .gt_super {
   font-size: 65%;
 }
 
-#mtngcequry .gt_footnote_marks {
+#eyqepgeyaj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mtngcequry .gt_asterisk {
+#eyqepgeyaj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mtngcequry .gt_indent_1 {
+#eyqepgeyaj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mtngcequry .gt_indent_2 {
+#eyqepgeyaj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mtngcequry .gt_indent_3 {
+#eyqepgeyaj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mtngcequry .gt_indent_4 {
+#eyqepgeyaj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mtngcequry .gt_indent_5 {
+#eyqepgeyaj .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mtngcequry .katex-display {
+#eyqepgeyaj .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mtngcequry div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#eyqepgeyaj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1363,26 +1432,26 @@ $sex
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot for linear association ------------------------------------------------------</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot for linear association ------------------------------------------------------</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1407,28 +1476,28 @@ $sex
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot for linear association with trend line ------------------------------------------------------</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot for linear association with trend line ------------------------------------------------------</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1454,21 +1523,21 @@ $sex
 <p>The approach described above is the {base} R approach. You can also perform univariate regression analysis using the function tbl_uvregression() from the {gtsummary} package. If you want to explore this alternative approach further read the dedicated EpiRhandbook <a href="https://epirhandbook.com/new_pages/regression.html#reg_gt_uni">chapter</a> <br></p>
 </details>
 <div class="webex-check">
-Based on the results of this model, is there a significant association between age and hospd?
-<div id="radio_JSIPCKYBYP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JSIPCKYBYP" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_JSIPCKYBYP" value=""> <span>No</span></label>
+QUESTION: Based on the results of this model, is there a significant association between age and hospd?
+<div id="radio_GYUEFVLUQA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GYUEFVLUQA" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_GYUEFVLUQA" value=""> <span>No</span></label>
 </div>
 </div>
 <div class="webex-check">
-How much does an additional year of age increase length of hospitalisation (in days)?
-<div id="radio_VUPALBRONE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VUPALBRONE" value="answer"> <span>0.372</span></label><label><input type="radio" autocomplete="off" name="radio_VUPALBRONE" value=""> <span>24.5</span></label><label><input type="radio" autocomplete="off" name="radio_VUPALBRONE" value=""> <span>0.271</span></label><label><input type="radio" autocomplete="off" name="radio_VUPALBRONE" value=""> <span>1.42</span></label>
+QUESTION: How much does an additional year of age increase length of hospitalisation (in days)?
+<div id="radio_AGAFUOKWJU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AGAFUOKWJU" value="answer"> <span>0.372</span></label><label><input type="radio" autocomplete="off" name="radio_AGAFUOKWJU" value=""> <span>24.5</span></label><label><input type="radio" autocomplete="off" name="radio_AGAFUOKWJU" value=""> <span>0.271</span></label><label><input type="radio" autocomplete="off" name="radio_AGAFUOKWJU" value=""> <span>1.42</span></label>
 </div>
 </div>
 <div class="webex-check">
-What % of the variability in length of hospitalisation can be explained by age?
-<div id="radio_NWZXTVJFFJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NWZXTVJFFJ" value=""> <span>65%</span></label><label><input type="radio" autocomplete="off" name="radio_NWZXTVJFFJ" value=""> <span>15%</span></label><label><input type="radio" autocomplete="off" name="radio_NWZXTVJFFJ" value="answer"> <span>27%</span></label><label><input type="radio" autocomplete="off" name="radio_NWZXTVJFFJ" value=""> <span>99%</span></label>
+QUESTION: What % of the variability in length of hospitalisation can be explained by age?
+<div id="radio_WIGOBZANVC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WIGOBZANVC" value=""> <span>65%</span></label><label><input type="radio" autocomplete="off" name="radio_WIGOBZANVC" value=""> <span>15%</span></label><label><input type="radio" autocomplete="off" name="radio_WIGOBZANVC" value="answer"> <span>27%</span></label><label><input type="radio" autocomplete="off" name="radio_WIGOBZANVC" value=""> <span>99%</span></label>
 </div>
 </div>
 <details>
@@ -1477,13 +1546,13 @@ What % of the variability in length of hospitalisation can be explained by age?
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Univariate regression analysis between hospd and age ------------------------------------------</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the linear regression and assign the output to age_hospd_lm</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>age_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> age, <span class="at">data =</span> tbe)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results using the summary() function</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(age_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Univariate regression analysis between hospd and age ------------------------------------------</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the linear regression and assign the output to age_hospd_lm</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>age_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> age, <span class="at">data =</span> tbe)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results using the summary() function</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(age_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1505,16 +1574,40 @@ Residual standard error: 11.61 on 482 degrees of freedom
 Multiple R-squared:  0.2711,    Adjusted R-squared:  0.2696 
 F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results of the regression analysis with the tidy() function as a data.frame</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>results_age_hospd_lm <span class="ot">&lt;-</span> <span class="fu">tidy</span>(age_hospd_lm)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>results_age_hospd_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 x 5
-  term        estimate std.error statistic  p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-1 (Intercept)   24.5      1.42        17.2 3.24e-52
-2 age            0.372    0.0278      13.4 5.60e-35</code></pre>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results of the regression analysis with the tidy() function as a data.frame</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>results_age_hospd_lm <span class="ot">&lt;-</span> <span class="fu">tidy</span>(age_hospd_lm)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>results_age_hospd_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">24.5314214</td>
+<td style="text-align: right;">1.4232588</td>
+<td style="text-align: right;">17.23609</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3722366</td>
+<td style="text-align: right;">0.0278031</td>
+<td style="text-align: right;">13.38831</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -1536,8 +1629,8 @@ F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><strong>Multiple and Adjusted R-squared:</strong> These values (0.2711 and 0.269) represent the proportion of variance in hospd explained by the linear relationship with age. Higher values indicate better fit. The adjusted one is adjusted for the number of predictors.</p>
 <p><strong>F-statistic and p-value:</strong> The F-statistic tests whether the overall model (including all predictors) is significant. A low p-value (like yours, &lt; 2.2e-16) indicates that the model is significant.</p>
 </section>
-<section id="optional-step-3.3-check-if-the-association-between-age-and-length-of-hospitalisation-varies-by-sex" class="level4">
-<h4 class="anchored" data-anchor-id="optional-step-3.3-check-if-the-association-between-age-and-length-of-hospitalisation-varies-by-sex">(Optional) Step 3.3: Check if the association between age and length of hospitalisation varies by sex</h4>
+<section id="step-3.3-check-if-the-association-between-age-and-length-of-hospitalisation-varies-by-sex" class="level4">
+<h4 class="anchored" data-anchor-id="step-3.3-check-if-the-association-between-age-and-length-of-hospitalisation-varies-by-sex">Step 3.3: Check if the association between age and length of hospitalisation varies by sex</h4>
 <p>Check visually whether the association between age and hospd differs by sex</p>
 <details>
 <summary style="text-decoration: underline; color: darkgreen;">
@@ -1553,31 +1646,31 @@ F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># As separate graphs ------------------------------------------</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex)  <span class="sc">+</span>                   <span class="co"># adding this function will generate a separate graph for each category of sex</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># As separate graphs ------------------------------------------</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd)) <span class="sc">+</span>    </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex)  <span class="sc">+</span>                   <span class="co"># adding this function will generate a separate graph for each category of sex</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1585,29 +1678,29 @@ F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same graphs with different colours ------------------------------------------</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">colour =</span> sex )) <span class="sc">+</span> <span class="co">#we add the colour in the aes so that it varies according to the categories of sex   </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same graphs with different colours ------------------------------------------</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>    </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age,        <span class="co"># we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">colour =</span> sex )) <span class="sc">+</span> <span class="co">#we add the colour in the aes so that it varies according to the categories of sex   </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                       <span class="co"># this geometry will create a scatterplot</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span>           <span class="co"># this geometry will add a trend line. "lm" is for "linear model"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Age"</span> , <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>)) <span class="sc">+</span>          <span class="co"># Format the x-axis to a range between 0 and 100 </span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">70</span>)) <span class="sc">+</span>                          <span class="co"># Format the y axis to a range between 0 and 70</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                            <span class="co"># Add a pre-defined theme for formatting</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1619,7 +1712,7 @@ F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><br></p>
 </details>
 <ul>
-<li><p><strong>What do you observe?</strong> The lines for female and male patients have different slopes, indicating that the association between age and hospitalization days is modified by age.</p></li>
+<li><p><strong>What do you observe?</strong> The lines for female and male patients have different slopes, indicating that the association between age and hospitalization days is modified by sex.</p></li>
 <li><p><strong>Why does this matter?</strong> Since there are different effects of age on the length of the hospitalization by sex, you may want to control for this.</p></li>
 </ul>
 </section>
@@ -1631,9 +1724,9 @@ F-statistic: 179.2 on 1 and 482 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h4 class="anchored" data-anchor-id="step-4.1-simple-statistical-test">Step 4.1: Simple statistical test</h4>
 <p>One way would be to carry out a <strong>simple statistical test</strong> which enables us to ascertain if there is a significant difference between groups. As you know, the choice of statistical test will be determined by the number of groups that we have and the nature of the variables. If you don’t remember well how to choose the appropriate statistical test have a look at this <a href="https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/13-study-design-and-choosing-statisti">BMJ article</a></p>
 <div class="webex-check">
-What simple statistical tests do you think would be most appropriate in this case?
-<div id="radio_YWNTTAKLIR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YWNTTAKLIR" value=""> <span>Chi-square or Fisher's exact test</span></label><label><input type="radio" autocomplete="off" name="radio_YWNTTAKLIR" value=""> <span>ANOVA or Kruskal Wallis</span></label><label><input type="radio" autocomplete="off" name="radio_YWNTTAKLIR" value="answer"> <span>Student t test or Mann Whitney/Wilcoxon rank-sum test</span></label><label><input type="radio" autocomplete="off" name="radio_YWNTTAKLIR" value=""> <span>McNemar's test or Spears Rank</span></label>
+QUESTION: What simple statistical tests do you think would be most appropriate in this case?
+<div id="radio_BILSAHWKZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BILSAHWKZV" value=""> <span>Chi-square or Fisher's exact test</span></label><label><input type="radio" autocomplete="off" name="radio_BILSAHWKZV" value=""> <span>ANOVA or Kruskal Wallis</span></label><label><input type="radio" autocomplete="off" name="radio_BILSAHWKZV" value="answer"> <span>Student t test or Mann Whitney/Wilcoxon rank-sum test</span></label><label><input type="radio" autocomplete="off" name="radio_BILSAHWKZV" value=""> <span>McNemar's test or Spears Rank</span></label>
 </div>
 </div>
 <p>In this case we have independent data, two groups (hypertension yes/no) and a quantitative dependent (outcome) variable (length of hospitalisation), so we will choose either a <strong>t-test</strong> or <strong>Wilcoxon rank-sum test</strong> (also known as Mann-Whitney). We’d do a t-test if length of hospitalisation is normally distributed and Wilcoxon if it isn’t.</p>
@@ -1652,14 +1745,14 @@ What simple statistical tests do you think would be most appropriate in this cas
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the frecuency distribution by hypertension status</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hospd)) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>hyper) <span class="co"># add facet_grid() to get a graph for each hyper status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the frecuency distribution by hypertension status</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hospd)) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>hyper) <span class="co"># add facet_grid() to get a graph for each hyper status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1667,26 +1760,26 @@ What simple statistical tests do you think would be most appropriate in this cas
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the density and add a  normal curve</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>                                  </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hospd, <span class="at">fill =</span> hyper)) <span class="sc">+</span>  <span class="co">#remember that for bars, fill is is the interior colour     </span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..)) <span class="sc">+</span> <span class="co">#here we are telling ggplot2 to display the density and not the freq count</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>hyper) <span class="sc">+</span> <span class="co"># add facet_grid() to get a graph for each hyper status</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#the function below will add the normal curve. </span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm,  <span class="co">#The fun = argument we are specifying that we want the normal curve         </span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(tbe<span class="sc">$</span>hospd, <span class="at">na.rm =</span> T), <span class="co">#to draw a normal curve we need to give the mean and standard deviation of our column</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sd   =</span> <span class="fu">sd</span>(tbe<span class="sc">$</span>hospd, <span class="at">na.rm =</span> T)),  </span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># Identify the colour and line width of the normal curve</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Length of hospitalization in days"</span>,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the density and add a  normal curve</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span>                                  </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> hospd, <span class="at">fill =</span> hyper)) <span class="sc">+</span>  <span class="co">#remember that for bars, fill is is the interior colour     </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..)) <span class="sc">+</span> <span class="co">#here we are telling ggplot2 to display the density and not the freq count</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>hyper) <span class="sc">+</span> <span class="co"># add facet_grid() to get a graph for each hyper status</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#the function below will add the normal curve. </span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm,  <span class="co">#The fun = argument we are specifying that we want the normal curve         </span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(tbe<span class="sc">$</span>hospd, <span class="at">na.rm =</span> T), <span class="co">#to draw a normal curve we need to give the mean and standard deviation of our column</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sd   =</span> <span class="fu">sd</span>(tbe<span class="sc">$</span>hospd, <span class="at">na.rm =</span> T)),  </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># Identify the colour and line width of the normal curve</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Length of hospitalization in days"</span>,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>      )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1713,19 +1806,40 @@ What simple statistical tests do you think would be most appropriate in this cas
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the Shapiro test</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hyper) <span class="sc">%&gt;%</span> <span class="co">#we first group by out independent or exposure variable</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(hospd)  <span class="co"># this function performs the Shapiro-Wilk test for all groups separately</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 x 4
-  hyper variable statistic     p
-  &lt;fct&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
-1 no    hospd        0.995 0.221
-2 yes   hospd        0.987 0.363</code></pre>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the Shapiro test</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hyper) <span class="sc">%&gt;%</span> <span class="co">#we first group by out independent or exposure variable</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(hospd)  <span class="co"># this function performs the Shapiro-Wilk test for all groups separately</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">hyper</th>
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">hospd</td>
+<td style="text-align: right;">0.9946512</td>
+<td style="text-align: right;">0.2207864</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">yes</td>
+<td style="text-align: left;">hospd</td>
+<td style="text-align: right;">0.9870178</td>
+<td style="text-align: right;">0.3632204</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -1733,9 +1847,9 @@ What simple statistical tests do you think would be most appropriate in this cas
 <p>The null hypothesis of Shapiro’test is that data is normally distributed, as our results were non-significant (p&gt;0.05) we cannot reject such null hypothesis. In other words, we can conclude that data is normally distributed.</p>
 <p><em>Note</em>: A statistician or an epidemiologist pretending to be a statistician would feel very uncomfortable by the conclusion written above. When we are unable to reject a null hypothesis we cannot conclude that this hypothesis (in this case that data is normally distributed) is true, but we should simply state that we were unable to reject it. However, in practical terms, by carrying out a Shapiro test we are assuming that the data is normally distributed….so word it as you like, but the consequences are the same.</p>
 <div class="webex-check">
-Now that we know that the data is normally distributed, what test should we carry out?
-<div id="radio_DDBKJJJYWG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DDBKJJJYWG" value="answer"> <span>Student t-test</span></label><label><input type="radio" autocomplete="off" name="radio_DDBKJJJYWG" value=""> <span>Wilcoxon rank-sum test</span></label>
+QUESTION: Now that we know that the data is normally distributed, what test should we carry out?
+<div id="radio_NPBBQUUSCT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NPBBQUUSCT" value="answer"> <span>Student t-test</span></label><label><input type="radio" autocomplete="off" name="radio_NPBBQUUSCT" value=""> <span>Wilcoxon rank-sum test</span></label>
 </div>
 </div>
 <p><strong>Task</strong> Carry out the statistical test to ascertain if there are significant differences in length of hospitalisation according to hypertension status</p>
@@ -1745,23 +1859,47 @@ Now that we know that the data is normally distributed, what test should we carr
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the Student t-test</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t_test</span>(hospd <span class="sc">~</span> hyper)  <span class="co"># we write first our dependent variable and then the exposure one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 x 8
-  .y.   group1 group2    n1    n2 statistic    df       p
-* &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1 hospd no     yes      373   111     -2.71  181. 0.00745</code></pre>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the Student t-test</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t_test</span>(hospd <span class="sc">~</span> hyper)  <span class="co"># we write first our dependent variable and then the exposure one</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">.y.</th>
+<th style="text-align: left;">group1</th>
+<th style="text-align: left;">group2</th>
+<th style="text-align: right;">n1</th>
+<th style="text-align: right;">n2</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">hospd</td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">yes</td>
+<td style="text-align: right;">373</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">-2.706422</td>
+<td style="text-align: right;">181.4443</td>
+<td style="text-align: right;">0.00745</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p><br></p>
 </details>
 <div class="webex-check">
-Is there a significant difference in the length of hospitalisation among patients with and without hypertension?
-<div id="radio_WFYMDMDUZH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WFYMDMDUZH" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_WFYMDMDUZH" value=""> <span>No</span></label>
+QUESTION: Is there a significant difference in the length of hospitalisation among patients with and without hypertension?
+<div id="radio_CYTOVHOAFW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CYTOVHOAFW" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_CYTOVHOAFW" value=""> <span>No</span></label>
 </div>
 </div>
 <p><em>Note</em>: In large datasets (as this one) the Shapiro-Wilk test may reject the normality hypothesis even though the deviation from the normal distribution is rather small. In this case you may still choose to calculate the t-test despite the violation of the normality assumption. This is acceptable because for large samples, the error imposed by t-test approximation is negligible.</p>
@@ -1775,22 +1913,1545 @@ Is there a significant difference in the length of hospitalisation among patient
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First we write the formula (lm stands for linear model) and assign the model to an object</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>hyper_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper, <span class="at">data=</span> tbe)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the model parameters</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_lm)                        <span class="co">#remember that we can also get them with the function summary()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 x 5
-  term        estimate std.error statistic   p.value
-  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept)    41.3      0.699     59.1  5.31e-223
-2 hyperyes        3.94     1.46       2.70 7.24e-  3</code></pre>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#First we write the formula (lm stands for linear model) and assign the model to an object</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>hyper_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper, <span class="at">data=</span> tbe)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the model parameters</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_lm)                        <span class="co">#remember that we can also get them with the function summary()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">41.324397</td>
+<td style="text-align: right;">0.6990698</td>
+<td style="text-align: right;">59.113403</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.936864</td>
+<td style="text-align: right;">1.4597610</td>
+<td style="text-align: right;">2.696924</td>
+<td style="text-align: right;">0.0072434</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p><br></p>
 </details>
+<ul>
+<li><strong>What do you find?</strong></li>
+</ul>
+<p>In this case the regression equation is: <span class="math inline">\(hopsd(predicted)=41.3+3.9⋅hyper\)</span></p>
+<p>The intercept (41.3) is the predicted mean of the hospitalization days when “hyper” is zero. In this example this refers to the mean hospitalization days for those without hypertension.</p>
+<p>The coefficient for “hyper” indicates the average amount of change in hospitalization days that would be predicted by a one unit increase in “hyper”. Here it means that those with hypertension have 3.9 hospitalization days more than those without hypertension. This effect is statistically significant (see the p value).</p>
 </section>
+</section>
+<section id="step-5-check-if-there-is-a-linear-association-between-length-of-hospitalisation-and-the-rest-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-check-if-there-is-a-linear-association-between-length-of-hospitalisation-and-the-rest-of-variables"><strong>Step 5: Check if there is a linear association between length of hospitalisation and the rest of variables</strong></h3>
+<p>Carry out a linear model for each variable that we have not explored yet to see if there is a linear association between length of hospitalisation and them.</p>
+<div class="webex-check">
+QUESTION: What of the following variables have a significant linear association with length of hospitalisation?
+<div id="radio_CJXMYFGZIA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJXMYFGZIA" value="answer"> <span>Sex</span></label><label><input type="radio" autocomplete="off" name="radio_CJXMYFGZIA" value="answer"> <span>Other comorbidities</span></label><label><input type="radio" autocomplete="off" name="radio_CJXMYFGZIA" value="answer"> <span>Monophasic disease</span></label><label><input type="radio" autocomplete="off" name="radio_CJXMYFGZIA" value=""> <span>Large tick at removal</span></label><label><input type="radio" autocomplete="off" name="radio_CJXMYFGZIA" value="answer"> <span>Vaccinated against TBE</span></label>
+</div>
+</div>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>We have seen already how to write a linear formula with lm(). You can then use either summary() from {base} or tidy() from {broom} to look at the coefficient and significance value. You could write these functions for each variable, but you could also try to use map() from {purrr} to do them all at once, as we did in the Step 2.4. Have a look at the Chapter on <a href="https://epirhandbook.com/new_pages/iteration.html#iter_purrr">Purrr</a> in the EpiRhandbook if you have any doubts.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Here we write one by one for each variable the formula and tidy</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#sex</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>sex_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> sex, <span class="at">data =</span> tbe)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(sex_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">46.66559</td>
+<td style="text-align: right;">0.6932755</td>
+<td style="text-align: right;">67.31176</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-12.41704</td>
+<td style="text-align: right;">1.1595927</td>
+<td style="text-align: right;">-10.70810</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#other comorbidities</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>other_hospd_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> other, <span class="at">data =</span> tbe)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(other_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">39.590909</td>
+<td style="text-align: right;">1.014237</td>
+<td style="text-align: right;">39.035162</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">otheryes</td>
+<td style="text-align: right;">4.142857</td>
+<td style="text-align: right;">1.271413</td>
+<td style="text-align: right;">3.258466</td>
+<td style="text-align: right;">0.0011993</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#vaccination</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>vac_hospd_lm    <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> vac, <span class="at">data =</span> tbe)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(vac_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">42.556989</td>
+<td style="text-align: right;">0.6262426</td>
+<td style="text-align: right;">67.956072</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-8.399095</td>
+<td style="text-align: right;">3.1607381</td>
+<td style="text-align: right;">-2.657321</td>
+<td style="text-align: right;">0.0081379</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#monophasic course</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>mono_hospd_lm   <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> mono, <span class="at">data =</span> tbe)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(mono_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">40.690566</td>
+<td style="text-align: right;">0.8291071</td>
+<td style="text-align: right;">49.077574</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">monoyes</td>
+<td style="text-align: right;">3.396192</td>
+<td style="text-align: right;">1.2325691</td>
+<td style="text-align: right;">2.755377</td>
+<td style="text-align: right;">0.0060844</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#large tick at removal</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>tick_hospd_lm   <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> tick, <span class="at">data =</span> tbe) </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(tick_hospd_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">42.731250</td>
+<td style="text-align: right;">0.7593945</td>
+<td style="text-align: right;">56.270158</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tickyes</td>
+<td style="text-align: right;">-1.487348</td>
+<td style="text-align: right;">1.3045725</td>
+<td style="text-align: right;">-1.140103</td>
+<td style="text-align: right;">0.2548094</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Here we do it with {purrr} all in one command</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>tbe <span class="sc">%&gt;%</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>hyper, <span class="sc">-</span>age, <span class="sc">-</span>hospd) <span class="sc">%&gt;%</span> <span class="co"># we first remove the columns we have explored before + the outcome column</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="at">.f =</span> <span class="sc">~</span><span class="fu">lm</span>(hospd <span class="sc">~</span> .x, <span class="at">data =</span> tbe)) <span class="sc">%&gt;%</span>   <span class="co"># here we carry out the model for each column. ".x" represents all the column</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(tidy)                                   <span class="co"># finally we do tidy on each model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$vac
+# A tibble: 2 x 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    42.6      0.626     68.0  4.69e-249
+2 .xyes          -8.40     3.16      -2.66 8.14e-  3
+
+$mono
+# A tibble: 2 x 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    40.7      0.829     49.1  1.30e-189
+2 .xyes           3.40     1.23       2.76 6.08e-  3
+
+$other
+# A tibble: 2 x 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    39.6       1.01     39.0  2.43e-151
+2 .xyes           4.14      1.27      3.26 1.20e-  3
+
+$tick
+# A tibble: 2 x 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)    42.7      0.759     56.3  5.50e-214
+2 .xyes          -1.49     1.30      -1.14 2.55e-  1
+
+$sex
+# A tibble: 2 x 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)     46.7     0.693      67.3 2.99e-247
+2 .xfemale       -12.4     1.16      -10.7 3.79e- 24</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>Statistically significant (<span class="math inline">\(p&lt;0.05\)</span>) univariable effects were observed for sex, other comorbidities, vaccination and monophasic disease course but not for large tick at removal. Women had on average 12.4 days shorter hospitalization stay than men, other comorbidities increase the hospitalization by 4.1 days, vaccination reduced it by 8.4 days, and monophasic disease course increased it by 3.4 days.</p>
+</section>
+<section id="step-6-adjusted-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-adjusted-analysis"><strong>Step 6: Adjusted analysis</strong></h3>
+<p>To control for possible confounding, we will adjust for the minimum adjustment set that we have identified through the DAG analysis (Goal 1), adding each variable in different steps.</p>
+<section id="step-6.1-add-age-as-a-covariate-to-the-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-6.1-add-age-as-a-covariate-to-the-model">Step 6.1: Add age as a covariate to the model</h4>
+<p>As a first step, add age to the model of the main effect.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>We have already calculated and saved the model of our main effect (<em>hyper_hospd_lm</em>). You can add age to this model by creating a new model and adding the additional variable, so that the formula syntax is model &lt;- lm(hospd ~ hyper + newVariable, data = data)</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a new model and adding age </span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age, <span class="at">data =</span> tbe)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                   <span class="co"># finally we do tidy on each model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">23.6918245</td>
+<td style="text-align: right;">1.437666</td>
+<td style="text-align: right;">16.479366</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.8015966</td>
+<td style="text-align: right;">1.245007</td>
+<td style="text-align: right;">3.053473</td>
+<td style="text-align: right;">0.0023875</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3715581</td>
+<td style="text-align: right;">0.027567</td>
+<td style="text-align: right;">13.478364</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>Adjusting for age, we find that hypertension is associated with a 3.8 increase in the days of hospitalizations. This is only a slight change compared to the effect in the unadjusted model (where the coefficient was 3.9).</p>
+</section>
+<section id="step-6.2-compare-the-performance-of-both-models" class="level4">
+<h4 class="anchored" data-anchor-id="step-6.2-compare-the-performance-of-both-models">Step 6.2: Compare the performance of both models</h4>
+<p>We have the univariate model (<em>hyper_hospd_lm</em>), and now we have one adjusted by age (<em>hyper_hospd_adj_lm</em>). Compare both models, calculating model performance metrics such as AIC and logLik.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>One easy function to calculate performance metrics is <code>glance()</code> from the {broom} package. But, of course, there are many others. Choose the one you feel most comfortable with!</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics -----------------------------------------------------</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_lm)   <span class="co"># performance metrics of the univariate model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0148657</td>
+<td style="text-align: right;">0.0128219</td>
+<td style="text-align: right;">13.50128</td>
+<td style="text-align: right;">7.273399</td>
+<td style="text-align: right;">0.0072434</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-1945.512</td>
+<td style="text-align: right;">3897.024</td>
+<td style="text-align: right;">3909.57</td>
+<td style="text-align: right;">87861.17</td>
+<td style="text-align: right;">482</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm) <span class="co"># performance metrics of the adjusted model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2849348</td>
+<td style="text-align: right;">0.2819616</td>
+<td style="text-align: right;">11.51466</td>
+<td style="text-align: right;">95.83297</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">-1867.974</td>
+<td style="text-align: right;">3743.948</td>
+<td style="text-align: right;">3760.676</td>
+<td style="text-align: right;">63774.52</td>
+<td style="text-align: right;">481</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>The output of <code>glance()</code> gives us many performance metrics. If you want to focus on the important bits, you can look at the <strong>logLik</strong> and the <strong>AIC</strong>. A larger logLik means a better model; and a lower AIC means also a better model. So, if your logLik goes up and your AIC goes down, you are going in the right direction. The advantage of the logLik is that there is a formal test (Likelihood Ratio Test) to test if two logLiks are significantly different. However, AIC takes more things into consideration than the logLik, such as the complexity of the model (favours simpler models), so it is very useful to compare models with different numbers of parameters (like this case).</p>
+<p>If you want to know more, let’s review each element of the output given by <code>glance()</code>:</p>
+<ul>
+<li><p><strong>r.squared</strong>: This is a measure of how well the independent variables in your model explain the variability of the dependent variable. Think of it as a percentage that tells you how much of the changes in the outcome can be predicted by the model. So, in our example, hypertension alone explains 1.5% of the variability in length of hospitalisation, but when we add age, that model explains 28.5% of the variability in our dependent variable.</p></li>
+<li><p><strong>adj.r.squared</strong>: The adjusted R-squared value adjusts the R-squared value based on the number of predictors in the model. It is a more accurate measure when comparing models with different numbers of predictors (as in this case). Here, it is slightly lower at 28.2%, indicating a small adjustment for the number of predictors.</p></li>
+<li><p><strong>sigma</strong>: This represents the residual standard error, which is the standard deviation of the residuals.</p></li>
+<li><p><strong>statistic</strong>: This is the F-statistic value for the overall significance of the model. It tests whether at least one predictor variable has a non-zero coefficient.</p></li>
+<li><p><strong>p.value</strong>: The p-value associated with the F-statistic.</p></li>
+<li><p><strong>df</strong>: Degrees of freedom associated with the model which typically correspond to the number of predictors (1 in the first case and 2 in the second).</p></li>
+<li><p><strong>logLik</strong>: The log-likelihood of the model, which is a measure of the model fit. Higher values indicate a better fit. As stated above, one of the main performance measures that you will use as an epidemiologist.</p></li>
+<li><p><strong>AIC</strong>: Akaike Information Criterion, which is used for model comparison. Lower values indicate a better model.</p></li>
+<li><p><strong>BIC</strong>: Bayesian Information Criterion, similar to AIC but with a higher penalty for models with more parameters.</p></li>
+<li><p><strong>deviance</strong>: This is a measure of the goodness of fit of the model. Lower values indicate a better fit.</p></li>
+<li><p><strong>df.residual</strong>: The residual degrees of freedom, which is the number of observations minus the number of parameters estimated.</p></li>
+<li><p><strong>nobs</strong>: The number of observations used in the model, which is 484 in your case</p></li>
+</ul>
+</section>
+<section id="optional-step-6.3-plotting-effects-of-age-by-hypertension" class="level4">
+<h4 class="anchored" data-anchor-id="optional-step-6.3-plotting-effects-of-age-by-hypertension">(Optional) Step 6.3: Plotting effects of age by hypertension</h4>
+<p>If you remember, in Step 3.3 we checked visually for the association between age and length of hospitalisation by sex. Now, we will do something similar by plotting the estimated effect of age on length of hospitalisation <strong>by hypertension status</strong>. The final output that we want is a scatterplot displaying the raw data (length of hospitalisation by age), and then the fitted regression line by hypertension status.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>In order to plot the estimated effects of age by hypertension we have to extract the fitted values of “hospd” from the model and add them to the dataframe. This only works if we have removed all rows that contain NAs in the hospd column before. we can then pass this new dataframe to a <code>ggplot()</code> with a <code>geom_point()</code> for the scatterplot and <code>geom_line()</code> for the fitted trend lines. Note: Previously, we used <code>geom_smooth()</code> to add trend lines to the scatterplot. Because we want to plot the predicted values of an existing model and not fit a linear model within <code>ggplot()</code>, we have to use <code>geom_line()</code> and use the predicted values of our model as input for y.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the fitted lines</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First add a variable with the fitted values to the dataframe</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>data_fitted <span class="ot">&lt;-</span> tbe <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hospd)) <span class="sc">%&gt;%</span>   <span class="co"># Remove NAs </span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fit =</span> <span class="fu">predict</span>(hyper_hospd_adj_lm)) <span class="co"># Create a new variable with the predicted values</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="do">### You can now open data_fitted to have a look at the new column</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we do the plot with the fitted lines</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>plot_fitted <span class="ot">&lt;-</span> data_fitted <span class="sc">%&gt;%</span></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> hospd,</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">colour =</span> hyper)) <span class="sc">+</span></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>                            <span class="co"># Adding a scatter plot</span></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit)) <span class="sc">+</span>                 <span class="co"># we add a line specifying that we want the fitted and not the observed values in the y-axis</span></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Effect of age on TBE hospital stay length for people</span><span class="sc">\n</span><span class="st">with and without hypertension "</span>, <span class="co"># Title of the plot, note that "\n" breaks the title into the next line</span></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Length of hospitalization in days"</span>,</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Hypertension"</span></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                                  <span class="co"># we add a predefined theme</span></span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>plot_fitted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tbe-en_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>We did not allow the association between age and hospitalization to vary by levels of hypertension. So we force them to be parallel by the way we specify the model. If we want the slopes to differ, we would need to allow for an interaction term. We’ll get to that later.</p>
+</section>
+<section id="step-6.4-continue-building-the-adjusted-model-and-check-quality-of-the-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-6.4-continue-building-the-adjusted-model-and-check-quality-of-the-model">Step 6.4: Continue building the adjusted model and check quality of the model</h4>
+<p>Continue adding the rest of variables that we have to adjust for according to the DAG (TBE vaccination, age, large tick, monophasic course, other comorbidities and sex) to the model <em>hyper_hospd_adj_lm</em> <strong>one by one</strong>. Check, after you add each variable, <strong>model performance metrics</strong> to ensure that the model is improving.</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">### We first add sex to the previous model</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age <span class="sc">+</span> sex, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">28.9661798</td>
+<td style="text-align: right;">1.3613386</td>
+<td style="text-align: right;">21.277718</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.4659484</td>
+<td style="text-align: right;">1.1079250</td>
+<td style="text-align: right;">3.128324</td>
+<td style="text-align: right;">0.001865</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3452202</td>
+<td style="text-align: right;">0.0246333</td>
+<td style="text-align: right;">14.014368</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-11.0377082</td>
+<td style="text-align: right;">0.9762639</td>
+<td style="text-align: right;">-11.306071</td>
+<td style="text-align: right;">0.000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4353144</td>
+<td style="text-align: right;">0.4317851</td>
+<td style="text-align: right;">10.24315</td>
+<td style="text-align: right;">123.3435</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-1810.837</td>
+<td style="text-align: right;">3631.674</td>
+<td style="text-align: right;">3652.584</td>
+<td style="text-align: right;">50362.62</td>
+<td style="text-align: right;">480</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">### TBE vaccination</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> vac, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">29.0192105</td>
+<td style="text-align: right;">1.3398585</td>
+<td style="text-align: right;">21.658415</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.5401913</td>
+<td style="text-align: right;">1.0905445</td>
+<td style="text-align: right;">3.246260</td>
+<td style="text-align: right;">0.0012512</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3507362</td>
+<td style="text-align: right;">0.0242813</td>
+<td style="text-align: right;">14.444681</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-10.9105961</td>
+<td style="text-align: right;">0.9613218</td>
+<td style="text-align: right;">-11.349577</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-9.6218919</td>
+<td style="text-align: right;">2.3644063</td>
+<td style="text-align: right;">-4.069475</td>
+<td style="text-align: right;">0.0000551</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.454185</td>
+<td style="text-align: right;">0.4496271</td>
+<td style="text-align: right;">10.08105</td>
+<td style="text-align: right;">99.6467</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">-1802.611</td>
+<td style="text-align: right;">3617.223</td>
+<td style="text-align: right;">3642.315</td>
+<td style="text-align: right;">48679.6</td>
+<td style="text-align: right;">479</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Monophasic disease course</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> vac <span class="sc">+</span> mono, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">27.9231475</td>
+<td style="text-align: right;">1.3632885</td>
+<td style="text-align: right;">20.482199</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.7307298</td>
+<td style="text-align: right;">1.0799901</td>
+<td style="text-align: right;">3.454411</td>
+<td style="text-align: right;">0.0006006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3443505</td>
+<td style="text-align: right;">0.0240868</td>
+<td style="text-align: right;">14.296254</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-11.0608203</td>
+<td style="text-align: right;">0.9517650</td>
+<td style="text-align: right;">-11.621378</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-9.8262935</td>
+<td style="text-align: right;">2.3391721</td>
+<td style="text-align: right;">-4.200757</td>
+<td style="text-align: right;">0.0000317</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">monoyes</td>
+<td style="text-align: right;">3.1330906</td>
+<td style="text-align: right;">0.9155900</td>
+<td style="text-align: right;">3.421936</td>
+<td style="text-align: right;">0.0006751</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4672362</td>
+<td style="text-align: right;">0.4616634</td>
+<td style="text-align: right;">9.970207</td>
+<td style="text-align: right;">83.84164</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">-1796.755</td>
+<td style="text-align: right;">3607.509</td>
+<td style="text-align: right;">3636.784</td>
+<td style="text-align: right;">47515.6</td>
+<td style="text-align: right;">478</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Large tick at removal</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> vac <span class="sc">+</span> mono <span class="sc">+</span> tick, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">28.1079813</td>
+<td style="text-align: right;">1.3968015</td>
+<td style="text-align: right;">20.1231029</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">3.7655402</td>
+<td style="text-align: right;">1.0821694</td>
+<td style="text-align: right;">3.4796219</td>
+<td style="text-align: right;">0.0005482</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3446256</td>
+<td style="text-align: right;">0.0241066</td>
+<td style="text-align: right;">14.2959288</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-11.0239613</td>
+<td style="text-align: right;">0.9542624</td>
+<td style="text-align: right;">-11.5523372</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-9.7114161</td>
+<td style="text-align: right;">2.3481138</td>
+<td style="text-align: right;">-4.1358371</td>
+<td style="text-align: right;">0.0000418</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">monoyes</td>
+<td style="text-align: right;">3.0852716</td>
+<td style="text-align: right;">0.9194697</td>
+<td style="text-align: right;">3.3554903</td>
+<td style="text-align: right;">0.0008555</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tickyes</td>
+<td style="text-align: right;">-0.5959864</td>
+<td style="text-align: right;">0.9677751</td>
+<td style="text-align: right;">-0.6158315</td>
+<td style="text-align: right;">0.5382995</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4676595</td>
+<td style="text-align: right;">0.4609634</td>
+<td style="text-align: right;">9.976687</td>
+<td style="text-align: right;">69.8405</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-1796.562</td>
+<td style="text-align: right;">3609.124</td>
+<td style="text-align: right;">3642.581</td>
+<td style="text-align: right;">47477.85</td>
+<td style="text-align: right;">477</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Other comorbidities</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> age <span class="sc">+</span> sex <span class="sc">+</span> vac <span class="sc">+</span> mono <span class="sc">+</span> tick <span class="sc">+</span> other, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">27.1251926</td>
+<td style="text-align: right;">1.4596417</td>
+<td style="text-align: right;">18.5834593</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">2.7139444</td>
+<td style="text-align: right;">1.1769928</td>
+<td style="text-align: right;">2.3058292</td>
+<td style="text-align: right;">0.0215491</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3406119</td>
+<td style="text-align: right;">0.0240754</td>
+<td style="text-align: right;">14.1477140</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-11.0797108</td>
+<td style="text-align: right;">0.9506756</td>
+<td style="text-align: right;">-11.6545649</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-9.2298015</td>
+<td style="text-align: right;">2.3484899</td>
+<td style="text-align: right;">-3.9301005</td>
+<td style="text-align: right;">0.0000975</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">monoyes</td>
+<td style="text-align: right;">3.0995048</td>
+<td style="text-align: right;">0.9157172</td>
+<td style="text-align: right;">3.3847838</td>
+<td style="text-align: right;">0.0007712</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tickyes</td>
+<td style="text-align: right;">-0.7577796</td>
+<td style="text-align: right;">0.9665465</td>
+<td style="text-align: right;">-0.7840074</td>
+<td style="text-align: right;">0.4334257</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">otheryes</td>
+<td style="text-align: right;">2.3008449</td>
+<td style="text-align: right;">1.0351078</td>
+<td style="text-align: right;">2.2228070</td>
+<td style="text-align: right;">0.0266978</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4731284</td>
+<td style="text-align: right;">0.4653803</td>
+<td style="text-align: right;">9.935728</td>
+<td style="text-align: right;">61.06371</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-1794.063</td>
+<td style="text-align: right;">3606.126</td>
+<td style="text-align: right;">3643.765</td>
+<td style="text-align: right;">46990.1</td>
+<td style="text-align: right;">476</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>As you can see, adding the rest of variables identified through the DAG improved the model, according to the metrics. The only exception was the addition of the variable “Large tick at removal”. However, the choice of covariates should be made conceptually through the DAG, and not based on whether there are small differences in AIC/logLik. If you concluded that this variable was a possible confounder, then keep it in the model.</p>
+</section>
+<section id="step-6.5-adding-an-interaction-term" class="level4">
+<h4 class="anchored" data-anchor-id="step-6.5-adding-an-interaction-term">Step 6.5: Adding an interaction term</h4>
+<p>We saw in Step 3.3 that the effect of age on length of hospitalisation is modified by sex. We knew this because the slopes were different for males and females. Given this information add now to the model an interaction term between sex and age.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>An interaction can be written as a multiplication of two variables in your regression formula, e.g.&nbsp;age*sex. There is no need to keep both variables individually in the formula AND in the interaction term. By just including the interaction term, R will estimate the coefficients independently for both variables and with the interaction.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction term --------------------------------------------------------</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>hyper_hospd_adj_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(hospd <span class="sc">~</span> hyper <span class="sc">+</span> vac <span class="sc">+</span> mono <span class="sc">+</span> tick <span class="sc">+</span> other <span class="sc">+</span> age<span class="sc">*</span>sex, <span class="at">data =</span> tbe) <span class="co"># formula</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(hyper_hospd_adj_lm)                                <span class="co"># estimates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">24.2675847</td>
+<td style="text-align: right;">1.6629366</td>
+<td style="text-align: right;">14.5932114</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">hyperyes</td>
+<td style="text-align: right;">2.9092258</td>
+<td style="text-align: right;">1.1650411</td>
+<td style="text-align: right;">2.4971014</td>
+<td style="text-align: right;">0.0128588</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vacyes</td>
+<td style="text-align: right;">-9.0596630</td>
+<td style="text-align: right;">2.3224314</td>
+<td style="text-align: right;">-3.9009389</td>
+<td style="text-align: right;">0.0001096</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">monoyes</td>
+<td style="text-align: right;">2.9451978</td>
+<td style="text-align: right;">0.9064522</td>
+<td style="text-align: right;">3.2491487</td>
+<td style="text-align: right;">0.0012396</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tickyes</td>
+<td style="text-align: right;">-0.6988387</td>
+<td style="text-align: right;">0.9557594</td>
+<td style="text-align: right;">-0.7311868</td>
+<td style="text-align: right;">0.4650256</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">otheryes</td>
+<td style="text-align: right;">2.2322254</td>
+<td style="text-align: right;">1.0235851</td>
+<td style="text-align: right;">2.1807913</td>
+<td style="text-align: right;">0.0296887</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age</td>
+<td style="text-align: right;">0.3998845</td>
+<td style="text-align: right;">0.0293313</td>
+<td style="text-align: right;">13.6333864</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-3.0511594</td>
+<td style="text-align: right;">2.5045520</td>
+<td style="text-align: right;">-1.2182456</td>
+<td style="text-align: right;">0.2237354</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">age:sexfemale</td>
+<td style="text-align: right;">-0.1728331</td>
+<td style="text-align: right;">0.0499755</td>
+<td style="text-align: right;">-3.4583541</td>
+<td style="text-align: right;">0.0005924</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(hyper_hospd_adj_lm)                              <span class="co"># performance metrics</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.4860689</td>
+<td style="text-align: right;">0.4774132</td>
+<td style="text-align: right;">9.823278</td>
+<td style="text-align: right;">56.15605</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-1788.045</td>
+<td style="text-align: right;">3596.09</td>
+<td style="text-align: right;">3637.911</td>
+<td style="text-align: right;">45835.97</td>
+<td style="text-align: right;">475</td>
+<td style="text-align: right;">484</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<div class="webex-check">
+QUESTION: Looking at the estimates of the model, for females, what is the net effect of age on length of hospitalisation?
+<div id="radio_UAVCQLPRBU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UAVCQLPRBU" value=""> <span>+0.4</span></label><label><input type="radio" autocomplete="off" name="radio_UAVCQLPRBU" value="answer"> <span>+0.23</span></label><label><input type="radio" autocomplete="off" name="radio_UAVCQLPRBU" value=""> <span>-0.17</span></label><label><input type="radio" autocomplete="off" name="radio_UAVCQLPRBU" value=""> <span>+0.17</span></label><label><input type="radio" autocomplete="off" name="radio_UAVCQLPRBU" value=""> <span>-0.32</span></label>
+</div>
+</div>
+<p>Looking at the results, we see that age has an estimate of 0.4, which means that one additional year of age is associated with an increase in 0.4 days of hospitalisation. We also see that being female is associated with a decrease in 3 days of hospitalisation (compared with being male). The interaction estimate of -0.17 means that for females, each additional year of age is associated with a decrease in 0.17 days of hospitalisation. So, to sum up, all things equal, a female of 41 years, compared to one of 40 years, would have +0.4 days of hospitalisation for having one extra year, but as she is female you have to add the interaction term (-0.17), so the net effect would be +0.23. For males, one extra year would still be associated with +0.4 days of hospitalisation.</p>
+<p>We also see that adding the interaction term changes the effect estimate for hypertension and improves the model, so we may want to keep the interaction in the model, assuming that this ensures a better control for confounding of “age” and “sex”.</p>
+<p><em>Note</em>: You should also look for other effect interaction terms in the dataframe. In the interest of the exercise, we will skip this step.</p>
+</section>
+</section>
+<section id="step-7-model-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="step-7-model-diagnostics"><strong>Step 7: Model diagnostics</strong></h3>
+<p>The multiple linear regression model that we just run, like all models, has several assumptions:</p>
+<ol type="1">
+<li><p><strong>Linearity</strong>: The relationship between the independent variables and the dependent variable (length of hospitalisation) is linear. This means that the change in the dependent variable is proportional to the change in the independent variables.</p></li>
+<li><p><strong>Independence</strong>: The observations are independent of each other.</p></li>
+<li><p><strong>Normality of Residuals</strong>: The residuals of the model are normally distributed, meaning that they are symmetrically distributed around 0 and the residuals’ distribution is bell-shaped.</p></li>
+<li><p><strong>Homoscedasticity</strong>: The residuals (difference between the observed values and the values estimated from the model) have constant variance at every level of the independent variables. This means that the spread of the residuals should be roughly the same across all levels of the independent variables.</p></li>
+<li><p><strong>No Multicollinearity</strong>: The independent variables are not highly correlated with each other. High multicollinearity can make it difficult to determine the individual effect of each independent variable on the dependent variable.</p></li>
+<li><p><strong>No Autocorrelation</strong>: The residuals are not correlated with each other. This is particularly important in time series data where observations are ordered in time.</p></li>
+</ol>
+<p>In this case study we will learn how to check two of these assumptions: <strong>Normality of residuals</strong> and <strong>Homoscedasticity</strong></p>
+<section id="step-7.1-normality-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="step-7.1-normality-assumption">Step 7.1: Normality assumption</h4>
+<p>To assess whether the residuals of our model are normally distributed or not we will do these three things:</p>
+<ul>
+<li><p>Generating some diagnostic plots of the model</p></li>
+<li><p>Creating an histogram with the residuals</p></li>
+<li><p>Carrying out a Shapiro-test</p></li>
+</ul>
+<p><strong>Task</strong>: Generate diagnostic plots of the model <em>hyper_hospd_adj_lm</em>. Don’t worry if you don’t find out how to do these. If you struggle, have a look at the hint below.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>You can retrieve <strong>diagnostic plots</strong> by using the function <code>autoplot()</code> from {ggfortify}. Pass your model object to the <code>autoplot()</code> function to generate three basic diagnostic plots. You can also specify which plot <code>autoplot()</code> needs to generate using the which = argument. In the solution, we specify that we want the first 2 plots.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(hyper_hospd_adj_lm, <span class="at">which =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tbe-en_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>Let’s interpret each graph:</p>
+<ul>
+<li><p><strong>Residuals vs.&nbsp;fitted plot (plot 1, upper left corner):</strong> You see a scatterplot with a blue line (LOESS smoothing curve). If the residuals are normally distributed around zero, then the blue line will be horizontal (parallel to the zero line).</p></li>
+<li><p><strong>Q-Q plot (plot 2, upper right plot):</strong> The Q-Q plot shows you whether or not the residuals are normally distributed. On the X-axis you can see the quantiles of a normal distribution, while on the Y-axis you can see the standardized residuals (residuals dived by their standard deviation). If the residuals are normally distributed, in general, most of the points need to lie on the diagonal.</p></li>
+</ul>
+<div class="webex-check">
+QUESTION: Are residuals normally distributed, based on these plots?
+<div id="radio_OVZAZRZARL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OVZAZRZARL" value=""> <span>No</span></label><label><input type="radio" autocomplete="off" name="radio_OVZAZRZARL" value="answer"> <span>Yes</span></label>
+</div>
+</div>
+<p><strong>Task</strong>: Build an histogram with the residuals of the <em>hyper_hospd_adj_lm</em> model.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>To do an <strong>histogram of the residuals</strong> you can follow a similar approach than the one we used in the step 6.3. That is, first adding to the <em>tbe</em> dataframe the residuals as a column (you can use the function <code>resid()</code>) and then using <code>ggplot()</code> to plot this column in the x-axis of a <code>geom_histogram()</code></p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First add a variable with the residual values to the dataframe</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data_res <span class="ot">&lt;-</span> tbe <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hospd)) <span class="sc">%&gt;%</span>   <span class="co"># Remove NAs </span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">res =</span> <span class="fu">resid</span>(hyper_hospd_adj_lm)) <span class="co"># Create a new variable with the residual values</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="do">### You can now open data_res to have a look at the new column</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we do the histogram with the residuals</span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>data_res <span class="sc">%&gt;%</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> res)) <span class="sc">+</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..)) <span class="sc">+</span>                        <span class="co"># Adding a histogram with density</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#the function below will add the normal curve. </span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm,  <span class="co">#The fun = argument we are specifying that we want the normal curve         </span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(data_res<span class="sc">$</span>res, <span class="at">na.rm =</span> T), <span class="co">#to draw a normal curve we need to give the mean and standard deviation of our column</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sd   =</span> <span class="fu">sd</span>(data_res<span class="sc">$</span>res, <span class="at">na.rm =</span> T)),  </span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">col =</span> <span class="st">"darkblue"</span>, <span class="at">lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Histogram of Residuals"</span>, </span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()                                  <span class="co"># we add a predefined theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tbe-en_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<div class="webex-check">
+QUESTION: Does the histogram suggest a normal distribution of residuals?
+<div id="radio_WTDIZTBMGG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WTDIZTBMGG" value=""> <span>No</span></label><label><input type="radio" autocomplete="off" name="radio_WTDIZTBMGG" value="answer"> <span>Yes</span></label>
+</div>
+</div>
+<p><strong>Task</strong>: Carry out a Shapiro-Wilk test to ascertain statistically if residuals are normally distributed</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Review Step 4.1 and have a look at the EpiRhandbook Chapter on <a href="https://epirhandbook.com/new_pages/stat_tests.html">Simple statistical tests</a> if you still have doubts.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data_res <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro_test</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">res</td>
+<td style="text-align: right;">0.9960796</td>
+<td style="text-align: right;">0.2762974</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<div class="webex-check">
+QUESTION: How do you interpret the result of the Shapiro-Wilk test?
+<div id="radio_ZNRSNICGSK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZNRSNICGSK" value=""> <span>Residuals do not follow a normal distribution</span></label><label><input type="radio" autocomplete="off" name="radio_ZNRSNICGSK" value="answer"> <span>We cannot reject the null hypothesis that residuals follow a normal distribution</span></label><label><input type="radio" autocomplete="off" name="radio_ZNRSNICGSK" value=""> <span>We accept the alternative hypothesis</span></label>
+</div>
+</div>
+</section>
+<section id="step-7.2-homoscedasticity" class="level4">
+<h4 class="anchored" data-anchor-id="step-7.2-homoscedasticity">Step 7.2: Homoscedasticity</h4>
+<p>Now we will check the other assumption, that the variance of the residuals (i.e., the magnitude of their distance to 0) does not depend on the predictor.</p>
+<p>Check homoscedasticity by running plot number 3 (Scale-location plot) in the <code>autoplot()</code> function.</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate the scale-location plot</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(hyper_hospd_adj_lm, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="tbe-en_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>This plot is called a scale-location plot and represents the fitted values vs.&nbsp;the square root of the standardized residuals. With this plot it is possible to check for heteroscedasticity (i.e., heterogeneity of variance - the opposite of homoscedasticity). Ideally, the residuals should be <strong>evenly spread</strong> out across all levels of fitted values. This means there should be no clear pattern or systematic change in the spread of residuals as you move along the x-axis. If the residuals form a <strong>funnel shape</strong> (narrow at one end and wide at the other), this indicates heteroscedasticity, meaning the variance of the residuals is not constant. The <strong>blue smoothed line</strong> should be roughly horizontal and close to zero. Significant deviations from this line can indicate issues with homoscedasticity.</p>
+<div class="webex-check">
+QUESTION: Based on this graph, do you think that the assumption of homoscedasticity is reasonably met?
+<div id="radio_XVOCVNWWAI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XVOCVNWWAI" value=""> <span>No</span></label><label><input type="radio" autocomplete="off" name="radio_XVOCVNWWAI" value="answer"> <span>Yes</span></label>
+</div>
+</div>
+</section>
+</section>
+<section id="step-8-public-health-relevance" class="level3">
+<h3 class="anchored" data-anchor-id="step-8-public-health-relevance"><strong>Step 8: Public health relevance</strong></h3>
+<ul>
+<li>Discuss the PH relevance of your findings and any next steps and recommendations that may result from this.</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>This is the first time that an association between hypertension and severity of TBE (based on the duration of hospitalization) has been detected. Even though you suspected such an association in the beginning (and thus tested for it) and even though you think that it may be causal based on your DAGs and the control for confounding, there are more steps involved in establishing a causal relationship. We should follow the Bradford Hill Criteria to argue causality. For example, the biological basis for this effect needs to be established. Similar effects have been seen for other infections (e.g., SARS-CoV-2), which may have promoted the hypothesis in the beginning. You may also decide to look for a possible dose-response relationship in further analysis of our data. Furthermore, these results should be repeated independently to rule out a chance finding. Once the causal relationship between hypertension and TBE is further corroborated, vaccination against TBE for persons with hypertension could be recommended. <br></p>
+</details>
 </section>
 </section>
 </section>

@@ -9,6 +9,7 @@ format:
   html: 
     css: webex.css
     include-after-body: webex.js
+    df-print: kable
 editor: 
   markdown: 
     wrap: 72
@@ -207,7 +208,7 @@ Write any revisions made to the case study
 |---------------------|:-------------------------------|------------------:|
 | 2023 | Revision R code                          |                Liese Van Gompel (MediPIET) |
 | 2024 | Revision R code                          | Joana Gomes Dias and Chiara Entradi (ECDC) |
-| 2024 | Revision of structure, format and R code |               Alberto Mateo Urdiales (ISS) |
+| 2024 | Revision of content, structure, R code and adaptation of format to Applied Epi's template of case studies |               Alberto Mateo Urdiales (ISS) |
 
 \pagebreak
 
@@ -983,7 +984,7 @@ You may have noticed that the summary() output has more information than the tid
 **F-statistic and p-value:** The F-statistic tests whether the overall model (including all predictors) is significant. A low p-value (like yours, < 2.2e-16) indicates that the model is significant.
 
 
-#### (Optional) Step 3.3: Check if the association between age and length of hospitalisation varies by sex
+#### Step 3.3: Check if the association between age and length of hospitalisation varies by sex
 
 Check visually whether the association between age and hospd differs by sex
 
@@ -1077,7 +1078,7 @@ tbe %>%
 
 
 -   **What do you observe?**
-The lines for female and male patients have different slopes, indicating that the association between age and hospitalization days is modified by age.
+The lines for female and male patients have different slopes, indicating that the association between age and hospitalization days is modified by sex.
 
 -   **Why does this matter?**
 Since there are different effects of age on the length of the hospitalization by sex, you may want to control for this.
@@ -1322,6 +1323,755 @@ tidy(hyper_hospd_lm)                        #remember that we can also get them 
 ```
 
 
+</br>
+
+</details>
+
+-   **What do you find?**
+
+In this case the regression equation is: $hopsd(predicted)=41.3+3.9⋅hyper$
+
+The intercept (41.3) is the predicted mean of the hospitalization days when “hyper” is zero. In this example this refers to the mean hospitalization days for those without hypertension. 
+
+The coefficient for “hyper” indicates the average amount of change in hospitalization days that would be predicted by a one unit increase in “hyper”. Here it means that those with hypertension have 3.9 hospitalization days more than those without hypertension. This effect is statistically significant (see the p value).
+
+
+### **Step 5: Check if there is a linear association between length of hospitalisation and the rest of variables**
+
+Carry out a linear model for each variable that we have not explored yet to see if there is a linear association between length of hospitalisation and them.
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Sex",
+  answer = "Other comorbidities",
+  answer = "Monophasic disease",
+  "Large tick at removal",
+  answer = "Vaccinated against TBE"
+  
+)
+
+cat("QUESTION: What of the following variables have a significant linear association with length of hospitalisation?", longmcq(opts))
+
+```
+:::
+
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+We have seen already how to write a linear formula with lm(). You can then use either summary() from {base} or tidy() from {broom} to look at the coefficient and significance value. You could write these functions for each variable, but you could also try to use map() from {purrr} to do them all at once, as we did in the Step 2.4. Have a look at the Chapter on  [Purrr](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) in the EpiRhandbook if you have any doubts.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+## Here we write one by one for each variable the formula and tidy
+
+#sex
+sex_hospd_lm <- lm(hospd ~ sex, data = tbe)
+tidy(sex_hospd_lm)
+
+#other comorbidities
+other_hospd_lm <- lm(hospd ~ other, data = tbe)
+tidy(other_hospd_lm)
+
+#vaccination
+vac_hospd_lm    <- lm(hospd ~ vac, data = tbe)
+tidy(vac_hospd_lm)
+
+#monophasic course
+mono_hospd_lm   <- lm(hospd ~ mono, data = tbe)
+tidy(mono_hospd_lm)
+
+#large tick at removal
+tick_hospd_lm   <- lm(hospd ~ tick, data = tbe) 
+tidy(tick_hospd_lm)
+
+
+## Here we do it with {purrr} all in one command
+
+tbe %>% 
+  select(-hyper, -age, -hospd) %>% # we first remove the columns we have explored before + the outcome column
+  map(.f = ~lm(hospd ~ .x, data = tbe)) %>%   # here we carry out the model for each column. ".x" represents all the column
+  map(tidy)                                   # finally we do tidy on each model
+```
+
+
+</br>
+
+</details>
+
+
+Statistically significant ($p<0.05$) univariable effects were observed for sex, other comorbidities, vaccination and monophasic disease course but not for large tick at removal. Women had on average 12.4 days shorter hospitalization stay than men, other comorbidities increase the hospitalization by 4.1 days, vaccination reduced it by 8.4 days, and monophasic disease course increased it by 3.4 days.
+
+
+### **Step 6: Adjusted analysis**
+
+To control for possible confounding, we will adjust for the minimum adjustment set that we have identified through the DAG analysis (Goal 1), adding each variable in different steps.
+
+#### Step 6.1: Add age as a covariate to the model
+
+
+As a first step, add age to the model of the main effect. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+We have already calculated and saved the model of our main effect (*hyper_hospd_lm*). You can add age to this model by creating a new model and adding the additional variable, so that the formula syntax is model <- lm(hospd ~ hyper + newVariable, data = data)
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Creating a new model and adding age 
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age, data = tbe)
+
+tidy(hyper_hospd_adj_lm)                                   # finally we do tidy on each model
+```
+
+
+</br>
+
+</details>
+
+Adjusting for age, we find that hypertension is associated with a 3.8 increase in the days of hospitalizations. This is only a slight change compared to the effect in the unadjusted model (where the coefficient was 3.9).
+
+
+#### Step 6.2: Compare the performance of both models
+
+We have the univariate model (*hyper_hospd_lm*), and now we have one adjusted by age (*hyper_hospd_adj_lm*). Compare both models, calculating model performance metrics such as AIC and logLik. 
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+One easy function to calculate performance metrics is `glance()` from the {broom} package. But, of course, there are many others. Choose the one you feel most comfortable with!
+ 
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Performance metrics -----------------------------------------------------
+
+glance(hyper_hospd_lm)   # performance metrics of the univariate model
+
+glance(hyper_hospd_adj_lm) # performance metrics of the adjusted model
+```
+
+
+</br>
+
+</details>
+
+
+
+The output of `glance()` gives us many performance metrics. If you want to focus on the important bits, you can look at the **logLik** and the **AIC**. A larger logLik means a better model; and a lower AIC means also a better model. So, if your logLik goes up and your AIC goes down, you are going in the right direction. The advantage of the logLik is that there is a formal test (Likelihood Ratio Test) to test if two logLiks are significantly different. However, AIC takes more things into consideration than the logLik, such as the complexity of the model (favours simpler models), so it is very useful to compare models with different numbers of parameters (like this case).
+
+
+If you want to know more, let's review each element of the output given by `glance()`:
+
+-   **r.squared**: This is a measure of how well the independent variables in your model explain the variability of the dependent variable. Think of it as a percentage that tells you how much of the changes in the outcome can be predicted by the model. So, in our example, hypertension alone explains 1.5% of the variability in length of hospitalisation, but when we add age, that model explains 28.5% of the variability in our dependent variable.
+
+-   **adj.r.squared**: The adjusted R-squared value adjusts the R-squared value based on the number of predictors in the model. It is a more accurate measure when comparing models with different numbers of predictors (as in this case). Here, it is slightly lower at 28.2%, indicating a small adjustment for the number of predictors.
+
+-   **sigma**: This represents the residual standard error, which is the standard deviation of the residuals.
+
+-   **statistic**: This is the F-statistic value for the overall significance of the model. It tests whether at least one predictor variable has a non-zero coefficient.
+
+-   **p.value**: The p-value associated with the F-statistic.
+
+-   **df**: Degrees of freedom associated with the model which typically correspond to the number of predictors (1 in the first case and 2 in the second).
+
+-   **logLik**: The log-likelihood of the model, which is a measure of the model fit. Higher values indicate a better fit. As stated above, one of the main performance measures that you will use as an epidemiologist.
+
+-   **AIC**: Akaike Information Criterion, which is used for model comparison. Lower values indicate a better model.
+
+-   **BIC**: Bayesian Information Criterion, similar to AIC but with a higher penalty for models with more parameters.
+
+-   **deviance**: This is a measure of the goodness of fit of the model. Lower values indicate a better fit.
+
+-   **df.residual**: The residual degrees of freedom, which is the number of observations minus the number of parameters estimated.
+
+-   **nobs**: The number of observations used in the model, which is 484 in your case
+
+#### (Optional) Step 6.3: Plotting effects of age by hypertension
+
+
+If you remember, in Step 3.3 we checked visually for the association between age and length of hospitalisation by sex. Now, we will do something similar by plotting the estimated effect of age on length of hospitalisation **by hypertension status**. The final output that we want is a scatterplot displaying the raw data (length of hospitalisation by age), and then the fitted regression line by hypertension status. 
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+In order to plot the estimated effects of age by hypertension we have to extract the fitted values of “hospd” from the model and add them to the dataframe. This only works if we have removed all rows that contain NAs in the hospd column before. we can then pass this new dataframe to a `ggplot()` with a `geom_point()` for the scatterplot and `geom_line()` for the fitted trend lines. 
+Note: Previously, we used `geom_smooth()` to add trend lines to the scatterplot. Because we want to plot the predicted values of an existing model and not fit a linear model within `ggplot()`, we have to use `geom_line()` and use the predicted values of our model as input for y.
+
+</br>
+
+</details>
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Plotting the fitted lines
+
+# First add a variable with the fitted values to the dataframe
+data_fitted <- tbe %>%
+  
+  filter(!is.na(hospd)) %>%   # Remove NAs 
+
+  mutate(fit = predict(hyper_hospd_adj_lm)) # Create a new variable with the predicted values
+
+### You can now open data_fitted to have a look at the new column
+
+# Now we do the plot with the fitted lines
+
+plot_fitted <- data_fitted %>%
+  
+  ggplot(mapping = aes(x = age, 
+                       y = hospd,
+                       colour = hyper)) +
+  
+  geom_point() +                            # Adding a scatter plot
+  
+  geom_line(aes(y = fit)) +                 # we add a line specifying that we want the fitted and not the observed values in the y-axis
+
+  labs(
+    title = "Effect of age on TBE hospital stay length for people\nwith and without hypertension ", # Title of the plot, note that "\n" breaks the title into the next line
+    x = "Age",
+    y = "Length of hospitalization in days",
+    colour = "Hypertension"
+  ) +
+  
+  theme_bw()                                  # we add a predefined theme
+
+plot_fitted
+```
+
+
+</br>
+
+</details>
+
+
+We did not allow the association between age and hospitalization to vary by levels of hypertension. So we force them to be parallel by the way we specify the model. If we want the slopes to differ, we would need to allow for an interaction term. We’ll get to that later.
+
+#### Step 6.4: Continue building the adjusted model and check quality of the model
+
+Continue adding the rest of variables that we have to adjust for according to the DAG (TBE vaccination, age, large tick, monophasic course, other comorbidities and sex) to the model *hyper_hospd_adj_lm* **one by one**. Check, after you add each variable, **model performance metrics** to ensure that the model is improving.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+### We first add sex to the previous model
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### TBE vaccination
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Monophasic disease course
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Large tick at removal
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Other comorbidities
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick + other, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+```
+
+
+</br>
+
+</details>
+
+As you can see, adding the rest of variables identified through the DAG improved the model, according to the metrics. The only exception was the addition of the variable "Large tick at removal". However, the choice of covariates should be made conceptually through the DAG, and not based on whether there are small differences in AIC/logLik. If you concluded that this variable was a possible confounder, then keep it in the model.
+
+
+#### Step 6.5: Adding an interaction term
+
+We saw in Step 3.3 that the effect of age on length of hospitalisation is modified by sex. We knew this because the slopes were different for males and females. Given this information add now to the model an interaction term between sex and age.
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+An interaction can be written as a multiplication of two variables in your regression formula, e.g. age*sex. There is no need to keep both variables individually in the formula AND in the interaction term. By just including the interaction term, R will estimate the coefficients independently for both variables and with the interaction.
+
+</br>
+
+</details>
+
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Interaction term --------------------------------------------------------
+
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + vac + mono + tick + other + age*sex, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+```
+
+</br>
+
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "+0.4",
+  answer = "+0.23",
+  "-0.17",
+  "+0.17",
+  "-0.32"
+  
+)
+
+cat("QUESTION: Looking at the estimates of the model, for females, what is the net effect of age on length of hospitalisation?", longmcq(opts))
+
+```
+:::
+
+Looking at the results, we see that age has an estimate of 0.4, which means that one additional year of age is associated with an increase in 0.4 days of hospitalisation. We also see that being female is associated with a decrease in 3 days of hospitalisation (compared with being male). The interaction estimate of -0.17 means that for females, each additional year of age is associated with a decrease in 0.17 days of hospitalisation. 
+So, to sum up, all things equal, a female of 41 years, compared to one of 40 years, would have +0.4 days of hospitalisation for having one extra year, but as she is female you have to add the interaction term (-0.17), so the net effect would be +0.23. For males, one extra year would still be associated with +0.4 days of hospitalisation.
+
+We also see that adding the interaction term changes the effect estimate for hypertension and improves the model, so we may want to keep the interaction in the model, assuming that this ensures a better control for confounding of “age” and “sex”.
+
+
+*Note*: You should also look for other effect interaction terms in the dataframe. In the interest of the exercise, we will skip this step.
+
+
+### **Step 7: Model diagnostics**
+The multiple linear regression model that we just run, like all models, has several assumptions:
+
+1. **Linearity**: The relationship between the independent variables and the dependent variable (length of hospitalisation) is linear. This means that the change in the dependent variable is proportional to the change in the independent variables.
+
+2. **Independence**: The observations are independent of each other. 
+
+3. **Normality of Residuals**: The residuals of the model are normally distributed, meaning that they are symmetrically distributed around 0 and the residuals’ distribution is bell-shaped.
+
+4. **Homoscedasticity**: The residuals (difference between the observed values and the values estimated from the model) have constant variance at every level of the independent variables. This means that the spread of the residuals should be roughly the same across all levels of the independent variables.
+
+5. **No Multicollinearity**: The independent variables are not highly correlated with each other. High multicollinearity can make it difficult to determine the individual effect of each independent variable on the dependent variable.
+
+6. **No Autocorrelation**: The residuals are not correlated with each other. This is particularly important in time series data where observations are ordered in time.
+
+
+In this case study we will learn how to check two of these assumptions: **Normality of residuals** and **Homoscedasticity**
+
+
+#### Step 7.1: Normality assumption
+
+To assess whether the residuals of our model are normally distributed or not we will do these three things:
+
+-   Generating some diagnostic plots of the model
+
+-   Creating an histogram with the residuals
+
+-   Carrying out a Shapiro-test
+
+**Task**: Generate diagnostic plots of the model *hyper_hospd_adj_lm*. Don't worry if you don't find out how to do these. If you struggle, have a look at the hint below.
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can retrieve **diagnostic plots** by using the function `autoplot()` from {ggfortify}. Pass your model object to the `autoplot()` function to generate three basic diagnostic plots. You can also specify which plot `autoplot()` needs to generate using the which = argument. In the solution, we specify that we want the first 2 plots.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+autoplot(hyper_hospd_adj_lm, which = 1:2)
+```
+
+</br>
+
+</details>
+
+
+Let's interpret each graph:
+
+-   **Residuals vs. fitted plot (plot 1, upper left corner):** You see a scatterplot with a blue line (LOESS smoothing curve). If the residuals are normally distributed around zero, then the blue line will be horizontal (parallel to the zero line).
+
+-   **Q-Q plot (plot 2, upper right plot):** The Q-Q plot shows you whether or not the residuals are normally distributed. On the X-axis you can see the quantiles of a normal distribution, while on the Y-axis you can see the standardized residuals (residuals dived by their standard deviation). If the residuals are normally distributed, in general, most of the points need to lie on the diagonal.
+
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Are residuals normally distributed, based on these plots?", longmcq(opts))
+
+```
+:::
+
+
+
+**Task**: Build an histogram with the residuals of the *hyper_hospd_adj_lm* model. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To do an **histogram of the residuals** you can follow a similar approach than the one we used in the step 6.3. That is, first adding to the *tbe* dataframe the residuals as a column (you can use the function `resid()`) and then using `ggplot()` to plot this column in the x-axis of a `geom_histogram()`
+
+</br>
+
+</details>
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# First add a variable with the residual values to the dataframe
+data_res <- tbe %>%
+  
+  filter(!is.na(hospd)) %>%   # Remove NAs 
+  
+  mutate(res = resid(hyper_hospd_adj_lm)) # Create a new variable with the residual values
+
+### You can now open data_res to have a look at the new column
+
+# Now we do the histogram with the residuals
+
+data_res %>%
+  
+  ggplot(mapping = aes(x = res)) +
+  
+  geom_histogram(aes(y = ..density..)) +                        # Adding a histogram with density
+  
+  #the function below will add the normal curve. 
+  stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(data_res$res, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(data_res$res, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) +
+  labs(
+    title = "Histogram of Residuals", 
+    x = "Residuals",
+    y = "Frequency"
+  ) +
+  
+  theme_bw()                                  # we add a predefined theme
+```
+
+</br>
+
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Does the histogram suggest a normal distribution of residuals?", longmcq(opts))
+
+```
+:::
+
+
+**Task**: Carry out a Shapiro-Wilk test to ascertain statistically if residuals are normally distributed
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Review Step 4.1 and have a look at the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html) if you still have doubts.
+
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+data_res %>%
+  shapiro_test(res)
+```
+
+</br>
+
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Residuals do not follow a normal distribution",
+  answer = "We cannot reject the null hypothesis that residuals follow a normal distribution",
+  "We accept the alternative hypothesis"
+)
+
+cat("QUESTION: How do you interpret the result of the Shapiro-Wilk test?", longmcq(opts))
+
+```
+:::
+
+#### Step 7.2: Homoscedasticity
+
+Now we will check the other assumption, that the variance of the residuals (i.e., the magnitude of their distance to 0) does not depend on the predictor.
+
+Check homoscedasticity by running plot number 3 (Scale-location plot) in the `autoplot()` function.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Generate the scale-location plot
+autoplot(hyper_hospd_adj_lm, which = 3)
+```
+
+</br>
+
+</details>
+
+This plot is called a scale-location plot and represents the fitted values vs. the square root of the standardized residuals. With this plot it is possible to check for heteroscedasticity (i.e., heterogeneity of variance - the opposite of homoscedasticity). Ideally, the residuals should be **evenly spread** out across all levels of fitted values. This means there should be no clear pattern or systematic change in the spread of residuals as you move along the x-axis.  If the residuals form a **funnel shape** (narrow at one end and wide at the other), this indicates heteroscedasticity, meaning the variance of the residuals is not constant. The **blue smoothed line** should be roughly horizontal and close to zero. Significant deviations from this line can indicate issues with homoscedasticity.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Based on this graph, do you think that the assumption of homoscedasticity is reasonably met?", longmcq(opts))
+
+```
+:::
+
+
+### **Step 8: Public health relevance**
+
+- Discuss the PH relevance of your findings and any next steps and recommendations that may result from this.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+This is the first time that an association between hypertension and severity of TBE (based on the duration of hospitalization) has been detected. Even though you suspected such an association in the beginning (and thus tested for it) and even though you think that it may be causal based on your DAGs and the control for confounding, there are more steps involved in establishing a causal relationship. We should follow the Bradford Hill Criteria to argue causality. For example, the biological basis for this effect needs to be established. Similar effects have been seen for other infections (e.g., SARS-CoV-2), which may have promoted the hypothesis in the beginning. You may also decide to look for a possible dose-response relationship in further analysis of our data. Furthermore, these results should be repeated independently to rule out a chance finding. Once the causal relationship between hypertension and TBE is further corroborated, vaccination against TBE for persons with hypertension could be recommended.
 </br>
 
 </details>
