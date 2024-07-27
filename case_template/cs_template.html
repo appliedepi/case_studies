@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -80,90 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="case-study-template-instructions" class="level1">
-<h1>Case study template instructions</h1>
-<section id="section-1.-considerations-for-standardised-coding-in-this-case-study-template" class="level2">
-<h2 class="anchored" data-anchor-id="section-1.-considerations-for-standardised-coding-in-this-case-study-template">Section 1. Considerations for standardised coding in this case-study template</h2>
-<section id="general-coding-framework-if-using-r" class="level3">
-<h3 class="anchored" data-anchor-id="general-coding-framework-if-using-r">General coding framework if using R</h3>
-<ul>
-<li>When possible, use [tidyverse}, not {data.table}, no apply() functions, and avoid {base}</li>
-<li>Use a vertical approach to writing coding - easier to read</li>
-<li>Use spaces in your code</li>
-<li>Use lowercase and underscores in your object names</li>
-<li>For quick tabulations Use tabyl() from {janitor}, not table() from {base}</li>
-<li>Use the magrittr pipe %&gt;%, not the native pipe</li>
-<li>Use &lt;- not =<br>
-</li>
-<li>Write out argument names, like this:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> surv,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> district,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> sex)<span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="vocabulary" class="level3">
-<h3 class="anchored" data-anchor-id="vocabulary">Vocabulary</h3>
-<ul>
-<li><strong>“Object”</strong> - not “variable”<br>
-</li>
-<li><strong>“Package”</strong> - an R package such as {dplyr}, or {janitor}. Do not use the word “library” or “libraries” to describe a single package. To reduce confusion, the “library” should refer to the folder called “library” where the R packages are stored in the computer.<br>
-</li>
-<li><strong>“Function”</strong> - a function like filter(), select(), geom_histogram(), etc.<br>
-</li>
-<li><strong>“Command”</strong> - code that runs to complete a given task. E.g. a ggplot() command may contain multiple functions connected by + symbols, a cleaning “command” may contain many functions connected by pipes.<br>
-</li>
-<li><strong>“Argument”</strong> - the specifications provided to a function e.g.&nbsp;data = , mapping = , collapse = , etc. (should always be written with = for clarity)<br>
-</li>
-<li><strong>“Operator”</strong> - As in the “assignment operator” or the “pipe operator”. Using “symbol” is OK, but not “pipe character” or “ assignment function”<br>
-</li>
-<li><strong>“Save”</strong> - reserve this word for exporting a file outside of R, such as for ggsave() or the {flextable} function save_as_docx(). Can be synonymous with “export”.<br>
-</li>
-<li><strong>“Create”</strong>, “Assign as” and “Define as” - use these words to refer to defining an object within R, using the assignment operator &lt;-<br>
-</li>
-<li><strong>“Import (data)”</strong> - avoid saying “read in” which doesn’t align with the import() function, and can be confusing to people who are not native english speakers. Reserve the word “load” for packages (see below).<br>
-</li>
-<li><strong>“Load (packages)”</strong> - use the word “load” for packages, as it aligns with the nomenclature of the p_load() function (or “install”, for the step prior to loading)<br>
-</li>
-<li><strong>“RStudio project”</strong> - not an “R Project”.<br>
-</li>
-<li><strong>“Quotation marks”</strong> vs.&nbsp;“Inverted commas” - “inverted” is a complicated word for non-native English speakers<br>
-</li>
-<li><strong>Columns &amp; Rows</strong> vs.&nbsp;Variables &amp; Observations. Structurally we talk about “columns and rows” but abstractly we talk about variables and observations.</li>
-</ul>
-</section>
-<section id="including-figures" class="level3">
-<h3 class="anchored" data-anchor-id="including-figures">Including figures</h3>
-<p>When including figures, make sure that they are aligned to the centre and that the size is correct. To insert figures in quarto follow Quarto’s <a href="https://quarto.org/docs/authoring/figures.html">guide</a></p>
-<p>You can also use the code below to insert an image that has been saved in a subfolder, as per this example.</p>
-<div class="cell" data-fig.margin="true">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"images/Applied_Epi_logo.png"</span>, <span class="at">error =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="images/Applied_Epi_logo.png" class="img-fluid" style="width:25.0%"></p>
-</div>
-</div>
-</section>
-<section id="including-questions" class="level3">
-<h3 class="anchored" data-anchor-id="including-questions">Including questions</h3>
-<p>Please, include questions throughout the case study.</p>
-<p>If the questions included are “open”, you can use the “Hints and Solutions” feature included in this template to suggest answers/reflections or propose coding solutions.</p>
-<p>If the questions foresee an specific answer, please use the {webexercises} package. You can find information and examples on how to use this package in their <a href="https://psyteachr.github.io/webexercises/articles/webexercises.html">website</a> and in their <a href="https://github.com/psyteachr/webexercises">GitHub</a>.</p>
-<p>To ensure that {webexercises} features are enabled, follow their instructions and download their webex.css and webex.js files. Then, make sure that you include those files in the format section of the YML, as per this document.</p>
-<p>Here you find an example of a multiple choice question:</p>
-<div class="webex-check">
-The time elapsed between exposure to a pathogen and the appearence of symptoms is known as:
-<div id="radio_PPZYRNDDJI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PPZYRNDDJI" value=""> <span>Infectious period</span></label><label><input type="radio" autocomplete="off" name="radio_PPZYRNDDJI" value=""> <span>Susceptibility</span></label><label><input type="radio" autocomplete="off" name="radio_PPZYRNDDJI" value="answer"> <span>Incubation period</span></label><label><input type="radio" autocomplete="off" name="radio_PPZYRNDDJI" value=""> <span>Communicability period</span></label>
-</div>
-</div>
-</section>
-<section id="unnumbered-sections" class="level3">
-<h3 class="anchored" data-anchor-id="unnumbered-sections">Unnumbered sections</h3>
-<p>Use {.unnumbered} after every heading so that they are not numbered in the final rendering</p>
+
 <!-- Some considerations about about this quarto template 
 -   Text within \<! \> will not show in your final document.
     -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
@@ -172,16 +89,11 @@ The time elapsed between exposure to a pathogen and the appearence of symptoms i
     -   This comment will not show up when you knit the document.\
     -   You can delete them if you want.\ -->
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
-</section>
-</section>
-<section id="section-2.-fixed-sections-in-the-case-study" class="level2">
-<h2 class="anchored" data-anchor-id="section-2.-fixed-sections-in-the-case-study">Section 2. Fixed sections in the case study</h2>
-<section id="name-of-case-study-and-language-abbreviated-in-brackets-e.g.-eng-esp-fra" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="name-of-case-study-and-language-abbreviated-in-brackets-e.g.-eng-esp-fra">Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA)</h3>
-</section>
-<section id="overview" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="overview">Overview</h3>
-<table class="table">
+<section id="name-of-case-study-and-language-abbreviated-in-brackets-e.g.-eng-esp-fra" class="level1 unnumbered">
+<h1 class="unnumbered">Name of case study and language (abbreviated) in brackets (e.g., ENG, ESP, FRA)</h1>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th><strong>Case study characteristics</strong></th>
@@ -245,18 +157,18 @@ Data source: XXXX<br>
 Adapted by: XXXX<br>
 </p>
 </section>
-<section id="instructions" class="level3">
-<h3 class="anchored" data-anchor-id="instructions">Instructions</h3>
-<section id="getting-help" class="level4">
-<h4 class="anchored" data-anchor-id="getting-help">Getting Help</h4>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<section id="getting-help" class="level3">
+<h3 class="anchored" data-anchor-id="getting-help">Getting Help</h3>
 <p>There are several ways to get help:</p>
 <ol type="1">
 <li>Look for the “hints” and solutions (see below)</li>
 <li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
 </ol>
 </section>
-<section id="hints-and-solutions" class="level4">
-<h4 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h4>
+<section id="hints-and-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h3>
 <p>Here is what the “helpers” look like:</p>
 <!--Note that this is the way of including hints and explanations to the solutions -->
 <!--
@@ -279,11 +191,11 @@ NOTE: Below is the solution (all within details tags collapsed)
 </summary>
 <p><br></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is more explanation about why the solution works.</p>
 <p><br></p>
@@ -293,14 +205,13 @@ NOTE: End of solution
 -->
 <!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
 </section>
-<section id="posting-a-question-in-the-community-forum" class="level4">
-<h4 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h4>
+<section id="posting-a-question-in-the-community-forum" class="level3">
+<h3 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h3>
 <p>… description here about posting in Community… TO BE COMPLETED BY APPLIED EPI</p>
 </section>
-<section id="terms-of-use" class="level4">
-<h4 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h4>
+<section id="terms-of-use" class="level3">
+<h3 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h3>
 <!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
-</section>
 </section>
 <section id="feedback-suggestions" class="level3">
 <h3 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h3>
@@ -314,12 +225,12 @@ NOTE: End of solution
 <h3 class="anchored" data-anchor-id="version-and-revisions">Version and revisions</h3>
 <p>Write date of first version</p>
 <p>Write any revisions made to the case study</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Date</th>
 <th style="text-align: left;">Changes made</th>
-<th style="text-align: right;">Version</th>
+<th style="text-align: right;">Author</th>
 </tr>
 </thead>
 <tbody>
@@ -342,14 +253,15 @@ NOTE: End of solution
 </table>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="guidance" class="level3">
-<h3 class="anchored" data-anchor-id="guidance">Guidance</h3>
-<section id="objectives-of-this-case-study" class="level4">
-<h4 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h4>
+</section>
+<section id="guidance" class="level2">
+<h2 class="anchored" data-anchor-id="guidance">Guidance</h2>
+<section id="objectives-of-this-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h3>
 <p>Here write an introduction to the case study specifying: 1. Background 2. Objectives/Learning outcomes 3. What the users of the case study will learn 4. Online references to both R code (e.g., EpiRhandbook) and to methodological documents</p>
 </section>
-<section id="previous-level-of-expertise-assumed" class="level4">
-<h4 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h4>
+<section id="previous-level-of-expertise-assumed" class="level3">
+<h3 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h3>
 <p>Add information of previous expertise needed to follow the case study. This includes expertise on:</p>
 <ul>
 <li>Epidemiological experience (e.g., knowledge of the foundations of survival analysis)</li>
@@ -357,8 +269,8 @@ NOTE: End of solution
 </ul>
 <p>If appropriate and possible, include references that can help the user to understand the level of expertise assumed</p>
 </section>
-<section id="preparation-for-the-case-study" class="level4">
-<h4 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h4>
+<section id="preparation-for-the-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h3>
 <p>Include the steps needed to start replicating the analysis of the case study</p>
 <p>For example:</p>
 <ol type="1">
@@ -370,9 +282,8 @@ NOTE: End of solution
 </ol>
 </section>
 </section>
-</section>
-<section id="section-3.-specific-to-the-case-study" class="level2">
-<h2 class="anchored" data-anchor-id="section-3.-specific-to-the-case-study">Section 3. Specific to the case study</h2>
+<section id="specific-to-the-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="specific-to-the-case-study">Specific to the case study</h2>
 <p>Finally, add the different sections of the case study. Remember to include questions +/- hints and solutions as appropriate.</p>
 <p>We acknowledge that every case study is different, so we trust you to give it the most relevant structure. However, consider including the following sections:</p>
 <ol type="1">
@@ -394,210 +305,416 @@ If relevant, include a section on descriptive analysis divided into three parts:
 <!-- /main column -->
 <script>
 
+
+
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 </script>
+
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -677,10 +794,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -690,8 +824,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -703,7 +846,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -747,6 +1013,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -772,6 +1039,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -832,6 +1125,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

@@ -27,7 +27,7 @@ editor:
 ## Overview {.unnumbered}
 
 | **Case study characteristics** |                                                      |
-|---------------------------|:--------------------------------------------|
+|--------------------------------|:-----------------------------------------------------|
 | **Name:**                      | openxlsx2 tutorial                                   |
 | **Language:**                  | English                                              |
 | **Tools:**                     | R, MS Excel                                          |
@@ -124,7 +124,7 @@ APPLIED EPI
 You will see these icons throughout the exercises:
 
 | Icon                                                     | Meaning                  |
-|---------------------------|---------------------------------------------|
+|----------------------------------------------------------|--------------------------|
 | `r fontawesome::fa("eye", fill = "darkblue")`            | Observe                  |
 | `r fontawesome::fa("exclamation", fill = "red")`         | Alert!                   |
 | `r fontawesome::fa("pen", fill = "brown")`               | An informative note      |

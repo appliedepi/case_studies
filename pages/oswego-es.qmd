@@ -6,9 +6,12 @@ format:
   html: 
     css: webex.css
     include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-# Oswego (ES) {#sec-oswego} 
+# Oswego (ES) {#sec-oswego}
 
 ## Overview {.unnumbered}
 
@@ -118,7 +121,7 @@ APPLIED EPI
 You will see these icons throughout the exercises:
 
 | Icon                                                     | Meaning                  |
-|-------------------------|----------------------------------------------|
+|----------------------------------------------------------|--------------------------|
 | `r fontawesome::fa("eye", fill = "darkblue")`            | Observe                  |
 | `r fontawesome::fa("exclamation", fill = "red")`         | Alert!                   |
 | `r fontawesome::fa("pen", fill = "brown")`               | An informative note      |
@@ -225,15 +228,12 @@ Antes de iniciar este estudio de caso, le aconsejamos que:
 5.  En la subcarpeta **outputs** encontrará todos los gráficos y tablas
     generadas en el anlálisis.
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## **Primera parte - Antecedentes** {.unnumbered}
 
 ```{r , fig.margin = TRUE, echo = FALSE, fig.width = 2, out.width = "35%", fig.cap = ""}
 knitr::include_graphics("case_studies/ESP/oswego_cs_es/images/Primera_parte_iglesia.jpg", error = F)
 ```
-
-
 
 El 19 de abril de 1940, el oficial de salud local en el pueblo de
 **Lycoming**, condado de **Oswego, Nueva York**, informó de la
@@ -254,12 +254,9 @@ ocurrencia y tiempo de aparición de los síntomas, y alimentos
 consumidos. de las 75 personas entrevistados, **46** personas
 presentaron síntomas de enfermedad gastrointestinal.
 
-
-
 #### **Pregunta 1** {.unnumbered}
 
-::: {.webex-check}
-
+::: webex-check
 ```{r, results="asis", echo=FALSE}
 opts <- c(
   "Una epidemia",
@@ -274,15 +271,11 @@ cat("¿Ante que tipo de situación está presente el Dr Rubin?", longmcq(opts))
 ```
 :::
 
-
-
-
 ```{=html}
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
 -->
 ```
-
 <details>
 
 <summary style="text-decoration: underline; color: darkgreen;">
@@ -301,7 +294,6 @@ encontrar la definición que se ajusta más a la situación descrita
 
 </details>
 
-
 <details>
 
 <summary style="text-decoration: underline; color: red;">
@@ -312,7 +304,6 @@ encontrar la definición que se ajusta más a la situación descrita
 </summary>
 
 </br>
-
 
 Numero 1 - No es la respuesta correcta; revisa el concepto de epidemia,
 tiene que ver con la cantidad de personas afectadas.
@@ -328,12 +319,9 @@ pasos del trabajo de campo.
 
 </details>
 
-
 #### **Pregunta 2** {.unnumbered}
 
-
-::: {.webex-check}
-
+::: webex-check
 ```{r, results="asis", echo=FALSE}
 opts_2 <- c(
   "Determinar la existencia del brote, análisis descriptivo, generar hipótesis, confirmar hipótesis, controlar brote, conclusiones y recomendaciones, informe final",
@@ -359,7 +347,6 @@ cat("Los pasos de una investigación de brote son:", longmcq(opts_2))
 
 </br>
 
-
 Puede utilizar el sitio de la OPS para profundizar sobre el tema
 [Enlace](https://www3.paho.org/hq/index.php?option=com_content&view=article&id=10543:2015-capitulo-iii-investigacion-brotes-personas&Itemid=0&lang=es#gsc.tab=0)
 
@@ -367,9 +354,7 @@ Puede utilizar el sitio de la OPS para profundizar sobre el tema
 
 </details>
 
-
 ### **Descripción clínica**de los casos {.unnumbered}
-
 
 El inicio de la enfermedad en todos los casos fue **agudo**,
 caracterizada principalmente por **náuseas**, **vómitos**, **diarrea** y
@@ -382,8 +367,10 @@ realizó examen de muestras fecales para el examen bacteriológico.
 
 #### **Pregunta 3** {.unnumbered}
 
-Enumere una de las grandes categorías de agentes causales de enfermedades que se deben considerar en el diagnóstico diferencial de un brote de enfermedad gastrointestinal como el de Oswego:\
-`r fitb(c("Bacterias", "Virus", "Parásitos", "Toxinas"), ignore_case = TRUE, ignore_ws = TRUE, width = "10")` 
+Enumere una de las grandes categorías de agentes causales de
+enfermedades que se deben considerar en el diagnóstico diferencial de un
+brote de enfermedad gastrointestinal como el de Oswego:\
+`r fitb(c("Bacterias", "Virus", "Parásitos", "Toxinas"), ignore_case = TRUE, ignore_ws = TRUE, width = "10")`
 
 ```{=html}
 <!--
@@ -394,8 +381,8 @@ NOTE: Below is the solution (all within details tags collapsed)
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click para ver la explicación de la solución
-(¡Inténtelo usted primero!)
+`r fontawesome::fa("check", fill = "red")`Click para ver la explicación
+de la solución (¡Inténtelo usted primero!)
 
 </summary>
 
@@ -424,7 +411,8 @@ como vehiculo de transmisión entre los afectados.
 
 #### **Pregunta 4** {.unnumbered}
 
-En lenguaje epidemiológico, ¿Qué es un vehículo? ¿Qué es un vector? ¿Cuáles son otros modos?
+En lenguaje epidemiológico, ¿Qué es un vehículo? ¿Qué es un vector?
+¿Cuáles son otros modos?
 
 Piense en estos conceptos y cuando esté listo, vea la solución propuesta
 
@@ -482,8 +470,9 @@ al desarrollo de los síntomas
 
 #### **Pregunta 5** {.unnumbered}
 
-Si fuese usted el que administra el cuestionario, ¿qué información recopilaría? Agrupa la información en categorías. Una vez que haya escrito sus categorías, puede ver abajo la solución.
-
+Si fuese usted el que administra el cuestionario, ¿qué información
+recopilaría? Agrupa la información en categorías. Una vez que haya
+escrito sus categorías, puede ver abajo la solución.
 
 ```{=html}
 <!--
@@ -525,8 +514,7 @@ nominal.
 
 #### **Pregunta 6** {.unnumbered}
 
-::: {.webex-check}
-
+::: webex-check
 ```{r, results="asis", echo=FALSE}
 opts_6 <- c(
   "Organizar los datos y describirlos por tiempo, lugar y persona",
@@ -541,14 +529,12 @@ cat("¿En que NO nos ayuda un listado nominal?", longmcq(opts_6))
 ```
 :::
 
-
-
-**Por favor, continue el caso entrando en la pestaña "Segunda parte - El Evento" en la parte superior**
+**Por favor, continue el caso entrando en la pestaña "Segunda parte - El
+Evento" en la parte superior**
 
 ## **Segunda parte - El Evento** {.unnumbered}
 
 ### **Descripción de la Cena** {.unnumbered}
-
 
 La investigación del Dr. Rubin también implicó averiguar más detalles
 sobre la cena. Después de hablar con los organizadores, descubrió que la
@@ -567,7 +553,8 @@ gastrointestinal.
 
 #### **Pregunta 7** {.unnumbered}
 
-¿Cuál es el valor de una curva epidémica en la investigación de un brote?
+¿Cuál es el valor de una curva epidémica en la investigación de un
+brote?
 
 ```{=html}
 <!--
@@ -603,7 +590,7 @@ NOTE: End of solution
 ```
 #### **Pregunta 8** {.unnumbered}
 
- ¿Qué nos dice el siguiente gráfico?
+¿Qué nos dice el siguiente gráfico?
 
 ```{r, echo=FALSE, fig.align='center', fig.height=4, fig.width=6, warning=FALSE, message=FALSE}
 
@@ -675,7 +662,8 @@ NOTE: End of solution
 ```
 #### **Pregunta 9** {.unnumbered}
 
-¿Hay algún caso en el que los tiempos de inicio no coincidan con los generales? ¿experiencia? ¿Cómo podrían explicarse?
+¿Hay algún caso en el que los tiempos de inicio no coincidan con los
+generales? ¿experiencia? ¿Cómo podrían explicarse?
 
 ```{=html}
 <!--
@@ -727,9 +715,10 @@ NOTE: End of solution
 ```
 :::
 
-#### **Pregunta 10** {.unnumbered} 
+#### **Pregunta 10** {.unnumbered}
 
-¿Cómo podrían presentarse mejor los datos en el listado nominal de participantes?
+¿Cómo podrían presentarse mejor los datos en el listado nominal de
+participantes?
 
 ```{=html}
 <!--
@@ -1475,5 +1464,4 @@ con la contaminación es un asunto por nexo epidemiológico.
 Nota: El paciente #52 era un niño que mientras viendo el procedimiento
 de congelación se le dio una plato de helado de vainilla a las 11:00 am
 en abril 18.
-
 :::
