@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>quarto-inputd8a93774</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="stengen-en.epiet_files/libs/clipboard/clipboard.min.js"></script>
+<script src="stengen-en.epiet_files/libs/quarto-html/quarto.js"></script>
+<script src="stengen-en.epiet_files/libs/quarto-html/popper.min.js"></script>
+<script src="stengen-en.epiet_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="stengen-en.epiet_files/libs/quarto-html/anchor.min.js"></script>
+<link href="stengen-en.epiet_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="stengen-en.epiet_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="stengen-en.epiet_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="stengen-en.epiet_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="stengen-en.epiet_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="webex.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><p><img src="../images/ecdc/logo_epiet_rki.png" class="img-fluid" style="width:12in"></p></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="mva---multivariable-analysis" class="level1">
+<h1><strong>MVA - Multivariable analysis</strong></h1>
+</section>
+<section id="case-study-an-outbreak-of-gastroenteritis-in-stegen-germany" class="level1 unnumbered">
+<h1 class="unnumbered">Case study: An Outbreak of Gastroenteritis in Stegen, Germany</h1>
+<p><strong><em>Authorship</em></strong><br>
+Original authors: This case study was first designed by Alain Moren and Gilles Desve for EPIET. It is based on an investigation conducted by Anja Hauri, RKI, Berlin, 1998.<br>
+Data source: Data is fictional and was inspired by <a href="https://linkinghub.elsevier.com/retrieve/pii/S0163-4453(23)00088-9">Nygren et al. Tick-borne encephalitis: acute clinical manifestations and severity in 581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr 1;86(4):369-75</a><br>
+Adapted and modified by: Alicia Barrasa (EPIET), Ioannis Karagiannis (Public Health England - PHE), Giri Shankar (Public Health Wales), Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian Agency for Health and Food Safety-AGES), Alexander Spina (AGES), Daniel Gardiner (PHE), Lukas Richter (AGES), Liese Van Gompel (MedEPIET), Kostas Danis (MedEPIET) and Alberto Mateo Urdiales (Istituto Superiore di Sanità - ISS)<br>
+</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<section id="getting-help" class="level3">
+<h3 class="anchored" data-anchor-id="getting-help">Getting Help</h3>
+<p>There are several ways to get help:</p>
+<ol type="1">
+<li>Look for the “hints” and solutions (see below)</li>
+<li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
+</ol>
+</section>
+<section id="hints-and-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h3>
+<p>Here is what the “helpers” look like:</p>
+<!--Note that this is the way of including hints and explanations to the solutions -->
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Here you will see a helpful hint!</p>
+<p><br></p>
+</details>
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is more explanation about why the solution works.</p>
+<p><br></p>
+</details>
+<!--
+NOTE: End of solution
+-->
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+<section id="posting-a-question-in-the-community-forum" class="level4">
+<h4 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h4>
+<p>… description here about posting in Community… TO BE COMPLETED BY APPLIED EPI</p>
+</section>
+<section id="terms-of-use" class="level4">
+<h4 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h4>
+<p><strong>Disclaimer</strong>: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information).</p>
+<p>You are free:</p>
+<ul>
+<li>to Share: to copy and distribute the work</li>
+<li>to Remix: to adapt and build upon the material</li>
+</ul>
+<p>Under the following conditions:</p>
+<ul>
+<li><p>Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers.</p></li>
+<li><p>Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors.</p></li>
+<li><p>Notification: If you use the work in the manner specified by the author or licensor, <a href="mailto:Walterj@rki.de">Walter@rki.de</a></p></li>
+<li><p>You cannot sell this work alone but you can use it as part of a teaching.</p></li>
+</ul>
+<p>With the understanding that:</p>
+<ul>
+<li><p>Waiver: Any of the above conditions can be waived if you get permission from the copyright holder.</p></li>
+<li><p>Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.</p></li>
+<li><p>Other Rights: In no way are any of the following rights affected by the license:</p>
+<ul>
+<li><p>Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;</p></li>
+<li><p>The author’s moral rights;</p></li>
+<li><p>Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.</p></li>
+</ul></li>
+<li><p>Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license.</p></li>
+</ul>
+<p>This licence is based on <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="uri">http://creativecommons.org/licenses/by-sa/3.0/</a></p>
+</section>
+</section>
+<section id="feedback-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h3>
+<ul>
+<li>You can write feedback and suggestions on this case study at the ECDC GITHUB</li>
+<li>Alternatively email us at: [ECDC CONTACT MAIL]</li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="version-and-revisions" class="level3">
+<h3 class="anchored" data-anchor-id="version-and-revisions">Version and revisions</h3>
+<p>Write date of first version</p>
+<p>Write any revisions made to the case study</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 44%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: left;">Changes made</th>
+<th style="text-align: right;">Author</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2015</td>
+<td style="text-align: left;">The case study has been divided in two parts: the first includes descriptive, univariable and stratified analysis as pre-module homework; the second includes logistic and binary regression (not shown here). Unnecessary toponymes were removed.</td>
+<td style="text-align: right;">Alicia Barrasa (EPIET) and Ioannis Karagiannis (Publich Health England-PHE)</td>
+</tr>
+<tr class="even">
+<td>2017</td>
+<td style="text-align: left;">Questions were rephrased to reflect real life scenarios (rather than academic exercise)</td>
+<td style="text-align: right;">Alicia Barrasa (EPIET) and Giri Shankar (Public Health Wales-PHW)</td>
+</tr>
+<tr class="odd">
+<td>2017</td>
+<td style="text-align: left;">The case study was adapted to include the help on R</td>
+<td style="text-align: right;">Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian Agency for Health and Food Safety-AGES) and Alexander Spina (AGES)</td>
+</tr>
+<tr class="even">
+<td>2017</td>
+<td style="text-align: left;">Contribution to the R code</td>
+<td style="text-align: right;">Daniel Gardiner (Public Health England-PHE) and Lukas Richter (AGES)</td>
+</tr>
+<tr class="odd">
+<td>2022</td>
+<td style="text-align: left;">Minor revisions to the R code and explanations</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td>2023</td>
+<td style="text-align: left;">Major revision of the R code. R code was simplified and R tidyverse code was implemented</td>
+<td style="text-align: right;">Liese Van Gompel (MedEPIET)</td>
+</tr>
+<tr class="odd">
+<td>2024</td>
+<td style="text-align: left;">Revision of the R code, i.e.&nbsp;use of</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p>EpiStas package for univariable and multivariable analysis, simplification and harmonisation of the R code| Kostas Danis (MediPIET)| | 2017 | Revision of content, structure, R code and adaptation of format to Applied Epi’s template of case studies | Alberto Mateo Urdiales (ISS) |</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="guidance" class="level2">
+<h2 class="anchored" data-anchor-id="guidance">Guidance</h2>
+<section id="objectives-of-this-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h3>
+<p>At the end of this case study, participants should: - know and be able to perform the fundamental steps of a descriptive statistical analysis of a foodborne outbreak (including quantitative assessment (frequency distributions, missing values, means/medians/modes, quartiles/SDs) and visualization of the data (histogram, boxplot)) - be able to perform univariate statistical analysis to identify potential vehicles of a foodborne outbreak (including risk ratios and/or odds ratios, depending on the design) - know why and how stratification can be conducted in datasets related to an outbreak investigation - be able to conduct a stratified analysis with respect to potential risk factors and confounders/effect modifiers - know how to use multivariable methods to quantify potential risk factors and control for confounding and/or effect modification</p>
+</section>
+<section id="previous-level-of-expertise-assumed" class="level3">
+<h3 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h3>
+<p>Participants are expected to be familiar with data management and basic analysis in R.</p>
+</section>
+<section id="preparation-for-the-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h3>
+<ol type="1">
+<li><p>Download folder named stengen_mva and extract contents in the local laptop</p></li>
+<li><p>Create an Rstudio project in the folder stengen_en. If you are unsure on how to do that, read the EpiRhandbook Chapter on <a href="https://epirhandbook.com/en/new_pages/r_projects.html">R projects</a></p></li>
+<li><p>Inside the folder “stengen_en”: Subfolder “data” contains a raw data file named <em>tira.csv</em>. This is the only data file you will use in this case study.</p></li>
+<li><p>Subfolder scripts should be used to save any scripts related to the analysis. Inside “backup” you will find a solution script with the code of the case study named <em>stengen_mva_backup.R</em>.</p></li>
+<li><p>Subfolder “outputs” could be used to store all outputs (tables, graphs, documents) that are the result of the analysis</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="part-1---scenario-study-design-and-analysis-plan" class="level1">
+<h1><strong>Part 1 - Scenario, study design and analysis plan</strong></h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>On 26 June 1998, the St Sebastian High School in Stegen (school A), Germany, celebrated a graduation party, where 250 to 350 participants were expected. Attendees included graduates from that school, their families and friends, teachers, 12th grade students and some graduates from a nearby school (school B).</p>
+<p>A self-service party buffet was supplied by a commercial caterer in Freiburg. Food was prepared on the day of the party and transported in a refrigerated van to the school.</p>
+<p>Festivities started with a dinner buffet which opened from 8:30 pm onwards and were followed by a dessert buffet offered from 10 pm. The party and the buffet extended late during the night and alcoholic beverages were quite popular. All agreed it was a party to be remembered.</p>
+</section>
+<section id="the-alert" class="level2">
+<h2 class="anchored" data-anchor-id="the-alert">The alert</h2>
+<p>On 2nd July 1998, the Freiburg local health office reported to the Robert Koch Institute (RKI) in Berlin the occurrence of many cases of gastroenteritis following the graduation party described above. More than 100 cases were suspected among attendees and some of them were admitted to nearby hospitals. Sick people suffered from fever, nausea, diarrhoea and vomiting that lasted for several days. Most believed that the tiramisu consumed at dinner was responsible for their illness. Salmonella Enteritidis was isolated from 19 stool samples.</p>
+<p>The Freiburg health office sent a team to investigate the kitchen facilities of the caterer. Food preparation procedures were reviewed. Food samples, except tiramisu (none was left over), were sent to the laboratory of Freiburg University. Microbiological analyses were performed on samples of the following: brown chocolate mousse, caramel cream, remoulade sauce, yoghurt dill sauce and 10 raw eggs.</p>
+<p>The Freiburg health office requested help from the RKI in the investigation to assess the magnitude of the outbreak and identify potential vehicle(s) and risk factors for transmission in order to better control the outbreak.</p>
+</section>
+<section id="the-study" class="level2">
+<h2 class="anchored" data-anchor-id="the-study">The study</h2>
+<p>Cases were defined as any person who had attended the party at St Sebastian High School who suffered from diarrhoea (≥ 3 loose stool for 24 hours) between 27 June and 29 June 1998; or who suffered from at least three of the following symptoms: vomiting, fever ≥38.5°C, nausea, abdominal pain, and headache.</p>
+<p>Students from both schools attending the party were asked through phone interviews to provide names of persons who attended the party.</p>
+<p>Overall, 291 responded to enquiries and 103 cases were identified (attack rate: 35%). Among these cases, 84 (82%) received medical treatment and four were admitted to hospitals. Attack rates by age group were 36.6% for persons &lt;20 years, 32.1% for persons 20 to 29 years, and 36.8% for persons older than 29 years.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/stengen/figure1.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Cases of gastroenteritis by time of onset among attendees of a high-school graduation ceremony (n=103), Germany, June 1998</figcaption>
+</figure>
+</div>
+<p><strong>QUESTION 1</strong>. What would be your hypothesis concerning the source of the outbreak?</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<p>The shape of the epidemic curve and the attendance to a single event (a buffet) pointed towards a foodborne outbreak related to a point source of infection.</p>
+<p><br></p>
+</details>
+<p><strong>QUESTION 2</strong>. What study design would you choose to test this hypothesis?</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<p>Using the updated list of attendants, a retrospective cohort study including all attendants to the party (that could be reached) was conducted. All had received a standard questionnaire asking for demographic information, signs, symptoms and duration, admission to hospital, and food and beverages consumption at the party including amount consumed. Food-specific attack rates were computed for more than 50 food items and beverages.</p>
+<p><br></p>
+</details>
+<p><strong>Question 3</strong>. What would your overall plan of analysis be?</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<p><strong>Perform data cleaning</strong> - For each variable, look at the range, unexpected and missing values. - Correct data using the original forms used if needed</p>
+<p><strong>Describe each variable</strong> - For each variable, describe frequency distributions including missing values and, if needed, means, median, modes, quartiles, standard deviation, outliers - Make appropriate histograms and box plots - Choose relevant characteristics to describe the population</p>
+<p><strong>Identify the outbreak vehicle if any</strong> - Chose the appropriate measure of association - Chose the appropriate statistical tests and significance level - Calculate food-specific attack rates - Look at the proportions of cases exposed - Calculate the percentages of cases exposed to each exposure - Search for any dose-response relationship if appropriate - Interpret the results</p>
+<p><strong>Perform a stratified analysis</strong> - Identify the variables that are potential effect modifiers (EM) and confounders - Design appropriate stratification tables - Stratify on each level taken by the EM and confounders - Compute appropriate measurements to identify confounding and effect modification - conduct appropriate statistical tests - Interpret the results</p>
+<p><strong>Perform a multivariable analysis</strong> - This will be discussed during the module.</p>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="part-2---descriptive-univariate-and-stratified-analysis-with-r" class="level1">
+<h1><strong>Part 2 - Descriptive, univariate and stratified analysis with R</strong></h1>
+<section id="step-1-set-up" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-set-up"><strong>Step 1: Set up</strong></h3>
+<section id="step-1.1-create-a-new-r-script" class="level4">
+<h4 class="anchored" data-anchor-id="step-1.1-create-a-new-r-script">Step 1.1: Create a new R script</h4>
+<p>Once you have created an Rproject inside the “stengen_mva” folder (as specified in the second point of the section <strong>Preparation for the case study</strong>). Create a new script with the name <em>stengen_analysis</em> and save it in the subfolder “scripts”. If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script.</p>
+</section>
+<section id="step-1.2-define-r-language" class="level4">
+<h4 class="anchored" data-anchor-id="step-1.2-define-r-language">Step 1.2: Define R language</h4>
+<p>Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the graphs that you want to produce. For example, a french person might have a french “locale”. If that is the case, when creating a graph by day of the week, Monday will be displayed as “lundi”. If that french person wants to create an English report, as for this case study, the language “locale” should be changed.</p>
+<p><strong>Task</strong>: Ensure your “locale” is in English and change it into English if it is not. If you don’t know how to do this try finding it online (searching for online help is an important skill for R users!). Otherwise, see the solution below</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see your language locale</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To change it into English</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">"LC_ALL"</span>, <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="step-1.3-installload-packages" class="level4">
+<h4 class="anchored" data-anchor-id="step-1.3-installload-packages">Step 1.3: Install/load packages</h4>
+<p>Install and load the following packages: rio, skimr, janitor, gtsummary, broom, rstatix, ggfortify and tidyverse.</p>
+<p>You can find more about installing/loading packages in the <a href="https://epirhandbook.com/en/new_pages/basics.html#packages">Packages</a> section of the EpiRhandbook.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>You may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called <code>select()</code> which we frequently use to subset columns of a data frame. But other packages such as {MASS} do also have a function called <code>select()</code>. This could create headaches if you want to subset columns using dplyr’s <code>select()</code> but R thinks you’re calling MASS’s <code>select()</code> (we call this masking - <code>dplyr::select()</code> is masked by <code>MASS::select()</code>). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your <code>p_load()</code> list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  rio,             <span class="co"># to import datasets</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  skimr,           <span class="co"># for displaying your data</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  janitor,         <span class="co"># a package for data cleaning</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  gtsummary,       <span class="co"># to create frequency tables</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  rstatix,         <span class="co"># to generate summary statistics</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  EpiStats,        <span class="co"># for univariable and stratified analysis</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="step-2-import-and-explore-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-import-and-explore-data"><strong>Step 2: Import and explore data</strong></h3>
+<section id="step-2.1-import-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.1-import-the-data">Step 2.1: Import the data</h4>
+<p><strong>Task</strong> Import the data frame called “tira.csv” inside the “data” subfolder.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>If you are working within a project, finding the path to the dataframe should be relatively straightfoward. A “.csv” file is a “Comma-separated Values” file. . You can import this dataframe using the <code>read.csv()</code> which comes already pre-installed in R. However, we recommend that you use the <strong><code>import()</code></strong> function from {rio} because, as you may remember, this function will recognise the file type and import it whether the file is from R, Stata, excel or many others. If you have any doubts about importing review the <a href="https://epirhandbook.com/en/new_pages/importing.html#import-data">Import and export</a> chapter of the EpiRhandbook.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset 'tira.csv'  </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tira_raw <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/tira.csv"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="step-2.2-explore-the-data" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.2-explore-the-data">Step 2.2: Explore the data</h4>
+<p><strong>Task</strong>: Explore the data trying to answer the following questions:</p>
+<div class="webex-check">
+QUESTION: How many rows and columns does the dataframe have?
+<div id="radio_DZYPVHEHHP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DZYPVHEHHP" value=""> <span>522 and 8</span></label><label><input type="radio" autocomplete="off" name="radio_DZYPVHEHHP" value=""> <span>2 and 345</span></label><label><input type="radio" autocomplete="off" name="radio_DZYPVHEHHP" value="answer"> <span>291 and 21</span></label><label><input type="radio" autocomplete="off" name="radio_DZYPVHEHHP" value=""> <span>600 and 23</span></label>
+</div>
+</div>
+<div class="webex-check">
+QUESTION: How many cases have ‘age’ missing?
+<div id="radio_SJMFIBSBXG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJMFIBSBXG" value="answer"> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_SJMFIBSBXG" value=""> <span>14</span></label><label><input type="radio" autocomplete="off" name="radio_SJMFIBSBXG" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_SJMFIBSBXG" value=""> <span>0</span></label>
+</div>
+</div>
+<div class="webex-check">
+QUESTION: What is the class of the column ‘salmon’?
+<div id="radio_DVEFCPRRJW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DVEFCPRRJW" value=""> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_DVEFCPRRJW" value="answer"> <span>integer</span></label><label><input type="radio" autocomplete="off" name="radio_DVEFCPRRJW" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_DVEFCPRRJW" value=""> <span>logical</span></label>
+</div>
+</div>
+<div class="webex-check">
+QUESTION: What is the class of the column ‘dateonset’?
+<div id="radio_XPQNKCRAKZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XPQNKCRAKZ" value=""> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_XPQNKCRAKZ" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_XPQNKCRAKZ" value="answer"> <span>date</span></label><label><input type="radio" autocomplete="off" name="radio_XPQNKCRAKZ" value=""> <span>numeric</span></label>
+</div>
+</div>
+<div class="webex-check">
+QUESTION: How many cases drank beer at the party?
+<div id="radio_EDQBEVZOUE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EDQBEVZOUE" value="answer"> <span>106</span></label><label><input type="radio" autocomplete="off" name="radio_EDQBEVZOUE" value=""> <span>20</span></label><label><input type="radio" autocomplete="off" name="radio_EDQBEVZOUE" value=""> <span>474</span></label><label><input type="radio" autocomplete="off" name="radio_EDQBEVZOUE" value=""> <span>30</span></label>
+</div>
+</div>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>An efficient way to explore data is to use the function <code>skim()</code> from the {skimr} package, as it gives you all the information needed with only one command. Of course, there are several alternatives. You can also have a look at <code>glimpse()</code> from {dplyr}, for example. <br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect your dataset and generate basic statistics using the skim function  </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(tira_raw)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tira_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="step-3-clean-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-clean-the-data"><strong>Step 3 Clean the data</strong></h3>
+<p>You might notice that most of the columns are of class ‘integer’. However, most variables consist out of 1 (present) and 0 (absent) values. For some of the following analyses, we will need R to treat these variables as factors (i.e., categorical variables).</p>
+<p><strong>Task</strong>: Change all present (1) / absent (0) variables from integer to factors.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>You can do this one by one, or you could do all at the same time using the <code>across()</code> function from {dplyr}. If you are not sure how to use the <code>across()</code> function, read the section on <a href="https://epirhandbook.com/en/new_pages/cleaning.html#clean_across">Transform multiple columns</a> from the EpiRhandbook. <br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tira_clean <span class="ot">&lt;-</span> tira_raw <span class="sc">%&gt;%</span> <span class="co"># tira_clean will be out clean dataframe after we have performed cleaning tasks on tira_raw</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this would be changing one-by-one the columns into factors</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ill =</span> <span class="fu">as.factor</span>(ill)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this would change all columns we are interested into 'factors' in only one command</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="sc">!</span><span class="fu">c</span>(uniquekey, dateonset, age, mportion, tportion), <span class="co"># with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">as.factor</span>(.x)))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that the changes have been succesful</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(tira_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script>
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+
+    p = t[i].parentElement;
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
+  }
+
+}
+
+
+
+/* webex-solution button toggling function */
+
+b_func = function() {
+
+  console.log("webex: toggle hide");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('open')) {
+
+    cl.remove("open");
+
+  } else {
+
+    cl.add("open");
+
+  }
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answers");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('unchecked')) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = "Hide Answers";
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = "Show Answers";
+
+  }
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  console.log("webex: check solveme");
+
+
+
+  var real_answers = JSON.parse(this.dataset.answer);
+
+  var my_answer = this.value;
+
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+
+    my_answer = my_answer.toLowerCase();
+
+  }
+
+  if (cl.contains("nospaces")) {
+
+    my_answer = my_answer.replace(/ /g, "")
+
+  }
+
+
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+
+    cl.add("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  }
+
+
+
+  // match numeric answers within a specified tolerance
+
+  if(this.dataset.tol > 0){
+
+    var tol = JSON.parse(this.dataset.tol);
+
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+
+    }
+
+  }
+
+
+
+  // added regex bit
+
+  if (cl.contains("regex")){
+
+    answer_regex = RegExp(real_answers.join("|"))
+
+    if (answer_regex.test(my_answer)) {
+
+      cl.add("webex-correct");
+
+    }
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var cl = this.classList
+
+
+
+  /* add style */
+
+  cl.remove("webex-incorrect");
+
+  cl.remove("webex-correct");
+
+  if (this.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
+  var cl = checked_button.parentElement.classList;
+
+  var labels = checked_button.parentElement.parentElement.children;
+
+
+
+  /* get rid of styles */
+
+  for (i = 0; i < labels.length; i++) {
+
+    labels[i].classList.remove("webex-incorrect");
+
+    labels[i].classList.remove("webex-correct");
+
+  }
+
+
+
+  /* add style */
+
+  if (checked_button.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+window.onload = function() {
+
+  console.log("webex onload");
+
+  /* set up solution buttons */
+
+  var buttons = document.getElementsByTagName("button");
+
+
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
+      buttons[i].onclick = b_func;
+
+    }
+
+  }
+
+
+
+  var check_sections = document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+
+
+    let btn = document.createElement("button");
+
+    btn.innerHTML = "Show Answers";
+
+    btn.classList.add("webex-check-button");
+
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+
+  }
+
+
+
+  /* set up webex-solveme inputs */
+
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+
+    solveme[i].setAttribute("autocomplete","off");
+
+    solveme[i].setAttribute("autocorrect", "off");
+
+    solveme[i].setAttribute("autocapitalize", "off");
+
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+
+    /* adjust answer for ignorecase or nospaces */
+
+    var cl = solveme[i].classList;
+
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+
+      real_answer = real_answer.toLowerCase();
+
+    }
+
+    if (cl.contains("nospaces")) {
+
+      real_answer = real_answer.replace(/ /g, "");
+
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+
+    /* attach checking function */
+
+    solveme[i].onkeyup = solveme_func;
+
+    solveme[i].onchange = solveme_func;
+
+
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  /* set up radiogroups */
+
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+
+    radiogroups[i].onchange = radiogroups_func;
+
+  }
+
+
+
+  /* set up selects */
+
+  var selects = document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

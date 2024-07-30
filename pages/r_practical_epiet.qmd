@@ -237,7 +237,7 @@ If you are familiar with Rmarkdown, you may decide to use this type of file inst
 ### Step 1.2: Define R language
 
 
-Depending on where you are and how to carried out R installation, your language "locale" might be different from the language of the graphs that you want to produce. For example, a french person might have a french "locale". If that is the case, when creating a graph by day of the week, Monday will be displayed as "lundi". If that french person wants to create an English report, as for this case study, the language "locale" should be changed.
+Depending on where you are and how you carried out R installation, your language "locale" might be different from the language of the graphs that you want to produce. For example, a french person might have a french "locale". If that is the case, when creating a graph by day of the week, Monday will be displayed as "lundi". If that french person wants to create an English report, as for this case study, the language "locale" should be changed.
 
 **Task**: Ensure your "locale" is in English and change it into English if it is not. If you don't know how to do this try finding it online (searching for online help is an important skill for R users!). Otherwise, see the solution below
 
@@ -530,7 +530,7 @@ When exploring the case-based data, you may have noticed that there are a few th
 </br>
 
 To convert all names to lower case, rather than renaming each column you may use the function clean_names() from the {janitor} package, which will do it automatically for all columns.
-Use lubridate functions to transform date columns into "Date" class, you can do one by one, or you could do all at the same time using the across() function from {dplyr}. If you feel you need to know more about transforming dates read the chapter [Working with Dates](https://epirhandbook.com/en/new_pages/dates.html) from the EpiRhandbook.If you are not sure how to use the across() function, you can also read the section on [Transform multiple columns](https://epirhandbook.com/en/new_pages/cleaning.html#clean_across).
+Use lubridate functions to transform date columns into "Date" class, you can do this one by one, or you could do all at the same time using the across() function from {dplyr}. If you feel you need to know more about transforming dates read the chapter [Working with Dates](https://epirhandbook.com/en/new_pages/dates.html) from the EpiRhandbook.If you are not sure how to use the across() function, you can also read the section on [Transform multiple columns](https://epirhandbook.com/en/new_pages/cleaning.html#clean_across).
 
 One simple way to create the "week_date" column would be to use the function floor_date() from {lubridate}. Take a look at the documentation to understand how it works and how to make Monday the starting day of the week.
 

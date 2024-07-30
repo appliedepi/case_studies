@@ -848,10 +848,15 @@ tbe %>%
 
 </details>
 
-Now you have visual evidence of a linear association of age with the duration of hospitalisation. Therefore, **it seems reasonable to include age as a continuous variable in the analysis.**
+Now you have visual evidence of a linear association of age with the duration of hospitalisation. Therefore, it seems reasonable to include age as a continuous variable in the analysis.
 
-#### Step 3.2: Check if the association between age and length of hospitalisation varies by sex
-Now, check visually whether the association between age and hospd differs by sex
+Now, we will see how to perform linear regression with R.
+
+
+
+#### Step 3.2: Univariate linear regression between length of hospitalisation and age
+
+Now, try running a linear regression model using the *tbe* data, with length of hospitalisation (hospd) as the dependent variable and age as the independent variable. Assign this model to an object named: *age_hospd_lm* If this is the first time doing regression in R, have a look at the [Univariate](https://epirhandbook.com/new_pages/regression.html#univariate) regression chapter of the EpiRhandbook.
 
 
 <details>
@@ -864,335 +869,10 @@ Now, check visually whether the association between age and hospd differs by sex
 
 </br>
 
-You may choose to create separate graphs adding a `facet_grid()` to your `ggplot()` (try looking up the syntax yourself). You may also decide to use colour coding to differentiate between factor levels of sex. For the latter, where do you think you should specify the colour, inside or outside the `aes()`? Read this [section](https://epirhandbook.com/new_pages/ggplot_basics.html#ggplotgroups) of the EpiRhandbook if you have doubts.
+You could use the lm() function from {base} to analyze the linear association between age and length of hospitalisation. The syntax is: lm(outcome/dependent variable ~ exposure/independent variable, data = dataframe) You can print the model output in a subsequent command using the summary() function. However, the tidy() function from {broom} provides an overview which can be more easily compiled and used in down-stream analyses if needed.
 
-</br>
 
-</details>
-
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-# As separate graphs
-tbe %>%    
-  
-  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
-                       y = hospd)) +    
-  
-  geom_point() +                       # this geometry will create a scatterplot
-  
-  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
-  
-  facet_grid(~sex)  +                   # adding this function will generate a separate graph for each category of sex
-
-  
-  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
-  
-  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
-  
-  labs(
-    x = "Age",
-    y = "Length of hospitalisation in days"
-  ) + 
-  
-  
-  theme_bw()                            # Add a pre-defined theme for formatting
-
-
-# Same graphs with different colours
-tbe %>%    
-  
-  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
-                       y = hospd,
-                       colour = sex )) + #we add the colour in the aes so that it varies according to the categories of sex   
-  
-  geom_point() +                       # this geometry will create a scatterplot
-  
-  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
-  
-  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
-  
-  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
-  
-  labs(
-    x = "Age",
-    y = "Length of hospitalisation in days"
-  ) + 
-  
-  
-  theme_bw()                            # Add a pre-defined theme for formatting
-```
-
-
-</br>
-
-</details>
-
--   **What do you observe?**
-The lines for female and male patients have different slopes, indicating that the association between age and hospitalisation days is modified by sex.
-
--   **Why does this matter?**
-Since there are different effects of age on the length of the hospitalisation by sex, you may want to control for this.
-
-
-### **Step 4: Check if there is a difference in length of hospitalisation by hypertension status**
-Let's now focus on our exposure of interest (hypertension). We can check whether TBE cases with high blood pressure have a significant longer stay in hospital compared with those without high blood pressure either by carrying out a simple statistical test or through univariate regression. We will do both.
-
-#### Step 4.1: Simple statistical test
-One way would be to carry out a **simple statistical test** which enables us to ascertain if there is a significant difference between groups. As you know, the choice of statistical test will be determined by the number of groups that we have and the nature of the variables. If you don't remember well how to choose the appropriate statistical test have a look at this [BMJ article](https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/13-study-design-and-choosing-statisti)
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  "Chi-square or Fisher's exact test",
-  "ANOVA or Kruskal Wallis",
-  answer = "Student t test or Mann Whitney/Wilcoxon rank-sum test",
-  "McNemar's test or Spears Rank"
-)
-
-cat("QUESTION: What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
-
-```
-:::
-
-
-In this case we have independent data, two groups (hypertension yes/no) and a quantitative dependent outcome (length of hospitalisation), so we will choose either a **t-test** or **Wilcoxon rank-sum test** (also known as Mann-Whitney). We'd do a t-test if length of hospitalisation is normally distributed and Wilcoxon if it isn't. We already checked in **Step 2.3** that the distribution of *hospd* looked normal from the histogram, let's now have a look if the distribution looks normal for both categories of hypertension: hypertension-yes and hypertension-no.
-
-**Task** Check visually whether length of hospitalisation is normally distributed for both categories of hypertension. 
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-A simple way to check this is by generating a histogram for *hospd* using ggplot(). Stratification by *hyper* is easily done by adding a `facet_grid()` to your ggplot, as we have already seen with the scatterplot. Looking at the frecuency distribution of "hospd" by "hypertension" can already give us an idea of whether the data is normally distributed or not.However, if we want to to add a normal curve, we'd need to plot the density and not the frequency, as you may rembember from the histogram we built above in **Sep 2.3**. 
-</br>
-
-</details>
-
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-# Plot the frecuency distribution by hypertension status
-tbe %>%
-  
-  ggplot(mapping = aes(x = hospd)) +
-  
-    geom_histogram() + 
-    
-    facet_grid(~hyper) # add facet_grid() to get a graph for each hyper status
-
-
-# Plot the density and add a  normal curve
-tbe %>%                                  
-  
-  ggplot(mapping = aes(x = hospd, fill = hyper)) +  #remember that for bars, fill is is the interior colour     
-  
-    geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
-  
-    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
-
-    #the function below will add the normal curve. 
-    stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
-                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
-                            sd   = sd(tbe$hospd, na.rm = T)),  
-                
-                col = "darkblue", lwd = 1) + # Identify the colour and line width of the normal curve
-    labs(
-      x = "Length of hospitalisation in days",
-      y = "Density"
-      )
-
-```
-
-
-</br>
-
-</details>
-
-
-From the graphs looks like the data is normally distributed, but there is a test we can do to determine this: **Shapiro-Wilk test**. 
-
-**Task**: Use the Shapiro test to determine whether length of hospitalisation comes from a normally-distributed population.
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-You can choose {base} functions to carry out the Shapiro test (and any other statistical test) or functions from the {rstatix} package. Here we will use the latter, because {rstatix} has a syntax that is compatible with {dplyr}, which can be an advantage. In any case the name of the functions are very similar. For example, using {base} the Shapiro test function is `shapiro.test()`; and with {rstatix} the same function is written as: `shapiro_test()`. If you want to know more about how to carry out simple statistical tests in R, read the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html)
-
-</br>
-
-</details>
-
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-tbe %>%
-  
-  group_by(hyper) %>% #we first group by out independent or exposure variable
-  
-  
-  shapiro_test(hospd)  # this function performs the Shapiro-Wilk test for all groups separately
-```
-
-
-</br>
-
-</details>
-
-
-The null hypothesis of Shapiro'test is that data is normally distributed. As our results were non-significant (p>0.05) we cannot reject such null hypothesis. In other words, we can conclude that data is normally distributed.
-
-*Note*: A statistician, or an epidemiologist pretending to be a statistician, would feel very uncomfortable by the conclusion written above. When we are unable to reject a null hypothesis we cannot conclude that this hypothesis (in this case that data is normally distributed) is true, but we should simply state that we were unable to reject it. However, in practical terms, by carrying out a Shapiro test we are assuming that the data is normally distributed....so word it as you like, but the consequences are the same.
-
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  answer = "Student t-test",
-  "Wilcoxon rank-sum test"
-  
-)
-
-cat("QUESTION: Now that we know that the data is normally distributed, what test should we carry out?", longmcq(opts))
-
-```
-:::
-
-**Task** Carry out the statistical test to ascertain if there are significant differences in length of hospitalisation according to hypertension status
-
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-tbe %>%
-  
-  t_test(hospd ~ hyper)  # we write first our dependent variable and then the exposure one
-```
-
-
-</br>
-
-</details>
-
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  answer = "Yes",
-  "No"
-  
-)
-
-cat("QUESTION: Is there a significant difference in the length of hospitalisation among patients with and without hypertension?", longmcq(opts))
-
-```
-:::
-
-
-*Note*: In large datasets (as this one) the Shapiro-Wilk test may reject the normality hypothesis even though the deviation from the normal distribution is rather small. In this case you may still choose to calculate the t-test despite the violation of the normality assumption. This is acceptable because for large samples, the error imposed by t-test approximation is negligible.
-
-
-#### Step 4.2: Univariate linear regression between hospd and hyper
-The other way was through univariate regression. Carry out a univariate linear regression with length of hospitalisation (hospd) as the dependent variable and hypertension as the independent variable. Assign this model to an object named: *hyper_hospd_lm*. If this is the first time doing regression in R, have a look at the [Univariate](https://epirhandbook.com/new_pages/regression.html#univariate) regression chapter of the EpiRhandbook.
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-As we are doing linear regression, we could use the `lm()` function from {base} to analyse the association between hypertension and length of hospitalisation. The syntax is: lm(outcome/dependent variable ~ exposure/independent variable, data = dataframe) You can print the model output in a subsequent command using the `summary()` function. However, the `tidy()` function from {broom} provides an overview which can be more easily compiled and used in down-stream analyses if needed.
-
-The approach described above is the {base} R approach. You can also perform univariate regression analysis using the function `tbl_uvregression()` from the {gtsummary} package. If you want to explore this alternative approach further read the dedicated EpiRhandbook [chapter](https://epirhandbook.com/new_pages/regression.html#reg_gt_uni)
-</br>
-
-</details>
-
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
-
-```{r , echo=TRUE}
-#First we write the formula (lm stands for linear model) and assign the model to an object
-hyper_hospd_lm <- lm(hospd ~ hyper, data= tbe)
-
-# Prin the detailed output of the model
-summary(hyper_hospd_lm)
-
-# Print the main model parameters
-results_hyper_hospd_lm <- tidy(hyper_hospd_lm) 
-results_hyper_hospd_lm
-```
-
-
+The approach described above is the {base} R approach. You can also perform univariate regression analysis using the function tbl_uvregression() from the {gtsummary} package. If you want to explore this alternative approach further read the dedicated EpiRhandbook [chapter](https://epirhandbook.com/new_pages/regression.html#reg_gt_uni)
 </br>
 
 </details>
@@ -1208,102 +888,7 @@ opts <- c(
   "No"
 )
 
-cat("QUESTION: Based on the results of this model, is there a significant association between hypertension and hospd?", longmcq(opts))
-
-```
-:::
-
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  answer = "3.9",
-  "41.3",
-  "1.46",
-  "1.2"
-)
-
-cat("QUESTION: How much does having hypertension increase length of hospitalisation (in days)?", longmcq(opts))
-
-```
-:::
-
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  "2.7%",
-  "41%",
-  answer = "1.3%",
-  "3%"
-  
-)
-
-cat("QUESTION: What % of the variability in length of hospitalisation can be explained by hypertension?", longmcq(opts))
-
-```
-:::
-
-
-In this case the regression equation is: $hopsd(predicted)=41.3+3.9⋅hyper$.
-
-Now let's go through the outputs of the model. 
-We will first review the outputs of the `tidy()` function. As explained before, the advantage of using `tidy()` is that we can save the output as an object for further manipulation. Also, `tidy()` keeps what we would normally need in epidemiology for the interpretation of the model:
-
-We have four columns and two rows. The rows refer to the **intercept** (baseline value for hospd when there is NO hypertension: 41.3) and our only exposure/predictor (hypertension). 
-In most cases, you will be interested in the row for **hypertension** (your predictor) and in the columns **estimate** and **p.value**. The **estimate** of hypertension tells us the estimated change in hospd when you go from NO hypertension to YES hypertension (that's why it is written as *hyperyes*). In this case, it’s approximately 3.94, meaning that having hypertension is associated with an increase in 3.94 days of hospitalisation. The column **p.value** tells us whether this estimate is statistically significant.
-
-**This is most of what you need to know to be a functional epidemiologist**. But if you want to know more, we will explain the rest of the elements of the output of both functions:  
-
-The column **std.error** provides an estimate of the variability or uncertainty associated with the estimate. In this case it means that the estimated effect of hypertension on hospitalisation duration (hospd) is expected to vary by about 1.46 days (on average) due to sampling variability. Finally, the **statistic** column gives us a value of the statistical test (t-test in this case) used to ascertain if the estimate is significantly different from 0 (normally you can ignore this column). 
-
-
-You may have noticed that the `summary()` output has more information than the `tidy()` output. Here we leave a brief explanation on what each part of the `summary()` output means:
-
-
-**Call:** This line shows the formula used for the regression model. 
-
-**Residuals:** These are the differences between the actual hospd values and the predicted values from the regression model. The summary provides statistics like minimum, median, and maximum residuals.
-
-**Coefficients:** This is the bit that interests us the most: 
-
--   **Intercept**: The estimated intercept (baseline value) for hospd when age is zero. In this case, it’s approximately 41.3.
--   **hyperyes:** The estimated change in hospd when you go from NO hypertension to YES hypertension. Here, it’s approximately 3.9. The t-value and **p-value** indicate whether this coefficient is statistically significant.
-
-**Significance Codes:** Indicate whether the p-value is highly significant (*** p < 0.001) or only marginally significant (* p<0.05)
-
-**Residual Standard Error:** This measures the average deviation of the observed hospd values from the regression line. In this case, it’s approximately 13.5.
-
-**Multiple and Adjusted R-squared:** These values (0.01487 and 0.01282) represent the proportion of variance in hospd explained by the linear relationship with hypertension. Higher values indicate better fit. The adjusted one is adjusted for the number of predictors. In this case we could say that around 1.3% of the variability in hospd is explained by hypertension.
-
-**F-statistic and p-value:** The F-statistic tests whether the overall model (including all predictors) is significant. A low p-value (like this one, < 0.007243) indicates that the model is significant.
-
-
-### **Step 5: Check if there is a linear association between length of hospitalisation and the rest of variables**
-
-We also need to know if there is a univariate association between our outcome (length of hospitalisation) and the confounders we may want to introduce in our model. We will do this in two steps, first with the continous variable and then with the factor variables. 
-
-#### Step 5.1: Univariate linear regression between length of hospitalisation and age
-
-Try running a linear regression model with length of hospitalisation (hospd) as the dependent variable and age as the independent variable. 
-
-::: {.webex-check}
-
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  answer = "Yes",
-  "No"
-)
-
-cat("QUESTION: Based on the results of the model, is there a significant association between age and hospd?", longmcq(opts))
+cat("QUESTION: Based on the results of this model, is there a significant association between age and hospd?", longmcq(opts))
 
 ```
 :::
@@ -1357,14 +942,18 @@ cat("QUESTION: What % of the variability in length of hospitalisation can be exp
 </br>
 
 ```{r , echo=TRUE}
+# Univariate regression analysis between hospd and age ------------------------------------------
+
 # Run the linear regression and assign the output to age_hospd_lm
 age_hospd_lm <- lm(hospd ~ age, data = tbe)
 
 # Print the results using the summary() function
 summary(age_hospd_lm)
 
-# Print the results of the regression analysis with the tidy() function
-tidy(age_hospd_lm)
+# Get the results of the regression analysis with the tidy() function as a data.frame
+results_age_hospd_lm <- tidy(age_hospd_lm)
+
+results_age_hospd_lm
 ```
 
 
@@ -1372,8 +961,394 @@ tidy(age_hospd_lm)
 
 </details>
 
-#### Step 5.2: Univariate linear regression between length of hospitalisation and factor variables
-Now carry out a similar univariate model for each of the factor variables that we have not explored to ascertain which ones are significantly associated with length of hospitalisation.
+Now let's go through the outputs of the model. 
+We will first review the outputs of the tidy() function. As explained before, the advantage of using tidy() is that we can save the output as an object for further manipulation. Also, tidy() keeps what we would normally need in epidemiology for the interpretation of the model:
+
+We have four columns and two rows. The rows refer to the **intercept** (baseline value for hospd when age is zero: 24.5) and our only exposure/predictor (age). 
+In most cases, you will be mostly interested in the row for **age** (your predictor) and in the columns **estimate** and **p.value**. The **estimate** of age tells us the estimated change in hospd for a one-unit increase in age. Here, it’s approximately 0.37. The column **p.value** tells us whether this estimate is statistically significant.
+
+If you want to know what the other columns are, keep reading. 
+
+The column **std.error** provides an estimate of the variability or uncertainty associated with the estimate. In this case it means that the estimated effect of age on hospitalisation duration (hospd) is expected to vary by about 0.0278 days (on average) due to sampling variability. Finally, the **statistic** column gives us a value of the statistical test (t-test in this case) used to ascertain if the estimate is significantly different from 0 (normally you can ignore this column). 
+
+
+You may have noticed that the summary() output has more information than the tidy() output. Here we leave a brief explanation on what each part of the output means:
+
+
+**Call:** This line shows the formula used for the regression model. 
+
+**Residuals:** These are the differences between the actual hospd values and the predicted values from the regression model. The summary provides statistics like minimum, median, and maximum residuals.
+
+**Coefficients:** This is the bit that interests us the most: 
+
+-   **Intercept**: The estimated intercept (baseline value) for hospd when age is zero. In this case, it’s approximately 24.53.
+-   **Age:** The estimated change in hospd for a one-unit increase in age. Here, it’s approximately 0.37. The t-value and **p-value** indicate whether this coefficient is statistically significant.
+
+**Significance Codes:** Indicate whether the p-value is highly significant (*** p < 0.001) or only marginally significant (* p<0.05)
+
+**Residual Standard Error:** This measures the average deviation of the observed hospd values from the regression line. In this case, it’s approximately 11.61.
+
+**Multiple and Adjusted R-squared:** These values (0.2711 and 0.269) represent the proportion of variance in hospd explained by the linear relationship with age. Higher values indicate better fit. The adjusted one is adjusted for the number of predictors.
+
+**F-statistic and p-value:** The F-statistic tests whether the overall model (including all predictors) is significant. A low p-value (like yours, < 2.2e-16) indicates that the model is significant.
+
+
+#### Step 3.3: Check if the association between age and length of hospitalisation varies by sex
+
+Check visually whether the association between age and hospd differs by sex
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may choose to create separate graphs adding a facet_grid() to your ggplot() (try looking up the syntax yourself). You may also decide to use colour coding to differentiate between factor levels of sex. For the latter, where do you think you should specify the colour, inside or outside the aes()? Read this [section](https://epirhandbook.com/new_pages/ggplot_basics.html#ggplotgroups) of the EpiRhandbook if you have doubts.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# As separate graphs ------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  facet_grid(~sex)  +                   # adding this function will generate a separate graph for each category of sex
+
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+
+
+# Same graphs with different colours ------------------------------------------
+
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd,
+                       colour = sex )) + #we add the colour in the aes so that it varies according to the categories of sex   
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+
+
+</br>
+
+</details>
+
+
+
+
+-   **What do you observe?**
+The lines for female and male patients have different slopes, indicating that the association between age and hospitalisation days is modified by sex.
+
+-   **Why does this matter?**
+Since there are different effects of age on the length of the hospitalisation by sex, you may want to control for this.
+
+
+### **Step 4: Check if there is a difference in length of hospitalisation by hypertension status**
+
+We can check whether TBE cases with high blood pressure have a significant longer stay in hospital compared with those without high blood pressure either by carrying out a simple statistical test or through univariate regression. We will do both
+
+#### Step 4.1: Simple statistical test
+
+
+One way would be to carry out a **simple statistical test** which enables us to ascertain if there is a significant difference between groups. As you know, the choice of statistical test will be determined by the number of groups that we have and the nature of the variables. If you don't remember well how to choose the appropriate statistical test have a look at this [BMJ article](https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/13-study-design-and-choosing-statisti)
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Chi-square or Fisher's exact test",
+  "ANOVA or Kruskal Wallis",
+  answer = "Student t test or Mann Whitney/Wilcoxon rank-sum test",
+  "McNemar's test or Spears Rank"
+)
+
+cat("QUESTION: What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
+
+```
+:::
+
+
+In this case we have independent data, two groups (hypertension yes/no) and a quantitative dependent (outcome) variable (length of hospitalisation), so we will choose either a **t-test** or **Wilcoxon rank-sum test** (also known as Mann-Whitney). We'd do a t-test if length of hospitalisation is normally distributed and Wilcoxon if it isn't.
+
+**Task** Check visually whether length of hospitalisation is normally distributed. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+A simple way to check this is by generating a histogram for “hospd” using ggplot(). Stratification by “hyper” is easily done by adding a facet_grid() to your ggplot, as we have already seen with scatterplot. Looking at the frecuency distribution of "hospd" by "hypertension" can already give us an idea of whether the data is normally distributed or not.
+
+However, if we want to to add a normal curve, we'd need to plot the density and not the frequency, as you may rembember from the histogram we built above in Step 2.3. 
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Plot the frecuency distribution by hypertension status
+tbe %>%
+  
+  ggplot(mapping = aes(x = hospd)) +
+  
+    geom_histogram() + 
+    
+    facet_grid(~hyper) # add facet_grid() to get a graph for each hyper status
+
+
+# Plot the density and add a  normal curve
+
+tbe %>%                                  
+  
+  ggplot(mapping = aes(x = hospd, fill = hyper)) +  #remember that for bars, fill is is the interior colour     
+  
+    geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
+  
+    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
+
+    #the function below will add the normal curve. 
+    stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(tbe$hospd, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) + # Identify the colour and line width of the normal curve
+    labs(
+      x = "Length of hospitalisation in days",
+      y = "Density"
+      )
+
+```
+
+
+</br>
+
+</details>
+
+
+From the graphs looks like the data is normally distributed, but there is a test we can do to determine this: **Shapiro-Wilk test**. 
+
+**Task**: Use the Shapiro test to determine whether length of hospitalisation comes from a normally-distributed population.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can choose {base} functions to carry out the Shapiro test (and any other statistical test) or functions from the {rstatix} package. Here we will use the latter, because {rstatix} has a syntax that is compatible with {dplyr}, which can be an advantage. In any case the name of the functions are very similar. For example, using {base} the Shapiro test function is shapiro.test(); and with {rstatix} the same function is written as: shapiro_test(). If you want to know more about how to carry out simple statistical tests in R, read the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html)
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Apply the Shapiro test
+tbe %>%
+  
+  group_by(hyper) %>% #we first group by out independent or exposure variable
+  
+  
+  shapiro_test(hospd)  # this function performs the Shapiro-Wilk test for all groups separately
+```
+
+
+</br>
+
+</details>
+
+
+The null hypothesis of Shapiro'test is that data is normally distributed, as our results were non-significant (p>0.05) we cannot reject such null hypothesis. In other words, we can conclude that data is normally distributed.
+
+*Note*: A statistician or an epidemiologist pretending to be a statistician would feel very uncomfortable by the conclusion written above. When we are unable to reject a null hypothesis we cannot conclude that this hypothesis (in this case that data is normally distributed) is true, but we should simply state that we were unable to reject it. However, in practical terms, by carrying out a Shapiro test we are assuming that the data is normally distributed....so word it as you like, but the consequences are the same.
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Student t-test",
+  "Wilcoxon rank-sum test"
+  
+)
+
+cat("QUESTION: Now that we know that the data is normally distributed, what test should we carry out?", longmcq(opts))
+
+```
+:::
+
+**Task** Carry out the statistical test to ascertain if there are significant differences in length of hospitalisation according to hypertension status
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Apply the Student t-test
+tbe %>%
+  
+  t_test(hospd ~ hyper)  # we write first our dependent variable and then the exposure one
+```
+
+
+</br>
+
+</details>
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+  
+)
+
+cat("QUESTION: Is there a significant difference in the length of hospitalisation among patients with and without hypertension?", longmcq(opts))
+
+```
+:::
+
+
+*Note*: In large datasets (as this one) the Shapiro-Wilk test may reject the normality hypothesis even though the deviation from the normal distribution is rather small. In this case you may still choose to calculate the t-test despite the violation of the normality assumption. This is acceptable because for large samples, the error imposed by t-test approximation is negligible.
+
+
+#### Step 4.2: Univariate linear regression
+
+
+Carry out a univariate linear regression to check whether hypertension is associated with length of hospitalisation.
+By now you should be able to do this on your own, but if you have any doubts look at Step 3.2 or to the [Regression Chapter](https://epirhandbook.com/new_pages/regression.html) of the EpiRhandbook.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#First we write the formula (lm stands for linear model) and assign the model to an object
+hyper_hospd_lm <- lm(hospd ~ hyper, data= tbe)
+
+# Generate the model parameters
+tidy(hyper_hospd_lm)                        #remember that we can also get them with the function summary()
+```
+
+
+</br>
+
+</details>
+
+-   **What do you find?**
+
+In this case the regression equation is: $hopsd(predicted)=41.3+3.9⋅hyper$
+
+The intercept (41.3) is the predicted mean of the hospitalisation days when “hyper” is zero. In this example this refers to the mean hospitalisation days for those without hypertension. 
+
+The coefficient for “hyper” indicates the average amount of change in hospitalisation days that would be predicted by a one unit increase in “hyper”. Here it means that those with hypertension have 3.9 hospitalisation days more than those without hypertension. This effect is statistically significant (see the p value).
+
+
+### **Step 5: Check if there is a linear association between length of hospitalisation and the rest of variables**
+
+Carry out a linear model for each variable that we have not explored yet to see if there is a linear association between length of hospitalisation and them.
+
 
 ::: {.webex-check}
 
@@ -1407,7 +1382,7 @@ cat("QUESTION: What of the following variables have a significant linear associa
 
 </br>
 
-We have seen already how to write a linear formula with `lm()`. You can then use either `summary()` from {base} or `tidy()` from {broom} to look at the coefficient and significance value. You could write these functions for each variable, but you could also try to use map() from {purrr} to do them all at once, as we did in the **Step 2.2**. Have a look at the Chapter on  [Purrr](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) in the EpiRhandbook if you have any doubts.
+We have seen already how to write a linear formula with lm(). You can then use either summary() from {base} or tidy() from {broom} to look at the coefficient and significance value. You could write these functions for each variable, but you could also try to use map() from {purrr} to do them all at once, as we did in the Step 2.4. Have a look at the Chapter on  [Purrr](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) in the EpiRhandbook if you have any doubts.
 
 </br>
 
@@ -1449,6 +1424,7 @@ tidy(tick_hospd_lm)
 
 
 ## Here we do it with {purrr} all in one command
+
 tbe %>% 
   select(-hyper, -age, -hospd) %>% # we first remove the columns we have explored before + the outcome column
   map(.f = ~lm(hospd ~ .x, data = tbe)) %>%   # here we carry out the model for each column. ".x" represents all the column
@@ -1464,11 +1440,12 @@ tbe %>%
 Statistically significant ($p<0.05$) univariable effects were observed for sex, other comorbidities, vaccination and monophasic disease course but not for large tick at removal. Women had on average 12.4 days shorter hospitalisation stay than men, other comorbidities increase the hospitalisation by 4.1 days, vaccination reduced it by 8.4 days, and monophasic disease course increased it by 3.4 days.
 
 
-### **Step 6: Multivariable analysis**
+### **Step 6: Adjusted analysis**
 
-To control for possible confounding, we will adjust for the minimum adjustment set that we have identified through the DAG analysis (**Goal 1**), adding each variable in different steps.
+To control for possible confounding, we will adjust for the minimum adjustment set that we have identified through the DAG analysis (Goal 1), adding each variable in different steps.
 
 #### Step 6.1: Add age as a covariate to the model
+
 
 As a first step, add age to the model of the main effect. 
 
@@ -1502,7 +1479,7 @@ We have already calculated and saved the model of our main effect (*hyper_hospd_
 # Creating a new model and adding age 
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age, data = tbe)
 
-tidy(hyper_hospd_adj_lm)                                   
+tidy(hyper_hospd_adj_lm)                                   # finally we do tidy on each model
 ```
 
 
@@ -1515,7 +1492,7 @@ Adjusting for age, we find that hypertension is associated with a 3.8 increase i
 
 #### Step 6.2: Compare the performance of both models
 
-We have the univariate model (*hyper_hospd_lm*), and now we have one adjusted by age (*hyper_hospd_adj_lm*). Compare both models calculating model performance metrics such as AIC and logLik. 
+We have the univariate model (*hyper_hospd_lm*), and now we have one adjusted by age (*hyper_hospd_adj_lm*). Compare both models, calculating model performance metrics such as AIC and logLik. 
 
 
 <details>
@@ -1545,6 +1522,8 @@ One easy function to calculate performance metrics is `glance()` from the {broom
 </br>
 
 ```{r , echo=TRUE}
+# Performance metrics -----------------------------------------------------
+
 glance(hyper_hospd_lm)   # performance metrics of the univariate model
 
 glance(hyper_hospd_adj_lm) # performance metrics of the adjusted model
@@ -1555,7 +1534,9 @@ glance(hyper_hospd_adj_lm) # performance metrics of the adjusted model
 
 </details>
 
-The output of `glance()` gives us several performance metrics. If you want to focus on the important bits, you can look at the **logLik** and the **AIC**. A larger logLik means a better model; and a lower AIC means also a better model. So, if your logLik goes up and your AIC goes down, you are going in the right direction. The advantage of the logLik is that there is a formal test (Likelihood Ratio Test) to test if two logLiks are significantly different. However, AIC takes more things into consideration than the logLik, such as the complexity of the model (favours simpler models), so it is very useful to compare models with different numbers of parameters (like this case).
+
+
+The output of `glance()` gives us many performance metrics. If you want to focus on the important bits, you can look at the **logLik** and the **AIC**. A larger logLik means a better model; and a lower AIC means also a better model. So, if your logLik goes up and your AIC goes down, you are going in the right direction. The advantage of the logLik is that there is a formal test (Likelihood Ratio Test) to test if two logLiks are significantly different. However, AIC takes more things into consideration than the logLik, such as the complexity of the model (favours simpler models), so it is very useful to compare models with different numbers of parameters (like this case).
 
 
 If you want to know more, let's review each element of the output given by `glance()`:
@@ -1582,10 +1563,14 @@ If you want to know more, let's review each element of the output given by `glan
 
 -   **df.residual**: The residual degrees of freedom, which is the number of observations minus the number of parameters estimated.
 
--   **nobs**: The number of observations used in the model, which is 484 in our case
+-   **nobs**: The number of observations used in the model, which is 484 in your case
 
 #### (Optional) Step 6.3: Plotting effects of age by hypertension
-If you remember, in **Step 3.2** we checked visually for the association between age and length of hospitalisation by sex. Now, we will do something similar by plotting the estimated effect of age on length of hospitalisation **by hypertension status**. The final output that we want is a scatterplot displaying the raw data (length of hospitalisation by age), and then the fitted regression line by hypertension status. 
+
+
+If you remember, in Step 3.3 we checked visually for the association between age and length of hospitalisation by sex. Now, we will do something similar by plotting the estimated effect of age on length of hospitalisation **by hypertension status**. The final output that we want is a scatterplot displaying the raw data (length of hospitalisation by age), and then the fitted regression line by hypertension status. 
+
+
 
 <details>
 
@@ -1617,6 +1602,8 @@ Note: Previously, we used `geom_smooth()` to add trend lines to the scatterplot.
 </br>
 
 ```{r , echo=TRUE}
+# Plotting the fitted lines
+
 # First add a variable with the fitted values to the dataframe
 data_fitted <- tbe %>%
   
@@ -1655,6 +1642,7 @@ plot_fitted
 
 </details>
 
+
 We did not allow the association between age and hospitalisation to vary by levels of hypertension. So we force them to be parallel by the way we specify the model. If we want the slopes to differ, we would need to allow for an interaction term. We’ll get to that later.
 
 #### Step 6.4: Continue building the adjusted model and check quality of the model
@@ -1674,32 +1662,47 @@ Continue adding the rest of variables that we have to adjust for according to th
 
 ```{r , echo=TRUE}
 ### We first add sex to the previous model
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex, data = tbe) # formula
+
 tidy(hyper_hospd_adj_lm)                                # estimates
+
 glance(hyper_hospd_adj_lm)                              # performance metrics
 
 
 ### TBE vaccination
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac, data = tbe) # formula
+
 tidy(hyper_hospd_adj_lm)                                # estimates
+
 glance(hyper_hospd_adj_lm)                              # performance metrics
 
 
 ### Monophasic disease course
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono, data = tbe) # formula
+
 tidy(hyper_hospd_adj_lm)                                # estimates
+
 glance(hyper_hospd_adj_lm)                              # performance metrics
 
 
 ### Large tick at removal
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick, data = tbe) # formula
+
 tidy(hyper_hospd_adj_lm)                                # estimates
+
 glance(hyper_hospd_adj_lm)                              # performance metrics
 
 
 ### Other comorbidities
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick + other, data = tbe) # formula
+
 tidy(hyper_hospd_adj_lm)                                # estimates
+
 glance(hyper_hospd_adj_lm)                              # performance metrics
 ```
 
@@ -1713,7 +1716,9 @@ As you can see, adding the rest of variables identified through the DAG improved
 
 #### Step 6.5: Adding an interaction term
 
-We saw in **Step 3.2** that the effect of age on length of hospitalisation is modified by sex. We knew this because the slopes were different for males and females. Given this information add now to the model an interaction term between sex and age.
+We saw in Step 3.3 that the effect of age on length of hospitalisation is modified by sex. We knew this because the slopes were different for males and females. Given this information add now to the model an interaction term between sex and age.
+
+
 
 <details>
 
@@ -1745,6 +1750,8 @@ An interaction can be written as a multiplication of two variables in your regre
 </br>
 
 ```{r, echo=TRUE}
+# Interaction term --------------------------------------------------------
+
 hyper_hospd_adj_lm <- lm(hospd ~ hyper + vac + mono + tick + other + age*sex, data = tbe) # formula
 
 tidy(hyper_hospd_adj_lm)                                # estimates
@@ -1890,7 +1897,7 @@ cat("QUESTION: Are residuals normally distributed, based on these plots?", longm
 
 </br>
 
-To do an **histogram of the residuals** you can follow a similar approach than the one we used in the **step 6.3**. That is, first adding to the *tbe* dataframe the residuals as a column (you can use the function `resid()`) and then using `ggplot()` to plot this column in the x-axis of a `geom_histogram()`
+To do an **histogram of the residuals** you can follow a similar approach than the one we used in the step 6.3. That is, first adding to the *tbe* dataframe the residuals as a column (you can use the function `resid()`) and then using `ggplot()` to plot this column in the x-axis of a `geom_histogram()`
 
 </br>
 
@@ -1973,7 +1980,7 @@ cat("QUESTION: Does the histogram suggest a normal distribution of residuals?", 
 
 </br>
 
-Review Step 4.1 and/or have a look at the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html) if you still have doubts.
+Review Step 4.1 and have a look at the EpiRhandbook Chapter on [Simple statistical tests](https://epirhandbook.com/new_pages/stat_tests.html) if you still have doubts.
 
 
 </br>

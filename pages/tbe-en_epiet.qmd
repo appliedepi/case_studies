@@ -13,6 +13,9 @@ format:
 editor: 
   markdown: 
     wrap: 72
+title: |
+  ![](../images/ecdc/logo_epiet_rki.png){width=12in}
+  
 ---
 
 ```{=html}
@@ -26,21 +29,9 @@ editor:
 ```
 <!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
-# TBE - Linear regression (ENG) {.unnumbered}
+# **MVA - Multivariable analysis**
 
-## Overview {.unnumbered}
-
-| **Case study characteristics** |                           |
-|--------------------------------|:--------------------------|
-| Name:                          | TBE - linear regression   |
-| Language:                      | English                   |
-| Tool:                          | R; DAGitty                         |
-| Location:                      | Germany                   |
-| Scale:                         | National                  |
-| Diseases:                      | TBE                       |
-| Keywords:                      | TBE; Linear Regression; R |
-| Technical complexity:          | Intermediate              |
-| Methodological complexity:     | Intermediate              |
+# Case study: Tick Borne Encephalitis, Germany {.unnumbered}
 
 ***Authorship***\
 Original authors: Teresa Nygren (RKI), Alicia Barrasa Blanco (UK FETP),
@@ -189,9 +180,8 @@ This licence is based on
 ### Feedback & suggestions
 
 -   You can write feedback and suggestions on this case study at the
-    [GitHub issues page](https://github.com/appliedepi/case_studies)
--   Alternatively email us at:
-    [contact\@appliedepi.org](mailto:contact@appliedepi.org)
+    ECDC GITHUB
+-   Alternatively email us at: [ECDC CONTACT MAIL]
 
 \pagebreak
 
@@ -225,24 +215,19 @@ Participants are expected to be familiar with directed acyclic graphs (DAGs) and
 
 ### Preparation for the case study
 
-Include the steps needed to start replicating the analysis of the case
-study
+1.  Download folder named tbe_mva and extract contents in the local laptop
 
-For example:
+2. Create an Rstudio project in the folder tbe_mva. If you are unsure on how to do that, read the EpiRhandbook Chapter on [R projects](https://epirhandbook.com/en/new_pages/r_projects.html)
 
-1.  Download folder named tbe_en and extract contents in the local laptop
-
-2. Create an Rstudio project in the folder tbe_en. If you are unsure on how to do that, read the EpiRhandbook Chapter on [R projects](https://epirhandbook.com/en/new_pages/r_projects.html)
-
-3. Inside the folder "tbe_en": Subfolder "data" contains a raw data file named *tbe.RDS*. This is the only data file you will use in this case study. 
+3. Inside the folder "tbe_mva": Subfolder "data" contains a raw data file named *tbe.RDS*. This is the only data file you will use in this case study. 
 
 4.  Subfolder scripts should be used to save any scripts related to the
-    analysis. Inside "backup" you will find a solution script with the code of the case study named *tbe_lr_backup.R*. You will also find an image which corresponds to the proposed DAG solution.
+    analysis. Inside "backup" you will find a solution script with the code of the case study named *tbe_mva_backup.R*. You will also find an image which corresponds to the proposed DAG solution.
     
 5.  Subfolder "outputs" could be used to store all outputs (tables, graphs,
     documents) that are the result of the analysis
 
-6.  You will also find inside "tbe_en" a word document called *starter_guide_DAGitty.docx* in case you need help using this website
+6.  You will also find inside "tbe_mva" a word document called *starter_guide_DAGitty.docx* in case you need help using this website
 
 # Introduction to the case study
 Tick-borne encephalitis (TBE) is a vaccine-preventable, tick-borne viral infection. The typical disease course is biphasic, consisting of a first phase with general symptoms such as headache and fever, a symptom-free interval, and a second phase with neurological manifestations. Severity ranges from mild symptoms over meningitis to severe meningoencephalitis or -myelitis. Overall, 70–95% of infections remain sub-clinical and <1% die.
@@ -262,7 +247,7 @@ Since you are interested in a causal question, please draw a DAG. If you want to
 
 -   Which variables would you need to adjust for?
 
-If you are new to DAGitty you can find a few helpful information in the document called *starter_guide_DAGitty.docx* present in the "tbe_en" folder you have downloaded in your laptop (See **Preparation for the case study**).
+If you are new to DAGitty you can find a few helpful information in the document called *starter_guide_DAGitty.docx* present in the "tbe_mva" folder you have downloaded in your laptop (See **Preparation for the case study**).
 
 Once you have drawn your DAG, click on the solution below to see the DAG we propose.
 
@@ -337,7 +322,7 @@ The following variables are provided:
 
 #### Step 1.1: Create a new R script
 
-Once you have created an Rproject inside the "tbe_en" folder (as specified in the second point of the section **Preparation for the case study**). Create a new script with the name *tbe_lr* and save it in the subfolder "scripts".
+Once you have created an Rproject inside the "tbe_mva" folder (as specified in the second point of the section **Preparation for the case study**). Create a new script with the name *tbe_mva* and save it in the subfolder "scripts".
 If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script.
 
 #### Step 1.2: Define R language
@@ -427,7 +412,7 @@ pacman::p_load(
 
 ### **Step 2: Import and explore data**
 ```{r, include=FALSE}
-tbe <- import("../cs/ENG/tbe_en/data/tbe.RDS")
+tbe <- import("../cs/ENG/tbe_mva/data/tbe.RDS")
 ```
 #### Step 2.1: Import the data and brief exploration
 
