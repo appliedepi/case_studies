@@ -110,7 +110,7 @@ tbe %>%
   
   geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
   
-  facet_grid(~sex)  +                   # adding this function will generate a separate graph for each category of sex
+  facet_wrap(~sex)  +                   # adding this function will generate a separate graph for each category of sex
   
   
   scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
@@ -162,7 +162,7 @@ tbe %>%
   
     geom_histogram() + 
     
-    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
+    facet_wrap(~hyper) + # add facet_wrap() to get a graph for each hyper status
     
     labs(
       x = "Length of hospitalization in days",
@@ -177,7 +177,7 @@ tbe %>%
   
     geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
   
-    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
+    facet_wrap(~hyper) + # add facet_wrap() to get a graph for each hyper status
 
     #the function below will add the normal curve. 
     stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
