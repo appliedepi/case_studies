@@ -1,0 +1,1498 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+    df-print: kable
+editor: 
+  markdown: 
+    wrap: 72
+title: |
+  ![](../images/ecdc/logo_epiet_rki.png){width=12in}
+---
+
+# **MVA - Multivariable analysis**
+
+# Case study: An Outbreak of Gastroenteritis in Stegen, Germany {.unnumbered}
+
+***Authorship***\
+Original authors: This case study was first designed by Alain Moren and
+Gilles Desve for EPIET. It is based on an investigation conducted by
+Anja Hauri, RKI, Berlin, 1998.\
+Data source: Data is fictional and was inspired by [Nygren et al.
+Tick-borne encephalitis: acute clinical manifestations and severity in
+581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr
+1;86(4):369-75](https://linkinghub.elsevier.com/retrieve/pii/S0163-4453(23)00088-9)\
+Adapted and modified by: Alicia Barrasa (EPIET), Ioannis Karagiannis
+(Public Health England - PHE), Giri Shankar (Public Health Wales),
+Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian
+Agency for Health and Food Safety-AGES), Alexander Spina (AGES), Daniel
+Gardiner (PHE), Lukas Richter (AGES), Liese Van Gompel (MedEPIET),  Kostas Danis (MedEPIET) and Alberto Mateo Urdiales
+(Istituto Superiore di Sanità - ISS)\
+
+## Instructions
+
+### Getting Help
+
+There are several ways to get help:
+
+1)  Look for the "hints" and solutions (see below)
+2)  Post a question in [Applied Epi
+    Community](www.community.appliedepi.org) with reference to this case
+    study
+
+### Hints and Solutions
+
+Here is what the "helpers" look like:
+
+<!--Note that this is the way of including hints and explanations to the solutions -->
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Here you will see a helpful hint!
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+```{r eval = F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Here is more explanation about why the solution works.
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: End of solution
+-->
+```
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+
+#### Posting a question in the Community Forum
+
+... description here about posting in Community... TO BE COMPLETED BY
+APPLIED EPI
+
+#### Terms of Use
+
+**Disclaimer**: The information presented in this exercise and the
+associated data files have been deliberately changed so as to facilitate
+the acquisition of the learning objectives for fellows of EPIET, EUPHEM
+and EPIET-associated programmes. This case study was first introduced in
+2022 (see Copyright and Licence agreement for more information).
+
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>
+
+### Feedback & suggestions
+
+-   You can write feedback and suggestions on this case study at the
+    ECDC GITHUB
+-   Alternatively email us at: \[ECDC CONTACT MAIL\]
+
+\pagebreak
+
+### Version and revisions
+
+Write date of first version
+
+Write any revisions made to the case study
+
+| Date | Changes made                                                                                                                                                                                                                                       |                                                                                                                                    Author |
+|---------------------|:-------------------------------|------------------:|
+| 2015 | The case study has been divided in two parts: the first includes descriptive, univariable and stratified analysis as pre-module homework; the second includes logistic and binary regression (not shown here). Unnecessary toponymes were removed. |                                                               Alicia Barrasa (EPIET) and Ioannis Karagiannis (Publich Health England-PHE) |
+| 2017 | Questions were rephrased to reflect real life scenarios (rather than academic exercise)                                                                                                                                                            |                                                                         Alicia Barrasa (EPIET) and Giri Shankar (Public Health Wales-PHW) |
+| 2017 | The case study was adapted to include the help on R                                                                                                                                                                                                | Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian Agency for Health and Food Safety-AGES) and Alexander Spina (AGES) |
+|2017| Contribution to the R code|Daniel Gardiner (Public Health England-PHE) and Lukas Richter (AGES)|
+|2022|Minor revisions to the R code and explanations| |
+|2023| Major revision of the R code. R code was simplified and R tidyverse code was implemented| Liese Van Gompel (MedEPIET)|
+|2024| Revision of the R code, i.e. use of
+EpiStas package for univariable and multivariable analysis,
+simplification and harmonisation of the R code| Kostas Danis (MediPIET)|
+| 2017 | Revision of content, structure, R code and adaptation of format to Applied Epi's template of case studies                                                                                                                                          |                                                                                                              Alberto Mateo Urdiales (ISS) |
+
+\pagebreak
+
+## Guidance
+
+### Objectives of this case study
+
+At the end of this case study, participants should:
+-   know and be able to perform the fundamental steps of a descriptive statistical analysis of a foodborne outbreak (including quantitative assessment (frequency distributions, missing values, means/medians/modes, quartiles/SDs) and visualization of the data (histogram, boxplot))
+-   be able to perform univariate statistical analysis to identify potential vehicles of a foodborne outbreak (including risk ratios and/or odds ratios, depending on the design)
+-   know why and how stratification can be conducted in datasets related to an outbreak investigation
+-   be able to conduct a stratified analysis with respect to potential risk factors and confounders/effect modifiers
+-   know how to use multivariable methods to quantify potential risk factors and control for confounding and/or effect modification
+
+
+### Previous level of expertise assumed
+
+Participants are expected to be familiar with data management and basic analysis in R.
+
+### Preparation for the case study
+
+1.  Download folder named stengen_mva and extract contents in the local
+    laptop
+
+2.  Create an Rstudio project in the folder stengen_en. If you are unsure on
+    how to do that, read the EpiRhandbook Chapter on [R
+    projects](https://epirhandbook.com/en/new_pages/r_projects.html)
+
+3.  Inside the folder "stengen_en": Subfolder "data" contains a raw data
+    file named *tira.csv*. This is the only data file you will use in
+    this case study. In the same folder you can find the **data dictionary** with
+    a description of the dataframe variables.
+    
+4.  Subfolder scripts should be used to save any scripts related to the
+    analysis. Inside "backup" you will find a solution script with the
+    code of the case study named *stengen_mva_backup.R*. 
+
+5.  Subfolder "outputs" could be used to store all outputs (tables,
+    graphs, documents) that are the result of the analysis
+
+
+# **Part 1 - Scenario, study design and analysis plan**
+## Introduction 
+
+On 26 June 1998, the St Sebastian High School in Stegen (school A), Germany, celebrated a graduation party, where 250 to 350 participants were expected. Attendees included graduates from that school, their families and friends, teachers, 12th grade students and some graduates from a nearby school (school B).
+
+A self-service party buffet was supplied by a commercial caterer in Freiburg. Food was prepared on the day of the party and transported in a refrigerated van to the school.  
+
+Festivities started with a dinner buffet which opened from 8:30 pm onwards and were followed by a dessert buffet offered from 10 pm. The party and the buffet extended late during the night and alcoholic beverages were quite popular. All agreed it was a party to be remembered.
+
+
+## The alert
+
+On 2nd July 1998, the Freiburg local health office reported to the Robert Koch Institute (RKI) in Berlin the occurrence of many cases of gastroenteritis following the graduation party described above. More than 100 cases were suspected among attendees and some of them were admitted to nearby hospitals. Sick people suffered from fever, nausea, diarrhoea and vomiting that lasted for several days. Most believed that the tiramisu consumed at dinner was responsible for their illness. Salmonella Enteritidis was isolated from 19 stool samples. 
+
+The Freiburg health office sent a team to investigate the kitchen facilities of the caterer. Food preparation procedures were reviewed. Food samples, except tiramisu (none was left over), were sent to the laboratory of Freiburg University. Microbiological analyses were performed on samples of the following: brown chocolate mousse, caramel cream, remoulade sauce, yoghurt dill sauce and 10 raw eggs.  
+ 
+The Freiburg health office requested help from the RKI in the investigation to assess the magnitude of the outbreak and identify potential vehicle(s) and risk factors for transmission in order to better control the outbreak.
+
+
+## The study
+
+Cases were defined as any person who had attended the party at St Sebastian High School who suffered from diarrhoea (≥ 3 loose stool for 24 hours) between 27 June and 29 June 1998; or who suffered from at least three of the following symptoms: vomiting, fever ≥38.5°C, nausea, abdominal pain, and headache.
+
+Students from both schools attending the party were asked through phone interviews to provide names of persons who attended the party. 
+
+Overall, 291 responded to enquiries and 103 cases were identified (attack rate: 35%). Among these cases, 84 (82%) received medical treatment and four were admitted to hospitals. Attack rates by age group were 36.6% for persons <20 years, 32.1% for persons 20 to 29 years, and 36.8% for persons older than 29 years. 
+
+![Figure 1: Cases of gastroenteritis by time of onset among attendees of a high-school graduation ceremony (n=103), Germany, June 1998](../images/stengen/figure1.png)
+
+
+**QUESTION 1**. What would be your hypothesis concerning the source of the outbreak?
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+The shape of the epidemic curve and the attendance to a single event (a buffet) pointed towards a foodborne outbreak related to a point source of infection.
+
+</br>
+
+</details>
+
+
+**QUESTION 2**. What study design would you choose to test this hypothesis?
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+Using the updated list of attendants, a retrospective cohort study including all attendants to the party (that could be reached) was conducted. All had received a standard questionnaire asking for demographic information, signs, symptoms and duration, admission to hospital, and food and beverages consumption at the party including amount consumed. Food-specific attack rates were computed for more than 50 food items and beverages.
+
+
+</br>
+
+</details>
+
+**Question 3**. What would your overall plan of analysis be?
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+**Perform data cleaning**
+-   For each variable, look at the range, unexpected and missing values.
+-   Correct data using the original forms used if needed 
+
+**Describe each variable**
+-   For each variable, describe frequency distributions including missing values and, if needed, means, median, modes, quartiles, standard deviation, outliers 
+-   Make appropriate histograms and box plots
+-   Choose relevant characteristics to describe the population
+
+**Identify the outbreak vehicle if any**
+-   Calculate food-specific attack rates
+-   Look at the proportions of cases exposed
+-   Chose the appropriate measure of association
+-   Chose the appropriate statistical tests and significance level
+-   Calculate the percentages of cases exposed to each exposure
+-   Search for any dose-response relationship if appropriate
+-   Interpret the results
+
+**Perform a stratified analysis**
+-   Identify the variables that are potential effect modifiers (EM) and confounders
+-   Design appropriate stratification tables
+-   Stratify on each level taken by the EM and confounders
+-   Compute appropriate measurements to identify confounding and effect modification
+-   conduct appropriate statistical tests
+-   Interpret the results
+
+**Perform a multivariable analysis**
+-   This will be discussed during the module.
+
+</br>
+
+</details>
+
+
+
+
+# **Part 2 - Descriptive, univariate and stratified analysis with R**
+
+### **Step 1: Set up**
+
+#### Step 1.1: Create a new R script
+
+Once you have created an Rproject inside the "stengen_mva" folder (as
+specified in the second point of the section **Preparation for the case
+study**). Create a new script with the name *stengen_analysis* and save it in the
+subfolder "scripts". If you are familiar with Rmarkdown, you may decide
+to use this type of file instead of a standard R script.
+
+#### Step 1.2: Define R language
+
+Depending on where you are and how you carried out R installation, your
+language "locale" might be different from the language of the graphs
+that you want to produce. For example, a french person might have a
+french "locale". If that is the case, when creating a graph by day of
+the week, Monday will be displayed as "lundi". If that french person
+wants to create an English report, as for this case study, the language
+"locale" should be changed.
+
+**Task**: Ensure your "locale" is in English and change it into English
+if it is not. If you don't know how to do this try finding it online
+(searching for online help is an important skill for R users!).
+Otherwise, see the solution below
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+
+```
+
+</br>
+
+</details>
+
+#### Step 1.3: Install/load packages
+
+Install and load the following packages: rio, skimr, janitor, gtsummary,
+rstatix, epitools, epiR, epikit and tidyverse.
+
+You can find more about installing/loading packages in the
+[Packages](https://epirhandbook.com/en/new_pages/basics.html#packages)
+section of the EpiRhandbook.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may end up using a long list of packages. Unfortunately different
+packages have functions with the same name. For example, the package
+{dplyr} (already installed with {tidyverse}) has a function called
+`select()` which we frequently use to subset columns of a data frame.
+But other packages such as {MASS} do also have a function called
+`select()`. This could create headaches if you want to subset columns
+using dplyr's `select()` but R thinks you're calling MASS's `select()`
+(we call this masking - `dplyr::select()` is masked by
+`MASS::select()`). Given that you are more likely to use functions from
+{tidyverse}, ensure that this is the last package in your `p_load()`
+list so that functions from {tidyverse} (including {dplyr} functions)
+will always "prevail".
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+pacman::p_load(
+  
+  rio,             # to import datasets
+  skimr,           # for displaying your data
+  janitor,         # a package for data cleaning
+  gtsummary,       # to create frequency tables
+  rstatix,         # to generate summary statistics
+  epitools,        # for univariable analysis
+  epikit,          # for creating age categories
+  epiR,            # for the adjusted risk ratios across strata
+  tidyverse  # data management and visualization
+)
+
+```
+
+</br>
+
+</details>
+
+### **Step 2: Import and explore data**
+
+```{r, include=FALSE}
+tira_raw <- import("../cs/ENG/stengen_mva/data/tira.csv")
+```
+
+#### Step 2.1: Import the data 
+
+**Task** Import the data frame called "tira.csv" inside the "data" subfolder. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+If you are working within a project, finding the path to the dataframe
+should be relatively straightfoward. A ".csv" file is a "Comma-separated Values" file. .
+You can import this dataframe using the `read.csv()` which comes already pre-installed in R.
+However, we recommend that you use the **`import()`** function
+from {rio} because, as you may remember, this function will recognise
+the file type and import it whether the file is from R, Stata, excel or
+many others. If you have any doubts about importing review the [Import
+and
+export](https://epirhandbook.com/en/new_pages/importing.html#import-data)
+chapter of the EpiRhandbook.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# Import the dataset 'tira.csv'  
+tira_raw <- import("data/tira.csv") 
+```
+
+
+</br>
+
+</details>
+
+
+
+#### Step 2.2: Explore the data 
+
+**Task**: Explore the data trying to answer the following questions:
+
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "522 and 8",
+  "2 and 345",
+  answer = "291 and 21",
+  "600 and 23"
+)
+
+
+cat("QUESTION: How many rows and columns does the dataframe have?", longmcq(opts))
+
+```
+:::
+
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "8",
+  "14",
+  "1",
+  "0"
+)
+
+
+cat("QUESTION: How many cases have 'age' missing?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "factor",
+  answer = "integer",
+  "character",
+  "logical"
+)
+
+
+cat("QUESTION: What is the class of the column 'salmon'?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "83%",
+  "70%",
+  answer = "29%",
+  "6%"
+)
+
+
+cat("QUESTION: What percentage of attendees ate tomato?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "factor",
+  "character",
+  answer = "date",
+  "numeric"
+)
+
+
+cat("QUESTION: What is the class of the column 'dateonset'?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "As 'NA'",
+  "As empy spaces",
+  "With an 'Unknown' cateogry",
+  answer = "With the number 9"
+)
+
+
+cat("QUESTION: How are missing categorised in the variables 'salmon', 'horseradish' and 'pork'?", longmcq(opts))
+
+```
+:::
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+An efficient way to explore data is to use the function `skim()` from the {skimr} package, as it gives you all the information needed with only one command. Of course, there are several alternatives. You can also have a look at `glimpse()` from {dplyr}, for example.
+An easy way to explore single variables that have categories is to use `tabyl()` from {janitor}
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Inspect your dataset and generate basic statistics using the skim function  
+skim(tira_raw)
+# Glimpse is an alternative to skim which gives more accurate information about the nature of the  variables
+glimpse(tira_raw)
+# To see the different categories of the variables
+tabyl(tira_raw, tomato)
+
+```
+
+
+</br>
+
+</details>
+
+
+#### Step 2.3: Explore age in more detail 
+
+**Task** Explore the age of attendees by: 
+
+- Getting summary statistics
+
+- Generating a boxplot of age by illness status.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+## Generate summary statistics 
+summary(tira_raw$age)
+
+boxplot_age <- tira_raw %>% 
+  
+  ggplot(mapping = aes(x = ill,
+                       y = age,
+                       fill = ill)) + 
+  
+  geom_boxplot() + 
+  
+  labs(
+    title = "Boxplot: Age distribution per disease status",
+    x = "Disease status",
+    y = "Age",
+    fill = "Illness (0=No;1=Yes)"
+  ) +
+  
+  theme_bw()
+
+boxplot_age
+```
+
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No ill",
+  "Ill",
+  answer = "Impossible to know from this boxplot"
+)
+
+
+cat("QUESTION: Which group (ill or not ill) has more variation around age's median?", longmcq(opts))
+
+```
+:::
+
+We were not able to create the boxplot that we aimed for. In fact, you should have seen a warning message in your console saying, at the end, something like: "Did you forget to specify a `group` aesthetic or to convert a numerical variable into a factor?"
+
+Looks like all columns that consist of 1 (present) and 0 (absent) values are of class 'integer', including "ill". However, we want them to be categorial, otherwise we won't be able to carry out many of the analysis we want (including this boxplot). So now we'll sort this out alongside other cleaning functions.  
+
+### **Step 3: Clean the data**
+
+#### Step 3.1: Transform categorical variables
+**Task**: Change all present (1) / absent (0) variables from integer to factors. Do the same for the variables that record the number of portions eaten.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can do this one by one, or you could do all at the same time using the `across()` function from {dplyr}. If you are not sure how to use the `across()` function, read the section on [Transform multiple columns](https://epirhandbook.com/en/new_pages/cleaning.html#clean_across) from the EpiRhandbook.
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we have performed cleaning tasks on tira_raw
+  
+  # this would be changing one-by-one the columns into factors
+  mutate(ill = as.factor(ill)) %>% 
+  
+  # this would change all columns we are interested into 'factors' in only one command
+  mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
+                .fns = ~ as.factor(.x)))
+
+
+# Check that the changes have been succesful
+glimpse(tira_clean)
+```
+
+
+</br>
+
+</details>
+
+#### Step 3.2: Categorise "missing" as NA
+We saw with the `skim()` overview -and in the data dictionary- that the variables *salmon*, *pork* and *horseradish* have 'missing' codified with number '9'. In most analysis, as for visualisations, it is very important that R considers missing data truly as "missing". To do that, missing data needs to be coded as NA (**without quotes**). Other codifications of missing data, such as empty spaces or the number 9 (as in this case) will mean that R will treat this data as a category or a number. For R, 9 is not different from number 1.
+
+**Task** Recode the columns salmon, pork and horseradish so that values of 9 are coded as NA.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+For this task you can use the `mutate()` function in combination with `recode()` or `if_else()`. The former is used specifically for recoding, whereas the latter is used to create/modify columns based on logical conditions. In any case, functions like `if_else()` and `recode()` may require you to specify the type of NA (e.g., NA_character_, NA_real_, NA_integer_) to ensure that the resulting vector maintains a consistent data type. This is important because R is strongly typed, meaning that each vector must contain elements of the same type.
+If you want to know more about recoding, read the EpiRhandbook section on [Recoding](https://epirhandbook.com/new_pages/cleaning.html#re-code-values). Regardless of the approach that you choose, add it to the cleaning pipe command you started before, so that your code is tidy.
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we have performed cleaning tasks on tira_raw
+  
+  # this would be changing one-by-one the columns into factors
+  mutate(ill = as.factor(ill)) %>% 
+  
+  # this would change all columns we are interested into 'factors' in only one command
+  mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
+                .fns = ~ as.factor(.x))) %>% 
+  
+  # we can do it one by one. Here we use recode for this example 
+  mutate(salmon = recode(salmon, 
+                         "9" = NA_character_)) %>% 
+  
+  # we can do all columns at the same time with across(). Now we use the if_else approach
+  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ if_else(.x == "9", NA_character_, .x)))
+
+
+# Check that the changes have been succesful
+tabyl(tira_clean, pork)
+```
+
+
+</br>
+
+</details>
+
+#### Step 3.3: Create age groups
+
+
+**Task**: Create a new variable with two categories (those aged < age's median and those >=age's median). **Add the code to create this new variable to the cleaning command you created above to ensure your code is tidy. Do not write multiple cleaning commands**
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we have performed cleaning tasks on tira_raw
+  
+  # this would be changing one-by-one the columns into factors
+  mutate(ill = as.factor(ill)) %>% 
+  
+  # this would change all columns we are interested into 'factors' in only one command
+  mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
+                .fns = ~ as.factor(.x))) %>% 
+  
+  # we can do it one by one. Here we use recode for this example 
+  mutate(salmon = recode(salmon, 
+                         "9" = NA_character_)) %>% 
+  
+  # we can do all columns at the same time with across(). Now we use the if_else approach
+  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ if_else(.x == "9", NA_character_, .x))) %>% 
+  
+  # create age categories
+  mutate(age_group = age_categories(age,           # the column to use to create the cateogories 
+                                    lower = 0,     # the lower value
+                                    upper = 20,    # the upper value (we want a group of 20+)
+                                    by = 20))      # as we only want two groups, this is also 20
+
+
+
+# Check that the changes have been succesful
+tabyl(tira_clean, age_group)
+```
+
+
+</br>
+
+</details>
+
+
+
+
+
+#### Step 3.4: Re-create the boxplot
+**Task**: Create the boxplot we tried in **Step 2.3** using the clean version of the data. Save the boxplot in the subfolder "outputs".
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+## Boxplot of age by illness status
+boxplot_age <- tira_clean %>% 
+  
+  ggplot(mapping = aes(x = ill,
+                       y = age,
+                       fill = ill)) + 
+  
+  geom_boxplot() + 
+  
+  labs(
+    title = "Boxplot: Age distribution per disease status",
+    x = "Disease status",
+    y = "Age",
+    fill = "Illness (0=No;1=Yes)"
+  ) +
+  
+  theme_bw()
+
+boxplot_age
+```
+
+```{r, echo=TRUE, eval=FALSE}
+
+### Save the boxplot
+#### A static way of saving it
+ggsave(filename = "outputs/boxplot_age.png", plot = boxplot_age)
+#### A dynamic way of doing it so that it contains the date of the analysis
+ggsave(filename = str_glue("outputs/boxplot_age_",             #First we write the beginning of the file name until the date 
+                           str_replace_all(Sys.Date(), "-", ""),  #Sys.Date() gives us the date of analysis. Str_replace_all() removes all hyphens 
+                           ".png"),                               # Finally we add the ending which is the file type
+       plot = boxplot_age)
+```
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No ill",
+  answer = "Ill",
+  "Impossible to know from this boxplot"
+)
+
+
+cat("QUESTION: Which group (ill or not ill) has more variation around age's median?", longmcq(opts))
+
+```
+:::
+
+### **Step 4: Descriptive analysis**
+
+
+#### Step 4.2: Analysis by time
+
+**Task**: Generate an epidemic curve with the dates of onset. Display in the x-axis each day of the study period.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You should be able, by now, to create the histogram required for this epicurve. For the x-axis breaks, remember there are two distinct elements in a `ggplot()`. Inside `geom_histogram()` we can specify the `binwidth =` of the bins to the unit we want (e.g, 1 for daily, 7 for weekly etc.). This will change how the epicurve is displayed. 
+The second element is the scale. Rememember that scales change the way the axis or the colours are displayed. In this case, as we want to modify the X-axis which is a date, we should use the function `scale_x_date()` and specify inside that we want `date_breaks =` by "day".
+If you are struggling, have a look at the [Epicurves](https://epirhandbook.com/new_pages/epicurves.html#epicurves-with-ggplot2) chapter of the EpiRhandbook, I'm sure it will solve all your doubts!
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+tira_clean %>% 
+  
+  ggplot(mapping = aes(x = dateonset)) + 
+  
+  geom_histogram(binwidth = 1,             # we assign the width of the bins to one day
+                 color = "darkgreen",      # color of lines around bars
+                 fill = "lightgreen" )  +  # color of fill within bars 
+  
+  scale_x_date(date_breaks = "day") +      # we want each day to be shown in the x-axis
+  
+  labs(
+    title = "Epicurve of cases by date of onset",
+    y = "Number of cases",
+    x = ""                                 # we leave x-axis title blank because we already say in title it is date of onset
+  ) +
+  
+  theme_bw() +                             # predefined theme
+  
+  theme(axis.text.x = element_text(angle = 90)) # we change the angle of the days in the x-axis so it is readble. Important this happens at the end
+
+  
+```
+
+</br>
+
+</details>
+
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "48h",
+  "A week later",
+  answer = "24h",
+  "The day of the party"
+)
+
+
+cat("QUESTION: How long after the party was peak day in cases?", longmcq(opts))
+
+```
+:::
+
+#### Step 4.3: Analysis by person
+
+**Task**: Generate 2-by-2 tables with sex and age group by illness status
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are several approaches to generate descriptive tables and cross-tabulations. You could use `tabyl()` from {janitor}, which is a very fast way; or you could use `group_by()` in combination with `summarise()`, from {dplyr} which is the most flexible. In this case, however, we show you the solution with a very efficient approach: `tbl_summary()` from {gtsummary}
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+tira_clean %>% 
+  
+  select(sex, age_group, ill) %>%  # we select the columns we're interested in
+  
+  tbl_summary(by = ill, percent = "column") # we assign the grouping column and define where we want the percentages by column
+```
+
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "51%",
+  "49%",
+  "45%",
+  "80%"
+)
+
+
+cat("QUESTION: What percentage of ill cases was female?", longmcq(opts))
+
+```
+:::
+
+### **Step 5: Develop and test hypothesis**
+
+In the previous step we have described the number of ill attendees by date of onset, and we have described how sex and age were distributed according to illness status. The next step in an outbreak investigation would be to develop and test hypothesis about the possible source of the outbreak.
+
+#### Step 5.1: Compute food-specific attack rates and % of cases exposed
+
+**Task**: Create a list with exposed and unexposed cases and calculate the attack rates.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You could use the same approach we used before with `tbl_summary()` from {gtsummary}, but to calculate attack rates, you'll need to change from column to row percentages.
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+tira_clean %>% 
+  
+  select(tira, wmousse, dmousse, wmousse, beer, 
+         redjelly, fruitsalad, tomato, mince, salmon,
+         horseradish, chickenwin, roastbeef, pork, ill) %>% # we select the columns we're interested in
+  
+  tbl_summary(by = ill, percent = "row") %>% #we assign the grouping column and define where we want the percentages by row
+  
+  add_overall()    # we add the overall counts
+```
+
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "39%",
+  "25%",
+  "78%",
+  answer = "68%"
+)
+
+
+cat("QUESTION: What is the attack rate in those who ate withe mousse?", longmcq(opts))
+
+```
+:::
+
+
+#### Step 5.2: Estimate the relative risk of the different exposures
+
+**Task**: First, estimate the relative risk for the exposure of having eaten white mousse at the dinner
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+One way yo estimate the relative risk in these situations is to use the function `riskratio()` from the package {epitools}. You need to first give the exposure and then the predictor.
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+# Relative risk wmousse
+riskratio(tira_clean$wmousse, tira_clean$ill)
+```
+
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "2.1",
+  "179",
+  answer = "2.8",
+  "1.0"
+  )
+
+
+cat("QUESTION: What is the risk of illness among those who ate white mousse compared to those who did not have this food ?", longmcq(opts))
+
+```
+:::
+
+**Task**: Calculate now the risk ratio for all the other exposures to develop hypothesis of the possible source
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You could write the `riskratio()` function changing the exposure variable one by one. However, to save time, avoid making errors and being more efficient, you could try to use approaches that allow you to apply the same function to many different objects (e.g., multiple columns) simultaneously. There are different options for this such as *loops*, *lapply* or *purrr*. Here we give the solution with *purrr*, so if you want to explore further purrr have a look at the dedicated [section](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) in the EpiRhandbook.
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+tira_clean %>% 
+  select(-uniquekey, -age, -age_group, -sex, -dateonset, -ill) %>% # we first remove the columns we're not interested + the outcome column
+  map(.f = ~riskratio(.x, tira_clean$ill))     # here we call the function for each column. ".x" represents all the columns in the database that have not been removed previously
+```
+
+</br>
+
+</details>
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "beer",
+  answer = "tiramisu",
+  "pork",
+  "dark mousse"
+  )
+
+
+cat("QUESTION: Which exposure has the highest risk ratio?", longmcq(opts))
+
+```
+:::
+
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer ="beer",
+  "tiramisu",
+  "pork",
+  "dark mousse"
+  )
+
+cat("QUESTION: Which of the following seems like a protective factor?", longmcq(opts))
+
+```
+:::
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "beer",
+  "tiramisu",
+  answer = "pork",
+  "dark mousse"
+  )
+
+cat("QUESTION: Which of the following has a non-significant association?", longmcq(opts))
+
+```
+:::
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+  )
+
+cat("QUESTION: Is there a dose-response in the association between illness and tiramisu?", longmcq(opts))
+
+```
+:::
+
+Several food items seemed to be associated with the occurrence of illness; **tiramisu, dark and white chocolate mousse, fruit salad, and red jelly**. They can potentially explain up to 94, 76, 49, 46, and 45 of the 103 cases, respectively. Investigators decided to identify their respective roles in the occurrence of illness. There also seems to be a **dose-response** in the amount of tiramisu eaten, with those eating 2 or more portions having a higher risk than those eating only 1 (who had a higher risk than those who did not eat tiramisu)
+
+From the crude analysis, epidemiologists noticed that the occurrence of gastroenteritis was lower among those attendants who had drunk beer. They also decided to assess if beer had a protective effect on the occurrence of gastroenteritis.
+
+#### Step 5.3: Confounding and effect modification
+
+The finding that beer had a protective effect on GI illness is surprising. One of your colleagues suggested that tiramisu might be confounding this association. Given that tiramisu has the highest risk ratio, it might be that the dessert is associated with the outcome (causes it) and to the exposure (those drinking beer might have preferred not to ruin its sour flavour with the sweetness of tiramisu). Another colleague disagrees and thinks that, actually, tiramisu might be an effect modifier in the relation between beer and illness.
+
+QUESTION: How would you check if tiramisu is a confounder or an effect modifier in the association between beer and illness? 
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+To check both things: confounding and effect modification, we should stratify our data by tiramisu consumption. Once stratified, we can calculate risk ratios in both strata and an adjusted risk ratio: **the adjusted Mantel–Haenszel risk ratio**. If this risk ratio is very different from the crude risk ratio (the overall risk ratio between beer and illness), then we can say that tiramisu is confounding the association between beer and illness. We normally define as "very different" when: $(RRcrude/RRadjusted - 1)*100$ is larger than 10-20% difference (no strict threshold, your interpretation and expertise counts!).
+
+If there is confounding but no effect modification, the adjusted M-H risk ratio should be different from the crude rr, but **the risk ratios in each strata -tiramisu yes and tiramisu no- should not be significantly different**. If they are significantly different then there is **effect modification**. How do we know if they are significantly different? We can run a test to tell us that called **the Mantel–Haenszel test of homogeneity**.
+</br>
+
+</details>
+
+
+
+
+**Task**: Check if tiramisu is a confounder or an effect modifier in the association between beer and illness
+
+Try doing this task with the function `epi.2by2()` from the {epiR} package. **Read very carefully the documentation of the function**. Pay special attention at how the data needs to be structured. Read the hint if you are struggling
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Unfortunately `epi.2by2()` is a very "picky" function. Although you can pass data into `epi.2by2()` in different formats, the easiest way is to create a new data frame grouped by the three columns that we will use: tira, beer and ill. 
+You could pass this new dataframe into `epi.2by2()` and it may work, but be careful. `epi.2by2()` will consider as exposed and as ill the first levels of your factor data, as per the image below
+![](../images/stengen/epi.2by2_data.png)
+Now run this line of code `riskratio(tira_clean$beer, tira_clean$ill)` and look at the first part of the output. You should see the output of the image below
+![](../images/stengen/beer_data_before.png)
+
+As you see, in the top left (96) we have unexposed who did not become ill, but in the previous image we saw that `epi.2by2()` will consider those in the top left as exposed and ill. How to overcome this? The trick is to change the levels of the factor variables. By default, they have "0" as first level and "1" as second level. So, whilst grouping the data we can add a line that changes  the order of the levels (See the solution if you don't know what its meant)
+
+
+</br>
+
+</details>
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+```{r, echo=TRUE}
+## Group the dataframe
+group_data <- tira_clean %>% 
+  mutate(across(.cols = c(tira, beer, ill), .fns = ~factor(.x, levels = c(1,0)))) %>% # we change the order of the levels
+  group_by(tira, beer, ill) %>% # it's important to group them in this order: strata, exposure, outcome
+  summarise(n = n()) 
+
+## Run the function to obtain M-H estimates
+strat_analysis <-  
+  epi.2by2(dat = group_data, method = "cohort.count", digits = 2, 
+           conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+#Print the results
+strat_analysis
+```
+
+</br>
+
+</details>
+
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "13%",
+  "87%",
+  "30%",
+  "20%"
+  )
+
+cat("QUESTION: Look at the results, what's the magnitude of the difference between the adjusted MH risk ratio and the crude one?", longmcq(opts))
+
+```
+:::
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "No",
+  "Yes"
+  )
+
+cat("QUESTION: Look at the results, is tiramisu an effect modifier in the association between beer and illness?", longmcq(opts))
+
+```
+:::
+
+You got several results. Let's now review them to make sense of them:
+
+The first part is a table in which you get the overall table for the association between beer and illness.
+The second part, titled *Point estimates and 95% CIs:* has different estimates depending on whether you're interested in risk ratios, odds ratios or attributable risks. As we are carrying out a cohort study, we're interested in the ones for **risk ratios**.
+
+**Inc risk ratio (crude)**: The crude incidence risk ratio, comparing the risk of the outcome between exposed and unexposed groups, with 95% confidence intervals.
+**Inc risk ratio (M-H):** The Mantel-Haenszel adjusted incidence risk ratio, accounting for stratification by tiramisu, with 95% confidence intervals.
+**Inc risk ratio (crude:M-H):** The ratio of the crude incidence risk ratio to the Mantel-Haenszel adjusted incidence risk ratio.
+
+
+This is all we need to evaluate confounding. As we said before, we need to evaluate if the crude and the adjusted risk ratios are very different. We said that we can do that with the formula $(RRcrude/RRadjusted - 1)*100$. Here, the **Inc risk ratio (crude:M-H):** corresponds to the first part: $RRcrude/RRadjusted$. So we need to substract 1 and multiple by 100: (0.87-1)*100. If you do that you'll get 13%, which is borderline, but we can say that tiramisu is not massively confounding the association between beer and illness.
+
+To know whether there is effect modification, you can check the **M-H test of homogeneity of IRRs** in the lower part of the results. As it is not significant (p = 0.713), we can conclude there is no effect modification of tiramisu on the association between beer and illness.
+
+
+
