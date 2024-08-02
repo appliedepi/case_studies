@@ -1,0 +1,859 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{=html}
+<!-- Some considerations about about this quarto template 
+-   Text within \<! \> will not show in your final document.
+    -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
+    -   These comments are used to explain the code chunks.\
+    -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
+    -   This comment will not show up when you knit the document.\
+    -   You can delete them if you want.\ -->
+```
+<!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
+
+# Creating reports with R and MS Excel: a tutorial using the openxls2 package (EN) {.unnumbered}
+
+## Overview {.unnumbered}
+
+| **Case study characteristics** |                                                      |
+|--------------------------------|:-----------------------------------------------------|
+| **Name:**                      | openxlsx2 tutorial                                   |
+| **Language:**                  | English                                              |
+| **Tools:**                     | R, MS Excel                                          |
+| **Location:**                  | N/A                                                  |
+| **Scale:**                     | N/A                                                  |
+| **Diseases:**                  | N/A                                                  |
+| **Keywords:**                  | R, Excel, Report, Export, Format, openxls2, Tutorial |
+| **Technical complexity:**      | Intermediate                                         |
+| **Methodological complexity:** | Intermediate                                         |
+
+***Authorship***\
+Original authors: Leonel Lerebours and Alberto Mateo Urdiales\
+Data source: None (Example data will be generated with R)\
+
+## Instructions
+
+### Getting Help
+
+There are several ways to get help:
+
+1)  Look for the "hints" and solutions (see below)
+2)  Post a question in [Applied Epi
+    Community](www.community.appliedepi.org) with reference to this case
+    study
+
+### Hints and Solutions
+
+Here is what the "helpers" look like:
+
+<!--Note that this is the way of including hints and explanations to the solutions -->
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Here you will see a helpful hint!
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+```{r eval = F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Here is more explanation about why the solution works.
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: End of solution
+-->
+```
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+
+### Posting a question in the Community Forum
+
+... description here about posting in Community... TO BE COMPLETED BY
+APPLIED EPI
+
+You will see these icons throughout the exercises:
+
+| Icon                                                     | Meaning                  |
+|----------------------------------------------------------|--------------------------|
+| `r fontawesome::fa("eye", fill = "darkblue")`            | Observe                  |
+| `r fontawesome::fa("exclamation", fill = "red")`         | Alert!                   |
+| `r fontawesome::fa("pen", fill = "brown")`               | An informative note      |
+| `r fontawesome::fa("terminal", fill = "black")`          | Time for you to code!    |
+| `r fontawesome::fa("window-restore", fill = "darkgrey")` | Change to another window |
+| `r fontawesome::fa("bookmark", fill = "orange")`         | Remember this for later  |
+
+### Terms of Use
+
+-   You may use the tutorial to learn how to generate reports using R by
+    creating tables and exporting them in MS Excel for visualization
+    with the `openxlsx2` package, for educational purposes, and to apply
+    the learned techniques to your personal or professional projects.
+    This tutorial might be freely translated, copied, or distributed. No
+    warranty is made or implied for use of the software for any
+    particular purpose.
+
+### Feedback & suggestions
+
+-   You can write feedback and suggestions on this tutorial at the
+    [GitHub issues page](https://github.com/appliedepi/case_studies)
+-   Alternatively email us at:
+    [contact\@appliedepi.org](mailto:contact@appliedepi.org)
+
+\pagebreak
+
+### Version and revisions
+
+**Version 1**
+
+July 27, 2024
+
+#### Disclaimer
+
+-   The main focus of the tutorial is to use the core functions of the
+    `openxlsx2` up to the version 1.8You must have install MS Excel (or
+    software equivalent like LibreOffice) to visualize the output
+    tables.
+
+-   The data for this tutorial will be generated randomly (any resemble
+    with real data is totally coincidence).
+
+| Date       | Changes made         |           Author |
+|------------|:---------------------|-----------------:|
+| 2024-07-27 | None (first version) | Leonel Lerebours |
+|            |                      |                  |
+|            |                      |                  |
+
+\pagebreak
+
+## Guidance
+
+### Objectives of this case study
+
+The goal of this tutorial is to introduce you in the use of openxlsx2 to
+export formatted tables in MS Excel.
+
+### Previous level of expertise assumed
+
+Add information of previous expertise needed to follow the case study.
+This includes expertise on:
+
+-   Is recommended to intermediate R skills and have basic or beyond
+    knowledge of `dplyr` (from tidyverse package) like pipe operators
+    and data wrangling. [Here some
+    reference](https://www.tidyverse.org/).
+
+<!-- -->
+
+-   Epidemiological experience (e.g., knowledge of how to design outputs
+    tables for reporting purpose)
+
+### Preparation for the case study
+
+-   Install the `openxlsx2` package (directly from Rstudio or
+    [here](https://janmarvin.github.io/openxlsx2/))
+
+-   You must have installed MS Excel (or software equivalent like
+    LibreOffice) to visualize the output tables.
+
+# Why use MS Excel for reporting ?
+
+Excel is one of the most use software for data analysis and also for
+visualization and many other capabilities. Since Excel's formatting
+options allow users to adjust fonts, colors, borders, and alignment to
+create visually appealing reports, with very easy knowledge, is very
+common in many areas including epidemiological task that is use as
+reporting tool.
+
+In some way is undenstandable since it let you to "interact" with the
+data shown, for example we want to do quick calculations out a summary
+table, or modify a graph and to compare with other previous reports.
+
+If you had or work doing periodical reporting like working with
+epidemiological surveillance, probably you or a co-worker use or had use
+in some point Excel or any other spreadsheet software like libreoffice
+to present tables and summaries.
+
+However, even with all the great perks that Excel has, somewhat is hard
+to automate a report with Excel even using a template with a
+pre-designed format. Is also time consuming every time you create a
+table or a graph (more if you don't know how to use macros) and edit a
+spreadsheet. If you add-up all the time that takes to format borders,
+re-size a column or change a font size, it probably will suprise you
+that is a lot.
+
+# Automating a report in Excel with R using openxlsx2 package
+
+As stand in the CRAN page of the openxlsx2 the main purpose of this
+package is:
+
+"Simplifies the creation of 'xlsx' files by providing a high level
+interface to writing, styling and editing worksheets."
+
+In this short tutorial we are going to create and format a summary
+report from scratch in R without touching Excel or any other spreadsheet
+software.
+
+## First step: The Data
+
+Before start using the functions of openxlsx2, we need to beforehand get
+what are the elements we want into the exported report, how many tables,
+type of tables (aggregate data or a linelists).
+
+For this tutorial, the scenario is to do a summary of the production of
+laboratories (sample received, confirmed by year and months).
+
+The source data for this you can create dummy data, no mater the source,
+could be in Excel or other spreadsheet software using formulas to
+generate random numbers (or with R too) using the following variables:
+
+-   **Date:** from a range you want, I use 3 years.
+
+-   **Laboratories:** a categorical variable with the values from "A" to
+    "E".
+
+-   **Number of samples received:** a numerical variable (ramdon number
+    from 0 to 100 for example).
+
+-   **Number of samples with positive results:** a numerical variable
+    less than the previous variable; I suggest a proportion range of the
+    samples received like 2% - 5%.
+
+Just to start right away, let's create a ***dataframe*** object with
+1,000 observations using tidyverse with the following code:
+
+```{r, eval=TRUE, echo=TRUE}
+
+library(tidyverse)
+
+set.seed(1300) # to replicate the same or similar dataframe
+
+# A dataframe for the example using 1000 observations
+bd <- tibble(
+  
+   date=sample(seq(as.Date("2022-01-01"),           # Random dates
+                  as.Date("2024-12-31"), by="day"),
+              replace = T,
+              1000),
+  
+   laboratories=sample(LETTERS[c(1:5)],             # Random Labs (A to E)
+                      replace = T, 
+                      1000),
+  
+  
+   n_samples=sample(c(1:40),                       # Random samples (by day and lab)
+                   replace = T, 
+                   1000)) %>% 
+  
+  mutate(
+    
+    n_confirmed=round(sample(seq(  #Random confirmed samples
+      from=0.01, 
+      to=0.05, 
+      by=0.001), 
+      replace=T,
+      1000)*n_samples,0),
+    
+    pct_confirmed=n_confirmed/n_samples       # % positivity
+    
+    )
+
+head(bd)
+
+```
+
+### Second step: transfoming the data: creating the summary tables
+
+How you can see, with this simple dummy dataframe of 4 variables we want
+to know :
+
+-   How many samples were reported by month.
+
+-   What is the proportion of the confirmed samples by month.
+
+-   What is the proportion of samples reported by laboratory.
+
+-   The overall positivity rate by laboratory.
+
+To obtain the information we will create various summary tables.
+
+Here is he code to create three summary tables:
+
+`r fontawesome::fa("exclamation", fill = "red")` *Note: In case you
+created a dummy database with Excel, (or you want to use your data) you
+have to add a line to import your file. You can use the rio package with
+import() fucntion or openxlsx2 package with read_xlsx() function.*
+
+```{r eval=TRUE, echo=TRUE}
+
+#install.packages(pacman) #uncomment this line if you not have installed pacman (package manager)
+
+library(pacman)
+
+
+p_load(tidyverse,  #to wangle data
+       janitor,    #to do tables 
+       openxlsx2)  #to do the report and exported in MS Excel format
+
+
+#table for samples by year and months
+
+total_sample_tab <- bd %>% 
+  
+  mutate(months=month(as.Date(date),label=T),
+         years=year(as.Date(date))) %>% 
+  
+  group_by(years, months) %>% 
+  
+  reframe(tot_samples=sum(n_samples)) %>% 
+  
+  rename("year of reporting"=years) %>% 
+  
+  pivot_wider(names_from = months,
+              values_from = tot_samples, 
+              values_fill = 0) %>% 
+  
+  adorn_totals(c("col", "row"))
+
+
+#table for positivity of samples by year and months
+
+
+#main part of the table 2
+positivity_a <- bd %>% 
+  
+  mutate(months=month(as.Date(date),label=T),
+         years=as.character(year(as.Date(date)))) %>% 
+  
+  group_by(years, months) %>% 
+  
+  reframe(tot_samples=sum(n_samples),
+          tot_confirmed=sum(n_confirmed),
+          pct=tot_confirmed/tot_samples) %>% 
+  
+  select(years, months, pct) %>% 
+  
+  pivot_wider(names_from = months,
+              values_from = pct, 
+              values_fill = 0)
+
+#last row of table 2
+positivity_b <- bd %>% 
+  
+  mutate(months=month(as.Date(date),label=T),
+         years=year(as.Date(date))) %>% 
+  
+  group_by(months) %>% 
+  
+  reframe(tot_samples=sum(n_samples),
+          tot_confirmed=sum(n_confirmed),
+          pct=tot_confirmed/tot_samples,
+          years="Monthly Pos.") %>% 
+  
+  select(years, months, pct) %>% 
+  
+  pivot_wider(names_from = months,
+              values_from = pct, 
+              values_fill = 0)
+
+#last column of table 2
+positivity_c <- bd %>% 
+  
+  mutate(months=month(as.Date(date),label=T),
+         years=as.character(year(as.Date(date)))) %>% 
+  
+  group_by(years) %>% 
+  
+  reframe(tot_samples=sum(n_samples),
+          tot_confirmed=sum(n_confirmed),
+          pct=tot_confirmed/tot_samples) %>% 
+  
+  select(years, year_pct=pct)
+
+positivity_tab <- bind_rows(positivity_a, positivity_b) %>%
+  left_join(positivity_c, by="years") %>% 
+    rename("year of reporting"=years,
+           "Yearly pos."=year_pct)
+
+
+laboratory_summary <- bd %>% 
+  
+  mutate(years=year(date)) %>% 
+  
+  group_by(years, laboratories) %>% 
+  
+  reframe(total_samples=sum(n_samples),
+          total_confirmed=sum(n_confirmed)) %>% 
+  
+  arrange(laboratories, years) %>% 
+  
+  adorn_totals("row") %>% 
+
+  mutate(positivity_rate=total_confirmed/total_samples) %>% 
+  
+  rename("Years of reporting"=years,
+         "Laboratories"=laboratories,
+         "Total Samples"=total_samples,
+         "Confirmed Samples"=total_confirmed,
+         "% of confirmed samples"=positivity_rate)
+
+```
+
+Now that we have the tables for the summary report, lets do a overview
+of the main functions of openxlsx2 :
+
+#### Main functions
+
+-   **wb_workbook()**: to create a new workbook
+
+-   **wb_add_worksheet()**: to add worksheets (name, zoom level and
+    gridlines)
+
+-   **wb_add_data()**: to add either a dataframe, a table, text string a
+    single value
+
+-   **wb_save()**: to export the workbook to a file (Excel format)
+
+-   **wb_open()**: really handy to open right away the workbook in Excel
+    (to see the results of the code)
+
+#### Related to formating
+
+-   **wb_add_font()**: to specify font type for a region
+
+-   **wb_add_border()**: to add borders to a region
+
+-   **wb_add_cell_style()**: to add specific style to a region (wrap,
+    vertical/horizontal/left/right alignment,
+
+-   **wb_add_numfmt():** to add specific number style to a cells range
+
+-   **wb_add_fill()**: to add fill color to a region
+
+-   **wb_set_col_widths():** to setup the width of specific columns
+
+-   **wb_set_row_heights():** to setup the heights of specific rows
+
+-   **wb_merge_cells():** to merge a range of cells
+
+Some of the functions uses as parameters to specify coordinates in the
+spreadsheet numbers (as columns and row) and others use dimensions,
+which are the combination of letters for columns and number for letters.
+
+#### Related to location / dimension / coordenates
+
+The following functions are really important to get the coordinates of
+where to apply specific formatting, since most of the functions to add
+format/style need a range (in row and columns). With these we can obtain
+Excel type coordinates of specify region (A1:B30 type) based on the size
+of the tables and the location in the worksheet of the table that we
+want to export.
+
+**rowcol_to_dims():** to create a vector with Excel's coordinates from
+the rows and columns numbers you provide (example: rowcol_to_dims(col=
+c(1:3), row= c(1:3)) will result in "A1:C3"). You can combine the use of
+nrow() and ncol() to get the size of a table and get the Excel's
+coordinates, depending where you want to place the table. Is important
+to know beforehand the position of a table (number of row and column)
+since the starting row and column so the format we want to apply fall in
+the range we want.
+
+**wb_dims()**: to get a dimension of an object (dataframe or matrix) for
+the spreadsheet. It start from coordinate A1 by default, for example if
+we use wb_dims(x=mtcars) will return the value of "A1:K33". This helper
+function
+
+![General approach, you can create an example with all the formats in
+excel first too](/images/openxlsx2_tut/icon1.png)
+
+Now that we have some dataframes and see a quick overview of the main or
+most used functions from openxlsx, lets start to create the following
+output in excel:
+
+![](/images/openxlsx2_tut/icon3.png)
+
+First lets see the "style" we want to add to the outputs and also the
+dimensions of the columns and rows where we want to apply a format. Like
+we do when we work in Excel directly.
+
+For example in the picture above we can observe the title in the middle
+of each tables is at the center and the text is larger and bolded, the
+first row with the columns's title the text is bold and has top and
+bottom borders and the last row, Total row also the text is in bold and
+has top bolder. In all of the cells the text is vertical and horizontaly
+centered. In the top table the text of the body is in number format and
+the last row too. In the bottom table, the text of the body and last row
+are in percentage format.
+
+These details we have to take into account to start creating the vectos
+with the ranges. There are formats that applies for whole table, others
+for just part of the tables.
+
+Also is very important to know where the tables are going to be located,
+also if is a table that is going to grow over time (from top to bottom
+or left to right).
+
+In our exercise the first column and row of the top table the starting
+position is at cell B3 and the bottom table starts at cell B10.
+
+The first row of the first table goes from cell B3 to cell O3, the last
+row range is B7 to O7. For the bottom table the first row range is B10
+to N10 and the bottom row is from B14 to N14.
+
+for the vector with the ranges, we have to specify the columns as number
+instead of letters. the rowcol_to_dims() function will convert the
+numbers coordinates to Excel range format (like A1:B3). With the
+combination of the function ncol() and nrow() and the starting position
+we can get the range of the whole table.
+
+Now with the first part:
+
+```{r eval=TRUE, echo=TRUE}
+
+#get the table 1 dimension
+
+tab1_dimres <- rowcol_to_dims(col = 1:ncol(total_sample_tab)+1, 
+                         row = 3:(nrow(total_sample_tab)+3))
+
+tab1_dimtitle <- rowcol_to_dims(col = 2, row = 2)
+
+#get the first row and last row dimension of table 1
+
+tab1_dimfirstrow<- rowcol_to_dims(col = 1:ncol(total_sample_tab)+1, row=3)
+
+tab1_dimlastrow <- rowcol_to_dims(col = 1:ncol(total_sample_tab)+1, row=nrow(total_sample_tab)+3)
+```
+
+Since the table 1 is a table that will grow over the time from top to
+bottom, the starting position of the table 2 must depends of the
+starting position of the first table, if we want to dinamically setup
+the starting position of table 2.
+
+Lets create a vector with the sequence of numbers of the rows where the
+table 2 will be located based on the position of table 1 and the spaces
+between table 1 and table 2.
+
+Table 1 has 7 rows ( nrow(total_sample_tab) ) and the started position
+in the spreadsheet is row 3, and we want the second table starts two
+rows after the end of table 1. So, the starting position row of table 2
+is the sum of the numbers of rows of table 1 + the starting position of
+table 1 + the rows after table 1 last row.
+
+```{r eval=TRUE, echo=TRUE}
+
+#vector with the row for the starting position of table 2
+
+tab2_row_start <- nrow(total_sample_tab)+3+3
+
+tab2_row_seq <- seq(from=nrow(total_sample_tab)+3+3, to=nrow(positivity_tab)+nrow(total_sample_tab)+3+3, by=1)
+
+
+tab2_dimres <- rowcol_to_dims(col = 1:ncol(positivity_tab)+1, #the columns are not affected
+                              row = tab2_row_seq)
+
+#get the first row and last row dimension of table 2
+
+tab2_dimtitle <- rowcol_to_dims(col = 2, row = tab2_row_start-1)
+
+tab2_dimfirstrow<- rowcol_to_dims(col =1:ncol(positivity_tab)+1, row=tab2_row_start)
+
+tab2_dimlastrow <- rowcol_to_dims(col =1:ncol(positivity_tab)+1, row=nrow(positivity_tab)+tab2_row_start)
+
+tab2_dimbody_pct <- rowcol_to_dims(col =2:ncol(positivity_tab)+1, row=1:nrow(positivity_tab)+tab2_row_start)
+```
+
+We are getting there!, now we have the ranges where we want to apply
+styles
+
+The next step now is to start using the openxlsx2 functions to:
+
+-   Create the worbook object
+
+-   Add at least one worksheet
+
+-   Add the tables
+
+-   Add the formatting/styles
+
+-   Save the workbook into a Excel file
+
+Lets see how, a great feature is that we can use pipe operators so we
+can chain our commands
+
+```{r eval=TRUE, echo=TRUE}
+
+
+wb_main <- wb_workbook("Test") %>%                    #creating the workbook
+
+wb_add_worksheet("lab summary",                   #adding the first worksheet
+
+gridLines = F,
+
+tabColor = "red") %>%
+
+wb_add_data(x="Samples reported by months (All laboratories)", #adding the titles of table 1
+
+start_col = 2, #starting in col 2 or "B" 
+
+start_row = 2) %>% 
+
+wb_merge_cells(rows=2, #merging the row above Table 1
+
+cols = 1:ncol(total_sample_tab)+1) %>%
+
+wb_add_data(x=total_sample_tab, start_col  = 2,
+
+start_row =3 ) %>%
+
+wb_add_data(x="Sample positivity by months (All Laboratories)", #add title of table 2
+            start_col = 2,
+            
+            start_row = tab2_row_start-1) %>%
+wb_merge_cells(rows=tab2_row_start-1, #merging the row above Table 2
+
+cols = 1:ncol(positivity_tab)+1) %>%
+
+wb_add_data(x=positivity_tab, start_col  = 2,
+
+start_row =tab2_row_start, na.strings ="-" )
+
+wb_open(wb_main) # to see a preview
+```
+
+![We can see so far what we have, almost
+done!](/images/openxlsx2_tut/icon5.png)
+
+Adding the format to the tables:
+
+```{r eval=TRUE, echo=TRUE}
+
+wb_main_w_styles <-wb_main %>%  
+
+wb_add_cell_style(1,tab1_dimres,
+
+vertical = "center",
+
+horizontal = "center",
+
+wrapText = 1) %>%
+
+wb_add_cell_style(1,tab1_dimtitle,
+
+vertical = "center",
+
+horizontal = "center") %>% 
+
+wb_add_border(1, tab1_dimfirstrow, 
+              
+              top_border = "thick", 
+              
+              top_color = wb_color(hex = "000000"),
+              
+              bottom_border = "thick", 
+              
+              bottom_color = wb_color(hex = "000000"),
+              
+              inner_vgrid = "none",
+              
+              left_border="none",
+              
+              right_border = "none") %>% 
+  
+  wb_add_font(dims=tab1_dimfirstrow,
+              
+              bold="double") %>% 
+  
+  wb_add_font(dims=tab1_dimtitle,
+              
+              size=12,
+                
+              bold="double") %>% 
+  wb_add_font(dims = tab1_dimlastrow,
+              
+              size=11,
+              
+              bold="dobule") %>% 
+  
+  wb_add_border(dims = tab1_dimlastrow,
+                
+                top_border = "thick",
+                
+                top_color = wb_color(hex = "000000"),
+                
+                inner_vgrid = "none",
+                
+                left_border="none",
+                
+                right_border = "none",
+                
+                bottom_border = "none") %>% 
+
+  wb_add_numfmt(dims = tab1_dimlastrow,
+                
+                numfmt = "#,0") %>% 
+  
+  wb_add_numfmt(dims = rowcol_to_dims(row=1:nrow(total_sample_tab)+3,
+                                      col=ncol(total_sample_tab)+1),
+                
+                numfmt = "#,0") %>% 
+  
+ wb_set_col_widths(cols = 2, widths = 20) %>% 
+  
+ wb_set_row_heights(rows = c(2, 3,nrow(total_sample_tab)+3), heights = 30 )  %>%
+  wb_add_cell_style(1,tab2_dimres,
+
+  vertical = "center",
+
+  horizontal = "center",
+
+  wrapText = 1) %>%
+
+  wb_add_cell_style(1,tab2_dimtitle,
+
+  vertical = "center",
+
+  horizontal = "center") %>% 
+
+  wb_add_border(1, tab2_dimfirstrow, 
+              
+              top_border = "thick", 
+              
+              top_color = wb_color(hex = "000000"),
+              
+              bottom_border = "thick", 
+              
+              bottom_color = wb_color(hex = "000000"),
+              
+              inner_vgrid = "none",
+              
+              left_border="none",
+              
+              right_border = "none") %>% 
+  
+  wb_add_font(dims=tab2_dimfirstrow,
+              
+              bold="double") %>% 
+  
+  wb_add_font(dims=tab2_dimtitle,
+              
+              size=12,
+                
+              bold="double") %>% 
+  wb_add_font(dims = tab2_dimlastrow,
+              
+              size=11,
+              
+              bold="dobule") %>% 
+  
+  wb_add_border(dims = tab2_dimlastrow,
+                
+                top_border = "thick",
+                
+                top_color = wb_color(hex = "000000"),
+                
+                inner_vgrid = "none",
+                
+                left_border="none",
+                
+                right_border = "none",
+                
+                bottom_border = "none") %>% 
+
+  wb_add_numfmt(dims = tab2_dimlastrow,
+                
+                numfmt = "#.0%") %>% 
+  
+  wb_add_numfmt(dims = tab2_dimbody_pct,
+                
+                numfmt = "#.0%") %>% 
+  
+ wb_set_col_widths(cols = 2, widths = 20) %>% 
+  
+ wb_set_row_heights(rows = c(tab2_row_start-1,tab2_row_start,nrow
+                             (positivity_tab)+tab2_row_start), heights = 30 ) %>% 
+ 
+  wb_open() # to open a temporary file (yo can save it too!)
+
+wb_save(wb_main_w_styles, "My outputs tables.xlsx", overwrite = T) # to save into an excel file
+
+
+  
+
+```
+
+If all functions and commands are correct, you will see the following
+output or similar:
+
+![The formated tables in Excel](/images/openxlsx2_tut/icon6.png)
+
+<br>
+
+Depending on how elaborate your report is, you can add more worksheets,
+also with programming (like using map() from purrr) you can automate
+several reports from different provinces or geographical units.
+
+<br>
+
+There are other great functions to add more details or expand the
+format, for example adding conditional format, or ***sparklines***. This
+tutorial covers just the main functions and what is the most common task
+to add formats.
+
+|                                            |
+|--------------------------------------------|
+| `r fontawesome::fa("pen", fill = "brown")` |
+
+For more in depth functionality, please review the following vignette:
+
+[openxlsx2](https://janmarvin.github.io/openxlsx2/index.html "Main page for openxls2 manual")
+
+Thanks for reading this tutorial!
