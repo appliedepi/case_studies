@@ -43,7 +43,8 @@ Gardiner (PHE), Lukas Richter (AGES), Liese Van Gompel (MedEPIET),  Kostas Danis
 There are several ways to get help:
 
 1)  Look for the "hints" and solutions (see below)
-2)  Post a question in [Applied Epi
+2)  Ask one of the module facilitators
+3)  Post a question in [Applied Epi
     Community](www.community.appliedepi.org) with reference to this case
     study
 
@@ -109,11 +110,6 @@ NOTE: End of solution
 -->
 ```
 <!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
-
-#### Posting a question in the Community Forum
-
-... description here about posting in Community... TO BE COMPLETED BY
-APPLIED EPI
 
 #### Terms of Use
 
@@ -197,10 +193,8 @@ Write any revisions made to the case study
 |2017| Contribution to the R code|Daniel Gardiner (Public Health England-PHE) and Lukas Richter (AGES)|
 |2022|Minor revisions to the R code and explanations| |
 |2023| Major revision of the R code. R code was simplified and R tidyverse code was implemented| Liese Van Gompel (MedEPIET)|
-|2024| Revision of the R code, i.e. use of
-EpiStas package for univariable and multivariable analysis,
-simplification and harmonisation of the R code| Kostas Danis (MediPIET)|
-| 2017 | Revision of content, structure, R code and adaptation of format to Applied Epi's template of case studies                                                                                                                                          |                                                                                                              Alberto Mateo Urdiales (ISS) |
+|2024| Revision of the R code, i.e. use of EpiStas package for univariable and multivariable analysis, simplification and harmonisation of the R code| Kostas Danis (MediPIET)|
+| 2017 | Revision of content, structure, R code and adaptation of format to Applied Epi's template of case studies | Alberto Mateo Urdiales (ISS) |
 
 \pagebreak
 
@@ -209,11 +203,14 @@ simplification and harmonisation of the R code| Kostas Danis (MediPIET)|
 ### Objectives of this case study
 
 At the end of this case study, participants should:
+
 -   know and be able to perform the fundamental steps of a descriptive statistical analysis of a foodborne outbreak (including quantitative assessment (frequency distributions, missing values, means/medians/modes, quartiles/SDs) and visualization of the data (histogram, boxplot))
+
 -   be able to perform univariate statistical analysis to identify potential vehicles of a foodborne outbreak (including risk ratios and/or odds ratios, depending on the design)
+
 -   know why and how stratification can be conducted in datasets related to an outbreak investigation
+
 -   be able to conduct a stratified analysis with respect to potential risk factors and confounders/effect modifiers
--   know how to use multivariable methods to quantify potential risk factors and control for confounding and/or effect modification
 
 
 ### Previous level of expertise assumed
@@ -222,21 +219,21 @@ Participants are expected to be familiar with data management and basic analysis
 
 ### Preparation for the case study
 
-1.  Download folder named stengen_mva and extract contents in the local
+1.  Download folder named *stengen_mva* and extract contents in the local
     laptop
 
-2.  Create an Rstudio project in the folder stengen_en. If you are unsure on
+2.  Create an Rstudio project in the folder *stengen_mva* If you are unsure on
     how to do that, read the EpiRhandbook Chapter on [R
     projects](https://epirhandbook.com/en/new_pages/r_projects.html)
 
-3.  Inside the folder "stengen_en": Subfolder "data" contains a raw data
+3.  Inside the folder *stengen_mva*: Subfolder "data" contains a raw data
     file named *tira.csv*. This is the only data file you will use in
     this case study. In the same folder you can find the **data dictionary** with
     a description of the dataframe variables.
     
 4.  Subfolder scripts should be used to save any scripts related to the
     analysis. Inside "backup" you will find a solution script with the
-    code of the case study named *stengen_mva_backup.R*. 
+    code of the case study named *stengen_analysis_backup.R*. 
 
 5.  Subfolder "outputs" could be used to store all outputs (tables,
     graphs, documents) that are the result of the analysis
@@ -284,7 +281,7 @@ Overall, 291 responded to enquiries and 103 cases were identified (attack rate: 
 
 </br>
 
-The shape of the epidemic curve and the attendance to a single event (a buffet) pointed towards a foodborne outbreak related to a point source of infection.
+The shape of the epidemic curve and the attendance to a single event (a buffet) pointed towards a foodborne outbreak related to a **point source of infection.**
 
 </br>
 
@@ -303,7 +300,7 @@ The shape of the epidemic curve and the attendance to a single event (a buffet) 
 
 </br>
 
-Using the updated list of attendants, a retrospective cohort study including all attendants to the party (that could be reached) was conducted. All had received a standard questionnaire asking for demographic information, signs, symptoms and duration, admission to hospital, and food and beverages consumption at the party including amount consumed. Food-specific attack rates were computed for more than 50 food items and beverages.
+Using the updated list of attendants, a **retrospective cohort study** including all attendants to the party (that could be reached) was conducted. All had received a standard questionnaire asking for demographic information, signs, symptoms and duration, admission to hospital, and food and beverages consumption at the party including amount consumed. Food-specific attack rates were computed for more than 50 food items and beverages.
 
 
 </br>
@@ -323,32 +320,51 @@ Using the updated list of attendants, a retrospective cohort study including all
 </br>
 
 **Perform data cleaning**
+
 -   For each variable, look at the range, unexpected and missing values.
+
 -   Correct data using the original forms used if needed 
 
 **Describe each variable**
+
 -   For each variable, describe frequency distributions including missing values and, if needed, means, median, modes, quartiles, standard deviation, outliers 
+
 -   Make appropriate histograms and box plots
+
 -   Choose relevant characteristics to describe the population
 
 **Identify the outbreak vehicle if any**
+
 -   Calculate food-specific attack rates
+
 -   Look at the proportions of cases exposed
+
 -   Chose the appropriate measure of association
+
 -   Chose the appropriate statistical tests and significance level
+
 -   Calculate the percentages of cases exposed to each exposure
+
 -   Search for any dose-response relationship if appropriate
+
 -   Interpret the results
 
 **Perform a stratified analysis**
+
 -   Identify the variables that are potential effect modifiers (EM) and confounders
+
 -   Design appropriate stratification tables
+
 -   Stratify on each level taken by the EM and confounders
+
 -   Compute appropriate measurements to identify confounding and effect modification
--   conduct appropriate statistical tests
+
+-   Conduct appropriate statistical tests
+
 -   Interpret the results
 
 **Perform a multivariable analysis**
+
 -   This will be discussed during the module.
 
 </br>
@@ -501,7 +517,7 @@ tira_raw <- import("../cs/ENG/stengen_mva/data/tira.csv")
 </br>
 
 If you are working within a project, finding the path to the dataframe
-should be relatively straightfoward. A ".csv" file is a "Comma-separated Values" file. .
+should be relatively straightfoward. A ".csv" file is a "Comma-separated Values" file.
 You can import this dataframe using the `read.csv()` which comes already pre-installed in R.
 However, we recommend that you use the **`import()`** function
 from {rio} because, as you may remember, this function will recognise
@@ -510,7 +526,6 @@ many others. If you have any doubts about importing review the [Import
 and
 export](https://epirhandbook.com/en/new_pages/importing.html#import-data)
 chapter of the EpiRhandbook.
-
 </br>
 
 </details>
@@ -551,7 +566,7 @@ pacman::p_load(webexercises)
 opts <- c(
   "522 and 8",
   "2 and 345",
-  answer = "291 and 21",
+  answer = "291 and 20",
   "600 and 23"
 )
 
@@ -706,6 +721,27 @@ tabyl(tira_raw, tomato)
 
 - Generating a boxplot of age by illness status.
 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can create a boxplot with {ggplot2} by using the geom `geom_boxplot()`.  In order to create two boxes, one for each illness status, you can assign in the aesthetics the column *ill* to both the x-axis and the fill. Don't worry if it doesn't look good right now....it should look like the solution below. If you need a refresher on how ggplot works, have a look at the EpiRhandbook [Chapter](https://epirhandbook.com/new_pages/ggplot_basics.html)
+
+</br>
+
+</details>
+
+
+
+
+
 <details>
 
 <summary style="text-decoration: underline; color: red;">
@@ -717,10 +753,11 @@ it yourself first!)
 
 </br>
 
-```{r , echo=TRUE}
+```{r , echo=TRUE, warning=TRUE}
 ## Generate summary statistics 
 summary(tira_raw$age)
 
+### Creating a boxplot of age by illness status
 boxplot_age <- tira_raw %>% 
   
   ggplot(mapping = aes(x = ill,
@@ -730,7 +767,7 @@ boxplot_age <- tira_raw %>%
   geom_boxplot() + 
   
   labs(
-    title = "Boxplot: Age distribution per disease status",
+    title = "Boxplot: Age distribution per illness status",
     x = "Disease status",
     y = "Age",
     fill = "Illness (0=No;1=Yes)"
@@ -761,9 +798,9 @@ cat("QUESTION: Which group (ill or not ill) has more variation around age's medi
 ```
 :::
 
-We were not able to create the boxplot that we aimed for. In fact, you should have seen a warning message in your console saying, at the end, something like: "Did you forget to specify a `group` aesthetic or to convert a numerical variable into a factor?"
+We were not able to create the boxplot that we aimed for. In fact, you can see that a warning message appeared in your console saying: "Did you forget to specify a `group` aesthetic or to convert a numerical variable into a factor?"
 
-Looks like all columns that consist of 1 (present) and 0 (absent) values are of class 'integer', including "ill". However, we want them to be categorial, otherwise we won't be able to carry out many of the analysis we want (including this boxplot). So now we'll sort this out alongside other cleaning functions.  
+Looks like all columns that consist of 1 (present) and 0 (absent) values are of class 'integer', including "ill". Integer means that they are considered numbers. However, we want them to be categories, otherwise we won't be able to carry out many of the analysis we want (including this boxplot). So, now we'll sort this out alongside other cleaning operations.  
 
 ### **Step 3: Clean the data**
 
@@ -817,9 +854,9 @@ glimpse(tira_clean)
 </details>
 
 #### Step 3.2: Categorise "missing" as NA
-We saw with the `skim()` overview -and in the data dictionary- that the variables *salmon*, *pork* and *horseradish* have 'missing' codified with number '9'. In most analysis, as for visualisations, it is very important that R considers missing data truly as "missing". To do that, missing data needs to be coded as NA (**without quotes**). Other codifications of missing data, such as empty spaces or the number 9 (as in this case) will mean that R will treat this data as a category or a number. For R, 9 is not different from number 1.
+We saw with the `skim()` overview -and in the data dictionary- that the variables *salmon*, *pork* and *horseradish* have 'missing' codified with number '9'. In most analysis and visualisations, it is very important that R considers missing data truly as "missing". To do that, missing data needs to be coded as NA (**without quotes**). Other codifications of missing data, such as empty spaces or the number 9 (as in this case) will mean that R will treat this data as a category or a number. For R, 9 is not different from number 1.
 
-**Task** Recode the columns salmon, pork and horseradish so that values of 9 are coded as NA.
+**Task** Recode the columns salmon, pork and horseradish so that values of 9 are coded as NA. Add the new code to the cleaning pipeline initiated in the previous step
 
 <details>
 
@@ -859,12 +896,8 @@ tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we hav
   mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
                 .fns = ~ as.factor(.x))) %>% 
   
-  # we can do it one by one. Here we use recode for this example 
-  mutate(salmon = recode(salmon, 
-                         "9" = NA_character_)) %>% 
-  
-  # we can do all columns at the same time with across(). Now we use the if_else approach
-  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ if_else(.x == "9", NA_character_, .x)))
+  # we can do all columns at the same time with across(). Here we use recode for this example 
+  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ recode(.x, "9" = NA_character_)))
 
 
 # Check that the changes have been succesful
@@ -876,10 +909,91 @@ tabyl(tira_clean, pork)
 
 </details>
 
-#### Step 3.3: Create age groups
+#### Step 3.3: Re-categorise mousse and tiramisu portions
+We saw that there are two columns -*tportion* and *mportion*- that have four categories according to the number of portions eaten. However, exploring these columns we can see that few people ate 3 portions. The low number in this category means that it will be very difficult to have meaningful results due to the wide uncertainty that we'll find in the estimates.
+
+**Task**: Re-categorise these columns so that they have three categories: 0,1 and 2+ portions eaten. Add the new code to the cleaning pipeline initiated previously. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+We will now use the `mutate()` function in combination with `if_else()`. As specified above, this function is used for simple logical recoding, which is what we want to do now. There are three "partner" functions called `if_else()` from {dplyr}, `ifelse()` from {base} and `fifelse()` from {data.table}. They all have the same syntax. `ifelse()` has the advantage of being embedded in R, which guarantees its stability and sustainability. `if_else()` has some advantages compared to `ifelse()` that are important in epi analysis. For example, it does not convert Date objects to numeric (which can be a headache) and verifies that both alternatives in the if and else statements are of the same class. Finally, `fifelse()` is the fastest, so it has its advantages when we're analysis a large database.
+
+If you want to know more about simple logical recoding, have a look at the dedicated [section](https://epirhandbook.com/new_pages/cleaning.html#ifelse-and-if_else) of the EpiRhandbook.
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#Check portion before
+tabyl(tira_clean, tportion)
+tabyl(tira_clean, mportion)
+
+#Run cleaning pipe line with new code
+tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we have performed cleaning tasks on tira_raw
+  
+  # this would be changing one-by-one the columns into factors
+  mutate(ill = as.factor(ill)) %>% 
+  
+  # this would change all columns we are interested into 'factors' in only one command
+  mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
+                .fns = ~ as.factor(.x))) %>% 
+  
+  # we can do all columns at the same time with across(). Here we use recode for this example 
+  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ recode(.x, "9" = NA_character_))) %>% 
+  
+  # simple logical recoding with if_else()
+  mutate(across(.cols = c(tportion, mportion), .fns = ~if_else(.x == "3" | .x == "2", "2+", .x)))
+
+
+#Check portion after to verify changes
+tabyl(tira_clean, tportion)
+tabyl(tira_clean, mportion)
+```
+
+
+</br>
+
+</details>
+
+#### Step 3.4: Create age groups
 
 
 **Task**: Create a new variable with two categories (those aged < age's median and those >=age's median). **Add the code to create this new variable to the cleaning command you created above to ensure your code is tidy. Do not write multiple cleaning commands**
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You can  create the age group column with the function `age_categories()` from {epikit}. If you're not familiar with this function, try looking in the *Help* on how it works, or read the specific EpiRhandbook [Section](https://epirhandbook.com/new_pages/cleaning.html#age_categories)
+</br>
+
+</details>
 
 
 <details>
@@ -903,12 +1017,11 @@ tira_clean <- tira_raw %>% # tira_clean will be out clean dataframe after we hav
   mutate(across(.cols = !c(uniquekey, dateonset, age), # with the exclamation mark before c() we are telling R that we want all columns, except those in the c() list, to be transformed into factors
                 .fns = ~ as.factor(.x))) %>% 
   
-  # we can do it one by one. Here we use recode for this example 
-  mutate(salmon = recode(salmon, 
-                         "9" = NA_character_)) %>% 
+  # we can do all columns at the same time with across(). Here we use recode for this example 
+  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ recode(.x, "9" = NA_character_))) %>% 
   
-  # we can do all columns at the same time with across(). Now we use the if_else approach
-  mutate(across(.cols = c(salmon, horseradish, pork), .fns = ~ if_else(.x == "9", NA_character_, .x))) %>% 
+  # simple logical recoding with if_else()
+  mutate(across(.cols = c(tportion, mportion), .fns = ~if_else(.x == "3" | .x == "2", "2+", .x))) %>% 
   
   # create age categories
   mutate(age_group = age_categories(age,           # the column to use to create the cateogories 
@@ -931,7 +1044,7 @@ tabyl(tira_clean, age_group)
 
 
 
-#### Step 3.4: Re-create the boxplot
+#### Step 3.5: Re-create the boxplot
 **Task**: Create the boxplot we tried in **Step 2.3** using the clean version of the data. Save the boxplot in the subfolder "outputs".
 
 <details>
@@ -999,6 +1112,7 @@ cat("QUESTION: Which group (ill or not ill) has more variation around age's medi
 
 ### **Step 4: Descriptive analysis**
 
+Now that we have explored and cleaned our data, we can start with the descriptive analysis. As you know, we normally describe the data by time, person and place. We won't do the "place" analysis because in this outbreak, that element is not relevant.
 
 #### Step 4.2: Analysis by time
 
@@ -1014,9 +1128,9 @@ cat("QUESTION: Which group (ill or not ill) has more variation around age's medi
 
 </br>
 
-You should be able, by now, to create the histogram required for this epicurve. For the x-axis breaks, remember there are two distinct elements in a `ggplot()`. Inside `geom_histogram()` we can specify the `binwidth =` of the bins to the unit we want (e.g, 1 for daily, 7 for weekly etc.). This will change how the epicurve is displayed. 
-The second element is the scale. Rememember that scales change the way the axis or the colours are displayed. In this case, as we want to modify the X-axis which is a date, we should use the function `scale_x_date()` and specify inside that we want `date_breaks =` by "day".
-If you are struggling, have a look at the [Epicurves](https://epirhandbook.com/new_pages/epicurves.html#epicurves-with-ggplot2) chapter of the EpiRhandbook, I'm sure it will solve all your doubts!
+You should be able, by now, to create the histogram required for this epicurve. For the x-axis breaks, remember there are two distinct elements in a `ggplot()`. Inside `geom_histogram()` we can specify the `binwidth =` of the bins to the unit we want (e.g, 1 for daily, 7 for weekly etc.). This will change the whole epicurve. 
+The second element is the scale. Scales change the way the axis or the colours are displayed, but the epicurve remains the same. In this case, as we want to modify the X-axis which is a date, we should use the function `scale_x_date()` and specify inside that we want `date_breaks =` by "day".
+If you are struggling, have a look at the [Epicurves](https://epirhandbook.com/new_pages/epicurves.html#epicurves-with-ggplot2) chapter of the EpiRhandbook.
 </br>
 
 </details>
@@ -1072,7 +1186,7 @@ opts <- c(
 )
 
 
-cat("QUESTION: How long after the party was peak day in cases?", longmcq(opts))
+cat("QUESTION: How long after the party was the peak day in cases?", longmcq(opts))
 
 ```
 :::
@@ -1091,7 +1205,7 @@ cat("QUESTION: How long after the party was peak day in cases?", longmcq(opts))
 
 </br>
 
-There are several approaches to generate descriptive tables and cross-tabulations. You could use `tabyl()` from {janitor}, which is a very fast way; or you could use `group_by()` in combination with `summarise()`, from {dplyr} which is the most flexible. In this case, however, we show you the solution with a very efficient approach: `tbl_summary()` from {gtsummary}
+There are several approaches to generate descriptive tables and cross-tabulations. You could use `tabyl()` from {janitor}, which is a very fast approach; or you could use `group_by()` in combination with `summarise()`, from {dplyr} which is the most flexible. In this case, however, we show you the solution with a very efficient approach: `tbl_summary()` from {gtsummary}
 </br>
 
 </details>
@@ -1111,7 +1225,7 @@ tira_clean %>%
   
   select(sex, age_group, ill) %>%  # we select the columns we're interested in
   
-  tbl_summary(by = ill, percent = "column") # we assign the grouping column and define where we want the percentages by column
+  tbl_summary(by = ill, percent = "column") # we assign the grouping column and define that we want the percentages by column
 ```
 
 </br>
@@ -1141,7 +1255,7 @@ In the previous step we have described the number of ill attendees by date of on
 
 #### Step 5.1: Compute food-specific attack rates and % of cases exposed
 
-**Task**: Create a list with exposed and unexposed cases and calculate the attack rates.
+**Task**: Create 2 by 2 tables with exposure and outcome and calculate the attack rates.
 
 <details>
 
@@ -1175,7 +1289,7 @@ tira_clean %>%
          redjelly, fruitsalad, tomato, mince, salmon,
          horseradish, chickenwin, roastbeef, pork, ill) %>% # we select the columns we're interested in
   
-  tbl_summary(by = ill, percent = "row") %>% #we assign the grouping column and define where we want the percentages by row
+  tbl_summary(by = ill, percent = "row") %>% #we assign the grouping column and define that we want the percentages by row
   
   add_overall()    # we add the overall counts
 ```
@@ -1196,13 +1310,17 @@ opts <- c(
 )
 
 
-cat("QUESTION: What is the attack rate in those who ate withe mousse?", longmcq(opts))
+cat("QUESTION: What is the attack rate in those who ate white mousse?", longmcq(opts))
 
 ```
 :::
 
 
 #### Step 5.2: Estimate the relative risk of the different exposures
+
+We have calculated attack rates in exposed and unexposed, which already gives us a lot of information. For example, we see little difference in the attack rates of those who ate and did not ate salmon; but we observe a much higher attack rate among those who ate tiramisu, than among those who did not eat it. We also see a higher attack rate in those who did not drink beer than in those who drank it.
+
+To have a better understanding of the exposures, we will now calculate relative risks.
 
 **Task**: First, estimate the relative risk for the exposure of having eaten white mousse at the dinner
 
@@ -1216,7 +1334,8 @@ cat("QUESTION: What is the attack rate in those who ate withe mousse?", longmcq(
 
 </br>
 
-One way yo estimate the relative risk in these situations is to use the function `riskratio()` from the package {epitools}. You need to first give the exposure and then the predictor.
+You could do this manually, but you could use the function `riskratio()` from the package {epitools}, which will give you a lot of interesting information, besides the RR and its 95%CI. In this function, you need first to write the exposure and then the predictor. Try reading the documentation of the function if you have any doubts.
+
 </br>
 
 </details>
@@ -1361,7 +1480,7 @@ cat("QUESTION: Is there a dose-response in the association between illness and t
 
 Several food items seemed to be associated with the occurrence of illness; **tiramisu, dark and white chocolate mousse, fruit salad, and red jelly**. They can potentially explain up to 94, 76, 49, 46, and 45 of the 103 cases, respectively. Investigators decided to identify their respective roles in the occurrence of illness. There also seems to be a **dose-response** in the amount of tiramisu eaten, with those eating 2 or more portions having a higher risk than those eating only 1 (who had a higher risk than those who did not eat tiramisu)
 
-From the crude analysis, epidemiologists noticed that the occurrence of gastroenteritis was lower among those attendants who had drunk beer. They also decided to assess if beer had a protective effect on the occurrence of gastroenteritis.
+From the crude analysis, epidemiologists noticed that the occurrence of **gastroenteritis was lower among those attendants who had drunk beer.** They also decided to assess if beer had a protective effect on the occurrence of gastroenteritis.
 
 #### Step 5.3: Confounding and effect modification
 
@@ -1381,9 +1500,9 @@ it yourself first!)
 
 </br>
 
-To check both things: confounding and effect modification, we should stratify our data by tiramisu consumption. Once stratified, we can calculate risk ratios in both strata and an adjusted risk ratio: **the adjusted Mantel–Haenszel risk ratio**. If this risk ratio is very different from the crude risk ratio (the overall risk ratio between beer and illness), then we can say that tiramisu is confounding the association between beer and illness. We normally define as "very different" when: $(RRcrude/RRadjusted - 1)*100$ is larger than 10-20% difference (no strict threshold, your interpretation and expertise counts!).
+To check both things: confounding and effect modification, we should stratify our data by tiramisu consumption. Once stratified, we can calculate risk ratios in both strata and an adjusted risk ratio: **the adjusted Mantel–Haenszel risk ratio**. If this risk ratio is very different from the crude risk ratio (the overall risk ratio between beer and illness), we could say that tiramisu is confounding the association between beer and illness. We normally define as "very different" when: $(RRcrude/RRadjusted - 1)*100$ is larger than 10-20% difference (no strict threshold, your interpretation and expertise counts!).
 
-If there is confounding but no effect modification, the adjusted M-H risk ratio should be different from the crude rr, but **the risk ratios in each strata -tiramisu yes and tiramisu no- should not be significantly different**. If they are significantly different then there is **effect modification**. How do we know if they are significantly different? We can run a test to tell us that called **the Mantel–Haenszel test of homogeneity**.
+If there is confounding but no effect modification, the adjusted M-H risk ratio should be different from the crude RR, but **the risk ratios in each strata -tiramisu yes and tiramisu no- should not be significantly different**. If they are significantly different then there is **effect modification**. How do we know if they are significantly different? We can run a test to tell us that called **the Mantel–Haenszel test of homogeneity**.
 </br>
 
 </details>
@@ -1406,12 +1525,14 @@ Try doing this task with the function `epi.2by2()` from the {epiR} package. **Re
 </br>
 
 Unfortunately `epi.2by2()` is a very "picky" function. Although you can pass data into `epi.2by2()` in different formats, the easiest way is to create a new data frame grouped by the three columns that we will use: tira, beer and ill. 
-You could pass this new dataframe into `epi.2by2()` and it may work, but be careful. `epi.2by2()` will consider as exposed and as ill the first levels of your factor data, as per the image below
+You could pass this new dataframe into `epi.2by2()` and it may work, but be careful. `epi.2by2()` will consider as *exposed* and as *ill* the first levels of your factor data, as per the image they have in the documentation and that we show you below:
+
 ![](../images/stengen/epi.2by2_data.png)
-Now run this line of code `riskratio(tira_clean$beer, tira_clean$ill)` and look at the first part of the output. You should see the output of the image below
+Now run this line of code `riskratio(tira_clean$beer, tira_clean$ill)` and look at the first part of the output. You should see something like this:
+
 ![](../images/stengen/beer_data_before.png)
 
-As you see, in the top left (96) we have unexposed who did not become ill, but in the previous image we saw that `epi.2by2()` will consider those in the top left as exposed and ill. How to overcome this? The trick is to change the levels of the factor variables. By default, they have "0" as first level and "1" as second level. So, whilst grouping the data we can add a line that changes  the order of the levels (See the solution if you don't know what its meant)
+As you see, in the top left (96) we have unexposed who did not become ill, but in the previous image we saw that `epi.2by2()` will consider those in the top left (a) as exposed and ill. How to overcome this? The trick is to change the levels of the factor variables. By default, they have "0" as first level and "1" as second level. So, we can add a line that changes  the order of the levels before we groups the data (See the solution if you don't know what its meant)
 
 
 </br>
@@ -1431,16 +1552,15 @@ it yourself first!)
 
 </br>
 ```{r, echo=TRUE}
-## Group the dataframe
+### Group the dataframe
 group_data <- tira_clean %>% 
   mutate(across(.cols = c(tira, beer, ill), .fns = ~factor(.x, levels = c(1,0)))) %>% # we change the order of the levels
   group_by(tira, beer, ill) %>% # it's important to group them in this order: strata, exposure, outcome
   summarise(n = n()) 
 
-## Run the function to obtain M-H estimates
-strat_analysis <-  
-  epi.2by2(dat = group_data, method = "cohort.count", digits = 2, 
-           conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+### Run the function to obtain M-H estimates
+strat_analysis <- epi.2by2(dat = group_data, method = "cohort.count",  # the method specifies that we are dealing with a cohort study
+           conf.level = 0.95, outcome = "as.columns")                  # we set up confidence intervals to 95 and we specify that the outcome variable is a column in the data
 #Print the results
 strat_analysis
 ```
@@ -1485,14 +1605,18 @@ You got several results. Let's now review them to make sense of them:
 The first part is a table in which you get the overall table for the association between beer and illness.
 The second part, titled *Point estimates and 95% CIs:* has different estimates depending on whether you're interested in risk ratios, odds ratios or attributable risks. As we are carrying out a cohort study, we're interested in the ones for **risk ratios**.
 
-**Inc risk ratio (crude)**: The crude incidence risk ratio, comparing the risk of the outcome between exposed and unexposed groups, with 95% confidence intervals.
-**Inc risk ratio (M-H):** The Mantel-Haenszel adjusted incidence risk ratio, accounting for stratification by tiramisu, with 95% confidence intervals.
-**Inc risk ratio (crude:M-H):** The ratio of the crude incidence risk ratio to the Mantel-Haenszel adjusted incidence risk ratio.
+-   **Inc risk ratio (crude)**: The crude incidence risk ratio, comparing the risk of the outcome between exposed and unexposed groups, with 95% confidence intervals. In this case, this is the overall risk of illness in those who drank beer compared to those who did not drink it.
+
+-   **Inc risk ratio (M-H):** The Mantel-Haenszel adjusted incidence risk ratio, accounting for stratification by tiramisu, with 95% confidence intervals.
+
+-   **Inc risk ratio (crude:M-H):** The ratio of the crude incidence risk ratio to the Mantel-Haenszel adjusted incidence risk ratio.
 
 
 This is all we need to evaluate confounding. As we said before, we need to evaluate if the crude and the adjusted risk ratios are very different. We said that we can do that with the formula $(RRcrude/RRadjusted - 1)*100$. Here, the **Inc risk ratio (crude:M-H):** corresponds to the first part: $RRcrude/RRadjusted$. So we need to substract 1 and multiple by 100: (0.87-1)*100. If you do that you'll get 13%, which is borderline, but we can say that tiramisu is not massively confounding the association between beer and illness.
 
 To know whether there is effect modification, you can check the **M-H test of homogeneity of IRRs** in the lower part of the results. As it is not significant (p = 0.713), we can conclude there is no effect modification of tiramisu on the association between beer and illness.
+
+How would you proceed with your analysis? (to be continued during the MVA module)
 
 
 
