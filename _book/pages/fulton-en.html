@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,13 +81,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
+  "limit": 20,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -96,10 +90,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -114,13 +106,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/fulton-en.html"><span class="chapter-title">Fulton (EN)</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/fulton-en.html"><span class="chapter-title">Fulton (EN)</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -129,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Applied Epi Case Studies</a> 
@@ -160,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -232,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-fulton-en" class="quarto-section-identifier"><span class="chapter-title">Fulton (EN)</span></span></h1>
+<h1 class="title"><span class="chapter-title">Fulton (EN)</span></h1>
 </div>
 
 
@@ -245,13 +237,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-
 </header>
-
 
 <section id="overview" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
-<table class="caption-top table">
+<table class="table">
 <thead>
 <tr class="header">
 <th><strong>Case study characteristics</strong></th>
@@ -368,7 +358,7 @@ NOTE: End of solution
 <section id="version-and-revisions" class="level3">
 <h3 class="anchored" data-anchor-id="version-and-revisions">Version and revisions</h3>
 <p>The first version was written by Alex Spina, Neale Batra, Mathilde Musset, Henry Laurenson-Schafer in August 2021.</p>
-<table class="caption-top table">
+<table class="table">
 <colgroup>
 <col style="width: 23%">
 <col style="width: 36%">
@@ -573,12 +563,12 @@ Analysis is loosely based off the monthly <a href="https://www.fultoncountyga.go
 <p>Explore the linelist to understand better the data.</p>
 <div class="webex-check">
 Question 2.1: How many rows are present in linelist_raw?
-<div id="radio_TGQKJATZHO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TGQKJATZHO" value=""> <span>48</span></label><label><input type="radio" autocomplete="off" name="radio_TGQKJATZHO" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_TGQKJATZHO" value="answer"> <span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_TGQKJATZHO" value=""> <span>5</span></label>
+<div id="radio_HAZCRFWWCF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HAZCRFWWCF" value=""> <span>48</span></label><label><input type="radio" autocomplete="off" name="radio_HAZCRFWWCF" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_HAZCRFWWCF" value="answer"> <span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_HAZCRFWWCF" value=""> <span>5</span></label>
 </div>
 Question 2.2: How many columns are of class numeric?
-<div id="radio_GNLLDIRFSN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GNLLDIRFSN" value=""> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_GNLLDIRFSN" value="answer"> <span>4</span></label><label><input type="radio" autocomplete="off" name="radio_GNLLDIRFSN" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_GNLLDIRFSN" value=""> <span>31</span></label>
+<div id="radio_ZDBRMPVAUY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZDBRMPVAUY" value=""> <span>8</span></label><label><input type="radio" autocomplete="off" name="radio_ZDBRMPVAUY" value="answer"> <span>4</span></label><label><input type="radio" autocomplete="off" name="radio_ZDBRMPVAUY" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_ZDBRMPVAUY" value=""> <span>31</span></label>
 </div>
 </div>
 <details>
@@ -720,8 +710,8 @@ Question 2.2: How many columns are of class numeric?
 </details>
 <div class="webex-check">
 Question 3.2: How many duplicated rows were present in the raw data?
-<div id="radio_OOGEXYOJTM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OOGEXYOJTM" value="answer"> <span>28</span></label><label><input type="radio" autocomplete="off" name="radio_OOGEXYOJTM" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_OOGEXYOJTM" value=""> <span>38</span></label><label><input type="radio" autocomplete="off" name="radio_OOGEXYOJTM" value=""> <span>124</span></label>
+<div id="radio_BAYRHVUDVV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BAYRHVUDVV" value="answer"> <span>28</span></label><label><input type="radio" autocomplete="off" name="radio_BAYRHVUDVV" value=""> <span>31</span></label><label><input type="radio" autocomplete="off" name="radio_BAYRHVUDVV" value=""> <span>38</span></label><label><input type="radio" autocomplete="off" name="radio_BAYRHVUDVV" value=""> <span>124</span></label>
 </div>
 </div>
 </section>
@@ -803,8 +793,8 @@ Question 3.2: How many duplicated rows were present in the raw data?
 </details>
 <div class="webex-check">
 Question 3.3: Which one of the following could NOT be used to transform the column sym_startdt_FALSE from the raw data frame into a date object?
-<div id="radio_LGXQTKPCIZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LGXQTKPCIZ" value=""> <span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_LGXQTKPCIZ" value=""> <span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_LGXQTKPCIZ" value=""> <span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_LGXQTKPCIZ" value="answer"> <span>lubridate::dmy()</span></label>
+<div id="radio_BZLUXLMCID" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BZLUXLMCID" value=""> <span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_BZLUXLMCID" value=""> <span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_BZLUXLMCID" value=""> <span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_BZLUXLMCID" value="answer"> <span>lubridate::dmy()</span></label>
 </div>
 </div>
 </section>
@@ -999,8 +989,8 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 </details>
 <div class="webex-check">
 Question 3.4: A column that has ordinal data, what class should it have?
-<div id="radio_RVXYWSIDCQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RVXYWSIDCQ" value=""> <span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_RVXYWSIDCQ" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_RVXYWSIDCQ" value="answer"> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_RVXYWSIDCQ" value=""> <span>integer</span></label>
+<div id="radio_LLGGXMUZVC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LLGGXMUZVC" value=""> <span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_LLGGXMUZVC" value=""> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_LLGGXMUZVC" value="answer"> <span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_LLGGXMUZVC" value=""> <span>integer</span></label>
 </div>
 </div>
 <details>
@@ -1055,11 +1045,7 @@ Question 3.4: A column that has ordinal data, what class should it have?
 <p><br> This is an example of how the code should look like in your rmarkdown file:</p>
 <div class="cell">
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="cs/ENG/fulton_en/images/Summary_fulton.png" class="img-fluid figure-img" width="1000"></p>
-</figure>
-</div>
+<p><img src="cs/ENG/fulton_en/images/Summary_fulton.png" class="img-fluid" width="1000"></p>
 </div>
 </div>
 <br>
@@ -1073,8 +1059,8 @@ Question 3.4: A column that has ordinal data, what class should it have?
 <p>Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County</p>
 <div class="webex-check">
 Question 5.1: During which week do we observe the peak in cases by date of reporting?
-<div id="radio_HGEFIVIKWU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HGEFIVIKWU" value=""> <span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_HGEFIVIKWU" value=""> <span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_HGEFIVIKWU" value=""> <span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_HGEFIVIKWU" value="answer"> <span>The week starting on December 30, 2020</span></label>
+<div id="radio_BMZUDIXKTS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BMZUDIXKTS" value=""> <span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_BMZUDIXKTS" value=""> <span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_BMZUDIXKTS" value=""> <span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_BMZUDIXKTS" value="answer"> <span>The week starting on December 30, 2020</span></label>
 </div>
 </div>
 <details>
@@ -1148,12 +1134,12 @@ Question 5.1: During which week do we observe the peak in cases by date of repor
 <p>Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.</p>
 <div class="webex-check">
 Question 6.1: In which age group do we observe the largest proportion of cumulative cases?
-<div id="radio_OWLMPNRGXP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OWLMPNRGXP" value=""> <span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_OWLMPNRGXP" value=""> <span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_OWLMPNRGXP" value="answer"> <span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_OWLMPNRGXP" value=""> <span>70+</span></label>
+<div id="radio_YUUZUCZOUP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YUUZUCZOUP" value=""> <span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_YUUZUCZOUP" value=""> <span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_YUUZUCZOUP" value="answer"> <span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_YUUZUCZOUP" value=""> <span>70+</span></label>
 </div>
 Question 6.2: In which race do we observe the largest proportion of deaths in the last 28 days?
-<div id="radio_APYUFXJNHJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_APYUFXJNHJ" value="answer"> <span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_APYUFXJNHJ" value=""> <span>White</span></label><label><input type="radio" autocomplete="off" name="radio_APYUFXJNHJ" value=""> <span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_APYUFXJNHJ" value=""> <span>Hispanic</span></label>
+<div id="radio_KXVNVPKQWU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KXVNVPKQWU" value="answer"> <span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_KXVNVPKQWU" value=""> <span>White</span></label><label><input type="radio" autocomplete="off" name="radio_KXVNVPKQWU" value=""> <span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_KXVNVPKQWU" value=""> <span>Hispanic</span></label>
 </div>
 </div>
 <details>
@@ -1500,8 +1486,8 @@ Question 6.2: In which race do we observe the largest proportion of deaths in th
 <p>Create a table by zip code in which you show the incidence in the most recent 14 days period, the incidence in the previous 14 days period and the percentage change in incidence between these periods.</p>
 <div class="webex-check">
 Question 7.1: What is the change in incidence observed between periods in the zip code number 30337?
-<div id="radio_DAXCCWWTFH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DAXCCWWTFH" value=""> <span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_DAXCCWWTFH" value=""> <span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_DAXCCWWTFH" value="answer"> <span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_DAXCCWWTFH" value=""> <span>-25%</span></label>
+<div id="radio_CAHCOSKNIQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CAHCOSKNIQ" value=""> <span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_CAHCOSKNIQ" value=""> <span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_CAHCOSKNIQ" value="answer"> <span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_CAHCOSKNIQ" value=""> <span>-25%</span></label>
 </div>
 </div>
 <details>
@@ -1636,8 +1622,8 @@ Question 7.1: What is the change in incidence observed between periods in the zi
 </ol>
 <div class="webex-check">
 Question 8.1: According to the results of the univariate analysis, how was having a sore throat associated with mortality from Covid-19
-<div id="radio_PAREXRULIU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PAREXRULIU" value=""> <span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_PAREXRULIU" value="answer"> <span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_PAREXRULIU" value=""> <span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_PAREXRULIU" value=""> <span>Impossible to know</span></label>
+<div id="radio_RMRRNLYJRW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMRRNLYJRW" value=""> <span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_RMRRNLYJRW" value="answer"> <span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_RMRRNLYJRW" value=""> <span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_RMRRNLYJRW" value=""> <span>Impossible to know</span></label>
 </div>
 </div>
 <details>
@@ -1827,828 +1813,416 @@ Question 8.1: According to the results of the univariate analysis, how was havin
 </main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
-
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
-
   }
-
 }
-
-
 
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
-
-
 
   var cl = this.classList
 
-
-
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
 
-
-
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
-
-
 
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     btn.onclick = check_func;
-
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
-
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
-
   }
-
 }
-
-
 
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
-
-
 
   var cl = this.classList
 
-
-
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
 
-
-
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
-
-
 
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     btn.onclick = check_func;
-
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -2728,27 +2302,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+  function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
+      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2758,17 +2315,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start',
+      placement: 'bottom-start'
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2780,130 +2328,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
+      return note.innerHTML;
     });
   }
       let selectedAnnoteEl;
@@ -2947,7 +2372,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
-            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2973,32 +2397,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -3060,18 +2458,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Case-studies Open Repository">
+      <a href="../index.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Case-studies Open Repository</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/oswego-es.html" class="pagination-link" aria-label="Oswego (ES)">
+      <a href="../pages/oswego-es.html" class="pagination-link">
         <span class="nav-page-text"><span class="chapter-title">Oswego (ES)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-
 
 
 

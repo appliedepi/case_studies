@@ -601,7 +601,7 @@ pacman::p_load(rio,
                lubridate,
                DT)
 
-oswego_db <- import("../cs/ESP/oswego_cs_es/data/oswego.xlsx")
+oswego_db <- import("../case_studies_to_translate/ESP/oswego_cs_es/data/oswego.xlsx")
 
 
 oswego_db %>% 
@@ -819,7 +819,7 @@ pacman::p_load(rio,
                DT)
 
 #Importar los datos
-listado <- import("../cs/ESP/oswego_cs_es/data/oswego.xlsx")
+listado <- import("../case_studies_to_translate/ESP/oswego_cs_es/data/oswego.xlsx")
 
 #Explorar las variables de la fecha y hora del almuerzo
 head(oswego_db$TimeSupper)

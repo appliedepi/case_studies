@@ -215,13 +215,13 @@ pacman::p_load(
   tidyverse  # data management and visualization
 )
 
-cb_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.csv")
-cb_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.json")
-cb_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.xlsx")
+cb_data_raw_csv <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.csv")
+cb_data_raw_json <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.json")
+cb_data_raw_xlsx <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.xlsx")
 
-agg_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.csv")
-agg_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.json")
-agg_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.xlsx")
+agg_data_raw_csv <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.csv")
+agg_data_raw_json <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.json")
+agg_data_raw_xlsx <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.xlsx")
 ```
 
 

@@ -3,6 +3,17 @@
 .Rdata
 .httr-oauth
 .DS_Store
-.quarto
+_book/*
+.quarto/*
+/pages/*/
+/pages/*.html
+/pages/~$*
+/pages/*
+/pages/!*.qmd
+/pages/!*.css
+/pages/!*.js
+/case_study_template/*/
+/case_study_template/*.html
+
 
 /.quarto/
