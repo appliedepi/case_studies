@@ -1,8 +1,0 @@
-```{r script-example, fig.margin = TRUE, echo = FALSE, fig.width = 3, out.width = "85%", fig.cap = ""}
-knitr::include_graphics("images/show_na_argument.png", error = F)
-```
-
-
-::: {style="display: flex; padding-left: 10px;"}
-<img src="https://player.slideplayer.com/14/4396681/data/images/img19.jpg" style="width: 100%; margin-bottom: 50px; margin-top: 50px; padding-right: 10px; align: centre"/>
-:::
