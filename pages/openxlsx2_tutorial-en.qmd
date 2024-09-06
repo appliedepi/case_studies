@@ -9,18 +9,10 @@ format:
 editor: 
   markdown: 
     wrap: 72
+execute:
+  warning: false
+  error: false
 ---
-
-```{=html}
-<!-- Some considerations about about this quarto template 
--   Text within \<! \> will not show in your final document.
-    -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
-    -   These comments are used to explain the code chunks.\
-    -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
-    -   This comment will not show up when you knit the document.\
-    -   You can delete them if you want.\ -->
-```
-<!--Below insert the name of the Case study. In curly brackets is the section reference name to be cross-references throughout the book -->
 
 # Creating reports with R and MS Excel: a tutorial using the openxls2 package (EN) {.unnumbered}
 
@@ -121,17 +113,6 @@ NOTE: End of solution
 ... description here about posting in Community... TO BE COMPLETED BY
 APPLIED EPI
 
-You will see these icons throughout the exercises:
-
-| Icon                                                     | Meaning                  |
-|----------------------------------------------------------|--------------------------|
-| `r fontawesome::fa("eye", fill = "darkblue")`            | Observe                  |
-| `r fontawesome::fa("exclamation", fill = "red")`         | Alert!                   |
-| `r fontawesome::fa("pen", fill = "brown")`               | An informative note      |
-| `r fontawesome::fa("terminal", fill = "black")`          | Time for you to code!    |
-| `r fontawesome::fa("window-restore", fill = "darkgrey")` | Change to another window |
-| `r fontawesome::fa("bookmark", fill = "orange")`         | Remember this for later  |
-
 ### Terms of Use
 
 -   You may use the tutorial to learn how to generate reports using R by
@@ -154,24 +135,22 @@ You will see these icons throughout the exercises:
 ### Version and revisions
 
 **Version 1**
-
-July 27, 2024
+| Date    | Changes made | Author| 
+|---------|:-------------|-------:|
+| July 2023 | First version | Leonel Lerebours |
+| September 2024        |  Review with some minor code revision and format            |    Alberto Mateo Urdiales    |
+|         |              |        |
+|         |              |        |
 
 #### Disclaimer
 
 -   The main focus of the tutorial is to use the core functions of the
-    `openxlsx2` up to the version 1.8You must have install MS Excel (or
-    software equivalent like LibreOffice) to visualize the output
+    `openxlsx2` up to the version 1.8. You must have install MS Excel (or
+    software equivalent like OpenOffice) to visualize the output
     tables.
 
 -   The data for this tutorial will be generated randomly (any resemble
     with real data is totally coincidence).
-
-| Date       | Changes made         |           Author |
-|------------|:---------------------|-----------------:|
-| 2024-07-27 | None (first version) | Leonel Lerebours |
-|            |                      |                  |
-|            |                      |                  |
 
 \pagebreak
 
@@ -184,76 +163,77 @@ export formatted tables in MS Excel.
 
 ### Previous level of expertise assumed
 
-Add information of previous expertise needed to follow the case study.
-This includes expertise on:
-
--   Is recommended to intermediate R skills and have basic or beyond
+-   It is recommended to have intermediate R skills and have at least a basic
     knowledge of `dplyr` (from tidyverse package) like pipe operators
     and data wrangling. [Here some
     reference](https://www.tidyverse.org/).
-
-<!-- -->
 
 -   Epidemiological experience (e.g., knowledge of how to design outputs
     tables for reporting purpose)
 
 ### Preparation for the case study
 
+-   Create a folder named "openxls2_tutorial" in your laptop
+
+-   Open Rstudio. Open an R script and ave it inside the folder with the name "openxls2_tutorial.R"
+
 -   Install the `openxlsx2` package (directly from Rstudio or
     [here](https://janmarvin.github.io/openxlsx2/))
 
 -   You must have installed MS Excel (or software equivalent like
-    LibreOffice) to visualize the output tables.
+    OpenOffice) in your laptop to visualize the output tables.
 
-# Why use MS Excel for reporting ?
+# Background
 
-Excel is one of the most use software for data analysis and also for
-visualization and many other capabilities. Since Excel's formatting
+## Why use MS Excel for reporting ?
+
+Excel is one of the most popular softwares for data analysis, data 
+visualization and many other capabilities, since Excel's formatting
 options allow users to adjust fonts, colors, borders, and alignment to
-create visually appealing reports, with very easy knowledge, is very
-common in many areas including epidemiological task that is use as
-reporting tool.
+create visually appealing reports. MS excel use is very 
+common in many areas, including epidemiological tasks that involve creating 
+reports.
 
-In some way is undenstandable since it let you to "interact" with the
-data shown, for example we want to do quick calculations out a summary
-table, or modify a graph and to compare with other previous reports.
+In some ways, MS Excel -as other point-and-click tools- is easy to learn, since it lets you "interact" with the
+data. For example, if we want to do quick calculations and produce a summary
+table, or if we want to modify a graph and to compare it with other previous reports.
 
-If you had or work doing periodical reporting like working with
-epidemiological surveillance, probably you or a co-worker use or had use
-in some point Excel or any other spreadsheet software like libreoffice
+If you have experience working in routine reporting -such as working with
+epidemiological surveillance-, probably you or a co-worker use or have used
+at some point Excel or any other spreadsheet software like OpenOffice
 to present tables and summaries.
 
-However, even with all the great perks that Excel has, somewhat is hard
+However, even with all the great perks that Excel has, it is somewhat hard
 to automate a report with Excel even using a template with a
-pre-designed format. Is also time consuming every time you create a
-table or a graph (more if you don't know how to use macros) and edit a
-spreadsheet. If you add-up all the time that takes to format borders,
-re-size a column or change a font size, it probably will suprise you
-that is a lot.
+pre-designed format. Is also time consuming to edit a spreadsheet every time you create a
+table or a graph (specially without knowledge of macros) and prone to errors.
 
-# Automating a report in Excel with R using openxlsx2 package
+## Automating a report in Excel with R using openxlsx2 package
 
-As stand in the CRAN page of the openxlsx2 the main purpose of this
-package is:
-
-"Simplifies the creation of 'xlsx' files by providing a high level
-interface to writing, styling and editing worksheets."
+As described in the CRAN [documentation](https://cran.r-project.org/web/packages/openxlsx2/openxlsx2.pdf) of the `openxlsx2` package the main purpose of this package is to simplify the creation of 'xlsx' files by providing a high level
+interface to writing, styling and editing worksheets.
 
 In this short tutorial we are going to create and format a summary
 report from scratch in R without touching Excel or any other spreadsheet
 software.
 
-## First step: The Data
+# Tutorial
 
-Before start using the functions of openxlsx2, we need to beforehand get
-what are the elements we want into the exported report, how many tables,
-type of tables (aggregate data or a linelists).
+## Step 1: The Data
 
-For this tutorial, the scenario is to do a summary of the production of
-laboratories (sample received, confirmed by year and months).
+Before start using the functions of `openxlsx2`, we need to decide on 
+what we want into the exported report (i.e., how many tables, what type of tables and which data inside.)
 
-The source data for this you can create dummy data, no mater the source,
-could be in Excel or other spreadsheet software using formulas to
+For this tutorial, the scenario is to do a summary of the **microbiology laboratories' production**: 
+
+-   how many samples received
+
+-   when the samples had a confirmed diagnosis
+
+-   all that aggregated by year and month
+
+We will not be using real data for this tutorial, but we will create it with R. Feel free to create it with MS Excel if you feel
+more comfortable.
 generate random numbers (or with R too) using the following variables:
 
 -   **Date:** from a range you want, I use 3 years.

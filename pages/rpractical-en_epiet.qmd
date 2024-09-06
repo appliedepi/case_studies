@@ -1,0 +1,1481 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+    toc: true
+editor: 
+  markdown: 
+    wrap: 72
+title: |
+  ![](../images/ecdc/logo_epiet_rki.png){width=12in}
+---
+
+# Introductory Course: R basics practical  {.unnumbered}
+
+***Authorship***\
+Original authors:   Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)\
+Data source: Fictional data provided by ECDC EI Group for training purposes\
+Adapted by: Alberto Mateo Urdiales to the case study template\
+
+
+## Instructions
+
+#### Getting Help
+
+There are several ways to get help:
+
+1)  Look for the "hints" and solutions (see below)
+2)  Ask one of the module facilitators
+3)  Post a question in [Applied Epi
+    Community](www.community.appliedepi.org) with reference to this case
+    study
+
+
+
+#### Hints and Solutions
+
+Here is what the "helpers" look like:
+
+<!--Note that this is the way of including hints and explanations to the solutions -->
+
+
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Here you will see a helpful hint!
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+```{r eval = F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Here is more explanation about why the solution works.
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: End of solution
+-->
+```
+
+
+#### Terms of Use
+
+**Disclaimer**: The information presented in this exercise and the
+associated data files have been deliberately changed so as to facilitate
+the acquisition of the learning objectives for fellows of EPIET, EUPHEM
+and EPIET-associated programmes. This case study was first introduced in
+2022 (see Copyright and Licence agreement for more information).
+
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>
+
+### Feedback & suggestions
+
+-   You can write feedback and suggestions on this case study at the
+    ECDC GITHUB
+-   Alternatively email us at: \[ECDC CONTACT MAIL\]
+
+\pagebreak
+
+### Version and revisions
+
+The first version was written by Xanthi Andrianou in October 2021.
+
+
+| Date    | Changes made | Version| Author| 
+|---------|:-------------|-------:|-------|
+|June 2024 | Adapted to case study template| 1.1 | Alberto Mateo Urdiales |
+|         |              |        |
+|         |              |        |
+
+
+\pagebreak
+
+
+## **Guidance**
+
+### Background
+
+The practical is based on a scenario that requires the **analysis of surveillance data** coming from two sources: **case-based information** reported by countries and **aggregated** case data collected from open sources. The datasets have been created to resemble the data collected during monitoring of mpox in Europe in 2022. 
+
+### Scenario and objectives
+
+Mpox has been reported in 5 countries for the first time in 2022. We have collected aggregated case numbers from open sources, and we have also reported case-based data. The objectives of the practical are the following:
+1.	Explore different types of files and how they can be imported in R
+2.	Perform basic data cleaning, e.g., changing the variable type, recode variables, aggregate and filter
+3.	Perform a basic descriptive analysis using tables and graphs
+
+
+### Previous level of expertise assumed
+
+To follow this case study you should be already familiar with the layout of Rstudio and on basic R concepts, such as packages, functions and arguments.
+
+If you feel you need to familiarise a bit further with these aspects, read the EpiRhandbook chapter on [R basics](https://epirhandbook.com/en/new_pages/basics.html)
+
+
+### Preparation for the case study
+
+1. Download folder named r_practical and extract contents in the local laptop
+
+2. Create an Rstudio project in the folder r_practical. If you are unsure on how to do that, read the EpiRhandbook on [R projects](https://epirhandbook.com/en/new_pages/r_projects.html)
+
+3. Inside "r_practical": Subfolder "data" contains the raw data you will use in this case study. You should see six different files, three called *E_pox_aggregated_data* and three *E_pox_case_based_data*. Each has a specific file type. 
+
+4. Inside "r_practical": Subfolder "scripts" should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called "backup" where you can find a solution R script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.
+
+5. Inside "r_practical": Subfolder "outputs" can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.
+
+
+<!-- This is where we load the data so that the outputs are shown, but remains not visible when rendering
+
+-->
+
+```{r, include=FALSE}
+
+
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # to create age categories
+  gtsummary,  # summary statistics, tests and regressions 
+  apyramid,   # plotting age pyramids 
+  tidyverse  # data management and visualization
+)
+
+cb_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.csv")
+cb_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.json")
+cb_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_case_based_data.xlsx")
+
+agg_data_raw_csv <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.csv")
+agg_data_raw_json <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.json")
+agg_data_raw_xlsx <- import("../cs/ENG/r_practical/data/E_pox_aggregated_data.xlsx")
+```
+
+
+# **Import and explore data** {.unnumbered}
+
+## **Step 1: Getting ready for importing the data**
+
+### Step 1.1: Create a new R script
+
+Once you have created an Rproject inside the "r_practical" folder (as specified in the second point of the section **Preparation for the case study**). Create a new script with the name *mpox_rpractical* and save it in the subfolder "scripts".
+If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script.
+
+### Step 1.2: Define R language
+
+
+Depending on where you are and how to carried out R installation, your language "locale" might be different from the language of the graphs that you want to produce. For example, a french person might have a french "locale". If that is the case, when creating a graph by day of the week, Monday will be displayed as "lundi". If that french person wants to create an English report, as for this case study, the language "locale" should be changed.
+
+**Task**: Ensure your "locale" is in English and change it into English if it is not. If you don't know how to do this try finding it online (searching for online help is an important skill for R users!). Otherwise, see the solution below
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, eval=FALSE}
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+
+```
+
+</br>
+
+</details>
+
+
+### Step 1.3: Install/load packages
+
+As you probably know, the first part of our script (besides including -commented- some information about the aim, author, date last updated and contact details) is to install and load packages.
+Fortunatelly there is a package that does this task very effectively: {pacman}. The function p_load() from this package will install any packages listed not already installed and will load them. If a listed package had already been installed, it will just load it.
+You can find more about installing/loading packages in the [Packages](https://epirhandbook.com/en/new_pages/basics.html#packages) section of the EpiRhandbook. 
+
+Using this approach, try to install and load the following packages: rio, janitor, lubridate, skimr, epikit, gtsummary,  apyramid and tidyverse.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. But other packages such as {MASS} do also have a function called select(). This could create headaches if you want to subset columns using dplyr's select() but R thinks you're calling MASS's select() (we call this masking - dplyr's select() is masked by MASS's select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always "prevail".
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # to create age categories
+  gtsummary,  # summary statistics, tests and regressions 
+  apyramid,   # plotting age pyramids 
+  tidyverse  # data management and visualization
+)
+
+```
+</br>
+
+</details>
+
+
+## **Step 2: Import and explore the data**
+
+### Step 2.1: Import the different data frames
+
+There are several ways in which you can import the different data frames. Inside "data/raw" you have three different types of files: csv, json and excel. One way would be to use a specific R function to import each file. For example, read.csv() from {base} can be used to import .csv files, fromJSON() function from {jsonlite} to import .json files and read_excel() from {readxl} to import .xlsx files. Fortunately, there is a more efficient approach which is to use the import() function from {rio} to open **any** file. This function will recognise the type of file and choose the appropriate function to import it. If you feel you need to know more about importing functions, read the [Import and export](https://epirhandbook.com/en/new_pages/importing.html#import-data) chapter of the EpiRhandbook.
+
+**Task**: Import the three case-based data frames and the three aggregated data frames using import() from {rio}.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# Importing ------------------------------------------------------
+# Case-based data
+cb_data_raw_csv <- import("data/E_pox_case_based_data.csv")
+cb_data_raw_json <- import("data/E_pox_case_based_data.json")
+cb_data_raw_xlsx <- import("data/E_pox_case_based_data.xlsx")
+
+# Aggregated data
+agg_data_raw_csv <- import("data/E_pox_aggregated_data.csv")
+agg_data_raw_json <- import("data/E_pox_aggregated_data.json")
+agg_data_raw_xlsx <- import("data/E_pox_aggregated_data.xlsx")
+
+```
+</br>
+
+</details>
+
+### Step 2.2: Explore the different data frames
+
+Take a look at the different data frames and try to find out:
+
+- The number of columns and observations
+
+- The class of their columns and whether it matches its nature (e.g., are "dates" considered "dates" by R?)
+
+- Look at the different categories of the columns about gender, clinical symptoms, outcome, hiv status and sexual orientation existing in the case-based data. Do you need to recode any of them?
+
+- How is unknown or missing data being categorised in these columns? Should you standardise this category?
+
+- If case-based and aggregated data from file types (.csv, .json and .xlsx) are exactly the same, remove the .json and .xlsx data frames from your environment.
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+An efficient way to explore data is to use the function skim() from the {skimr} package, as it gives you all the information needed with only one command. Of course, there are several alternatives. To know the different categories in a column, you can use the function tabyl() from {janitor}, which will give you counts and percentages of every category in the data column.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Explore the different case-based data frames
+
+skim(cb_data_raw_csv)
+skim(cb_data_raw_json)
+skim(cb_data_raw_xlsx)
+
+# Explore the different categories of gender and clinical columns in one of the cb data frames
+tabyl(cb_data_raw_csv, Gender)
+
+tabyl(cb_data_raw_csv, ClinicalSymptoms)
+
+tabyl(cb_data_raw_csv, Outcome)
+
+tabyl(cb_data_raw_csv, HIVStatus)
+
+tabyl(cb_data_raw_csv, SexualOrientation)
+
+# Explore the different aggregated data frames
+
+skim(agg_data_raw_csv)
+skim(agg_data_raw_json)
+skim(agg_data_raw_xlsx)
+
+# Remove json and xlsx files as they are exactly the same as the csv ones. Within rm() we ask for the objects containing the pattern "json" or "xlsx" to be removed from the environment
+rm(list = ls(pattern = "json|xlsx"))
+
+```
+</br>
+
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "2000",
+  "13",
+  answer = "3",
+  "101"
+)
+
+
+cat("How many columns does the aggregated data frame have?", longmcq(opts))
+
+```
+:::
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Date",
+  answer = "Character",
+  "Numeric",
+  "Factor"
+)
+
+
+cat("What is the class of the column DateOfNotification in the case-based data?", longmcq(opts))
+
+```
+:::
+
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "1168",
+  "722",
+  "900",
+  "446"
+)
+
+
+cat("For how many cases is the HIV status Unknown or missing?", longmcq(opts))
+
+```
+:::
+
+
+## **Step 3: Cleaning the data**
+
+### Step 3.1: Clean the case-based data
+
+When exploring the case-based data, you may have noticed that there are a few things that we need to take care of before we can start doing further analysis. Firstly, names contain a mixture of upper and lower case letters. Whilst this isn't in itself a problem, R is case-sensitive, so having all names in lower case may make our life easier. Also, date columns are not consider "Dates" by R, but instead they are being consider as "Character", which means they are being considered as nominal data. This would give us problems when plotting by Dates. Another issue is that some columns have categories that may not be intuitive for all. For example, Gender is categorised with "F", "M", "O" and "UNK". The column Outcome as "A" and "UNK". We should give them more appropriate categories. Finally, it is important that missing data is considered as "missing" in R. That means that R treats it as "NA". In the column clinical symptoms, for example, missing data is an empty cell, not "NA". R is considering this as another nominal category instead of missing, and will consider it this way in any analysis or output you produce. 
+
+**Tasks**: 
+
+-   Create a clean version of your case-based data making all cleaning changes in a single piping command
+
+-   Change all column names to lower case. 
+
+-   Convert all date columns to class "Date".
+
+-   Use the column "DateOfNotification" to create a column called "week_date" which has the week of notification, starting on Mondays. 
+
+-   Transform all empty cells into "NA"
+
+-   Recode "Gender" categories into : "Female", "Male", "Other" and "Unknown"
+
+-   Recode "Outcome" categories into: "Alive" and "Unknown"
+
+-   Recode HIV status into: "Positive", "Negative" and "Unknown/Missing"
+
+-   Recode Sexual orientation into: "Bisexual", "Heterosexual", "MSM/homo or bisexual male" and "Unknown/missing".
+
+-   Create a column called "age_group" with ten year age groups and the oldest group being 70+
+
+-   Check that all changes have been made correctly
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To convert all names to lower case, rather than renaming each column you may use the function clean_names() from the {janitor} package, which will do it automatically for all columns.
+Use lubridate functions to transform date columns into "Date" class, you can do one by one, or you could do all at the same time using the across() function from {dplyr}. If you feel you need to know more about transforming dates read the chapter [Working with Dates](https://epirhandbook.com/en/new_pages/dates.html) from the EpiRhandbook.If you are not sure how to use the across() function, you can also read the section on [Transform multiple columns](https://epirhandbook.com/en/new_pages/cleaning.html#clean_across).
+
+One simple way to create the "week_date" column would be to use the function floor_date() from {lubridate}. Take a look at the documentation to understand how it works and how to make Monday the starting day of the week.
+
+There are different functions that we can use to recode. We propose three: The function recode() from {dplyr}, the function ifelse() from {base} and the function case_when() from {dplyr}. If you want to know more about these functions, look that the section on [Re-code values](https://epirhandbook.com/en/new_pages/cleaning.html#re-code-values) from the EpiRhandbook.
+
+To create the age groups, explore the function called age_categories() from the {epikit} package.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Create a new object called cb_data which is the clean version of the raw data, applying the cleaning functions
+
+
+cb_data <- cb_data_raw_csv %>% 
+  
+  clean_names() %>% # standardises names and puts all into lower case 
+  
+  #(Note: after this point all column names have changed)
+  
+  mutate(date_of_notification = ymd(date_of_notification)) %>%  #transform ONE column into date
+
+  mutate(across(starts_with("date"), 
+                .fns = ~ ymd(.x))) %>%  #transforms ALL columns starting with "date" into dates
+  
+  mutate(week_date = floor_date(date_of_notification, # create week column with Monday start
+                              unit = "week",
+                              week_start = "Monday")) %>% 
+  
+  mutate(across(where(is.character), 
+                .fns = ~ ifelse(.x == "", NA, .x)))  %>% #transforms empty cells into NA across all character columns
+  
+  mutate(gender = recode(gender,
+                         "F" = "Female",
+                         "M" = "Male",
+                         "O" = "Other",
+                         "UNK" = "Unknown")) %>%
+  
+    
+  mutate(across(where(is.character), 
+                .fns = ~ ifelse(.x == "UNK", "Unknown", .x)))  %>% #transforms UNK to Unknown across all character columns
+  
+  mutate(outcome = ifelse(outcome == "A", "Alive", outcome)) %>%   #we can recode as well with ifelse if we want to change only one or two categories
+  
+  mutate(hiv_status = case_when(hiv_status == "NEG" ~ "Negative",    #for more complex recoding better case_when
+                                hiv_status == "POS" ~ "Positive",
+                                TRUE                ~ "Unknown/missing")) %>% 
+  
+  mutate(sexual_orientation = case_when(sexual_orientation == "BISEXUAL" ~ "Bisexual",
+                                        sexual_orientation == "HETERO" ~ "Heterosexual",
+                                        sexual_orientation == "MSM" ~ "MSM/homo or bisexual male",
+                                        TRUE                        ~  "Unknown/missing")) %>% 
+  
+  mutate(age_group = age_categories(age, 
+                                    lower = 0,      #set up the lower age
+                                    upper = 70,     #set up the upper age
+                                    by = 10))       #set up the age breaks
+
+
+
+
+# Check that all changes have been made correctly
+
+skim(cb_data)
+
+tabyl(cb_data, gender)
+
+tabyl(cb_data, clinical_symptoms)
+
+tabyl(cb_data, outcome)
+
+tabyl(cb_data, hiv_status)
+
+tabyl(cb_data, sexual_orientation)
+
+tabyl(cb_data, week_date)
+
+tabyl(cb_data, age_group)
+
+```
+</br>
+
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "36",
+  answer = "1960",
+  "65",
+  "1523"
+)
+
+
+cat("How many male cases we have in the data frame?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "2022-04-11",
+  "2022-07-25",
+  "2022-02-28",
+  "2022-05-09"
+)
+
+
+cat("Which week has the largest number of cases?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "1",
+  answer = "3",
+  "None",
+  "396"
+)
+
+
+cat("How many cases with missing age are present?", longmcq(opts))
+
+```
+:::
+### Step 3.2: Clean the aggregated data
+
+In a similar way, clean the aggregated data by:
+
+-   Standardising names to lower case
+
+-   Ensure that date of reporting is of class "Date"
+
+-   Create a column called "week_date" with the week of reporting starting on Monday
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Check class of date of reporting column
+
+class(agg_data_raw_csv$DateRep) #It is a date, so we do not need to change its class
+
+# Create a new object called agg_data which is the clean version of the raw data, applying the cleaning functions
+
+agg_data <- agg_data_raw_csv %>% 
+  
+  clean_names() %>% # standardises names and puts all into lower case 
+  
+  #(Note: after this point all column names have changed)
+  
+  mutate(week_date = floor_date(date_rep, # create week column with Monday start
+                              unit = "week",
+                              week_start = "Monday")) 
+
+```
+</br>
+
+</details>
+
+
+## **Step 4: Basic descriptives**
+
+### Step 4.1: Table my place (country)
+
+**Task**: Using the case-based data, create a table with the number of cases by country
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+An easy way to produce tables is using the function tbl_summary() from {gtsummary} package
+
+</br>
+
+</details>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "C",
+  "D",
+  "B",
+  answer = "A"
+)
+
+
+cat("What's the country with the largest percentage of cases?", longmcq(opts))
+
+```
+:::
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Create an object with the table
+cb_country_table <- cb_data %>%
+
+  select(country) %>% #select the column that we want to use in the table
+  
+  gtsummary::tbl_summary() # create the table
+
+# Ask R to print the table
+cb_country_table
+
+```
+</br>
+
+</details>
+
+
+
+
+### Step 4.2: Epicurve by week of notification (overall)
+
+**Task**: Using the case-based data, create an epicurve by week of notification
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To do the epicurve, you can use ggplot() and geom_histogram(), which will automatically aggregate your data. If you are unsure on how ggplot() works, read the EpiRhandbook chapter on [Epidemic curves](https://epirhandbook.com/en/new_pages/epicurves.html)
+
+An alternative approach is to first aggregate the number of cases by week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the [Grouping data](https://epirhandbook.com/en/new_pages/grouping.html) chapter of the EpiRhandbook.
+
+Once you have an object with aggregated cases by week of notification, create the epicurve using ggplot()
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+epicurve_epox <- ggplot(data = cb_data,          #data to be used
+                        aes(x = week_date)) +    #with geom_histogram() you only need to assign the x axis
+  
+  geom_histogram(binwidth = 7,                   #binwidth 7 ensures that the width represents 7 days
+                 fill="darkgreen",               #colour inside the bins
+                 color="white",                  #outline colour of the bins
+                 alpha=0.8) +                    #transparency of the bins
+  
+  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
+
+  
+  labs(title="Mpox cases reported in 2022") +  #add a title
+  
+  theme_bw() +                                  #assign a predefined theme
+  
+  theme(axis.text = element_text(size=9),       #define the font size of the axis text
+        axis.title = element_blank(),           #remove the titles of the x and y axis 
+        axis.text.x = element_text(angle=90))   #rotate the x axis text
+           
+  
+epicurve_epox
+
+```
+</br>
+
+</details>
+
+
+### Step 4.3: Epicurve by week of notification (by country)
+
+**Task**: Using the case-based data, create an epicurve by week of notification in which the colour of the bins represents the number of cases by country
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+The code will be very similar to the previous one, but remember that if want a dynamic colour inside the bins, you need to assign the fill to the column you want to use (country) and place it inside the aesthetics
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+epicurve_epox_country <- ggplot(data = cb_data,  #data to be used
+                        aes(x = week_date,       
+                            fill = country)) +   #now the fill needs to be inside aes()  
+  
+  geom_histogram(binwidth = 7,                   #binwidth 7 ensures that the width represents 7 days
+                 color="white",                  #outline colour of the bins
+                 alpha=0.8) +                    #transparency of the bins
+  
+  scale_fill_viridis_d() +                       #we change the predefined colours
+
+  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
+
+  
+  labs(title="Mpox cases reported by country in 2022") +  #add a title
+  
+  theme_bw() +                                  #assign a predefined theme
+  
+  theme(legend.position = "bottom",             #legend position to the bottom
+        axis.text = element_text(size=9),       #define the font size of the axis text
+        axis.title = element_blank(),           #remove the titles of the x and y axis 
+        axis.text.x = element_text(angle=90),   #rotate the x axis text
+        legend.title = element_blank())         #remove title of legend
+           
+  
+epicurve_epox_country
+
+```
+</br>
+
+</details>
+
+
+
+### Step 4.4: Demographic characteristics
+
+Now that we have created some outputs by time and place, we should focus on the "person" element. The two most important demographic characteristics are usually age and gender. In the case we are seeing, we may also want to explore the sexual orientation of cases.
+
+**Task**: 
+
+-   Explore the number of cases by age group and gender. 
+
+-   Create a table with number and percentages of cases by sexual orientation
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+The easiest way to explore both columns (age_group and gender) would be to use the tabyl() function from {janitor}.
+Then, to create the age pyramid explore the function age_pyramid() from the {apyramid} package. You can find more about this function in the EpiRhandbook chapter [Demographic pyramids and Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
+To create the table by sexual orientation, consider using the function tbl_summary() from {gtsummary}
+
+</br>
+
+</details>
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Females 60-69",
+  "Males 40-49",
+  "Females 10-19",
+  answer = "Males 30-39"
+)
+
+
+cat("Which demographic group is more affected by Mpox?", longmcq(opts))
+
+```
+:::
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Explore gender and age group columns
+tabyl(cb_data, gender)
+tabyl(cb_data, age_group)
+
+# Table with sexual orientation 
+
+tab_sor <- cb_data %>% 
+  
+  select(sexual_orientation) %>% 
+  
+  tbl_summary(label = list(sexual_orientation ~ "Sexual Orientation")) 
+
+tab_sor
+```
+</br>
+
+</details>
+
+
+
+
+### Step 4.5: Clinical characteristics
+
+Now, let's summarise the main clinical information that we have in our case-based data frame.
+
+**Tasks**:
+
+-   Create a bar plot with the proportion of each type clinical symptoms
+
+-   Create a table with the number and percentage of cases by outcome
+
+-   Create a table with sexual orientation by HIV status. You may add a statistical test to ascertain if there are significant differences between groups.
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To create bar plots we can use geom_bar() or geom_col() depending on the nature of our data. If we aggregate first, we can use geom_col(), otherwise we should use geom_bar().
+There is a function of the {gtsummary} package called add_p() which enables you to easy calculate a statistical test across groups. If you want to know more read the section on [gtsummary package](https://epirhandbook.com/en/new_pages/stat_tests.html#stats_gt) of the EpiRhandbook.
+
+</br>
+
+</details>
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Yes",
+  answer = "No"
+)
+
+
+cat("Are there significant differences in HIV status across cases according to their sexual orientation ?", longmcq(opts))
+
+```
+:::
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Bar plot with clinical symptoms
+
+bar_clinical <- cb_data %>% 
+  
+  drop_na(clinical_symptoms) %>%   # we remove those with missing clinical symptoms
+  
+  group_by(clinical_symptoms) %>% 
+  
+  summarise(n_cases = n(), .groups = "drop") %>%
+  
+  mutate(prop=(n_cases/sum(n_cases))*100) %>%  # we create a column with proportions
+  
+  ggplot(aes(y = reorder(clinical_symptoms, prop), x = prop)) +  # the reorder function ensures that categories are ordered by proportion in the graph
+  
+  geom_col(fill = "darkgreen") + 
+  
+  labs(
+    title= "Frequency of clinical symptoms in Mpox cases",
+    y = "",
+    x = "Number of cases"
+  ) +
+  
+  theme_bw() +
+  
+  theme(axis.text = element_text(size=9))       #define the font size of the axis
+
+bar_clinical  
+
+
+# Table with number and percentage of cases by outcome
+
+tab_outcome <- cb_data %>% 
+  
+  select(outcome) %>% 
+  
+  tbl_summary(label = list(outcome = "Reported outcome")) # with the argument "label" we can change how the column name is displayed
+
+tab_outcome
+
+# Table with sexual orientation by HIV outcome
+
+tab_hiv_sor <- cb_data %>% 
+  
+  select(hiv_status, sexual_orientation) %>% 
+  
+  filter(hiv_status != "Unknown/missing") %>% # we remove the Unknown
+  
+  tbl_summary(by = hiv_status, label = list(sexual_orientation ~ "Sexual Orientation")) %>% 
+  
+  add_p()                                     # this function will estimate a p value with the appropriate statistical test based on the class of the columns and the number of observations
+
+tab_hiv_sor
+```
+</br>
+
+</details>
+
+
+
+
+
+## **Step 5: Optional analysis**
+
+If you have time, let's now undertake some further analysis. First we will look at data quality. We will check two things:
+
+1. In the case-based data, what's the delay between symptom onset, diagnosis and notification?
+
+2. Are numbers from case-based data consistent with the aggregated data?
+
+Then, we will test your skills in data visualisation creating a heat plot.
+
+
+### Step 5.1: Delay between date of onset, diagnosis and notification
+
+**Tasks** 
+
+
+-   Calculate median time from symptom onset to diagnosis and from diagnosis to notification, both overall and by country
+
+-   Assess visually the number of cases by calendar period and type of date (onset, diagnosis and notification)
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To plot together the different dates you may need to transform your data from "wide" to "long" form. What we call "pivoting" in R. The objective is to have a column with the different date categories (onset, diagnosis and notification) and another column with their date value. If you are unsure on how to do this, have a look at the [PivoTing data](https://epirhandbook.com/en/new_pages/pivoting.html) chapter of the EpiRhandbook.
+Then, try to plot with the daily values, but if that's not easy to interpret you may want to aggregate cases by week.
+
+</br>
+
+</details>
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Yes",
+  answer = "No"
+)
+
+
+cat("Is there a difference in the delay from diagnosis to notification by country?", longmcq(opts))
+
+```
+:::
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Estimate delay between onset and diagnosis, and between diagnosis and notification
+
+delay_db <- cb_data %>% 
+  
+  mutate(delay_diag = as.numeric(date_of_diagnosis - date_of_onset)) %>%   #we create variables with difference between dates, we transform them in numeric to be able to then calculate measures of central tendency
+  
+  mutate(delay_not = as.numeric(date_of_notification - date_of_diagnosis))
+
+summary(delay_db$delay_diag) #the summary will give us measures of central tendency and dispersion
+summary(delay_db$delay_not)
+
+
+delay_country <- delay_db %>% #here, we group by country and summarise the median to compare across countries
+  
+  group_by(country) %>% 
+  
+  summarise(median_delay_diag = median(delay_diag, na.rm = T),
+            median_delay_not = median(delay_not, na.rm = T))
+
+delay_country
+
+# Line graph with the different dates 
+
+dates_longer <- cb_data %>% # use the variables of the dates and make a longer dataset. In the pivot_longer() command we select the columns which we want to expand in long format and transform the dataset
+   
+  pivot_longer(
+    
+    cols=starts_with("date_"),         # all columns starting with "date_" will be taken 
+
+    names_to = "indicator",            #the names of the columns will be placed in a single column called "indicator"
+
+    values_to = "date")                # the values (which are dates in this case) will be placed in a column called "date"
+  
+
+dates_longer_week <- dates_longer  %>% 
+
+  mutate(week_date = floor_date(date, unit = "week", week_start = "Monday")) %>%  # we create a week column
+    
+  group_by(indicator, week_date) %>% 
+    
+  summarise(n=n(), .groups="drop") %>%   # we group and summarise to have the number of cases by date type and week
+    
+  drop_na(week_date)                     # we drop the cases with no data on dates
+
+
+
+
+plot_date_delay <-   ggplot(data = dates_longer_week,
+                            aes(x = week_date, 
+                                y = n, 
+                                color=indicator)) +
+  
+  geom_line(linewidth = 1.5) +
+  
+  scale_x_date(breaks = "2 weeks")+
+  
+  theme_bw() +
+  
+  theme(legend.position = "bottom", 
+        axis.text = element_text(size=9),
+        axis.title = element_blank(),
+        axis.text.x = element_text(angle=90),
+        legend.title = element_blank()) +
+  labs(title="Mpox cases reported in 2022, by date of onset, diagnosis and notification.")
+
+plot_date_delay
+```
+</br>
+
+</details>
+
+
+
+
+
+### Step 5.2: Compare case-based and aggregated data
+
+**Task**: Create a plot comparing the number of cases reported to through the case-based flow and through the aggregated flow in each country.
+
+NOTE: Take into consideration that the column on cases in the aggregated data frame reports the *cumulative* number of cases.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "A",
+  "B",
+  answer = "C",
+  "D",
+  "E"
+)
+
+
+cat("Which country is not reporting aggregated data?", longmcq(opts))
+
+```
+:::
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Create a data frame with the overall number of cases reported through the aggregated flux
+
+agg_data_country <- agg_data %>% 
+  
+  group_by(country) %>% 
+  
+  filter(date_rep == max(date_rep)) %>% # as we have cumulative data, we keep only the last week (after grouping by country)
+  
+  select(-date_rep, -week_date) %>%     # remove unnecessary columns
+
+  mutate(source = "aggregated")         # we create this column to distinguish the numbers from the case-based flux
+
+
+# Create a data frame with the overall number of cases reported through the case-based flux
+
+cb_data_country <- cb_data %>%
+  
+  group_by(country) %>% 
+  
+  summarise(cases = n(), .groups = "drop") %>% 
+  
+  mutate(source = "case_based")       # we create this column to distinguish the numbers from the
+  
+
+# We append both data frames. Remember this is different from merging
+
+total_data <- bind_rows(cb_data_country, agg_data_country)
+
+
+# We create a graph to compare the cases reported in both sources
+
+graph_comp <- ggplot(data = total_data,
+                     aes(x = source, 
+                         y = cases, 
+                         fill = source)) +
+  
+  geom_col(position = "dodge") +            #position dodge puts bars one next to each other, instead of "stacked"
+  
+  facet_wrap(~ country, scales = "free_y") +  # this command gives us one graph per country. The argument scales is used to allow each y axis scales to adjust to the data
+
+  scale_fill_viridis_d(
+    labels = c("Aggregated", "Case-based")  # this function changes the colours, but with the argument "labels" we can change the text of each fill.
+     ) +
+  
+  
+  labs(
+    title = "Number of cases of Mpox reported in 2022 according to source of data",
+    fill = "Source",
+    x = "",
+    y = "Total number of cases"
+  ) + 
+  
+  theme_bw() +
+  
+  theme(axis.text.x = element_blank(),      # we remove the text of the x axis because it is already present in the legend
+        axis.ticks.x = element_blank())     # we also remove the ticks for aesthetic purposes
+
+graph_comp
+```
+</br>
+
+</details>
+
+### Step 5.3: Heat plot with number of cases by country and week of notification
+
+
+Heat plots are a type of plots that are gaining popularity in epidemiology. In our case, they can be useful to understand how the epidemic evolved in different countries.
+
+**Task**: Using the case-based data, create a heat plot with the number of cases by country and week of notification. 
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+In this case you will need to aggregate your data by country and week of notification. You can do this using the functions group_by() and summarise() from {dplyr}. If you are unsure on how to do this, review the [Grouping data](https://epirhandbook.com/en/new_pages/grouping.html) chapter of the EpiRhandbook.
+Then, use the geom geom_tile() to create a heat plot. If you're unsure on how to do this, read the EpiRhanbook section on [Heat Plots]https://epirhandbook.com/en/new_pages/heatmaps.html)
+
+</br>
+
+</details>
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "A",
+  "D",
+  answer = "E",
+  "B"
+)
+
+
+cat("Which country had the latest date of notification?", longmcq(opts))
+
+```
+:::
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+hp_epox <- cb_data %>% #we first group the data by country and week of notification
+  
+  group_by(country, week_date) %>% 
+  
+  summarise(n_cases = n(), .groups = "drop") %>% 
+
+  #now we can use the pipe to directly plot the resulting data from the grouping
+  
+  ggplot(aes(x = week_date,
+           y = country,           #we want the countries to be in the y axis
+           fill = n_cases)) +     #the colour of the tiles should depend on the number of cases
+  
+  geom_tile(colour = "black") +   #this is the outline colour of each tile
+  
+  scale_fill_gradient(            #here we define the colours we want to use in the gradient
+    low = "lightgreen",
+    high = "red") +
+  
+  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
+  
+  labs(
+    title= "Mpox cases by country and week of notification",
+    fill = "Number of cases"                               
+  ) +
+  
+  theme_bw() +
+  
+  theme(legend.position = "bottom",             #legend position to the bottom
+        axis.text = element_text(size=9),       #define the font size of the axis
+        axis.title = element_blank(),           #remove the titles of the x and y 
+        axis.text.x = element_text(angle=90))   #rotate the x axis text
+    
+hp_epox 
+```
+</br>
+
+</details>
+
+
