@@ -15,7 +15,7 @@ editor:
   markdown: 
     wrap: 72
 title: |
-  ![](../images/ecdc/logo_epiet_rki.png){width=12in}
+  ![](../images/logos/logo_epiet_rki.png){width=12in}
   
 ---
 
@@ -413,7 +413,7 @@ pacman::p_load(
 
 ### **Step 2: Import and explore data**
 ```{r, include=FALSE}
-tbe <- import("../cs/ENG/tbe_mva/data/tbe.RDS")
+tbe <- import("../case_studies_to_translate/ENG/tbe_mva/data/tbe.RDS")
 ```
 #### Step 2.1: Import the data and brief exploration
 

@@ -427,7 +427,7 @@ pacman::p_load(
 
 ### **Step 2: Import and explore data**
 ```{r, include=FALSE}
-tbe <- import("../cs/ENG/tbe_en/data/tbe.RDS")
+tbe <- import("../case_studies_to_translate/ENG/tbe_en/data/tbe.RDS")
 ```
 #### Step 2.1: Import the data and brief exploration
 
