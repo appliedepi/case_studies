@@ -10,6 +10,7 @@ format:
     css: webex.css
     include-after-body: webex.js
     df-print: kable
+    toc: true
 editor: 
   markdown: 
     wrap: 72
