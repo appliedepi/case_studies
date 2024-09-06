@@ -9,4 +9,6 @@ _book/*
 /pages/*.html
 /pages/~$*
 /pages/!*.qmd
+/case_study_template/*/
+/case_study_template/*.html
 
