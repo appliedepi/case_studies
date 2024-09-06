@@ -15,3 +15,5 @@ _book/*
 /case_study_template/*/
 /case_study_template/*.html
 
+
+/.quarto/
