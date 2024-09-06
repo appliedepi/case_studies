@@ -4,7 +4,7 @@ book:
   title: Applied Epi Case Studies
   author: Applied Epi
   date: 10/09/2023
-  cover-image: Applied_Epi_logo.png
+  cover-image: images/logos/Applied_Epi_logo.png
   chapters:
   - index.qmd
   - pages/fulton-en.qmd
