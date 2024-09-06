@@ -3,6 +3,10 @@
 .Rdata
 .httr-oauth
 .DS_Store
-.quarto
+_book/*
+.quarto/*
+/pages/*/
+/pages/*.html
+/pages/~$*
+/pages/!*.qmd
 
-/.quarto/
