@@ -20,40 +20,43 @@ pacman::p_load(
 # babelquarto::register_further_languages(further_languages = "de")
 # # https://docs.ropensci.org/babeldown/articles/quarto.html
 
-chapter_list = c("fulton.qmd", "r_practical_epiet.qmd", "tbe.qmd")
+chapter_list = c("fulton.qmd", "r_practical.qmd", "tbe.qmd")
 
-# Function to copy and rename files
-copy_and_rename_files <- function(chapters, language_tag) {
-  for (chapter in chapters) {
-    source_file <- file.path("pages", chapter)
-    target_file <- file.path("pages", gsub("\\.qmd$", paste0(".", language_tag, ".qmd"), chapter))
-    if (file_exists(source_file)) {
-      file_copy(source_file, target_file)
-      message(paste("Copied and renamed:", source_file, "to", target_file))
-    } else {
-      message(paste("Source file does not exist:", source_file))
-    }
-  }
-}
-
-# Copy and rename files with the specified language tag "es"
-copy_and_rename_files(chapter_list, "es")
+# # Function to copy and rename files
+# copy_and_rename_files <- function(chapters, language_tag) {
+#   for (chapter in chapters) {
+#     source_file <- file.path("pages", chapter)
+#     target_file <- file.path("pages", gsub("\\.qmd$", paste0(".", language_tag, ".qmd"), chapter))
+#     if (file_exists(source_file)) {
+#       file_copy(source_file, target_file)
+#       message(paste("Copied and renamed:", source_file, "to", target_file))
+#     } else {
+#       message(paste("Source file does not exist:", source_file))
+#     }
+#   }
+# }
+# 
+# # Copy and rename files with the specified language tag "es"
+# copy_and_rename_files(chapter_list, "es")
 
 # # 3. Translate the book
 # # babeldown helps you translate each book chapter. It will translate chapters one by one with babeldown before having a human review the translation.
 
-
+# 1 Detect chapters changed in the book
+readRenviron(".env")
+DEEPL_API_URL <- Sys.getenv("DEEPL_API_URL")
+DEEPL_API_KEY <- Sys.getenv("DEEPL_API_KEY")
 
 # # Rendering new language
 # # Translate a cover page
-# babeldown::deepl_translate_quarto(
-#      book_path = here::here(),
-#      chapter = "index.qmd",
-#      force = TRUE,
-#      render = FALSE, # Whether to run babelquarto::render_bool() after translation.
-#      source_lang = "EN",
-#      target_lang = "ES",
-#      formality = "less")
+babeldown::deepl_translate_quarto(
+     book_path = here::here(),
+     chapter = "index.qmd",
+     force = TRUE,
+     render = FALSE, # Whether to run babelquarto::render_bool() after translation.
+     source_lang = "EN",
+     target_lang = "ES",
+     formality = "more")
 
 # # Translate chapter page
 
@@ -75,10 +78,7 @@ copy_and_rename_files(chapter_list, "es")
 
 
 # UPDATE LANGUAGE TRANSLATION PROTOCOL ------------------------------------------------------------------------
-# 1 Detect chapters changed in the book
-readRenviron(".env")
-DEEPL_API_URL <- Sys.getenv("DEEPL_API_URL")
-DEEPL_API_KEY <- Sys.getenv("DEEPL_API_KEY")
+
 
 diffs <- system("git diff --name-only main...", intern = TRUE) # to include only committed file, use ... after main
 chapters_changed <- diffs[stringr::str_detect(diffs, "\\.qmd$")] # Filter only .qmd files
