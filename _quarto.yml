@@ -43,7 +43,7 @@ book:
   repo-url: https://github.com/appliedepi/case_studies
   sharing: ["twitter", "facebook", "linkedin"]
   sidebar:
-    logo: "images/Applied_Epi_logo.png"
+    logo: "images/logos/Applied_Epi_logo.png"
     tools:
       - icon: twitter
         href: "https://twitter.com/appliedepi"
@@ -52,7 +52,7 @@ book:
   author: Applied Epi
   date: today
   date-format: "MMM D, YYYY"
-  favicon: "images/Applied_Epi_logo.png"
+  favicon: "images/logos/Applied_Epi_logo.png"
   # cover-image: Applied_Epi_logo.png
   # cookie-consent:
   #   type: implied
