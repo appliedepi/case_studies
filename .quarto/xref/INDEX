@@ -7,5 +7,17 @@
   },
   "pages/oswego-es.qmd": {
     "oswego-es.html": "7a43bb42"
+  },
+  "pages/fulton.qmd": {
+    "fulton.html": "681519e5"
+  },
+  "pages/r_practical.qmd": {
+    "r_practical.html": "b3434502"
+  },
+  "pages/tbe.qmd": {
+    "tbe.html": "4f02f077"
+  },
+  "pages/oswego.es.qmd": {
+    "oswego.es.html": "624b038d"
   }
 }
