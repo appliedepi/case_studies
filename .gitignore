@@ -20,3 +20,4 @@ _book/*
 /case_study_template/*.html
 
 /.quarto/
+.env
