@@ -71,7 +71,8 @@ book:
     part-es: "Estudios de caso"
     chapters:
     - pages/fulton.qmd          
-    - pages/r_practical_epiet.qmd
-    - pages/tbe.qmd                
+    - pages/r_practical.qmd
+    - pages/tbe.qmd
+    # - pages/stengen_epiet.qmd                
     - pages/oswego.es.qmd
 
