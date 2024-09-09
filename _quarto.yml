@@ -1,17 +1,28 @@
 project:
   type: book
-book:
-  title: Applied Epi Case Studies
-  author: Applied Epi
-  date: 10/09/2023
-  cover-image: images/logos/Applied_Epi_logo.png
-  chapters:
-  - index.qmd
-  - pages/fulton-en.qmd
-  - pages/oswego-es.qmd
-bibliography: references.bib
+
+published-title: "Last updated"
+lightbox: true # Lightbox images allow a reader to click to see a larger version of the image (including any caption)
+
+babelquarto:
+  languagecodes:
+
+  - name: es
+    text: "Español"
+  - name: en
+    text: "English"
+
+  mainlanguage: 'en'
+  languages: ['es']
+
+title-es: "Estudios de casos de AppliedEpi"
+lang: en
+
 format:
-  html:
+  html: 
+    theme:
+      light: cosmo
+      dark: [darkly, theme-dark.scss]
     toc: true
     number-sections: false
     number-depth: 0
@@ -19,5 +30,48 @@ format:
     - webex.css
     include-after-body:
     - webex.js
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
+
+bibliography: references.bib
+
+
+book:
+  title: "AppliedEpi cases studies"
+  search:
+    type: textbox
+  repo-url: https://github.com/appliedepi/case_studies
+  sharing: ["twitter", "facebook", "linkedin"]
+  sidebar:
+    logo: "images/Applied_Epi_logo.png"
+    tools:
+      - icon: twitter
+        href: "https://twitter.com/appliedepi"
+      - icon: linkedin
+        href: "https://www.linkedin.com/company/appliedepi/"
+  author: Applied Epi
+  date: today
+  date-format: "MMM D, YYYY"
+  favicon: "images/Applied_Epi_logo.png"
+  # cover-image: Applied_Epi_logo.png
+  # cookie-consent:
+  #   type: implied
+  #   style: simple
+  #   palette: dark
+  # google-analytics:
+  #   tracking-id: "G-QXDW878QLX"
+  #   storage: cookies
+  #   anonymize-ip: true
+  chapters:
+  # INTRO 
+  - index.qmd                           
+
+  # ABOUT BOOK
+  - part: "Case studies"
+    part-es: "Estudios de caso"
+    chapters:
+    - pages/fulton.qmd          
+    - pages/r_practical_epiet.qmd
+    - pages/tbe.qmd                
+    - pages/oswego.es.qmd
+
