@@ -1,0 +1,2030 @@
+---
+output: html_document
+editor_options:
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format:
+  html:
+    css: webex.css
+    include-after-body: webex.js
+    df-print: kable
+editor:
+  markdown:
+    wrap: 72
+---
+
+```{=html}
+<!-- Some considerations about about this quarto template 
+-   Text within \<! \> will not show in your final document.
+    -   The other parts such as slashes (///), dashes (-) and tildes (\~) are just aesthetic
+    -   These comments are used to explain the code chunks.\
+    -   We refer to functions in curly brackets, e.g. {dplyr} and functions end in brackets, e.g. count()\
+    -   This comment will not show up when you knit the document.\
+    -   You can delete them if you want.\ -->
+```
+
+<!--Abajo inserte el nombre del caso práctico. Entre corchetes está el nombre de referencia de la sección a la que se harán referencias cruzadas a lo largo del libro -->
+
+# TBE - Regresión lineal (ENG) {.unnumbered}
+
+## Visión general {.unnumbered}
+
+| **Características del estudio de caso**                          |                                                                                                                               | 
+| ------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| Nombre:                   | TBE - regresión lineal                                                                                                        | 
+| Idioma:                   | Inglés                                                                                                                        | 
+| Herramienta:              | R; DAGitty                                                                                                                    | 
+| Ubicación:                | Alemania                                                                                                                      | 
+| Escala:                   | Nacional                                                                                                                      | 
+| Enfermedades:             | TBE                                                                                                                           | 
+| Palabras clave:           | TBE; Regresión lineal; R                                                                                                      | 
+| Complejidad técnica:      | Intermedia                                                                                                                    | 
+| Complejidad metodológica: | Intermedia                                                                                                                    | 
+
+***Autoría***  
+Autores originales: Teresa Nygren (RKI), Alicia Barrasa Blanco (UK FETP),
+Jan Walter (RKI) y Achim Dörre (RKI)  
+Fuente de los datos: Los datos son ficticios y se inspiraron en [Nygren et al. Encefalitis transmitida por garrapatas: manifestaciones clínicas agudas y gravedad en 581 casos de Alemania, 2018-2020. Journal of Infection. 2023 Abr 1;86(4):369-75](https://linkinghub.elsevier.com/retrieve/pii/S0163-4453\(23\)00088-9)  
+Adaptado por: Liese Van Gompel (MediPIET), Joana Gomes Dias (ECDC), Chiara
+Entradi (ECDC) y Alberto Mateo Urdiales (ISS)\\
+
+## Instrucciones
+
+### Obtener ayuda
+
+Hay varias formas de obtener ayuda:
+
+1) Busque las "pistas" y soluciones (véase más abajo)
+2) Publique una pregunta en [Epi aplicada
+  Comunidad](www.community.appliedepi.org) con referencia a este caso
+  estudio
+
+### Consejos y soluciones
+
+Este es el aspecto de los "ayudantes":
+
+<!--Note que esta es la forma de incluir pistas y explicaciones a las soluciones -->
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+¡Aquí verá una pista útil!
+
+</br>
+
+</detalles>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver la solución
+
+</summary>
+
+</br>
+
+```{r, eval=F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Aquí tiene más explicaciones sobre por qué funciona la solución.
+
+</br>
+
+</detalles>
+
+```{=html}
+<!--
+NOTE: End of solution
+-->
+```
+
+<BR> NOTA SOBRE LAS SOLUCIONES: Al utilizar {webexercises} la solución se resaltará automáticamente, por lo que puede cambiar (si procede) la característica "Haga clic aquí para ver la solución" por "Haga clic aquí para ver la explicación de la solución" -->
+
+#### Publicar una pregunta en el Foro de la Comunidad
+
+... descripción aquí sobre la publicación en la Comunidad... A COMPLETAR POR
+EPI SOLICITADO
+
+#### Condiciones de uso
+
+**Descargo de responsabilidad** La información presentada en este ejercicio y los archivos de datos asociados se han modificado deliberadamente para facilitar la adquisición de los objetivos de aprendizaje a los becarios de los programas EPIET, EUPHEM y asociados a EPIET.
+Este estudio de caso se presentó por primera vez en 2022 (para más información, véase el acuerdo sobre derechos de autor y licencia).
+
+Es gratuito:
+
+- de Compartir: de copiar y distribuir la obra
+- Remezclar: adaptar y construir sobre el material
+
+En las siguientes condiciones:
+
+- Atribución: Debe atribuir la obra de la manera especificada por
+  el autor o el licenciante (pero no de ninguna manera que sugiera que ellos
+  le respaldan a usted o a su uso de la obra). La mejor manera de hacerlo es
+  mantener tal cual la lista de colaboradores: fuentes, autores y
+  revisores.
+
+- Compartir igual: Si altera, transforma o construye sobre esta obra, usted
+  puede distribuir la obra resultante sólo bajo la misma o similar
+  licencia a ésta. Sus cambios deben estar documentados. Bajo esa
+  condición, se le permite añadir su nombre a la lista de
+  colaboradores.
+
+- Notificación: Si utiliza la obra en la forma especificada por el
+  autor o licenciante, [Walter@rki.de](mailto:Walterj@rki.de)
+
+- No puede vender esta obra por sí sola, pero puede utilizarla como parte de un
+  enseñanza.
+
+En el entendimiento de que:
+
+- Renuncia: Se puede renunciar a cualquiera de las condiciones anteriores si obtiene
+  permiso del titular de los derechos de autor.
+
+- Dominio público: Cuando la obra o alguno de sus elementos se encuentra en el
+  dominio público en virtud de la legislación aplicable, esa condición no es en modo alguno
+  afectado por la licencia.
+
+- Otros derechos: Ninguno de los siguientes derechos se verá afectado por
+  la licencia:
+  
+  - Sus derechos de trato justo o uso justo, u otros derechos aplicables
+    excepciones y limitaciones de los derechos de autor;
+  
+  - Los derechos morales del autor;
+  
+  - Los derechos que otras personas puedan tener sobre la propia obra o sobre
+    cómo se utiliza la obra, como los derechos de publicidad o privacidad.
+
+- Aviso: Para cualquier reutilización o distribución, debe dejar claro a los demás
+  los términos de la licencia de esta obra manteniendo juntos esta obra y el
+  licencia actual.
+
+Esta licencia se basa en
+[http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
+
+### Comentarios y sugerencias
+
+- Puede escribir sus comentarios y sugerencias sobre este estudio de caso en el
+  [página de incidencias de GitHub](https://github.com/appliedepi/case_studies)
+- O envíenos un correo electrónico a
+  [contact@appliedepi.org](mailto:contact@appliedepi.org)
+
+\\pagebreak
+
+### Versión y revisiones
+
+Escriba la fecha de la primera versión
+
+Escriba las revisiones realizadas al estudio de caso
+
+| Fecha                     | Cambios realizados                                                                                                            | Autor                                    | 
+| ------------------------- | :---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------: |
+| 2023                      | Revisión Código R                                                                                                             | Liese Van Gompel (MediPIET)              | 
+| 2024                      | Revisión Código R                                                                                                             | Joana Gomes Dias y Chiara Entradi (ECDC) | 
+| 2024                      | Revisión del contenido, la estructura, el código R y adaptación del formato a la plantilla de estudios de caso de Applied Epi | Alberto Mateo Urdiales (ISS)             | 
+
+\\pagebreak
+
+## Orientación
+
+### Objetivos de este estudio de caso
+
+Al final del estudio de caso, los participantes deberán ser capaces de:
+
+- Utilizar gráficos acíclicos dirigidos (DAG) para identificar variables adecuadas para controlar los factores de confusión;
+- Realizar una regresión lineal en R;
+- Escribir los modelos asociados e interpretarlos.
+
+### Nivel de conocimientos previos asumido
+
+Se espera que los participantes estén familiarizados con los grafos acíclicos dirigidos (DAG) y con el uso de DAGitty (un entorno basado en navegador para crear DAGS) para la primera parte; y con la gestión de datos, así como con el análisis descriptivo y estratificado en R para la segunda parte.
+
+### Preparación del estudio de caso
+
+Incluya los pasos necesarios para empezar a reproducir el análisis del caso
+estudio
+
+Por ejemplo:
+
+1. Descargue la carpeta denominada tbe\_en y extraiga el contenido en el ordenador portátil local
+
+2. Cree un proyecto Rstudio en la carpeta tbe\_en. Si no está seguro de cómo hacerlo, lea el capítulo de EpiRhandbook sobre [Proyectos R](https://epirhandbook.com/en/new_pages/r_projects.html)
+
+3. Dentro de la carpeta "tbe\_en": La subcarpeta "data" contiene un archivo de datos brutos llamado *tbe.RDS*. Éste es el único archivo de datos que utilizará en este estudio de caso.
+
+4. La subcarpeta scripts debe utilizarse para guardar cualquier script relacionado con el
+  análisis. Dentro de "backup" encontrará un script de solución con el código del estudio de caso llamado *tbe\_lr\_respaldo.R*. También encontrará una imagen que corresponde a la solución DAG propuesta.
+
+5. La subcarpeta "salidas" podría utilizarse para almacenar todas las salidas (tablas, gráficos,
+  documentos) que son el resultado del análisis
+
+6. También encontrará dentro de "tbe\_es" un documento de Word llamado *guía\_de\_arranque\_DAGitty.docx* por si necesita ayuda para utilizar este sitio web
+
+# Introducción al estudio de caso
+
+La encefalitis transmitida por garrapatas (ETG) es una infección vírica prevenible mediante vacunación y transmitida por garrapatas. El curso típico de la enfermedad es bifásico y consta de una primera fase con síntomas generales como dolor de cabeza y fiebre, un intervalo libre de síntomas y una segunda fase con manifestaciones neurológicas. La gravedad varía desde síntomas leves, pasando por meningitis, hasta meningoencefalitis o -mielitis graves. En general, el 70-95% de las infecciones permanecen subclínicas y \<1% mueren.
+En algunos análisis se observó que la edad, el curso monofásico, las comorbilidades del sistema nervioso central (SNC) y las comorbilidades generales se asociaban de forma independiente con la TBE grave. Los resultados fueron inconsistentes en cuanto a la diabetes, el sexo masculino y otros factores. Otros posibles predictores son el grupo sanguíneo, la duración de la ingesta de sangre de las garrapatas (proxy: garrapata grande en el momento de la extracción), la inmunosupresión, las enfermedades autoinmunes y las comorbilidades inflamatorias crónicas.
+En Alemania, el diagnóstico de laboratorio de la EET aguda pasó a ser de declaración obligatoria en 2001. Entre 2018 y 2020, se llevó a cabo una vigilancia intensificada. Los objetivos principales eran evaluar las manifestaciones clínicas, la utilización de la asistencia sanitaria, los cuidados informales, las prácticas de tratamiento, la calidad de vida y las bajas por enfermedad, así como identificar los factores asociados a la gravedad de la EET.
+
+**Nota** Esta introducción ha sido adaptada de [Nygren et al. Encefalitis transmitida por garrapatas: manifestaciones clínicas agudas y gravedad en 581 casos de Alemania, 2018-2020. Revista de Infecciones. 2023 Abr 1;86(4):369-75](https://linkinghub.elsevier.com/retrieve/pii/S0163-4453\(23\)00088-9)
+
+# Objetivo general
+
+Usted es uno de los epidemiólogos encargados del sistema de vigilancia intensificada. Su jefe le pide que compruebe una hipótesis que **la hipertensión arterial también puede ser causal de la TBE grave**. Como variable sustitutiva de la TBE grave, utilizará la duración de la hospitalización (número de días pasados en el hospital).
+
+## **Objetivo 1: Dibujar un gráfico acíclico dirigido (DAG)**
+
+Puesto que está interesado en una cuestión causal, dibuje un DAG. Si desea utilizar un ordenador, puede intentar [http://www.dagitty.net/](http://www.dagitty.net/).
+
+- ¿Qué variables tendría que ajustar?
+
+Si es nuevo en DAGitty puede encontrar información útil en el documento llamado *guía\_de\_arranque\_DAGitty.docx* presente en la carpeta "tbe\_es" que ha descargado en su ordenador portátil (Ver **Preparación del estudio de caso**).
+
+Una vez que haya dibujado su DAG, haga clic en la solución de abajo para ver el DAG que le proponemos.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver la solución
+
+</summary>
+
+</br>
+
+Al planificar el estudio, el epidemiólogo tuvo en cuenta este DAG:
+
+![](../images/tbe/tbe_dag.png)
+
+![](../images/tbe/legend_dag.png)
+
+</br>
+
+</detalles>
+
+Según este DAG, si desea explorar la asociación entre hipertensión y TBE grave, debe ajustar por:
+
+- Diagnóstico de TBE
+
+- Vacunación TBE
+
+- edad
+
+- garrapata grande (=carga viral grande)
+
+- curso monofásico
+
+- otras comorbilidades
+
+- sexuales.
+
+El diagnóstico de TBE está controlado por diseño (sólo se incluyen los casos).
+
+Probablemente su DAG tendrá un aspecto diferente. Esto está absolutamente bien, ya que no existe un único DAG posible. Pero debería poder justificar su DAG basándose en las pruebas existentes.
+
+## **Objetivo 2: Realizar una regresión lineal en R**
+
+Ahora trabajaremos con el marco de datos proporcionado que incluye los datos de 523 pacientes que han sido hospitalizados por TBE en los años 2018 a 2020 en Alemania y de los que se recogieron datos.
+
+Se proporcionan las siguientes variables:
+
+*Tabla 1: Diccionario de datos para el marco de datos "tbe.RDS":*
+
+| **Variable**                          | **Descripción**                                                                                                                              | **Valores**                                         | 
+| ------------------------- | :---------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------- |
+| edad                      | edad en años                                                                                                                  | continua                                 | 
+| hiper                     | hipertensión                                                                                                                  | 1= sí, 0=no                              | 
+| vac                       | vacunado contra la TBE                                                                                                        | 1= sí, 0=no                              | 
+| mono                      | curso monofásico de la enfermedad                                                                                             | 1= sí, 0=no                              | 
+| otros                     | otras comorbilidades                                                                                                          | 1= sí, 0=no                              | 
+| tick                      | garrapata grande al retirarla                                                                                                 | 1= sí, 0=no                              | 
+| sexo                      | sexo                                                                                                                          | 1= femenino, 0= masculino                | 
+| hospd                     | duración de la hospitalización en días                                                                                        | continua                                 | 
+
+### **Paso 1: Puesta en marcha**
+
+#### Paso 1.1: Cree un nuevo script R
+
+Una vez que haya creado un proyecto R dentro de la carpeta "tbe\_es" (como se especifica en el segundo punto de la sección **Preparación del caso práctico**). Cree un nuevo script con el nombre *tbe\_lr* y guárdelo en la subcarpeta "scripts".
+Si está familiarizado con Rmarkdown, puede decidir utilizar este tipo de archivo en lugar de un script estándar de R.
+
+#### Paso 1.2: Definir el lenguaje R
+
+Dependiendo de dónde se encuentre y de cómo haya realizado la instalación de R, su idioma "locale" podría ser diferente del idioma de los gráficos que desea producir. Por ejemplo, una persona francesa podría tener un "locale" francés. En ese caso, al crear un gráfico por día de la semana, el lunes aparecerá como "lundi". Si esa persona francesa desea crear un informe en inglés, como en este caso, deberá cambiar la "configuración regional" del idioma.
+
+**Tarea** Asegúrese de que su "locale" está en inglés y cámbiela a inglés si no lo está. Si no sabe cómo hacerlo, intente encontrarlo en línea (¡buscar ayuda en línea es una habilidad importante para los usuarios de R!). Si no, vea la solución a continuación
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+```{r , echo=TRUE, results = 'hide'}
+# Para ver la configuración regional de su idioma
+Sys.getlocale()
+
+# Para cambiarlo a inglés
+
+Sys.setlocale("LC\_ALL", "English")
+
+````
+
+</br>
+
+</details>
+
+
+#### Step 1.3: Install/load packages
+
+Install and load the following packages: rio, skimr, janitor, gtsummary, broom, rstatix, ggfortify and tidyverse.
+
+You can find more about installing/loading packages in the [Packages](https://epirhandbook.com/en/new_pages/basics.html#packages) section of the EpiRhandbook. 
+
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+You may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called `select()` which we frequently use to subset columns of a data frame. But other packages such as {MASS} do also have a function called `select()`. This could create headaches if you want to subset columns using dplyr's `select()` but R thinks you're calling MASS's `select()` (we call this masking - `dplyr::select()` is masked by `MASS::select()`). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your `p_load()` list so that functions from {tidyverse} (including {dplyr} functions) will always "prevail".
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  gtsummary,  # summary statistics, tests and regressions 
+  broom,      # to generate tidy tibbles of regression analysis
+  rstatix,    # for statistics, including statistical tests
+  ggfortify,  # data visualisation for statistical analysis results
+  tidyverse  # data management and visualization
+)
+
+````
+
+</br>
+
+</detalles>
+
+### **Paso 2: Importar y explorar los datos**
+
+```{r, include=FALSE}
+tbe <- import("../case_studies_to_translate/ENG/tbe_en/data/tbe.RDS")
+```
+
+#### Paso 2.1: Importar los datos y breve exploración
+
+Importe el marco de datos llamado "tbe.RDS" dentro de la subcarpeta "datos". Si está trabajando dentro de un proyecto, encontrar la ruta al marco de datos debería ser relativamente sencillo. Un archivo ".RDS" es un archivo objeto de R. Puede importar este marco de datos utilizando la función `readRDS()` función de {base}. Sin embargo, le recomendamos que utilice la función **`import()`** función de {rio} ya que, como recordará, esta función reconocerá el tipo de archivo y lo importará tanto si el archivo es de R, Stata, excel o muchos otros. Si tiene alguna duda sobre la importación revise la [Importar y exportar](https://epirhandbook.com/en/new_pages/importing.html#import-data) del EpiRhandbook.
+
+A continuación, explore los datos intentando responder a las siguientes preguntas:
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "523",
+  "2",
+  answer = "8",
+  "6"
+)
+
+
+cat("QUESTION: How many columns does the dataframe have?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "958",
+  answer = "22",
+  "18",
+  "39"
+)
+
+
+cat("QUESTION: How many rows have missing the column 'Other comorbidities'?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "119",
+  "191",
+  "332",
+  "285"
+)
+
+
+cat("QUESTION: How many cases have hypertension?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "0",
+  "6",
+  "2",
+  "8"
+)
+
+
+cat("QUESTION: How many character columns does the dataframe have?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "There is no difference between these classes, those are synonims",
+  "Character columns contain text, whereas factors contain numbers",
+  "Factors are used when we have more than 5 categories of data",
+  answer = "Both classes contain text, but factors are used when there are a limited number of unique character strings and they often represent categorical data"
+)
+
+
+cat("QUESTION: What is the difference between a column of class 'character' and a column of class 'factor'?", longmcq(opts))
+
+```
+
+:::
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Pulse para leer una pista
+
+</summary>
+
+</br>
+
+Una forma eficiente de explorar los datos es utilizar la función `skim()` del {skimr} ya que le proporciona toda la información necesaria con un solo comando. Por supuesto, existen varias alternativas.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE, results="hide", eval=FALSE}
+# Import the data
+
+tbe <- import("data/tbe.RDS")
+```
+
+```{r, echo=TRUE}
+
+# Explore the dataframe
+skim(tbe)
+```
+
+</br>
+
+</detalles>
+
+Normalmente, en este punto empezaríamos **limpiar** nuestros datos. Afortunadamente para usted, los datos tbe ya han sido limpiados, por lo que puede saltar directamente a la parte divertida. No obstante, siéntase libre de renombrar/recodificar o cambiar cualquier aspecto del marco de datos para acomodarlo a sus preferencias personales.
+
+#### Paso 2.2: Inspeccione las columnas de los factores
+
+Como vimos antes, tenemos 6 columnas factoriales que representan variables categóricas en nuestro marco de datos. Aunque las inspeccionamos con el `skim()` podemos explorarlas más a fondo con la función `tabyl()` función {janitor} paquete.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Pulse para leer una pista
+
+</summary>
+
+</br>
+
+Para ahorrar tiempo, intente utilizar siempre funciones que le permitan aplicar la misma función a muchos objetos diferentes (por ejemplo, varias columnas) simultáneamente. Puede conseguirlo utilizando varios enfoques, como por ejemplo *bucles*, *lapply* o *purrr*. Aquí damos la solución con *purrr*, así que si quiere explorar más a fondo purrr eche un vistazo a la página dedicada [sección](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) en el EpiRhandbook.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+### One by one
+tabyl(tbe, hyper)
+
+tabyl(tbe, vac)
+
+#### All at once
+tbe %>% 
+  
+  select(where(is.factor)) %>% #we first select only the columns that are of class 'factor'
+  
+  map(.f = tabyl)              #inside map() from {purrr} we specify the function we want to apply to the entire dataframe
+
+```
+
+</br>
+
+</detalles>
+
+#### Paso 2.3: Histograma con la duración de la hospitalización
+
+Nuestra variable de resultado será la duración de la hospitalización en días (columna *hospd*). Quizá merezca la pena examinar esta columna con más detalle, ya que sus características pueden influir en la forma en que realizaremos el análisis más adelante. Un aspecto importante es comprobar su distribución y averiguar, al menos visualmente, si sigue una distribución normal.
+
+**Tarea** Crear un histograma con la distribución de *hospd*. Intente añadir la curva normal a este histograma.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+)
+
+
+cat("QUESTION: Does lenght of hospitalisation look like normally distributed?", longmcq(opts))
+
+```
+
+:::
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Hay muchas formas de crear un histograma en R, pero pruebe a utilizar el paquete {ggplot2}. Puede echar un vistazo al
+[Conceptos básicos de ggplot](https://epirhandbook.com/new_pages/ggplot_basics.html) del EpiRhandbook si tiene dificultades.
+
+Añadir la curva normal al histograma puede resultar todo un reto. No se preocupe si no lo consigue. Una pista es que, en el histograma, necesitará visualizar la **densidad** y no el recuento de frecuencias. Pruebe a pedir un *motor de búsqueda* o a cualquier *plataforma de IA* para pedir ayuda. La mayoría de nosotros utilizamos estas herramientas a diario para pedir ayuda en R.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE, results="hide"}
+tbe %>%                                  #we call the data first and we pass it into ggplot with the pipe operator
+  
+  ggplot(mapping = aes(x = hospd)) +     #when drawing an histogram we only need to specify the x-axis   
+  
+  geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
+  
+  #the function below will add the normal curve. 
+  stat_function(fun = dnorm,  #In the fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(tbe$hospd, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) # Identify the colour and line width of the normal curve
+```
+
+Ahora, ¡eso fue difícil! Pero estamos aquí para empujarle a salir de su zona de confort. Entremos en más detalles sobre lo que hemos hecho.
+
+A estas alturas, ya debería sentirse cómodo creando un histograma básico utilizando ggplot, así que centrémonos en las cosas nuevas.
+Hemos añadido otra estética al `geom_histogram()` en la que especificamos que queremos que se trace la densidad y no el recuento de frecuencias. **¿Por qué?** La visualización de la densidad es más apropiada cuando queremos centrarnos en la forma de los datos, ya que podemos ver con mayor claridad la distribución de probabilidad subyacente.
+
+Pero, **¿qué es realmente la densidad?** La densidad representa la frecuencia relativa, lo que hacemos es escalar el eje y para que el área bajo el histograma sea igual a 1, normalizando el histograma para representar probabilidades (densidad) en lugar de recuentos brutos. De hecho, observe cómo cambia el eje y cuando representa la densidad y cuando representa los recuentos.
+
+Por último, **¿por qué ponemos dos puntos antes y después de la densidad en el aes()?** Los puntos dobles antes y después de ..density.. son una sintaxis especial utilizada dentro de ggplot2. Indican una variable interna que ggplot2 calcula durante el proceso de trazado. Así, ggplot2 calcula normalmente la densidad para los histogramas, pero no la muestra a menos que usted la especifique (con esta sintaxis).
+
+</br>
+
+</detalles>
+
+#### Paso 2.4: Crear una tabla cruzada y calcular una prueba estadística
+
+Supongamos que ahora queremos explorar si el sexo está asociado a la hipertensión.
+Para averiguarlo, cree una tabla cruzada que muestre estas dos variables y calcule la prueba estadística adecuada para saber si existe una asociación estadística entre ellas.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Hay varias formas de hacerlo. Podría, por ejemplo, crear la tabla cruzada con `tabyl()` y luego calcular por separado la prueba estadística. La forma más sencilla sería utilizar el `tbl_summary()` función {gtsummary} que le permite hacer ambas cosas, la tabulación cruzada y las pruebas estadísticas, en el mismo comando. Ya debería estar familiarizado con este paquete, pero si necesita un pequeño repaso eche un vistazo a la página dedicada [capítulo](https://epirhandbook.com/new_pages/stat_tests.html#stats_gt) del EpiRhandbook.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+tbe %>% 
+  select(hyper, sex) %>%   #we select the columns we are interested in
+  tbl_summary(by = hyper) %>% #we specify that we want by hypertension status
+  add_p()                     # adding this command will calculate the most appropriate statistical test
+
+```
+
+</br>
+
+</detalles>
+
+Como puede ver, no existe una asociación significativa entre el sexo y la hipertensión.
+
+### **Paso 3: Comprobar si existe una asociación lineal entre la duración de la hospitalización y la edad**
+
+La edad es un factor de confusión potencial para un curso más grave de la ETB que implique una estancia hospitalaria más prolongada, por lo que nos gustaría ajustarla. Dado que la edad es una variable continua, podríamos incluirla en el modelo de regresión de varias formas (por ejemplo, como variable continua, en categorías, transformándola, etc.). Para decidirlo, necesitamos analizar la asociación de la edad con la duración de la hospitalización.
+
+#### Paso 3.1: Inspeccionar una posible asociación lineal
+
+Observe primero la relación entre la edad y la duración de la hospitalización mediante un diagrama de dispersión.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+    
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+
+</br>
+
+</detalles>
+
+¿Qué opina usted? ¿Existe una asociación lineal? ¿Cómo puede estar seguro? Añada una línea de tendencia del modelo lineal para ayudarle con la interpretación.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Para la línea de tendencia, puede añadir un `geom_smooth()` geometría. Busque la documentación de geom\_smooth (puede escribir `?geom_smooth()` en la consola y pulsar "Intro") y busque la opción de métodos.Para una línea de tendencia lineal puede asignar al argumento de métodos "lm" (modelo lineal).
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+
+</br>
+
+</detalles>
+
+Ahora tiene pruebas visuales de una asociación lineal de la edad con la duración de la hospitalización. Por lo tanto, **parece razonable incluir la edad como variable continua en el análisis.**
+
+#### Paso 3.2: Comprobar si la asociación entre edad y duración de la hospitalización varía en función del sexo
+
+Ahora, compruebe visualmente si la asociación entre edad y hospd difiere según el sexo
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Puede optar por crear gráficos separados añadiendo un `facet_grid()` a su `ggplot()` (intente buscar la sintaxis usted mismo). También puede decidir utilizar un código de colores para diferenciar los niveles de sexo de los factores. Para esto último, ¿dónde cree que debe especificar el color, dentro o fuera del `aes()`? Lea esto [sección](https://epirhandbook.com/new_pages/ggplot_basics.html#ggplotgroups) del Manual EpiR si tiene dudas.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# As separate graphs
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd)) +    
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  facet_grid(~sex)  +                   # adding this function will generate a separate graph for each category of sex
+
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+
+
+# Same graphs with different colours
+tbe %>%    
+  
+  ggplot(mapping = aes(x = age,        # we put length of hospitalisation on the y-axis because this axis usually contains the dependent variable; and here we want to know if hospd depends on age
+                       y = hospd,
+                       colour = sex )) + #we add the colour in the aes so that it varies according to the categories of sex   
+  
+  geom_point() +                       # this geometry will create a scatterplot
+  
+  geom_smooth(method = lm) +           # this geometry will add a trend line. "lm" is for "linear model"
+  
+  scale_x_continuous(name = "Age" , limits = c(0,100)) +          # Format the x-axis to a range between 0 and 100 
+  
+  scale_y_continuous(limits = c(0,70)) +                          # Format the y axis to a range between 0 and 70
+  
+  labs(
+    x = "Age",
+    y = "Length of hospitalisation in days"
+  ) + 
+  
+  
+  theme_bw()                            # Add a pre-defined theme for formatting
+```
+
+</br>
+
+</detalles>
+
+- **¿Qué observa?**
+  Las líneas correspondientes a los pacientes de sexo femenino y masculino tienen pendientes diferentes, lo que indica que la asociación entre la edad y los días de hospitalización se ve modificada por el sexo.
+
+- **¿Por qué es importante?**
+  Dado que los efectos de la edad sobre la duración de la hospitalización son diferentes según el sexo, es posible que desee controlar este aspecto.
+
+### **Paso 4: Compruebe si hay diferencias en la duración de la hospitalización según el estado de hipertensión**
+
+Centrémonos ahora en nuestra exposición de interés (la hipertensión). Podemos comprobar si los casos de TBE con hipertensión tienen una estancia hospitalaria significativamente más larga en comparación con los que no tienen hipertensión, ya sea realizando una simple prueba estadística o mediante una regresión univariante. Nosotros haremos ambas cosas.
+
+#### Paso 4.1: Prueba estadística simple
+
+Una forma sería realizar una **prueba estadística simple** que nos permita averiguar si existe una diferencia significativa entre los grupos. Como sabe, la elección de la prueba estadística vendrá determinada por el número de grupos que tengamos y la naturaleza de las variables. Si no recuerda bien cómo elegir la prueba estadística adecuada eche un vistazo a esto [artículo del BMJ](https://www.bmj.com/about-bmj/resources-readers/publications/statistics-square-one/13-study-design-and-choosing-statisti)
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Chi-square or Fisher's exact test",
+  "ANOVA or Kruskal Wallis",
+  answer = "Student t test or Mann Whitney/Wilcoxon rank-sum test",
+  "McNemar's test or Spears Rank"
+)
+
+cat("QUESTION: What simple statistical tests do you think would be most appropriate in this case?", longmcq(opts))
+
+```
+
+:::
+
+En este caso tenemos datos independientes, dos grupos (hipertensión sí/no) y un resultado dependiente cuantitativo (duración de la hospitalización), por lo que elegiremos un **prueba t** o **prueba de suma de rangos de Wilcoxon** (también conocida como Mann-Whitney). Haríamos una prueba t si la duración de la hospitalización se distribuye normalmente y Wilcoxon si no. Ya hemos comprobado en **Paso 2.3** que la distribución de *hospd* parecía normal a partir del histograma, veamos ahora si la distribución parece normal para ambas categorías de hipertensión: hipertensión-sí e hipertensión-no.
+
+**Tarea** Compruebe visualmente si la duración de la hospitalización se distribuye normalmente para ambas categorías de hipertensión.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Una forma sencilla de comprobarlo es generando un histograma para *hospd* utilizando ggplot(). Estratificación por *hiper* se realiza fácilmente añadiendo un `facet_grid()` a su ggplot, como ya hemos visto con el scatterplot. Observar la distribución de frecuencias de "hospd" por "hipertensión" ya nos puede dar una idea de si los datos se distribuyen normalmente o no.Sin embargo, si queremos añadir una curva normal, necesitaríamos trazar la densidad y no la frecuencia, como quizá recuerde del histograma que construimos anteriormente en **Sep 2.3**.
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Plot the frecuency distribution by hypertension status
+tbe %>%
+  
+  ggplot(mapping = aes(x = hospd)) +
+  
+    geom_histogram() + 
+    
+    facet_grid(~hyper) # add facet_grid() to get a graph for each hyper status
+
+
+# Plot the density and add a  normal curve
+tbe %>%                                  
+  
+  ggplot(mapping = aes(x = hospd, fill = hyper)) +  #remember that for bars, fill is is the interior colour     
+  
+    geom_histogram(aes(y = ..density..)) + #here we are telling ggplot2 to display the density and not the freq count
+  
+    facet_grid(~hyper) + # add facet_grid() to get a graph for each hyper status
+
+    #the function below will add the normal curve. 
+    stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(tbe$hospd, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(tbe$hospd, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) + # Identify the colour and line width of the normal curve
+    labs(
+      x = "Length of hospitalisation in days",
+      y = "Density"
+      )
+
+```
+
+</br>
+
+</detalles>
+
+Por los gráficos parece que los datos se distribuyen normalmente, pero hay una prueba que podemos hacer para determinarlo: **prueba de Shapiro-Wilk**.
+
+**Tarea** Utilice la prueba de Shapiro para determinar si la duración de la hospitalización procede de una población distribuida normalmente.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Puede elegir {base} funciones para realizar la prueba de Shapiro (y cualquier otra prueba estadística) o funciones del {rstatix} paquete. Aquí utilizaremos estas últimas, porque {rstatix} tiene una sintaxis compatible con {dplyr} lo que puede ser una ventaja. En cualquier caso, los nombres de las funciones son muy similares. Por ejemplo, utilizando {base} la función de la prueba de Shapiro es `shapiro.test()` y con {rstatix} la misma función se escribe como `shapiro_test()`. Si desea saber más sobre cómo realizar pruebas estadísticas sencillas en R, lea el capítulo del EpiRhandbook sobre [Pruebas estadísticas sencillas](https://epirhandbook.com/new_pages/stat_tests.html)
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+tbe %>%
+  
+  group_by(hyper) %>% #we first group by out independent or exposure variable
+  
+  
+  shapiro_test(hospd)  # this function performs the Shapiro-Wilk test for all groups separately
+```
+
+</br>
+
+</detalles>
+
+La hipótesis nula de la prueba de Shapiro es que los datos se distribuyen normalmente. Como nuestros resultados no fueron significativos (p>0,05) no podemos rechazar dicha hipótesis nula. En otras palabras, podemos concluir que los datos están distribuidos normalmente.
+
+*Nota*: Un estadístico, o un epidemiólogo que pretenda ser estadístico, se sentiría muy incómodo por la conclusión escrita más arriba. Cuando no somos capaces de rechazar una hipótesis nula no podemos concluir que esta hipótesis (en este caso que los datos se distribuyen normalmente) es cierta, sino que simplemente debemos afirmar que no hemos sido capaces de rechazarla. Sin embargo, en términos prácticos, al realizar una prueba de Shapiro estamos dando por supuesto que los datos se distribuyen normalmente..... Redáctelo como quiera, pero las consecuencias son las mismas.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Student t-test",
+  "Wilcoxon rank-sum test"
+  
+)
+
+cat("QUESTION: Now that we know that the data is normally distributed, what test should we carry out?", longmcq(opts))
+
+```
+
+:::
+
+**Tarea** Realizar la prueba estadística para determinar si existen diferencias significativas en la duración de la hospitalización según el estado de hipertensión
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+tbe %>%
+  
+  t_test(hospd ~ hyper)  # we write first our dependent variable and then the exposure one
+```
+
+</br>
+
+</detalles>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+  
+)
+
+cat("QUESTION: Is there a significant difference in the length of hospitalisation among patients with and without hypertension?", longmcq(opts))
+
+```
+
+:::
+
+*Nota* En conjuntos de datos grandes (como éste) la prueba de Shapiro-Wilk puede rechazar la hipótesis de normalidad aunque la desviación de la distribución normal sea bastante pequeña. En este caso, puede optar por calcular la prueba t a pesar de la violación de la hipótesis de normalidad. Esto es aceptable porque para muestras grandes, el error impuesto por la aproximación de la prueba t es insignificante.
+
+#### Paso 4.2: Regresión lineal univariante entre hospd e hiper
+
+La otra vía fue la regresión univariante. Realice una regresión lineal univariante con la duración de la hospitalización (hospd) como variable dependiente y la hipertensión como variable independiente. Asigne este modelo a un objeto denominado *hiper\_hospd\_lm*. Si es la primera vez que realiza una regresión en R, eche un vistazo al [Univariante](https://epirhandbook.com/new_pages/regression.html#univariate) regression chapter of the EpiRhandbook.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Como estamos haciendo una regresión lineal, podríamos utilizar la función `lm()` función de {base} para analizar la asociación entre la hipertensión y la duración de la hospitalización. La sintaxis es: lm(resultado/variable dependiente ~ exposición/variable independiente, datos = dataframe) Puede imprimir la salida del modelo en un comando posterior utilizando la función `summary()` función Sin embargo, la `tidy()` función de {broom} proporciona una visión general que puede compilarse más fácilmente y utilizarse en análisis posteriores si es necesario.
+
+El enfoque descrito anteriormente es el {base} enfoque R. También puede realizar un análisis de regresión univariante utilizando la función `tbl_uvregression()` de {gtsummary} paquete. Si desea explorar más a fondo este enfoque alternativo lea el EpiRhandbook dedicado [capítulo](https://epirhandbook.com/new_pages/regression.html#reg_gt_uni)
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+#First we write the formula (lm stands for linear model) and assign the model to an object
+hyper_hospd_lm <- lm(hospd ~ hyper, data= tbe)
+
+# Prin the detailed output of the model
+summary(hyper_hospd_lm)
+
+# Print the main model parameters
+results_hyper_hospd_lm <- tidy(hyper_hospd_lm) 
+results_hyper_hospd_lm
+```
+
+</br>
+
+</detalles>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+)
+
+cat("QUESTION: Based on the results of this model, is there a significant association between hypertension and hospd?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "3.9",
+  "41.3",
+  "1.46",
+  "1.2"
+)
+
+cat("QUESTION: How much does having hypertension increase length of hospitalisation (in days)?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "2.7%",
+  "41%",
+  answer = "1.3%",
+  "3%"
+  
+)
+
+cat("QUESTION: What % of the variability in length of hospitalisation can be explained by hypertension?", longmcq(opts))
+
+```
+
+:::
+
+En este caso la ecuación de regresión es: $hopsd(predicha)=41,3+3,9⋅hyper$.
+
+Repasemos ahora los resultados del modelo.
+Primero revisaremos las salidas del `tidy()` función. Como ya se ha explicado, la ventaja de utilizar `tidy()` es que podemos guardar la salida como un objeto para su posterior manipulación. También, `tidy()` guarda lo que normalmente necesitaríamos en epidemiología para la interpretación del modelo:
+
+Tenemos cuatro columnas y dos filas. Las filas se refieren a los **intercepción** (valor de referencia para hospd cuando NO hay hipertensión: 41,3) y a nuestra única exposición/predictor (la hipertensión).
+En la mayoría de los casos, le interesará la fila correspondiente a **hipertensión** (su predictor) y en las columnas **estimación** y **p.valor**. El **estimación** de la hipertensión nos dice el cambio estimado en hospd cuando se pasa de NO hipertensión a SÍ hipertensión (por eso se escribe como *hiperyes*). En este caso, es aproximadamente 3,94, lo que significa que tener hipertensión se asocia a un aumento de 3,94 días de hospitalización. La columna **valor.p** nos indica si esta estimación es estadísticamente significativa.
+
+**Esto es la mayor parte de lo que necesita saber para ser un epidemiólogo funcional**. Pero si quiere saber más, le explicaremos el resto de elementos de la salida de ambas funciones:
+
+La columna **std.error** proporciona una estimación de la variabilidad o incertidumbre asociada a la estimación. En este caso significa que se espera que el efecto estimado de la hipertensión sobre la duración de la hospitalización (hospd) varíe en unos 1,46 días (de media) debido a la variabilidad del muestreo. Por último, la **estadístico** nos da el valor de la prueba estadística (prueba t en este caso) utilizada para determinar si la estimación es significativamente diferente de 0 (normalmente puede ignorar esta columna).
+
+Puede que se haya dado cuenta de que el `summary()` tiene más información que el `tidy()` salida. Aquí le dejamos una breve explicación sobre lo que cada parte de la `summary()` salida significa:
+
+**Llamada:** Esta línea muestra la fórmula utilizada para el modelo de regresión.
+
+**Residuos:** Son las diferencias entre los valores reales del hospd y los valores predichos del modelo de regresión. El resumen proporciona estadísticas como los residuales mínimo, mediano y máximo.
+
+**Coeficientes:** Esta es la parte que más nos interesa:
+
+- **Interceptar**: El intercepto estimado (valor de referencia) para hospd cuando la edad es cero. En este caso, es aproximadamente 41,3.
+- **hiperyes:** El cambio estimado en el hospd cuando se pasa de NO hipertenso a SI hipertenso. Aquí es aproximadamente 3,9. El valor t y **valor p** indican si este coeficiente es estadísticamente significativo.
+
+**Códigos de significación:** Indican si el valor p es altamente significativo (\*\*\* p \< 0,001) o sólo marginalmente significativo (\* p\<0,05)
+
+**Error estándar residual:** Mide la desviación media de los valores de hospd observados con respecto a la línea de regresión. En este caso, es de aproximadamente 13,5.
+
+**R-cuadrado múltiple y ajustado:** Estos valores (0,01487 y 0,01282) representan la proporción de varianza en hospd explicada por la relación lineal con la hipertensión. Los valores más altos indican un mejor ajuste. El ajustado se ajusta por el número de predictores. En este caso podríamos decir que alrededor del 1,3% de la variabilidad en hospd se explica por la hipertensión.
+
+**Estadístico F y valor p:** El estadístico F comprueba si el modelo global (incluidos todos los predictores) es significativo. Un valor p bajo (como éste, \< 0,007243) indica que el modelo es significativo.
+
+### **Paso 5: Comprobar si existe una asociación lineal entre la duración de la hospitalización y el resto de variables**
+
+También necesitamos saber si existe una asociación univariante entre nuestro resultado (duración de la hospitalización) y los factores de confusión que queramos introducir en nuestro modelo. Haremos esto en dos pasos, primero con la variable continua y después con las variables factoriales.
+
+#### Paso 5.1: Regresión lineal univariante entre la duración de la hospitalización y la edad
+
+Pruebe a ejecutar un modelo de regresión lineal con la duración de la hospitalización (hospd) como variable dependiente y la edad como variable independiente.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Yes",
+  "No"
+)
+
+cat("QUESTION: Based on the results of the model, is there a significant association between age and hospd?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "0.372",
+  "24.5",
+  "0.271",
+  "1.42"
+)
+
+cat("QUESTION: How much does an additional year of age increase length of hospitalisation (in days)?", longmcq(opts))
+
+```
+
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "65%",
+  "15%",
+  answer = "27%",
+  "99%"
+  
+)
+
+cat("QUESTION: What % of the variability in length of hospitalisation can be explained by age?", longmcq(opts))
+
+```
+
+:::
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Run the linear regression and assign the output to age_hospd_lm
+age_hospd_lm <- lm(hospd ~ age, data = tbe)
+
+# Print the results using the summary() function
+summary(age_hospd_lm)
+
+# Print the results of the regression analysis with the tidy() function
+tidy(age_hospd_lm)
+```
+
+</br>
+
+</detalles>
+
+#### Paso 5.2: Regresión lineal univariante entre la duración de la hospitalización y las variables factoriales
+
+Realice ahora un modelo univariante similar para cada una de las variables factoriales que no hemos explorado para determinar cuáles se asocian significativamente con la duración de la hospitalización.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "Sex",
+  answer = "Other comorbidities",
+  answer = "Monophasic disease",
+  "Large tick at removal",
+  answer = "Vaccinated against TBE"
+  
+)
+
+cat("QUESTION: What of the following variables have a significant linear association with length of hospitalisation?", longmcq(opts))
+
+```
+
+:::
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Ya hemos visto cómo escribir una fórmula lineal con `lm()`. Entonces puede utilizar `summary()` de {base} o `tidy()` desde {broom} para ver el coeficiente y el valor de significación. Podría escribir estas funciones para cada variable, pero también podría intentar utilizar map() de {purrr} para hacerlas todas a la vez, como hicimos en la función **Paso 2.2**. Eche un vistazo al capítulo sobre [Purrr](https://epirhandbook.com/new_pages/iteration.html#iter_purrr) en el EpiRhandbook si tiene alguna duda.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+## Here we write one by one for each variable the formula and tidy
+
+#sex
+sex_hospd_lm <- lm(hospd ~ sex, data = tbe)
+tidy(sex_hospd_lm)
+
+#other comorbidities
+other_hospd_lm <- lm(hospd ~ other, data = tbe)
+tidy(other_hospd_lm)
+
+#vaccination
+vac_hospd_lm    <- lm(hospd ~ vac, data = tbe)
+tidy(vac_hospd_lm)
+
+#monophasic course
+mono_hospd_lm   <- lm(hospd ~ mono, data = tbe)
+tidy(mono_hospd_lm)
+
+#large tick at removal
+tick_hospd_lm   <- lm(hospd ~ tick, data = tbe) 
+tidy(tick_hospd_lm)
+
+
+## Here we do it with {purrr} all in one command
+tbe %>% 
+  select(-hyper, -age, -hospd) %>% # we first remove the columns we have explored before + the outcome column
+  map(.f = ~lm(hospd ~ .x, data = tbe)) %>%   # here we carry out the model for each column. ".x" represents all the column
+  map(tidy)                                   # finally we do tidy on each model
+```
+
+</br>
+
+</detalles>
+
+Se observaron efectos univariables estadísticamente significativos ($p\<0,05$) para el sexo, otras comorbilidades, la vacunación y el curso monofásico de la enfermedad, pero no para la garrapata grande en el momento de la extracción. Las mujeres tuvieron de media 12,4 días menos de estancia hospitalaria que los hombres, otras comorbilidades aumentaron la hospitalización en 4,1 días, la vacunación la redujo en 8,4 días y el curso monofásico de la enfermedad la aumentó en 3,4 días.
+
+### **Paso 6: Análisis multivariable**
+
+Para controlar los posibles factores de confusión, ajustaremos el conjunto mínimo de ajustes que hemos identificado mediante el análisis DAG (**Objetivo 1**), añadiendo cada variable en diferentes pasos.
+
+#### Paso 6.1: Añadir la edad como covariable al modelo
+
+Como primer paso, añada la edad al modelo del efecto principal.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Ya hemos calculado y guardado el modelo de nuestro efecto principal (*hiper\_hospd\_lm*). Puede añadir la edad a este modelo creando un nuevo modelo y añadiendo la variable adicional, de forma que la sintaxis de la fórmula sea modelo \<- lm(hospd ~ hiper + nuevaVariable, datos = datos)
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Creating a new model and adding age 
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age, data = tbe)
+
+tidy(hyper_hospd_adj_lm)                                   
+```
+
+</br>
+
+</detalles>
+
+Ajustando por edad, encontramos que la hipertensión se asocia con un aumento de 3,8 días de hospitalizaciones. Se trata sólo de un ligero cambio en comparación con el efecto en el modelo sin ajustar (en el que el coeficiente era de 3,9).
+
+#### Paso 6.2: Comparar el rendimiento de ambos modelos
+
+Tenemos el modelo univariante (*hiper\_hospd\_lm*), y ahora tenemos uno ajustado por edad (*hiper\_hospd\_adj\_lm*). Compare ambos modelos calculando métricas de rendimiento del modelo como AIC y logLik.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Una función sencilla para calcular las métricas de rendimiento es `glance()` a partir del {broom} paquete. Pero, por supuesto, hay muchas otras. ¡Elija la que le resulte más cómoda!
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+glance(hyper_hospd_lm)   # performance metrics of the univariate model
+
+glance(hyper_hospd_adj_lm) # performance metrics of the adjusted model
+```
+
+</br>
+
+</detalles>
+
+La salida de `glance()` nos da varias métricas de rendimiento. Si quiere centrarse en las partes importantes, puede mirar el **logLik** y el **AIC**. Un logLik mayor significa un modelo mejor; y un AIC menor significa también un modelo mejor. Por lo tanto, si su logLik sube y su AIC baja, va en la dirección correcta. La ventaja del logLik es que existe una prueba formal (prueba de la razón de verosimilitud) para comprobar si dos logLiks son significativamente diferentes. Sin embargo, el AIC tiene en cuenta más cosas que el logLik, como la complejidad del modelo (favorece los modelos más sencillos), por lo que es muy útil para comparar modelos con diferentes números de parámetros (como en este caso).
+
+Si quiere saber más, revisemos cada elemento de la salida dada por `glance()`:
+
+- **r.al cuadrado**: Es una medida de lo bien que las variables independientes de su modelo explican la variabilidad de la variable dependiente. Piense en ello como un porcentaje que le indica qué parte de los cambios en el resultado puede predecir el modelo. Así, en nuestro ejemplo, la hipertensión por sí sola explica el 1,5% de la variabilidad de la duración de la hospitalización, pero cuando añadimos la edad, ese modelo explica el 28,5% de la variabilidad de nuestra variable dependiente.
+
+- **r.adj.al cuadrado**: El valor R-cuadrado ajustado ajusta el valor R-cuadrado en función del número de predictores del modelo. Es una medida más precisa cuando se comparan modelos con diferentes números de predictores (como en este caso). En este caso, es ligeramente inferior, del 28,2%, lo que indica un pequeño ajuste por el número de predictores.
+
+- **sigma** representa el error estándar residual, que es la desviación estándar de los residuos.
+
+- **estadística**: Es el valor del estadístico F para la significación global del modelo. Comprueba si al menos una variable de predicción tiene un coeficiente distinto de cero.
+
+- **valor.p**: El valor p asociado al estadístico F.
+
+- **df**: Grados de libertad asociados al modelo que suelen corresponder al número de predictores (1 en el primer caso y 2 en el segundo).
+
+- **logLik**: La log-verosimilitud del modelo, que es una medida del ajuste del modelo. Los valores más altos indican un mejor ajuste. Como ya se ha dicho, es una de las principales medidas de rendimiento que utilizará como epidemiólogo.
+
+- **AIC**: Criterio de información de Akaike, que se utiliza para la comparación de modelos. Los valores más bajos indican un modelo mejor.
+
+- **BIC**: Criterio de información bayesiano, similar al AIC pero con una penalización mayor para los modelos con más parámetros.
+
+- **desviación**: Es una medida de la bondad de ajuste del modelo. Los valores más bajos indican un mejor ajuste.
+
+- **df.residual**: Los grados de libertad residuales, que son el número de observaciones menos el número de parámetros estimados.
+
+- **nobs**: El número de observaciones utilizadas en el modelo, que en nuestro caso es de 484
+
+#### (Opcional) Paso 6.3: Trazar los efectos de la edad según la hipertensión
+
+Si lo recuerda, en **Paso 3.2** comprobamos visualmente la asociación entre la edad y la duración de la hospitalización por sexo. Ahora, haremos algo similar trazando el efecto estimado de la edad sobre la duración de la hospitalización **según el estado de hipertensión**. El resultado final que deseamos es un diagrama de dispersión que muestre los datos brutos (duración de la hospitalización por edad) y, a continuación, la línea de regresión ajustada por estado de hipertensión.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Para trazar los efectos estimados de la edad según la hipertensión tenemos que extraer los valores ajustados de "hospd" del modelo y añadirlos al marco de datos. Esto sólo funciona si antes hemos eliminado todas las filas que contienen NA en la columna "hospd". a continuación, podemos pasar este nuevo marco de datos a un `ggplot()` con un `geom_point()` para el gráfico de dispersión y `geom_line()` para las líneas de tendencia ajustadas.
+Nota: Anteriormente, utilizábamos `geom_smooth()` para añadir líneas de tendencia al diagrama de dispersión. Como queremos trazar los valores predichos de un modelo existente y no ajustar un modelo lineal dentro de `ggplot()` tenemos que utilizar `geom_line()` y utilizar los valores predichos de nuestro modelo como entrada para y.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# First add a variable with the fitted values to the dataframe
+data_fitted <- tbe %>%
+  
+  filter(!is.na(hospd)) %>%   # Remove NAs 
+
+  mutate(fit = predict(hyper_hospd_adj_lm)) # Create a new variable with the predicted values
+
+### You can now open data_fitted to have a look at the new column
+
+# Now we do the plot with the fitted lines
+
+plot_fitted <- data_fitted %>%
+  
+  ggplot(mapping = aes(x = age, 
+                       y = hospd,
+                       colour = hyper)) +
+  
+  geom_point() +                            # Adding a scatter plot
+  
+  geom_line(aes(y = fit)) +                 # we add a line specifying that we want the fitted and not the observed values in the y-axis
+
+  labs(
+    title = "Effect of age on TBE hospital stay length for people\nwith and without hypertension ", # Title of the plot, note that "\n" breaks the title into the next line
+    x = "Age",
+    y = "Length of hospitalisation in days",
+    colour = "Hypertension"
+  ) +
+  
+  theme_bw()                                  # we add a predefined theme
+
+plot_fitted
+```
+
+</br>
+
+</detalles>
+
+No permitimos que la asociación entre edad y hospitalización variara según los niveles de hipertensión. Así que los forzamos a ser paralelos por la forma en que especificamos el modelo. Si quisiéramos que las pendientes difirieran, tendríamos que permitir un término de interacción. Llegaremos a eso más adelante.
+
+#### Paso 6.4: Continúe construyendo el modelo ajustado y compruebe la calidad del modelo
+
+Continúe añadiendo al modelo el resto de variables por las que tenemos que ajustar según la DAG (vacunación TBE, edad, garrapata grande, curso monofásico, otras comorbilidades y sexo) *hiper\_hospd\_adj\_lm* **uno a uno**. Compruebe, después de añadir cada variable, **las métricas de rendimiento del modelo** para asegurarse de que el modelo mejora.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+### We first add sex to the previous model
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex, data = tbe) # formula
+tidy(hyper_hospd_adj_lm)                                # estimates
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### TBE vaccination
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac, data = tbe) # formula
+tidy(hyper_hospd_adj_lm)                                # estimates
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Monophasic disease course
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono, data = tbe) # formula
+tidy(hyper_hospd_adj_lm)                                # estimates
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Large tick at removal
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick, data = tbe) # formula
+tidy(hyper_hospd_adj_lm)                                # estimates
+glance(hyper_hospd_adj_lm)                              # performance metrics
+
+
+### Other comorbidities
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + age + sex + vac + mono + tick + other, data = tbe) # formula
+tidy(hyper_hospd_adj_lm)                                # estimates
+glance(hyper_hospd_adj_lm)                              # performance metrics
+```
+
+</br>
+
+</detalles>
+
+Como puede ver, añadir el resto de variables identificadas mediante el DAG mejoró el modelo, según las métricas. La única excepción fue la adición de la variable "Garrapata grande en el momento de la eliminación". Sin embargo, la elección de las covariables debe hacerse conceptualmente a través del DAG, y no basándose en si hay pequeñas diferencias en AIC/logLik. Si llegó a la conclusión de que esta variable era un posible factor de confusión, entonces manténgala en el modelo.
+
+#### Paso 6.5: Añadir un término de interacción
+
+Hemos visto en **Paso 3.2** que el efecto de la edad sobre la duración de la hospitalización se ve modificado por el sexo. Lo sabíamos porque las pendientes eran diferentes para hombres y mujeres. Dada esta información, añada ahora al modelo un término de interacción entre el sexo y la edad.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Una interacción puede escribirse como una multiplicación de dos variables en su fórmula de regresión, por ejemplo, edad\*sexo. No hay necesidad de mantener ambas variables individualmente en la fórmula Y en el término de interacción. Con sólo incluir el término de interacción, R estimará los coeficientes de forma independiente para ambas variables y con la interacción.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+hyper_hospd_adj_lm <- lm(hospd ~ hyper + vac + mono + tick + other + age*sex, data = tbe) # formula
+
+tidy(hyper_hospd_adj_lm)                                # estimates
+
+glance(hyper_hospd_adj_lm)                              # performance metrics
+```
+
+</br>
+
+</detalles>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "+0.4",
+  answer = "+0.23",
+  "-0.17",
+  "+0.17",
+  "-0.32"
+  
+)
+
+cat("QUESTION: Looking at the estimates of the model, for females, what is the net effect of age on length of hospitalisation?", longmcq(opts))
+
+```
+
+:::
+
+Observando los resultados, vemos que la edad tiene una estimación de 0,4, lo que significa que un año adicional de edad se asocia a un aumento de 0,4 días de hospitalización. También vemos que ser mujer se asocia a una disminución de 3 días de hospitalización (en comparación con ser hombre). La estimación de la interacción de -0,17 significa que, en el caso de las mujeres, cada año adicional de edad se asocia a una disminución de 0,17 días de hospitalización.
+Así que, en resumen, en igualdad de condiciones, una mujer de 41 años, comparada con una de 40, tendría +0,4 días de hospitalización por tener un año más, pero al ser mujer hay que añadir el término de interacción (-0,17), por lo que el efecto neto sería de +0,23. En el caso de los hombres, un año extra seguiría estando asociado a +0,4 días de hospitalización.
+
+También vemos que añadir el término de interacción cambia la estimación del efecto para la hipertensión y mejora el modelo, por lo que es posible que queramos mantener la interacción en el modelo, suponiendo que esto garantiza un mejor control de los factores de confusión de la "edad" y el "sexo".
+
+*Nota* También debe buscar otros términos de interacción de efectos en el marco de datos. En interés del ejercicio, omitiremos este paso.
+
+### **Paso 7: Diagnóstico del modelo**
+
+El modelo de regresión lineal múltiple que acabamos de ejecutar, como todos los modelos, tiene varios supuestos:
+
+1. **Linealidad** La relación entre las variables independientes y la variable dependiente (duración de la hospitalización) es lineal. Esto significa que el cambio en la variable dependiente es proporcional al cambio en las variables independientes.
+
+2. **Independencia** Las observaciones son independientes entre sí.
+
+3. **Normalidad de los residuos** Los residuos del modelo se distribuyen normalmente, lo que significa que se distribuyen simétricamente en torno a 0 y que la distribución de los residuos tiene forma de campana.
+
+4. **Homocedasticidad**: Los residuos (diferencia entre los valores observados y los valores estimados a partir del modelo) tienen una varianza constante en todos los niveles de las variables independientes. Esto significa que la dispersión de los residuos debería ser aproximadamente la misma en todos los niveles de las variables independientes.
+
+5. **Sin multicolinealidad**: Las variables independientes no están muy correlacionadas entre sí. Una multicolinealidad elevada puede dificultar la determinación del efecto individual de cada variable independiente sobre la variable dependiente.
+
+6. **Sin autocorrelación**: Los residuos no están correlacionados entre sí. Esto es especialmente importante en los datos de series temporales en los que las observaciones están ordenadas en el tiempo.
+
+En este caso práctico aprenderemos a comprobar dos de estos supuestos: **Normalidad de los residuos** y **Homoscedasticidad**
+
+#### Paso 7.1: Suposición de normalidad
+
+Para evaluar si los residuos de nuestro modelo están distribuidos normalmente o no haremos estas tres cosas:
+
+- Generar algunos gráficos de diagnóstico del modelo
+
+- Creación de un histograma con los residuos
+
+- Realización de una prueba de Shapiro
+
+**Tarea**: Generar gráficos de diagnóstico del modelo *hiper\_hospd\_adj\_lm*. No se preocupe si no encuentra cómo hacer esto. Si tiene dificultades, eche un vistazo a la pista que aparece a continuación.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Haga clic para leer una pista
+
+</summary>
+
+</br>
+
+Puede recuperar **gráficos de diagnóstico** utilizando la función `autoplot()` de {ggfortify}. Pase su objeto modelo a la función `autoplot()` para generar tres gráficos de diagnóstico básicos. También puede especificar qué trazado `autoplot()` debe generar utilizando el argumento which =. En la solución, especificamos que queremos los 2 primeros gráficos.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+autoplot(hyper_hospd_adj_lm, which = 1:2)
+```
+
+</br>
+
+</detalles>
+
+Interpretemos cada gráfico:
+
+- **Gráfico de residuos frente a gráfico ajustado (gráfico 1, esquina superior izquierda):** Verá un diagrama de dispersión con una línea azul (curva de suavizado LOESS). Si los residuos se distribuyen normalmente alrededor de cero, entonces la línea azul será horizontal (paralela a la línea cero).
+
+- **Gráfico Q-Q (gráfico 2, gráfico superior derecho):** El gráfico Q-Q le muestra si los residuos están o no distribuidos normalmente. En el eje X puede ver los cuantiles de una distribución normal, mientras que en el eje Y puede ver los residuos estandarizados (residuos divididos por su desviación estándar). Si los residuos están distribuidos normalmente, en general, la mayoría de los puntos deben situarse en la diagonal.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Are residuals normally distributed, based on these plots?", longmcq(opts))
+
+```
+
+:::
+
+**Tarea**: Construir un histograma con los residuos del *hiper\_hospd\_adj\_lm* modelo.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Pulse para leer una pista
+
+</summary>
+
+</br>
+
+Para hacer un **histograma de los residuos** puede seguir un enfoque similar al que utilizamos en el **paso 6.3**. Es decir, añadiendo primero al *tbe* dataframe los residuos como una columna (puede utilizar la función `resid()`) y luego utilizando `ggplot()` para trazar esta columna en el eje x de un `geom_histogram()`
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# First add a variable with the residual values to the dataframe
+data_res <- tbe %>%
+  
+  filter(!is.na(hospd)) %>%   # Remove NAs 
+  
+  mutate(res = resid(hyper_hospd_adj_lm)) # Create a new variable with the residual values
+
+### You can now open data_res to have a look at the new column
+
+# Now we do the histogram with the residuals
+
+data_res %>%
+  
+  ggplot(mapping = aes(x = res)) +
+  
+  geom_histogram(aes(y = ..density..)) +                        # Adding a histogram with density
+  
+  #the function below will add the normal curve. 
+  stat_function(fun = dnorm,  #The fun = argument we are specifying that we want the normal curve         
+                args = list(mean = mean(data_res$res, na.rm = T), #to draw a normal curve we need to give the mean and standard deviation of our column
+                            sd   = sd(data_res$res, na.rm = T)),  
+                
+                col = "darkblue", lwd = 1) +
+  labs(
+    title = "Histogram of Residuals", 
+    x = "Residuals",
+    y = "Frequency"
+  ) +
+  
+  theme_bw()                                  # we add a predefined theme
+```
+
+</br>
+
+</detalles>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Does the histogram suggest a normal distribution of residuals?", longmcq(opts))
+
+```
+
+:::
+
+**Tarea** Realizar una prueba de Shapiro-Wilk para determinar estadísticamente si los residuos se distribuyen normalmente
+
+<detalles>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Pulse para leer una pista
+
+</summary>
+
+</br>
+
+Revise el paso 4.1 y/o eche un vistazo al capítulo del EpiRhandbook sobre [Pruebas estadísticas sencillas](https://epirhandbook.com/new_pages/stat_tests.html) si aún tiene dudas.
+
+</br>
+
+</detalles>
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+data_res %>%
+  shapiro_test(res)
+```
+
+</br>
+
+</detalles>
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Residuals do not follow a normal distribution",
+  answer = "We cannot reject the null hypothesis that residuals follow a normal distribution",
+  "We accept the alternative hypothesis"
+)
+
+cat("QUESTION: How do you interpret the result of the Shapiro-Wilk test?", longmcq(opts))
+
+```
+
+:::
+
+#### Paso 7.2: Homocedasticidad
+
+Ahora comprobaremos el otro supuesto, que la varianza de los residuos (es decir, la magnitud de su distancia a 0) no depende del predictor.
+
+Compruebe la homocedasticidad ejecutando el gráfico número 3 (Gráfico de escala-localización) en el `autoplot()` función
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+```{r, echo=TRUE}
+# Generate the scale-location plot
+autoplot(hyper_hospd_adj_lm, which = 3)
+```
+
+</br>
+
+</detalles>
+
+Este gráfico se denomina gráfico de escala-localización y representa los valores ajustados frente a la raíz cuadrada de los residuos estandarizados. Con este gráfico es posible comprobar la heteroscedasticidad (es decir, la heterogeneidad de la varianza, lo contrario de la homocedasticidad). Idealmente, los residuos deberían ser **uniformemente repartidos** en todos los niveles de valores ajustados. Esto significa que no debería haber un patrón claro o un cambio sistemático en la dispersión de los residuos a medida que se desplaza por el eje x.  Si los residuos forman una **forma de embudo** (estrecha en un extremo y ancha en el otro), esto indica heteroscedasticidad, lo que significa que la varianza de los residuos no es constante. El **línea azul suavizada** debería ser aproximadamente horizontal y cercana a cero. Las desviaciones significativas de esta línea pueden indicar problemas de homocedasticidad.
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "No",
+  answer = "Yes"
+)
+
+cat("QUESTION: Based on this graph, do you think that the assumption of homoscedasticity is reasonably met?", longmcq(opts))
+
+```
+
+:::
+
+### **Paso 8: Relevancia para la salud pública**
+
+- Discuta la relevancia para la salud pública de sus conclusiones y los próximos pasos y recomendaciones que puedan derivarse de ello.
+
+<detalles>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Haga clic para ver una solución (¡pruébela usted primero!)
+
+</summary>
+
+</br>
+
+Es la primera vez que se detecta una asociación entre la hipertensión y la gravedad de la ETE (basada en la duración de la hospitalización). Aunque usted sospechara tal asociación al principio (y por tanto la comprobara) y aunque piense que puede ser causal basándose en sus DAG y en el control de los factores de confusión, hay más pasos implicados en el establecimiento de una relación causal. Deberíamos seguir los criterios de Bradford Hill para argumentar la causalidad. Por ejemplo, es necesario establecer la base biológica de este efecto. Se han observado efectos similares en otras infecciones (por ejemplo, SARS-CoV-2), lo que puede haber promovido la hipótesis en un principio. También puede decidir buscar una posible relación dosis-respuesta en análisis posteriores de nuestros datos. Además, estos resultados deberían repetirse de forma independiente para descartar un hallazgo casual. Una vez que se corrobore más la relación causal entre la hipertensión y la TBE, podría recomendarse la vacunación contra la TBE para las personas con hipertensión.
+</br>
+
+</detalles>
+
+
