@@ -1,0 +1,75 @@
+---
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+
+# Estudios de caso Repositorio abierto
+
+```{r, echo=F}
+pacman::p_load(
+  rio,
+  here,
+  janitor,
+  DT,
+  tidyverse
+)
+```
+
+**Objetivo** En este repositorio puede ayudarle a desarrollar su epidemiología a través de estudios de casos que cubren situaciones y métodos epidemiológicos comunes.
+
+**Escrito por epidemiólogos, para epidemiólogos**
+
+[**Epidemiología aplicada**](https://www.appliedepi.org/) es una organización sin ánimo de lucro y un movimiento de base de epis de primera línea de todo el mundo. Escribimos en nuestro tiempo libre para ofrecer este recurso a la comunidad. Su aliento y sus comentarios son muy bienvenidos:
+
+- Visite nuestra [**página web**](https://www.appliedepi.org/) y [**únase a nuestra lista de contactos**](https://docs.google.com/forms/d/e/1FAIpQLSdtk7Mg32lYQ3ucbIM-kIwIRxgRwDfG5TJHsVAbFjQ1i6fwiw/viewform?usp=send_form)
+
+- **[contact@appliedepi.org](mailto:contact@appliedepi.org)** tuitear [**@appliedepi**](https://x.com/appliedepi) o [**LinkedIn**](https://www.linkedin.com/company/appliedepi/?originalSubdomain=it)
+
+- Envíe temas a nuestro **repositorio Github**
+
+# Cómo utilizar este repositorio
+
+- Consulte los distintos casos prácticos que ofrecemos en el **Tabla** situada en los @sec-locs.
+
+- Filtre la tabla por idioma, tema, dificultad o cualquiera de las otras opciones para elegir el estudio de caso que le interese.
+
+- Haga clic en el enlace que le llevará a la página del estudio de caso específico y siga las instrucciones.
+
+# Agradecimientos
+
+## Autores
+
+# Lista de casos prácticos {#sec-locs}
+
+Consulte a continuación la lista de estudios de casos disponibles en el repositorio
+
+```{r, echo=F}
+table_cases <- tribble(
+  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Keywords, ~Technical_Complexity, ~Methodological_Complexity, 
+  "Fulton", 'pages/fulton-en.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "COVID-19; SARS-COV-2; Outbreak", "Intermediate", "Basic",  
+  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Gastrointestinal;Brote", "Intermedio", "Intermedio"
+)
+
+```
+
+```{r, echo=F, eval=T}
+
+# Render the table with DT, making the 'Link' column clickable with custom text
+datatable(table_cases, escape = FALSE, filter = "top", options = list(
+  columnDefs = list(
+    list(targets = 2, render = JS(
+      "function(data, type, row, meta) {
+        if(type === 'display') {
+          var linkText = 'Link'; // Use the 'Name' column as the display text
+          data = '<a href=\"' + data + '\">' + linkText + '</a>';
+        }
+        return data;
+      }"
+    ))
+  )
+), callback = JS("table.page.len(5).draw();"))
+
+```
+
+

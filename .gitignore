@@ -5,15 +5,19 @@
 .DS_Store
 _book/*
 .quarto/*
-/pages/*/
-/pages/*.html
-/pages/~$*
+
+# Ignore everything inside /pages/ except for .qmd, .css, and .js files
 /pages/*
-/pages/!*.qmd
-/pages/!*.css
-/pages/!*.js
+!/pages/*.qmd
+!/pages/*.css
+!/pages/*.js
+
+# Ignore specific file types inside /pages/
+.pages/*.html
+/pages/~$*
+
 /case_study_template/*/
 /case_study_template/*.html
 
-
 /.quarto/
+.env
