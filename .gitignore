@@ -3,8 +3,6 @@
 .Rdata
 .httr-oauth
 .DS_Store
-_book/*
-.quarto/*
 
 # Ignore everything inside /pages/ except for .qmd, .css, and .js files
 /pages/*
@@ -13,8 +11,8 @@ _book/*
 !/pages/*.js
 
 # Ignore specific file types inside /pages/
-.pages/*.html
 /pages/~$*
+/pages/*.html
 
 /case_study_template/*/
 /case_study_template/*.html
