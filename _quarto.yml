@@ -73,6 +73,7 @@ book:
     - pages/fulton.qmd          
     - pages/r_practical.qmd
     - pages/tbe.qmd
-    # - pages/stengen_epiet.qmd                
+    - pages/stengen-en.qmd                
+    - pages/openxlsx2_tutorial-en_revised.qmd                
     - pages/oswego.es.qmd
 
