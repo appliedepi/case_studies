@@ -13,7 +13,7 @@ _book/*
 !/pages/*.js
 
 # Ignore specific file types inside /pages/
-.pages/*.html
+/pages/*.html
 /pages/~$*
 
 /case_study_template/*/
