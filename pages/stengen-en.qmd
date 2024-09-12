@@ -517,7 +517,7 @@ pacman::p_load(
 ### **Step 2: Import and explore data**
 
 ```{r, include=FALSE}
-tira_raw <- import("../cs/ENG/stengen_mva/data/tira.csv")
+tira_raw <- import("../case_studies_to_translate/ENG/stengen_mva/data/tira.csv")
 ```
 
 #### Step 2.1: Import the data 
