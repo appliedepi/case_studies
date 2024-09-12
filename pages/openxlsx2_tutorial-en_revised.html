@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>openxlsx2_tutorial-en_revised</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="openxlsx2_tutorial-en_revised_files/libs/clipboard/clipboard.min.js"></script>
+<script src="openxlsx2_tutorial-en_revised_files/libs/quarto-html/quarto.js"></script>
+<script src="openxlsx2_tutorial-en_revised_files/libs/quarto-html/popper.min.js"></script>
+<script src="openxlsx2_tutorial-en_revised_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="openxlsx2_tutorial-en_revised_files/libs/quarto-html/anchor.min.js"></script>
+<link href="openxlsx2_tutorial-en_revised_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="openxlsx2_tutorial-en_revised_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="openxlsx2_tutorial-en_revised_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="openxlsx2_tutorial-en_revised_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="openxlsx2_tutorial-en_revised_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="webex.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="creating-reports-with-r-and-ms-excel-a-tutorial-using-the-openxls2-package-en" class="level1 unnumbered">
+<h1 class="unnumbered">Creating reports with R and MS Excel: a tutorial using the openxls2 package (EN)</h1>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Case study characteristics</strong></th>
+<th style="text-align: left;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Name:</strong></td>
+<td style="text-align: left;">openxlsx2 tutorial</td>
+</tr>
+<tr class="even">
+<td><strong>Language:</strong></td>
+<td style="text-align: left;">English</td>
+</tr>
+<tr class="odd">
+<td><strong>Tools:</strong></td>
+<td style="text-align: left;">R, MS Excel</td>
+</tr>
+<tr class="even">
+<td><strong>Location:</strong></td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>Scale:</strong></td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="even">
+<td><strong>Diseases:</strong></td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>Keywords:</strong></td>
+<td style="text-align: left;">R, Excel, Report, Export, Format, openxls2, Tutorial</td>
+</tr>
+<tr class="even">
+<td><strong>Technical complexity:</strong></td>
+<td style="text-align: left;">Intermediate</td>
+</tr>
+<tr class="odd">
+<td><strong>Methodological complexity:</strong></td>
+<td style="text-align: left;">Intermediate</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Authorship</em></strong><br>
+Original authors: Leonel Lerebours and Alberto Mateo Urdiales<br>
+Data source: None (Example data will be generated with R)<br>
+</p>
+</section>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<section id="getting-help" class="level3">
+<h3 class="anchored" data-anchor-id="getting-help">Getting Help</h3>
+<p>There are several ways to get help:</p>
+<ol type="1">
+<li>Look for the “hints” and solutions (see below)</li>
+<li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
+</ol>
+</section>
+<section id="hints-and-solutions" class="level3">
+<h3 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h3>
+<p>Here is what the “helpers” look like:</p>
+<!--Note that this is the way of including hints and explanations to the solutions -->
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Here you will see a helpful hint!</p>
+<p><br></p>
+</details>
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is more explanation about why the solution works.</p>
+<p><br></p>
+</details>
+<!--
+NOTE: End of solution
+-->
+<!-- NOTE ABOUT SOLUTIONS: When using {webexercises} the solution will be automatically highlighted, so you can change (if appropriate) the feature "Click here to see the solution" to  "Click here to see the explanation of the solution" -->
+</section>
+<section id="posting-a-question-in-the-community-forum" class="level3">
+<h3 class="anchored" data-anchor-id="posting-a-question-in-the-community-forum">Posting a question in the Community Forum</h3>
+<p>… description here about posting in Community… TO BE COMPLETED BY APPLIED EPI</p>
+</section>
+<section id="terms-of-use" class="level3">
+<h3 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h3>
+<ul>
+<li>You may use the tutorial to learn how to generate reports using R by creating tables and exporting them in MS Excel for visualization with the <code>openxlsx2</code> package, for educational purposes, and to apply the learned techniques to your personal or professional projects. This tutorial might be freely translated, copied, or distributed. No warranty is made or implied for use of the software for any particular purpose.</li>
+</ul>
+</section>
+<section id="feedback-suggestions" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-suggestions">Feedback &amp; suggestions</h3>
+<ul>
+<li>You can write feedback and suggestions on this tutorial at the <a href="https://github.com/appliedepi/case_studies">GitHub issues page</a></li>
+<li>Alternatively email us at: <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a></li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="version-and-revisions" class="level3">
+<h3 class="anchored" data-anchor-id="version-and-revisions">Version and revisions</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 36%">
+<col style="width: 21%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: left;">Changes made</th>
+<th style="text-align: right;">Version</th>
+<th>Author</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>July 2023</td>
+<td style="text-align: left;">First draft</td>
+<td style="text-align: right;">1.0</td>
+<td>Leonel Lerebours</td>
+</tr>
+<tr class="even">
+<td>September 2024</td>
+<td style="text-align: left;">Revision first draft</td>
+<td style="text-align: right;">1.1</td>
+<td>Alberto Mateo Urdiales</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td style="text-align: left;"></td>
+<td style="text-align: right;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="disclaimer" class="level4">
+<h4 class="anchored" data-anchor-id="disclaimer">Disclaimer</h4>
+<ul>
+<li><p>The main focus of the tutorial is to use the core functions of the <code>openxlsx2</code> up to the version 1.8. You must have install MS Excel (or software equivalent like OpenOffice) to visualize the output tables.</p></li>
+<li><p>The data for this tutorial will be generated randomly (any resemble with real data is totally coincidence).</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+</section>
+<section id="guidance" class="level2">
+<h2 class="anchored" data-anchor-id="guidance">Guidance</h2>
+<section id="objectives-of-this-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="objectives-of-this-case-study">Objectives of this case study</h3>
+<p>The goal of this tutorial is to introduce you in the use of openxlsx2 to export formatted tables in MS Excel.</p>
+</section>
+<section id="previous-level-of-expertise-assumed" class="level3">
+<h3 class="anchored" data-anchor-id="previous-level-of-expertise-assumed">Previous level of expertise assumed</h3>
+<ul>
+<li><p>It is recommended to have intermediate R skills and have at least a basic knowledge of <code>dplyr</code> (from tidyverse package) like pipe operators and data wrangling. <a href="https://www.tidyverse.org/">Here some reference</a>.</p></li>
+<li><p>Epidemiological experience (e.g., knowledge of how to design outputs tables for reporting purpose)</p></li>
+</ul>
+</section>
+<section id="preparation-for-the-case-study" class="level3">
+<h3 class="anchored" data-anchor-id="preparation-for-the-case-study">Preparation for the case study</h3>
+<ul>
+<li><p>Create a folder named “openxls2_tutorial” in your laptop</p></li>
+<li><p>Create an Rstudio project in the folder openxls2_tutorial. If you are unsure on how to do that, read the EpiRhandbook on <a href="https://epirhandbook.com/en/new_pages/r_projects.html">R projects</a></p></li>
+<li><p>You must have installed MS Excel (or software equivalent like OpenOffice) in your laptop to visualize the output tables.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<section id="why-use-ms-excel-for-reporting" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-ms-excel-for-reporting">Why use MS Excel for reporting ?</h2>
+<p>Excel is one of the most popular softwares for data analysis, data visualization and many other capabilities, since Excel’s formatting options allow users to adjust fonts, colors, borders, and alignment to create visually appealing reports. MS excel use is very common in many areas, including epidemiological tasks that involve creating reports.</p>
+<p>In some ways, MS Excel -as other point-and-click tools- is easy to learn, since it lets you “interact” with the data. For example, if we want to do quick calculations and produce a summary table, or if we want to modify a graph and to compare it with other previous reports.</p>
+<p>If you have experience working in routine reporting -such as working with epidemiological surveillance-, probably you or a co-worker use or have used at some point Excel or any other spreadsheet software like OpenOffice to present tables and summaries.</p>
+<p>However, even with all the great perks that Excel has, it is somewhat hard to automate a report with Excel even using a template with a pre-designed format. Is also time consuming to edit a spreadsheet every time you create a table or a graph (specially without knowledge of macros) and prone to errors.</p>
+</section>
+<section id="automating-a-report-in-excel-with-r-using-openxlsx2-package" class="level2">
+<h2 class="anchored" data-anchor-id="automating-a-report-in-excel-with-r-using-openxlsx2-package">Automating a report in Excel with R using openxlsx2 package</h2>
+<p>As described in the CRAN <a href="https://cran.r-project.org/web/packages/openxlsx2/openxlsx2.pdf">documentation</a> of the <code>openxlsx2</code> package the main purpose of this package is to simplify the creation of ‘xlsx’ files by providing a high level interface to writing, styling and editing worksheets.</p>
+<p>In this short tutorial we are going to create and format a summary report from scratch in R without touching Excel or any other spreadsheet software.</p>
+</section>
+</section>
+<section id="tutorial" class="level1">
+<h1>Tutorial</h1>
+<section id="step-1-getting-ready" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-getting-ready"><strong>Step 1: Getting ready</strong></h2>
+<section id="step-1.1-create-a-new-r-script" class="level3">
+<h3 class="anchored" data-anchor-id="step-1.1-create-a-new-r-script">Step 1.1: Create a new R script</h3>
+<p>Once you have created an Rproject inside the “openxls2_tutorial” folder (as specified in the second point of the section <strong>Preparation for the case study</strong>). Create a new script with the name <em>openxls2_tutorial.R</em> and save it in the subfolder “openxls2_tutorial”.</p>
+</section>
+<section id="step-1.2-installload-packages" class="level3">
+<h3 class="anchored" data-anchor-id="step-1.2-installload-packages">Step 1.2: Install/load packages</h3>
+<p>As you probably know, the first part of our script (besides including -commented- some information about the aim, author, date last updated and contact details) is to install and load packages. Fortunately, there is a package that does this task very effectively: {pacman}. The function p_load() from this package will install any packages listed not already installed and will load them. If a listed package had already been installed, it will just load it. You can find more about installing/loading packages in the <a href="https://epirhandbook.com/en/new_pages/basics.html#packages">Packages</a> section of the EpiRhandbook.</p>
+<p>Using this approach, try to install and load the following packages: janitor, openxlsx2 and tidyverse.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>You may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. But other packages such as {MASS} do also have a function called select(). This could create headaches if you want to subset columns using dplyr’s select() but R thinks you’re calling MASS’s select() (we call this masking - dplyr’s select() is masked by MASS’s select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  openxlsx2,  <span class="co"># create xlsx files </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># to manage dates</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="step-2-create-a-fake-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-create-a-fake-dataset"><strong>Step 2: Create a fake dataset</strong></h2>
+<p>Before start using the functions of <code>openxlsx2</code>, we need to decide on what we want into the exported report (i.e., how many tables, what type of tables and which data inside.)</p>
+<p>For this tutorial, the scenario is to do a summary of the <strong>microbiology laboratories’ production</strong>, including:</p>
+<ul>
+<li><p>how many samples were received</p></li>
+<li><p>how many were confirmed</p></li>
+<li><p>when the samples had a confirmed diagnosis</p></li>
+</ul>
+<p>We will not be using real data for this tutorial, but we will create it with R. Feel free to create it with MS Excel if you feel more comfortable.</p>
+<p><strong>Task</strong>: Generate a fake data frame of 1000 observations using the following variables:</p>
+<ul>
+<li><p><strong>date:</strong> from January 01, 2022 to December 31st, 2024.</p></li>
+<li><p><strong>laboratories:</strong> a categorical variable with five categories that have values from “A” to “E”.</p></li>
+<li><p><strong>n_samples:</strong> The Number of samples received. a numerical variable (ramdon number from 0 to 100).</p></li>
+<li><p><strong>n_confirmed:</strong> The Number of samples with positive results. A numerical variable calculated as a proportion of the previous variable, with a range that goes from 0.02 to 0.05.</p></li>
+<li><p><strong>pct_confirmed:</strong> The percentage of samples confirmed (n_samples/n_confirmed)</p></li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>One way to create the dataframe is to use the function <code>tibble()</code> which comes when you install {tidyverse}. Inside <code>tibble()</code> you can create the specified columns using the <code>sample()</code> function which will create values randomly once you have specified the date rage, the categories etc. If you are unsure on how to do this read the <a href="https://tibble.tidyverse.org/">documentation</a> of the tibble function or this post from <a href="https://www.r-bloggers.com/2020/05/create-and-convert-tibbles/">R bloggers</a> which may help you. If you still do not manage, have a look at the solution. Don’t worry, this may be the most difficult part of the case study!</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we first use this function which will ensure that, even though the dataframe will be generated with random values, we will ALWAYS get the same values if we rerun the script. The number inside is not relevant</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1300</span>) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dataframe for the example using 1000 observations</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Random dates</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>   <span class="at">date=</span><span class="fu">sample</span>(<span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2022-01-01"</span>),           <span class="co"># the begging of the period</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">as.Date</span>(<span class="st">"2024-12-31"</span>),            <span class="co"># the end of the period</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">by=</span><span class="st">"day"</span>),                        <span class="co"># the time interval</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">replace =</span> <span class="cn">TRUE</span>,                          <span class="co"># setting replace to true means that each date can be chosen to be in the sample more than once.</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>              <span class="dv">1000</span>),                                <span class="co"># this is the number of observations</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Random Labs (A to E)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>   <span class="at">laboratories=</span><span class="fu">sample</span>(LETTERS[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)],             <span class="co"># we are saying that this columns should have letters from A (1) to E (5)       </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">replace =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                      <span class="dv">1000</span>),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Random samples (by day and lab)</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>   <span class="at">n_samples=</span><span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>),                       </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                   <span class="at">replace =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                   <span class="dv">1000</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Random confirmed samples</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_confirmed=</span><span class="fu">round</span>(<span class="fu">sample</span>(<span class="fu">seq</span>(                  <span class="co"># the round function is used to round numbers. In this case the multiplication may mean that we have decimals</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">from=</span><span class="fl">0.01</span>, </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">to=</span><span class="fl">0.05</span>, </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">by=</span><span class="fl">0.001</span>), </span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">replace=</span>T,</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1000</span>)<span class="sc">*</span>n_samples,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">0</span>),                                 <span class="co"># setting digits to 0 is saying to round it to the nearest whole number</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># % positivity</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_confirmed=</span>n_confirmed<span class="sc">/</span>n_samples       </span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#take a look at the db created</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  date       laboratories n_samples n_confirmed pct_confirmed
+  &lt;date&gt;     &lt;chr&gt;            &lt;int&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+1 2024-09-04 B                   15           0        0     
+2 2023-02-27 C                   90           1        0.0111
+3 2023-06-02 A                   88           4        0.0455
+4 2023-02-19 B                    1           0        0     
+5 2024-06-15 D                   29           1        0.0345
+6 2022-06-24 C                   43           2        0.0465</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 64 512" style="height:1em;width:0.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V320c0 17.7 14.3 32 32 32s32-14.3 32-32V64zM32 480a40 40 0 1 0 0-80 40 40 0 1 0 0 80z"></path></svg> <strong>Note:</strong> If you want to create a dummy database with Excel, (or you want to use your data) you will have to import your file. To do that, you can use the function <code>import()</code> from the {rio} package or the function <code>read_xlsx()</code> from the openxlsx2 package. Read the dedicated <a href="https://epirhandbook.com/new_pages/importing.html">EpiRhandbook Chapter</a> for importing data if you have any doubts.</p>
+</section>
+<section id="step-3-transfoming-the-data-and-creating-the-summary-tables" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-transfoming-the-data-and-creating-the-summary-tables"><strong>Step 3: Transfoming the data and creating the summary tables</strong></h2>
+<p>As you can see, with this simple fake dataframe of 5 columns we may want to know :</p>
+<ul>
+<li><p>How many samples were reported by month each year.</p></li>
+<li><p>What is the proportion of the confirmed samples by month.</p></li>
+<li><p>What is the proportion of samples reported by each laboratory.</p></li>
+<li><p>The overall positivity rate by laboratory.</p></li>
+</ul>
+<section id="step-3.1-summary-table-with-number-of-samples-received" class="level3">
+<h3 class="anchored" data-anchor-id="step-3.1-summary-table-with-number-of-samples-received">Step 3.1: Summary table with number of samples received</h3>
+<p>Let’s start by creating a table with the number of samples received by month each year. We want a table that has a nice formatting to put in a report, so we want a column with the year of reporting and one column for each calendar month. We also want to add the totals.</p>
+<p>We will achieve this in to separate steps:</p>
+<p><strong>Task 1</strong>: Aggregate the number of samples received (column <em>n_samples</em>) by month and year. Called the new column with the aggregated number <em>tot_samples</em></p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>There are different ways to aggregate data. We suggest you use the function <code>group_by()</code> alongside <code>summarise()</code>, which is a {dplyr} approach. If you have never used this approach or if you have doubts, read the this <a href="https://epirhandbook.com/new_pages/grouping.html#group_summarise">section</a> of the EpiRhandbook. In any case, you’ll need to create columns for the month and the year using the <em>date</em> column. You can do this using the functions <code>month()</code> and <code>year()</code>.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table for samples by year and months</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#table for samples by year and months</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>total_sample_tab <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we first create a column named months and years which are the respective months and years of the column "date"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">months =</span> <span class="fu">month</span>(date,<span class="at">label=</span>T), <span class="co"># the argument label = T ensures that months have the name of the month and not their number</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">years  =</span> <span class="fu">year</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we group by the new columns</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(years, months) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># and we create a new column by adding by each group the number of samples received</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tot_samples =</span> <span class="fu">sum</span>(n_samples), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="co"># the .groups = "drop" argument ungroup the data, which is always advisable after we finish aggregation</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">#check the new data frame</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(total_sample_tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  years months tot_samples
+  &lt;dbl&gt; &lt;ord&gt;        &lt;int&gt;
+1  2022 gen           1587
+2  2022 feb           1439
+3  2022 mar           1099
+4  2022 apr            906
+5  2022 mag           1378
+6  2022 giu           1646</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+<p>The new dataframe has one column for years, one for months and one for the total number of samples received. We call this the <strong>long</strong> format. This format is useful for further analysis/visualisation (creating a plot), but here what we want is to export this into a nice formatted table, so we want to the months to go in the columns. In other words, we want our dataframe in a <strong>wide</strong> format.</p>
+<p><strong>Task 2</strong>: Pivot your data from long to wide so that you have one column per month. Add the totals.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>One way to do this is to use the function <code>pivot_wider()</code>. You need to specify where the names of the columns will come from and where the values will come from. If you are not familiar with pivoting or if you have doubts, spend some time in this <a href="https://epirhandbook.com/new_pages/pivoting.html#long-to-wide">section</a> of the EpiRhandbook</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivoting from long to wide</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>total_sample_tab <span class="ot">&lt;-</span> total_sample_tab <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> months,        <span class="co"># so the names of the columns will be the months</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> tot_samples,  <span class="co"># and the values the number of samples</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span>        <span class="co"># if there were no data in a given month, it would fill it with 0</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="fu">c</span>(<span class="st">"col"</span>, <span class="st">"row"</span>))           <span class="co"># we add the sum of the totals both by row and column</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>total_sample_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> years  gen  feb  mar  apr  mag  giu  lug  ago  set  ott  nov  dic Total
+  2022 1587 1439 1099  906 1378 1646 1640  799  955 1422  976 1550 15397
+  2023 1391 1488 1390 1870 1236 1488 1737 1097 1320 1642 1581 1647 17887
+  2024 1339 1156 1526 1188 1274 1609 1455 1342 1974 1226 1626 1974 17689
+ Total 4317 4083 4015 3964 3888 4743 4832 3238 4249 4290 4183 5171 50973</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="step-3.2-summary-table-with-positivity-percentage" class="level3">
+<h3 class="anchored" data-anchor-id="step-3.2-summary-table-with-positivity-percentage">Step 3.2: Summary table with positivity percentage</h3>
+<p><strong>Task</strong>: Following a similar approach to the one we used in the previous step, create a table showing, by year and month, the positivity percentage of the samples</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>positivity_tab <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we first create a column named months and years which are the respective months and years of the column "date"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">months =</span> <span class="fu">month</span>(date,<span class="at">label=</span>T), <span class="co"># the argument label = T ensures that months have the name of the month and not their number</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">years  =</span> <span class="fu">year</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we group by the new columns</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(years, months) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we create  new columns by adding by each group the number of samples received, the total confirmed and calcualte percentage</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tot_samples =</span> <span class="fu">sum</span>(n_samples),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">tot_confirmed =</span> <span class="fu">sum</span>(n_confirmed),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">pct =</span> <span class="fu">round</span>(tot_confirmed<span class="sc">/</span>tot_samples, <span class="at">digits =</span> <span class="dv">5</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> <span class="co"># round can be use to round up numbers. in this case to only 1 decimal</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#we select the columns we're interested</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(years, months, pct) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we pivot them into wide format</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> months,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> pct, </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>positivity_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 13
+  years    gen    feb    mar    apr    mag    giu    lug    ago    set    ott
+  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1  2022 0.0309 0.0285 0.0319 0.0342 0.0268 0.0316 0.0287 0.0263 0.0304 0.0267
+2  2023 0.0367 0.0289 0.0295 0.0267 0.0235 0.0343 0.0311 0.0228 0.0296 0.0311
+3  2024 0.0261 0.0294 0.0242 0.0295 0.0330 0.0311 0.0261 0.0276 0.0314 0.0286
+# ℹ 2 more variables: nov &lt;dbl&gt;, dic &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="step-3.3-summary-table-by-laboratory" class="level3">
+<h3 class="anchored" data-anchor-id="step-3.3-summary-table-by-laboratory">Step 3.3: Summary table by laboratory</h3>
+<p><strong>Task</strong>: Create a summary table for each year and laboratory with the total number of samples, the number of samples confirmed and the positivity percentage, as well as the total by rows.</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>laboratory_summary <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we first create a column named years which are the years of the column "date"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years=</span><span class="fu">year</span>(date)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we group by year and laboratory </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(years, laboratories) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we create new columns with the total number of samples received and the total number of samples confirmed</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_samples=</span><span class="fu">sum</span>(n_samples),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">total_confirmed=</span><span class="fu">sum</span>(n_confirmed), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we arrange our table by laboratory and year</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(laboratories, years) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we add the totals by row</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>(<span class="st">"row"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we add a column with the positivity percentage by row</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">positivity_rate=</span> <span class="fu">round</span>(total_confirmed<span class="sc">/</span>total_samples, <span class="at">digits =</span> <span class="dv">5</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we rename the columns</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Years of reporting"</span><span class="ot">=</span>years,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Laboratories"</span><span class="ot">=</span>laboratories,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Total Samples"</span><span class="ot">=</span>total_samples,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>         <span class="st">"Confirmed Samples"</span><span class="ot">=</span>total_confirmed,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>         <span class="st">"% of confirmed samples"</span><span class="ot">=</span>positivity_rate)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>laboratory_summary </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Years of reporting Laboratories Total Samples Confirmed Samples
+               2022            A          4202               135
+               2023            A          3638                98
+               2024            A          3997               110
+               2022            B          2795                76
+               2023            B          3759               104
+               2024            B          3800               119
+               2022            C          2441                68
+               2023            C          3425               111
+               2024            C          3045                90
+               2022            D          2730                75
+               2023            D          2863                83
+               2024            D          3553               106
+               2022            E          3229               102
+               2023            E          4202               127
+               2024            E          3294                93
+              Total            -         50973              1497
+ % of confirmed samples
+                0.03213
+                0.02694
+                0.02752
+                0.02719
+                0.02767
+                0.03132
+                0.02786
+                0.03241
+                0.02956
+                0.02747
+                0.02899
+                0.02983
+                0.03159
+                0.03022
+                0.02823
+                0.02937</code></pre>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="step-4-export-the-tables-to-excel" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-export-the-tables-to-excel"><strong>Step 4: Export the tables to excel</strong></h2>
+<p>Now that we have the tables for the summary report, lets do a overview of the main functions of openxlsx2 :</p>
+<section id="main-functions" class="level3">
+<h3 class="anchored" data-anchor-id="main-functions">Main functions</h3>
+<ul>
+<li><p><strong>wb_workbook()</strong>: to create a new workbook</p></li>
+<li><p><strong>wb_add_worksheet()</strong>: to add worksheets (name, zoom level and gridlines)</p></li>
+<li><p><strong>wb_add_data()</strong>: to add either a dataframe, a table, text string a single value</p></li>
+<li><p><strong>wb_save()</strong>: to export the workbook to a file (Excel format)</p></li>
+<li><p><strong>wb_open()</strong>: really handy to open right away the workbook in Excel (to see the results of the code)</p></li>
+</ul>
+</section>
+<section id="related-to-formating" class="level3">
+<h3 class="anchored" data-anchor-id="related-to-formating">Related to formating</h3>
+<ul>
+<li><p><strong>wb_add_font()</strong>: to specify font type for a region</p></li>
+<li><p><strong>wb_add_border()</strong>: to add borders to a region</p></li>
+<li><p><strong>wb_add_cell_style()</strong>: to add specific style to a region (wrap, vertical/horizontal/left/right alignment,</p></li>
+<li><p><strong>wb_add_numfmt():</strong> to add specific number style to a cells range</p></li>
+<li><p><strong>wb_add_fill()</strong>: to add fill color to a region</p></li>
+<li><p><strong>wb_set_col_widths():</strong> to setup the width of specific columns</p></li>
+<li><p><strong>wb_set_row_heights():</strong> to setup the heights of specific rows</p></li>
+<li><p><strong>wb_merge_cells():</strong> to merge a range of cells</p></li>
+</ul>
+<p>Some of the functions use parameters to specify coordinates in the spreadsheet numbers (as columns and row) and others use dimensions, which are the combination of letters for columns and number for letters.</p>
+</section>
+<section id="related-to-location-dimension-coordenates" class="level3">
+<h3 class="anchored" data-anchor-id="related-to-location-dimension-coordenates">Related to location / dimension / coordenates</h3>
+<p>The following functions are really important to get the coordinates of where to apply specific formatting, since most of the functions to add format/style need a range (in row and columns). With these we can obtain Excel type coordinates of specify a region (such as A1:B30) based on the size of the tables and the location in the worksheet of the table that we want to export.</p>
+<p><strong>rowcol_to_dims():</strong> to create a vector with Excel’s coordinates from the rows and columns numbers you provide (example: rowcol_to_dims(col= c(1:3), row= c(1:3)) will result in “A1:C3”). You can combine the use of nrow() and ncol() to get the size of a table and get the Excel’s coordinates, depending where you want to place the table. Is important to know beforehand the position of a table (number of row and column) since the starting row and column so the format we want to apply fall in the range we want.</p>
+<p><strong>wb_dims()</strong>: to get a dimension of an object (dataframe or matrix) for the spreadsheet. It start from coordinate A1 by default, for example if we use wb_dims(x=mtcars) will return the value of “A1:K33”. This helper function</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/openxlsx2_tut/icon1.png" class="img-fluid figure-img"></p>
+<figcaption>General approach, you can create an example with all the formats in excel first too</figcaption>
+</figure>
+</div>
+<p>Now that we have some dataframes and see a quick overview of the main or most used functions from openxlsx, lets start to create the following output in excel:</p>
+<p><img src="../images/openxlsx2_tut/icon6.png" class="img-fluid"></p>
+<p>First lets see the “style” we want to add to the outputs and also the dimensions of the columns and rows where we want to apply a format. Like we do when we work in Excel directly.</p>
+<p>For example in the picture above we can observe the title in the middle of each tables is at the center and the text is larger and bold. The first row with the column’s title has also bold text and has top and bottom borders. The last row, Total, has also bold text and has top bolder. In all of the cells the text is centered. In the top table the text of the body is in number format and the last row too. In the bottom table, the text of the body and last row are in percentage format.</p>
+<p>We have to take into account these details to start creating the vectors with the ranges. There are formats that applies for the whole table, others for just part of the tables.</p>
+<p>Also, it is very important to know where the tables are going to be located and if it is a table that is going to grow over time (from top to bottom or left to right).</p>
+</section>
+<section id="step-4.1-set-the-table-positions" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.1-set-the-table-positions">Step 4.1: Set the table positions</h3>
+<p>The first column and row of the top table (Table with the total samples received) in the exercise have the starting position at <strong>cell B3</strong>, whilst the bottom table (The positivity table) starts at <strong>cell B10</strong>.</p>
+<p>The first row of the first table (Table with the total samples received) goes from cell <strong>B3 to cell O3</strong>, the last row range is <strong>B7 to O7</strong>. For the bottom table (The positivity table) the first row range is <strong>B10 to N10</strong> and the bottom row is from <strong>B14 to N14</strong>.</p>
+<p>For the vector with the ranges, we have to specify the columns as number instead of letters. the <code>rowcol_to_dims()</code> function will convert the numbers coordinates to the Excel range format (such as A1:B3). With the combination of the function <code>ncol()</code> and <code>nrow()</code> and the starting position we can get the range of the whole table.</p>
+<p><strong>Task</strong>: Use the function <code>rowcol_to_dims()</code> to obtain the range of the columns for the <em>Table with the total samples received</em> (B3:07). Assign this range to the name <em>tab1_dimres</em>. Get also the range for the same table’s title (B2:B2)</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get the table 1 (Table with the total samples received) dimensions</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>tab1_dimres <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1:ncol() will give us the a range for the number of columns of the table. By adding one we are specifying that we want the range to start in B instead of A</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(total_sample_tab) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># similarly 3:nrow() will create a range that starts in 3 and will go until nrow() + 3, whic is 7</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="dv">3</span><span class="sc">:</span>(<span class="fu">nrow</span>(total_sample_tab) <span class="sc">+</span> <span class="dv">3</span>))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>tab1_dimtitle <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(<span class="at">col =</span> <span class="dv">2</span>, <span class="at">row =</span> <span class="dv">2</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#get the first row and last row dimension of table 1 (Table with the total samples received)</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>tab1_dimfirstrow<span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(<span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(total_sample_tab)<span class="sc">+</span><span class="dv">1</span>, <span class="at">row=</span><span class="dv">3</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>tab1_dimlastrow <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(<span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(total_sample_tab)<span class="sc">+</span><span class="dv">1</span>, <span class="at">row=</span><span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<p>Since the table1 (<em>Table with the total samples received</em>) is a table that will grow over the time from top to bottom, the starting position of the table 2 (<em>The positivity table</em>) must depend on the starting position of the first table, if we want to dinamically setup the starting position of <em>The positivity table</em>.</p>
+<p>Lets create a vector with the sequence of numbers of the rows where the <em>The positivity table</em> will be located based on the position of table 1 and the spaces between <em>Table with the total samples received</em> and <em>The positivity table</em>.</p>
+<p><em>Table with the total samples received</em> has 7 rows <code>nrow(total_sample_tab)</code> and the starting position in the spreadsheet is row 3, and we want the second table starts two rows after the end of table 1. So, the starting position row of table 2 is the sum of the numbers of rows of table 1 + the starting position of table 1 + the rows after table 1 last row.</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#vector with the row for the starting position of table 2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tab2_row_start <span class="ot">&lt;-</span> <span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">3</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>tab2_row_seq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from=</span> <span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">3</span>, </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">to=</span><span class="fu">nrow</span>(positivity_tab)<span class="sc">+</span><span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">3</span>, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by=</span><span class="dv">1</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>tab2_dimres <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(<span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(positivity_tab)<span class="sc">+</span><span class="dv">1</span>, <span class="co">#the columns are not affected</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">row =</span> tab2_row_seq)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#get the first row and last row dimension of table 2 (The positivity table)</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>tab2_dimtitle <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">2</span>, </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> tab2_row_start <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>tab2_dimfirstrow<span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span><span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(positivity_tab) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">row=</span>tab2_row_start)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>tab2_dimlastrow <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(positivity_tab) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">row  =</span><span class="fu">nrow</span>(positivity_tab) <span class="sc">+</span> tab2_row_start)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>tab2_dimbody_pct <span class="ot">&lt;-</span> <span class="fu">rowcol_to_dims</span>(</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(positivity_tab) <span class="sc">+</span> <span class="dv">1</span>, </span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(positivity_tab) <span class="sc">+</span> tab2_row_start)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<p>We are getting there!, now that we have the ranges where we just need to format it.</p>
+</section>
+<section id="step-4.2-creating-the-table-in-ms-excel" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.2-creating-the-table-in-ms-excel">Step 4.2: Creating the table in MS Excel</h3>
+<p>The next step now is to start using the {openxlsx2} functions to:</p>
+<ul>
+<li><p>Add the tables</p></li>
+<li><p>Add the formatting/styles</p></li>
+<li><p>Save the workbook into a Excel file</p></li>
+</ul>
+<p><strong>Task</strong>: Looking at the {openxlsx2} functions described in the section <strong>Main functions</strong> have a go at:</p>
+<ul>
+<li><p>Create a workbook object</p></li>
+<li><p>Add at least one worksheet</p></li>
+</ul>
+<p>Below you have one possible solution that we propose</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wb_main <span class="ot">&lt;-</span> <span class="fu">wb_workbook</span>(<span class="st">"Laboratory_Data"</span>) <span class="sc">%&gt;%</span>                    <span class="co">#creating the workbook</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_add_worksheet</span>(<span class="st">"lab summary"</span>,                                  <span class="co">#adding the first worksheet</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="at">gridLines =</span> <span class="cn">FALSE</span>,                                               <span class="co">#remove gridlines</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="at">tabColor =</span> <span class="st">"red"</span>) <span class="sc">%&gt;%</span>                                            <span class="co">#tab color in the spreadsheet</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_add_data</span>(<span class="at">x=</span><span class="st">"Samples reported by month and year (All laboratories)"</span>, <span class="co">#adding the title of table 1</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">start_col =</span> <span class="dv">2</span>,                                                   <span class="co">#title starting in col 2 or "B" </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">start_row =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span>                                               <span class="co">#title starts in row 2 as well</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_merge_cells</span>(<span class="at">rows=</span><span class="dv">2</span>,                                           <span class="co">#merging the row above Table 1</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(total_sample_tab) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span>                         <span class="co">#column range of Table 1            </span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_add_data</span>(<span class="at">x=</span>total_sample_tab, <span class="at">start_col  =</span> <span class="dv">2</span>,                  <span class="co">#data starts in column 2 and row 3</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="at">start_row =</span><span class="dv">3</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_add_data</span>(<span class="at">x=</span><span class="st">"Sample positivity by month and year (All Laboratories)"</span>, <span class="co">#add title of table 2</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">start_col =</span> <span class="dv">2</span>,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">start_row =</span> tab2_row_start<span class="dv">-1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_merge_cells</span>(<span class="at">rows=</span> tab2_row_start <span class="sc">-</span> <span class="dv">1</span>, <span class="co">#merging the row above Table 2</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(positivity_tab)<span class="sc">+</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_add_data</span>(<span class="at">x=</span>positivity_tab, <span class="at">start_col  =</span> <span class="dv">2</span>,</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="at">start_row =</span>tab2_row_start, <span class="at">na.strings =</span><span class="st">"-"</span> )</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_open</span>(wb_main) <span class="co"># to see a preview</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<p>We can see so far what we have, almost done! <img src="../images/openxlsx2_tut/icon5.png" class="img-fluid"></p>
+</section>
+<section id="step-4.3-formatting-the-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.3-formatting-the-table">Step 4.3: Formatting the table</h3>
+<p>No we just need to format the table.</p>
+<p><strong>Task</strong>: Format the table using the {openxlsx2} functions described in the <strong>Related to formatting</strong> section.</p>
+<p>Below is our proposed solution.</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>wb_main_w_styles <span class="ot">&lt;-</span> wb_main <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_cell_style</span>( <span class="dv">1</span>, tab1_dimres,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertical =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">horizontal =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrapText =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_cell_style</span>(<span class="dv">1</span> , tab1_dimtitle,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertical =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">horizontal =</span> <span class="st">"center"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_border</span>(<span class="dv">1</span>, tab1_dimfirstrow, </span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">top_border =</span> <span class="st">"thick"</span>, </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">top_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">bottom_border =</span> <span class="st">"thick"</span>, </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">bottom_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">inner_vgrid =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>                <span class="at">left_border=</span><span class="st">"none"</span>,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                <span class="at">right_border =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_font</span>(<span class="at">dims =</span> tab1_dimfirstrow,</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>              <span class="at">bold =</span> <span class="st">"double"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_font</span>(<span class="at">dims =</span> tab1_dimtitle,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>              <span class="at">size=</span><span class="dv">12</span>,</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>              <span class="at">bold =</span> <span class="st">"double"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_font</span>(<span class="at">dims =</span> tab1_dimlastrow,</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>              <span class="at">size=</span><span class="dv">11</span>,</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>              <span class="at">bold=</span><span class="st">"dobule"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_border</span>(<span class="at">dims =</span> tab1_dimlastrow,</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>                <span class="at">top_border =</span> <span class="st">"thick"</span>,</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>                <span class="at">top_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>                <span class="at">inner_vgrid =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>                <span class="at">left_border=</span><span class="st">"none"</span>,</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>                <span class="at">right_border =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>                <span class="at">bottom_border =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_numfmt</span>(<span class="at">dims =</span> tab1_dimlastrow,</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>                <span class="at">numfmt =</span> <span class="st">"#,0"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_numfmt</span>(<span class="at">dims =</span> <span class="fu">rowcol_to_dims</span>(<span class="at">row=</span><span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span>,</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">col=</span><span class="fu">ncol</span>(total_sample_tab)<span class="sc">+</span><span class="dv">1</span>),</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>                <span class="at">numfmt =</span> <span class="st">"#,0"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a> <span class="fu">wb_set_col_widths</span>(<span class="at">cols =</span> <span class="dv">2</span>, <span class="at">widths =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a> <span class="fu">wb_set_row_heights</span>(<span class="at">rows =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>,<span class="fu">nrow</span>(total_sample_tab)<span class="sc">+</span><span class="dv">3</span>), <span class="at">heights =</span> <span class="dv">30</span> )  <span class="sc">%&gt;%</span></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_cell_style</span>(<span class="dv">1</span>, tab2_dimres,</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertical =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">horizontal =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">wrapText =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_cell_style</span>(<span class="dv">1</span>, tab2_dimtitle,</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertical =</span> <span class="st">"center"</span>,</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">horizontal =</span> <span class="st">"center"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_border</span>(<span class="dv">1</span>, tab2_dimfirstrow, </span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>              <span class="at">top_border =</span> <span class="st">"thick"</span>, </span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>              <span class="at">top_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>              <span class="at">bottom_border =</span> <span class="st">"thick"</span>, </span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>              <span class="at">bottom_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>              <span class="at">inner_vgrid =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>              <span class="at">left_border=</span><span class="st">"none"</span>,</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>              <span class="at">right_border =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_font</span>(<span class="at">dims=</span>tab2_dimfirstrow,</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>              <span class="at">bold=</span><span class="st">"double"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_font</span>(<span class="at">dims=</span>tab2_dimtitle,</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>              <span class="at">size=</span><span class="dv">12</span>,</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>              <span class="at">bold=</span><span class="st">"double"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_border</span>(<span class="at">dims =</span> tab2_dimlastrow,</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>                <span class="at">top_border =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>                <span class="at">inner_vgrid =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>                <span class="at">left_border=</span><span class="st">"none"</span>,</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>                <span class="at">right_border =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>                <span class="at">bottom_color =</span> <span class="fu">wb_color</span>(<span class="at">hex =</span> <span class="st">"000000"</span>),</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>                <span class="at">bottom_border =</span> <span class="st">"thick"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_add_numfmt</span>(<span class="at">dims =</span> tab2_dimbody_pct,</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>                <span class="at">numfmt =</span> <span class="st">"#.0%"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a> <span class="fu">wb_set_col_widths</span>(<span class="at">cols =</span> <span class="dv">2</span>, <span class="at">widths =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a> <span class="fu">wb_set_row_heights</span>(<span class="at">rows =</span> <span class="fu">c</span>(tab2_row_start<span class="dv">-1</span>,tab2_row_start,nrow</span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>                             (positivity_tab)<span class="sc">+</span>tab2_row_start), <span class="at">heights =</span> <span class="dv">30</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wb_open</span>() <span class="co"># to open a temporary file </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<p>If all functions and commands are correct, you should see something like the following output:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/openxlsx2_tut/icon6.png" class="img-fluid figure-img"></p>
+<figcaption>The formated tables in Excel</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-4.4-exporting-the-table" class="level3">
+<h3 class="anchored" data-anchor-id="step-4.4-exporting-the-table">Step 4.4: Exporting the table</h3>
+<p>The last step is to export the table and save it in our computer.</p>
+<p><strong>Task</strong>: Using the function wb_save(), export the tables into your local computer</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save the output into an excel file</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wb_save</span>(wb_main_w_styles, <span class="st">"Lab_tables.xlsx"</span>, <span class="at">overwrite =</span> T) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<p><br></p>
+<p>Depending on how complex your report is, you can add more worksheets. Iteration (like using map() from purrr) could help you to automate several reports from different provinces or geographical units. Have a look at the <a href="https://epirhandbook.com/new_pages/iteration.html">Iteration</a> chapter of the EpiRhandbook if you want to explore this further.</p>
+<p><br></p>
+<p>There are other great functions to add more details or expand the format of the tables, for example adding conditional format, or <strong><em>sparklines</em></strong>. This tutorial covers just the main functions and what is the most common task to add formats. For more in depth formatting, please review the openxlsx2 following <a href="https://janmarvin.github.io/openxlsx2/index.html" title="Main page for openxls2 manual">vignette</a></p>
+<p>Thanks for reading this tutorial!</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script>
+
+
+
+/* update total correct if #webex-total_correct exists */
+
+update_total_correct = function() {
+
+  console.log("webex: update total_correct");
+
+
+
+  var t = document.getElementsByClassName("webex-total_correct");
+
+  for (var i = 0; i < t.length; i++) {
+
+    p = t[i].parentElement;
+
+    var correct = p.getElementsByClassName("webex-correct").length;
+
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
+    var selects = p.getElementsByClassName("webex-select").length;
+
+
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
+  }
+
+}
+
+
+
+/* webex-solution button toggling function */
+
+b_func = function() {
+
+  console.log("webex: toggle hide");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('open')) {
+
+    cl.remove("open");
+
+  } else {
+
+    cl.add("open");
+
+  }
+
+}
+
+
+
+/* check answers */
+
+check_func = function() {
+
+  console.log("webex: check answers");
+
+
+
+  var cl = this.parentElement.classList;
+
+  if (cl.contains('unchecked')) {
+
+    cl.remove("unchecked");
+
+    this.innerHTML = "Hide Answers";
+
+  } else {
+
+    cl.add("unchecked");
+
+    this.innerHTML = "Show Answers";
+
+  }
+
+}
+
+
+
+/* function for checking solveme answers */
+
+solveme_func = function(e) {
+
+  console.log("webex: check solveme");
+
+
+
+  var real_answers = JSON.parse(this.dataset.answer);
+
+  var my_answer = this.value;
+
+  var cl = this.classList;
+
+  if (cl.contains("ignorecase")) {
+
+    my_answer = my_answer.toLowerCase();
+
+  }
+
+  if (cl.contains("nospaces")) {
+
+    my_answer = my_answer.replace(/ /g, "")
+
+  }
+
+
+
+  if (my_answer == "") {
+
+    cl.remove("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else if (real_answers.includes(my_answer)) {
+
+    cl.add("webex-correct");
+
+    cl.remove("webex-incorrect");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+    cl.remove("webex-correct");
+
+  }
+
+
+
+  // match numeric answers within a specified tolerance
+
+  if(this.dataset.tol > 0){
+
+    var tol = JSON.parse(this.dataset.tol);
+
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+
+      cl.add("webex-correct");
+
+    } else {
+
+      cl.remove("webex-correct");
+
+    }
+
+  }
+
+
+
+  // added regex bit
+
+  if (cl.contains("regex")){
+
+    answer_regex = RegExp(real_answers.join("|"))
+
+    if (answer_regex.test(my_answer)) {
+
+      cl.add("webex-correct");
+
+    }
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking select answers */
+
+select_func = function(e) {
+
+  console.log("webex: check select");
+
+
+
+  var cl = this.classList
+
+
+
+  /* add style */
+
+  cl.remove("webex-incorrect");
+
+  cl.remove("webex-correct");
+
+  if (this.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else if (this.value != "blank") {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+/* function for checking radiogroups answers */
+
+radiogroups_func = function(e) {
+
+  console.log("webex: check radiogroups");
+
+
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
+  var cl = checked_button.parentElement.classList;
+
+  var labels = checked_button.parentElement.parentElement.children;
+
+
+
+  /* get rid of styles */
+
+  for (i = 0; i < labels.length; i++) {
+
+    labels[i].classList.remove("webex-incorrect");
+
+    labels[i].classList.remove("webex-correct");
+
+  }
+
+
+
+  /* add style */
+
+  if (checked_button.value == "answer") {
+
+    cl.add("webex-correct");
+
+  } else {
+
+    cl.add("webex-incorrect");
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+window.onload = function() {
+
+  console.log("webex onload");
+
+  /* set up solution buttons */
+
+  var buttons = document.getElementsByTagName("button");
+
+
+
+  for (var i = 0; i < buttons.length; i++) {
+
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
+      buttons[i].onclick = b_func;
+
+    }
+
+  }
+
+
+
+  var check_sections = document.getElementsByClassName("webex-check");
+
+  console.log("check:", check_sections.length);
+
+  for (var i = 0; i < check_sections.length; i++) {
+
+    check_sections[i].classList.add("unchecked");
+
+
+
+    let btn = document.createElement("button");
+
+    btn.innerHTML = "Show Answers";
+
+    btn.classList.add("webex-check-button");
+
+    btn.onclick = check_func;
+
+    check_sections[i].appendChild(btn);
+
+
+
+    let spn = document.createElement("span");
+
+    spn.classList.add("webex-total_correct");
+
+    check_sections[i].appendChild(spn);
+
+  }
+
+
+
+  /* set up webex-solveme inputs */
+
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+
+
+  for (var i = 0; i < solveme.length; i++) {
+
+    /* make sure input boxes don't auto-anything */
+
+    solveme[i].setAttribute("autocomplete","off");
+
+    solveme[i].setAttribute("autocorrect", "off");
+
+    solveme[i].setAttribute("autocapitalize", "off");
+
+    solveme[i].setAttribute("spellcheck", "false");
+
+    solveme[i].value = "";
+
+
+
+    /* adjust answer for ignorecase or nospaces */
+
+    var cl = solveme[i].classList;
+
+    var real_answer = solveme[i].dataset.answer;
+
+    if (cl.contains("ignorecase")) {
+
+      real_answer = real_answer.toLowerCase();
+
+    }
+
+    if (cl.contains("nospaces")) {
+
+      real_answer = real_answer.replace(/ /g, "");
+
+    }
+
+    solveme[i].dataset.answer = real_answer;
+
+
+
+    /* attach checking function */
+
+    solveme[i].onkeyup = solveme_func;
+
+    solveme[i].onchange = solveme_func;
+
+
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  /* set up radiogroups */
+
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
+  for (var i = 0; i < radiogroups.length; i++) {
+
+    radiogroups[i].onchange = radiogroups_func;
+
+  }
+
+
+
+  /* set up selects */
+
+  var selects = document.getElementsByClassName("webex-select");
+
+  for (var i = 0; i < selects.length; i++) {
+
+    selects[i].onchange = select_func;
+
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
+  }
+
+
+
+  update_total_correct();
+
+}
+
+
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
