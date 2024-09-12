@@ -13,8 +13,6 @@ format:
 editor: 
   markdown: 
     wrap: 72
-title: |
-  ![](../images/ecdc/logo_epiet_rki.png){width=12in}
 ---
 
 # An Outbreak of Gastroenteritis in Stegen, Germany (ENG) {.unnumbered} 
