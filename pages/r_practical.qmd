@@ -17,23 +17,15 @@ editor:
 # Descriptive analysis of the 2022 Mpox outbreak in Europe {#sec-rpractical}
 
 ::: {.callout-note appearance="minimal" icon="false"}
-**Tool**: R \| **Technical complexity**: Basic \| **Methodological
-complexity**: Basic\
+**Tool**: R    \| **Technical complexity**: Basic    \| **Methodological complexity**: Basic\
 **Source:** ECDC EI Group (simulated data)\
-**Prior knowledge required:** [R
-basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
+**Prior knowledge required:** [R basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
 Rstudio; R packages, functions and arguments)
 :::
 
 For instructions on how to use our case studies, [see here.] We welcome feedback and suggestions via [contact\@appliedepi.org](mailto:contact@appliedepi.org). Discuss the case study at [community].
 
 \pagebreak
-
-## Objectives
-
-1.  Explore different types of files and how they can be imported in R.
-2.  Perform basic data cleaning, e.g., changing the variable type, recode variables, aggregate and filter.
-3.  Perform a basic descriptive analysis using tables and graphs
 
 ## Scenario
 
@@ -46,20 +38,26 @@ You are given access to:
 
 Let's go!
 
+## Objectives
+
+In this case study you will: 
+
+1.  Explore different types of files and how they can be imported in R.
+2.  Perform basic data cleaning, e.g., changing the variable type, recode variables, aggregate and filter.
+3.  Perform a basic descriptive analysis using tables and graphs
+
 ## Step 1. Set up
 
 ### 1.1 Get started in R Studio
 
-You want to create a reproducible workflow, so you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don't get lost later on. 
+Start by setting up a reproducible and well-organized workflow. This will make it easy to rerun your analysis whenever needed.
 
 **Tasks:**
 
--   Ensure your working language in RStudio is English
 -   Set up a R Studio project
--   Create an R script, or an Rmarkdown file if you prefer. Make sure
-    the script purpose, date, and author are written as comments at the
-    top.
--   Make sure your folders/subfolders are well-organised
+-   Set up clear sub-folders where your code, data, and outputs will go
+-   Create an R script, or an Rmarkdown file if you prefer. Make sure the script purpose, date, and author are written as comments at the top.
+-   Extra: Ensure your working language in RStudio is appropriate (e.g. English for this exercise)
 
 <details>
 
@@ -71,15 +69,9 @@ You want to create a reproducible workflow, so you need a place to save your cod
 
 </br>
 
-- Download folder named r_practical and extract contents in the local laptop
+- Create a folder where all the work in this case study will go. For example, create 'mpox_analysis' on your computer desktop. Create your R Studio project to be based in this folder. 
 
-- Create an Rstudio project in the folder r_practical. If you are unsure on how to do that, read the EpiRhandbook on R projects
-
-- Inside "r_practical": Subfolder "data" contains the raw data you will use in this case study. You should see six different files, three called E_pox_aggregated_data and three E_pox_case_based_data. Each has a specific file type.
-
-- Inside "r_practical": Subfolder "scripts" should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called "backup" where you can find a solution R script for each step in case you are stuck at any point or if you want to compare your own script with the solution one.
-
-- Inside "r_practical": Subfolder "outputs" can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.
+- We suggest creating the following sub-folders: scripts (for your code), data (for your data), and outputs (for your analytical outputs). 
 
 </details>
 
@@ -94,21 +86,25 @@ it yourself first!)
 
 </br>
 
-```{r, include=FALSE}
-# To see your language locale 
-Sys.getlocale() 
+To create an Rstudio project in your new folder, clicking *New Project...* in the top left of your R Studio, then *"Existing Directory"* (because your folder area already exists), then *Browse* to select your new folder. For more information, look at the [R projects] section of the Epi R Handbook (https://epirhandbook.com/new_pages/r_projects.html)
 
-# To change it into English 
-Sys.setlocale("LC_ALL", "English")  
-```
+Start a new R script by clicking *New File...* in the top left of your R Studio, then *"R Script"*. Save it immediately in the appropriate place, e.g. in a 'scripts' subfolder of your R Project. 
+
+At the top of your new R scipt, write some essential information like your name, the purpose of the file, and the date. 
+
+Your R locale determines the language and regional settings used for things like date formats and translations. If your locale is different from the language you want for your report (e.g., a French locale vs. an English report), you can change it to English by running Sys.setlocale("LC_ALL", "English"). Include this in your script if needed, or skip it if your locale is usually appropriate. More information on this is available in the [instructions] page. 
 
 </details>
 
 ### 1.2 Install/load packages
 
-The first part of your code is to install and load packages. You've heard that a great way to do this is with the {pacman} package, so that's where you start.
+Next in your R script, you need to install and load the necessary R packages. This ensures that the functions you need are available for your analysis.
 
-You know that you will need to use rio (for importing data), janitor (for cleaning data), lubridate (for cleaning dates), skimr (for reviewing data), epikit, gtsummary, apyramid, and tidyverse.
+You will need the following packages: rio (for importing data), janitor (for cleaning data), lubridate (for cleaning dates), skimr (for reviewing data), epikit (for epi-related tasks), gtsummary (for presentation-ready tables), apyramid (for age-sex pyramids), and tidyverse (for general data manipulation/science tasks).
+
+As you start, your trusted colleague nudges you and whispers "I've heard that a great way to manage your packages is with the {pacman} package". 
+
+Over to you!
 
 <details>
 
@@ -121,13 +117,13 @@ it yourself first!)
 
 </br>
 
-The function p_load() from {pacman} will check each listed package. If not already installed it will install install them. Then, it will load it for use in your R session.
+Use the function p_load() from {pacman} for this task. You provide the function with a list of packages that you want to use. It will take two steps per package: 1) Check if the package is installed on your computer, and install it if necessary, then 2) Load the package so it can be used during this R session. 
 
-Note you may end up using a long list of packages. Unfortunately different
-packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. But
-other packages such as {MASS} do also have a function called select(). This could create headaches if you want to subset columns using dplyr's select() but R thinks you're calling MASS's select() (we call this masking - dplyr's select() is masked by MASS's select()). Given that you
-are more likely to use functions from {tidyverse}, ensure that this is
-the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always "prevail".
+If you don't already have pacman installed, you will need to install it the "traditional way" first, with install.packages(). 
+
+Note that the order of packages in your p_load function can be important. If two packages have the same function names (e.g. select() in tidyverse and select() in MASS, which do different things), then R will use the function from the most recently loaded package. To prioritize functions from tidyverse, which are commonly used for data manipulation and visualization, load tidyverse last.
+
+</detail>
 
 ```{r, echo=TRUE, eval=TRUE}
 
@@ -149,11 +145,42 @@ pacman::p_load(
 
 ```
 
-## Step 2: Import the data
+## Step 2: Download and import the data
 
-ECDC provides you with six files for your analysis: Three case-based linelists with case information from X, X, X, and the three aggregate datasets summarising total case counts. They are available as three different types of files: csv, json and excel, and are located inside “data/raw”.
+### 2.1: Download the data
 
-**Task:** Import the three case-based data frames and the three aggregated data frames into your R environment 
+ECDC provides you with two files for your analysis:
+
+- A case-level linelist (*"mpox_linelist.xlsx"*) with case information from five countries (countries A - E)
+- An aggregate table (*"mpox_aggregate_table.csv"*) for those countries with cumulative case counts per day. 
+
+They provide it to you via AppliedEpi's very useful data repository, which you can access using the *{appliedepidata}* package. So first you need to download these two files to your own computer, as follows:
+
+1) Install the *{appliedepidata}* package from GitHub using the install_github functions in the remotes package. Install *{remotes}* if you need to first. 
+```{r , echo=TRUE, eval=FALSE}
+# Install remotes if you need to (so you can install a package from GitHub)
+pacman::p_load("remotes")
+
+# Use the install_github function from remotes to install appliedepidata
+remotes::install_github("appliedepi/appliedepidata")
+```
+
+2) Save the two datasets into a specific folder using the *save_data()* function from *{appliedepidata}*, by running the  code below. The example below saves the data into a 'data' subfolder within the R project. Note that if you do not specify a location within the 'path' argument of the function, a window will pop up asking you to manually select a folder. 
+
+```{r , echo=TRUE, eval=FALSE}
+# Save down the two mpox files using the save_data() function from appliedepidata
+appliedepidata::save_data("mpox_linelist",
+                        path = "data")
+
+appliedepidata::save_data("mpox_aggregate_table",
+                          path = "data")
+```
+
+### 2.2 Import the data 
+
+Great! Thanks ECDC and Applied Epi! Now it's time to import the data into R Studio so you can analyse it. 
+
+**Task:** Import the downloaded case-based and aggregated data into your R environment. Ideally you want to use one function for both datasets, despite one being a csv and the other an xlsx file. 
 
 <details>
 
@@ -165,7 +192,7 @@ ECDC provides you with six files for your analysis: Three case-based linelists w
 
 </br>
 
-This function will recognise the file type and import it accordingly. It replaces the use of file-type specific functions, such as read.csv() from {base} for .csv files, JSON() function from {jsonlite} to import .json files, and read_excel() from {readxl} to import .xlsx files.
+Use the import function from the {rio} package, which can recognise and import different file types. It replaces importing functions that are specific to the file type, such as read.csv() from {base} for .csv files and read_excel() from {readxl} to import .xlsx files.
 
 If you feel you need to know more about importing functions, read the Import and export chapter of the EpiRhandbook.
 
@@ -181,45 +208,48 @@ it yourself first!)
 </summary>
 
 ```{r , echo=TRUE, eval=FALSE}
-# Importing ------------------------------------------------------
+# Import data  --------------
+
 # Case-based data
-cb_data_raw_csv <- import("data/E_pox_case_based_data.csv")
-cb_data_raw_json <- import("data/E_pox_case_based_data.json")
-cb_data_raw_xlsx <- import("data/E_pox_case_based_data.xlsx")
+mpox_linelist_raw <- import("data/mpox_linelist.xlsx")
 
 # Aggregated data
-agg_data_raw_csv <- import("data/E_pox_aggregated_data.csv")
-agg_data_raw_json <- import("data/E_pox_aggregated_data.json")
-agg_data_raw_xlsx <- import("data/E_pox_aggregated_data.xlsx")
+mpox_agg_raw <- import("data/mpox_aggregate_table.csv")
 
 ```
 
-```{r , include = FALSE}
-cb_data_raw_csv <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.csv")
-cb_data_raw_json <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.json")
-cb_data_raw_xlsx <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_case_based_data.xlsx")
+```{r, include = FALSE}
+# This code is actually run; the prior chunks are just for show for simplicity
 
-agg_data_raw_csv <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.csv")
-agg_data_raw_json <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.json")
-agg_data_raw_xlsx <- import("../case_studies_to_translate/ENG/r_practical/data/E_pox_aggregated_data.xlsx")
+pacman::p_load("remotes")
+
+if (!requireNamespace("appliedepidata", quietly = TRUE)) {
+  remotes::install_github("appliedepi/appliedepidata")
+}
+
+appliedepidata::get_data("mpox_linelist")
+mpox_linelist_raw <- mpox_linelist
+
+
+appliedepidata::get_data("mpox_aggregate_table")
+mpox_agg_raw <- mpox_aggregate_table
+
+rm(mpox_linelist, mpox_aggregate_table)
+
 ```
+
 </details>
 
 ## Step 3: Explore the data
 
 You need to understand what the data looks like as a first step, to inform your analysis. 
 
-Tasks: Take a look at the different data frames and try to find out:
+*Tasks:* Take a look at the different data frames and determine:
 
--   The number of columns and observations
-
+-   The number of columns and observations (e.g. their _dimensions_)
 -   The class of their columns and whether it matches its nature (e.g., are "dates" considered "dates" by R?)
-
--   Look at the different categories of the columns about gender, clinical symptoms, outcome, hiv status and sexual orientation existing in the case-based data. Do you need to recode any of them?
-
--   How is unknown or missing data being categorised in these columns? Should you standardise this category?
-
--   If case-based and aggregated data from file types (.csv, .json and .xlsx) are exactly the same, remove the .json and .xlsx data frames from your environment.
+-   If the contents of columns are clean and standardized in the mpox linelist (e.g. gender, clinical symptoms, outcome, hiv status and sexual orientation). Do you need to recode any of them?
+-   How unknown or missing data is  categorised in these columns. Do these values need to be standardized?
 
 <details>
 
@@ -231,8 +261,13 @@ Tasks: Take a look at the different data frames and try to find out:
 
 </br>
 
-An efficient way to explore data is to use the function skim() from the {skimr} package, as it gives you all the information needed with only
-one command. Of course, there are several alternatives. To know the different categories in a column, you can use the function tabyl() from {janitor}, which will give you counts and percentages of every category in the data column.
+An efficient function for initial data exploring is skim() from the {skimr} package, as it gives you a lot of information on data structure and content. 
+
+You can also use the function tabyl() from {janitor}, to get counts and percentages of every category in the data column, one by one. These get printed to your RStudio console. 
+
+Finally, you can use the tbl_summary() function from gtsummary to get see the distribution of values within multiple variables at once. The output from tbl_summary() is seen in the Viewer of your RStudio.
+
+Decide which one you prefer! 
 
 </br>
 
@@ -250,31 +285,25 @@ it yourself first!)
 </br>
 
 ```{r , echo=TRUE, results = 'hide'}
-# Explore the different case-based data frames
+# Explore the dimensions of the two data objects
+skim(mpox_linelist_raw)
+skim(mpox_agg_raw)
 
-skim(cb_data_raw_csv)
-skim(cb_data_raw_json)
-skim(cb_data_raw_xlsx)
+# Explore the values of different categorical columns in the mpox linelist: with tabyl
+tabyl(mpox_linelist_raw, Gender)
 
-# Explore the different categories of gender and clinical columns in one of the cb data frames
-tabyl(cb_data_raw_csv, Gender)
+tabyl(mpox_linelist_raw, ClinicalSymptoms)
 
-tabyl(cb_data_raw_csv, ClinicalSymptoms)
+tabyl(mpox_linelist_raw, Outcome)
 
-tabyl(cb_data_raw_csv, Outcome)
+tabyl(mpox_linelist_raw, HIVStatus)
 
-tabyl(cb_data_raw_csv, HIVStatus)
+tabyl(mpox_linelist_raw, SexualOrientation)
 
-tabyl(cb_data_raw_csv, SexualOrientation)
-
-# Explore the different aggregated data frames
-
-skim(agg_data_raw_csv)
-skim(agg_data_raw_json)
-skim(agg_data_raw_xlsx)
-
-# Remove json and xlsx files as they are exactly the same as the csv ones. Within rm() we ask for the objects containing the pattern "json" or "xlsx" to be removed from the environment
-rm(list = ls(pattern = "json|xlsx"))
+# Explore the values of different categorical columns in the mpox linelist: with tbl_summary
+mpox_linelist_raw %>% 
+  select(Gender, ClinicalSymptoms, Outcome, HIVStatus, SexualOrientation) %>% 
+  tbl_summary()
 
 ```
 
@@ -291,12 +320,8 @@ rm(list = ls(pattern = "json|xlsx"))
 pacman::p_load(webexercises)
 
 opts <- c(
-  "2000",
-  "13",
-  answer = "3",
-  "101"
+  "2000", "13", answer = "3", "101"
 )
-
 
 cat("How many columns does the aggregated data frame have?", longmcq(opts))
 
@@ -308,10 +333,7 @@ cat("How many columns does the aggregated data frame have?", longmcq(opts))
 pacman::p_load(webexercises)
 
 opts <- c(
-  "Date",
-  answer = "Character",
-  "Numeric",
-  "Factor"
+  "Date", answer = "Character", "Numeric", "Factor"
 )
 
 
@@ -401,10 +423,10 @@ it yourself first!)
 </br>
 
 ```{r , echo=TRUE, results = 'hide'}
-# Create a new object called cb_data which is the clean version of the raw data, applying the cleaning functions
+# Create a new object called mpox_linelist which is the clean version of the raw data, applying the cleaning functions
 
 
-cb_data <- cb_data_raw_csv %>% 
+mpox_linelist <- mpox_linelist_raw %>% 
   
   clean_names() %>% # standardises names and puts all into lower case 
   
@@ -453,21 +475,21 @@ cb_data <- cb_data_raw_csv %>%
 
 # Check that all changes have been made correctly
 
-skim(cb_data)
+skim(mpox_linelist)
 
-tabyl(cb_data, gender)
+tabyl(mpox_linelist, gender)
 
-tabyl(cb_data, clinical_symptoms)
+tabyl(mpox_linelist, clinical_symptoms)
 
-tabyl(cb_data, outcome)
+tabyl(mpox_linelist, outcome)
 
-tabyl(cb_data, hiv_status)
+tabyl(mpox_linelist, hiv_status)
 
-tabyl(cb_data, sexual_orientation)
+tabyl(mpox_linelist, sexual_orientation)
 
-tabyl(cb_data, week_date)
+tabyl(mpox_linelist, week_date)
 
-tabyl(cb_data, age_group)
+tabyl(mpox_linelist, age_group)
 
 ```
 
@@ -553,11 +575,11 @@ it yourself first!)
 ```{r , echo=TRUE, results = 'hide'}
 # Check class of date of reporting column
 
-class(agg_data_raw_csv$DateRep) #It is a date, so we do not need to change its class
+class(mpox_agg_raw$DateRep) #It is a date, so we do not need to change its class
 
-# Create a new object called agg_data which is the clean version of the raw data, applying the cleaning functions
+# Create a new object called mpox_agg which is the clean version of the raw data, applying the cleaning functions
 
-agg_data <- agg_data_raw_csv %>% 
+mpox_agg <- mpox_agg_raw %>% 
   
   clean_names() %>% # standardises names and puts all into lower case 
   
@@ -633,7 +655,7 @@ it yourself first!)
 
 ```{r , echo=TRUE}
 # Create an object with the table
-cb_country_table <- cb_data %>%
+cb_country_table <- mpox_linelist %>%
 
   select(country) %>% #select the column that we want to use in the table
   
@@ -693,7 +715,7 @@ it yourself first!)
 ```{r , echo=TRUE}
 # Epicurve by notification
 
-epicurve_epox <- ggplot(data = cb_data,          #data to be used
+epicurve_epox <- ggplot(data = mpox_linelist,          #data to be used
                         aes(x = week_date)) +    #with geom_histogram() you only need to assign the x axis
   
   geom_histogram(binwidth = 7,                   #binwidth 7 ensures that the width represents 7 days
@@ -717,7 +739,7 @@ epicurve_epox
 
 # Epicurve by notification and country 
 
-epicurve_epox_country <- ggplot(data = cb_data,  #data to be used
+epicurve_epox_country <- ggplot(data = mpox_linelist,  #data to be used
                         aes(x = week_date,       
                             fill = country)) +   #now the fill needs to be inside aes()  
   
@@ -745,7 +767,7 @@ epicurve_epox_country
 
 # Heatmap of cases by country over time
 
-hp_epox <- cb_data %>% #we first group the data by country and week of notification
+hp_epox <- mpox_linelist %>% #we first group the data by country and week of notification
   
   group_by(country, week_date) %>% 
   
@@ -827,12 +849,12 @@ it yourself first!)
 
 ```{r , echo=TRUE}
 # Explore gender and age group columns
-tabyl(cb_data, gender)
-tabyl(cb_data, age_group)
+tabyl(mpox_linelist, gender)
+tabyl(mpox_linelist, age_group)
 
 # Table with sexual orientation 
 
-tab_sor <- cb_data %>% 
+tab_sor <- mpox_linelist %>% 
   
   select(sexual_orientation) %>% 
   
@@ -908,7 +930,7 @@ it yourself first!)
 ```{r , echo=TRUE}
 # Bar plot with clinical symptoms
 
-bar_clinical <- cb_data %>% 
+bar_clinical <- mpox_linelist %>% 
   
   drop_na(clinical_symptoms) %>%   # we remove those with missing clinical symptoms
   
@@ -937,7 +959,7 @@ bar_clinical
 
 # Table with number and percentage of cases by outcome
 
-tab_outcome <- cb_data %>% 
+tab_outcome <- mpox_linelist %>% 
   
   select(outcome) %>% 
   
@@ -1014,7 +1036,7 @@ it yourself first!)
 ```{r , echo=TRUE}
 # Estimate delay between onset and diagnosis, and between diagnosis and notification
 
-delay_db <- cb_data %>% 
+delay_db <- mpox_linelist %>% 
   
   mutate(delay_diag = as.numeric(date_of_diagnosis - date_of_onset)) %>%   #we create variables with difference between dates, we transform them in numeric to be able to then calculate measures of central tendency
   
@@ -1035,7 +1057,7 @@ delay_country
 
 # Line graph with the different dates 
 
-dates_longer <- cb_data %>% # use the variables of the dates and make a longer dataset. In the pivot_longer() command we select the columns which we want to expand in long format and transform the dataset
+dates_longer <- mpox_linelist %>% # use the variables of the dates and make a longer dataset. In the pivot_longer() command we select the columns which we want to expand in long format and transform the dataset
    
   pivot_longer(
     
@@ -1129,7 +1151,7 @@ it yourself first!)
 ```{r , echo=TRUE}
 # Create a data frame with the overall number of cases reported through the aggregated flux
 
-agg_data_country <- agg_data %>% 
+mpox_agg_country <- mpox_agg %>% 
   
   group_by(country) %>% 
   
@@ -1142,7 +1164,7 @@ agg_data_country <- agg_data %>%
 
 # Create a data frame with the overall number of cases reported through the case-based flux
 
-cb_data_country <- cb_data %>%
+mpox_linelist_country <- mpox_linelist %>%
   
   group_by(country) %>% 
   
@@ -1153,7 +1175,7 @@ cb_data_country <- cb_data %>%
 
 # We append both data frames. Remember this is different from merging
 
-total_data <- bind_rows(cb_data_country, agg_data_country)
+total_data <- bind_rows(mpox_linelist_country, mpox_agg_country)
 
 
 # We create a graph to compare the cases reported in both sources
