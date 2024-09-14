@@ -1,0 +1,183 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Instructions
+
+## Getting Help
+
+There are several ways to get help:
+
+1)  Look for the "hints" and solutions (see below)
+2)  Post a question in [Applied Epi
+    Community](www.community.appliedepi.org) with reference to this case
+    study
+
+### Hints and Solutions
+
+Here is what the "helpers" look like:
+
+<!--Note that this is the way of including hints and explanations to the solutions -->
+
+```{=html}
+<!--
+NOTE: Below is the hint (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Here you will see a helpful hint!
+
+</br>
+
+</details>
+
+```{=html}
+<!--
+NOTE: Below is the solution (all within details tags collapsed)
+-->
+```
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see the solution
+
+</summary>
+
+</br>
+
+```{r eval = F, echo=T}
+ebola_linelist %>% 
+  filter(
+    age > 25,
+    district == "Bolo"
+  )
+```
+
+Here is more explanation about why the solution works.
+
+</br>
+
+</details>
+
+## R Studio Set-up
+
+Install (and update!) R and RStudio
+Instructions and links go here.
+Define R Language
+Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the report that you want to produce. For example, a French person might have a French “locale”. If that is the case, when creating a graph by day of the week, Monday will be displayed as “lundi”. If that French person wants to create an English report, as for this case study, the language “locale” should be changed.
+
+To ensure your “locale” is set to English, use the following code: 
+```{r, echo = TRUE, eval=FALSE}
+# To see your language locale
+Sys.getlocale()
+
+# To change it into English
+Sys.setlocale("LC_ALL", "English")
+```
+
+Set-up a RStudio Project and R script for the case study
+Download the case study folder which can be found at the top of the case study page and extract the contents somewhere on your computer. 
+
+In your case study folder, you should have a 
+subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” 
+subfolder “data” which will contain the raw data you will use
+subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.
+
+Make sure your folders/subfolders are well-organised as this will save you a headache later! 
+
+Create an Rstudio project in the case study folder. If you are unsure on how to do that, read the EpiRhandbook on R projects. Once you have created an Rproject, create a new script with an appropriate name (example mpox_rpractical) and save it in the subfolder “scripts”. 
+
+If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script. See Using Rmarkdown below for more instructions. 
+
+Make sure the purpose, date last updated, and author are written as comments at the top.
+
+## Using Rmarkdown
+Some of our case studies use Rmarkdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.
+
+Typically, you want to change the default chunk options of your Rmarkdown script to:
+hide all code chunks in the report
+do not show messages or warnings
+show errors if they appear, but to not stop the rendering
+set up the default figure width to 7 and the figure height to 6
+to show the figure titles on top of the plots by default
+
+```{r, eval = F, echo = T}
+# hide all code chunks in the output, but show errors 
+knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
+                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
+                      warning = FALSE, # do not show warnings in the output word doc 
+                      message = FALSE, # do not show  messages in the output word doc
+                      fig.width = 7,         # Figure width
+                      fig.height = 6,        # Figure height
+                      fig.topcaption = TRUE  # show figure titles on top of plot
+                     )
+```
+
+### Install packages
+
+Several packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the Packages section of the EpiRhandbook.
+
+Note you may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. Other packages such as {MASS} also have a function called select(). This could create headaches if you want to subset columns using dplyr’s select() but R thinks you’re calling MASS’s select() (we call this masking - dplyr’s select() is masked by MASS’s select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.
+
+```{r, eval = F, echo = T}
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # to create age categories
+  gtsummary,  # summary statistics, tests and regressions 
+  apyramid,   # plotting age pyramids 
+  tidyverse  # data management and visualization
+)
+```
+
+If this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See this handbook pages on the basics of installing packages and running R from network drives (company computers) for more detail. https://epirhandbook.com/r-basics.html#installation https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
+
+Terms of Use
+Disclaimer: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information).
+You are free:
+to Share: to copy and distribute the work
+to Remix: to adapt and build upon the material
+Under the following conditions:
+Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers.
+Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors.
+Notification: If you use the work in the manner specified by the author or licensor, Walter@rki.de
+You cannot sell this work alone but you can use it as part of a teaching.
+With the understanding that:
+Waiver: Any of the above conditions can be waived if you get permission from the copyright holder.
+Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.
+Other Rights: In no way are any of the following rights affected by the license:
+Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;
+The author’s moral rights;
+Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
+Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license.
+This licence is based on http://creativecommons.org/licenses/by-sa/3.0/
+
