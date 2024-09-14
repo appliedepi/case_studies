@@ -23,7 +23,7 @@ format:
     theme:
       light: cosmo
       dark: [darkly, theme-dark.scss]
-    toc: true
+    toc: false
     number-sections: false
     number-depth: 0
     css:
@@ -70,6 +70,7 @@ book:
   - part: "Case studies"
     part-es: "Estudios de caso"
     chapters:
+    - pages/instructions.qmd
     - pages/fulton.qmd          
     - pages/r_practical.qmd
     - pages/tbe.qmd
