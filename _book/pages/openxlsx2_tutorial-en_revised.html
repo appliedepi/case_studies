@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script><link rel="stylesheet" href="../webex.css">
 <link rel="stylesheet" href="webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -92,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="../pages/fulton.html">Case studies</a></li>
+<li class="breadcrumb-item"><a href="../pages/instructions.html">Case studies</a></li>
 <li class="breadcrumb-item"><a href="../pages/openxlsx2_tutorial-en_revised.html">Creating reports with R and MS Excel: a tutorial using the openxls2 package (EN)</a></li>
 </ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
@@ -150,7 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case-studies Open Repository</span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome to our Case Study Repository!</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -163,6 +163,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/instructions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Instructions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pages/fulton.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fulton (EN)</span></a>
   </div>
@@ -196,72 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li>
-<a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
-  <ul class="collapse">
-<li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a></li>
-  <li><a href="#hints-and-solutions" id="toc-hints-and-solutions" class="nav-link" data-scroll-target="#hints-and-solutions">Hints and Solutions</a></li>
-  <li><a href="#posting-a-question-in-the-community-forum" id="toc-posting-a-question-in-the-community-forum" class="nav-link" data-scroll-target="#posting-a-question-in-the-community-forum">Posting a question in the Community Forum</a></li>
-  <li><a href="#terms-of-use" id="toc-terms-of-use" class="nav-link" data-scroll-target="#terms-of-use">Terms of Use</a></li>
-  <li><a href="#feedback-suggestions" id="toc-feedback-suggestions" class="nav-link" data-scroll-target="#feedback-suggestions">Feedback &amp; suggestions</a></li>
-  <li><a href="#version-and-revisions" id="toc-version-and-revisions" class="nav-link" data-scroll-target="#version-and-revisions">Version and revisions</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#guidance" id="toc-guidance" class="nav-link" data-scroll-target="#guidance">Guidance</a>
-  <ul class="collapse">
-<li><a href="#objectives-of-this-case-study" id="toc-objectives-of-this-case-study" class="nav-link" data-scroll-target="#objectives-of-this-case-study">Objectives of this case study</a></li>
-  <li><a href="#previous-level-of-expertise-assumed" id="toc-previous-level-of-expertise-assumed" class="nav-link" data-scroll-target="#previous-level-of-expertise-assumed">Previous level of expertise assumed</a></li>
-  <li><a href="#preparation-for-the-case-study" id="toc-preparation-for-the-case-study" class="nav-link" data-scroll-target="#preparation-for-the-case-study">Preparation for the case study</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a>
-  <ul class="collapse">
-<li><a href="#why-use-ms-excel-for-reporting" id="toc-why-use-ms-excel-for-reporting" class="nav-link" data-scroll-target="#why-use-ms-excel-for-reporting">Why use MS Excel for reporting ?</a></li>
-  <li><a href="#automating-a-report-in-excel-with-r-using-openxlsx2-package" id="toc-automating-a-report-in-excel-with-r-using-openxlsx2-package" class="nav-link" data-scroll-target="#automating-a-report-in-excel-with-r-using-openxlsx2-package">Automating a report in Excel with R using openxlsx2 package</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial">Tutorial</a>
-  <ul class="collapse">
-<li>
-<a href="#step-1-getting-ready" id="toc-step-1-getting-ready" class="nav-link" data-scroll-target="#step-1-getting-ready"><strong>Step 1: Getting ready</strong></a>
-  <ul class="collapse">
-<li><a href="#step-1.1-create-a-new-r-script" id="toc-step-1.1-create-a-new-r-script" class="nav-link" data-scroll-target="#step-1.1-create-a-new-r-script">Step 1.1: Create a new R script</a></li>
-  <li><a href="#step-1.2-installload-packages" id="toc-step-1.2-installload-packages" class="nav-link" data-scroll-target="#step-1.2-installload-packages">Step 1.2: Install/load packages</a></li>
-  </ul>
-</li>
-  <li><a href="#step-2-create-a-fake-dataset" id="toc-step-2-create-a-fake-dataset" class="nav-link" data-scroll-target="#step-2-create-a-fake-dataset"><strong>Step 2: Create a fake dataset</strong></a></li>
-  <li>
-<a href="#step-3-transfoming-the-data-and-creating-the-summary-tables" id="toc-step-3-transfoming-the-data-and-creating-the-summary-tables" class="nav-link" data-scroll-target="#step-3-transfoming-the-data-and-creating-the-summary-tables"><strong>Step 3: Transfoming the data and creating the summary tables</strong></a>
-  <ul class="collapse">
-<li><a href="#step-3.1-summary-table-with-number-of-samples-received" id="toc-step-3.1-summary-table-with-number-of-samples-received" class="nav-link" data-scroll-target="#step-3.1-summary-table-with-number-of-samples-received">Step 3.1: Summary table with number of samples received</a></li>
-  <li><a href="#step-3.2-summary-table-with-positivity-percentage" id="toc-step-3.2-summary-table-with-positivity-percentage" class="nav-link" data-scroll-target="#step-3.2-summary-table-with-positivity-percentage">Step 3.2: Summary table with positivity percentage</a></li>
-  <li><a href="#step-3.3-summary-table-by-laboratory" id="toc-step-3.3-summary-table-by-laboratory" class="nav-link" data-scroll-target="#step-3.3-summary-table-by-laboratory">Step 3.3: Summary table by laboratory</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#step-4-export-the-tables-to-excel" id="toc-step-4-export-the-tables-to-excel" class="nav-link" data-scroll-target="#step-4-export-the-tables-to-excel"><strong>Step 4: Export the tables to excel</strong></a>
-  <ul class="collapse">
-<li><a href="#main-functions" id="toc-main-functions" class="nav-link" data-scroll-target="#main-functions">Main functions</a></li>
-  <li><a href="#related-to-formating" id="toc-related-to-formating" class="nav-link" data-scroll-target="#related-to-formating">Related to formating</a></li>
-  <li><a href="#related-to-location-dimension-coordenates" id="toc-related-to-location-dimension-coordenates" class="nav-link" data-scroll-target="#related-to-location-dimension-coordenates">Related to location / dimension / coordenates</a></li>
-  <li><a href="#step-4.1-set-the-table-positions" id="toc-step-4.1-set-the-table-positions" class="nav-link" data-scroll-target="#step-4.1-set-the-table-positions">Step 4.1: Set the table positions</a></li>
-  <li><a href="#step-4.2-creating-the-table-in-ms-excel" id="toc-step-4.2-creating-the-table-in-ms-excel" class="nav-link" data-scroll-target="#step-4.2-creating-the-table-in-ms-excel">Step 4.2: Creating the table in MS Excel</a></li>
-  <li><a href="#step-4.3-formatting-the-table" id="toc-step-4.3-formatting-the-table" class="nav-link" data-scroll-target="#step-4.3-formatting-the-table">Step 4.3: Formatting the table</a></li>
-  <li><a href="#step-4.4-exporting-the-table" id="toc-step-4.4-exporting-the-table" class="nav-link" data-scroll-target="#step-4.4-exporting-the-table">Step 4.4: Exporting the table</a></li>
-  </ul>
-</li>
-  </ul>
-</li>
-  </ul></nav>
-</div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">Creating reports with R and MS Excel: a tutorial using the openxls2 package (EN)</h1>

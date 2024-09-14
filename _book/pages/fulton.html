@@ -55,7 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="../">
 <link href="../pages/r_practical.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../pages/instructions.html" rel="prev">
 <link href="../images/logos/Applied_Epi_logo.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
@@ -85,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script><link rel="stylesheet" href="../webex.css">
 <link rel="stylesheet" href="webex.css">
 </head>
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
@@ -93,8 +93,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
-<li class="breadcrumb-item"><a href="../pages/fulton.html">Case studies</a></li>
-<li class="breadcrumb-item"><a href="../pages/fulton.html"><span class="chapter-number">2</span>  <span class="chapter-title">Fulton (EN)</span></a></li>
+<li class="breadcrumb-item"><a href="../pages/instructions.html">Case studies</a></li>
+<li class="breadcrumb-item"><a href="../pages/fulton.html"><span class="chapter-number">3</span>  <span class="chapter-title">Fulton (EN)</span></a></li>
 </ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -151,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Case-studies Open Repository</span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Welcome to our Case Study Repository!</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -164,6 +164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/instructions.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Instructions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pages/fulton.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Fulton (EN)</span></a>
   </div>
@@ -197,87 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li>
-<a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a>
-  <ul class="collapse">
-<li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a></li>
-  <li><a href="#feedback-suggestions" id="toc-feedback-suggestions" class="nav-link" data-scroll-target="#feedback-suggestions">Feedback &amp; suggestions</a></li>
-  <li><a href="#version-and-revisions" id="toc-version-and-revisions" class="nav-link" data-scroll-target="#version-and-revisions">Version and revisions</a></li>
-  <li><a href="#guidance" id="toc-guidance" class="nav-link" data-scroll-target="#guidance">Guidance</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#import-data-and-cleaning" id="toc-import-data-and-cleaning" class="nav-link" data-scroll-target="#import-data-and-cleaning">Import data and cleaning</a>
-  <ul class="collapse">
-<li>
-<a href="#step-1-rmarkdown-set-up" id="toc-step-1-rmarkdown-set-up" class="nav-link" data-scroll-target="#step-1-rmarkdown-set-up"><strong>Step 1: Rmarkdown set up</strong></a>
-  <ul class="collapse">
-<li><a href="#step-1.1-define-r-language" id="toc-step-1.1-define-r-language" class="nav-link" data-scroll-target="#step-1.1-define-r-language"><strong>Step 1.1: Define R language</strong></a></li>
-  <li><a href="#step-1.2-default-chunk-options" id="toc-step-1.2-default-chunk-options" class="nav-link" data-scroll-target="#step-1.2-default-chunk-options"><strong>Step 1.2: Default chunk options</strong></a></li>
-  <li><a href="#step-1.3-installload-packages" id="toc-step-1.3-installload-packages" class="nav-link" data-scroll-target="#step-1.3-installload-packages"><strong>Step 1.3: Install/load packages</strong></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#step-2-data-import-and-exploration" id="toc-step-2-data-import-and-exploration" class="nav-link" data-scroll-target="#step-2-data-import-and-exploration"><strong>Step 2: Data import and exploration</strong></a>
-  <ul class="collapse">
-<li><a href="#step-2.1-data-import" id="toc-step-2.1-data-import" class="nav-link" data-scroll-target="#step-2.1-data-import"><strong>Step 2.1: Data import</strong></a></li>
-  <li><a href="#step-2.2-data-exploration" id="toc-step-2.2-data-exploration" class="nav-link" data-scroll-target="#step-2.2-data-exploration"><strong>Step 2.2: Data exploration</strong></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#step-3-data-cleaning" id="toc-step-3-data-cleaning" class="nav-link" data-scroll-target="#step-3-data-cleaning"><strong>Step 3: Data cleaning</strong></a>
-  <ul class="collapse">
-<li><a href="#step-3.1-create-date-objects" id="toc-step-3.1-create-date-objects" class="nav-link" data-scroll-target="#step-3.1-create-date-objects"><strong>Step 3.1: Create date objects</strong></a></li>
-  <li><a href="#step-3.2-clean-column-names" id="toc-step-3.2-clean-column-names" class="nav-link" data-scroll-target="#step-3.2-clean-column-names"><strong>Step 3.2: Clean column names</strong></a></li>
-  <li><a href="#step-3.3-remove-duplicated-rows" id="toc-step-3.3-remove-duplicated-rows" class="nav-link" data-scroll-target="#step-3.3-remove-duplicated-rows"><strong>Step 3.3: Remove duplicated rows</strong></a></li>
-  <li><a href="#step-3.4-change-column-class-and-remove-data-inconsistencies" id="toc-step-3.4-change-column-class-and-remove-data-inconsistencies" class="nav-link" data-scroll-target="#step-3.4-change-column-class-and-remove-data-inconsistencies"><strong>Step 3.4: Change column class and remove data inconsistencies</strong></a></li>
-  <li><a href="#step-3.5-create-a-column-for-weeks" id="toc-step-3.5-create-a-column-for-weeks" class="nav-link" data-scroll-target="#step-3.5-create-a-column-for-weeks"><strong>Step 3.5: Create a column for weeks</strong></a></li>
-  <li><a href="#step-3.6-create-time-difference-columns" id="toc-step-3.6-create-time-difference-columns" class="nav-link" data-scroll-target="#step-3.6-create-time-difference-columns"><strong>Step 3.6: Create time difference columns</strong></a></li>
-  <li><a href="#step-3.7-create-age-groups" id="toc-step-3.7-create-age-groups" class="nav-link" data-scroll-target="#step-3.7-create-age-groups"><strong>Step 3.7: Create age groups</strong></a></li>
-  <li><a href="#step-3.8-recode-charactercategorical-columns" id="toc-step-3.8-recode-charactercategorical-columns" class="nav-link" data-scroll-target="#step-3.8-recode-charactercategorical-columns"><strong>Step 3.8: Recode character/categorical columns</strong></a></li>
-  <li><a href="#step-3.9-merge-ethnicity-and-race" id="toc-step-3.9-merge-ethnicity-and-race" class="nav-link" data-scroll-target="#step-3.9-merge-ethnicity-and-race"><strong>Step 3.9: Merge ethnicity and race</strong></a></li>
-  <li><a href="#step-3.10-filter-data-frame" id="toc-step-3.10-filter-data-frame" class="nav-link" data-scroll-target="#step-3.10-filter-data-frame"><strong>Step 3.10: Filter data frame</strong></a></li>
-  </ul>
-</li>
-  </ul>
-</li>
-  <li>
-<a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis">Descriptive analysis</a>
-  <ul class="collapse">
-<li><a href="#step-4-start-the-report-with-a-summary-of-the-findings" id="toc-step-4-start-the-report-with-a-summary-of-the-findings" class="nav-link" data-scroll-target="#step-4-start-the-report-with-a-summary-of-the-findings"><strong>Step 4: Start the report with a summary of the findings</strong></a></li>
-  <li>
-<a href="#step-5.-analysis-by-time" id="toc-step-5.-analysis-by-time" class="nav-link" data-scroll-target="#step-5.-analysis-by-time"><strong>Step 5. Analysis by time</strong></a>
-  <ul class="collapse">
-<li><a href="#step-5.1-table-weekly-number-of-cases" id="toc-step-5.1-table-weekly-number-of-cases" class="nav-link" data-scroll-target="#step-5.1-table-weekly-number-of-cases"><strong>Step 5.1: Table weekly number of cases</strong></a></li>
-  <li><a href="#step-5.2-epicurve" id="toc-step-5.2-epicurve" class="nav-link" data-scroll-target="#step-5.2-epicurve"><strong>Step 5.2: Epicurve</strong></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#step-6.-analysis-by-person" id="toc-step-6.-analysis-by-person" class="nav-link" data-scroll-target="#step-6.-analysis-by-person"><strong>Step 6. Analysis by person</strong></a>
-  <ul class="collapse">
-<li><a href="#step-6.1-table-with-demographic-information" id="toc-step-6.1-table-with-demographic-information" class="nav-link" data-scroll-target="#step-6.1-table-with-demographic-information"><strong>Step 6.1: Table with demographic information</strong></a></li>
-  <li><a href="#step-6.2-age-pyramid" id="toc-step-6.2-age-pyramid" class="nav-link" data-scroll-target="#step-6.2-age-pyramid"><strong>Step 6.2: Age pyramid</strong></a></li>
-  <li><a href="#step-6.3-scatter-plot" id="toc-step-6.3-scatter-plot" class="nav-link" data-scroll-target="#step-6.3-scatter-plot"><strong>Step 6.3: Scatter plot</strong></a></li>
-  <li><a href="#step-6.4-bar-plot" id="toc-step-6.4-bar-plot" class="nav-link" data-scroll-target="#step-6.4-bar-plot"><strong>Step 6.4: Bar plot</strong></a></li>
-  </ul>
-</li>
-  <li><a href="#step-7.-analysis-by-place" id="toc-step-7.-analysis-by-place" class="nav-link" data-scroll-target="#step-7.-analysis-by-place"><strong>Step 7. Analysis by place</strong></a></li>
-  </ul>
-</li>
-  <li>
-<a href="#analysis-of-mortality" id="toc-analysis-of-mortality" class="nav-link" data-scroll-target="#analysis-of-mortality">Analysis of mortality</a>
-  <ul class="collapse">
-<li><a href="#step-8.-analysis-of-risk-factors-for-mortality" id="toc-step-8.-analysis-of-risk-factors-for-mortality" class="nav-link" data-scroll-target="#step-8.-analysis-of-risk-factors-for-mortality"><strong>Step 8. Analysis of risk factors for mortality</strong></a></li>
-  </ul>
-</li>
-  <li><a href="#interpretation-and-reflection" id="toc-interpretation-and-reflection" class="nav-link" data-scroll-target="#interpretation-and-reflection">Interpretation and reflection</a></li>
-  </ul></nav>
-</div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span class="chapter-title">Fulton (EN)</span></h1>
@@ -550,12 +475,12 @@ Analysis is loosely based off the monthly <a href="https://www.fultoncountyga.go
 <p>Explore the linelist to understand better the data.</p>
 <div class="webex-check">
 Question 2.1: How many rows are present in linelist_raw?
-<div id="radio_IQPBTUORXH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IQPBTUORXH" value=""><span>48</span></label><label><input type="radio" autocomplete="off" name="radio_IQPBTUORXH" value=""><span>31</span></label><label><input type="radio" autocomplete="off" name="radio_IQPBTUORXH" value="answer"><span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_IQPBTUORXH" value=""><span>5</span></label>
+<div id="radio_UBCLMXNDZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UBCLMXNDZV" value=""><span>48</span></label><label><input type="radio" autocomplete="off" name="radio_UBCLMXNDZV" value=""><span>31</span></label><label><input type="radio" autocomplete="off" name="radio_UBCLMXNDZV" value="answer"><span>82101</span></label><label><input type="radio" autocomplete="off" name="radio_UBCLMXNDZV" value=""><span>5</span></label>
 </div>
 Question 2.2: How many columns are of class numeric?
-<div id="radio_CCREHJIBOG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CCREHJIBOG" value=""><span>8</span></label><label><input type="radio" autocomplete="off" name="radio_CCREHJIBOG" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_CCREHJIBOG" value=""><span>19</span></label><label><input type="radio" autocomplete="off" name="radio_CCREHJIBOG" value=""><span>31</span></label>
+<div id="radio_OXDWLBRNRZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OXDWLBRNRZ" value=""><span>8</span></label><label><input type="radio" autocomplete="off" name="radio_OXDWLBRNRZ" value="answer"><span>4</span></label><label><input type="radio" autocomplete="off" name="radio_OXDWLBRNRZ" value=""><span>19</span></label><label><input type="radio" autocomplete="off" name="radio_OXDWLBRNRZ" value=""><span>31</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution code (try it yourself first!)</p>
@@ -667,8 +592,8 @@ Question 2.2: How many columns are of class numeric?
 </div>
 <br></details><div class="webex-check">
 Question 3.2: How many duplicated rows were present in the raw data?
-<div id="radio_BZEFWKWGBI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BZEFWKWGBI" value="answer"><span>28</span></label><label><input type="radio" autocomplete="off" name="radio_BZEFWKWGBI" value=""><span>31</span></label><label><input type="radio" autocomplete="off" name="radio_BZEFWKWGBI" value=""><span>38</span></label><label><input type="radio" autocomplete="off" name="radio_BZEFWKWGBI" value=""><span>124</span></label>
+<div id="radio_WXOIJGJRLE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WXOIJGJRLE" value="answer"><span>28</span></label><label><input type="radio" autocomplete="off" name="radio_WXOIJGJRLE" value=""><span>31</span></label><label><input type="radio" autocomplete="off" name="radio_WXOIJGJRLE" value=""><span>38</span></label><label><input type="radio" autocomplete="off" name="radio_WXOIJGJRLE" value=""><span>124</span></label>
 </div>
 </div>
 </section><section id="step-3.4-change-column-class-and-remove-data-inconsistencies" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="step-3.4-change-column-class-and-remove-data-inconsistencies"><strong>Step 3.4: Change column class and remove data inconsistencies</strong></h3>
@@ -738,8 +663,8 @@ Question 3.2: How many duplicated rows were present in the raw data?
 </div>
 <br></details><div class="webex-check">
 Question 3.3: Which one of the following could NOT be used to transform the column sym_startdt_FALSE from the raw data frame into a date object?
-<div id="radio_XTXQRZQPGV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XTXQRZQPGV" value=""><span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_XTXQRZQPGV" value=""><span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_XTXQRZQPGV" value=""><span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_XTXQRZQPGV" value="answer"><span>lubridate::dmy()</span></label>
+<div id="radio_DXVGOOVWIK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXVGOOVWIK" value=""><span>base::as.Date()</span></label><label><input type="radio" autocomplete="off" name="radio_DXVGOOVWIK" value=""><span>lubridate::as_date()</span></label><label><input type="radio" autocomplete="off" name="radio_DXVGOOVWIK" value=""><span>lubridate::ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_DXVGOOVWIK" value="answer"><span>lubridate::dmy()</span></label>
 </div>
 </div>
 </section><section id="step-3.5-create-a-column-for-weeks" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="step-3.5-create-a-column-for-weeks"><strong>Step 3.5: Create a column for weeks</strong></h3>
@@ -900,8 +825,8 @@ Question 3.3: Which one of the following could NOT be used to transform the colu
 </div>
 <br></details><div class="webex-check">
 Question 3.4: A column that has ordinal data, what class should it have?
-<div id="radio_RTWAPOENPU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RTWAPOENPU" value=""><span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_RTWAPOENPU" value=""><span>character</span></label><label><input type="radio" autocomplete="off" name="radio_RTWAPOENPU" value="answer"><span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_RTWAPOENPU" value=""><span>integer</span></label>
+<div id="radio_VVZLNHAAPJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VVZLNHAAPJ" value=""><span>logical</span></label><label><input type="radio" autocomplete="off" name="radio_VVZLNHAAPJ" value=""><span>character</span></label><label><input type="radio" autocomplete="off" name="radio_VVZLNHAAPJ" value="answer"><span>factor</span></label><label><input type="radio" autocomplete="off" name="radio_VVZLNHAAPJ" value=""><span>integer</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -945,8 +870,8 @@ Question 3.4: A column that has ordinal data, what class should it have?
 <p>Create a table with the number of cases per reporting week to see how the epidemic evolved by time in Fulton County</p>
 <div class="webex-check">
 Question 5.1: During which week do we observe the peak in cases by date of reporting?
-<div id="radio_RIGMPAANHK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RIGMPAANHK" value=""><span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_RIGMPAANHK" value=""><span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_RIGMPAANHK" value=""><span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_RIGMPAANHK" value="answer"><span>The week starting on December 30, 2020</span></label>
+<div id="radio_VRUGCMCCBK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VRUGCMCCBK" value=""><span>The week starting on March 02, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_VRUGCMCCBK" value=""><span>The week starting on December 16, 2020</span></label><label><input type="radio" autocomplete="off" name="radio_VRUGCMCCBK" value=""><span>The week starting on January 13, 2021</span></label><label><input type="radio" autocomplete="off" name="radio_VRUGCMCCBK" value="answer"><span>The week starting on December 30, 2020</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -1004,12 +929,12 @@ Question 5.1: During which week do we observe the peak in cases by date of repor
 <p>Create a table summarising, with counts and percentages, the total cumulative number of cases and deaths, as well the cases and deaths notified in the last 28 days by demographic characteristics: sex, age and race.</p>
 <div class="webex-check">
 Question 6.1: In which age group do we observe the largest proportion of cumulative cases?
-<div id="radio_GZUDGGGITQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GZUDGGGITQ" value=""><span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_GZUDGGGITQ" value=""><span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_GZUDGGGITQ" value="answer"><span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_GZUDGGGITQ" value=""><span>70+</span></label>
+<div id="radio_HRYCUVZBYQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HRYCUVZBYQ" value=""><span>0-9</span></label><label><input type="radio" autocomplete="off" name="radio_HRYCUVZBYQ" value=""><span>30-39</span></label><label><input type="radio" autocomplete="off" name="radio_HRYCUVZBYQ" value="answer"><span>20-29</span></label><label><input type="radio" autocomplete="off" name="radio_HRYCUVZBYQ" value=""><span>70+</span></label>
 </div>
 Question 6.2: In which race do we observe the largest proportion of deaths in the last 28 days?
-<div id="radio_ERQUJJPDJV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ERQUJJPDJV" value="answer"><span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_ERQUJJPDJV" value=""><span>White</span></label><label><input type="radio" autocomplete="off" name="radio_ERQUJJPDJV" value=""><span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_ERQUJJPDJV" value=""><span>Hispanic</span></label>
+<div id="radio_AZXQVHZWLH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AZXQVHZWLH" value="answer"><span>Black</span></label><label><input type="radio" autocomplete="off" name="radio_AZXQVHZWLH" value=""><span>White</span></label><label><input type="radio" autocomplete="off" name="radio_AZXQVHZWLH" value=""><span>Asian</span></label><label><input type="radio" autocomplete="off" name="radio_AZXQVHZWLH" value=""><span>Hispanic</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -1327,8 +1252,8 @@ Question 6.2: In which race do we observe the largest proportion of deaths in th
 <p>Create a table by zip code in which you show the incidence in the most recent 14 days period, the incidence in the previous 14 days period and the percentage change in incidence between these periods.</p>
 <div class="webex-check">
 Question 7.1: What is the change in incidence observed between periods in the zip code number 30337?
-<div id="radio_IDCIXJDJLL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IDCIXJDJLL" value=""><span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_IDCIXJDJLL" value=""><span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_IDCIXJDJLL" value="answer"><span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_IDCIXJDJLL" value=""><span>-25%</span></label>
+<div id="radio_EMYNSMMDII" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EMYNSMMDII" value=""><span>+20%</span></label><label><input type="radio" autocomplete="off" name="radio_EMYNSMMDII" value=""><span>+36%</span></label><label><input type="radio" autocomplete="off" name="radio_EMYNSMMDII" value="answer"><span>-62.5%</span></label><label><input type="radio" autocomplete="off" name="radio_EMYNSMMDII" value=""><span>-25%</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -1454,8 +1379,8 @@ Question 7.1: What is the change in incidence observed between periods in the zi
 </ol>
 <div class="webex-check">
 Question 8.1: According to the results of the univariate analysis, how was having a sore throat associated with mortality from Covid-19
-<div id="radio_UJCBODVYCZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UJCBODVYCZ" value=""><span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_UJCBODVYCZ" value="answer"><span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_UJCBODVYCZ" value=""><span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_UJCBODVYCZ" value=""><span>Impossible to know</span></label>
+<div id="radio_TGKSNOERNN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TGKSNOERNN" value=""><span>It was a risk factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_TGKSNOERNN" value="answer"><span>It was a protective factor for mortality</span></label><label><input type="radio" autocomplete="off" name="radio_TGKSNOERNN" value=""><span>It was not associated with mortality</span></label><label><input type="radio" autocomplete="off" name="radio_TGKSNOERNN" value=""><span>Impossible to know</span></label>
 </div>
 </div>
 <details><summary style="text-decoration: underline; color: red;"><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)
@@ -2384,8 +2309,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Case-studies Open Repository</span></span>
+      <a href="../pages/instructions.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Instructions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
