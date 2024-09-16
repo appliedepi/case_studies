@@ -1,0 +1,1348 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+    df-print: kable
+    toc: true
+editor: 
+  markdown: 
+    wrap: 72
+title: |
+  ![](images/ecdc/logo_epiet_rki.png){width=12in}
+---
+
+# **MVA - Multivariable analysis**
+
+# Case study: Continuation - An Outbreak of Gastroenteritis in Stegen, Germany {.unnumbered}
+
+## Objectives of this case study
+
+At the end of the case study, participants should be able to analyse data from a foodborne outbreak investigation using logistic and log-binomial regression, and to assess the respective roles played by several food vehicles.
+
+
+## Previous level of expertise assumed
+
+Participants are expected to be familiar with data management as well as descriptive and stratified analysis in R. 
+
+## Preparation for the case study
+
+1.  Extract the contents of the folder named *logreg_mva* in the local
+    laptop
+
+2.  Create an Rstudio project in the folder *logreg_mva* If you are unsure on
+    how to do that, read the EpiRhandbook Chapter on [R
+    projects](https://epirhandbook.com/en/new_pages/r_projects.html)
+
+3.  Inside the folder *logreg_mva*: Subfolder "data" contains the clean data
+    (from the Homework exercise) named *tira_clean.csv*. This is the only data file you will use in
+    this case study. In the same folder you can find the **data dictionary** with
+    a description of the dataframe variables.
+    
+4.  Subfolder scripts should be used to save any scripts related to the
+    analysis. Inside "backup" you will find a solution script with the
+    code of the case study named *logreg_analysis_backup.R*. 
+
+5.  Subfolder "outputs" could be used to store all outputs (tables,
+    graphs, documents) that are the result of the analysis
+
+
+## **Scenario, study design and analysis plan**
+### Introduction 
+
+On 26 June 1998, the St Sebastian High School in Stegen (school A), Germany, celebrated a graduation party, where 250 to 350 participants were expected. Attendees included graduates from that school, their families and friends, teachers, 12th grade students and some graduates from a nearby school (school B).
+
+A self-service party buffet was supplied by a commercial caterer in Freiburg. Food was prepared on the day of the party and transported in a refrigerated van to the school.  
+
+Festivities started with a dinner buffet which opened from 8:30 pm onwards and were followed by a dessert buffet offered from 10 pm. The party and the buffet extended late during the night and alcoholic beverages were quite popular. All agreed it was a party to be remembered.
+
+
+### The alert
+
+On 2nd July 1998, the Freiburg local health office reported to the Robert Koch Institute (RKI) in Berlin the occurrence of many cases of gastroenteritis following the graduation party described above. More than 100 cases were suspected among attendees and some of them were admitted to nearby hospitals. Sick people suffered from fever, nausea, diarrhoea and vomiting that lasted for several days. Most believed that the tiramisu consumed at dinner was responsible for their illness. Salmonella Enteritidis was isolated from 19 stool samples. 
+
+The Freiburg health office sent a team to investigate the kitchen facilities of the caterer. Food preparation procedures were reviewed. Food samples, except tiramisu (none was left over), were sent to the laboratory of Freiburg University. Microbiological analyses were performed on samples of the following: brown chocolate mousse, caramel cream, remoulade sauce, yoghurt dill sauce and 10 raw eggs.  
+ 
+The Freiburg health office requested help from the RKI in the investigation to assess the magnitude of the outbreak and identify potential vehicle(s) and risk factors for transmission in order to better control the outbreak.
+
+
+### The study
+
+Cases were defined as any person who had attended the party at St Sebastian High School who suffered from diarrhoea (≥ 3 loose stool for 24 hours) between 27 June and 29 June 1998; or who suffered from at least three of the following symptoms: vomiting, fever ≥38.5°C, nausea, abdominal pain, and headache.
+
+Students from both schools attending the party were asked through phone interviews to provide names of persons who attended the party. 
+
+Overall, 291 responded to enquiries and 103 cases were identified (attack rate: 35%). Among these cases, 84 (82%) received medical treatment and four were admitted to hospitals. Attack rates by age group were 36.6% for persons <20 years, 32.1% for persons 20 to 29 years, and 36.8% for persons older than 29 years. 
+
+### Case study continued
+
+Univariable and stratified analysis results suggest that tiramisu, dark and white mousse, fruit salad and red jelly were associated with illness (since RRs are high even among those who did not eat tiramisu). Such an association can be real (several contaminated food items, use of a single spoon to serve portions) or due to another unidentified confounding factor.
+
+Interpretation of results should also be careful in light of the small number of cases involved in the stratified analysis.
+
+
+**QUESTION 1**. How would you explore the effect of several risk factors? How would you account for a potential dose-response relationship?
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+</summary>
+
+</br>
+
+
+One way would be to conduct a multivariable analysis to assess the effect of multiple risk factors simultaneously. This helps control for potential confounding factors and provides adjusted risk estimates. The type of analysis will depend on the nature of the outcome. As we are dealing with a binary outcome, the appropriate regression analysis would be logistic regression. 
+
+Furthermore, to account for dose-response relationship we could analyse the association between the exposure categorised in different levels and the outcome.
+
+It is also important to explore whether the effect of one risk factor depends on the level of another risk factor and, if so, include an interaction term/s.
+
+</br>
+
+</details>
+
+
+## **Univariate logistic regression**
+
+### **Step 1: Set up**
+
+**Tasks:**
+
+-   Ensure your working language in RStudio is English
+-   Set up a R Studio project
+-   Create an R script, or an Rmarkdown file if you prefer. Make sure
+    the script purpose, date, and author are written as comments at the
+    top.
+-   Make sure your folders/subfolders are well-organised
+-   Install and load the following packages: rio, skimr, janitor, epiR, lmtest,
+broom and tidyverse.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, results = 'hide'}
+# To see your language locale 
+Sys.getlocale() 
+
+# To change it into English 
+Sys.setlocale("LC_ALL", "English")  
+
+
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+pacman::p_load(
+  
+  rio,             # to import datasets
+  skimr,           # for displaying your data
+  janitor,         # a package for data cleaning
+  epiR,            # for the adjusted risk ratios across strata
+  lmtest,          # for the likelihood ratio test 
+  broom,           # to generate tidy tibbles of regression analysis 
+  tidyverse        # data management and visualization
+)
+
+```
+
+</br>
+
+</details>
+
+### **Step 2: Import and explore data**
+
+```{r, include=FALSE}
+tira_clean <- import("../cs/ENG/logreg_mva/data/tira_clean.csv")
+```
+
+
+**Tasks** 
+
+-   Import the data frame called "tira_clean.csv" inside the "data" subfolder. 
+-   Explore the data trying to answer the following questions:
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "522 and 8",
+  answer = "291 and 21",
+  "2 and 345",
+  "600 and 23"
+)
+
+
+cat("QUESTION: How many rows and columns does the dataframe have?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "5",
+  answer = "3",
+  "0",
+  "15"
+)
+
+
+cat("QUESTION: How many character columns are present in the data?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "39%",
+  "73%",
+  "60%",
+  "2%"
+)
+
+
+cat("QUESTION: What percentage of attendees drunk beer (excluding NAs)?", longmcq(opts))
+
+```
+:::
+:::
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE, eval=FALSE}
+# Import the dataset 'tira_clean.csv'  
+tira_clean <- import("data/tira_clean.csv") 
+
+# Inspect your dataset and generate basic statistics using the skim function  
+skim(tira_clean)
+# Glimpse is an alternative to skim which gives more accurate information about the nature of the  variables
+glimpse(tira_clean)
+# To see the different categories of the variables
+tabyl(tira_clean, beer)
+```
+
+
+</br>
+
+</details>
+
+
+### **Step 3: Univariate logistic regression**
+
+So, at this point (after the analysis carried out in the Homeweork case study) we suspect that tiramisu may be causing the outbreak, but we also have other variables that were significantly associated with an increased risk of illness. 
+
+As stated above, we can start exploring the effect of the different exposures carrying out logistic regression. Logistic regression is a method for fitting a regression curve when the outcome variable is categorical. The first will be, therefore, to ensure that illness is coded in our database as a binary categorical variable.
+
+#### 3.1: Ensure that outcome variable is dichotomous
+
+As stated above, logistic regression is only appropriate if the outcome variable is categorical. In our model, our outcome column is *ill*. This column should be dichotomous with only two values (1-ill, 0-no ill). As a first step, let's ensure that R has it coded in the appropriate way.
+
+**Task**: Explore the column *ill* to ascertain if it is a binary -categorical- outcome
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+tabyl(tira_clean, ill)
+
+```
+
+
+</br>
+
+</details>    
+
+The column *ill* has only two values (1 and 0), with 103 individuals being ill and 188 without illness. Therefore, it is dichotomous and can carry on with the logistic regression analysis.
+
+
+#### 3.2: Write the logistic regression formula
+
+Now that we know that *ill* is a dichotomous variable we can run a first univariate logistic regression analysis with tiramisu as the only exposure.
+
+**Task**: Run a logistic regression model with illness as the outcome and eating tiramisu as the exposure.
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+The `glm()` function is a tool to perform logistic regression in R. Its basic syntax is: `glm([OUTCOME] ~ [COVARIATES])`
+
+glm stands for ‘generalized linear models’ and can handle a range of different regression models. Note that the syntax ‘[OUTCOME] ~ [PREDICTOR]’ defines a formula in R. The left hand side is always the outcome or dependent variable, whereas the right hand side (after the ~) defines the covariates/independent variables/predictors. For example, the formula ‘ill ~ tira’ means that the variable ‘ill’ is an outcome which may depend on the variable ‘tira’. 
+
+The specific form of how these variables are related is defined separately using the `family =` argument. In order to make sure that a logistic regression is performed, we need to write:
+
+`glm([OUTCOME] ~ [PREDICTOR], family = binomial(link = "logit"))`
+
+By saying that the family is "binomial" we are saying that our outcome follows a binominal distribution. In other words, that is has only two possible values (0 and 1). The `link =` specifies the function that links the exposure (eating tiramisu) with the outcome, which in our case is a "logit" (or logistic regression) function.
+
+We said that the [OUTCOME] in a logistic regression is always a binary variable and that, in our case, it takes the values of 0 and 1. But it doesn't necessarily have to take those values, it could be anything such as yes/no or ill/not_ill. It doesn't matter. When using a factor variable, one should make sure that the levels of the factor are ordered correctly and should be careful when interpreting the results.
+
+Finally, note that the glm function also has a `data =` argument, where we can specify which data to use. In our current example, we are only dealing with one dataset, but in other situations (e.g., when building data subsets), and also for purposes of readability, this argument can be useful.
+
+Normally, we save the output of the `glm()` as an object. Then, to see the results of the model we can run the function `summary()` writting the name of that object inside. You need to be aware that the estimates provided are the **log odds**. 
+
+If  you still have doubts or want to read more about logistic regression have a look at the dedicated [section](https://epirhandbook.com/new_pages/regression.html#logistic-regression) in EpiRhandbook.
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#write the formula of the logistic regression model with 'ill' as the outcome and 'tira' as the exposure
+model1 <- glm(ill ~ tira, 
+              data = tira_clean, 
+              family = binomial(link = "logit"))
+
+#Using the 'summary' function, we obtain an overview of the key results.
+summary(model1)
+```
+
+</br>
+
+</details>    
+
+The first part of the results are the **Coefficients**. We have:
+
+- **(Intercept)**: The intercept term, which is the log-odds of the outcome when all predictors are zero. Here, it is -3.1167.
+
+**tira**: The coefficient for the predictor tira (having eaten tiramisu), which is 4.3641. This means that compared to not eating tiramisu, eating the food increases the log-odds of illness by 4.3641.
+
+The other thing that will be interesting is the **AIC (Akaike Information Criterion)** which is used for model comparison. Lower values indicate a better model.
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "-3.1",
+  "4.4%",
+  "0.4",
+  answer = "78.58"
+
+)
+
+
+cat("QUESTION: Based on these results, what are the odds of becoming ill for those who ate tiramisu compared with those who did not eat it?", longmcq(opts))
+
+```
+:::
+::: 
+
+How come the odds ratio is 78.34 if that number is nowhere in the summary results we got?
+
+The reason is that, as we specified above, the `summary()` function gives you the coefficient as the **log-odds** of the outcome. To get the odds ratio we need to exponentiate the 4.3641.
+
+
+#### 3.3: Exponentiate the results of the model
+
+**Task**: Exponentiate the results fo the coefficient to get the odds ratio
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are several options. One efficient way to exponentiate the results of a logistic regression model is to use the function `tidy()` from the {broom} package. Inside `tidy()` you can set as `TRUE`
+the argument `exponentiate = `. You can also set `conf.int =` to TRUE to get the confidence intervals.
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#get the odds ratio with its confidence interval using the tidy function
+tidy(model1, 
+     exponentiate = TRUE, 
+     conf.int = TRUE)
+```
+
+</br>
+
+</details>  
+
+Now we know that individuals who ate tiramisu have 78 times higher odds of becoming ill compared to those who did not eat tiramisu. This is clearly significant, with a lower confidence interval of 35. However, we haven't yet adjusted our model for any possible confounders.
+
+#### 3.4: Check the goodness-of-fit
+
+For every fitted model, it is recommended to check the goodness-of-fit. Especially if the model is understood as a predictive tool, it should be assessed how well the estimates are in accordance with the actual data.
+
+In logistic regression, the residual deviance measures how well the model fits with the predictors. The lower the value, the better the model is able to predict the value of the response variable. **Residual deviance** is reported in the lower part of the `summary()` outputs along its ‘degrees of freedom’. In our case it is 186.41 with 284 degrees of freedom. If the model and the data agree, the deviance is approximately chi-squared distributed. 
+
+**Task**: With this information, assess the goodness of fit for model 1. 
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Don't worry if you were not able to it on your own. It is not very evident. As we said, if the model and the data agree, the deviance is approximately chi-squared distributed. We can, therefore, use the chi squared to test this hypothesis (the null hypothesis is that the model fits well the data). If the p value of the chi squared is significant, we can reject the null hypothesis that our model fits well the data.
+We can find this p value using the function `pchisq()`. It is important, inside this function, to set the argument `lower.tail = FALSE`. Without going into too much detail, setting this to FALSE will tells us the probability of seeing a large difference between our observed data and what we would expect if the null hypothesis is true. This helps us determine if our model fits the data well.
+
+</br>
+
+</details>
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#we get the p-value for the goodness of fit test by setting lower.tail = FALSE
+pchisq(model1$deviance, model1$df.residual, lower.tail = FALSE)
+
+```
+
+</br>
+
+</details> 
+
+The result is not significant at all, meaning that we cannot reject the null hypothesis which states that our model fits well the data. In the future, if you want to do a simple check before obtaining the p-value, you can remember this: If the residual deviance is not larger than the corresponding degrees of freedom, then there is no indication of a bad goodness-of-fit.
+
+
+#### 3.5: Univariate logistic regression for white mousse  
+
+**Task**: Now carry out the same steps for white mousse (*wmousse*) instead of tira: write the regression formula, get the summary, exponentiate the results and assess goodness of fit.
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#write the formula saving the model in an object
+model_wmousse <- glm(ill~wmousse,
+                     data = tira_clean,
+                     family = binomial(link = "logit"))
+
+#get the summary of the results
+summary(model_wmousse)
+
+#exponentiate the estimates and get confidence intervals
+tidy(model_wmousse, exponentiate = TRUE, conf.int = TRUE)
+
+#assess the fitness of the model
+pchisq(model_wmousse$deviance, model_wmousse$df.residual, lower.tail = FALSE)
+
+```
+
+</br>
+
+</details> 
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "1.91",
+  "0.314",
+  answer = "6.78",
+  "12.4"
+)
+
+
+cat("QUESTION: What is the odds ratio in the model assessing the risk of illness according to whether participants ate white mousse?", longmcq(opts))
+
+```
+:::
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "The one with just tiramisu as exposure",
+  "The one with just white mousse as exposure"
+)
+
+
+cat("QUESTION: Checking the goodness of fit, which univariate model seem to fit better with the data?", longmcq(opts))
+
+```
+:::
+::: 
+
+#### 3.6: Dose-response relationship
+
+From the univariate logistic regression model we see that exposure to tiramisu is strongly associated with illness. We may want to inspect if there is a dose-response relationship using the column *tportion*.
+
+The first thing we want to decide is how we should treat the column *tportion*.
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Character",
+  answer = "Factor",
+  "integer",
+  "numeric"
+)
+
+
+cat("QUESTION: Which class do you think that tportion SHOULD have?", longmcq(opts))
+
+```
+:::
+::: 
+
+
+Treating *tportion* as a discrete variable means that we assume that eating 2 portions of tiramisu is twice as risky as eating 1 portion. Since this is not a reasonable assumption, we will treat is as categorical. More specifically, as the categories have an order (eating two portions is more than eating one) we will treat it as a "factor".
+
+**Tasks**: 
+
+-   Check the class of the column *tportion*
+-   Convert the column *tportion* into class "factor"
+-   Run a univariate logistic regression model to assess if there is a dose-response relationship between tiramisu and illness.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+Remember the different steps: a) write a `glm()` formula and save it as an object; b) get the `summary()` of this object to see the results; and c) convert the estimates to their exponent with `tidy()` (and add the argument for the confidence intervals)
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+#check class of column tportion
+class(tira_clean$tportion)
+
+#convert tportion into factor
+tira_clean <- tira_clean %>% 
+  mutate(tportion = factor(tportion, levels = c("0", "1", "2+")))
+
+#checkk that the change has been effective
+class(tira_clean$tportion)
+tabyl(tira_clean, tportion)
+
+
+
+```
+
+```{r , echo=TRUE}
+#write the formula and save it as an object
+model_tportion <- glm(ill ~ tportion,
+                      data = tira_clean,
+                      family = binomial(link = "logit"))
+
+#take a look at the results
+summary(model_tportion)
+```
+
+```{r , echo=TRUE}
+#use the tidy function to obtain the odds ratios and confidence intervals
+tidy(model_tportion, exponentiate = TRUE, conf.int = TRUE)
+```
+
+</br>
+
+</details> 
+
+
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "47.3",
+  answer = "188",
+  "5.24",
+  "3.86"
+)
+
+
+cat("QUESTION: What are the odds of being ill if you had eaten 2+ portions of tiramisu compared with the odds of being ill if you had not eaten tiramisu?", longmcq(opts))
+
+```
+:::
+::: 
+
+As we see in the result, the risk of illness is much higher among those who ate 2+ portions of tiramisu than in those who ate 1 portion. Something that you would expect if there is a dose-response relationship. However, the confidence intervals overlap. 
+
+We have seen in the univariate logistic regression model that tiramisu seems to be strongly associated with illness, let's see if that effect stays after including other covariates in the model.
+
+# **Multivariate logistic regression**
+
+### **Step 4. Build the final multivariate regression model** 
+
+#### 4.1: Add beer to the logistic regression model
+
+In the previous part of the case study we saw that beer was associated with a decrease in the risk of illness. We ruled out any effect modification but it was not clear wether tiramisu was confounding the relation between beer and illness.
+One way to assess if beer has an effect on illness **independent** of the effect of tiramisu is to add if to the model as a covariate. By adding more covariates we start to build our multivariate logistic regression model.
+
+**Task**: Run a logistic regression model with ill as the outcome and tira and beer as the independent variables. Interpret the results
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are two ways in which you can add, sequentially, covariates into your model. One way would be to rewrite the command as: `glm(ill ~ tira + beer, data = tira_clean, family = binomial(link = "logit"))`.
+The other way is to use the function `update()` to "update" the first model: `update(model1, formula = ill ~ tira + beer)`. 0ne advantage of the 'update' function is that we do not need to specify the data or the model family again. It may also help to keep the code readable when more complex model building is performed. Here, we give you both options.
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Option 1: write the formula again and save it as an object
+model2 <- glm(ill ~ tira + beer,
+                      data = tira_clean,
+                      family = binomial(link = "logit"))
+# Option 2: use the update() function
+model2 <- update(model1, 
+                 formula = ill ~ tira + beer)
+#take a look at the results
+summary(model2)
+```
+
+```{r , echo=TRUE}
+#use the tidy function to obtain the odds ratios and confidence intervals
+tidy(model2, exponentiate = TRUE, conf.int = TRUE)
+```
+
+
+</br>
+
+</details> 
+
+Note that the formula ‘ill ~ tira + beer’ simply represents that the variable ‘ill’ is related to the two variables ‘tira’ and ‘beer’ and that their potential effects are separately considered. Despite the + sign in the formula, there is no direct addition of the variables, it just means that the glm function allows for specific regression coefficients related to each variable.
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "No",
+  "Yes"
+)
+
+
+cat("QUESTION: Does beer decrease the odds of illness significantly in this multivariate model?", longmcq(opts))
+
+```
+:::
+::: 
+
+The odds ratio of drinking beer is approximately 0.5, which suggest there is a decrease risk among those who drank it. However, the confidence interval includes the null value, so we cannot conclude that this is a protective factor.
+
+#### 4.2: Decide which further variables to include
+
+In order to decide whether tiramisu is the most likely cause of the outbreak, we need to decide which variables could be confounding the association between tiramisu and illness; and include those in our multivariate regression model.
+
+One way to decide that is to draw a Directed Acyclic Graph (DAG). The picture below shows the DAG for this particular case, which has been created using the website [dagitty](http://www.dagitty.net/).
+
+**Note**: Ideally, a DAG can and should be designed regardless of the actually collected variables. For the sake of this exercise, we have however focused primarily on the following available variables: llness, tira, age, sex, mousse, beer, roastbeef, pork, salmon, horseradish, chickenwin.
+
+![](images/logreg/DAG_logreg.png)
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "age",
+  "beer",
+  "chicken",
+  "mousse (dark and white)",
+  "pork",
+  "roastbeef",
+  "salmon",
+  "sex",
+  answer= "all of the above"
+)
+
+
+cat("QUESTION: According to the DAG, for which variables should we adjust our model?", longmcq(opts))
+
+```
+:::
+::: 
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+You can see the solution in the top right corner of the image. Daggity suggests that to investigate the relation between tiramisu and illness we should adjust for: **age, beer, chicken, mousse (dark and white), pork, roastbeef, salmon and sex**
+
+</br>
+
+</details> 
+
+
+#### 4.3: Remove missing data
+
+Before we fit the fully adjusted model, we may want to remove the rows that have missing data in any of the variables selected for adjustment. Removing all observations with missing data is important for appropriate model selection, because the usual criteria (such as AIC) are only applicable when the same dataset is fitted with different models. So, if we later one want to compare the fully adjusted model with the univariate model, we first need to remove these rows.
+
+**Task**: Remove the rows in the dataset that have missing data for any of the variables selected for adjustment. Assign the resulting dataset to a new object named *tira_clean_adj*
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+There are different ways to do this. One is to first define the variables to be retained in the dataset and then pass the function `drop_na()`. If this function is empty inside the parenthesis it will remove rows with *any* missing value. An equivalent approach would be to, instead selecting the variables first, specify the variables inside the `drop_na()` function. There are, however, many other alternatives. If you want to explore more you can read the dedicated [section](https://epirhandbook.com/new_pages/missing_data.html#useful-functions) of the EpiRhandbook
+
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Remove rows with missing values in any of the adjusting variables
+
+## create an object with the adjusting variables
+adj_var <- c("ill", "tira", "beer", "age", "sex", "dmousse", "wmousse", 
+             "roastbeef", "chickenwin", "salmon", "pork")
+## Option 1
+tira_clean_adj <- tira_clean %>% 
+  select(adj_var) %>% 
+  drop_na()
+  
+## Option 2
+tira_clean_adj <- tira_clean %>% 
+  drop_na(adj_var)
+```
+
+</br>
+
+</details> 
+
+#### 4.4: Fit the fully adjusted model
+
+
+**Task**: Include all the adjusting variables suggested in the DAG into the final model and interpret the results.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# write the formula again and save it as an object
+logitmodel <- glm(ill ~ tira + beer + age + sex + 
+                    dmousse + wmousse + roastbeef + 
+                    chickenwin + salmon + pork,
+                  data = tira_clean_adj,
+                  family = binomial(link = "logit"))
+
+#take a look at the results
+summary(logitmodel)
+```
+
+```{r , echo=TRUE}
+#use the tidy function to obtain the odds ratios and confidence intervals
+tidy(logitmodel, exponentiate = TRUE, conf.int = TRUE)
+```
+
+
+</br>
+
+</details> 
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "60.4",
+  "193",
+  "45.5",
+  "90.6"
+)
+
+
+cat("QUESTION: After adjustment, what are the odds of illness among those who ate tiramisu compared to those who did not eat tiramisu?", longmcq(opts))
+
+```
+:::
+::: 
+
+The interpretation of numeric variables like age, might be a bit tricker, so try to answer this question
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "-10% in the odds of illness",
+  "-0.10% in the odds of illness",
+  answer= "-9.6% in the odds of illness",
+  "-1% in the odds of illness"
+)
+
+
+cat("QUESTION: Looking at the main estimate, what is the associated decrease in the odds of illness for each 10-year increase in age?", longmcq(opts))
+
+```
+:::
+::: 
+
+The main estimate for age is an odds ratio of 0.990, which means that for each one-unit increase in age, the odds of illness decrease by a factor of 0.990 (though it is not significant because the confidence interval includes 1). To calculate the effect of a 10-year increase in age on the odds of illness, you can raise the odds ratio to the power of 10. Given the odds ratio for age is 0.990, the calculation would be: $(0.990)^{10}$  which is 0.904. This means that a 10-year increase in age would decrease the odds of the outcome by approximately 9.6% (since 1 - 0.904 = 0.096). 
+
+
+
+#### 4.5: Assess improvement in the model
+
+Now we will compare the performance of the model with only the tiramisu (model1) as the exposure and the fully adjusted model.
+
+**Task**: Rerun model1 (with only tiramisu as the exposure) using now the dataset *tira_clean_adj*. Then, compare the performance of both models
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+As we saw in the TBE case study, one easy function to calculate performance metrics is `glance()` from the {broom} package. But, of course, there are many others. Choose the one you feel most comfortable with!
+ 
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# Rerun model1 with the new dataset
+model1 <- glm(ill ~ tira, 
+              data = tira_clean_adj, 
+              family = binomial(link = "logit"))
+
+# Check performance of both models
+glance(model1)   # performance metrics of the univariate model
+
+glance(logitmodel) # performance metrics of the adjusted model
+```
+
+
+</br>
+
+</details>
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "logitmodel",
+  "model1"
+)
+
+
+cat("QUESTION: According to the metrics, which model fits better to the data?", longmcq(opts))
+
+```
+:::
+::: 
+
+The output of `glance()` gives us several performance metrics. If you want to focus on the important bits, you can look at the **logLik** and the **AIC**. A larger logLik means a better model; and a lower AIC means also a better model. The advantage of the logLik is that there is a formal test (Likelihood Ratio Test) to test if two logLiks are significantly different. However, AIC takes more things into consideration than the logLik, such as the complexity of the model (favours simpler models), so it is very useful to compare models with different numbers of parameters (like this case). 
+In our case, the logLik of the logitmodel is higher than the one for model1 (`r round(glance(logitmodel)[[3]], digits = 1)` vs `r round(glance(model1)[[3]], digits = 1)`) and the AIC is lower (`r round(glance(logitmodel)[[4]], digits = 1)` vs `r round(glance(model1)[[4]], digits = 1)`). The only metric in which model1 performs better is the BIC which might suggest overfitting in the logit model.
+
+
+#### 4.6: Include interaction in the model
+
+In the stratified analysis that was part of the Homework case study, we investigated the possible effect modification of tiramisu in the relation between beer and illness. We concluded that there was not a clear effect modification, but let's now check if adding an interaction between beer and tiramisu improves the model or not.
+
+**Task**: Update the *logitmodel* adding an interaction term between tiramisu and beer. Call this model *tirabeer* and assess whether the new model fits better the data.
+
+
+<details>
+
+<summary style="text-decoration: underline; color: darkgreen;">
+
+`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
+
+</summary>
+
+</br>
+
+To incorporate an interaction term to the formula you can use the multiplication symbol (`*`). So, add to the formula `beer*tira`. Note that by writing beer*tira in the formula in glm, R automatically incorporates 'beer' and 'tira' as individual covariates as well. 
+ 
+</br>
+
+</details>
+
+<details>
+
+<summary style="text-decoration: underline; color: red;">
+
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+
+</summary>
+
+</br>
+
+```{r , echo=TRUE}
+# write the formula and save it as an object
+tirabeer <- glm(ill ~ tira*beer + age + sex + 
+                    dmousse + wmousse + roastbeef + 
+                    chickenwin + salmon + pork,
+                  data = tira_clean_adj,
+                  family = binomial(link = "logit"))
+
+#take a look at the results
+tidy(tirabeer, exponentiate = TRUE, conf.int = TRUE)
+```
+
+```{r , echo=TRUE}
+#assess which model performs better
+glance(logitmodel)
+glance(tirabeer)
+```
+
+</br>
+
+</details>
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "93.1",
+  answer = "0.640",
+  "0.347",
+  "20.67"
+)
+
+
+cat("QUESTION: What are the odds of illness of someone who drank beer but did not eat tiramisu in comparison to someone who neither drank beer nor ate tiramisu?", longmcq(opts))
+
+```
+:::
+::: 
+
+ORs are generally combined multiplicatively., i.e. when we wish to determine the OR of a person X to a reference person Y, we need to look at the exposures where both persons differ). We can do this systematically:
+
+-   person X: drank beer, did not eat tiramisu, i.e. beer=1, tira=0, beer:tira=0
+
+-   person Y: did not drink beer, did not eat tiramisu, i.e. beer=0, tira=0, beer:tira=0
+
+These persons differ regarding beer only, therefore the odds ratio is given by the OR of beer
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer =  "93.1",
+  "0.640",
+  "0.347",
+  "20.67"
+)
+
+
+cat("QUESTION: What are the odds of illness of someone who ate tiramisu but did not drink beer in comparison to someone who neither ate tiramisu nor drank beer?", longmcq(opts))
+
+```
+:::
+::: 
+
+In this case:
+
+-   person X: did not drink beer, ate tiramisu, i.e. beer=0, tira=1, beer:tira=0
+
+-   person Y: did not drink beer, did not eat tiramisu, i.e. beer=0, tira=0, beer:tira=0
+
+These persons differ regarding tiramisu only, therefore the odds ratio is given by the OR of tira
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "93.1",
+  "0.640",
+  "0.347",
+ answer =  "20.67"
+)
+
+
+cat("QUESTION: What are the odds ratio of illness of someone who drank beer and ate tiramisu in comparison to someone who neither drank beer nor ate tiramisu?", longmcq(opts))
+
+```
+:::
+::: 
+
+We can do this similarly to the previous question:
+
+person X: drank beer, did eat tiramisu, i.e. beer=1, tira=1, beer:tira=1
+
+person Y: did not drink beer, did not eat tiramisu, i.e. beer=0, tira=0, beer:tira=0
+
+These persons differ regarding both beer and tiramisu, therefore the odds ratio is given by the product of the OR of beer, the OR of tira and the OR of the interaction term (0.640`*`93.1*0.347)
+
+
+::: {.callout-note appearance="minimal" icon="false"}
+
+**Test yourself!**
+
+::: {.webex-check}
+
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Yes",
+ answer =  "No"
+)
+
+
+cat("QUESTION: Does the model including the interaction term perform better than the model without the interaction?", longmcq(opts))
+
+```
+:::
+::: 
+
+The AIC and BIC of the model with interaction are higher than the ones in the model without interaction. The logLik is also higher, though. But is is significantly higher? We could test this with the function `lmtest::lrtest(logitmodel, tirabeer)`. If you run this in your script you will see that the difference is not significant.
+
+We can conclude that including the interaction term does not improve significantly our model and increases its complexity. There is also no plausability on why there should be interaction between these two foods, so we discard the model with interaction.
+
+
+# **Conclusion**
+
+Assuming the DAG that we have built, we infer that there is a causal relation between consumption of tiramisu and illness, i.e. we argue that tiramisu is a (likely) cause for the gastrointestinal infections.
+
+Well done reaching the end of this case study! By now you should feel more confident carrying out logistic regression models in R. If you want to explore this type of analysis in more detail, you can have a look at the [EpiRhandbook](https://epirhandbook.com/new_pages/regression.html) section or to the examples at the [UCLA](https://stats.oarc.ucla.edu/other/dae/) website.
+
+## Case study information 
+
+***Authorship***\
+Original authors: This case study was first designed by Alain Moren and
+Gilles Desve for EPIET. It is based on an investigation conducted by
+Anja Hauri, RKI, Berlin, 1998.\
+Data source: Data is fictional and was inspired by [Nygren et al.
+Tick-borne encephalitis: acute clinical manifestations and severity in
+581 cases from Germany, 2018-2020. Journal of Infection. 2023 Apr
+1;86(4):369-75](https://linkinghub.elsevier.com/retrieve/pii/S0163-4453(23)00088-9)\
+Adapted and modified by: Alicia Barrasa (EPIET), Ioannis Karagiannis
+(Public Health England - PHE), Giri Shankar (Public Health Wales),
+Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian
+Agency for Health and Food Safety-AGES), Alexander Spina (AGES), Daniel
+Gardiner (PHE), Lukas Richter (AGES), Liese Van Gompel (MedEPIET),  Kostas Danis (MedEPIET) and Alberto Mateo Urdiales
+(Istituto Superiore di Sanità - ISS)\
+
+
+#### Terms of Use
+
+**Disclaimer**: The information presented in this exercise and the
+associated data files have been deliberately changed so as to facilitate
+the acquisition of the learning objectives for fellows of EPIET, EUPHEM
+and EPIET-associated programmes. This case study was first introduced in
+2022 (see Copyright and Licence agreement for more information).
+
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>
+
+### Feedback & suggestions
+
+-   You can write feedback and suggestions on this case study at the
+    ECDC GITHUB
+-   Alternatively email us at: \[ECDC CONTACT MAIL\]
+
+\pagebreak
+
+### Version and revisions
+
+Write date of first version
+
+Write any revisions made to the case study
+
+| Date | Changes made                                                                                                                                                                                                                                       |                                                                                                                                    Author |
+|---------------------|:-------------------------------|------------------:|
+| 2015 | The case study has been divided in two parts: the first includes descriptive, univariable and stratified analysis as pre-module homework; the second includes logistic and binary regression (not shown here). Unnecessary toponymes were removed. |                                                               Alicia Barrasa (EPIET) and Ioannis Karagiannis (Publich Health England-PHE) |
+| 2017 | Questions were rephrased to reflect real life scenarios (rather than academic exercise)                                                                                                                                                            |                                                                         Alicia Barrasa (EPIET) and Giri Shankar (Public Health Wales-PHW) |
+| 2017 | The case study was adapted to include the help on R                                                                                                                                                                                                | Niklas Willrich (Robert Koch Institute-RKI), Patrick Keating (Austrian Agency for Health and Food Safety-AGES) and Alexander Spina (AGES) |
+|2017| Contribution to the R code|Daniel Gardiner (Public Health England-PHE) and Lukas Richter (AGES)|
+|2022|Minor revisions to the R code and explanations| |
+|2023| Major revision of the R code. R code was simplified and R tidyverse code was implemented| Liese Van Gompel (MedEPIET)|
+|2024| Revision of the R code, i.e. use of EpiStas package for univariable and multivariable analysis, simplification and harmonisation of the R code| Kostas Danis (MediPIET)|
+| 2024 | Revision of content, structure, R code and adaptation of format to Applied Epi's template of case studies | Alberto Mateo Urdiales (ISS) |
+
