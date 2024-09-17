@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Applied Epi cases studies",
-    "section": "",
-    "text": "Here, you can practice technical and analytical skills using real-life scenarios. The case studies, contributed by FETPs and health ministries worldwide, feature data that is either generated or anonymized for training purposes.\nFind a case study of interest with the table below, and click on the link to open it in the appropriate language for you."
-  },
-  {
-    "objectID": "index.html#welcome-to-our-case-study-repository",
-    "href": "index.html#welcome-to-our-case-study-repository",
-    "title": "Applied Epi cases studies",
-    "section": "",
-    "text": "Here, you can practice technical and analytical skills using real-life scenarios. The case studies, contributed by FETPs and health ministries worldwide, feature data that is either generated or anonymized for training purposes.\nFind a case study of interest with the table below, and click on the link to open it in the appropriate language for you."
-  },
-  {
-    "objectID": "index.html#about-us",
-    "href": "index.html#about-us",
-    "title": "Applied Epi cases studies",
-    "section": "About us",
-    "text": "About us\nApplied Epi is a nonprofit organisation and grassroots movement of frontline epis from around the world. We write in our spare time to offer this resource to the community. Your encouragement and feedback is most welcome:\n\nVisit our website and join our contact list\ncontact@appliedepi.org, tweet @appliedepi, or LinkedIn\nSubmit issues to our Github repository"
-  },
-  {
     "objectID": "pages/r_practical.html",
     "href": "pages/r_practical.html",
     "title": "Descriptive analysis of the 2022 Mpox outbreak in Europe",
@@ -124,6 +103,27 @@
     "title": "Instructions",
     "section": "",
     "text": "Some of our case studies use Rmarkdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.\nTypically, you want to change the default chunk options of your Rmarkdown script to: hide all code chunks in the report do not show messages or warnings show errors if they appear, but to not stop the rendering set up the default figure width to 7 and the figure height to 6 to show the figure titles on top of the plots by default\n\n# hide all code chunks in the output, but show errors \nknitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output\n                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)\n                      warning = FALSE, # do not show warnings in the output word doc \n                      message = FALSE, # do not show  messages in the output word doc\n                      fig.width = 7,         # Figure width\n                      fig.height = 6,        # Figure height\n                      fig.topcaption = TRUE  # show figure titles on top of plot\n                     )\n\n\n\nSeveral packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the Packages section of the EpiRhandbook.\nNote you may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. Other packages such as {MASS} also have a function called select(). This could create headaches if you want to subset columns using dplyr’s select() but R thinks you’re calling MASS’s select() (we call this masking - dplyr’s select() is masked by MASS’s select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.\n\n# Ensures the package \"pacman\" is installed\nif (!require(\"pacman\")) {\n     install.packages(\"pacman\") }\n\n# install (if necessary) from CRAN and load packages to be used\npacman::p_load(\n  rio,        # importing data  \n  skimr,      # get overview of data\n  janitor,    # data cleaning and tables\n  lubridate,  # working with dates\n  epikit,     # to create age categories\n  gtsummary,  # summary statistics, tests and regressions \n  apyramid,   # plotting age pyramids \n  tidyverse  # data management and visualization\n)\n\nIf this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See this handbook pages on the basics of installing packages and running R from network drives (company computers) for more detail. https://epirhandbook.com/r-basics.html#installation https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives\nTerms of Use Disclaimer: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information). You are free: to Share: to copy and distribute the work to Remix: to adapt and build upon the material Under the following conditions: Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers. Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors. Notification: If you use the work in the manner specified by the author or licensor, Walter@rki.de You cannot sell this work alone but you can use it as part of a teaching. With the understanding that: Waiver: Any of the above conditions can be waived if you get permission from the copyright holder. Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license. Other Rights: In no way are any of the following rights affected by the license: Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author’s moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights. Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license. This licence is based on http://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Applied Epi cases studies",
+    "section": "",
+    "text": "Here, you can practice technical and analytical skills using real-life scenarios. The case studies, contributed by FETPs and health ministries worldwide, feature data that is either generated or anonymized for training purposes.\nFind a case study of interest with the table below, and click on the link to open it in the appropriate language for you."
+  },
+  {
+    "objectID": "index.html#welcome-to-our-case-study-repository",
+    "href": "index.html#welcome-to-our-case-study-repository",
+    "title": "Applied Epi cases studies",
+    "section": "",
+    "text": "Here, you can practice technical and analytical skills using real-life scenarios. The case studies, contributed by FETPs and health ministries worldwide, feature data that is either generated or anonymized for training purposes.\nFind a case study of interest with the table below, and click on the link to open it in the appropriate language for you."
+  },
+  {
+    "objectID": "index.html#about-us",
+    "href": "index.html#about-us",
+    "title": "Applied Epi cases studies",
+    "section": "About us",
+    "text": "About us\nApplied Epi is a nonprofit organisation and grassroots movement of frontline epis from around the world. We write in our spare time to offer this resource to the community. Your encouragement and feedback is most welcome:\n\nVisit our website and join our contact list\ncontact@appliedepi.org, tweet @appliedepi, or LinkedIn\nSubmit issues to our Github repository"
   },
   {
     "objectID": "pages/fulton.html",
