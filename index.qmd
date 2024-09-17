@@ -22,9 +22,10 @@ Find a case study of interest with the table below, and click on the link to ope
 
 ```{r echo = F}
 table_cases <- tribble(
-  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Keywords, ~Technical_Complexity, ~Methodological_Complexity, 
-  "Fulton", 'pages/fulton-en.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "COVID-19; SARS-COV-2; Outbreak", "Intermediate", "Basic",  
-  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Gastrointestinal;Brote", "Intermedio", "Intermedio"
+  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Technical_Complexity, ~Methodological_Complexity, 
+  "Descriptive analysis of Mpox outbreak", 'pages/r_practical.html', "ECDC", "English", "R", "Europe", "Regional", "Mpox",  "Basic", "Basic",  
+    "Fulton", 'pages/fulton.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "Intermediate", "Basic",  
+  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Intermedio", "Intermedio"
 )
 
 ```

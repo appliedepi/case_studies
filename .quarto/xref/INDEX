@@ -19,5 +19,14 @@
   },
   "pages/oswego.es.qmd": {
     "oswego.es.html": "624b038d"
+  },
+  "pages/instructions.qmd": {
+    "instructions.html": "4d714e60"
+  },
+  "pages/stengen-en.qmd": {
+    "stengen-en.html": "30eb946a"
+  },
+  "pages/openxlsx2_tutorial-en_revised.qmd": {
+    "openxlsx2_tutorial-en_revised.html": "a3e0884f"
   }
 }

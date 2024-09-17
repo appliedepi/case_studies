@@ -2,16 +2,6 @@
 output: html_document
 editor_options: 
   chunk_output_type: console
-execute:
-  warning: false
-  error: false
-format: 
-  html: 
-    css: webex.css
-    include-after-body: webex.js
-editor: 
-  markdown: 
-    wrap: 72
 ---
 
 # Instructions

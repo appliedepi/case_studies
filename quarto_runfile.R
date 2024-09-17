@@ -493,7 +493,7 @@ path_rel <- function(path, output_folder, lang, main_language) {
 
 
 # Call the render_book function
-render_book()
+render_website()
 
 
 # WHOLE HANDBOOK
