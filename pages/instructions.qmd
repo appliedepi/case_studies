@@ -4,20 +4,87 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Instructions
+# How-to Guide
 
-## Getting Help
+# New to Case Studies?
+
+## What is a Case Study?
+
+A case study is an interactive learning tool. It guides users through scenarios, with tasks and questions to practice skills and is usually completed within a few hours. The case studies in the Applied Epi repository span a variety of skills and diseases with different levels of complexity, so make sure you take a moment to find the one best suited for you!
+
+## Getting Started
+
+### Folder Structure
+
+You'll start by choosing a location on your computer to create a dedicated folder for your case study. Once you've decided on the best spot, set up a folder with the case study's name to keep everything organized from the start.
+
+In your case study folder, you should have a:
+
+* subfolder “scripts” to save any scripts related to the analysis
+* subfolder “data” which will contain the raw data you will use
+* subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis
+
+**Make sure your folders and subfolders are well-organised as this will save you a headache later!** 
+
+### RStudio Project
+
+Create an Rstudio project in the case study folder. If you are unsure on how to do that, read the EpiRhandbook on [RStudio projects](https://www.epirhandbook.com/en/new_pages/r_projects.html). 
+
+### R Scripts
+
+Once you have created an RStudio project, start a new R script with an appropriate name (example case_study_name) and save it in the subfolder “scripts”. 
+
+If you are familiar with R markdown, you may decide to use this type of file instead of a standard R script. See below for more instructions on using R markdown. 
+
+No matter what type of file you choose to use, make sure the purpose, date last updated, and author are written as comments at the top.
+
+```{r eval = F, echo=T}
+
+#Purpose: To practice new skills using this case study
+#Author: Your Name
+#Date: Mmm dd, yyyy or whatever format you like best
+
+```
+
+### R Markdown
+
+Some of our case studies use R markdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.
+
+Typically, you want to change the default chunk options of your R markdown script to:
+
+* hide all code chunks in the report
+* not show messages or warnings in the output
+* show errors if they appear, but to not stop the rendering
+* set up the default figure width to 7 and the figure height to 6
+* show the figure titles on top of the plots by default
+
+```{r, eval = F, echo = T}
+# hide all code chunks in the output, but show errors 
+knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
+                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
+                      warning = FALSE, # do not show warnings in the output word doc 
+                      message = FALSE, # do not show  messages in the output word doc
+                      fig.width = 7,         # Figure width
+                      fig.height = 6,        # Figure height
+                      fig.topcaption = TRUE  # show figure titles on top of plot
+                     )
+```
+
+Be sure to review [Reports with R Markdown](https://www.epirhandbook.com/en/new_pages/rmarkdown.html) in the EpiRhandbook before jumping in!
+
+## I Need Help!
 
 There are several ways to get help:
 
-1)  Look for the "hints" and solutions (see below)
-2)  Post a question in [Applied Epi
+1)  Look for the hints and solutions (see below)
+2)  Take a look at the [EpiRHandbook](https://www.epirhandbook.com/en/)
+3)  Post a question in [Applied Epi
     Community](www.community.appliedepi.org) with reference to this case
     study
 
 ### Hints and Solutions
 
-Here is what the "helpers" look like:
+There are hints and solutions throughout every case study. Here are what the "helpers" look like:
 
 <!--Note that this is the way of including hints and explanations to the solutions -->
 
@@ -57,7 +124,11 @@ NOTE: Below is the solution (all within details tags collapsed)
 
 </br>
 
+The solution is typically the code required to find the answer. However, sometimes it may simply be a written response designed to prompt deeper reflection on the scenario.
+
 ```{r eval = F, echo=T}
+# Example of a solution
+
 ebola_linelist %>% 
   filter(
     age > 25,
@@ -65,20 +136,24 @@ ebola_linelist %>%
   )
 ```
 
-Here is more explanation about why the solution works.
-
 </br>
 
 </details>
 
-## R Studio Set-up
+# New to RStudio?
 
-Install (and update!) R and RStudio
-Instructions and links go here.
-Define R Language
-Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the report that you want to produce. For example, a French person might have a French “locale”. If that is the case, when creating a graph by day of the week, Monday will be displayed as “lundi”. If that French person wants to create an English report, as for this case study, the language “locale” should be changed.
+## Install (and update!) R and RStudio
 
-To ensure your “locale” is set to English, use the following code: 
+If this is your first time using R and RStudio, welcome! The [Epidemiologist R Handbook or EpiRhandbook](https://www.epirhandbook.com/en/) has a wealth of information to support you along the way. It has everything thing you need to get started with [R basics](https://www.epirhandbook.com/en/new_pages/basics.html), including [installing and updating R and RStudio](https://www.epirhandbook.com/en/new_pages/basics.html#installation).
+
+If you are new to RStudio, it might be a good idea to spend some time reviewing that page and others before trying out any case studies. Don't forget that we also have free self-paced [R tutorials](https://appliedepi.org/tutorial/) if you'd like even more guidance and practice.
+
+## Define R Language
+Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the report that you want to produce. 
+
+For example, a French-speaking person might have a French 'locale'. If that is the case, when creating a graph by day of the week, "Monday" will be displayed as “lundi”. If that person wants to create an English report, as for this case study, the language 'locale' should be changed.
+
+To ensure your 'locale' is set to English, use the following code: 
 ```{r, echo = TRUE, eval=FALSE}
 # To see your language locale
 Sys.getlocale()
@@ -87,47 +162,9 @@ Sys.getlocale()
 Sys.setlocale("LC_ALL", "English")
 ```
 
-Set-up a RStudio Project and R script for the case study
-Download the case study folder which can be found at the top of the case study page and extract the contents somewhere on your computer. 
+## Install packages
 
-In your case study folder, you should have a 
-subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” 
-subfolder “data” which will contain the raw data you will use
-subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.
-
-Make sure your folders/subfolders are well-organised as this will save you a headache later! 
-
-Create an Rstudio project in the case study folder. If you are unsure on how to do that, read the EpiRhandbook on R projects. Once you have created an Rproject, create a new script with an appropriate name (example mpox_rpractical) and save it in the subfolder “scripts”. 
-
-If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script. See Using Rmarkdown below for more instructions. 
-
-Make sure the purpose, date last updated, and author are written as comments at the top.
-
-## Using Rmarkdown
-Some of our case studies use Rmarkdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.
-
-Typically, you want to change the default chunk options of your Rmarkdown script to:
-hide all code chunks in the report
-do not show messages or warnings
-show errors if they appear, but to not stop the rendering
-set up the default figure width to 7 and the figure height to 6
-to show the figure titles on top of the plots by default
-
-```{r, eval = F, echo = T}
-# hide all code chunks in the output, but show errors 
-knitr::opts_chunk$set(echo = FALSE,  # hide all code chunks in output
-                      error = TRUE,  # show errors if they appear, but don't stop (produce the word doc)
-                      warning = FALSE, # do not show warnings in the output word doc 
-                      message = FALSE, # do not show  messages in the output word doc
-                      fig.width = 7,         # Figure width
-                      fig.height = 6,        # Figure height
-                      fig.topcaption = TRUE  # show figure titles on top of plot
-                     )
-```
-
-### Install packages
-
-Several packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the Packages section of the EpiRhandbook.
+Several packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the [suggested packages](https://www.epirhandbook.com/en/new_pages/packages_suggested.html) section of the EpiRhandbook.
 
 Note you may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. Other packages such as {MASS} also have a function called select(). This could create headaches if you want to subset columns using dplyr’s select() but R thinks you’re calling MASS’s select() (we call this masking - dplyr’s select() is masked by MASS’s select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.
 
@@ -149,25 +186,15 @@ pacman::p_load(
 )
 ```
 
-If this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See this handbook pages on the basics of installing packages and running R from network drives (company computers) for more detail. https://epirhandbook.com/r-basics.html#installation https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives
+If this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See these EpiRhandbook pages on the [basics of installing packages](https://www.epirhandbook.com/en/new_pages/basics.html#installation) and [running R from network drives](https://www.epirhandbook.com/en/new_pages/network_drives.html) (company computers) for more detail. 
 
-Terms of Use
-Disclaimer: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information).
-You are free:
-to Share: to copy and distribute the work
-to Remix: to adapt and build upon the material
-Under the following conditions:
-Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers.
-Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors.
-Notification: If you use the work in the manner specified by the author or licensor, Walter@rki.de
-You cannot sell this work alone but you can use it as part of a teaching.
-With the understanding that:
-Waiver: Any of the above conditions can be waived if you get permission from the copyright holder.
-Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.
-Other Rights: In no way are any of the following rights affected by the license:
-Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;
-The author’s moral rights;
-Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
-Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license.
-This licence is based on http://creativecommons.org/licenses/by-sa/3.0/
+# Terms of Use
+
+## Disclaimer 
+
+All case studies are based on real or plausible scenarios. Some will use simulated data, while others will feature open-access or provided de-identified data. The type of data used will be clearly indicated at the start of each case study.  
+
+## Licenses
+
+Case studies will be managed according to their original licenses, which you'll be able to find at the bottom of each case study page. If you have any questions, send us an email at **contact@appliedepi.org**.
 
