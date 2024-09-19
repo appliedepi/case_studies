@@ -161,17 +161,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a>
+  <li><a href="#how-to-guide" id="toc-how-to-guide" class="nav-link active" data-scroll-target="#how-to-guide">How-to Guide</a></li>
+  <li><a href="#new-to-case-studies" id="toc-new-to-case-studies" class="nav-link" data-scroll-target="#new-to-case-studies">New to Case Studies?</a>
   <ul class="collapse">
-  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a>
+  <li><a href="#what-is-a-case-study" id="toc-what-is-a-case-study" class="nav-link" data-scroll-target="#what-is-a-case-study">What is a Case Study?</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#folder-structure" id="toc-folder-structure" class="nav-link" data-scroll-target="#folder-structure">Folder Structure</a></li>
+  <li><a href="#rstudio-project" id="toc-rstudio-project" class="nav-link" data-scroll-target="#rstudio-project">RStudio Project</a></li>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts">R Scripts</a></li>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a></li>
+  </ul></li>
+  <li><a href="#i-need-help" id="toc-i-need-help" class="nav-link" data-scroll-target="#i-need-help">I Need Help!</a>
   <ul class="collapse">
   <li><a href="#hints-and-solutions" id="toc-hints-and-solutions" class="nav-link" data-scroll-target="#hints-and-solutions">Hints and Solutions</a></li>
   </ul></li>
-  <li><a href="#r-studio-set-up" id="toc-r-studio-set-up" class="nav-link" data-scroll-target="#r-studio-set-up">R Studio Set-up</a></li>
-  <li><a href="#using-rmarkdown" id="toc-using-rmarkdown" class="nav-link" data-scroll-target="#using-rmarkdown">Using Rmarkdown</a>
+  </ul></li>
+  <li><a href="#new-to-rstudio" id="toc-new-to-rstudio" class="nav-link" data-scroll-target="#new-to-rstudio">New to RStudio?</a>
   <ul class="collapse">
+  <li><a href="#install-and-update-r-and-rstudio" id="toc-install-and-update-r-and-rstudio" class="nav-link" data-scroll-target="#install-and-update-r-and-rstudio">Install (and update!) R and RStudio</a></li>
+  <li><a href="#define-r-language" id="toc-define-r-language" class="nav-link" data-scroll-target="#define-r-language">Define R Language</a></li>
   <li><a href="#install-packages" id="toc-install-packages" class="nav-link" data-scroll-target="#install-packages">Install packages</a></li>
   </ul></li>
+  <li><a href="#terms-of-use" id="toc-terms-of-use" class="nav-link" data-scroll-target="#terms-of-use">Terms of Use</a>
+  <ul class="collapse">
+  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer</a></li>
+  <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -185,18 +200,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="instructions" class="level1">
-<h1>Instructions</h1>
-<section id="getting-help" class="level2">
-<h2 class="anchored" data-anchor-id="getting-help">Getting Help</h2>
+<section id="how-to-guide" class="level1">
+<h1>How-to Guide</h1>
+</section>
+<section id="new-to-case-studies" class="level1">
+<h1>New to Case Studies?</h1>
+<section id="what-is-a-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-case-study">What is a Case Study?</h2>
+<p>A case study is an interactive learning tool. It guides users through scenarios, with tasks and questions to practice skills and is usually completed within a few hours. The case studies in the Applied Epi repository span a variety of skills and diseases with different levels of complexity, so make sure you take a moment to find the one best suited for you!</p>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="folder-structure" class="level3">
+<h3 class="anchored" data-anchor-id="folder-structure">Folder Structure</h3>
+<p>You’ll start by choosing a location on your computer to create a dedicated folder for your case study. Once you’ve decided on the best spot, set up a folder with the case study’s name to keep everything organized from the start.</p>
+<p>In your case study folder, you should have a:</p>
+<ul>
+<li>subfolder “scripts” to save any scripts related to the analysis</li>
+<li>subfolder “data” which will contain the raw data you will use</li>
+<li>subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis</li>
+</ul>
+<p><strong>Make sure your folders and subfolders are well-organised as this will save you a headache later!</strong></p>
+</section>
+<section id="rstudio-project" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio-project">RStudio Project</h3>
+<p>Create an Rstudio project in the case study folder. If you are unsure on how to do that, read the EpiRhandbook on <a href="https://www.epirhandbook.com/en/new_pages/r_projects.html">RStudio projects</a>.</p>
+</section>
+<section id="r-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="r-scripts">R Scripts</h3>
+<p>Once you have created an RStudio project, start a new R script with an appropriate name (example case_study_name) and save it in the subfolder “scripts”.</p>
+<p>If you are familiar with R markdown, you may decide to use this type of file instead of a standard R script. See below for more instructions on using R markdown.</p>
+<p>No matter what type of file you choose to use, make sure the purpose, date last updated, and author are written as comments at the top.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Purpose: To practice new skills using this case study</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Author: Your Name</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Date: Mmm dd, yyyy or whatever format you like best</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="r-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="r-markdown">R Markdown</h3>
+<p>Some of our case studies use R markdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.</p>
+<p>Typically, you want to change the default chunk options of your R markdown script to:</p>
+<ul>
+<li>hide all code chunks in the report</li>
+<li>not show messages or warnings in the output</li>
+<li>show errors if they appear, but to not stop the rendering</li>
+<li>set up the default figure width to 7 and the figure height to 6</li>
+<li>show the figure titles on top of the plots by default</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hide all code chunks in the output, but show errors </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>,  <span class="co"># hide all code chunks in output</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">error =</span> <span class="cn">TRUE</span>,  <span class="co"># show errors if they appear, but don't stop (produce the word doc)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="co"># do not show warnings in the output word doc </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="co"># do not show  messages in the output word doc</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.width =</span> <span class="dv">7</span>,         <span class="co"># Figure width</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.height =</span> <span class="dv">6</span>,        <span class="co"># Figure height</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.topcaption =</span> <span class="cn">TRUE</span>  <span class="co"># show figure titles on top of plot</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Be sure to review <a href="https://www.epirhandbook.com/en/new_pages/rmarkdown.html">Reports with R Markdown</a> in the EpiRhandbook before jumping in!</p>
+</section>
+</section>
+<section id="i-need-help" class="level2">
+<h2 class="anchored" data-anchor-id="i-need-help">I Need Help!</h2>
 <p>There are several ways to get help:</p>
 <ol type="1">
-<li>Look for the “hints” and solutions (see below)</li>
+<li>Look for the hints and solutions (see below)</li>
+<li>Take a look at the <a href="https://www.epirhandbook.com/en/">EpiRHandbook</a></li>
 <li>Post a question in <a href="www.community.appliedepi.org">Applied Epi Community</a> with reference to this case study</li>
 </ol>
 <section id="hints-and-solutions" class="level3">
 <h3 class="anchored" data-anchor-id="hints-and-solutions">Hints and Solutions</h3>
-<p>Here is what the “helpers” look like:</p>
+<p>There are hints and solutions throughout every case study. Here are what the “helpers” look like:</p>
 <!--Note that this is the way of including hints and explanations to the solutions -->
 <!--
 NOTE: Below is the hint (all within details tags collapsed)
@@ -217,77 +293,76 @@ NOTE: Below is the solution (all within details tags collapsed)
 <p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see the solution</p>
 </summary>
 <p><br></p>
+<p>The solution is typically the code required to find the answer. However, sometimes it may simply be a written response designed to prompt deeper reflection on the scenario.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of a solution</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ebola_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    age <span class="sc">&gt;</span> <span class="dv">25</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    district <span class="sc">==</span> <span class="st">"Bolo"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Here is more explanation about why the solution works.</p>
 <p><br></p>
 </details>
 </section>
 </section>
-<section id="r-studio-set-up" class="level2">
-<h2 class="anchored" data-anchor-id="r-studio-set-up">R Studio Set-up</h2>
-<p>Install (and update!) R and RStudio Instructions and links go here. Define R Language Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the report that you want to produce. For example, a French person might have a French “locale”. If that is the case, when creating a graph by day of the week, Monday will be displayed as “lundi”. If that French person wants to create an English report, as for this case study, the language “locale” should be changed.</p>
-<p>To ensure your “locale” is set to English, use the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see your language locale</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To change it into English</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">"LC_ALL"</span>, <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Set-up a RStudio Project and R script for the case study Download the case study folder which can be found at the top of the case study page and extract the contents somewhere on your computer.</p>
-<p>In your case study folder, you should have a subfolder “scripts” should be used to save any scripts related to the analysis. Inside scripts there is another subfolder called “backup” subfolder “data” which will contain the raw data you will use subfolder “outputs” can be used to store any outputs (tables, graphs, documents) that are the result of the analysis.</p>
-<p>Make sure your folders/subfolders are well-organised as this will save you a headache later!</p>
-<p>Create an Rstudio project in the case study folder. If you are unsure on how to do that, read the EpiRhandbook on R projects. Once you have created an Rproject, create a new script with an appropriate name (example mpox_rpractical) and save it in the subfolder “scripts”.</p>
-<p>If you are familiar with Rmarkdown, you may decide to use this type of file instead of a standard R script. See Using Rmarkdown below for more instructions.</p>
-<p>Make sure the purpose, date last updated, and author are written as comments at the top.</p>
 </section>
-<section id="using-rmarkdown" class="level2">
-<h2 class="anchored" data-anchor-id="using-rmarkdown">Using Rmarkdown</h2>
-<p>Some of our case studies use Rmarkdown and the code goes within “chunks”, which is different from a standard R script. If you want to create a reproducible workflow, you need a place to save your code so you can run it again if you need to. You want all your files easily organised so you don’t get lost later on. You need to begin by setting the default chunk options.</p>
-<p>Typically, you want to change the default chunk options of your Rmarkdown script to: hide all code chunks in the report do not show messages or warnings show errors if they appear, but to not stop the rendering set up the default figure width to 7 and the figure height to 6 to show the figure titles on top of the plots by default</p>
+<section id="new-to-rstudio" class="level1">
+<h1>New to RStudio?</h1>
+<section id="install-and-update-r-and-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="install-and-update-r-and-rstudio">Install (and update!) R and RStudio</h2>
+<p>If this is your first time using R and RStudio, welcome! The <a href="https://www.epirhandbook.com/en/">Epidemiologist R Handbook or EpiRhandbook</a> has a wealth of information to support you along the way. It has everything thing you need to get started with <a href="https://www.epirhandbook.com/en/new_pages/basics.html">R basics</a>, including <a href="https://www.epirhandbook.com/en/new_pages/basics.html#installation">installing and updating R and RStudio</a>.</p>
+<p>If you are new to RStudio, it might be a good idea to spend some time reviewing that page and others before trying out any case studies. Don’t forget that we also have free self-paced <a href="https://appliedepi.org/tutorial/">R tutorials</a> if you’d like even more guidance and practice.</p>
+</section>
+<section id="define-r-language" class="level2">
+<h2 class="anchored" data-anchor-id="define-r-language">Define R Language</h2>
+<p>Depending on where you are and how you carried out R installation, your language “locale” might be different from the language of the report that you want to produce.</p>
+<p>For example, a French-speaking person might have a French ‘locale’. If that is the case, when creating a graph by day of the week, “Monday” will be displayed as “lundi”. If that person wants to create an English report, as for this case study, the language ‘locale’ should be changed.</p>
+<p>To ensure your ‘locale’ is set to English, use the following code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hide all code chunks in the output, but show errors </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>,  <span class="co"># hide all code chunks in output</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">error =</span> <span class="cn">TRUE</span>,  <span class="co"># show errors if they appear, but don't stop (produce the word doc)</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="co"># do not show warnings in the output word doc </span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="co"># do not show  messages in the output word doc</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.width =</span> <span class="dv">7</span>,         <span class="co"># Figure width</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.height =</span> <span class="dv">6</span>,        <span class="co"># Figure height</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">fig.topcaption =</span> <span class="cn">TRUE</span>  <span class="co"># show figure titles on top of plot</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To see your language locale</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.getlocale</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># To change it into English</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setlocale</span>(<span class="st">"LC_ALL"</span>, <span class="st">"English"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="install-packages" class="level3">
-<h3 class="anchored" data-anchor-id="install-packages">Install packages</h3>
-<p>Several packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the Packages section of the EpiRhandbook.</p>
+</section>
+<section id="install-packages" class="level2">
+<h2 class="anchored" data-anchor-id="install-packages">Install packages</h2>
+<p>Several packages are required for different aspects of analysis with R. You will need to install these before starting. We install and load packages using the {pacman} package. Its p_load() command will install packages if necessary and load them for use in the current session. If a listed package has already been installed, it will just load it. Each case study specifies at the beginning what packages you need to have installed. You can find more about installing/loading packages in the <a href="https://www.epirhandbook.com/en/new_pages/packages_suggested.html">suggested packages</a> section of the EpiRhandbook.</p>
 <p>Note you may end up using a long list of packages. Unfortunately different packages have functions with the same name. For example, the package {dplyr} (already installed with {tidyverse}) has a function called select() which we frequently use to subset columns of a data frame. Other packages such as {MASS} also have a function called select(). This could create headaches if you want to subset columns using dplyr’s select() but R thinks you’re calling MASS’s select() (we call this masking - dplyr’s select() is masked by MASS’s select()). Given that you are more likely to use functions from {tidyverse}, ensure that this is the last package in your p_load() list so that functions from {tidyverse} (including {dplyr} functions) will always “prevail”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># importing data  </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  skimr,      <span class="co"># get overview of data</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># working with dates</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  epikit,     <span class="co"># to create age categories</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  gtsummary,  <span class="co"># summary statistics, tests and regressions </span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  apyramid,   <span class="co"># plotting age pyramids </span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># importing data  </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  skimr,      <span class="co"># get overview of data</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># working with dates</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  epikit,     <span class="co"># to create age categories</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  gtsummary,  <span class="co"># summary statistics, tests and regressions </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  apyramid,   <span class="co"># plotting age pyramids </span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>If this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See this handbook pages on the basics of installing packages and running R from network drives (company computers) for more detail. https://epirhandbook.com/r-basics.html#installation https://epirhandbook.com/r-on-network-drives.html#r-on-network-drives</p>
-<p>Terms of Use Disclaimer: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information). You are free: to Share: to copy and distribute the work to Remix: to adapt and build upon the material Under the following conditions: Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers. Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors. Notification: If you use the work in the manner specified by the author or licensor, Walter@rki.de You cannot sell this work alone but you can use it as part of a teaching. With the understanding that: Waiver: Any of the above conditions can be waived if you get permission from the copyright holder. Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license. Other Rights: In no way are any of the following rights affected by the license: Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations; The author’s moral rights; Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights. Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license. This licence is based on http://creativecommons.org/licenses/by-sa/3.0/</p>
-
-
+<p>If this step is not working, you may have limited administrative rights for your computer. Making sure your IT-department gives you the correct access can save a lot of headache. See these EpiRhandbook pages on the <a href="https://www.epirhandbook.com/en/new_pages/basics.html#installation">basics of installing packages</a> and <a href="https://www.epirhandbook.com/en/new_pages/network_drives.html">running R from network drives</a> (company computers) for more detail.</p>
 </section>
+</section>
+<section id="terms-of-use" class="level1">
+<h1>Terms of Use</h1>
+<section id="disclaimer" class="level2">
+<h2 class="anchored" data-anchor-id="disclaimer">Disclaimer</h2>
+<p>All case studies are based on real or plausible scenarios. Some will use simulated data, while others will feature open-access or provided de-identified data. The type of data used will be clearly indicated at the start of each case study.</p>
+</section>
+<section id="licenses" class="level2">
+<h2 class="anchored" data-anchor-id="licenses">Licenses</h2>
+<p>Case studies will be managed according to their original licenses, which you’ll be able to find at the bottom of each case study page. If you have any questions, send us an email at <strong>contact@appliedepi.org</strong>.</p>
+
+
 </section>
 </section>
 
