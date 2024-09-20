@@ -23,7 +23,7 @@ Here, you can practice technical and analytical skills with real-life scenarios.
 A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. Simply pick the one that fits you best and click to open it in your language!
 
 For more information on how to use the case studies, click the [How-to
-Guide](instructions.html). 
+Guide](pages/instructions.html). 
 
 ```{r, echo = F, eval=T, message= F}
 
