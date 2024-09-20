@@ -26,7 +26,7 @@ Rstudio; R packages, functions and arguments, using pipes)
 :::
 
 For instructions on how to use our case studies, see our [How-to
-Guide](pages/instructions.qmd_). We welcome feedback and suggestions via
+Guide](pages/instructions.qmd). We welcome feedback and suggestions via
 [contact\@appliedepi.org](mailto:contact@appliedepi.org). You can also
 discuss the case study or related concepts on the [Applied Epi
 Community](https://community.appliedepi.org/).
@@ -319,8 +319,7 @@ rm(mpox_linelist, mpox_aggregate_table)
 
 ## Step 3: Explore the data
 
-You need to understand what the data looks like as a first step, to
-inform your analysis.
+The data’s in, and now it’s time to see what story it tells. Take an initial look at your data to check its quality and how you can best use it. 
 
 **Tasks:** Take a look at the different data frames and determine:
 
@@ -491,17 +490,9 @@ cat("For how many cases is the HIV status Unknown or missing?", longmcq(opts))
 
 ### 4.1: Clean the case-based data
 
-**Cleaning column names and values**
+So! The good news: you have information on geography, dates, demographic characteristics, and clinical details. A promising descriptive analysis lies ahead. 
 
-Great! From your exploration, you know that you can describe the
-geographic distribution of cases by country, trends over time, their
-demographic details, their sexual orientation and hiv status, plus their
-outcome and clinical symptoms.
-
-You plan to make some tables and graphs to describe those variables.
-
-BUT! You may noticed that there are a few things that you need to clean
-up before really diving into the analysis.
+BUT! You may noticed that there are a few things to fix before the real detective work begins.
 
 For example:
 
@@ -524,12 +515,12 @@ For example:
     changes in a single piping command
 -   Change all column names to lower case.
 -   Convert all date columns to class "Date".
--   Recode "Gender" categories into: "Female", "Male", "Other", and
-    "Unknown"
--   Recode "Outcome" categories into: "Alive" and "Unknown"
--   Recode HIV status into: "Positive", "Negative" and "Unknown"
--   Recode Sexual orientation into: "Bisexual", "Heterosexual",
-    "MSM/homo or bisexual male" and "Unknown".
+-   Convert all missing/unknown values to NA (to be recognized by R as missing)
+-   Recode non-missing "Gender" categories into: "Female", "Male", and "Other"
+-   Recode non-misising HIV status into: "Positive", "Negative" and "Unknown"
+-   Recode non-missing sexual orientation into: "Bisexual", "Heterosexual", and
+    "MSM/homo or bisexual male".
+-   Recode non-missing "outcome" categories into: "Alive" and "Dead". 
 -   Check that all changes have been made correctly
 
 <details>
@@ -579,7 +570,7 @@ it yourself first!)
 </br>
 
 Here we clean the data using a 'chain' of commands connected by pipes
-(%\>%), which is the grammar of the functions in the {Tidyverse}. The
+(%>%), which is the grammar of the functions in the {Tidyverse}. The
 output is assigned to a new object called mpox_linelist to differentiate
 it from the raw data. It can be helpful to have both the cleaned and raw
 data available in the environment to compare to the original data if
@@ -602,30 +593,26 @@ mpox_linelist <- mpox_linelist_raw %>%
   mutate(across(starts_with("date"), 
                 .fns = ~ ymd(.x))) %>%  
   
+  #transforms UNK to NA across all character columns 
+  mutate(across(where(is.character), 
+                .fns = ~ ifelse(.x %in% c("UNK", "Unknown"), NA_character_, .x)))  %>% 
 
   # Recode the gender values to be more obvious  
   mutate(gender = recode(gender,
                          "F" = "Female",
                          "M" = "Male",
-                         "O" = "Other",
-                         "UNK" = "Unknown")) %>%
-  
-  #transforms UNK to Unknown across all character columns 
-  mutate(across(where(is.character), 
-                .fns = ~ ifelse(.x == "UNK", "Unknown", .x)))  %>% 
+                         "O" = "Other")) %>%
   
   #recode with ifelse to change only one or two categories based on a rule. 
   mutate(outcome = ifelse(outcome == "A", "Alive", outcome)) %>%   
   
   #recode with case_when for more complex recoding 
   mutate(hiv_status = case_when(hiv_status == "NEG" ~ "Negative",    
-                                hiv_status == "POS" ~ "Positive",
-                                TRUE                ~ "Unknown")) %>% 
+                                hiv_status == "POS" ~ "Positive")) %>% 
   
   mutate(sexual_orientation = case_when(sexual_orientation == "BISEXUAL" ~ "Bisexual",
                                         sexual_orientation == "HETERO" ~ "Heterosexual",
-                                        sexual_orientation == "MSM" ~ "MSM/homo or bisexual male",
-                                        TRUE                        ~  "Unknown")) 
+                                        sexual_orientation == "MSM" ~ "MSM/homo or bisexual male")) 
 ```
 
 You can then review your data by tabulating across all the different
@@ -659,9 +646,9 @@ tabyl(mpox_linelist, hiv_status)
 ```
 
 **IMPORTANT**: If 'unknown' and NA had meaningful differences, combining
-them wouldn't be appropriate (e.g., 'unknown' means the case was asked
-but didn't want to respond, while NA means they weren't asked). Here, we
-assume no meaningful difference and combine them for simplicity.
+them wouldn't be appropriate (e.g., if 'unknown' meant the case was asked
+but didn't want to respond, while NA meant they weren't asked). Here, we
+assume no meaningful difference and want R to recognize them as missing. 
 
 </br>
 
@@ -714,90 +701,6 @@ opts <- c(
 )
 
 cat("How many cases have 'alive' as an outcome?", longmcq(opts))
-
-```
-:::
-:::
-
-**Creating new columns for analysis**
-
-Fabulous, you're getting there. Now, because you plan to create weekly
-epicurves and an age-sex pyramid, you need to ensure your data has the
-right columns for this.
-
-***Tasks:***
-
--   Use the column "DateOfNotification" to create a column called
-    "week_date" which has the week of notification, starting on Mondays.
-
--   Create a column called "age_group" with ten year age groups and the
-    oldest group being 70+
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-To create the age groups, explore the function called `age_categories()`
-from the `{epikit}` package.
-
-One simple way to create the "week_date" column would be to use the
-function `floor_date()` from `{lubridate}`. Take a look at the
-documentation to understand how it works and how to make Monday the
-starting day of the week.
-
-</br>
-
-</details>
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
-
-Add the creation of these columns to your cleaning code:
-
-```{r , echo=TRUE, results = 'hide'}
-
-mpox_linelist <- mpox_linelist %>% 
-  # create week column with Monday start 
-  mutate(week_date = floor_date(date_of_notification, unit = "week", week_start = "Monday")) %>%
-  
-  # Use the age_categories function to create age categories
-  mutate(age_group = age_categories(age, lower = 0, #set up the lower age
-                                    upper = 70, #set up the upper age
-                                    by = 10)) #set up the age breaks
-```
-
-</details>
-
-::: {.callout-note appearance="minimal" icon="false"}
-**Test yourself!**
-
-::: webex-check
-```{r, results="asis", echo=FALSE}
-pacman::p_load(webexercises)
-
-opts <- c(
-  answer = "2022-04-11",
-  "2022-07-25",
-  "2022-02-28",
-  "2022-05-09"
-)
-
-
-cat("Which week has the largest number of cases?", longmcq(opts))
 
 ```
 :::
@@ -880,11 +783,11 @@ cat("Take a look at the aggreate data. Which country reported the largest cumula
 
 ## Step 5: Describe outbreak by person, place, and time
 
+Now we’re getting to the heart of the investigation. Who is affected? Which locations are most affected, and how quickly is it spreading? Your ability to tell the classic "person, place, and time" story will be crucial to guiding the response. Pinpoint those hotspots and trends!
+
 ### 5.1: Describe total case counts by country
 
-**Task**: Using the mpox case linelist, create a table showing the total
-number of cases by country. This time, make the table more
-publication-friendly.
+**Task**: Using the mpox case linelist, create a table showing the total number of cases by country. This time, make the table more publication-friendly.
 
 <details>
 
@@ -965,10 +868,8 @@ Okay so Country A has the most cases in total based on most recent data. But how
 
 **Tasks**:
 
--   Using the mpox case linelist, create an epicurve by week of
-    notification
--   Using the mpox case linelist, create an epicurve by week of
-    notification to enable a comparison of trends by country.
+-   Using the mpox case linelist, create an epicurve by week of notification
+-   Using the mpox case linelist, create an epicurve by week of notification to enable a comparison of trends by country.
 -   Using the mpox case linelist, create a heat plot with the number of
     cases by country and week of notification.
 
@@ -982,26 +883,17 @@ Okay so Country A has the most cases in total based on most recent data. But how
 
 </br>
 
-To do the epicurve, you can use ggplot() and geom_histogram(), which
-will automatically aggregate your data. If you are unsure on how
-ggplot() works, read the EpiRhandbook chapter on [Epidemic
+Prepare your data for the epicurve first. You can create a "week_date" column using the
+function `floor_date()` from `{lubridate}`. Take a look at the
+documentation to understand how it works and how to pick the starting day of the week.
+
+To create the epicurve, you can use `ggplot()` and `geom_bar()`, which visualizes the number of rows within a group - e.g. number of cases per week. To compare trends in different countries, consider using the `facet_wrap()` function. If you are unsure on how
+`ggplot()` works, read the EpiRhandbook chapter on [Epidemic
 curves](https://epirhandbook.com/en/new_pages/epicurves.html).
 
-An alternative approach is to first aggregate the number of cases by
-week of notification. You can do this using the functions group_by() and
-summarise() from {dplyr}. If you are unsure on how to do this, review
-the [Grouping data](https://epirhandbook.com/en/new_pages/grouping.html)
-chapter of the EpiRhandbook.
-
-Once you have an object with aggregated cases by week of notification,
-create the epicurve using ggplot(). If want a dynamic colour inside the
-bins, you need to assign the fill to the column you want to use
-(country) and place it inside the aesthetics
-
-Heat plots can be useful to understand how the epidemic evolved in
-different countries. You will need to aggregate your data by country and
-week of notification. You can do this using the functions group_by() and
-summarise() from {dplyr}. If you are unsure on how to do this, review
+To create a heatmap, you will need to create a table of counts by country and
+week of notification. You can do this using the functions `group_by()` and
+`summarise()` from `{dplyr}`. If you are unsure on how to do this, review
 the Grouping data chapter of the EpiRhandbook. Then, use the geom
 geom_tile() to create a heat plot. If you're unsure on how to do this,
 read the EpiRhanbook section on [Heat
@@ -1020,7 +912,16 @@ it yourself first!)
 
 </br>
 
-The code below creates an epicurve using ggplot() and the geom_bar() function and applies further formatting. You can plug in the column you created during the data cleaning step for the x axis. With geom_bar(), you do not need to specify the y axis as the function counts the number of rows per x axis value. 
+Prepare your data by creating the new column using `mutate()` and `floor_date()`:
+
+```{r , echo=TRUE}
+
+mpox_linelist <- mpox_linelist %>% 
+  # create week column with Monday start 
+  mutate(week_date = floor_date(date_of_notification, unit = "week", week_start = "Monday")) 
+```
+
+The code below creates an epicurve using `ggplot()` and the `geom_bar()` function, then applies further formatting. With `geom_bar()`, you only need to specify the x axis, and the function will visualize the number of rows per unique x axis value. 
 
 ```{r , echo=TRUE}
 
@@ -1037,7 +938,7 @@ epicurve_mpox <- ggplot(data = mpox_linelist,
   labs(title="Mpox cases reported in 2022 in Countries A, B, C, D, and E",
        subtitle = "Date as of August 31st 2022") +  #add a title
   
-  theme_bw() +                                  #assign a predefined theme
+  theme_minimal() +                             #assign a predefined theme
   
   theme(axis.text = element_text(size=9),       #define the font size of the axis text
         axis.title = element_blank(),           #remove the titles of the x and y axis 
@@ -1048,7 +949,9 @@ epicurve_mpox
 
 ```
 
-To examine how the outbreak spread by country, add `facet_wrap()` to your ggplot code. This splits the graph into multiple smaller ones. Below, we show how we can even simply add the function to the national epicurve object. Alternatively, you could add fill = country to the aes() in the epicurve code to keep a single curve but color each bar by country. However, we don't recommend this for comparing trends, as stacked bars make it harder to see individual patterns.
+To examine how the outbreak spread by country, add `facet_wrap()` to your ggplot code. This splits the graph into multiple smaller ones. As shown below, you can even simply add the function to the national epicurve object.
+
+An alternative approach would be to create a stacked epicurve, i.e. retain the single epicurve but split each bar into colors per country. You would do this by adding `fill = country` to the aes() in the epicurve code. However, we don't recommend this for comparing trends, as stacked bars make it harder to see individual patterns.
 
 ```{r , echo=TRUE}
 epicurve_epox_country <- epicurve_mpox + 
@@ -1061,43 +964,50 @@ epicurve_epox_country <- epicurve_mpox +
 epicurve_epox_country
 ```
 
+Finally, if you want to demonstrate this as a weekly heatmap, you can use geom_tile(). First, aggregate the data by week. Then pipe into a ggplot(), as shown below.
+
 ```{r , echo=TRUE}
 
-# Heatmap of cases by country over time
+# Assign the output of your ggplot code to a new object
+hp_mpox <- mpox_linelist %>% 
+  
+  #first count the number of cases by country and notification week
+  count(country, week_date) %>% 
 
-hp_epox <- mpox_linelist %>% #we first group the data by country and week of notification
+  #you can pipe directly into the ggplot
+    ggplot(aes(x = week_date, # notification week along the x axis
+           y = country,       # country along the y axis
+           fill = n)) +       # colour in the heatmap tiles by number
   
-  group_by(country, week_date) %>% 
+  # specify that you want this to be a heatmap with geom_tile()
+  geom_tile(colour = "black") +   # black is the outline of each tile
   
-  summarise(n_cases = n(), .groups = "drop") %>% 
-
-  #now we can use the pipe to directly plot the resulting data from the grouping
-  
-  ggplot(aes(x = week_date,
-           y = country,           #we want the countries to be in the y axis
-           fill = n_cases)) +     #the colour of the tiles should depend on the number of cases
-  
-  geom_tile(colour = "black") +   #this is the outline colour of each tile
-  
-  scale_fill_gradient(            #here we define the colours we want to use in the gradient
+  #define the gradient of the colours
+  scale_fill_gradient(            
     low = "lightgreen",
     high = "red") +
   
-  scale_x_date(breaks = "2 weeks") +             #set the x axis labels to two week intervals
+  #set the x axis labels to two week intervals
+  scale_x_date(breaks = "2 weeks") +             
   
+  # Add titles
   labs(
     title= "Mpox cases by country and week of notification",
     fill = "Number of cases"                               
   ) +
   
+  # Apply an overall theme to your plot
   theme_bw() +
   
-  theme(legend.position = "bottom",             #legend position to the bottom
-        axis.text = element_text(size=9),       #define the font size of the axis
-        axis.title = element_blank(),           #remove the titles of the x and y 
-        axis.text.x = element_text(angle=90))   #rotate the x axis text
+  # Customize other appearance details
+  theme(legend.position = "bottom",       #legend position to bottom
+        axis.text = element_text(size=9),     #define axis font 
+        axis.title = element_blank(),         #remove the axis titles
+        axis.text.x = element_text(angle=90)) #rotate the x axis text
     
-hp_epox 
+
+# Print the heatmap
+hp_mpox 
 
 ```
 
@@ -1107,16 +1017,12 @@ hp_epox
 
 ### 5.3: Describe demographic characteristics
 
-Now that we have created some outputs by time and place, we should focus
-on the "person" element. The two most important demographic
-characteristics are usually age and gender. In the case we are seeing,
-we may also want to explore the sexual orientation of cases.
+Next, describe the age, gender, and sexual orientation of cases. What is interesting?
 
 **Task**:
 
--   Explore the number of cases by age group and gender.
--   Create a table with number and percentages of cases by sexual
-    orientation
+-   Create a single table showing overall distribution of age, gender, and sexual orientation
+-   Create an age-gender pyramid showing age as 10-year age bands
 
 <details>
 
@@ -1128,15 +1034,13 @@ we may also want to explore the sexual orientation of cases.
 
 </br>
 
-The easiest way to explore both columns (age_group and gender) would be
-to use the tabyl() function from {janitor}. Then, to create the age
-pyramid explore the function age_pyramid() from the {apyramid} package.
-You can find more about this function in the EpiRhandbook chapter
-[Demographic pyramids and
+
+To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function tbl_summary() from {gtsummary}.
+
+To create an age-gender pyramid, first create a new column with the function `age_categories()`
+from the `{epikit}` package. Then explore the function age_pyramid() from the {apyramid} package.You can find more about this function in the EpiRhandbook chapter [Demographic pyramids and
 Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
 
-To create the table by sexual orientation, consider using the function
-tbl_summary() from {gtsummary}
 
 </br>
 
@@ -1146,27 +1050,65 @@ tbl_summary() from {gtsummary}
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
 
 </summary>
 
 </br>
 
+See below the code to quickly generate one table with the breakdown of different variables. The function `tbl_summary()` by default summarizes columns differently depending on their class:
+
+- Age is a numeric column, so is summarized with a median and interquartile range. 
+- Gender and sexual orientation are character values, so are described in terms of counts and percentages. 
+
+You can customize this further; explore the documentation by typing `?tbl_summary()` in your console. 
+
+Note that `tbl_summary()` by default does not include NAs in the counts and percentages, allowing you to see the distribution of non-missing values. 
+
 ```{r , echo=TRUE}
-# Explore gender and age group columns
-tabyl(mpox_linelist, gender)
-tabyl(mpox_linelist, age_group)
 
-# Table with sexual orientation 
-
-tab_sor <- mpox_linelist %>% 
+# Create table of all three variables
+tab_demographics <- mpox_linelist %>% 
   
-  select(sexual_orientation) %>% 
+  # select the columns of interest for
+  select(age, gender, sexual_orientation) %>% 
   
-  tbl_summary(label = list(sexual_orientation ~ "Sexual Orientation")) 
+  # use tbl_summary() to create the table
+  tbl_summary() 
 
-tab_sor
+tab_demographics
+```
+
+Create the new age group column as follows. You can add this to the cleaning section of your script (which we covered 4.1).
+
+```{r , echo=TRUE}
+  
+mpox_linelist <- mpox_linelist %>% 
+  # Use the age_categories function to create age categories
+  mutate(age_group = age_categories(age, lower = 0, #set up the lower age
+                                    upper = 70, #set up the upper age
+                                    by = 10)) #set up the age breaks
+```
+
+
+Then make the age-gender pyramid using the `age_pyramid()` function. It is a function that builds on ggplot, so you can then continue to add on customization, such as the `theme_bw()` below. 
+
+```{r , echo=TRUE}
+
+# Create table of all three variables
+figure_agesex <- mpox_linelist %>% 
+  
+  # Filter to male and female only
+  filter(gender %in% c("Male", "Female")) %>% 
+  
+  # select the columns of interest for
+  age_pyramid(age_group = "age_group",
+              split_by = "gender") +
+  
+  # change theme
+  theme_bw()
+
+figure_agesex
 ```
 
 </br>
@@ -1192,41 +1134,37 @@ cat("Which demographic group is more affected by Mpox?", longmcq(opts))
 
 ```
 :::
+
+::: webex-check
+```{r, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "41%",
+  "42%",
+  "5%",
+  answer = "94%"
+)
+
+
+cat("What proportion of mpox cases were homosexual or bisexual men?", longmcq(opts))
+
+```
+:::
+
+
+
 :::
 
 ### 5.4: Describe clinical characteristics
 
-Now, let's summarise the main clinical information that we have in our
-case-based data frame.
+The media is starting to call your office and are asking what symptoms the public should look out for. Just in luck - you can check that out in the data too!
 
 **Tasks**:
 
--   Create a bar plot with the proportion of each type clinical symptoms
+-   Create a table with the distribution of different symptoms and outcomes. 
 
--   Create a table with the number and percentage of cases by outcome
-
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
-To create bar plots we can use geom_bar() or geom_col() depending on the
-nature of our data. If we aggregate first, we can use geom_col(),
-otherwise we should use geom_bar(). There is a function of the
-{gtsummary} package called add_p() which enables you to easy calculate a
-statistical test across groups. If you want to know more read the
-section on [gtsummary
-package](https://epirhandbook.com/en/new_pages/stat_tests.html#stats_gt)
-of the EpiRhandbook.
-
-</br>
-
-</details>
+No hints! You should know this one by now!
 
 <details>
 
@@ -1240,42 +1178,18 @@ it yourself first!)
 </br>
 
 ```{r , echo=TRUE}
-# Bar plot with clinical symptoms
-
-bar_clinical <- mpox_linelist %>% 
-  
-  drop_na(clinical_symptoms) %>%   # we remove those with missing clinical symptoms
-  
-  group_by(clinical_symptoms) %>% 
-  
-  summarise(n_cases = n(), .groups = "drop") %>%
-  
-  mutate(prop=(n_cases/sum(n_cases))*100) %>%  # we create a column with proportions
-  
-  ggplot(aes(y = reorder(clinical_symptoms, prop), x = prop)) +  # the reorder function ensures that categories are ordered by proportion in the graph
-  
-  geom_col(fill = "darkgreen") + 
-  
-  labs(
-    title= "Frequency of clinical symptoms in Mpox cases",
-    y = "",
-    x = "Number of cases"
-  ) +
-  
-  theme_bw() +
-  
-  theme(axis.text = element_text(size=9))       #define the font size of the axis
-
-bar_clinical  
-
 
 # Table with number and percentage of cases by outcome
 
 tab_outcome <- mpox_linelist %>% 
   
-  select(outcome) %>% 
+  # Select the columns for tabulation
+  select(outcome, clinical_symptoms) %>% 
   
-  tbl_summary(label = list(outcome = "Reported outcome")) # with the argument "label" we can change how the column name is displayed
+  # Use tbl_summary() - note that this time we are adding on labels to change how the column name is displayed
+  tbl_summary(label = list(
+    clinical_symptoms = "Symptoms",
+    outcome = "Reported outcome")) 
 
 tab_outcome
 
@@ -1288,11 +1202,9 @@ tab_outcome
 
 ## **Step 6: Reviewing data quality**
 
-It is important to understand how timely, complete, and valid your data
-is, if it will be the basis of understanding an outbreak and making
-decisions. For example - you will need to be mindful of reporting delays
-when interpreting epicurves, and be aware of how complete different
-sources of data are compared to each other.
+You've described a lot now, but you want to make sure you understand how timely and complete your mpox linelist is, especially if it will be the basis of making decisions. 
+
+For example - is it possible that there are very different reporting delays between countries, meaning current case counts are not directly comparable? Oh dear, must check.
 
 ### 6.1: Delay between date of onset, diagnosis and notification
 
@@ -1357,54 +1269,102 @@ it yourself first!)
 
 </br>
 
+First create the required columns for this analysis. 
 ```{r , echo=TRUE}
-# Estimate delay between onset and diagnosis, and between diagnosis and notification
 
+# Create two columns in linelist to assess delays
 delay_db <- mpox_linelist %>% 
   
-  mutate(delay_diag = as.numeric(date_of_diagnosis - date_of_onset)) %>%   #we create variables with difference between dates, we transform them in numeric to be able to then calculate measures of central tendency
-  
-  mutate(delay_not = as.numeric(date_of_notification - date_of_diagnosis))
+  # Time between onset and diagnosis (converted to a number)
+  mutate(delay_diag = as.numeric(date_of_diagnosis - date_of_onset)) %>%   
 
-summary(delay_db$delay_diag) #the summary will give us measures of central tendency and dispersion
+  # Time between diagnosis and notification (converted to a number)
+  mutate(delay_not = as.numeric(date_of_notification - date_of_diagnosis)) 
+```
+
+Use the summary function from base R to quickly view the median, mean, interquartile range, and rang. 
+
+```{r , echo=TRUE}
+
+# Summarize the delays to diagnosis
+summary(delay_db$delay_diag) 
+
+# Summarize the delays from diagnosis to notification
 summary(delay_db$delay_not)
+```
 
+Use group_by() and summarize() to create a table with median delays per country. 
 
-delay_country <- delay_db %>% #here, we group by country and summarise the median to compare across countries
+```{r , echo=TRUE}
+delay_country <- delay_db %>% 
   
+  # Group by country
   group_by(country) %>% 
   
+  # Create columns for each delay
   summarise(median_delay_diag = median(delay_diag, na.rm = T),
             median_delay_not = median(delay_not, na.rm = T))
 
 delay_country
+```
 
-# Line graph with the different dates 
+To explore how the trends in cases over time differ when using different dates, you can reshape the linelist to create a dataset with one row per date type per case. 
 
-dates_longer <- mpox_linelist %>% # use the variables of the dates and make a longer dataset. In the pivot_longer() command we select the columns which we want to expand in long format and transform the dataset
-   
+```{r , echo=TRUE}
+# Prepare the data
+dates_longer <- mpox_linelist %>% 
+  
+  select(age, gender, sexual_orientation, starts_with("date_")) %>% 
+
   pivot_longer(
     
-    cols=starts_with("date_"),         # all columns starting with "date_" will be taken 
+      # all columns starting with "date_" will be pivoted from wide to long 
+      cols=starts_with("date_"),         
+    
+      # put names of the columns into a single column called "indicator"
+      names_to = "indicator",   
+      
+      # the date values will be placed in a column called "date"
+      values_to = "date")                
+```
 
-    names_to = "indicator",            #the names of the columns will be placed in a single column called "indicator"
+The data will then look like this, with three rows per case:
 
-    values_to = "date")                # the values (which are dates in this case) will be placed in a column called "date"
-  
+```{r, echo = F, eval = T}
 
+DT::datatable(dates_longer %>% filter(row_number()<7))
+
+
+```
+
+Then tabulate cases by week per indicator
+
+```{r , echo=TRUE}
+
+# Create new object
 dates_longer_week <- dates_longer  %>% 
 
-  mutate(week_date = floor_date(date, unit = "week", week_start = "Monday")) %>%  # we create a week column
-    
+  # Create a new week column
+  mutate(week_date = floor_date(date, unit = "week", week_start = "Monday")) %>%  
+  
+  # Within each combination of indicator and week, calculate the number of cases
   group_by(indicator, week_date) %>% 
-    
-  summarise(n=n(), .groups="drop") %>%   # we group and summarise to have the number of cases by date type and week
-    
-  drop_na(week_date)                     # we drop the cases with no data on dates
+  summarise(n=n()) %>%   
+  
+  # drop the cases with no data on dates  
+  drop_na(week_date)                     
+```
+The data will then look like this, with three rows per case:
 
+```{r, echo = F, eval = T}
 
+DT::datatable(dates_longer_week %>% filter(row_number()<4))
 
+```
 
+Finally, create a plot with ggplot() and geom_line(). 
+
+```{r, echo = T, eval = T}
 plot_date_delay <-   ggplot(data = dates_longer_week,
                             aes(x = week_date, 
                                 y = n, 
@@ -1432,12 +1392,14 @@ plot_date_delay
 
 ### 6.2: Compare case-based and aggregated data
 
-**Task**: Create a plot comparing the number of cases reported to
-through the case-based flow and through the aggregated flow in each
-country.
+Finally, you remember that all-along you've had these aggregate counts from routine surveillance. You find out that these numbers are actually already being published.
 
-NOTE: Take into consideration that the column on cases in the aggregated
-data frame reports the *cumulative* number of cases.
+Before you share your own numbers, you'd better check how different they are from already-published statistics!
+
+**Task**: Create a plot comparing the number of cases reported to
+through the case-based flow and through the aggregated flow in each country.
+
+NOTE: Take into consideration that the column on cases in the aggregated data frame reports the *cumulative* number of cases.
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -1472,51 +1434,58 @@ it yourself first!)
 
 </br>
 
+First, create a data frame of country totals from the aggregate data.
+
 ```{r , echo=TRUE}
-# Create a data frame with the overall number of cases reported through the aggregated flux
-
 mpox_agg_country <- mpox_agg %>% 
-  
+ 
+  # as we have cumulative data, we keep only the last week per country 
   group_by(country) %>% 
+  filter(date_rep == max(date_rep)) %>% 
   
-  filter(date_rep == max(date_rep)) %>% # as we have cumulative data, we keep only the last week (after grouping by country)
-  
-  select(-date_rep, -week_date) %>%     # remove unnecessary columns
+  # remove unnecessary columns
+  select(-date_rep, -week_date) %>%     
 
-  mutate(source = "aggregated")         # we create this column to distinguish the numbers from the case-based flux
+  # create this column to distinguish the numbers from the linelist data
+  mutate(source = "aggregated")         
+```
 
+Then create a data frame of country totals from the case linelist, and append it to the totals from the aggregate data. 
 
-# Create a data frame with the overall number of cases reported through the case-based flux
+```{r , echo=TRUE}
 
 mpox_linelist_country <- mpox_linelist %>%
   
+  # count cases by country, use the same column name as in the aggregate data
   group_by(country) %>% 
+  summarise(cases = n()) %>% 
   
-  summarise(cases = n(), .groups = "drop") %>% 
-  
-  mutate(source = "case_based")       # we create this column to distinguish the numbers from the
+  # create this column to distinguish the numbers from the linelist data
+  mutate(source = "case_based")       
   
 
-# We append both data frames. Remember this is different from merging
-
+# Append both data frames. Remember this is different from merging
 total_data <- bind_rows(mpox_linelist_country, mpox_agg_country)
+```
 
+You can now use this data to compare the cases reported in both sources, using `ggplot()`. 
 
-# We create a graph to compare the cases reported in both sources
+```{r , echo=TRUE}
 
 graph_comp <- ggplot(data = total_data,
                      aes(x = source, 
                          y = cases, 
                          fill = source)) +
   
-  geom_col(position = "dodge") +            #position dodge puts bars one next to each other, instead of "stacked"
+  #position dodge puts bars one next to each other, instead of "stacked"
+  geom_col(position = "dodge") +            
   
-  facet_wrap(~ country, scales = "free_y") +  # this command gives us one graph per country. The argument scales is used to allow each y axis scales to adjust to the data
+  # this command gives us one graph per country. The argument scales allows each y axis scales to adjust to the data
+  facet_wrap(~ country, scales = "free_y") +  
 
+  # changes the colours, but with the argument "labels" we can change the text of each fill.
   scale_fill_viridis_d(
-    labels = c("Aggregated", "Case-based")  # this function changes the colours, but with the argument "labels" we can change the text of each fill.
-     ) +
-  
+    labels = c("Aggregated", "Case-based")) +
   
   labs(
     title = "Number of cases of Mpox reported in 2022 according to source of data",
@@ -1527,26 +1496,31 @@ graph_comp <- ggplot(data = total_data,
   
   theme_bw() +
   
-  theme(axis.text.x = element_blank(),      # we remove the text of the x axis because it is already present in the legend
-        axis.ticks.x = element_blank())     # we also remove the ticks for aesthetic purposes
+  # we remove the text of the x axis because it is already present in the legend
+  theme(axis.text.x = element_blank(),   
+        
+   # we also remove the ticks for aesthetic purposes
+        axis.ticks.x = element_blank())    
 
 graph_comp
 ```
 
 </br>
 
+Interesting! There are some differences - and this probably will be worth flagging with stakeholders and/or explaining in a footnote somewhere. 
+
 </details>
 
 ## Final thoughts
 
-Well done! Through your analysis you now understand the magnitude of the
-outbreak so far, where and when it spread, which demographic groups are
-most affected, and how the disease actually manifests in terms of
-symptoms and severity. ECDC is very happy with your work.
+Well done! Through your analysis you now understand the magnitude of the outbreak so far, where and when it spread, which demographic groups are most affected, and how the disease actually manifests in terms of symptoms and severity. ECDC is very happy with your work.
 
-By coding this up in R, this analysis should be reproducible, meaning
-you can quickly update it with new data and keep monitoring the
-outbreak. To further practise reproducible reports, \[link to
+By coding this up in R, this analysis should be reproducible, meaning you can quickly update it with new data and keep monitoring the outbreak. 
+
+Of course, the above data is not real. If you want to see a paper on the actual outbreak that occured in Europe in 2022, you can take a look at this [Eurosurveillance paper](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.36.2200620). This [ECDC page on Mpox](https://www.ecdc.europa.eu/en/mpox) also publishes updates on the status of mpox in Europe. 
+
+
+To further practise reproducible reports, \[link to
 RMarkdown\].
 
 ## Case study information
@@ -1561,7 +1535,64 @@ purposes\
 |------------------|:------------------|-----------------:|------------------|
 | October 2021 | First draft                    |       1 | Xanthi Andrianou       |
 | June 2024    | Adapted to case study template |     1.1 | Alberto Mateo Urdiales |
+| September 2024    | Revise for case study repository |     1.2 | Paula Blomquist and Alanah Jansen |
 
-**Terms of Use**
+## Terms of Use
 
-<!-- Describe the licencing and other appropriate information about Terms of use or any other disclaimer -->
+**Disclaimer**: The information presented in this exercise and the
+associated data files have been deliberately changed so as to facilitate
+the acquisition of the learning objectives for fellows of EPIET, EUPHEM
+and EPIET-associated programmes. This case study was first introduced in
+2022 (see Copyright and Licence agreement for more information).
+
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>

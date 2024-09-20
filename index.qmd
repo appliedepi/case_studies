@@ -16,9 +16,12 @@ pacman::p_load(
 
 ## Welcome to our Case Study Repository!
 
-Here, you can practice technical and analytical skills using real-life scenarios. The case studies, contributed by FETPs and health ministries worldwide, feature data that is either generated or anonymized for training purposes.
+Here, you can practice technical and analytical skills with real-life scenarios. The case studies, shared by FETPs and health ministries, use training data that’s either generated or anonymized.
 
-Find a case study of interest with the table below, and click on the link to open it in the appropriate language for you. 
+A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. Simply pick the one that fits you best and click to open it in your language!
+
+For more information on how to use the case studies, click the [How-to
+Guide](pages/instructions.qmd). 
 
 ```{r echo = F}
 table_cases <- tribble(
