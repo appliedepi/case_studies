@@ -43,7 +43,14 @@ reactable(table,
     name = colDef(name = "Case Study name", align = "left",
                   style = list(width = "300px"),
                   headerStyle = list(width = "300px")),
-    link = colDef(name = "Link", align = "left"),
+    link = colDef(name = "Link", align = "left",
+                  cell = function(value) {
+          htmltools::div(
+            htmltools::p(
+              htmltools::tags$a(href = value, value)
+            )
+          )
+        }),
     creator = colDef(name = "Creator", align = "left"),
     language = colDef(name = "Language", align = "left"),
     tool = colDef(name = "Tool", align = "left"),
@@ -70,6 +77,9 @@ reactable(table,
                fontFamily = "Arial",  
                 fontSize = "14px"), # Blue background with white text),
 )
+
+
+
 
 
 ```
