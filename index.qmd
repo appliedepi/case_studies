@@ -10,7 +10,9 @@ pacman::p_load(
   here,
   janitor,
   DT,
-  tidyverse
+  tidyverse,
+  googlesheets4,
+  reactable
 )
 ```
 
@@ -21,20 +23,59 @@ Here, you can practice technical and analytical skills with real-life scenarios.
 A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. Simply pick the one that fits you best and click to open it in your language!
 
 For more information on how to use the case studies, click the [How-to
-Guide](pages/instructions.qmd). 
+Guide](instructions.html). 
 
-```{r echo = F}
-table_cases <- tribble(
-  ~Name, ~Link, ~Creator,  ~Language, ~Tool, ~Location, ~Scale, ~Disease, ~Technical_Complexity, ~Methodological_Complexity, 
-  "Descriptive analysis of Mpox outbreak", 'pages/r_practical.html', "ECDC", "English", "R", "Europe", "Regional", "Mpox",  "Basic", "Basic",  
-    "Fulton", 'pages/fulton.html', "Applied Epi", "English", "R", "United States", "Local", "COVID-19", "Intermediate", "Basic",  
-  "Oswego ES", "pages/oswego-es.html", "US CDC (adapted)", "Español", "R", "Estados Unidos", "Local", "Gastrointestinal", "Intermedio", "Intermedio"
+```{r, echo = F, eval=T, message= F}
+
+# Specify the URL of the Google Sheet
+sheet_url <- "https://docs.google.com/spreadsheets/d/1wrZtM3XjUtbDXD7PVLOHdd-H92hq_-WAQoIpRatjhlc/edit?gid=598142358"
+
+# Read the data from the Google Sheet
+table_raw <- read_sheet(sheet_url)
+
+# Restrict columns
+table <- table_raw %>% 
+  select(name, link, creator, language, tool, country, scale, subject, `technical complexity`, `methodological complexity`)
+
+# Create table
+reactable(table,
+  columns = list(
+    name = colDef(name = "Case Study name", align = "left",
+                  style = list(width = "300px"),
+                  headerStyle = list(width = "300px")),
+    link = colDef(name = "Link", align = "left"),
+    creator = colDef(name = "Creator", align = "left"),
+    language = colDef(name = "Language", align = "left"),
+    tool = colDef(name = "Tool", align = "left"),
+    country = colDef(name = "Location", align = "left"),
+    scale = colDef(name = "Scale", align = "left"),
+    subject = colDef(name = "Subject", align = "left"),
+    `technical complexity` = colDef(name = "Technical Complexity", align = "center",
+                  style = list(width = "150px"),
+                  headerStyle = list(width = "150px")),
+    `methodological complexity` = colDef(name = "Methodological Complexity", align = "center",
+                  style = list(width = "150px"),
+                  headerStyle = list(width = "150px"))
+  ),
+  defaultPageSize = 5,
+  filterable = TRUE,
+  sortable = TRUE,
+  style = list(backgroundColor = "white", 
+               color = "black", 
+               fontFamily = "Arial",  
+                fontSize = "17px",
+               border = "1px solid #000"), # Blue background with white text),
+  rowStyle = list(backgroundColor = "white", 
+               color = "black", 
+               fontFamily = "Arial",  
+                fontSize = "14px"), # Blue background with white text),
 )
+
 
 ```
 
 
-```{r, echo = F, eval = T}
+```{r, echo = F, eval = F}
 
 # Render the table with DT, making the 'Link' column clickable with custom text
 datatable(table_cases, escape = FALSE, filter = "top", options = list(

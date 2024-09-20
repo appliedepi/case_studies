@@ -235,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>For instructions on how to use our case studies, see our <a href="pages/instructions.qmd_">How-to Guide</a>. We welcome feedback and suggestions via <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a>. You can also discuss the case study or related concepts on the <a href="https://community.appliedepi.org/">Applied Epi Community</a>.</p>
+<p>For instructions on how to use our case studies, see our <a href="instructions.html">How-to Guide</a>. We welcome feedback and suggestions via <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a>. You can also discuss the case study or related concepts on the <a href="https://community.appliedepi.org/">Applied Epi Community</a>.</p>
 <div style="page-break-after: always;"></div>
 <section id="scenario" class="level2">
 <h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
@@ -392,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The number of columns and observations (e.g.&nbsp;their <em>dimensions</em>)</li>
 <li>The class of their columns and whether it matches its nature (e.g., are “dates” considered “dates” by R?)</li>
 <li>If the contents of columns are clean and standardized in the mpox linelist (e.g.&nbsp;gender, clinical symptoms, outcome, hiv status and sexual orientation). Do you need to recode any of them?</li>
-<li>How unknown or missing data is categorised in these columns. Do these values need to be standardized?</li>
+<li>How unknown or missing data is categorized in these columns. Do these values need to be standardized?</li>
 </ul>
 <details>
 <summary style="text-decoration: underline; color: darkgreen;">
@@ -422,8 +422,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-4b35b33a4bf67e148dab" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4b35b33a4bf67e148dab">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["2022-03-03","2022-03-23","2022-05-01","2022-03-10","2022-05-04"],["2022-03-02","2022-03-23","2022-05-01",null,"2022-05-04"],["2022-02-27","2022-03-13","2022-04-19","2022-02-27","2022-04-27"],[39,46,49,45,41],["M","M","F","M","M"],["MSM",null,null,null,null],["A","A","UNK","A","A"],["POS","UNK",null,"NEG","NEG"],["CountryA","CountryA","CountryC","CountryC","CountryA"],["Rash","Rash","Rash, Systemic symptoms","Rash, Systemic symptoms, Lesions","Rash, Systemic symptoms, Lesions"],["Rash","Rash","Rash","Rash","Rash"],[null,null,"Systemic symptoms","Systemic symptoms","Systemic symptoms"],[null,null,null,"Lesions","Lesions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DateOfNotification<\/th>\n      <th>DateOfDiagnosis<\/th>\n      <th>DateOfOnset<\/th>\n      <th>Age<\/th>\n      <th>Gender<\/th>\n      <th>SexualOrientation<\/th>\n      <th>Outcome<\/th>\n      <th>HIVStatus<\/th>\n      <th>Country<\/th>\n      <th>ClinicalSymptoms<\/th>\n      <th>Rash<\/th>\n      <th>SystemicSymptoms<\/th>\n      <th>Lesions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DateOfNotification","targets":1},{"name":"DateOfDiagnosis","targets":2},{"name":"DateOfOnset","targets":3},{"name":"Age","targets":4},{"name":"Gender","targets":5},{"name":"SexualOrientation","targets":6},{"name":"Outcome","targets":7},{"name":"HIVStatus","targets":8},{"name":"Country","targets":9},{"name":"ClinicalSymptoms","targets":10},{"name":"Rash","targets":11},{"name":"SystemicSymptoms","targets":12},{"name":"Lesions","targets":13}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-225745de2b3dc3367b1f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-225745de2b3dc3367b1f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["2022-03-03","2022-03-23","2022-05-01","2022-03-10","2022-05-04"],["2022-03-02","2022-03-23","2022-05-01",null,"2022-05-04"],["2022-02-27","2022-03-13","2022-04-19","2022-02-27","2022-04-27"],[39,46,49,45,41],["M","M","F","M","M"],["MSM",null,null,null,null],["A","A","UNK","A","A"],["POS","UNK",null,"NEG","NEG"],["CountryA","CountryA","CountryC","CountryC","CountryA"],["Rash","Rash","Rash, Systemic symptoms","Rash, Systemic symptoms, Lesions","Rash, Systemic symptoms, Lesions"],["Rash","Rash","Rash","Rash","Rash"],[null,null,"Systemic symptoms","Systemic symptoms","Systemic symptoms"],[null,null,null,"Lesions","Lesions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DateOfNotification<\/th>\n      <th>DateOfDiagnosis<\/th>\n      <th>DateOfOnset<\/th>\n      <th>Age<\/th>\n      <th>Gender<\/th>\n      <th>SexualOrientation<\/th>\n      <th>Outcome<\/th>\n      <th>HIVStatus<\/th>\n      <th>Country<\/th>\n      <th>ClinicalSymptoms<\/th>\n      <th>Rash<\/th>\n      <th>SystemicSymptoms<\/th>\n      <th>Lesions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DateOfNotification","targets":1},{"name":"DateOfDiagnosis","targets":2},{"name":"DateOfOnset","targets":3},{"name":"Age","targets":4},{"name":"Gender","targets":5},{"name":"SexualOrientation","targets":6},{"name":"Outcome","targets":7},{"name":"HIVStatus","targets":8},{"name":"Country","targets":9},{"name":"ClinicalSymptoms","targets":10},{"name":"Rash","targets":11},{"name":"SystemicSymptoms","targets":12},{"name":"Lesions","targets":13}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Below is an example of using the <code>tabyl()</code> function from <code>{janitor},</code> to look at the distribution of clinical symptoms. You can see 12 cases have missing clinical information and that many cases have a mix of symptoms.</p>
@@ -478,20 +478,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 How many columns does the aggregated data have?
-<div id="radio_LVTLWUNLYU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LVTLWUNLYU" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_LVTLWUNLYU" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_LVTLWUNLYU" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_LVTLWUNLYU" value=""> <span>101</span></label>
+<div id="radio_CXFLDWFBGA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CXFLDWFBGA" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_CXFLDWFBGA" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_CXFLDWFBGA" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_CXFLDWFBGA" value=""> <span>101</span></label>
 </div>
 </div>
 <div class="webex-check">
 What is the class of the column DateOfNotification in the mpox linelist?
-<div id="radio_PYYHINTLIN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PYYHINTLIN" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_PYYHINTLIN" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_PYYHINTLIN" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_PYYHINTLIN" value=""> <span>Factor</span></label>
+<div id="radio_DKSTMDCUGD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DKSTMDCUGD" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_DKSTMDCUGD" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_DKSTMDCUGD" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_DKSTMDCUGD" value=""> <span>Factor</span></label>
 </div>
 </div>
 <div class="webex-check">
 For how many cases is the HIV status Unknown or missing?
-<div id="radio_RUGBDLLHNC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RUGBDLLHNC" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_RUGBDLLHNC" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_RUGBDLLHNC" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_RUGBDLLHNC" value=""> <span>446</span></label>
+<div id="radio_QZWDKSSMAD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QZWDKSSMAD" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_QZWDKSSMAD" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_QZWDKSSMAD" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_QZWDKSSMAD" value=""> <span>446</span></label>
 </div>
 </div>
 </div>
@@ -611,20 +611,20 @@ For how many cases is the HIV status Unknown or missing?
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 Is it always appropriate to combine different types of unknown data? (e.g.&nbsp;missing, unknown, did not respond, NA)
-<div id="radio_GYVKQAKOPU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GYVKQAKOPU" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_GYVKQAKOPU" value="answer"> <span>Depends on the meaning of those values</span></label><label><input type="radio" autocomplete="off" name="radio_GYVKQAKOPU" value=""> <span>No - never do this</span></label>
+<div id="radio_LFRHKMFCOO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LFRHKMFCOO" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_LFRHKMFCOO" value="answer"> <span>Depends on the meaning of those values</span></label><label><input type="radio" autocomplete="off" name="radio_LFRHKMFCOO" value=""> <span>No - never do this</span></label>
 </div>
 </div>
 <div class="webex-check">
 How many male cases do we have in the data frame?
-<div id="radio_OAXCYRSVKD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OAXCYRSVKD" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_OAXCYRSVKD" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_OAXCYRSVKD" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_OAXCYRSVKD" value=""> <span>1523</span></label>
+<div id="radio_SJTHXMYRSI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJTHXMYRSI" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_SJTHXMYRSI" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_SJTHXMYRSI" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_SJTHXMYRSI" value=""> <span>1523</span></label>
 </div>
 </div>
 <div class="webex-check">
 How many cases have ‘alive’ as an outcome?
-<div id="radio_EBIRUNLZXG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EBIRUNLZXG" value="answer"> <span>1405</span></label><label><input type="radio" autocomplete="off" name="radio_EBIRUNLZXG" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_EBIRUNLZXG" value=""> <span>595</span></label>
+<div id="radio_SUVSSFAJUZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SUVSSFAJUZ" value="answer"> <span>1405</span></label><label><input type="radio" autocomplete="off" name="radio_SUVSSFAJUZ" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_SUVSSFAJUZ" value=""> <span>595</span></label>
 </div>
 </div>
 </div>
@@ -674,8 +674,8 @@ How many cases have ‘alive’ as an outcome?
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 Take a look at the aggreate data. Which country reported the largest cumulative number of cases during the week 2022-04-11?
-<div id="radio_FDSXGGBYBZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FDSXGGBYBZ" value="answer"> <span>Country A</span></label><label><input type="radio" autocomplete="off" name="radio_FDSXGGBYBZ" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_FDSXGGBYBZ" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_FDSXGGBYBZ" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_FDSXGGBYBZ" value=""> <span>Country E</span></label>
+<div id="radio_BHSOWELHFJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BHSOWELHFJ" value="answer"> <span>Country A</span></label><label><input type="radio" autocomplete="off" name="radio_BHSOWELHFJ" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_BHSOWELHFJ" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_BHSOWELHFJ" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_BHSOWELHFJ" value=""> <span>Country E</span></label>
 </div>
 </div>
 </div>
@@ -717,23 +717,23 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>cb_country_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="uxtjrptchm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uxtjrptchm table {
+<div id="bhekrntfsh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bhekrntfsh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uxtjrptchm thead, #uxtjrptchm tbody, #uxtjrptchm tfoot, #uxtjrptchm tr, #uxtjrptchm td, #uxtjrptchm th {
+#bhekrntfsh thead, #bhekrntfsh tbody, #bhekrntfsh tfoot, #bhekrntfsh tr, #bhekrntfsh td, #bhekrntfsh th {
   border-style: none;
 }
 
-#uxtjrptchm p {
+#bhekrntfsh p {
   margin: 0;
   padding: 0;
 }
 
-#uxtjrptchm .gt_table {
+#bhekrntfsh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -759,12 +759,12 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-left-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_caption {
+#bhekrntfsh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uxtjrptchm .gt_title {
+#bhekrntfsh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -776,7 +776,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-bottom-width: 0;
 }
 
-#uxtjrptchm .gt_subtitle {
+#bhekrntfsh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -788,7 +788,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-top-width: 0;
 }
 
-#uxtjrptchm .gt_heading {
+#bhekrntfsh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -800,13 +800,13 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-right-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_bottom_border {
+#bhekrntfsh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_col_headings {
+#bhekrntfsh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -821,7 +821,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-right-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_col_heading {
+#bhekrntfsh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -841,7 +841,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   overflow-x: hidden;
 }
 
-#uxtjrptchm .gt_column_spanner_outer {
+#bhekrntfsh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -853,15 +853,15 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 4px;
 }
 
-#uxtjrptchm .gt_column_spanner_outer:first-child {
+#bhekrntfsh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uxtjrptchm .gt_column_spanner_outer:last-child {
+#bhekrntfsh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uxtjrptchm .gt_column_spanner {
+#bhekrntfsh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -873,11 +873,11 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   width: 100%;
 }
 
-#uxtjrptchm .gt_spanner_row {
+#bhekrntfsh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uxtjrptchm .gt_group_heading {
+#bhekrntfsh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -903,7 +903,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   text-align: left;
 }
 
-#uxtjrptchm .gt_empty_group_heading {
+#bhekrntfsh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -918,15 +918,15 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   vertical-align: middle;
 }
 
-#uxtjrptchm .gt_from_md > :first-child {
+#bhekrntfsh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uxtjrptchm .gt_from_md > :last-child {
+#bhekrntfsh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uxtjrptchm .gt_row {
+#bhekrntfsh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -945,7 +945,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   overflow-x: hidden;
 }
 
-#uxtjrptchm .gt_stub {
+#bhekrntfsh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -958,7 +958,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 5px;
 }
 
-#uxtjrptchm .gt_stub_row_group {
+#bhekrntfsh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -972,15 +972,15 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   vertical-align: top;
 }
 
-#uxtjrptchm .gt_row_group_first td {
+#bhekrntfsh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uxtjrptchm .gt_row_group_first th {
+#bhekrntfsh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uxtjrptchm .gt_summary_row {
+#bhekrntfsh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -990,16 +990,16 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 5px;
 }
 
-#uxtjrptchm .gt_first_summary_row {
+#bhekrntfsh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_first_summary_row.thick {
+#bhekrntfsh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uxtjrptchm .gt_last_summary_row {
+#bhekrntfsh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1009,7 +1009,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-bottom-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_grand_summary_row {
+#bhekrntfsh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1019,7 +1019,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 5px;
 }
 
-#uxtjrptchm .gt_first_grand_summary_row {
+#bhekrntfsh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1029,7 +1029,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-top-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_last_grand_summary_row_top {
+#bhekrntfsh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1039,11 +1039,11 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-bottom-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_striped {
+#bhekrntfsh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uxtjrptchm .gt_table_body {
+#bhekrntfsh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1052,7 +1052,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-bottom-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_footnotes {
+#bhekrntfsh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1066,7 +1066,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-right-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_footnote {
+#bhekrntfsh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1075,7 +1075,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 5px;
 }
 
-#uxtjrptchm .gt_sourcenotes {
+#bhekrntfsh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1089,7 +1089,7 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   border-right-color: #D3D3D3;
 }
 
-#uxtjrptchm .gt_sourcenote {
+#bhekrntfsh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1097,63 +1097,63 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
   padding-right: 5px;
 }
 
-#uxtjrptchm .gt_left {
+#bhekrntfsh .gt_left {
   text-align: left;
 }
 
-#uxtjrptchm .gt_center {
+#bhekrntfsh .gt_center {
   text-align: center;
 }
 
-#uxtjrptchm .gt_right {
+#bhekrntfsh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uxtjrptchm .gt_font_normal {
+#bhekrntfsh .gt_font_normal {
   font-weight: normal;
 }
 
-#uxtjrptchm .gt_font_bold {
+#bhekrntfsh .gt_font_bold {
   font-weight: bold;
 }
 
-#uxtjrptchm .gt_font_italic {
+#bhekrntfsh .gt_font_italic {
   font-style: italic;
 }
 
-#uxtjrptchm .gt_super {
+#bhekrntfsh .gt_super {
   font-size: 65%;
 }
 
-#uxtjrptchm .gt_footnote_marks {
+#bhekrntfsh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uxtjrptchm .gt_asterisk {
+#bhekrntfsh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uxtjrptchm .gt_indent_1 {
+#bhekrntfsh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uxtjrptchm .gt_indent_2 {
+#bhekrntfsh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uxtjrptchm .gt_indent_3 {
+#bhekrntfsh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uxtjrptchm .gt_indent_4 {
+#bhekrntfsh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uxtjrptchm .gt_indent_5 {
+#bhekrntfsh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1200,8 +1200,8 @@ Take a look at the aggreate data. Which country reported the largest cumulative 
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 What country has the largest percentage of cases?
-<div id="radio_BTCCJIOPWW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BTCCJIOPWW" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_BTCCJIOPWW" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_BTCCJIOPWW" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_BTCCJIOPWW" value=""> <span>Country E</span></label><label><input type="radio" autocomplete="off" name="radio_BTCCJIOPWW" value="answer"> <span>Country A</span></label>
+<div id="radio_HUHPUMBEWA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUHPUMBEWA" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_HUHPUMBEWA" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_HUHPUMBEWA" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_HUHPUMBEWA" value=""> <span>Country E</span></label><label><input type="radio" autocomplete="off" name="radio_HUHPUMBEWA" value="answer"> <span>Country A</span></label>
 </div>
 </div>
 </div>
@@ -1370,23 +1370,23 @@ What country has the largest percentage of cases?
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>tab_demographics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="staiouhgct" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#staiouhgct table {
+<div id="kgzwecibop" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kgzwecibop table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#staiouhgct thead, #staiouhgct tbody, #staiouhgct tfoot, #staiouhgct tr, #staiouhgct td, #staiouhgct th {
+#kgzwecibop thead, #kgzwecibop tbody, #kgzwecibop tfoot, #kgzwecibop tr, #kgzwecibop td, #kgzwecibop th {
   border-style: none;
 }
 
-#staiouhgct p {
+#kgzwecibop p {
   margin: 0;
   padding: 0;
 }
 
-#staiouhgct .gt_table {
+#kgzwecibop .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1412,12 +1412,12 @@ What country has the largest percentage of cases?
   border-left-color: #D3D3D3;
 }
 
-#staiouhgct .gt_caption {
+#kgzwecibop .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#staiouhgct .gt_title {
+#kgzwecibop .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1429,7 +1429,7 @@ What country has the largest percentage of cases?
   border-bottom-width: 0;
 }
 
-#staiouhgct .gt_subtitle {
+#kgzwecibop .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1441,7 +1441,7 @@ What country has the largest percentage of cases?
   border-top-width: 0;
 }
 
-#staiouhgct .gt_heading {
+#kgzwecibop .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1453,13 +1453,13 @@ What country has the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#staiouhgct .gt_bottom_border {
+#kgzwecibop .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#staiouhgct .gt_col_headings {
+#kgzwecibop .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1474,7 +1474,7 @@ What country has the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#staiouhgct .gt_col_heading {
+#kgzwecibop .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1494,7 +1494,7 @@ What country has the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#staiouhgct .gt_column_spanner_outer {
+#kgzwecibop .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1506,15 +1506,15 @@ What country has the largest percentage of cases?
   padding-right: 4px;
 }
 
-#staiouhgct .gt_column_spanner_outer:first-child {
+#kgzwecibop .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#staiouhgct .gt_column_spanner_outer:last-child {
+#kgzwecibop .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#staiouhgct .gt_column_spanner {
+#kgzwecibop .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1526,11 +1526,11 @@ What country has the largest percentage of cases?
   width: 100%;
 }
 
-#staiouhgct .gt_spanner_row {
+#kgzwecibop .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#staiouhgct .gt_group_heading {
+#kgzwecibop .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1556,7 +1556,7 @@ What country has the largest percentage of cases?
   text-align: left;
 }
 
-#staiouhgct .gt_empty_group_heading {
+#kgzwecibop .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1571,15 +1571,15 @@ What country has the largest percentage of cases?
   vertical-align: middle;
 }
 
-#staiouhgct .gt_from_md > :first-child {
+#kgzwecibop .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#staiouhgct .gt_from_md > :last-child {
+#kgzwecibop .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#staiouhgct .gt_row {
+#kgzwecibop .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1598,7 +1598,7 @@ What country has the largest percentage of cases?
   overflow-x: hidden;
 }
 
-#staiouhgct .gt_stub {
+#kgzwecibop .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1611,7 +1611,7 @@ What country has the largest percentage of cases?
   padding-right: 5px;
 }
 
-#staiouhgct .gt_stub_row_group {
+#kgzwecibop .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1625,15 +1625,15 @@ What country has the largest percentage of cases?
   vertical-align: top;
 }
 
-#staiouhgct .gt_row_group_first td {
+#kgzwecibop .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#staiouhgct .gt_row_group_first th {
+#kgzwecibop .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#staiouhgct .gt_summary_row {
+#kgzwecibop .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1643,16 +1643,16 @@ What country has the largest percentage of cases?
   padding-right: 5px;
 }
 
-#staiouhgct .gt_first_summary_row {
+#kgzwecibop .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#staiouhgct .gt_first_summary_row.thick {
+#kgzwecibop .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#staiouhgct .gt_last_summary_row {
+#kgzwecibop .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1662,7 +1662,7 @@ What country has the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#staiouhgct .gt_grand_summary_row {
+#kgzwecibop .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1672,7 +1672,7 @@ What country has the largest percentage of cases?
   padding-right: 5px;
 }
 
-#staiouhgct .gt_first_grand_summary_row {
+#kgzwecibop .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1682,7 +1682,7 @@ What country has the largest percentage of cases?
   border-top-color: #D3D3D3;
 }
 
-#staiouhgct .gt_last_grand_summary_row_top {
+#kgzwecibop .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1692,11 +1692,11 @@ What country has the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#staiouhgct .gt_striped {
+#kgzwecibop .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#staiouhgct .gt_table_body {
+#kgzwecibop .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1705,7 +1705,7 @@ What country has the largest percentage of cases?
   border-bottom-color: #D3D3D3;
 }
 
-#staiouhgct .gt_footnotes {
+#kgzwecibop .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1719,7 +1719,7 @@ What country has the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#staiouhgct .gt_footnote {
+#kgzwecibop .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1728,7 +1728,7 @@ What country has the largest percentage of cases?
   padding-right: 5px;
 }
 
-#staiouhgct .gt_sourcenotes {
+#kgzwecibop .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1742,7 +1742,7 @@ What country has the largest percentage of cases?
   border-right-color: #D3D3D3;
 }
 
-#staiouhgct .gt_sourcenote {
+#kgzwecibop .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1750,63 +1750,63 @@ What country has the largest percentage of cases?
   padding-right: 5px;
 }
 
-#staiouhgct .gt_left {
+#kgzwecibop .gt_left {
   text-align: left;
 }
 
-#staiouhgct .gt_center {
+#kgzwecibop .gt_center {
   text-align: center;
 }
 
-#staiouhgct .gt_right {
+#kgzwecibop .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#staiouhgct .gt_font_normal {
+#kgzwecibop .gt_font_normal {
   font-weight: normal;
 }
 
-#staiouhgct .gt_font_bold {
+#kgzwecibop .gt_font_bold {
   font-weight: bold;
 }
 
-#staiouhgct .gt_font_italic {
+#kgzwecibop .gt_font_italic {
   font-style: italic;
 }
 
-#staiouhgct .gt_super {
+#kgzwecibop .gt_super {
   font-size: 65%;
 }
 
-#staiouhgct .gt_footnote_marks {
+#kgzwecibop .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#staiouhgct .gt_asterisk {
+#kgzwecibop .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#staiouhgct .gt_indent_1 {
+#kgzwecibop .gt_indent_1 {
   text-indent: 5px;
 }
 
-#staiouhgct .gt_indent_2 {
+#kgzwecibop .gt_indent_2 {
   text-indent: 10px;
 }
 
-#staiouhgct .gt_indent_3 {
+#kgzwecibop .gt_indent_3 {
   text-indent: 15px;
 }
 
-#staiouhgct .gt_indent_4 {
+#kgzwecibop .gt_indent_4 {
   text-indent: 20px;
 }
 
-#staiouhgct .gt_indent_5 {
+#kgzwecibop .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1893,14 +1893,14 @@ What country has the largest percentage of cases?
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 Which demographic group is more affected by Mpox?
-<div id="radio_HJBUYCRIGQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HJBUYCRIGQ" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_HJBUYCRIGQ" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_HJBUYCRIGQ" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_HJBUYCRIGQ" value="answer"> <span>Males 30-39</span></label>
+<div id="radio_CFXEMMEHLH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CFXEMMEHLH" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_CFXEMMEHLH" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_CFXEMMEHLH" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_CFXEMMEHLH" value="answer"> <span>Males 30-39</span></label>
 </div>
 </div>
 <div class="webex-check">
 What proportion of mpox cases were homosexual or bisexual men?
-<div id="radio_JZHEMYEQVB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JZHEMYEQVB" value=""> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_JZHEMYEQVB" value=""> <span>42%</span></label><label><input type="radio" autocomplete="off" name="radio_JZHEMYEQVB" value=""> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_JZHEMYEQVB" value="answer"> <span>94%</span></label>
+<div id="radio_IYCRZTPWVM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IYCRZTPWVM" value=""> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_IYCRZTPWVM" value=""> <span>42%</span></label><label><input type="radio" autocomplete="off" name="radio_IYCRZTPWVM" value=""> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_IYCRZTPWVM" value="answer"> <span>94%</span></label>
 </div>
 </div>
 </div>
@@ -1936,23 +1936,23 @@ What proportion of mpox cases were homosexual or bisexual men?
 <span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>tab_outcome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="xugsloxndm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xugsloxndm table {
+<div id="ogykryrxmo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ogykryrxmo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xugsloxndm thead, #xugsloxndm tbody, #xugsloxndm tfoot, #xugsloxndm tr, #xugsloxndm td, #xugsloxndm th {
+#ogykryrxmo thead, #ogykryrxmo tbody, #ogykryrxmo tfoot, #ogykryrxmo tr, #ogykryrxmo td, #ogykryrxmo th {
   border-style: none;
 }
 
-#xugsloxndm p {
+#ogykryrxmo p {
   margin: 0;
   padding: 0;
 }
 
-#xugsloxndm .gt_table {
+#ogykryrxmo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1978,12 +1978,12 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-left-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_caption {
+#ogykryrxmo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xugsloxndm .gt_title {
+#ogykryrxmo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1995,7 +1995,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-bottom-width: 0;
 }
 
-#xugsloxndm .gt_subtitle {
+#ogykryrxmo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2007,7 +2007,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-top-width: 0;
 }
 
-#xugsloxndm .gt_heading {
+#ogykryrxmo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2019,13 +2019,13 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-right-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_bottom_border {
+#ogykryrxmo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_col_headings {
+#ogykryrxmo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2040,7 +2040,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-right-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_col_heading {
+#ogykryrxmo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2060,7 +2060,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   overflow-x: hidden;
 }
 
-#xugsloxndm .gt_column_spanner_outer {
+#ogykryrxmo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2072,15 +2072,15 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 4px;
 }
 
-#xugsloxndm .gt_column_spanner_outer:first-child {
+#ogykryrxmo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xugsloxndm .gt_column_spanner_outer:last-child {
+#ogykryrxmo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xugsloxndm .gt_column_spanner {
+#ogykryrxmo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2092,11 +2092,11 @@ What proportion of mpox cases were homosexual or bisexual men?
   width: 100%;
 }
 
-#xugsloxndm .gt_spanner_row {
+#ogykryrxmo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xugsloxndm .gt_group_heading {
+#ogykryrxmo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2122,7 +2122,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   text-align: left;
 }
 
-#xugsloxndm .gt_empty_group_heading {
+#ogykryrxmo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2137,15 +2137,15 @@ What proportion of mpox cases were homosexual or bisexual men?
   vertical-align: middle;
 }
 
-#xugsloxndm .gt_from_md > :first-child {
+#ogykryrxmo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xugsloxndm .gt_from_md > :last-child {
+#ogykryrxmo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xugsloxndm .gt_row {
+#ogykryrxmo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2164,7 +2164,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   overflow-x: hidden;
 }
 
-#xugsloxndm .gt_stub {
+#ogykryrxmo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2177,7 +2177,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 5px;
 }
 
-#xugsloxndm .gt_stub_row_group {
+#ogykryrxmo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2191,15 +2191,15 @@ What proportion of mpox cases were homosexual or bisexual men?
   vertical-align: top;
 }
 
-#xugsloxndm .gt_row_group_first td {
+#ogykryrxmo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xugsloxndm .gt_row_group_first th {
+#ogykryrxmo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xugsloxndm .gt_summary_row {
+#ogykryrxmo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2209,16 +2209,16 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 5px;
 }
 
-#xugsloxndm .gt_first_summary_row {
+#ogykryrxmo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_first_summary_row.thick {
+#ogykryrxmo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xugsloxndm .gt_last_summary_row {
+#ogykryrxmo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2228,7 +2228,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-bottom-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_grand_summary_row {
+#ogykryrxmo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2238,7 +2238,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 5px;
 }
 
-#xugsloxndm .gt_first_grand_summary_row {
+#ogykryrxmo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2248,7 +2248,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-top-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_last_grand_summary_row_top {
+#ogykryrxmo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2258,11 +2258,11 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-bottom-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_striped {
+#ogykryrxmo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xugsloxndm .gt_table_body {
+#ogykryrxmo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2271,7 +2271,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-bottom-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_footnotes {
+#ogykryrxmo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2285,7 +2285,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-right-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_footnote {
+#ogykryrxmo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2294,7 +2294,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 5px;
 }
 
-#xugsloxndm .gt_sourcenotes {
+#ogykryrxmo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2308,7 +2308,7 @@ What proportion of mpox cases were homosexual or bisexual men?
   border-right-color: #D3D3D3;
 }
 
-#xugsloxndm .gt_sourcenote {
+#ogykryrxmo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2316,63 +2316,63 @@ What proportion of mpox cases were homosexual or bisexual men?
   padding-right: 5px;
 }
 
-#xugsloxndm .gt_left {
+#ogykryrxmo .gt_left {
   text-align: left;
 }
 
-#xugsloxndm .gt_center {
+#ogykryrxmo .gt_center {
   text-align: center;
 }
 
-#xugsloxndm .gt_right {
+#ogykryrxmo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xugsloxndm .gt_font_normal {
+#ogykryrxmo .gt_font_normal {
   font-weight: normal;
 }
 
-#xugsloxndm .gt_font_bold {
+#ogykryrxmo .gt_font_bold {
   font-weight: bold;
 }
 
-#xugsloxndm .gt_font_italic {
+#ogykryrxmo .gt_font_italic {
   font-style: italic;
 }
 
-#xugsloxndm .gt_super {
+#ogykryrxmo .gt_super {
   font-size: 65%;
 }
 
-#xugsloxndm .gt_footnote_marks {
+#ogykryrxmo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xugsloxndm .gt_asterisk {
+#ogykryrxmo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xugsloxndm .gt_indent_1 {
+#ogykryrxmo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xugsloxndm .gt_indent_2 {
+#ogykryrxmo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xugsloxndm .gt_indent_3 {
+#ogykryrxmo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xugsloxndm .gt_indent_4 {
+#ogykryrxmo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xugsloxndm .gt_indent_5 {
+#ogykryrxmo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2452,8 +2452,8 @@ What proportion of mpox cases were homosexual or bisexual men?
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 Is there a difference in the delay from diagnosis to notification by country?
-<div id="radio_BDEEPTIUQC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BDEEPTIUQC" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_BDEEPTIUQC" value="answer"> <span>No</span></label>
+<div id="radio_WJFIMMNQMS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WJFIMMNQMS" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_WJFIMMNQMS" value="answer"> <span>No</span></label>
 </div>
 </div>
 </div>
@@ -2535,8 +2535,8 @@ Is there a difference in the delay from diagnosis to notification by country?
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-b8544fd8f8473c5c284d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-b8544fd8f8473c5c284d">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[39,39,39,46,46,46],["Male","Male","Male","Male","Male","Male"],["MSM/homo or bisexual male","MSM/homo or bisexual male","MSM/homo or bisexual male",null,null,null],["date_of_notification","date_of_diagnosis","date_of_onset","date_of_notification","date_of_diagnosis","date_of_onset"],["2022-03-03","2022-03-02","2022-02-27","2022-03-23","2022-03-23","2022-03-13"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>age<\/th>\n      <th>gender<\/th>\n      <th>sexual_orientation<\/th>\n      <th>indicator<\/th>\n      <th>date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"age","targets":1},{"name":"gender","targets":2},{"name":"sexual_orientation","targets":3},{"name":"indicator","targets":4},{"name":"date","targets":5}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-255e81c6a09e7f23dafe" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-255e81c6a09e7f23dafe">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[39,39,39,46,46,46],["Male","Male","Male","Male","Male","Male"],["MSM/homo or bisexual male","MSM/homo or bisexual male","MSM/homo or bisexual male",null,null,null],["date_of_notification","date_of_diagnosis","date_of_onset","date_of_notification","date_of_diagnosis","date_of_onset"],["2022-03-03","2022-03-02","2022-02-27","2022-03-23","2022-03-23","2022-03-13"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>age<\/th>\n      <th>gender<\/th>\n      <th>sexual_orientation<\/th>\n      <th>indicator<\/th>\n      <th>date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"age","targets":1},{"name":"gender","targets":2},{"name":"sexual_orientation","targets":3},{"name":"indicator","targets":4},{"name":"date","targets":5}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Then tabulate cases by week per indicator</p>
@@ -2558,8 +2558,8 @@ Is there a difference in the delay from diagnosis to notification by country?
 <div class="cell">
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-5a532b082d51bbf4dd7f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5a532b082d51bbf4dd7f">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["date_of_diagnosis","date_of_diagnosis","date_of_diagnosis","date_of_notification","date_of_notification","date_of_notification","date_of_onset","date_of_onset","date_of_onset"],["2022-01-17","2022-01-24","2022-01-31","2022-01-17","2022-01-24","2022-01-31","2022-01-10","2022-01-17","2022-01-24"],[2,4,13,3,9,27,4,10,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>indicator<\/th>\n      <th>week_date<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"indicator","targets":1},{"name":"week_date","targets":2},{"name":"n","targets":3}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2a12730ce3627f3466c3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2a12730ce3627f3466c3">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["date_of_diagnosis","date_of_diagnosis","date_of_diagnosis","date_of_notification","date_of_notification","date_of_notification","date_of_onset","date_of_onset","date_of_onset"],["2022-01-17","2022-01-24","2022-01-31","2022-01-17","2022-01-24","2022-01-31","2022-01-10","2022-01-17","2022-01-24"],[2,4,13,3,9,27,4,10,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>indicator<\/th>\n      <th>week_date<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"indicator","targets":1},{"name":"week_date","targets":2},{"name":"n","targets":3}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Finally, create a plot with ggplot() and geom_line().</p>
@@ -2605,8 +2605,8 @@ Is there a difference in the delay from diagnosis to notification by country?
 <p><strong>Test yourself!</strong></p>
 <div class="webex-check">
 Which country is not reporting aggregated data?
-<div id="radio_OKQXZWVVMH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OKQXZWVVMH" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_OKQXZWVVMH" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_OKQXZWVVMH" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_OKQXZWVVMH" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_OKQXZWVVMH" value=""> <span>E</span></label>
+<div id="radio_YUGNJETVJX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YUGNJETVJX" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_YUGNJETVJX" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_YUGNJETVJX" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_YUGNJETVJX" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_YUGNJETVJX" value=""> <span>E</span></label>
 </div>
 </div>
 </div>

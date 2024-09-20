@@ -26,7 +26,7 @@ Rstudio; R packages, functions and arguments, using pipes)
 :::
 
 For instructions on how to use our case studies, see our [How-to
-Guide](pages/instructions.qmd). We welcome feedback and suggestions via
+Guide](instructions.html). We welcome feedback and suggestions via
 [contact\@appliedepi.org](mailto:contact@appliedepi.org). You can also
 discuss the case study or related concepts on the [Applied Epi
 Community](https://community.appliedepi.org/).
@@ -329,7 +329,7 @@ The data’s in, and now it’s time to see what story it tells. Take an initial
 -   If the contents of columns are clean and standardized in the mpox
     linelist (e.g. gender, clinical symptoms, outcome, hiv status and
     sexual orientation). Do you need to recode any of them?
--   How unknown or missing data is categorised in these columns. Do
+-   How unknown or missing data is categorized in these columns. Do
     these values need to be standardized?
 
 <details>
