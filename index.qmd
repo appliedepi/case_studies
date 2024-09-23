@@ -16,7 +16,12 @@ pacman::p_load(
 )
 ```
 
-## Welcome to our Case Study Repository!
+## Welcome to our Open Case Study Repository!
+
+::: {.callout-important title="WEBSITE UNDER CONSTRUCTION"}
+This is a draft version of this page. The content and URL will change.
+:::
+
 
 Here, you can practice technical and analytical skills with real-life scenarios. The case studies, shared by FETPs and health ministries, use training data that’s either generated or anonymized.
 
@@ -33,30 +38,44 @@ sheet_url <- "https://docs.google.com/spreadsheets/d/1wrZtM3XjUtbDXD7PVLOHdd-H92
 # Read the data from the Google Sheet
 table_raw <- read_sheet(sheet_url)
 
-# Restrict columns
+# Replace the language column with clickable links using the `name` for URLs
 table <- table_raw %>% 
-  select(name, link, creator, language, tool, country, scale, subject, `technical complexity`, `methodological complexity`)
+  mutate(casestudy_identifier= if_else(publish=="yes",casestudy_identifier, "under_construction")) %>% 
+  dplyr::mutate(
+    og_language = language, 
+    language = paste0('<a href="pages/', 
+                      casestudy_identifier, '.html" target="_blank">', language, '</a>'))
+
+
+# Group by unique_identifier, description, and group_identifier to combine languages
+find_langs <- table %>% 
+  dplyr::group_by(group_identifier) |>
+  dplyr::summarize(language = paste(unique(language), collapse = ", "), 
+                   .groups = 'drop')
+
+# Final outout
+output <- table %>% 
+  select(group_identifier, name, key_word, creator, tool, country, scale, subject, `technical complexity`, `methodological complexity`) %>%   
+  unique() %>% 
+  left_join(find_langs, by = "group_identifier") %>% 
+  select(name, language, key_word, creator, tool, subject, `technical complexity`, `methodological complexity`)
+  # Removed country and scale, don't think it's that helpful
 
 # Create table
-reactable(table,
+reactable(output,
   columns = list(
-    name = colDef(name = "Case Study name", align = "left",
-                  style = list(width = "300px"),
+    name = colDef(name = "Case Study name",
+                  style = list(width = "300px", fontWeight = "bold"),
                   headerStyle = list(width = "300px")),
-    link = colDef(name = "Link", align = "left",
-                  cell = function(value) {
-          htmltools::div(
-            htmltools::p(
-              htmltools::tags$a(href = value, value)
-            )
-          )
-        }),
-    creator = colDef(name = "Creator", align = "left"),
-    language = colDef(name = "Language", align = "left"),
-    tool = colDef(name = "Tool", align = "left"),
-    country = colDef(name = "Location", align = "left"),
-    scale = colDef(name = "Scale", align = "left"),
-    subject = colDef(name = "Subject", align = "left"),
+    language = colDef(name = "Language (links)", html = TRUE),
+    key_word = colDef(name = "Key words",
+                      style = list(width = "200px"),
+                  headerStyle = list(width = "200px")),
+    creator = colDef(name = "Creator"),
+    tool = colDef(name = "Tool"),
+    # country = colDef(name = "Location"),
+    # scale = colDef(name = "Scale"),
+    subject = colDef(name = "Subject"),
     `technical complexity` = colDef(name = "Technical Complexity", align = "center",
                   style = list(width = "150px"),
                   headerStyle = list(width = "150px")),
@@ -77,6 +96,8 @@ reactable(table,
                fontFamily = "Arial",  
                 fontSize = "14px"), # Blue background with white text),
 )
+
+
 
 
 

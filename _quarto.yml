@@ -6,14 +6,15 @@ project:
     - pages/instructions.qmd
     - pages/fulton.qmd          
     - pages/r_practical.qmd
-    # - pages/tbe.qmd
-    # - pages/stengen-en.qmd                
-    # - pages/openxlsx2_tutorial-en_revised.qmd                
-    # - pages/oswego.es.qmd
+    - pages/under_construction.qmd
+    - pages/tbe.qmd
+    - pages/stegen-en.qmd                
+    - pages/openxlsx2_tutorial-en_revised.qmd                
+    - pages/oswego.es.qmd
     
 
 website:
-  title: "Applied Epi cases studies"
+  title: "Applied Epi Open Case Study Repository"
   navbar:
     left:
       - href: index.qmd
