@@ -9,7 +9,6 @@ pacman::p_load(
   rio,
   here,
   janitor,
-  DT,
   tidyverse,
   googlesheets4,
   reactable
@@ -27,42 +26,110 @@ Guide](pages/instructions.html).
 
 ```{r, echo = F, eval=T, message= F}
 
-# Specify the URL of the Google Sheet
+# define current language of interest 
+# (this allows us to just copy paste this code chunk to other langs and switch, 
+# ideally there would be a way to auto switch using inputs from babelquarto?)
+curr_lang <- "en"
+
+# Specify the URL of the Google Sheet (which lists case studies)
 sheet_url <- "https://docs.google.com/spreadsheets/d/1wrZtM3XjUtbDXD7PVLOHdd-H92hq_-WAQoIpRatjhlc/edit?gid=598142358"
 
-# Read the data from the Google Sheet
-table_raw <- read_sheet(sheet_url)
 
-# Restrict columns
+# Read the data from the Google Sheet
+table_raw <- read_sheet(sheet_url, sheet = "Publishing")
+
+# Read in the column names translation sheet from Google sheet
+translations <- read_sheet(sheet_url, sheet = "TranslationCols")
+
+
+# filter to show current language 
+# still have links to other languages by combining
 table <- table_raw %>% 
-  select(name, link, creator, language, tool, country, scale, subject, `technical complexity`, `methodological complexity`)
+  mutate(
+    og_language = language, 
+    language = paste0(
+      '<a href="/pages/', 
+      casestudy_identifier, 
+      if_else(language != "en", paste0(".", language), ""),
+      '.html" target="_blank">', 
+      language, 
+      '</a>'
+    )
+  )
+
+# Find available languages using group_identifier to combine languages
+find_langs <- table %>% 
+  group_by(group_identifier) %>% 
+  summarize(language = paste(unique(language), collapse = ", "), 
+                   .groups = 'drop')  
+
+
+# Join with the original data to retain 'name' and handle suffixes
+table <- table %>% 
+  filter(og_language == curr_lang) %>% 
+  # Restrict columns  
+  select(group_identifier, name, creator, tool, country, scale, subject,
+                `technical complexity`, `methodological complexity`) %>% 
+  left_join(find_langs, by = "group_identifier") %>% 
+  # rearrange to have language further forward (not sure why this is not agreeing)
+  select(-group_identifier, name, creator, language, tool, country, scale, subject,
+                `technical complexity`, `methodological complexity`)
+  
 
 # Create table
 reactable(table,
   columns = list(
-    name = colDef(name = "Case Study name", align = "left",
+    name = colDef(name = matchmaker::match_vec("name", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                  align = "left",
                   style = list(width = "300px"),
                   headerStyle = list(width = "300px")),
-    link = colDef(name = "Link", align = "left",
-                  cell = function(value) {
-          htmltools::div(
-            htmltools::p(
-              htmltools::tags$a(href = value, value)
-            )
-          )
-        }),
-    creator = colDef(name = "Creator", align = "left"),
-    language = colDef(name = "Language", align = "left"),
-    tool = colDef(name = "Tool", align = "left"),
-    country = colDef(name = "Location", align = "left"),
-    scale = colDef(name = "Scale", align = "left"),
-    subject = colDef(name = "Subject", align = "left"),
-    `technical complexity` = colDef(name = "Technical Complexity", align = "center",
-                  style = list(width = "150px"),
-                  headerStyle = list(width = "150px")),
-    `methodological complexity` = colDef(name = "Methodological Complexity", align = "center",
-                  style = list(width = "150px"),
-                  headerStyle = list(width = "150px"))
+    # link = colDef(name = "Link", align = "left",
+    #               cell = function(value) {
+    #       htmltools::div(
+    #         htmltools::p(
+    #           htmltools::tags$a(href = value, value)
+    #         )
+    #       )
+    #     }),
+    creator = colDef(name = matchmaker::match_vec("creator", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                     align = "left"),
+    language = colDef(name = matchmaker::match_vec("Language", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                      html = TRUE,
+                      align = "left"),
+    tool = colDef(name = matchmaker::match_vec("tool", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                  align = "left"),
+    country = colDef(name = matchmaker::match_vec("country", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                     align = "left"),
+    scale = colDef(name = matchmaker::match_vec("scale", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                   align = "left"),
+    subject = colDef(name = matchmaker::match_vec("name", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang),
+                     align = "left"),
+    `technical complexity` = colDef(name = matchmaker::match_vec("technical complexity", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang),
+                                    align = "center",
+                                    style = list(width = "150px"),
+                                    headerStyle = list(width = "150px")),
+    `methodological complexity` = colDef(name = matchmaker::match_vec("methodological complexity", 
+                                               dictionary = translations, 
+                                               from = "og", to = curr_lang), 
+                                         align = "center",
+                                         style = list(width = "150px"),
+                                         headerStyle = list(width = "150px"))
   ),
   defaultPageSize = 5,
   filterable = TRUE,
@@ -78,17 +145,13 @@ reactable(table,
                 fontSize = "14px"), # Blue background with white text),
 )
 
-
-
-
-
 ```
 
 
 ```{r, echo = F, eval = F}
 
 # Render the table with DT, making the 'Link' column clickable with custom text
-datatable(table_cases, escape = FALSE, filter = "top", options = list(
+DT::datatable(table_cases, escape = FALSE, filter = "top", options = list(
   columnDefs = list(
     list(targets = 2, render = JS(
       "function(data, type, row, meta) {
