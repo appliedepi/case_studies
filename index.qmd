@@ -30,7 +30,7 @@ A case study is a fun, interactive way to learn—guiding you through scenarios 
 For more information on how to use the case studies, click the [How-to
 Guide](pages/instructions.html). 
 
-```{r, echo = F, eval=T, message= F}
+```{r, echo = F, eval=T, warning = F, message= F}
 
 # define current language of interest 
 # (this allows us to just copy paste this code chunk to other langs and switch, 
