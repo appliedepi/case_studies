@@ -78,7 +78,7 @@ output <- table %>%
   unique() %>% 
   left_join(find_langs, by = "group_identifier") %>% 
   # rearrange to have language further forward (not sure why this is not agreeing)
- select(-group_identifier, name, creator, language, tool, subject, `technical complexity`, `methodological complexity`)
+ select(name, creator, language, tool, subject, `technical complexity`, `methodological complexity`)
   
 
 # Create table
