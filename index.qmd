@@ -156,7 +156,7 @@ reactable(output,
 
 ## About us
 
-[**Applied Epi**](https://www.appliedepi.org/) is a nonprofit organisation and grassroots movement of frontline epis from around the world. We write in our spare time to offer this resource to the community. Your encouragement and feedback is most welcome:
+[**Applied Epi**](https://www.appliedepi.org/) is a nonprofit organisation and grassroots movement of frontline epidemiologists from around the world. We write in our spare time to offer this resource to the community. Your encouragement and feedback is most welcome:
 
 -   Visit our [**website**](https://www.appliedepi.org/) and [**join our contact list**](https://docs.google.com/forms/d/e/1FAIpQLSdtk7Mg32lYQ3ucbIM-kIwIRxgRwDfG5TJHsVAbFjQ1i6fwiw/viewform?usp=send_form)
 

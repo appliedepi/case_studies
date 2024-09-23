@@ -16,7 +16,7 @@ You can complete the case study individually or in a group. If facilitating, gui
 
 Aside from opening up the case study, you need to:
 
-- Have the relevant program on your computer, like R or Excel. 
+- Have the relevant program on your computer, like R or Microsoft Excel. 
 - Organize yourself and put any related files in a project folder. 
 
 For projects using R, see more detail in the 'New to RStudio Projects'? section below. 
