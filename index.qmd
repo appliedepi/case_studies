@@ -24,7 +24,7 @@ This is a draft version of this page. The content and URL will change.
 
 Here, you can practice technical and analytical skills with real-life scenarios. The case studies, shared by FETPs and health ministries, use training data that’s either generated or anonymized.
 
-A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. Simply pick the one that fits you best and click to open it in your language!
+A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. You can filter and order the rows to pick the one that fits you best. Click the link corresponding to your preferred language to open it up.
 
 For more information on how to use the case studies, click the [How-to
 Guide](pages/instructions.html). 
@@ -57,7 +57,7 @@ table <- table_raw %>%
       '<a href="pages/', 
       casestudy_identifier, 
       if_else(language != "en", paste0(".", language), ""),
-      '.html" target="_blank">', 
+      '.html" target="_self">', 
       language, 
       '</a>'
     )
@@ -124,7 +124,7 @@ reactable(output,
                                          style = list(width = "150px"),
                                          headerStyle = list(width = "150px"))
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 10,
   filterable = TRUE,
   sortable = TRUE,
   style = list(backgroundColor = "white", 
