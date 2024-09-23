@@ -34,5 +34,11 @@
   },
   "pages/stegen-en.qmd": {
     "stegen-en.html": "f38b44a3"
+  },
+  "pages/under_construction.es.qmd": {
+    "under_construction.es.html": "c9a6d127"
+  },
+  "pages/under_construction.fr.qmd": {
+    "under_construction.fr.html": "d6af257a"
   }
 }
