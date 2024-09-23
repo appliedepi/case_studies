@@ -9,6 +9,7 @@ pacman::p_load(
   rio,
   here,
   janitor,
+  ISOcodes,
   tidyverse,
   googlesheets4,
   reactable
@@ -35,6 +36,7 @@ Guide](pages/instructions.html).
 # (this allows us to just copy paste this code chunk to other langs and switch, 
 # ideally there would be a way to auto switch using inputs from babelquarto?)
 curr_lang <- "en"
+curr_lang_iso3 <- "eng"
 
 # Specify the URL of the Google Sheet (which lists case studies)
 sheet_url <- "https://docs.google.com/spreadsheets/d/1wrZtM3XjUtbDXD7PVLOHdd-H92hq_-WAQoIpRatjhlc/edit?gid=598142358"
@@ -50,13 +52,25 @@ translations <- read_sheet(sheet_url, sheet = "TranslationCols")
 # filter to show current language 
 # still have links to other languages by combining
 table <- table_raw %>%
-  mutate(casestudy_identifier= if_else(publish=="yes",casestudy_identifier, "under_construction")) %>% 
+  mutate(casestudy_identifier= if_else(publish=="yes",
+                                       casestudy_identifier, 
+                                       "under_construction"), 
+         # backup language for filter usage 
+         og_language = language) %>% 
+  # recode language and country 
+  mutate(language = matchmaker::match_vec(language, 
+                                               dictionary = ISOcodes::ISO_639_3, 
+                                               from = "Part1", to = curr_lang_iso3), 
+         country = toupper(country),
+         country = matchmaker::match_vec(country, 
+                                         dictionary = ISOcodes::ISO_3166_1, 
+                                         from = "Alpha_3", to = "Name")) %>% 
   mutate(
-    og_language = language, 
+    # change languages to clickable links 
     language = paste0(
       '<a href="pages/', 
       casestudy_identifier, 
-      if_else(language != "en", paste0(".", language), ""),
+      if_else(og_language != "en", paste0(".", og_language), ""),
       '.html" target="_self">', 
       language, 
       '</a>'
