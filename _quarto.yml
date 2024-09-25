@@ -27,7 +27,7 @@ website:
         text: Home
       - href: pages/instructions.qmd
         text: How-to Guide
-      - href: pages/instructions.qmd
+      - href: "https://appliedepi.org/"
         text: About Applied Epi
     tools:
       - icon: twitter
@@ -48,8 +48,8 @@ format:
     number-sections: false
     number-depth: 0
     grid: 
-      body-width: 1000px
-      margin-width: 50px
+      body-width: 1200px
+      margin-width: 40px
     # css:
     #  - webex.css
     # include-after-body:
