@@ -1,80 +1,68 @@
 project:
-  type: book
+  type: website
+  render:
+    - index.qmd      
+ 
+    - pages/instructions.qmd
+    - pages/fulton.qmd          
+    - pages/r_practical.qmd
+    - pages/under_construction.qmd
+    - pages/tbe.qmd
+    - pages/stegen-en.qmd                
+    - pages/openxlsx2_tutorial-en_revised.qmd       
+    
+    # Spanish
+    - pages/oswego.es.qmd
+    - pages/under_construction.es.qmd
+    
+    # French
+    - pages/under_construction.fr.qmd
+    
 
-published-title: "Last updated"
-lightbox: true # Lightbox images allow a reader to click to see a larger version of the image (including any caption)
-
-babelquarto:
-  languagecodes:
-
-  - name: es
-    text: "Español"
-  - name: en
-    text: "English"
-
-  mainlanguage: 'en'
-  languages: ['es']
-
-title-es: "Estudios de casos de AppliedEpi"
-lang: en
-
-format:
-  html: 
-    theme:
-      light: cosmo
-      dark: [darkly, theme-dark.scss]
-    toc: false
-    number-sections: false
-    number-depth: 0
-    css:
-    - webex.css
-    include-after-body:
-    - webex.js
-  # pdf:
-  #   documentclass: scrreprt
-
-bibliography: references.bib
-
-
-book:
-  title: "AppliedEpi cases studies"
-  search:
-    type: textbox
-  repo-url: https://github.com/appliedepi/case_studies
-  sharing: ["twitter", "facebook", "linkedin"]
-  sidebar:
-    logo: "images/logos/Applied_Epi_logo.png"
+website:
+  title: "Applied Epi Open Case Study Repository"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: pages/instructions.qmd
+        text: How-to Guide
+      - href: "https://appliedepi.org/"
+        text: About Applied Epi
     tools:
       - icon: twitter
         href: "https://twitter.com/appliedepi"
       - icon: linkedin
         href: "https://www.linkedin.com/company/appliedepi/"
-  author: Applied Epi
-  date: today
-  date-format: "MMM D, YYYY"
-  favicon: "images/logos/Applied_Epi_logo.png"
-  # cover-image: Applied_Epi_logo.png
-  # cookie-consent:
-  #   type: implied
-  #   style: simple
-  #   palette: dark
-  # google-analytics:
-  #   tracking-id: "G-QXDW878QLX"
-  #   storage: cookies
-  #   anonymize-ip: true
-  chapters:
-  # INTRO 
-  - index.qmd                           
+    background: primary
+  sidebar:
+    logo: "images/logos/Applied_Epi_logo.png"  
+    
+format:
+  html: 
+    theme: 
+      light: sandstone
+      dark: [darkly, theme-dark.scss]
+    toc: true
+    toc-location: left 
+    number-sections: false
+    number-depth: 0
+    grid: 
+      body-width: 1200px
+      margin-width: 40px
+    # css:
+    #  - webex.css
+    # include-after-body:
+    #  - webex.js
 
-  # ABOUT BOOK
-  - part: "Case studies"
-    part-es: "Estudios de caso"
-    chapters:
-    - pages/instructions.qmd
-    - pages/fulton.qmd          
-    - pages/r_practical.qmd
-    - pages/tbe.qmd
-    - pages/stengen-en.qmd                
-    - pages/openxlsx2_tutorial-en_revised.qmd                
-    - pages/oswego.es.qmd
-
+babelquarto:
+  languagecodes:
+  - name: es
+    text: "Español"
+  - name: en
+    text: "English"
+  mainlanguage: 'en'
+  languages: ['es']
+  languagelinks: sidebar
+title-es: "Estudios de casos de AppliedEpi"
+lang: en

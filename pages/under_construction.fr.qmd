@@ -1,0 +1,26 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Page en construction {#sec-rpractical}
+
+::: {.callout-important title="EN CONSTRUCTION"}
+Cette page est en cours de développement. Le contenu et l'URL vont changer.
+:::
+
+Pour des instructions sur la façon d'utiliser nos études de cas, consultez notre [How-to
+Guide](instructions.html).  Nous accueillons vos retours et suggestions à l'adresse
+[contact\@appliedepi.org](mailto:contact@appliedepi.org). Vous pouvez également discuter de l'étude de cas ou des concepts connexes sur la [Applied Epi Community](https://community.appliedepi.org/).
+

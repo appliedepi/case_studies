@@ -1,0 +1,3333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Applied Epi Open Case Study Repository – r_practical</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.33/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<link rel="stylesheet" href="webex.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Applied Epi Open Case Study Repository</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/instructions.html" rel="" target="">
+ <span class="menu-text">How-to Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://appliedepi.org/" rel="" target="">
+ <span class="menu-text">About Applied Epi</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto tools-wide">
+    <a href="https://twitter.com/appliedepi" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://www.linkedin.com/company/appliedepi/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/logos/Applied_Epi_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-rpractical" id="toc-sec-rpractical" class="nav-link active" data-scroll-target="#sec-rpractical">Descriptive analysis of the 2022 Mpox outbreak in Europe</a>
+  <ul class="collapse">
+  <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#step-1.-set-up" id="toc-step-1.-set-up" class="nav-link" data-scroll-target="#step-1.-set-up">Step 1. Set up</a>
+  <ul class="collapse">
+  <li><a href="#get-started-in-rstudio" id="toc-get-started-in-rstudio" class="nav-link" data-scroll-target="#get-started-in-rstudio">1.1 Get started in RStudio</a></li>
+  <li><a href="#installload-packages" id="toc-installload-packages" class="nav-link" data-scroll-target="#installload-packages">1.2 Install/load packages</a></li>
+  </ul></li>
+  <li><a href="#step-2-download-and-import-the-data" id="toc-step-2-download-and-import-the-data" class="nav-link" data-scroll-target="#step-2-download-and-import-the-data">Step 2: Download and import the data</a>
+  <ul class="collapse">
+  <li><a href="#download-the-data" id="toc-download-the-data" class="nav-link" data-scroll-target="#download-the-data">2.1: Download the data</a></li>
+  <li><a href="#import-the-data" id="toc-import-the-data" class="nav-link" data-scroll-target="#import-the-data">2.2 Import the data</a></li>
+  </ul></li>
+  <li><a href="#step-3-explore-the-data" id="toc-step-3-explore-the-data" class="nav-link" data-scroll-target="#step-3-explore-the-data">Step 3: Explore the data</a></li>
+  <li><a href="#step-4-clean-the-data" id="toc-step-4-clean-the-data" class="nav-link" data-scroll-target="#step-4-clean-the-data">Step 4: Clean the data</a>
+  <ul class="collapse">
+  <li><a href="#clean-the-case-based-data" id="toc-clean-the-case-based-data" class="nav-link" data-scroll-target="#clean-the-case-based-data">4.1: Clean the case-based data</a></li>
+  <li><a href="#clean-the-aggregated-data" id="toc-clean-the-aggregated-data" class="nav-link" data-scroll-target="#clean-the-aggregated-data">4.2: Clean the aggregated data</a></li>
+  </ul></li>
+  <li><a href="#step-5-describe-outbreak-by-person-place-and-time" id="toc-step-5-describe-outbreak-by-person-place-and-time" class="nav-link" data-scroll-target="#step-5-describe-outbreak-by-person-place-and-time">Step 5: Describe outbreak by person, place, and time</a>
+  <ul class="collapse">
+  <li><a href="#describe-total-case-counts-by-country" id="toc-describe-total-case-counts-by-country" class="nav-link" data-scroll-target="#describe-total-case-counts-by-country">5.1: Describe total case counts by country</a></li>
+  <li><a href="#describe-cases-over-time" id="toc-describe-cases-over-time" class="nav-link" data-scroll-target="#describe-cases-over-time">5.2: Describe cases over time</a></li>
+  <li><a href="#describe-demographic-characteristics" id="toc-describe-demographic-characteristics" class="nav-link" data-scroll-target="#describe-demographic-characteristics">5.3: Describe demographic characteristics</a></li>
+  <li><a href="#describe-clinical-characteristics" id="toc-describe-clinical-characteristics" class="nav-link" data-scroll-target="#describe-clinical-characteristics">5.4: Describe clinical characteristics</a></li>
+  </ul></li>
+  <li><a href="#step-6-reviewing-data-quality" id="toc-step-6-reviewing-data-quality" class="nav-link" data-scroll-target="#step-6-reviewing-data-quality"><strong>Step 6: Reviewing data quality</strong></a>
+  <ul class="collapse">
+  <li><a href="#delay-between-date-of-onset-diagnosis-and-notification" id="toc-delay-between-date-of-onset-diagnosis-and-notification" class="nav-link" data-scroll-target="#delay-between-date-of-onset-diagnosis-and-notification">6.1: Delay between date of onset, diagnosis and notification</a></li>
+  <li><a href="#compare-case-based-and-aggregated-data" id="toc-compare-case-based-and-aggregated-data" class="nav-link" data-scroll-target="#compare-case-based-and-aggregated-data">6.2: Compare case-based and aggregated data</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final thoughts</a></li>
+  <li><a href="#case-study-information" id="toc-case-study-information" class="nav-link" data-scroll-target="#case-study-information">Case study information</a></li>
+  <li><a href="#terms-of-use" id="toc-terms-of-use" class="nav-link" data-scroll-target="#terms-of-use">Terms of Use</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="sec-rpractical" class="level1">
+<h1>Descriptive analysis of the 2022 Mpox outbreak in Europe</h1>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Tool</strong>: R | <strong>Technical complexity</strong>: Basic | <strong>Methodological complexity</strong>: Basic<br>
+<strong>Source:</strong> ECDC EI Group (simulated data)<br>
+<strong>Prior knowledge required:</strong> <a href="https://epirhandbook.com/en/new_pages/basics.html">R basics</a> (Using Rstudio; R packages, functions and arguments, using pipes)</p>
+</div>
+</div>
+</div>
+<p>For instructions on how to use our case studies, see our <a href="instructions.html">How-to Guide</a>. We welcome feedback and suggestions via <a href="mailto:contact@appliedepi.org">contact@appliedepi.org</a>. You can also discuss the case study or related concepts on the <a href="https://community.appliedepi.org/">Applied Epi Community</a>.</p>
+<div style="page-break-after: always;"></div>
+<section id="scenario" class="level2">
+<h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
+<p>It is May 2022 and Mpox has just been reported for the first time across 5 countries in Europe: Countries “A”, “B”, “C”, “D”, and “E”. You have been requested to provide a basic descriptive analysis to the European Centre for Disease Prevention and Control (ECDC).</p>
+<p>You are given access to:</p>
+<ul>
+<li>A dataset with aggregate case counts, submitted to ECDC by the five countries as part of routine European reporting</li>
+<li>A linelist with cases, submitted by the five countries to ECDC for this particular analysis</li>
+</ul>
+<p>Let’s go!</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>In this case study you will:</p>
+<ol type="1">
+<li>Explore different types of files and how they can be imported in R.</li>
+<li>Perform basic data cleaning, e.g., changing the variable type, recoding variables, aggregating and filtering.</li>
+<li>Perform a basic descriptive analysis using tables and graphs</li>
+</ol>
+</section>
+<section id="step-1.-set-up" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-set-up">Step 1. Set up</h2>
+<section id="get-started-in-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="get-started-in-rstudio">1.1 Get started in RStudio</h3>
+<p>Start by setting up a reproducible and well-organized workflow. This will make it easy to rerun your analysis whenever needed.</p>
+<p><strong>Tasks:</strong></p>
+<ul>
+<li>Set up an RStudio project</li>
+<li>Set up clear sub-folders where your code, data, and outputs will go</li>
+<li>Create an R script, or an R Markdown file if you prefer. Make sure the script purpose, date, and author are written as comments at the top.</li>
+<li>Extra: Ensure your working language in RStudio is appropriate (e.g. English for this exercise)</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<ul>
+<li><p>Create a folder where all the work in this case study will go. For example, create ‘mpox_analysis’ on your computer desktop. Create your RStudio project to be based in this folder.</p></li>
+<li><p>We suggest creating the following sub-folders: <code>scripts</code> (for your code), <code>data</code> (for your data), and <code>outputs</code> (for your analytical outputs).</p></li>
+</ul>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Create a folder (e.g.&nbsp;‘mpox_analysis’ on your Desktop) for your work. To create an Rstudio project in your new folder, click <code>New Project…</code> in the top left of your R Studio, then <code>Existing Directory</code>, then <code>Browse</code> to select your new folder. For more information, look at the <a href="https://epirhandbook.com/new_pages/r_projects.html">R projects</a> section of the Epi R Handbook.</p>
+<p>Start a new R script by clicking <code>New File…</code> in the top left of your R Studio, then <code>R Script</code>. Save it immediately in the appropriate place, e.g.&nbsp;in a ‘scripts’ subfolder of your R Project.</p>
+<p>At the top of your new R script, write some essential information like your name, the purpose of the file, and the date.</p>
+<p>Your R locale determines the language and regional settings used for things like date formats and translations. If your locale is different from the language you want for your report (e.g., a French locale vs.&nbsp;an English report), you can change it to English by running <code>Sys.setlocale("LC_ALL", "English")</code>. Include this in your script if needed, or skip it if your locale is usually appropriate. This is explained in more detail in the <a href="pages/instructions.qmd_">How-to Guide</a>.</p>
+</details>
+</section>
+<section id="installload-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installload-packages">1.2 Install/load packages</h3>
+<p>Next in your R script, you need to install and load the necessary R packages. This ensures that the functions you need are available for your analysis.</p>
+<p>You will need the following packages: <code>rio</code> (for importing data), <code>janitor</code> (for cleaning data), <code>lubridate</code> (for cleaning dates), <code>skimr</code> (for reviewing data), <code>epikit</code> (for epi-related tasks), <code>gtsummary</code> (for presentation-ready tables), <code>apyramid</code> (for age-sex pyramids), and <code>tidyverse</code> (for general data manipulation/science tasks).</p>
+<p>As you start, your trusted colleague nudges you and whispers “I’ve heard that a great way to manage your packages is with the <code>pacman</code> package”.</p>
+<p>Over to you!</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Use the function <code>p_load()</code> from <code>pacman</code> for this task. You provide the function with a list of packages that you want to use. It will take two steps per package: 1) Check if the package is installed on your computer, and install it if necessary, then 2) Load the package so it can be used during this R session.</p>
+<p>If you don’t already have <code>pacman</code> installed, you will need to install it the “traditional way” first, with <code>install.packages()</code>.</p>
+<p>Note that the order of packages in your p_load function can be important. If two packages have the same function names (e.g.&nbsp;<code>select()</code> in the package <code>MASS</code> and <code>select()</code> in <code>tidyverse</code>, which do different things), then R will use the function from the most recently loaded package. To prioritize functions from tidyverse, which are commonly used for data manipulation and visualization, load tidyverse last.</p>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">install.packages</span>(<span class="st">"pacman"</span>) }</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install (if necessary) from CRAN and load packages to be used</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  rio,        <span class="co"># importing data  </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  skimr,      <span class="co"># get overview of data</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  janitor,    <span class="co"># data cleaning and tables</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  lubridate,  <span class="co"># working with dates</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  epikit,     <span class="co"># to create age categories</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  gtsummary,  <span class="co"># summary statistics, tests and regressions </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  apyramid,   <span class="co"># plotting age pyramids </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  tidyverse  <span class="co"># data management and visualization</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details></section>
+</section>
+<section id="step-2-download-and-import-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-download-and-import-the-data">Step 2: Download and import the data</h2>
+<section id="download-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="download-the-data">2.1: Download the data</h3>
+<p>ECDC provides you with two files for your analysis, both updated as of 31st August 2022:</p>
+<ul>
+<li>A case-level linelist (<em>“mpox_linelist.xlsx”</em>) with case information from five countries (countries A - E)</li>
+<li>An aggregate table (<em>“mpox_aggregate_table.csv”</em>) for those countries with cumulative case counts per day.</li>
+</ul>
+<p>They provide it to you via AppliedEpi’s very useful data repository, which you can access using the <code>{appliedepidata}</code> package. So first you need to download these two files to your own computer, as follows:</p>
+<ol type="1">
+<li>Install the <code>{appliedepidata}</code> package from GitHub using the <code>install_github()</code> function in the <code>{remotes}</code> package. Install <code>{remotes}</code> if you need to first.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install remotes if you need to (so you can install a package from GitHub)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the install_github function from remotes to install appliedepidata</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"appliedepi/appliedepidata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Save the two datasets into a specific folder using the <code>save_data()</code> function from <code>{appliedepidata}</code>, by running the code below. The example below saves the data into a ‘data’ subfolder within the RStudio project. Note that if you do not specify a location within the ‘path’ argument of the function, a window will pop up asking you to manually select a folder.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save down the two mpox files using the save_data() function from appliedepidata</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>appliedepidata<span class="sc">::</span><span class="fu">save_data</span>(<span class="st">"mpox_linelist"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">path =</span> <span class="st">"data"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>appliedepidata<span class="sc">::</span><span class="fu">save_data</span>(<span class="st">"mpox_aggregate_table"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">path =</span> <span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="import-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-data">2.2 Import the data</h3>
+<p>Great! Thanks ECDC and Applied Epi! Now it’s time to import the data from that folder into RStudio, so you can analyse it.</p>
+<p><strong>Task:</strong> Import the downloaded case-based and aggregated data into your R environment. Ideally you want to use one function for both datasets, despite one being a csv and the other an xlsx file.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Use the <code>import</code> function from the <code>{rio}</code> package, which can recognize and import different file types. It replaces importing functions that are specific to the file type, such as <code>read.csv()</code> from <code>{base}</code> for .csv files and <code>read_excel()</code> from <code>{readxl}</code> to import .xlsx files.</p>
+<p>If you feel you need to know more about importing functions, read the <a href="https://epirhandbook.com/new_pages/importing.html">Import and export</a> chapter of the EpiRhandbook.</p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p>Below we use the import function to bring in both files. Note how we are assigning the imported data to two objects, one called <em>mpox_linelist_raw</em>, and one called <em>mpox_agg_raw</em>. We add the ‘raw’ suffix to distinguish this data from the cleaned versions we will make later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data  --------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Case-based data</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>mpox_linelist_raw <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/mpox_linelist.xlsx"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregated data</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mpox_agg_raw <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"data/mpox_aggregate_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+</section>
+</section>
+<section id="step-3-explore-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-explore-the-data">Step 3: Explore the data</h2>
+<p>The data’s in, and now it’s time to see what story it tells. Take an initial look at your data to check its quality and how you can best use it.</p>
+<p><strong>Tasks:</strong> Take a look at the different data frames and determine:</p>
+<ul>
+<li>The number of columns and observations (e.g.&nbsp;their <em>dimensions</em>)</li>
+<li>The class of their columns and whether it matches its nature (e.g., are “dates” considered “dates” by R?)</li>
+<li>If the contents of columns are clean and standardized in the mpox linelist (e.g.&nbsp;gender, clinical symptoms, outcome, hiv status and sexual orientation). Do you need to recode any of them?</li>
+<li>How unknown or missing data is categorized in these columns. Do these values need to be standardized?</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>An efficient function for initial data exploring is <code>skim()</code> from the <code>{skimr}</code> package, as it gives you a lot of information on data structure and content, including the classes of columns.</p>
+<p>You can use the function <code>tabyl()</code> from <code>{janitor}</code>, to get counts and percentages of every category in the data column, one by one. These get printed to your RStudio console.</p>
+<p>Also - we recommend just looking at the data itself! A good function for this is <code>view()</code>, a baseR function.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Using the <code>skim</code> commands you can see the rows and columns of each dataset, and you can see how most of the columns in <em>mpox_linelist_raw</em> (including those containing dates) are character classes. (Results not shown on this exercise page)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the dimensions of the two data objects </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mpox_linelist_raw)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mpox_agg_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Take a look at the overall data using <code>view()</code>. It will pop up in the Data Viewer tab and you will get a good sense of how clean the data is and what the missingness is like. This preview shows just 5 rows from the linelist data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(mpox_linelist_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-e4a90ebf04469b1e2a2c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e4a90ebf04469b1e2a2c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5"],["2022-03-03","2022-03-23","2022-05-01","2022-03-10","2022-05-04"],["2022-03-02","2022-03-23","2022-05-01",null,"2022-05-04"],["2022-02-27","2022-03-13","2022-04-19","2022-02-27","2022-04-27"],[39,46,49,45,41],["M","M","F","M","M"],["MSM",null,null,null,null],["A","A","UNK","A","A"],["POS","UNK",null,"NEG","NEG"],["CountryA","CountryA","CountryC","CountryC","CountryA"],["Rash","Rash","Rash, Systemic symptoms","Rash, Systemic symptoms, Lesions","Rash, Systemic symptoms, Lesions"],["Rash","Rash","Rash","Rash","Rash"],[null,null,"Systemic symptoms","Systemic symptoms","Systemic symptoms"],[null,null,null,"Lesions","Lesions"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>DateOfNotification<\/th>\n      <th>DateOfDiagnosis<\/th>\n      <th>DateOfOnset<\/th>\n      <th>Age<\/th>\n      <th>Gender<\/th>\n      <th>SexualOrientation<\/th>\n      <th>Outcome<\/th>\n      <th>HIVStatus<\/th>\n      <th>Country<\/th>\n      <th>ClinicalSymptoms<\/th>\n      <th>Rash<\/th>\n      <th>SystemicSymptoms<\/th>\n      <th>Lesions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"DateOfNotification","targets":1},{"name":"DateOfDiagnosis","targets":2},{"name":"DateOfOnset","targets":3},{"name":"Age","targets":4},{"name":"Gender","targets":5},{"name":"SexualOrientation","targets":6},{"name":"Outcome","targets":7},{"name":"HIVStatus","targets":8},{"name":"Country","targets":9},{"name":"ClinicalSymptoms","targets":10},{"name":"Rash","targets":11},{"name":"SystemicSymptoms","targets":12},{"name":"Lesions","targets":13}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Below is an example of using the <code>tabyl()</code> function from <code>{janitor},</code> to look at the distribution of clinical symptoms. You can see 12 cases have missing clinical information and that many cases have a mix of symptoms.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, HIVStatus)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> HIVStatus   n percent valid_percent
+       NEG 525  0.2625     0.4107981
+       POS 307  0.1535     0.2402191
+       UNK 446  0.2230     0.3489828
+      &lt;NA&gt; 722  0.3610            NA</code></pre>
+</div>
+</div>
+<p>You can explore further columns one by one (results not shown):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the values of different categorical columns in the mpox linelist: with tabyl</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, Gender)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, ClinicalSymptoms)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, Outcome)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, SexualOrientation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You could add extra arguments to <code>tabyl()</code> to customize the tables, such as adding totals and changing the proportions to percentages so they are easier to read. See the table on clinical symptoms below. But remember - this is just an initial look so don’t go too crazy.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist_raw, ClinicalSymptoms) <span class="sc">%&gt;%</span>    <span class="co"># Tabulate symptoms </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_totals</span>() <span class="sc">%&gt;%</span>                              <span class="co"># Add totals to bottom of table</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_pct_formatting</span>(<span class="at">digits =</span> <span class="dv">2</span>)                <span class="co"># Format percentages</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 ClinicalSymptoms    n percent valid_percent
+                          Lesions   14   0.70%         0.70%
+                             Rash  257  12.85%        12.93%
+                    Rash, Lesions  323  16.15%        16.25%
+          Rash, Systemic symptoms  676  33.80%        34.00%
+ Rash, Systemic symptoms, Lesions  654  32.70%        32.90%
+                Systemic symptoms   28   1.40%         1.41%
+       Systemic symptoms, Lesions   36   1.80%         1.81%
+                             &lt;NA&gt;   12   0.60%             -
+                            Total 2000 100.00%       100.00%</code></pre>
+</div>
+</div>
+<p>Finally, as an alternative approach to <code>tabyl()</code>, you could use <code>tbl_summary()</code> from the <code>{gtsummary}</code> package. We will describe this later.</p>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+How many columns does the aggregated data have?
+<div id="radio_EJOEGKMCSM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EJOEGKMCSM" value=""> <span>2000</span></label><label><input type="radio" autocomplete="off" name="radio_EJOEGKMCSM" value=""> <span>13</span></label><label><input type="radio" autocomplete="off" name="radio_EJOEGKMCSM" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_EJOEGKMCSM" value=""> <span>101</span></label>
+</div>
+</div>
+<div class="webex-check">
+What is the class of the column DateOfNotification in the mpox linelist?
+<div id="radio_JMYJTMAXCG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JMYJTMAXCG" value=""> <span>Date</span></label><label><input type="radio" autocomplete="off" name="radio_JMYJTMAXCG" value="answer"> <span>Character</span></label><label><input type="radio" autocomplete="off" name="radio_JMYJTMAXCG" value=""> <span>Numeric</span></label><label><input type="radio" autocomplete="off" name="radio_JMYJTMAXCG" value=""> <span>Factor</span></label>
+</div>
+</div>
+<div class="webex-check">
+For how many cases is the HIV status Unknown or missing?
+<div id="radio_UIYFRTPVQL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UIYFRTPVQL" value="answer"> <span>1168</span></label><label><input type="radio" autocomplete="off" name="radio_UIYFRTPVQL" value=""> <span>722</span></label><label><input type="radio" autocomplete="off" name="radio_UIYFRTPVQL" value=""> <span>900</span></label><label><input type="radio" autocomplete="off" name="radio_UIYFRTPVQL" value=""> <span>446</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-clean-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-clean-the-data">Step 4: Clean the data</h2>
+<section id="clean-the-case-based-data" class="level3">
+<h3 class="anchored" data-anchor-id="clean-the-case-based-data">4.1: Clean the case-based data</h3>
+<p>So! The good news: you have information on geography, dates, demographic characteristics, and clinical details. A promising descriptive analysis lies ahead.</p>
+<p>BUT! You may noticed that there are a few things to fix before the real detective work begins.</p>
+<p>For example:</p>
+<ul>
+<li>Column names have capital letters. This isn’t outright a problem, but can lead to mistakes since R treats ColumnName and Columnname as different.</li>
+<li>Date columns are recognized as character classes, not dates, which would cause issues like incorrect ordering (alphabetical) in epicurves.</li>
+<li>Some columns have values that are unclear or unsuitable for presentation. For example gender is categorized with “F”, “M”, “O” and “UNK”. The column Outcome is “A” and “UNK”.</li>
+<li>Missing data is inconsistently handled, for instance with both “UNK” and NA in the HIV status column. R thinks “UNK” is a valid value, which it treats differently to true missing data (indicated by NA)</li>
+</ul>
+<p><strong>Tasks</strong>:</p>
+<ul>
+<li>Create a clean version of your case-based data making all cleaning changes in a single piping command</li>
+<li>Change all column names to lower case.</li>
+<li>Convert all date columns to class “Date”.</li>
+<li>Convert all missing/unknown values to NA (to be recognized by R as missing)</li>
+<li>Recode non-missing “Gender” categories into: “Female”, “Male”, and “Other”</li>
+<li>Recode non-misising HIV status into: “Positive”, “Negative” and “Unknown”</li>
+<li>Recode non-missing sexual orientation into: “Bisexual”, “Heterosexual”, and “MSM/homo or bisexual male”.</li>
+<li>Recode non-missing “outcome” categories into: “Alive” and “Dead”.</li>
+<li>Check that all changes have been made correctly</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>To convert all column names to lower case at once rather than renaming each column, use the function <code>clean_names()</code> from the <code>{janitor}</code> package.</p>
+<p>Use <code>{lubridate}</code> functions to transform date columns into “Date” class. You can do this one by one, or you could do all at the same time using the <code>across()</code> function from <code>{dplyr}.</code> If you feel you need to know more about transforming dates read the chapter <a href="https://epirhandbook.com/en/new_pages/dates.html">Working with Dates</a> from the EpiRhandbook. If you are not sure how to use the across() function, you can also read the section on <a href="https://epirhandbook.com/en/new_pages/cleaning.html#clean_across">Transform multiple columns</a>.</p>
+<p>There are different functions that we can use to recode values. We propose three: The function <code>recode()</code> from <code>{dplyr}</code>, the function <code>ifelse()</code> from <code>{base}</code> and the function <code>case_when()</code> from <code>{dplyr}</code>. If you want to know more about these functions, look that the section on <a href="https://epirhandbook.com/en/new_pages/cleaning.html#re-code-values">Re-code values</a> from the EpiRhandbook.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Here we clean the data using a ‘chain’ of commands connected by pipes (%&gt;%), which is the grammar of the functions in the {Tidyverse}. The output is assigned to a new object called mpox_linelist to differentiate it from the raw data. It can be helpful to have both the cleaned and raw data available in the environment to compare to the original data if needed.</p>
+<p>See the series of functions and the explanation in the comments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called mpox_linelist which is the clean version of the raw data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mpox_linelist <span class="ot">&lt;-</span> mpox_linelist_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># standardises names and puts all into lower case </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#transform ONE column into date (note the column names are lower case now)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_of_notification =</span> <span class="fu">ymd</span>(date_of_notification)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#transforms ALL columns starting with "date" into dates</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"date"</span>), </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ymd</span>(.x))) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#transforms UNK to NA across all character columns </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">ifelse</span>(.x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"UNK"</span>, <span class="st">"Unknown"</span>), <span class="cn">NA_character_</span>, .x)))  <span class="sc">%&gt;%</span> </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Recode the gender values to be more obvious  </span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">recode</span>(gender,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"F"</span> <span class="ot">=</span> <span class="st">"Female"</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"M"</span> <span class="ot">=</span> <span class="st">"Male"</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"O"</span> <span class="ot">=</span> <span class="st">"Other"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#recode with ifelse to change only one or two categories based on a rule. </span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outcome =</span> <span class="fu">ifelse</span>(outcome <span class="sc">==</span> <span class="st">"A"</span>, <span class="st">"Alive"</span>, outcome)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#recode with case_when for more complex recoding </span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hiv_status =</span> <span class="fu">case_when</span>(hiv_status <span class="sc">==</span> <span class="st">"NEG"</span> <span class="sc">~</span> <span class="st">"Negative"</span>,    </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>                                hiv_status <span class="sc">==</span> <span class="st">"POS"</span> <span class="sc">~</span> <span class="st">"Positive"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexual_orientation =</span> <span class="fu">case_when</span>(sexual_orientation <span class="sc">==</span> <span class="st">"BISEXUAL"</span> <span class="sc">~</span> <span class="st">"Bisexual"</span>,</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"HETERO"</span> <span class="sc">~</span> <span class="st">"Heterosexual"</span>,</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>                                        sexual_orientation <span class="sc">==</span> <span class="st">"MSM"</span> <span class="sc">~</span> <span class="st">"MSM/homo or bisexual male"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can then review your data by tabulating across all the different columns you have cleaned. See the preview of the HIV table below - it looks tidier now with more understandable categories, and all missing data is classified as ‘Unknown’.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that all changes have been made correctly</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(mpox_linelist)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist, gender)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist, clinical_symptoms)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist, outcome)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist, hiv_status)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(mpox_linelist, sexual_orientation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> hiv_status    n percent valid_percent
+   Negative  525  0.2625     0.6310096
+   Positive  307  0.1535     0.3689904
+       &lt;NA&gt; 1168  0.5840            NA</code></pre>
+</div>
+</div>
+<p><strong>IMPORTANT</strong>: If ‘unknown’ and NA had meaningful differences, combining them wouldn’t be appropriate (e.g., if ‘unknown’ meant the case was asked but didn’t want to respond, while NA meant they weren’t asked). Here, we assume no meaningful difference and want R to recognize them as missing.</p>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+Is it always appropriate to combine different types of unknown data? (e.g.&nbsp;missing, unknown, did not respond, NA)
+<div id="radio_RMYLROBWFM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMYLROBWFM" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_RMYLROBWFM" value="answer"> <span>Depends on the meaning of those values</span></label><label><input type="radio" autocomplete="off" name="radio_RMYLROBWFM" value=""> <span>No - never do this</span></label>
+</div>
+</div>
+<div class="webex-check">
+How many male cases do we have in the data frame?
+<div id="radio_QRIAKZTNRR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QRIAKZTNRR" value=""> <span>36</span></label><label><input type="radio" autocomplete="off" name="radio_QRIAKZTNRR" value="answer"> <span>1960</span></label><label><input type="radio" autocomplete="off" name="radio_QRIAKZTNRR" value=""> <span>65</span></label><label><input type="radio" autocomplete="off" name="radio_QRIAKZTNRR" value=""> <span>1523</span></label>
+</div>
+</div>
+<div class="webex-check">
+How many cases have ‘alive’ as an outcome?
+<div id="radio_FPYKVLOLJI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FPYKVLOLJI" value="answer"> <span>1405</span></label><label><input type="radio" autocomplete="off" name="radio_FPYKVLOLJI" value=""> <span>None</span></label><label><input type="radio" autocomplete="off" name="radio_FPYKVLOLJI" value=""> <span>595</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="clean-the-aggregated-data" class="level3">
+<h3 class="anchored" data-anchor-id="clean-the-aggregated-data">4.2: Clean the aggregated data</h3>
+<p>In a similar way, clean the aggregated data by:</p>
+<ul>
+<li>Standardising names to lower case</li>
+<li>Ensuring that date of reporting is of class “Date”</li>
+<li>Creating a column called “week_date” with the week of reporting starting on Monday</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>We can first check the class of the DateRep column, which shows us that it was already recognized as a date column on import.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check class of date of reporting column</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(mpox_agg_raw<span class="sc">$</span>DateRep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then create a new object for the clean aggregate data, and write your cleaning coded connected with pipes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new object called mpox_agg which is the clean version of the raw data, applying the cleaning functions</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>mpox_agg <span class="ot">&lt;-</span> mpox_agg_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># standardises names and puts all into lower case</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span>  </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create week column with Monday start</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_rep, </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">unit =</span> <span class="st">"week"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">week_start =</span> <span class="st">"Monday"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+Take a look at the aggreate data. Which country reported the largest cumulative number of cases during the week 2022-04-11?
+<div id="radio_QYWHKKJBFT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QYWHKKJBFT" value="answer"> <span>Country A</span></label><label><input type="radio" autocomplete="off" name="radio_QYWHKKJBFT" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_QYWHKKJBFT" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_QYWHKKJBFT" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_QYWHKKJBFT" value=""> <span>Country E</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="step-5-describe-outbreak-by-person-place-and-time" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-describe-outbreak-by-person-place-and-time">Step 5: Describe outbreak by person, place, and time</h2>
+<p>Now we’re getting to the heart of the investigation. Who is affected? Which locations are most affected, and how quickly is it spreading? Your ability to tell the classic “person, place, and time” story will be crucial to guiding the response. Pinpoint those hotspots and trends!</p>
+<section id="describe-total-case-counts-by-country" class="level3">
+<h3 class="anchored" data-anchor-id="describe-total-case-counts-by-country">5.1: Describe total case counts by country</h3>
+<p><strong>Task</strong>: Using the mpox case linelist, create a table showing the total number of cases by country. This time, make the table more publication-friendly.</p>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>You could use <code>tabyl()</code> like before, but an easy way to produce publication-ready tables is with the function tbl_summary() from {gtsummary} package. This formats the table for you. It will print to your Viewer rather than the console.</p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Create a new object with the table output - as this is a key output that you can then integrate into a document later rather than just viewing for now.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an object with the table</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cb_country_table <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#select the column that we want to use in the table</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create the table. No need to specify columns; it will tabulate all available columns (selected above)</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>() </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the table</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>cb_country_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="hphkhuyvzn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hphkhuyvzn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hphkhuyvzn thead, #hphkhuyvzn tbody, #hphkhuyvzn tfoot, #hphkhuyvzn tr, #hphkhuyvzn td, #hphkhuyvzn th {
+  border-style: none;
+}
+
+#hphkhuyvzn p {
+  margin: 0;
+  padding: 0;
+}
+
+#hphkhuyvzn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hphkhuyvzn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hphkhuyvzn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hphkhuyvzn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hphkhuyvzn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hphkhuyvzn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hphkhuyvzn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hphkhuyvzn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hphkhuyvzn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hphkhuyvzn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hphkhuyvzn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hphkhuyvzn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hphkhuyvzn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hphkhuyvzn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hphkhuyvzn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hphkhuyvzn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hphkhuyvzn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hphkhuyvzn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hphkhuyvzn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hphkhuyvzn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hphkhuyvzn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hphkhuyvzn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hphkhuyvzn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hphkhuyvzn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hphkhuyvzn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hphkhuyvzn .gt_left {
+  text-align: left;
+}
+
+#hphkhuyvzn .gt_center {
+  text-align: center;
+}
+
+#hphkhuyvzn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hphkhuyvzn .gt_font_normal {
+  font-weight: normal;
+}
+
+#hphkhuyvzn .gt_font_bold {
+  font-weight: bold;
+}
+
+#hphkhuyvzn .gt_font_italic {
+  font-style: italic;
+}
+
+#hphkhuyvzn .gt_super {
+  font-size: 65%;
+}
+
+#hphkhuyvzn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hphkhuyvzn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hphkhuyvzn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hphkhuyvzn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hphkhuyvzn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hphkhuyvzn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hphkhuyvzn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N = 2,000</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>N = 2,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">country</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;CountryA</td>
+<td headers="stat_0" class="gt_row gt_center">816 (41%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;CountryB</td>
+<td headers="stat_0" class="gt_row gt_center">391 (20%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;CountryC</td>
+<td headers="stat_0" class="gt_row gt_center">474 (24%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;CountryD</td>
+<td headers="stat_0" class="gt_row gt_center">217 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;CountryE</td>
+<td headers="stat_0" class="gt_row gt_center">102 (5.1%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+What country has the largest percentage of cases?
+<div id="radio_YRBHXGKAQY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRBHXGKAQY" value=""> <span>Country C</span></label><label><input type="radio" autocomplete="off" name="radio_YRBHXGKAQY" value=""> <span>Country D</span></label><label><input type="radio" autocomplete="off" name="radio_YRBHXGKAQY" value=""> <span>Country B</span></label><label><input type="radio" autocomplete="off" name="radio_YRBHXGKAQY" value=""> <span>Country E</span></label><label><input type="radio" autocomplete="off" name="radio_YRBHXGKAQY" value="answer"> <span>Country A</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="describe-cases-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="describe-cases-over-time">5.2: Describe cases over time</h3>
+<p>Okay so Country A has the most cases in total based on most recent data. But how does that change look over time?</p>
+<p><strong>Tasks</strong>:</p>
+<ul>
+<li>Using the mpox case linelist, create an epicurve by week of notification</li>
+<li>Using the mpox case linelist, create an epicurve by week of notification to enable a comparison of trends by country.</li>
+<li>Using the mpox case linelist, create a heat plot with the number of cases by country and week of notification.</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>Prepare your data for the epicurve first. You can create a “week_date” column using the function <code>floor_date()</code> from <code>{lubridate}</code>. Take a look at the documentation to understand how it works and how to pick the starting day of the week.</p>
+<p>To create the epicurve, you can use <code>ggplot()</code> and <code>geom_bar()</code>, which visualizes the number of rows within a group - e.g.&nbsp;number of cases per week. To compare trends in different countries, consider using the <code>facet_wrap()</code> function. If you are unsure on how <code>ggplot()</code> works, read the EpiRhandbook chapter on <a href="https://epirhandbook.com/en/new_pages/epicurves.html">Epidemic curves</a>.</p>
+<p>To create a heatmap, you will need to create a table of counts by country and week of notification. You can do this using the functions <code>group_by()</code> and <code>summarise()</code> from <code>{dplyr}</code>. If you are unsure on how to do this, review the Grouping data chapter of the EpiRhandbook. Then, use the geom geom_tile() to create a heat plot. If you’re unsure on how to do this, read the EpiRhanbook section on <a href="https://epirhandbook.com/en/new_pages/heatmaps.html">Heat Plots</a></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>Prepare your data by creating the new column using <code>mutate()</code> and <code>floor_date()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mpox_linelist <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create week column with Monday start </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date_of_notification, <span class="at">unit =</span> <span class="st">"week"</span>, <span class="at">week_start =</span> <span class="st">"Monday"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code below creates an epicurve using <code>ggplot()</code> and the <code>geom_bar()</code> function, then applies further formatting. With <code>geom_bar()</code>, you only need to specify the x axis, and the function will visualize the number of rows per unique x axis value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open up the plot production with ggplot() function, specifying object and columns</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>epicurve_mpox <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpox_linelist,          </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">aes</span>(<span class="at">x =</span> week_date)) <span class="sc">+</span>    </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"darkgreen"</span>,                     <span class="co">#colour inside the bins</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"white"</span>,                  <span class="co">#outline colour of the bins</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span>                    <span class="co">#transparency of the bins</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             <span class="co">#set the x axis labels to two week intervals</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported in 2022 in Countries A, B, C, D, and E"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Date as of August 31st 2022"</span>) <span class="sc">+</span>  <span class="co">#add a title</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span>                             <span class="co">#assign a predefined theme</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),       <span class="co">#define the font size of the axis text</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),           <span class="co">#remove the titles of the x and y axis </span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>))   <span class="co">#rotate the x axis text</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the epicurve</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>epicurve_mpox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To examine how the outbreak spread by country, add <code>facet_wrap()</code> to your ggplot code. This splits the graph into multiple smaller ones. As shown below, you can even simply add the function to the national epicurve object.</p>
+<p>An alternative approach would be to create a stacked epicurve, i.e.&nbsp;retain the single epicurve but split each bar into colors per country. You would do this by adding <code>fill = country</code> to the aes() in the epicurve code. However, we don’t recommend this for comparing trends, as stacked bars make it harder to see individual patterns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country <span class="ot">&lt;-</span> epicurve_mpox <span class="sc">+</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Facet wrap to make mini-plots, specifying that you want two columns of plots. </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(.<span class="sc">~</span>country,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">ncol =</span> <span class="dv">1</span>) </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the epicurve</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>epicurve_epox_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Finally, if you want to demonstrate this as a weekly heatmap, you can use geom_tile(). First, aggregate the data by week. Then pipe into a ggplot(), as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the output of your ggplot code to a new object</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>hp_mpox <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first count the number of cases by country and notification week</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(country, week_date) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#you can pipe directly into the ggplot</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> week_date, <span class="co"># notification week along the x axis</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> country,       <span class="co"># country along the y axis</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> n)) <span class="sc">+</span>       <span class="co"># colour in the heatmap tiles by number</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify that you want this to be a heatmap with geom_tile()</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span>   <span class="co"># black is the outline of each tile</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#define the gradient of the colours</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(            </span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">low =</span> <span class="st">"lightgreen"</span>,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">high =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#set the x axis labels to two week intervals</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>) <span class="sc">+</span>             </span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add titles</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span> <span class="st">"Mpox cases by country and week of notification"</span>,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Number of cases"</span>                               </span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Apply an overall theme to your plot</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Customize other appearance details</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,       <span class="co">#legend position to bottom</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),     <span class="co">#define axis font </span></span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),         <span class="co">#remove the axis titles</span></span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>)) <span class="co">#rotate the x axis text</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the heatmap</span></span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>hp_mpox </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="describe-demographic-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="describe-demographic-characteristics">5.3: Describe demographic characteristics</h3>
+<p>Next, describe the age, gender, and sexual orientation of cases. What is interesting?</p>
+<p><strong>Task</strong>:</p>
+<ul>
+<li>Create a single table showing overall distribution of age, gender, and sexual orientation</li>
+<li>Create an age-gender pyramid showing age as 10-year age bands</li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function tbl_summary() from {gtsummary}.</p>
+<p>To create an age-gender pyramid, first create a new column with the function <code>age_categories()</code> from the <code>{epikit}</code> package. Then explore the function age_pyramid() from the {apyramid} package.You can find more about this function in the EpiRhandbook chapter <a href="https://epirhandbook.com/en/new_pages/age_pyramid.html">Demographic pyramids and Likert-scales</a></p>
+<p><br></p>
+</details>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>See below the code to quickly generate one table with the breakdown of different variables. The function <code>tbl_summary()</code> by default summarizes columns differently depending on their class:</p>
+<ul>
+<li>Age is a numeric column, so is summarized with a median and interquartile range.</li>
+<li>Gender and sexual orientation are character values, so are described in terms of counts and percentages.</li>
+</ul>
+<p>You can customize this further; explore the documentation by typing <code>?tbl_summary()</code> in your console.</p>
+<p>Note that <code>tbl_summary()</code> by default does not include NAs in the counts and percentages, allowing you to see the distribution of non-missing values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table of all three variables</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>tab_demographics <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select the columns of interest for</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, sexual_orientation) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use tbl_summary() to create the table</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>() </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>tab_demographics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="nyzlrkqcih" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nyzlrkqcih table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nyzlrkqcih thead, #nyzlrkqcih tbody, #nyzlrkqcih tfoot, #nyzlrkqcih tr, #nyzlrkqcih td, #nyzlrkqcih th {
+  border-style: none;
+}
+
+#nyzlrkqcih p {
+  margin: 0;
+  padding: 0;
+}
+
+#nyzlrkqcih .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nyzlrkqcih .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nyzlrkqcih .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nyzlrkqcih .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nyzlrkqcih .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nyzlrkqcih .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nyzlrkqcih .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nyzlrkqcih .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nyzlrkqcih .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nyzlrkqcih .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nyzlrkqcih .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nyzlrkqcih .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nyzlrkqcih .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nyzlrkqcih .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nyzlrkqcih .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nyzlrkqcih .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nyzlrkqcih .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nyzlrkqcih .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nyzlrkqcih .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nyzlrkqcih .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nyzlrkqcih .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nyzlrkqcih .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nyzlrkqcih .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nyzlrkqcih .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nyzlrkqcih .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nyzlrkqcih .gt_left {
+  text-align: left;
+}
+
+#nyzlrkqcih .gt_center {
+  text-align: center;
+}
+
+#nyzlrkqcih .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nyzlrkqcih .gt_font_normal {
+  font-weight: normal;
+}
+
+#nyzlrkqcih .gt_font_bold {
+  font-weight: bold;
+}
+
+#nyzlrkqcih .gt_font_italic {
+  font-style: italic;
+}
+
+#nyzlrkqcih .gt_super {
+  font-size: 65%;
+}
+
+#nyzlrkqcih .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nyzlrkqcih .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nyzlrkqcih .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nyzlrkqcih .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nyzlrkqcih .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nyzlrkqcih .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nyzlrkqcih .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N = 2,000</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>N = 2,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">age</td>
+<td headers="stat_0" class="gt_row gt_center">37 (31, 45)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">gender</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td headers="stat_0" class="gt_row gt_center">36 (1.8%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td headers="stat_0" class="gt_row gt_center">1,960 (98%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
+<td headers="stat_0" class="gt_row gt_center">1 (&lt;0.1%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">3</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">sexual_orientation</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Bisexual</td>
+<td headers="stat_0" class="gt_row gt_center">7 (0.8%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Heterosexual</td>
+<td headers="stat_0" class="gt_row gt_center">46 (5.2%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;MSM/homo or bisexual male</td>
+<td headers="stat_0" class="gt_row gt_center">833 (94%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">1,114</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Median (IQR); n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Create the new age group column as follows. You can add this to the cleaning section of your script (which we covered 4.1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mpox_linelist <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use the age_categories function to create age categories</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">age_categories</span>(age, <span class="at">lower =</span> <span class="dv">0</span>, <span class="co">#set up the lower age</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">upper =</span> <span class="dv">70</span>, <span class="co">#set up the upper age</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">by =</span> <span class="dv">10</span>)) <span class="co">#set up the age breaks</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then make the age-gender pyramid using the <code>age_pyramid()</code> function. It is a function that builds on ggplot, so you can then continue to add on customization, such as the <code>theme_bw()</code> below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table of all three variables</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>figure_agesex <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter to male and female only</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select the columns of interest for</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">age_pyramid</span>(<span class="at">age_group =</span> <span class="st">"age_group"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">split_by =</span> <span class="st">"gender"</span>) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># change theme</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>figure_agesex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+Which demographic group is more affected by Mpox?
+<div id="radio_XUJCCHRQZI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XUJCCHRQZI" value=""> <span>Females 60-69</span></label><label><input type="radio" autocomplete="off" name="radio_XUJCCHRQZI" value=""> <span>Males 40-49</span></label><label><input type="radio" autocomplete="off" name="radio_XUJCCHRQZI" value=""> <span>Females 10-19</span></label><label><input type="radio" autocomplete="off" name="radio_XUJCCHRQZI" value="answer"> <span>Males 30-39</span></label>
+</div>
+</div>
+<div class="webex-check">
+What proportion of mpox cases were homosexual or bisexual men?
+<div id="radio_QWKEHDRLSZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QWKEHDRLSZ" value=""> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_QWKEHDRLSZ" value=""> <span>42%</span></label><label><input type="radio" autocomplete="off" name="radio_QWKEHDRLSZ" value=""> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_QWKEHDRLSZ" value="answer"> <span>94%</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="describe-clinical-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="describe-clinical-characteristics">5.4: Describe clinical characteristics</h3>
+<p>The media is starting to call your office and are asking what symptoms the public should look out for. Just in luck - you can check that out in the data too!</p>
+<p><strong>Tasks</strong>:</p>
+<ul>
+<li>Create a table with the distribution of different symptoms and outcomes.</li>
+</ul>
+<p>No hints! You should know this one by now!</p>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table with number and percentage of cases by outcome</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>tab_outcome <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select the columns for tabulation</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(outcome, clinical_symptoms) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use tbl_summary() - note that this time we are adding on labels to change how the column name is displayed</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">label =</span> <span class="fu">list</span>(</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">clinical_symptoms =</span> <span class="st">"Symptoms"</span>,</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="st">"Reported outcome"</span>)) </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>tab_outcome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="rdhhaixtqe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rdhhaixtqe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rdhhaixtqe thead, #rdhhaixtqe tbody, #rdhhaixtqe tfoot, #rdhhaixtqe tr, #rdhhaixtqe td, #rdhhaixtqe th {
+  border-style: none;
+}
+
+#rdhhaixtqe p {
+  margin: 0;
+  padding: 0;
+}
+
+#rdhhaixtqe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rdhhaixtqe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rdhhaixtqe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rdhhaixtqe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rdhhaixtqe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rdhhaixtqe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rdhhaixtqe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rdhhaixtqe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rdhhaixtqe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rdhhaixtqe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rdhhaixtqe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rdhhaixtqe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rdhhaixtqe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rdhhaixtqe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rdhhaixtqe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rdhhaixtqe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rdhhaixtqe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rdhhaixtqe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rdhhaixtqe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rdhhaixtqe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rdhhaixtqe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rdhhaixtqe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rdhhaixtqe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rdhhaixtqe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rdhhaixtqe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rdhhaixtqe .gt_left {
+  text-align: left;
+}
+
+#rdhhaixtqe .gt_center {
+  text-align: center;
+}
+
+#rdhhaixtqe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rdhhaixtqe .gt_font_normal {
+  font-weight: normal;
+}
+
+#rdhhaixtqe .gt_font_bold {
+  font-weight: bold;
+}
+
+#rdhhaixtqe .gt_font_italic {
+  font-style: italic;
+}
+
+#rdhhaixtqe .gt_super {
+  font-size: 65%;
+}
+
+#rdhhaixtqe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rdhhaixtqe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rdhhaixtqe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rdhhaixtqe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rdhhaixtqe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rdhhaixtqe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rdhhaixtqe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="<strong>Characteristic</strong>"><strong>Characteristic</strong></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="<strong>N = 2,000</strong><span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>1</sup></span>"><strong>N = 2,000</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">Reported outcome</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Alive</td>
+<td headers="stat_0" class="gt_row gt_center">1,405 (100%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">595</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Symptoms</td>
+<td headers="stat_0" class="gt_row gt_center"><br></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Lesions</td>
+<td headers="stat_0" class="gt_row gt_center">14 (0.7%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Rash</td>
+<td headers="stat_0" class="gt_row gt_center">257 (13%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Rash, Lesions</td>
+<td headers="stat_0" class="gt_row gt_center">323 (16%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Rash, Systemic symptoms</td>
+<td headers="stat_0" class="gt_row gt_center">676 (34%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Rash, Systemic symptoms, Lesions</td>
+<td headers="stat_0" class="gt_row gt_center">654 (33%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Systemic symptoms</td>
+<td headers="stat_0" class="gt_row gt_center">28 (1.4%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Systemic symptoms, Lesions</td>
+<td headers="stat_0" class="gt_row gt_center">36 (1.8%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
+<td headers="stat_0" class="gt_row gt_center">12</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="2"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> n (%)</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+</section>
+<section id="step-6-reviewing-data-quality" class="level2">
+<h2 class="anchored" data-anchor-id="step-6-reviewing-data-quality"><strong>Step 6: Reviewing data quality</strong></h2>
+<p>You’ve described a lot now, but you want to make sure you understand how timely and complete your mpox linelist is, especially if it will be the basis of making decisions.</p>
+<p>For example - is it possible that there are very different reporting delays between countries, meaning current case counts are not directly comparable? Oh dear, must check.</p>
+<section id="delay-between-date-of-onset-diagnosis-and-notification" class="level3">
+<h3 class="anchored" data-anchor-id="delay-between-date-of-onset-diagnosis-and-notification">6.1: Delay between date of onset, diagnosis and notification</h3>
+<p><strong>Tasks</strong></p>
+<ul>
+<li><p>Calculate median time from symptom onset to diagnosis and from diagnosis to notification, both overall and by country</p></li>
+<li><p>Assess visually the number of cases by calendar period and type of date (onset, diagnosis and notification)</p></li>
+</ul>
+<details>
+<summary style="text-decoration: underline; color: darkgreen;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gold;overflow:visible;position:relative;"><path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"></path></svg> Click to read a hint</p>
+</summary>
+<p><br></p>
+<p>To plot together the different dates you may need to transform your data from “wide” to “long” form. What we call “pivoting” in R. The objective is to have a column with the different date categories (onset, diagnosis and notification) and another column with their date value. If you are unsure on how to do this, have a look at the <a href="https://epirhandbook.com/en/new_pages/pivoting.html">Pivoting data</a> chapter of the EpiRhandbook. Then, try to plot with the daily values, but if that’s not easy to interpret you may want to aggregate cases by week.</p>
+<p><br></p>
+</details>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+Is there a difference in the delay from diagnosis to notification by country?
+<div id="radio_GUSYHMGOCG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GUSYHMGOCG" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_GUSYHMGOCG" value="answer"> <span>No</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>First create the required columns for this analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two columns in linelist to assess delays</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>delay_db <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Time between onset and diagnosis (converted to a number)</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delay_diag =</span> <span class="fu">as.numeric</span>(date_of_diagnosis <span class="sc">-</span> date_of_onset)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Time between diagnosis and notification (converted to a number)</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delay_not =</span> <span class="fu">as.numeric</span>(date_of_notification <span class="sc">-</span> date_of_diagnosis)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use the summary function from base R to quickly view the median, mean, interquartile range, and rang.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the delays to diagnosis</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(delay_db<span class="sc">$</span>delay_diag) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ -2.000   4.000   7.000   7.758  10.000  66.000     897 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the delays from diagnosis to notification</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(delay_db<span class="sc">$</span>delay_not)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max.     NA's 
+-46.0000  -2.0000   0.0000  -0.6078   1.0000  23.0000      715 </code></pre>
+</div>
+</div>
+<p>Use group_by() and summarize() to create a table with median delays per country.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>delay_country <span class="ot">&lt;-</span> delay_db <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group by country</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create columns for each delay</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">median_delay_diag =</span> <span class="fu">median</span>(delay_diag, <span class="at">na.rm =</span> T),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_delay_not =</span> <span class="fu">median</span>(delay_not, <span class="at">na.rm =</span> T))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>delay_country</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  country  median_delay_diag median_delay_not
+  &lt;chr&gt;                &lt;dbl&gt;            &lt;dbl&gt;
+1 CountryA                 7                0
+2 CountryB                 7                0
+3 CountryC                 6                0
+4 CountryD                 7                0
+5 CountryE                 6                0</code></pre>
+</div>
+</div>
+<p>To explore how the trends in cases over time differ when using different dates, you can reshape the linelist to create a dataset with one row per date type per case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare the data</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>dates_longer <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, sexual_orientation, <span class="fu">starts_with</span>(<span class="st">"date_"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># all columns starting with "date_" will be pivoted from wide to long </span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols=</span><span class="fu">starts_with</span>(<span class="st">"date_"</span>),         </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>      <span class="co"># put names of the columns into a single column called "indicator"</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"indicator"</span>,   </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>      <span class="co"># the date values will be placed in a column called "date"</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"date"</span>)                </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data will then look like this, with three rows per case:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-42324ce99b1f8cd8e993" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-42324ce99b1f8cd8e993">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],[39,39,39,46,46,46],["Male","Male","Male","Male","Male","Male"],["MSM/homo or bisexual male","MSM/homo or bisexual male","MSM/homo or bisexual male",null,null,null],["date_of_notification","date_of_diagnosis","date_of_onset","date_of_notification","date_of_diagnosis","date_of_onset"],["2022-03-03","2022-03-02","2022-02-27","2022-03-23","2022-03-23","2022-03-13"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>age<\/th>\n      <th>gender<\/th>\n      <th>sexual_orientation<\/th>\n      <th>indicator<\/th>\n      <th>date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"age","targets":1},{"name":"gender","targets":2},{"name":"sexual_orientation","targets":3},{"name":"indicator","targets":4},{"name":"date","targets":5}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Then tabulate cases by week per indicator</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new object</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dates_longer_week <span class="ot">&lt;-</span> dates_longer  <span class="sc">%&gt;%</span> </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a new week column</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">week_date =</span> <span class="fu">floor_date</span>(date, <span class="at">unit =</span> <span class="st">"week"</span>, <span class="at">week_start =</span> <span class="st">"Monday"</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Within each combination of indicator and week, calculate the number of cases</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(indicator, week_date) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span>   </span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop the cases with no data on dates  </span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(week_date)                     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The data will then look like this, with three rows per case:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4c6097c25da69408bd38" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4c6097c25da69408bd38">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9"],["date_of_diagnosis","date_of_diagnosis","date_of_diagnosis","date_of_notification","date_of_notification","date_of_notification","date_of_onset","date_of_onset","date_of_onset"],["2022-01-17","2022-01-24","2022-01-31","2022-01-17","2022-01-24","2022-01-31","2022-01-10","2022-01-17","2022-01-24"],[2,4,13,3,9,27,4,10,19]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>indicator<\/th>\n      <th>week_date<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":3},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"indicator","targets":1},{"name":"week_date","targets":2},{"name":"n","targets":3}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row","selectable":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Finally, create a plot with ggplot() and geom_line().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plot_date_delay <span class="ot">&lt;-</span>   <span class="fu">ggplot</span>(<span class="at">data =</span> dates_longer_week,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">aes</span>(<span class="at">x =</span> week_date, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">y =</span> n, </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                                <span class="at">color=</span>indicator)) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">breaks =</span> <span class="st">"2 weeks"</span>)<span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, </span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">9</span>),</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">90</span>),</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Mpox cases reported in 2022, by date of onset, diagnosis and notification."</span>)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>plot_date_delay</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br></p>
+</details>
+</section>
+<section id="compare-case-based-and-aggregated-data" class="level3">
+<h3 class="anchored" data-anchor-id="compare-case-based-and-aggregated-data">6.2: Compare case-based and aggregated data</h3>
+<p>Finally, you remember that all-along you’ve had these aggregate counts from routine surveillance. You find out that these numbers are actually already being published.</p>
+<p>Before you share your own numbers, you’d better check how different they are from already-published statistics!</p>
+<p><strong>Task</strong>: Create a plot comparing the number of cases reported to through the case-based flow and through the aggregated flow in each country.</p>
+<p>NOTE: Take into consideration that the column on cases in the aggregated data frame reports the <em>cumulative</em> number of cases.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Test yourself!</strong></p>
+<div class="webex-check">
+Which country is not reporting aggregated data?
+<div id="radio_ZFPTBYPRMH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZFPTBYPRMH" value=""> <span>A</span></label><label><input type="radio" autocomplete="off" name="radio_ZFPTBYPRMH" value=""> <span>B</span></label><label><input type="radio" autocomplete="off" name="radio_ZFPTBYPRMH" value="answer"> <span>C</span></label><label><input type="radio" autocomplete="off" name="radio_ZFPTBYPRMH" value=""> <span>D</span></label><label><input type="radio" autocomplete="off" name="radio_ZFPTBYPRMH" value=""> <span>E</span></label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<details>
+<summary style="text-decoration: underline; color: red;">
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"></path></svg>Click to see a solution (try it yourself first!)</p>
+</summary>
+<p><br></p>
+<p>First, create a data frame of country totals from the aggregate data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mpox_agg_country <span class="ot">&lt;-</span> mpox_agg <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># as we have cumulative data, we keep only the last week per country </span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date_rep <span class="sc">==</span> <span class="fu">max</span>(date_rep)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove unnecessary columns</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>date_rep, <span class="sc">-</span>week_date) <span class="sc">%&gt;%</span>     </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create this column to distinguish the numbers from the linelist data</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="st">"aggregated"</span>)         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then create a data frame of country totals from the case linelist, and append it to the totals from the aggregate data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mpox_linelist_country <span class="ot">&lt;-</span> mpox_linelist <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count cases by country, use the same column name as in the aggregate data</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(country) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cases =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create this column to distinguish the numbers from the linelist data</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source =</span> <span class="st">"case_based"</span>)       </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Append both data frames. Remember this is different from merging</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>total_data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(mpox_linelist_country, mpox_agg_country)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can now use this data to compare the cases reported in both sources, using <code>ggplot()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>graph_comp <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> total_data,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="at">x =</span> source, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> cases, </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">fill =</span> source)) <span class="sc">+</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#position dodge puts bars one next to each other, instead of "stacked"</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span>            </span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this command gives us one graph per country. The argument scales allows each y axis scales to adjust to the data</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> country, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span>  </span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># changes the colours, but with the argument "labels" we can change the text of each fill.</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Aggregated"</span>, <span class="st">"Case-based"</span>)) <span class="sc">+</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of cases of Mpox reported in 2022 according to source of data"</span>,</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Source"</span>,</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total number of cases"</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we remove the text of the x axis because it is already present in the legend</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),   </span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>   <span class="co"># we also remove the ticks for aesthetic purposes</span></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())    </span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>graph_comp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="r_practical_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br></p>
+<p>Interesting! There are some differences - and this probably will be worth flagging with stakeholders and/or explaining in a footnote somewhere.</p>
+</details>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">Final thoughts</h2>
+<p>Well done! Through your analysis you now understand the magnitude of the outbreak so far, where and when it spread, which demographic groups are most affected, and how the disease actually manifests in terms of symptoms and severity. ECDC is very happy with your work.</p>
+<p>By coding this up in R, this analysis should be reproducible, meaning you can quickly update it with new data and keep monitoring the outbreak.</p>
+<p>Of course, the above data is not real. If you want to see a paper on the actual outbreak that occured in Europe in 2022, you can take a look at this <a href="https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.36.2200620">Eurosurveillance paper</a>. This <a href="https://www.ecdc.europa.eu/en/mpox">ECDC page on Mpox</a> also publishes updates on the status of mpox in Europe.</p>
+<p>To further practise reproducible reports, [link to RMarkdown].</p>
+</section>
+<section id="case-study-information" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-information">Case study information</h2>
+<p><strong>Authorship</strong></p>
+<p>Original authors: Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)<br>
+Data source: Fictional data provided by ECDC EI Group for training purposes<br>
+</p>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th style="text-align: left;">Changes made</th>
+<th style="text-align: right;">Version</th>
+<th>Author</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>October 2021</td>
+<td style="text-align: left;">First draft</td>
+<td style="text-align: right;">1</td>
+<td>Xanthi Andrianou</td>
+</tr>
+<tr class="even">
+<td>June 2024</td>
+<td style="text-align: left;">Adapted to case study template</td>
+<td style="text-align: right;">1.1</td>
+<td>Alberto Mateo Urdiales</td>
+</tr>
+<tr class="odd">
+<td>September 2024</td>
+<td style="text-align: left;">Revise for case study repository</td>
+<td style="text-align: right;">1.2</td>
+<td>Paula Blomquist and Alanah Jansen</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="terms-of-use" class="level2">
+<h2 class="anchored" data-anchor-id="terms-of-use">Terms of Use</h2>
+<p><strong>Disclaimer</strong>: The information presented in this exercise and the associated data files have been deliberately changed so as to facilitate the acquisition of the learning objectives for fellows of EPIET, EUPHEM and EPIET-associated programmes. This case study was first introduced in 2022 (see Copyright and Licence agreement for more information).</p>
+<p>You are free:</p>
+<ul>
+<li>to Share: to copy and distribute the work</li>
+<li>to Remix: to adapt and build upon the material</li>
+</ul>
+<p>Under the following conditions:</p>
+<ul>
+<li><p>Attribution: You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work). The best way to do this is to keep as it is the list of contributors: sources, authors and reviewers.</p></li>
+<li><p>Share Alike: If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one. Your changes must be documented. Under that condition, you are allowed to add your name to the list of contributors.</p></li>
+<li><p>Notification: If you use the work in the manner specified by the author or licensor, <a href="mailto:Walterj@rki.de">Walter@rki.de</a></p></li>
+<li><p>You cannot sell this work alone but you can use it as part of a teaching.</p></li>
+</ul>
+<p>With the understanding that:</p>
+<ul>
+<li><p>Waiver: Any of the above conditions can be waived if you get permission from the copyright holder.</p></li>
+<li><p>Public Domain: Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.</p></li>
+<li><p>Other Rights: In no way are any of the following rights affected by the license:</p>
+<ul>
+<li><p>Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;</p></li>
+<li><p>The author’s moral rights;</p></li>
+<li><p>Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.</p></li>
+</ul></li>
+<li><p>Notice: For any reuse or distribution, you must make clear to others the license terms of this work by keeping together this work and the current license.</p></li>
+</ul>
+<p>This licence is based on <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="uri">http://creativecommons.org/licenses/by-sa/3.0/</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
