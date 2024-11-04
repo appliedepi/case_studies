@@ -1,0 +1,26 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format: 
+  html: 
+    css: webex.css
+    include-after-body: webex.js
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Under-construction case study page {#sec-rpractical}
+
+::: {.callout-important title="WEBSITE UNDER CONSTRUCTION"}
+This case study is being developed. The content and URL will change.
+:::
+
+For instructions on how to use our case studies, see our [How-to
+Guide](instructions.html). We welcome feedback and suggestions via
+[contact\@appliedepi.org](mailto:contact@appliedepi.org). You can also discuss the case study or related concepts on the [Applied Epi Community](https://community.appliedepi.org/).
+

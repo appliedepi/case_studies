@@ -19,5 +19,26 @@
   },
   "pages/oswego.es.qmd": {
     "oswego.es.html": "624b038d"
+  },
+  "pages/instructions.qmd": {
+    "instructions.html": "4d714e60"
+  },
+  "pages/stengen-en.qmd": {
+    "stengen-en.html": "30eb946a"
+  },
+  "pages/openxlsx2_tutorial-en_revised.qmd": {
+    "openxlsx2_tutorial-en_revised.html": "a3e0884f"
+  },
+  "pages/under_construction.qmd": {
+    "under_construction.html": "e1bf7e61"
+  },
+  "pages/stegen-en.qmd": {
+    "stegen-en.html": "f38b44a3"
+  },
+  "pages/under_construction.es.qmd": {
+    "under_construction.es.html": "c9a6d127"
+  },
+  "pages/under_construction.fr.qmd": {
+    "under_construction.fr.html": "d6af257a"
   }
 }
