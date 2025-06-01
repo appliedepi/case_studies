@@ -21,9 +21,9 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 # Linking, reshaping, and analysing notifiable disease surveillance data and laboratory data in R {#multi_disease_lab}
 
 ::: {.callout-note appearance="minimal" icon="false"}
-**Tool**: R \| **Technical complexity**: Intermediate \| **Methodological complexity**: Basic \|
-**Source:** Applied Epi and CDC DGHP GDLDSB (simulated data) \|
-**Prior knowledge required:** [R
+**Tool**: R \| **Technical complexity**: Intermediate \|
+**Methodological complexity**: Basic \| **Source:** Applied Epi and CDC
+DGHP GDLDSB (simulated data) \| **Prior knowledge required:** [R
 basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
 Rstudio; R packages, functions and arguments, using pipes)
 :::
@@ -38,11 +38,19 @@ Community](https://community.appliedepi.org/).
 
 ## Scenario
 
-You are an epidemiologist working in the country of Feveria, in the national surveillance office. Your team already routinely collects and processes notifiable disease surveillance data as well as the lab results for those notifications. Your boss would like to transition the analysis  process into R, so that on a weekly basis you can monitor the disease trends and the performance of the surveillance systems. 
+You are an epidemiologist working in the country of Feveria, in the
+national surveillance office. Your team already routinely collects and
+processes notifiable disease surveillance data as well as the lab
+results for those notifications. Your boss would like to transition the
+analysis process into R, so that on a weekly basis you can monitor the
+disease trends and the performance of the surveillance systems.
 
-You have access to two routine datasets:
--    Notifiable disease data submitted to your surveillance unit routinely by clinics across the country via DHIS2
--    Laboratory data submitted by three large national laboratories, also submitted to your unit via DHIS2
+You have access to two routine datasets: 
+- Notifiable disease data
+submitted to your surveillance unit routinely by clinics across the
+country via DHIS2 
+- Laboratory data submitted by three large national
+laboratories, also submitted to your unit via DHIS2
 
 Let's go!
 
@@ -50,10 +58,16 @@ Let's go!
 
 In this case study you will:
 
-1.  Use key R functions to clean string data, reshape datasets, link data sources, and create new variables using logical conditions to prepare data for analysis.
-2.  Conduct data quality checks at multiple stages of the project and understand their importance for reliable analysis.
-3.  Perform basic descriptive analyses to compare disease trends across different data sources, before and after linkage.
-4.  Interpret differences in results across data sources and understand how these reflect the structure and design of the overall surveillance system.
+1.  Use key R functions to clean string data, reshape datasets, link
+    data sources, and create new variables using logical conditions to
+    prepare data for analysis.
+2.  Conduct data quality checks at multiple stages of the project and
+    understand their importance for reliable analysis.
+3.  Perform basic descriptive analyses to compare disease trends across
+    different data sources, before and after linkage.
+4.  Interpret differences in results across data sources and understand
+    how these reflect the structure and design of the overall
+    surveillance system.
 
 ## Step 1. Set up
 
@@ -103,9 +117,11 @@ it yourself first!)
 
 </br>
 
-Create a folder (e.g. 'multi_disease_lab' on your Desktop) for your work. To create an Rstudio project in your new folder, click `New Project…` in
-the top left of your R Studio, then `Existing Directory`, then `Browse`
-to select your new folder. For more information, look at the [R
+Create a folder (e.g. 'multi_disease_lab' on your Desktop) for your
+work. To create an Rstudio project in your new folder, click
+`New Project…` in the top left of your R Studio, then
+`Existing Directory`, then `Browse` to select your new folder. For more
+information, look at the [R
 projects](https://epirhandbook.com/new_pages/r_projects.html) section of
 the Epi R Handbook.
 
@@ -132,7 +148,7 @@ Next in your R script, you need to install and load the necessary R
 packages. This ensures that the functions you need are available for
 your analysis.
 
-<span style="color:blue">**Need to update packages below**</span>
+[**Need to update packages below**]{style="color:blue"}
 
 You will need the following packages: `rio` (for importing data),
 `janitor` (for cleaning data), `lubridate` (for cleaning dates), `skimr`
@@ -198,10 +214,13 @@ pacman::p_load(
 
 ### 2.1: Download the data
 
-Your office provides you with two files for your analysis, both updated as of 31st August 2025:
+Your office provides you with two files for your analysis, both updated
+as of 31st August 2025:
 
--   A notification-level data (*"notification_data.xlsx"*) with case information from 10 hospitals and clinics
--   Test-level data (*"lab_data.csv"*) submitted by three national laboratories for the 10 hospitals and clinics
+-   A notification-level data (*"notification_data.xlsx"*) with case
+    information from 10 hospitals and clinics
+-   Test-level data (*"lab_data.csv"*) submitted by three national
+    laboratories for the 10 hospitals and clinics
 
 They provide it to you via AppliedEpi's very useful data repository,
 which you can access using the `{appliedepidata}` package. So first you
@@ -237,12 +256,12 @@ appliedepidata::save_data("data_lab",
 
 ### 2.2 Import the data
 
-Great! Thanks country office and Applied Epi! Now it's time to import the data
-from that folder into RStudio, so you can analyse it.
+Great! Thanks country office and Applied Epi! Now it's time to import
+the data from that folder into RStudio, so you can analyse it.
 
-**Task:** Import the two downloaded data files into your
-R environment. Ideally you want to use one function for both datasets,
-despite one being a csv and the other an xlsx file.
+**Task:** Import the two downloaded data files into your R environment.
+Ideally you want to use one function for both datasets, despite one
+being a csv and the other an xlsx file.
 
 <details>
 
@@ -315,9 +334,11 @@ rm(notification_data, lab_data)
 
 ## Step 3: Inspect the data
 
-The data’s in, and now it’s time to see what story it tells. Take an initial look at your data to check its quality and how you can best use it. 
+The data’s in, and now it’s time to see what story it tells. Take an
+initial look at your data to check its quality and how you can best use
+it.
 
- <!-- Stopped working here  -->
+<!-- Stopped working here  -->
 
 ### Step 3.1: Inspect the surveillance data
 
@@ -326,7 +347,10 @@ The data’s in, and now it’s time to see what story it tells. Take an initial
 -   The number of columns and observations (e.g. their *dimensions*)
 -   The class of their columns and whether it matches its nature (e.g.,
     are "dates" considered "dates" by R?)
--   If the contents of columns are clean and standardized in the notification_data linelist (e.g. sex, residential region, residential city, disease notified). Do you need to recode any of them?
+-   If the contents of columns are clean and standardized in the
+    notification_data linelist (e.g. sex, residential region,
+    residential city, disease notified). Do you need to recode any of
+    them?
 -   How unknown or missing data is categorized in these columns. Do
     these values need to be standardized?
 
@@ -346,7 +370,8 @@ structure and content, including the classes of columns.
 
 You can use the function `tabyl()` from `{janitor}`, to get counts and
 percentages of every category in the data column, one by one. These get
-printed to your RStudio console. Don't forget to use `tabyl(is.na())` to see how many missing values you have in each category.
+printed to your RStudio console. Don't forget to use `tabyl(is.na())` to
+see how many missing values you have in each category.
 
 Also - we recommend just looking at the data itself! A good function for
 this is `view()`, a baseR function.
@@ -436,7 +461,7 @@ later.
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -482,15 +507,18 @@ cat("For how many cases is the HIV status Unknown or missing?", longmcq(opts))
 
 ```
 :::
-:::
+::::::
 
 ## Step 4: Clean the data
 
 ### 4.1: Clean the case-based data
 
-So! The good news: you have information on geography, dates, demographic characteristics, and clinical details. A promising descriptive analysis lies ahead. 
+So! The good news: you have information on geography, dates, demographic
+characteristics, and clinical details. A promising descriptive analysis
+lies ahead.
 
-BUT! You may noticed that there are a few things to fix before the real detective work begins.
+BUT! You may noticed that there are a few things to fix before the real
+detective work begins.
 
 For example:
 
@@ -513,12 +541,15 @@ For example:
     changes in a single piping command
 -   Change all column names to lower case.
 -   Convert all date columns to class "Date".
--   Convert all missing/unknown values to NA (to be recognized by R as missing)
--   Recode non-missing "Gender" categories into: "Female", "Male", and "Other"
--   Recode non-misising HIV status into: "Positive", "Negative" and "Unknown"
--   Recode non-missing sexual orientation into: "Bisexual", "Heterosexual", and
-    "MSM/homo or bisexual male".
--   Recode non-missing "outcome" categories into: "Alive" and "Dead". 
+-   Convert all missing/unknown values to NA (to be recognized by R as
+    missing)
+-   Recode non-missing "Gender" categories into: "Female", "Male", and
+    "Other"
+-   Recode non-misising HIV status into: "Positive", "Negative" and
+    "Unknown"
+-   Recode non-missing sexual orientation into: "Bisexual",
+    "Heterosexual", and "MSM/homo or bisexual male".
+-   Recode non-missing "outcome" categories into: "Alive" and "Dead".
 -   Check that all changes have been made correctly
 
 <details>
@@ -568,7 +599,7 @@ it yourself first!)
 </br>
 
 Here we clean the data using a 'chain' of commands connected by pipes
-(%>%), which is the grammar of the functions in the {Tidyverse}. The
+(%\>%), which is the grammar of the functions in the {Tidyverse}. The
 output is assigned to a new object called mpox_linelist to differentiate
 it from the raw data. It can be helpful to have both the cleaned and raw
 data available in the environment to compare to the original data if
@@ -644,15 +675,16 @@ tabyl(mpox_linelist, hiv_status)
 ```
 
 **IMPORTANT**: If 'unknown' and NA had meaningful differences, combining
-them wouldn't be appropriate (e.g., if 'unknown' meant the case was asked
-but didn't want to respond, while NA meant they weren't asked). Here, we
-assume no meaningful difference and want R to recognize them as missing. 
+them wouldn't be appropriate (e.g., if 'unknown' meant the case was
+asked but didn't want to respond, while NA meant they weren't asked).
+Here, we assume no meaningful difference and want R to recognize them as
+missing.
 
 </br>
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -702,7 +734,7 @@ cat("How many cases have 'alive' as an outcome?", longmcq(opts))
 
 ```
 :::
-:::
+::::::
 
 ### 4.2: Clean the aggregated data
 
@@ -757,7 +789,7 @@ mpox_agg <- mpox_agg_raw %>%
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -777,15 +809,20 @@ cat("Take a look at the aggreate data. Which country reported the largest cumula
 
 ```
 :::
-:::
+::::
 
 ## Step 5: Describe outbreak by person, place, and time
 
-Now we’re getting to the heart of the investigation. Who is affected? Which locations are most affected, and how quickly is it spreading? Your ability to tell the classic "person, place, and time" story will be crucial to guiding the response. Pinpoint those hotspots and trends!
+Now we’re getting to the heart of the investigation. Who is affected?
+Which locations are most affected, and how quickly is it spreading? Your
+ability to tell the classic "person, place, and time" story will be
+crucial to guiding the response. Pinpoint those hotspots and trends!
 
 ### 5.1: Describe total case counts by country
 
-**Task**: Using the mpox case linelist, create a table showing the total number of cases by country. This time, make the table more publication-friendly.
+**Task**: Using the mpox case linelist, create a table showing the total
+number of cases by country. This time, make the table more
+publication-friendly.
 
 <details>
 
@@ -817,7 +854,9 @@ it yourself first!)
 
 </br>
 
-Create a new object with the table output - as this is a key output that you can then integrate into a document later rather than just viewing for now. 
+Create a new object with the table output - as this is a key output that
+you can then integrate into a document later rather than just viewing
+for now.
 
 ```{r , echo=TRUE}
 # Create an object with the table
@@ -838,7 +877,7 @@ cb_country_table
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -858,16 +897,19 @@ cat("What country has the largest percentage of cases?", longmcq(opts))
 
 ```
 :::
-:::
+::::
 
 ### 5.2: Describe cases over time
 
-Okay so Country A has the most cases in total based on most recent data. But how does that change look over time? 
+Okay so Country A has the most cases in total based on most recent data.
+But how does that change look over time?
 
 **Tasks**:
 
--   Using the mpox case linelist, create an epicurve by week of notification
--   Using the mpox case linelist, create an epicurve by week of notification to enable a comparison of trends by country.
+-   Using the mpox case linelist, create an epicurve by week of
+    notification
+-   Using the mpox case linelist, create an epicurve by week of
+    notification to enable a comparison of trends by country.
 -   Using the mpox case linelist, create a heat plot with the number of
     cases by country and week of notification.
 
@@ -881,20 +923,24 @@ Okay so Country A has the most cases in total based on most recent data. But how
 
 </br>
 
-Prepare your data for the epicurve first. You can create a "week_date" column using the
-function `floor_date()` from `{lubridate}`. Take a look at the
-documentation to understand how it works and how to pick the starting day of the week.
+Prepare your data for the epicurve first. You can create a "week_date"
+column using the function `floor_date()` from `{lubridate}`. Take a look
+at the documentation to understand how it works and how to pick the
+starting day of the week.
 
-To create the epicurve, you can use `ggplot()` and `geom_bar()`, which visualizes the number of rows within a group - e.g. number of cases per week. To compare trends in different countries, consider using the `facet_wrap()` function. If you are unsure on how
-`ggplot()` works, read the EpiRhandbook chapter on [Epidemic
+To create the epicurve, you can use `ggplot()` and `geom_bar()`, which
+visualizes the number of rows within a group - e.g. number of cases per
+week. To compare trends in different countries, consider using the
+`facet_wrap()` function. If you are unsure on how `ggplot()` works, read
+the EpiRhandbook chapter on [Epidemic
 curves](https://epirhandbook.com/en/new_pages/epicurves.html).
 
-To create a heatmap, you will need to create a table of counts by country and
-week of notification. You can do this using the functions `group_by()` and
-`summarise()` from `{dplyr}`. If you are unsure on how to do this, review
-the Grouping data chapter of the EpiRhandbook. Then, use the geom
-geom_tile() to create a heat plot. If you're unsure on how to do this,
-read the EpiRhanbook section on [Heat
+To create a heatmap, you will need to create a table of counts by
+country and week of notification. You can do this using the functions
+`group_by()` and `summarise()` from `{dplyr}`. If you are unsure on how
+to do this, review the Grouping data chapter of the EpiRhandbook. Then,
+use the geom geom_tile() to create a heat plot. If you're unsure on how
+to do this, read the EpiRhanbook section on [Heat
 Plots](https://epirhandbook.com/en/new_pages/heatmaps.html)
 
 </details>
@@ -910,7 +956,8 @@ it yourself first!)
 
 </br>
 
-Prepare your data by creating the new column using `mutate()` and `floor_date()`:
+Prepare your data by creating the new column using `mutate()` and
+`floor_date()`:
 
 ```{r , echo=TRUE}
 
@@ -919,7 +966,10 @@ mpox_linelist <- mpox_linelist %>%
   mutate(week_date = floor_date(date_of_notification, unit = "week", week_start = "Monday")) 
 ```
 
-The code below creates an epicurve using `ggplot()` and the `geom_bar()` function, then applies further formatting. With `geom_bar()`, you only need to specify the x axis, and the function will visualize the number of rows per unique x axis value. 
+The code below creates an epicurve using `ggplot()` and the `geom_bar()`
+function, then applies further formatting. With `geom_bar()`, you only
+need to specify the x axis, and the function will visualize the number
+of rows per unique x axis value.
 
 ```{r , echo=TRUE}
 
@@ -947,9 +997,16 @@ epicurve_mpox
 
 ```
 
-To examine how the outbreak spread by country, add `facet_wrap()` to your ggplot code. This splits the graph into multiple smaller ones. As shown below, you can even simply add the function to the national epicurve object.
+To examine how the outbreak spread by country, add `facet_wrap()` to
+your ggplot code. This splits the graph into multiple smaller ones. As
+shown below, you can even simply add the function to the national
+epicurve object.
 
-An alternative approach would be to create a stacked epicurve, i.e. retain the single epicurve but split each bar into colors per country. You would do this by adding `fill = country` to the aes() in the epicurve code. However, we don't recommend this for comparing trends, as stacked bars make it harder to see individual patterns.
+An alternative approach would be to create a stacked epicurve, i.e.
+retain the single epicurve but split each bar into colors per country.
+You would do this by adding `fill = country` to the aes() in the
+epicurve code. However, we don't recommend this for comparing trends, as
+stacked bars make it harder to see individual patterns.
 
 ```{r , echo=TRUE}
 epicurve_epox_country <- epicurve_mpox + 
@@ -962,7 +1019,9 @@ epicurve_epox_country <- epicurve_mpox +
 epicurve_epox_country
 ```
 
-Finally, if you want to demonstrate this as a weekly heatmap, you can use geom_tile(). First, aggregate the data by week. Then pipe into a ggplot(), as shown below.
+Finally, if you want to demonstrate this as a weekly heatmap, you can
+use geom_tile(). First, aggregate the data by week. Then pipe into a
+ggplot(), as shown below.
 
 ```{r , echo=TRUE}
 
@@ -1015,11 +1074,13 @@ hp_mpox
 
 ### 5.3: Describe demographic characteristics
 
-Next, describe the age, gender, and sexual orientation of cases. What is interesting?
+Next, describe the age, gender, and sexual orientation of cases. What is
+interesting?
 
 **Task**:
 
--   Create a single table showing overall distribution of age, gender, and sexual orientation
+-   Create a single table showing overall distribution of age, gender,
+    and sexual orientation
 -   Create an age-gender pyramid showing age as 10-year age bands
 
 <details>
@@ -1032,13 +1093,16 @@ Next, describe the age, gender, and sexual orientation of cases. What is interes
 
 </br>
 
+To quickly create a presentation-ready table showing the breakdowns for
+three different columns, consider using the function tbl_summary() from
+{gtsummary}.
 
-To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function tbl_summary() from {gtsummary}.
-
-To create an age-gender pyramid, first create a new column with the function `age_categories()`
-from the `{epikit}` package. Then explore the function age_pyramid() from the {apyramid} package.You can find more about this function in the EpiRhandbook chapter [Demographic pyramids and
+To create an age-gender pyramid, first create a new column with the
+function `age_categories()` from the `{epikit}` package. Then explore
+the function age_pyramid() from the {apyramid} package.You can find more
+about this function in the EpiRhandbook chapter [Demographic pyramids
+and
 Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
-
 
 </br>
 
@@ -1048,20 +1112,28 @@ Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
 
 <summary style="text-decoration: underline; color: red;">
 
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
+`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
+it yourself first!)
 
 </summary>
 
 </br>
 
-See below the code to quickly generate one table with the breakdown of different variables. The function `tbl_summary()` by default summarizes columns differently depending on their class:
+See below the code to quickly generate one table with the breakdown of
+different variables. The function `tbl_summary()` by default summarizes
+columns differently depending on their class:
 
-- Age is a numeric column, so is summarized with a median and interquartile range. 
-- Gender and sexual orientation are character values, so are described in terms of counts and percentages. 
+-   Age is a numeric column, so is summarized with a median and
+    interquartile range.
+-   Gender and sexual orientation are character values, so are described
+    in terms of counts and percentages.
 
-You can customize this further; explore the documentation by typing `?tbl_summary()` in your console. 
+You can customize this further; explore the documentation by typing
+`?tbl_summary()` in your console.
 
-Note that `tbl_summary()` by default does not include NAs in the counts and percentages, allowing you to see the distribution of non-missing values. 
+Note that `tbl_summary()` by default does not include NAs in the counts
+and percentages, allowing you to see the distribution of non-missing
+values.
 
 ```{r , echo=TRUE}
 
@@ -1077,7 +1149,8 @@ tab_demographics <- mpox_linelist %>%
 tab_demographics
 ```
 
-Create the new age group column as follows. You can add this to the cleaning section of your script (which we covered 4.1).
+Create the new age group column as follows. You can add this to the
+cleaning section of your script (which we covered 4.1).
 
 ```{r , echo=TRUE}
   
@@ -1088,8 +1161,9 @@ mpox_linelist <- mpox_linelist %>%
                                     by = 10)) #set up the age breaks
 ```
 
-
-Then make the age-gender pyramid using the `age_pyramid()` function. It is a function that builds on ggplot, so you can then continue to add on customization, such as the `theme_bw()` below. 
+Then make the age-gender pyramid using the `age_pyramid()` function. It
+is a function that builds on ggplot, so you can then continue to add on
+customization, such as the `theme_bw()` below.
 
 ```{r , echo=TRUE}
 
@@ -1113,7 +1187,7 @@ figure_agesex
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+::::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -1149,18 +1223,18 @@ cat("What proportion of mpox cases were homosexual or bisexual men?", longmcq(op
 
 ```
 :::
-
-
-
-:::
+:::::
 
 ### 5.4: Describe clinical characteristics
 
-The media is starting to call your office and are asking what symptoms the public should look out for. Just in luck - you can check that out in the data too!
+The media is starting to call your office and are asking what symptoms
+the public should look out for. Just in luck - you can check that out in
+the data too!
 
 **Tasks**:
 
--   Create a table with the distribution of different symptoms and outcomes. 
+-   Create a table with the distribution of different symptoms and
+    outcomes.
 
 No hints! You should know this one by now!
 
@@ -1200,9 +1274,13 @@ tab_outcome
 
 ## **Step 6: Reviewing data quality**
 
-You've described a lot now, but you want to make sure you understand how timely and complete your mpox linelist is, especially if it will be the basis of making decisions. 
+You've described a lot now, but you want to make sure you understand how
+timely and complete your mpox linelist is, especially if it will be the
+basis of making decisions.
 
-For example - is it possible that there are very different reporting delays between countries, meaning current case counts are not directly comparable? Oh dear, must check.
+For example - is it possible that there are very different reporting
+delays between countries, meaning current case counts are not directly
+comparable? Oh dear, must check.
 
 ### 6.1: Delay between date of onset, diagnosis and notification
 
@@ -1237,7 +1315,7 @@ not easy to interpret you may want to aggregate cases by week.
 
 </details>
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -1254,7 +1332,7 @@ cat("Is there a difference in the delay from diagnosis to notification by countr
 
 ```
 :::
-:::
+::::
 
 <details>
 
@@ -1267,7 +1345,8 @@ it yourself first!)
 
 </br>
 
-First create the required columns for this analysis. 
+First create the required columns for this analysis.
+
 ```{r , echo=TRUE}
 
 # Create two columns in linelist to assess delays
@@ -1280,7 +1359,8 @@ delay_db <- mpox_linelist %>%
   mutate(delay_not = as.numeric(date_of_notification - date_of_diagnosis)) 
 ```
 
-Use the summary function from base R to quickly view the median, mean, interquartile range, and rang. 
+Use the summary function from base R to quickly view the median, mean,
+interquartile range, and rang.
 
 ```{r , echo=TRUE}
 
@@ -1291,7 +1371,8 @@ summary(delay_db$delay_diag)
 summary(delay_db$delay_not)
 ```
 
-Use group_by() and summarize() to create a table with median delays per country. 
+Use group_by() and summarize() to create a table with median delays per
+country.
 
 ```{r , echo=TRUE}
 delay_country <- delay_db %>% 
@@ -1306,7 +1387,9 @@ delay_country <- delay_db %>%
 delay_country
 ```
 
-To explore how the trends in cases over time differ when using different dates, you can reshape the linelist to create a dataset with one row per date type per case. 
+To explore how the trends in cases over time differ when using different
+dates, you can reshape the linelist to create a dataset with one row per
+date type per case.
 
 ```{r , echo=TRUE}
 # Prepare the data
@@ -1352,6 +1435,7 @@ dates_longer_week <- dates_longer  %>%
   # drop the cases with no data on dates  
   drop_na(week_date)                     
 ```
+
 The data will then look like this, with three rows per case:
 
 ```{r, echo = F, eval = F}
@@ -1360,7 +1444,7 @@ DT::datatable(dates_longer_week %>% filter(row_number()<4))
 
 ```
 
-Finally, create a plot with ggplot() and geom_line(). 
+Finally, create a plot with ggplot() and geom_line().
 
 ```{r, echo = T, eval = F}
 plot_date_delay <-   ggplot(data = dates_longer_week,
@@ -1390,16 +1474,21 @@ plot_date_delay
 
 ### 6.2: Compare case-based and aggregated data
 
-Finally, you remember that all-along you've had these aggregate counts from routine surveillance. You find out that these numbers are actually already being published.
+Finally, you remember that all-along you've had these aggregate counts
+from routine surveillance. You find out that these numbers are actually
+already being published.
 
-Before you share your own numbers, you'd better check how different they are from already-published statistics!
+Before you share your own numbers, you'd better check how different they
+are from already-published statistics!
 
 **Task**: Create a plot comparing the number of cases reported to
-through the case-based flow and through the aggregated flow in each country.
+through the case-based flow and through the aggregated flow in each
+country.
 
-NOTE: Take into consideration that the column on cases in the aggregated data frame reports the *cumulative* number of cases.
+NOTE: Take into consideration that the column on cases in the aggregated
+data frame reports the *cumulative* number of cases.
 
-::: {.callout-note appearance="minimal" icon="false"}
+:::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
 
 ::: webex-check
@@ -1419,7 +1508,7 @@ cat("Which country is not reporting aggregated data?", longmcq(opts))
 
 ```
 :::
-:::
+::::
 
 <details>
 
@@ -1448,7 +1537,8 @@ mpox_agg_country <- mpox_agg %>%
   mutate(source = "aggregated")         
 ```
 
-Then create a data frame of country totals from the case linelist, and append it to the totals from the aggregate data. 
+Then create a data frame of country totals from the case linelist, and
+append it to the totals from the aggregate data.
 
 ```{r , echo=TRUE}
 
@@ -1466,7 +1556,8 @@ mpox_linelist_country <- mpox_linelist %>%
 total_data <- bind_rows(mpox_linelist_country, mpox_agg_country)
 ```
 
-You can now use this data to compare the cases reported in both sources, using `ggplot()`. 
+You can now use this data to compare the cases reported in both sources,
+using `ggplot()`.
 
 ```{r , echo=TRUE}
 
@@ -1505,21 +1596,31 @@ graph_comp
 
 </br>
 
-Interesting! There are some differences - and this probably will be worth flagging with stakeholders and/or explaining in a footnote somewhere. 
+Interesting! There are some differences - and this probably will be
+worth flagging with stakeholders and/or explaining in a footnote
+somewhere.
 
 </details>
 
 ## Final thoughts
 
-Well done! Through your analysis you now understand the magnitude of the outbreak so far, where and when it spread, which demographic groups are most affected, and how the disease actually manifests in terms of symptoms and severity. ECDC is very happy with your work.
+Well done! Through your analysis you now understand the magnitude of the
+outbreak so far, where and when it spread, which demographic groups are
+most affected, and how the disease actually manifests in terms of
+symptoms and severity. ECDC is very happy with your work.
 
-By coding this up in R, this analysis should be reproducible, meaning you can quickly update it with new data and keep monitoring the outbreak. 
+By coding this up in R, this analysis should be reproducible, meaning
+you can quickly update it with new data and keep monitoring the
+outbreak.
 
-Of course, the above data is not real. If you want to see a paper on the actual outbreak that occured in Europe in 2022, you can take a look at this [Eurosurveillance paper](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.36.2200620). This [ECDC page on Mpox](https://www.ecdc.europa.eu/en/mpox) also publishes updates on the status of mpox in Europe. 
+Of course, the above data is not real. If you want to see a paper on the
+actual outbreak that occured in Europe in 2022, you can take a look at
+this [Eurosurveillance
+paper](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.36.2200620).
+This [ECDC page on Mpox](https://www.ecdc.europa.eu/en/mpox) also
+publishes updates on the status of mpox in Europe.
 
-
-To further practise reproducible reports, \[link to
-RMarkdown\].
+To further practise reproducible reports, \[link to RMarkdown\].
 
 ## Case study information
 
@@ -1529,11 +1630,11 @@ Original authors: Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)\
 Data source: Fictional data provided by ECDC EI Group for training
 purposes\
 
-| Date         | Changes made                   | Version | Author                 |
-|------------------|:------------------|-----------------:|------------------|
-| October 2021 | First draft                    |       1 | Xanthi Andrianou       |
-| June 2024    | Adapted to case study template |     1.1 | Alberto Mateo Urdiales |
-| September 2024    | Revise for case study repository |     1.2 | Paula Blomquist and Alanah Jansen |
+| Date | Changes made | Version | Author |
+|------------------|:-----------------|-----------------:|------------------|
+| October 2021 | First draft | 1 | Xanthi Andrianou |
+| June 2024 | Adapted to case study template | 1.1 | Alberto Mateo Urdiales |
+| September 2024 | Revise for case study repository | 1.2 | Paula Blomquist and Alanah Jansen |
 
 ## Terms of Use
 
