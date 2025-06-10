@@ -13,11 +13,11 @@ project:
     # - pages/openxlsx2_tutorial-en_revised.qmd       
     
     # Spanish
-    - pages/oswego.es.qmd
-    - pages/under_construction.es.qmd
+   # - pages/oswego.es.qmd
+   # - pages/under_construction.es.qmd
     
     # French
-    - pages/under_construction.fr.qmd
+   # - pages/under_construction.fr.qmd
     
 
 website:
