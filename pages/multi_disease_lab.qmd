@@ -2258,10 +2258,9 @@ Other things:
 
 ## Case study information
 
-**Authorship**
-
-Original authors:Paula Blomquist and Alanah Jansen Data source:
-Fictional data provided by Applied Epi, with input from CDC DGHSP
+::: {.callout-note appearance="minimal" icon="false"}
+**Original authors**: Paula Blomquist and Alanah Jansen \| **Data source**: Fictional data provided by Applied Epi, with input from CDC DGHP GSLDSB 
+:::
 
 | Date      | Changes made | Version | Author                            |
 |-----------|:-------------|--------:|-----------------------------------|
@@ -2271,6 +2270,4 @@ Fictional data provided by Applied Epi, with input from CDC DGHSP
 
 **Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. 
 
-This case study is under a [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en). 
-
-For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+**License**: This case study is under a [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
