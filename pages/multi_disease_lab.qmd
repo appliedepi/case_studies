@@ -21,10 +21,9 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Tool**: R \| **Technical complexity**: Intermediate \|
-**Methodological complexity**: Basic \| **Source:** Applied Epi and CDC
-DGHP GDLDSB (simulated data) \| **Prior knowledge required:** [R
+**Methodological complexity**: Basic \| **Prior knowledge required:** [R
 basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
-Rstudio; R packages, functions and arguments, using pipes)
+Rstudio; R packages, functions and arguments, using pipes) \| **Source:** Applied Epi and Centers for Disease Control and Prevention (CDC) - Division of Global Health Protection (DGHP) Global Surveillance Laboratory and Data Systems Branch (GSLDSB) (simulated data) \| **Funded by:** TEPHINET
 :::
 
 For instructions on how to use our case studies, see our [How-to
