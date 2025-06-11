@@ -37,18 +37,37 @@ Community](https://community.appliedepi.org/).
 
 ## Scenario
 
-You are an epidemiologist working in a regional surveillance office in Feveria Metropolis, the largest region of the tropical country Feveria. There are three districts within Feveria Metropolis:
+You are an epidemiologist working in a regional surveillance office in
+Feveria Metropolis, the largest region of the tropical country Feveria.
+There are three districts within Feveria Metropolis:
 
-- Feveria Central, the large over-populated downtown area. This is also the oldest distict within the Metropolis, with less reliable water and sanitation infrastructure. 
-- Lake Minara, a lake area with good infrastructure but many mosquitoes in the warmer months of the year
-- Kasara, the rural countryside area away on the other side of Feveria central
+-   Feveria Central, the large over-populated downtown area. This is
+    also the oldest distict within the Metropolis, with less reliable
+    water and sanitation infrastructure.
+-   Lake Minara, a populated lake area with good infrastructure but many
+    mosquitoes in the warmer months of the year
+-   Kasara, a more sub-urban area on the other side of Feveria central
 
-It is January 2025, and your boss would like you to transfer the routine processing of notifiable disease data into R. The processing currently uses Excel. 
+**Map of districts within Feveria Metropolis, in the country Feveria**
 
-She asks that you write code to import, clean, link, and analyse the following linelists:
+![](/images/multi_disease_lab/map.png){width="70%"}
 
-- **2024 Notifiable Disease Surveillance Data:** This is the data your surveillance unit gets regularly from clinics throughout the Feveria Central region. It includes details about cases suspected of having Dengue, Malaria, Cholera, Typhoid Fever, and Yellow Fever, all diagnosed by clinics based on the patients' symptoms.
-- **2024 Laboratory Data:** This data comes from lab test results, specifically from three major labs in Feveria Central. These results are for samples taken from those suspected notifiable disease cases mentioned above.
+It is January 2025, and your boss would like you to transfer the routine
+processing of notifiable disease data into R. The processing currently
+uses Excel.
+
+She asks that you write code to import, clean, link, and analyse the
+following linelists:
+
+-   **2024 Notifiable Disease Surveillance Data:** This is the data your
+    surveillance unit gets regularly from clinics throughout the Feveria
+    Central region. It includes details about cases suspected of having
+    Dengue, Malaria, Cholera, Typhoid Fever, and Yellow Fever, all
+    diagnosed by clinics based on the patients' symptoms.
+-   **2024 Laboratory Data:** This data comes from lab test results,
+    specifically from three major labs in Feveria Central. These results
+    are for samples taken from those suspected notifiable disease cases
+    mentioned above.
 
 Let's go!
 
@@ -56,8 +75,8 @@ Let's go!
 
 In this case study you will:
 
-1.  Use key R functions to clean data, reshape datasets, link
-    data sources, and create new variables using logical conditions to
+1.  Use key R functions to clean data, reshape datasets, link data
+    sources, and create new variables using logical conditions to
     prepare data for analysis.
 2.  Conduct data quality checks at multiple stages of the project and
     understand their importance for reliable analysis.
@@ -96,7 +115,7 @@ will make it easy to rerun your analysis whenever needed.
     outputs).
 :::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
 Create a folder (e.g. 'multi_disease_lab' on your Desktop) for your
@@ -142,7 +161,7 @@ that a great way to manage your packages is with the `pacman` package".
 
 Over to you!
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
 Use the function `p_load()` from `pacman` for this task. You provide the
@@ -188,16 +207,18 @@ pacman::p_load(
 
 ### 2.1: Download the data
 
-Your office provides you with two files for your analysis, both containing data for 2024 and updated as of 15th January 2025:
+Your office provides you with two files for your analysis, both
+containing data for 2024 and updated as of 15th January 2025:
 
 -   A notification-level data (*"notification_data.xlsx"*) with case
-    information from 5 health centers 
--   Test-level data (*"lab_data.csv"*) submitted by three
-    laboratories conducting testing for the 5 health centres
-    
-For this case study, you can access the data via AppliedEpi's very useful data repository,
-which you can access using the `{appliedepidata}` package. So first you
-need to download these two files to your own computer, as follows:
+    information from 5 health centers
+-   Test-level data (*"lab_data.csv"*) submitted by three laboratories
+    conducting testing for the 5 health centres
+
+For this case study, you can access the data via AppliedEpi's very
+useful data repository, which you can access using the
+`{appliedepidata}` package. So first you need to download these two
+files to your own computer, as follows:
 
 1)  Install the `{appliedepidata}` package from GitHub using the
     `install_github()` function in the `{remotes}` package. Install
@@ -232,7 +253,8 @@ appliedepidata::save_data("data_lab",
 Great! Thanks country office and Applied Epi! Now it's time to import
 the data from that folder into RStudio, so you can analyse it.
 
-#### **Task A:Import the two downloaded data files into your R environment.** 
+#### **Task A:Import the two downloaded data files into your R environment.**
+
 Ideally you want to use one function for both datasets, despite one
 being a csv and the other an xlsx file.
 
@@ -247,10 +269,9 @@ are specific to the file type, such as `read.csv()` from `{base}` for
 If you feel you need to know more about importing functions, read the
 [Import and export](https://epirhandbook.com/new_pages/importing.html)
 chapter of the EpiRhandbook.
-
 :::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
 Below we use the import function to bring in both files. Note how we are
@@ -295,28 +316,35 @@ data_lab_raw <- read_sheet("https://docs.google.com/spreadsheets/d/1Dgh-VLiAdZ3T
 # rm(notification_data, lab_data)
 
 ```
-
 :::
 
 ## Step 3: Inspect the data
 
 The data’s in, and now it’s time to see what story it tells. Take an
-initial look at your two datasets to check their contents and quality. 
+initial look at your two datasets to check their contents and quality.
 
 ### Step 3.1: Inspect the surveillance data
 
-#### **Task A: First, inspect the *dimensions* and general contents of the notification data** 
+#### **Task A: First, inspect the *dimensions* and general contents of the notification data**
 
-An efficient function for initial data exploring is `skim()` from the `{skimr}` package, as it gives you a lot of information on data structure and content. The `names()` function will show you the different column names in your data. 
+**Use `skim()` from the `{skimr}` package, `names()`, `ncol()`, and
+`nrow()`** to inspect.
 
-You can also use the `ncol()` and `nrow()` functions to simply count the numbers of columns and rows in the data. Do you know what to put inside the brackets? 
+`skim()` gives you a lot of information on data structure and content,
+whereas `names()` will show you the different column names in your data.
+The `ncol()` and `nrow()` functions to simply count the numbers of
+columns and rows in the data. Do you know what to put inside the
+brackets?
 
-Easiest of all though, is to look at the RStudio Environment. Remember the object in your environment for the notification data is called `data_notif_raw`. 
+Easiest of all though, is to look at the RStudio Environment. Remember
+the object in your environment for the notification data is called
+`data_notif_raw`.
 
-Click on the solution box underneath the questions if you need help. 
+Click on the solution box underneath the questions if you need help.
 
-:::: {.callout-note icon=false}
+:::: {.callout-note icon="false"}
 # Questions
+
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 pacman::p_load(webexercises)
@@ -369,46 +397,65 @@ opts <- c(
 
 cat("What type of information can you NOT see in this data?", longmcq(opts))
 ```
-
 :::
 ::::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Use `skim()` from the {skimr} package to look at a summary of the entire dataframe, and `View()` to look at the whole dataframe directly:
+Use `skim()` from the {skimr} package to look at a summary of the entire
+dataframe, and `View()` to look at the whole dataframe directly:
+
 ```{r}
 skim(data_notif_raw)
 ```
 
-Or, you could use `names()` to print out just the column names. Through either `skim()` or `names()` you will be able to see the types of information included: the health facility of the case, onset date, birthdate, sex, a flag indicating pregnancy, district of residence, onset and report dates, and outcome information. There is also a `Notification ID` which appears to be a unique identifier for a case, but we would want to double check duplicates before we are sure. Note that there are NO test results in this data, as these notifications are from clinics diagnosing notifiable diseases based on clinical case definitions. 
+Or, you could use `names()` to print out just the column names. Through
+either `skim()` or `names()` you will be able to see the types of
+information included: the health facility of the case, onset date,
+birthdate, sex, a flag indicating pregnancy, district of residence,
+onset and report dates, and outcome information. There is also a
+`Notification ID` which appears to be a unique identifier for a case,
+but we would want to double check duplicates before we are sure. Note
+that there are NO test results in this data, as these notifications are
+from clinics diagnosing notifiable diseases based on clinical case
+definitions.
 
 ```{r eval=T}
 names(data_notif_raw)
 ```
 
-Use `ncol()` and `nrow()` to print the number of columns and rows, like this:
+Use `ncol()` and `nrow()` to print the number of columns and rows, like
+this:
+
 ```{r}
 ncol(data_notif_raw)
 nrow(data_notif_raw)
 ```
 
-This will print the numbers of columns and rows in your console. 
+This will print the numbers of columns and rows in your console.
+
 ```{r eval=T, echo=F}
 ncol(data_notif_raw)
 nrow(data_notif_raw)
 ```
 
-Otherwise, when you look at the RStudio environment you can see that the number of observations (which is the same as rows) and columns are listed next to the name of the dataframe. 
-
+Otherwise, when you look at the RStudio environment you can see that the
+number of observations (which is the same as rows) and columns are
+listed next to the name of the dataframe.
 :::
 
 #### **Task B: Next, look at the classes of columns in your dataset**
 
-The function `skim()` from the `{skimr}` package will again be useful here. You can also use the `class()` function to look at the class if particular columns - do you remember how to specify the column of interest in this function? Again, the easiest approach is to look at the RStudio Environment. 
+**Use `skim()` from the `{skimr}` package or `class()` to inspect your
+column classes**
 
-:::: {.callout-note icon=false}
-# Questions 
+Do you remember how to specify the column of interest inside the
+`class()` function? Alternatively, you can just look at the RStudio
+Environment.
+
+:::: {.callout-note icon="false"}
+# Questions
 
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
@@ -433,34 +480,45 @@ cat("What is the class of most columns in the raw notification data?", longmcq(o
 :::
 ::::
 
-
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-You can use `class` like the example below. The $ is an operator used to select a specific column from the `data_notif_raw` dataframe. Note that the backticks are used around Date of Birth because the column name contains spaces. 
+You can use `class` like the example below. The \$ is an operator used
+to select a specific column from the `data_notif_raw` dataframe. Note
+that the backticks are used around Date of Birth because the column name
+contains spaces.
+
 ```{r}
 class(data_notif_raw$`Date of Birth`)
 ```
 
-To look at class via the RStudio environment, click on the blue arrow next to the dataframe name. The column names will appear, with the class next to it (e.g. it says "chr" to show character class)
+To look at class via the RStudio environment, click on the blue arrow
+next to the dataframe name. The column names will appear, with the class
+next to it (e.g. it says "chr" to show character class)
 :::
-
 
 #### **Task C: Inspect categorical values and missingness**
 
-Use the `tabyl()` function to inspect the values within categorical columns, specifying the dataset object in the first argument, and the column name in the second argument. For example, this code tabulates the values for the Sex column. The output shows that male and female are inconsistently spelled across the data. This column would need further cleaning before analysis. 
+**Use the `tabyl()` function to inspect the values within categorical
+columns**, specifying the dataset object in the first argument, and the
+column name in the second argument. For example, this code tabulates the
+values for the Sex column. The output shows that male and female are
+inconsistently spelled across the data. This column would need further
+cleaning before analysis.
 
 ```{r eval=T}
 tabyl(data_notif_raw, Sex)
 
 ```
 
-To inspect missingness, you can use the `miss_var_summary()` function from the {naniar} package: 
+To inspect missingness, you can use the `miss_var_summary()` function
+from the {naniar} package:
+
 ```{r eval=T}
 miss_var_summary(data_notif_raw)
 ```
 
-:::: {.callout-note icon=false}
+:::: {.callout-note icon="false"}
 # Questions
 
 ::: webex-check
@@ -501,38 +559,60 @@ cat("Based on the missingness of its values, is the `Onset date` column useful?"
 :::
 ::::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Use the `tabyl()` function to tabulate the values within the Residential district column. Again, the first argument is the name of the dataframe object, and the second argument is the name of the column. 
+Use the `tabyl()` function to tabulate the values within the Residential
+district column. Again, the first argument is the name of the dataframe
+object, and the second argument is the name of the column.
+
 ```{r, eval=T}
 tabyl(data_notif_raw, `Residential District`)
 ```
-You can see that each of the three locations (Feveria Central, Lake Minara, and Kasara) are spelled in different ways and with different capitalisation. This will need to be cleaned out if we want to analyse the geographic distribution of the notifiable diseases. 
 
-Similarly, use the `tabyl()` function to tabulate the values within the `Disease notified` column. You can see these are spelled out appropriately and consistently, so you can already see the distribution of rows by disease without further cleaning. 
+You can see that each of the three locations (Feveria Central, Lake
+Minara, and Kasara) are spelled in different ways and with different
+capitalisation. This will need to be cleaned out if we want to analyse
+the geographic distribution of the notifiable diseases.
+
+Similarly, use the `tabyl()` function to tabulate the values within the
+`Disease notified` column. You can see these are spelled out
+appropriately and consistently, so you can already see the distribution
+of rows by disease without further cleaning.
+
 ```{r, eval=T}
 tabyl(data_notif_raw, `Disease notified`)
 ```
 
-A different way of checking missingness is to tabulate the the output of the function `is.na()`. In the example below, the function `is.na()` evaluates each value within the column `Onset date`, returning TRUE for missing ones and FALSE for present ones. Running `tabyl()` on this TRUE/FALSE output then quickly gives you a clear count and percentage of both missing and non-missing values in that column. Remember, values like a space or the words "Unknown" or "Missing" will not be recognised by R as missing. R will only recognise true blanks as missing, represented by "NA".  
+A different way of checking missingness is to tabulate the the output of
+the function `is.na()`. In the example below, the function `is.na()`
+evaluates each value within the column `Onset date`, returning TRUE for
+missing ones and FALSE for present ones. Running `tabyl()` on this
+TRUE/FALSE output then quickly gives you a clear count and percentage of
+both missing and non-missing values in that column. Remember, values
+like a space or the words "Unknown" or "Missing" will not be recognised
+by R as missing. R will only recognise true blanks as missing,
+represented by "NA".
 
-For `Onset date`, you can see that 70% of cases are missing onset date, suggesting that this column would not be particularly useful for analysing trends in disease over time. 
+For `Onset date`, you can see that 70% of cases are missing onset date,
+suggesting that this column would not be particularly useful for
+analysing trends in disease over time.
 
 ```{r, eval=T}
 tabyl(is.na(data_notif_raw$`Onset date`))
 ```
-
 :::
 
 ### Step 3.2: Inspect the laboratory data
 
-#### **Task A: Inspect the *dimensions* and general content of the lab data** 
+#### **Task A: Inspect the *dimensions* and general content of the lab data**
 
-Like with the surveillance data, use `skim()`, ncol()`, and `nrow()` functions or check the environment to inspect the lab data. 
+Like with the surveillance data, **use `skim()`, ncol()`, and`nrow()\`
+functions or check the environment to inspect the lab data.**
 
-:::: {.callout-note icon=false}
+:::: {.callout-note icon="false"}
 # Questions
+
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 pacman::p_load(webexercises)
@@ -575,46 +655,57 @@ cat("Which of these columns are NOT in the lab data?", longmcq(opts))
 :::
 ::::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Just like in section 3.1, you can use `skim()` from the {skimr} package to look at the entire surveillance dataset with clinical notifications. This will also show you the different column names in the data, showing you that the lab data only contains information about the test and not about the patient. It does however also contain a notification ID, just like the notifiable disease surveillance data does. 
+Just like in section 3.1, you can use `skim()` from the {skimr} package
+to look at the entire surveillance dataset with clinical notifications.
+This will also show you the different column names in the data, showing
+you that the lab data only contains information about the test and not
+about the patient. It does however also contain a notification ID, just
+like the notifiable disease surveillance data does.
+
 ```{r}
 skim(data_lab_raw)
 ```
 
-Use `ncol()` and `nrow()` to print the number of columns and rows, like this:
+Use `ncol()` and `nrow()` to print the number of columns and rows, like
+this:
+
 ```{r}
 ncol(data_lab_raw)
 nrow(data_lab_raw)
 ```
 
-This will print the numbers of columns and rows in your console. 
+This will print the numbers of columns and rows in your console.
+
 ```{r eval=T, echo=F}
 ncol(data_lab_raw)
 nrow(data_lab_raw)
 ```
 
-There are often more records in the lab data than in the clinical data. If you inspect the data with `View(data_notif_raw)`, you'll see that several rows share the same notification_id. This can happen when multiple targets are tested from the same sample (same sample ID), or when a case is retested (resulting in a different sample ID).
+There are often more records in the lab data than in the clinical data.
+If you inspect the data with `View(data_notif_raw)`, you'll see that
+several rows share the same notification_id. This can happen when
+multiple targets are tested from the same sample (same sample ID), or
+when a case is retested (resulting in a different sample ID).
 
 ```{r}
 View(data_lab_raw)
 ```
+
 ```{r, eval=T, echo=F}
 flextable(head(data_lab_raw |> filter(str_detect(target,"Dengue")))) |> autofit()
 ```
-
-
 :::
 
+#### **Task B: Look at the classes, categorical values, and missingness** 
 
+As above, **use the `class()`, `skim`, or `tabyl()` functions, or
+inspect the Environment, to look at your columns in more detail.**
 
-#### **Task B: Look at the classes, categorical values, and missingness **
-
-As above, use the `class()`, `skim`, or `tabyl()` functions, or inspect the Environment, to look at your columns in more detail. 
-
-:::: {.callout-note icon=false}
-# Questions 
+:::: {.callout-note icon="false"}
+# Questions
 
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
@@ -654,26 +745,70 @@ opts <- c(
 
 cat("Which test targets multiple targets (and therefore has multiple rows per sample?)", longmcq(opts))
 
-```
+opts <- c(
+  answer = "6",
+  "3",
+  "4"
+)
 
+cat("How many possible results are there for 'value'?)", longmcq(opts))
+
+opts <- c(
+  answer = "P",
+  "P2",
+  "P01",
+  "P0139",
+  "N",
+  "I"
+)
+
+cat("What is NOT a possible test result for the stool culture test which targets V. cholera bacteria'?)", longmcq(opts))
+
+
+```
 :::
 ::::
 
-
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Use `class()` with the one date column in the data - you will see that R does recognise it as a date. This means R understands the order of values in this column (e.g. from oldest to newest) and trends over time could be inspected with this colmumn. 
+Use `class()` with the one date column in the data - you will see that R
+does recognise it as a date. This means R understands the order of
+values in this column (e.g. from oldest to newest) and trends over time
+could be inspected with this colmumn.
+
 ```{r}
 class(data_lab_raw$date_test)
 ```
 
-Use of the `miss_var_summary()` function from the {naniar} package demonstrates that this data is actually complete. This may be because the laboratory systems use automated processes, so are much less likely to have human error. However note, in real life the lab data would probably have some issues too!
+Use of the `miss_var_summary()` function from the {naniar} package
+demonstrates that this data is actually complete. This may be because
+the laboratory systems use automated processes, so are much less likely
+to have human error. However note, in real life the lab data would
+probably have some issues too!
+
 ```{r eval=T}
 miss_var_summary(data_lab_raw)
 ```
 
-You can inspect the different values within columns using `tabyl()`. In this example, we suggest you cross-tabulate `test` and `target` columns, by writing them the column names into the function as two separate arguments. The output shows that each test clearly aligns with one or more targets, and that it is only the Dengue test which targets more than one target (IgG, IgM, and NS.1). Tip: Experiment with changing the order of the column names to see the impact on the table. 
+You can inspect the different values within columns using `tabyl()`. In
+this example, we suggest you cross-tabulate `test` and `target` columns,
+by writing them the column names into the function as two separate
+arguments. The output shows that each test clearly aligns with one or
+more targets, and that it is only the Dengue test which targets more
+than one target (IgG, IgM, and NS.1). Tip: Experiment with changing the
+order of the column names to see the impact on the table.
+
+```{r eval=T}
+tabyl(data_lab_raw, target, test)
+```
+
+Finally, you can inspect the different values for the column 'value',
+which shows the results per test. You can see that there are six
+positive results, including N for negative, P for positive, and I for
+indeterminate. Cholera specifically does not show P, but can show P2,
+P01, and P0139, which in this case represent being positive for specific
+serogroups/subtypes.
 
 ```{r eval=T}
 tabyl(data_lab_raw, target, test)
@@ -682,34 +817,58 @@ tabyl(data_lab_raw, target, test)
 
 ## Step 4: Clean and describe the notifiable disease surveillance data
 
-You now know that the notifiable disease surveillance data contains information about suspected cases, alongside basic demographic information (age, sex, pregnancy, district of residence), and information about their onset date, report data at the health facility, and outcome. Some columns need cleaning before further analysis, due to variations in spelling of categorical values and some date columns not being recognised as dates. 
+You now know that the notifiable disease surveillance data contains
+information about suspected cases, alongside basic demographic
+information (age, sex, pregnancy, district of residence), and
+information about their onset date, report data at the health facility,
+and outcome. Some columns need cleaning before further analysis, due to
+variations in spelling of categorical values and some date columns not
+being recognised as dates.
 
-
-You will now start writing longer chunks of code to clean data, using various `{dplyr}` functions chained together with pipes (which look like this: |>).  
+You will now start writing longer chunks of code to clean data, using
+various `{dplyr}` functions chained together with pipes (which look like
+this: \|\>).
 
 ### Step 4.1: Clean the data
 
-#### **Task A**: Clean your column names and select columns for analysis
+#### **Task A: Clean your column names and select columns for analysis**
 
-Due to quality and data storage issues, your team recommends that you create a clean linelist that only contains information on the disease, date of report, location of the case, and the unique identifier. 
+Due to quality and data storage issues, your team recommends that you
+create a clean linelist that only contains information on the disease,
+date of report, location of the case, and the unique identifier.
 
-Write R code to produce a new clean dataframe called `data_notif`, applying the following cleaning tasks:
+**Write R code to produce a new clean dataframe called `data_notif`**,
+applying the following cleaning tasks:
 
-- Rename columns to be more machine readable (remove spaces and capitalisation) using `clean_names()` from the {janitor} package
-- Use the `rename()` function from `{dplyr}` so that the column with the date of diagnosis (and therefore date of reporting by the clinic) is changed to a more conscise `date_report`.  
-- Select relevant columns for analysis with the `select()` function from the `{dplyr}` package. 
+-   Rename columns to be more machine readable (remove spaces and
+    capitalisation) using `clean_names()` from the {janitor} package
+-   Use the `rename()` function from `{dplyr}` so that the column with
+    the date of diagnosis (and therefore date of reporting by the
+    clinic) is changed to a more conscise `date_report`.\
+-   Select relevant columns for analysis with the `select()` function
+    from the `{dplyr}` package.
 
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-Start your code with the name of the new dataframe, the assignment arrow, and the name of the raw data object. This shows that the outcome of the raw data processing will be assigned to a new object called `data_notif`. 
+Start your code with the name of the new dataframe, the assignment
+arrow, and the name of the raw data object. This shows that the outcome
+of the raw data processing will be assigned to a new object called
+`data_notif`.
 
 ```{r}
 data_notif <- data_notif_raw
 
 ```
 
-Then build on this code by adding in additional functions, chained together with a pipe. This lets you perform several operations in one smooth sequence. First, you'll use `clean_names()` to standardize all your column names. It automatically replaces spaces and special characters with underscores and converts everything to lowercase, making names easier to work with. Then, you can use `rename()` to give a column a new name. Just remember, when you use rename(), the column will already have its `clean_names()` version.
+Then build on this code by adding in additional functions, chained
+together with a pipe. This lets you perform several operations in one
+smooth sequence. First, you'll use `clean_names()` to standardize all
+your column names. It automatically replaces spaces and special
+characters with underscores and converts everything to lowercase, making
+names easier to work with. Then, you can use `rename()` to give a column
+a new name. Just remember, when you use rename(), the column will
+already have its `clean_names()` version.
 
 ```{r}
 data_notif <- data_notif_raw |> 
@@ -717,13 +876,13 @@ data_notif <- data_notif_raw |>
   rename(NEW_NAME = OLD_NAME)
 
 ```
-
 :::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Here is the code to clean column names and select the right columns for analysis:
+Here is the code to clean column names and select the right columns for
+analysis:
 
 ```{r eval=T}
 # Clean data
@@ -734,28 +893,36 @@ data_notif <- data_notif_raw |>
   select(notification_id, residential_district, disease_notified, date_report)
 
 ```
-
 :::
 
+#### **Task B: Standardise categorical values**
 
-#### **Task B**: Standardise categorical values
+You already know from your data inspection that the values for district
+are not standardised.
 
-You already know from your data inspection that the values for district are not standardised. Add two `mutate()` functions to replace the `residential_district` column, to:
+**Add a `mutate()` function to clean the `residential_district`
+column**, to:
 
-- Standardise the capitalisation of the column
-- Replace the existing `residential_district` column with a clean column that only contains these district values: "Lake Minara", "Feveria Central", and "Kasara".
+-   Standardise the capitalisation of the column
+-   Replace the existing `residential_district` column with a clean
+    column that only contains these district values: "Lake Minara",
+    "Feveria Central", and "Kasara".
 
-See the hint to see what functions you can use. 
+See the hint to see what functions you can use.
 
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-Try using `str_to_title()` from `{stringr}` package so that the first letter of each word is upper case and all other letters are lower case. You can also use `case_match()` to specify different specific typos 
+Try using `str_to_title()` from `{stringr}` package so that the first
+letter of each word is upper case and all other letters are lower case.
+You can also use `case_match()` to specify different specific typos
 
-Use the 'help' functionality of RStudio to see how to use these functions. For example, type `?case_match` in your console to get the help page. 
+Use the 'help' functionality of RStudio to see how to use these
+functions. For example, type `?case_match` in your console to get the
+help page.
 :::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
 Your cleaning code should now look like this:
@@ -776,7 +943,8 @@ data_notif <- data_notif_raw |>
 
 ```
 
-You could also wrap the `str_to_title` function into the `case_match()` for shorter code, as follows:
+You could also wrap the `str_to_title` function into the `case_match()`
+for shorter code, as follows:
 
 ```{r eval=T}
 # Clean data
@@ -792,20 +960,29 @@ data_notif <- data_notif_raw |>
 
 
 ```
-
 :::
 
+#### **Task C: Manage dates**
 
-#### **Task C**: Manage dates
+The column for report date needs to be transformed so that it is
+recognized as a date in R. This will allow you to analyse trends over
+time, including over weeks and months.
 
-The column for report date needs to be transformed so that it is recognized as a date in R. This will allow you to analyse trends over time, including over weeks and months. 
+**Review the values within the `date_report` column. Then, add a line to
+your cleaning code to change `date_report` into a date class.**
 
-Review the values within the `date_report` column. Knowing the structure will allow you to use the correct function to convert the column into a date class. We recommend you use one of the functions from the `{lubridate}` package: either `ymd()` (for converting dates written as year-month-date), `mdy()` (for dates written as month-day-year), or `dmy()` (for dates written as day-month-year). These functions will recognise any way of writing the date as long as it is the correct order, for example "21st August 2025" and "21-08-2024" would both be recognised by `dmy()`. 
+Knowing the structure will allow you to use the correct function to
+convert the column into a date class. We recommend you use one of the
+functions from the `{lubridate}` package: either `ymd()` (for converting
+dates written as year-month-date), `mdy()` (for dates written as
+month-day-year), or `dmy()` (for dates written as day-month-year). These
+functions will recognise any way of writing the date as long as it is
+the correct order, for example "21st August 2025" and "21-08-2024" would
+both be recognised by `dmy()`.
 
-Then, add a line to your cleaning code to change `date_report` into a data class. 
+:::: {.callout-note icon="false"}
+# Questions
 
-:::: {.callout-note icon=false}
-# Questions 
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
@@ -827,21 +1004,25 @@ opts <- c(
 cat("Which `mutate()` function should you use to convert the date_report column into a date class?", longmcq(opts))
 
 ```
-
 :::
 ::::
 
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-You can use the `head()` function to view the first six rows of data for the `date_report` column. You can see that they are written with the year first, then the month, then the date. 
+You can use the `head()` function to view the first six rows of data for
+the `date_report` column. You can see that they are written with the
+year first, then the month, then the date.
+
 ```{r eval=T}
 head(data_notif$date_report)
 ```
 
-You can use the `ymd()` function inside `mutate()` to convert the class of the `date_report` function. You can double-check that the class is correct by running a `class()` function afterwards. 
+You can use the `ymd()` function inside `mutate()` to convert the class
+of the `date_report` function. You can double-check that the class is
+correct by running a `class()` function afterwards.
 
-Your cleaning code should now look like this: 
+Your cleaning code should now look like this:
 
 ```{r eval=T}
 # Clean data
@@ -859,22 +1040,95 @@ data_notif <- data_notif_raw |>
 ```
 
 And you can double check the class with this:
+
 ```{r eval=T}
 class(data_notif$date_report)
 ```
-
 :::
 
-### Step 4.2: Perform simple descriptive analysis 
+#### **Task D: Check for duplicates**
 
-Your colleagues inform you that each row, identified by the notification_id, represents an individual case. A person may appear several times in the data however, for instance if they were diagnosed with suspected malaria one month and then suspected cholera another month. Do not worry about such cases. 
+Your colleagues tell you that each notification_id represents one
+suspected case. You now want to **create a table to check if
+`notification_id` is duplicated across rows in you data**.
 
-Use the `tabyl()` function for the following tasks. 
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "Yes",
+  "No"
+)
+
+cat("Does one row in the notifiable disease surveillance data equate to one case?", longmcq(opts))
+
+opts <- c(
+  "Yes",
+  answer = "No"
+)
+
+cat("Do you need to deduplicate your data for epidemiological analysis of cases?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-tip collapse="true"}
+## Click to read a hint
+
+There are many ways to do this, but try using `count()` function from
+`{dplyr}`. It will create a table that counts the number of rows per
+unique value of the column that you specify inside the function. Then,
+use `tabyl()` to look at the distribution of these counts.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+First, pipe from the surveillance data into the `count()` function,
+giving the `notification_id` column as the only argument. This creates a
+table that counts the number of rows per unique value of `sample_id`,
+shown in a new column `n`. You can see for example in this excerpt that
+there is only one row per each of these 6 `notification_id`s.
+
+```{r, eval=F}
+
+data_notif |> 
+  count(notification_id) 
+```
+
+```{r, eval=T, echo=F}
+
+data_notif |> 
+  count(notification_id) |> 
+  head()
+```
+
+Then tabulate the new column `n` with the `tabyl()`, which shows that
+there is only one row per unique notification_id. This means that one
+row equates to one case, and no further deduplication is needed.
+
+```{r, eval=T}
+
+data_notif |> 
+  count(notification_id) |> 
+  tabyl(n)
+```
+:::
+
+### Step 4.2: Simple descriptive analysis
+
+You can now comfortably proceed with descriptive analyses of cases, as
+your data is clean and you know that one row equals one case. Use the
+`tabyl()` function for the following tasks.
 
 #### **Task A: Count the number of suspected cases of each disease diagnosed in 2024**
 
-:::: {.callout-note icon=false}
-# Questions 
+:::: {.callout-note icon="false"}
+# Questions
 
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
@@ -900,29 +1154,35 @@ opts <- c(
 cat("Which disease was least commonly diagnosed by clinics in Feveria Central in 2024?", longmcq(opts))
 
 ```
-
 :::
 ::::
 
-
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Using `tabyl()`, we can see that there were 533 suspected cases of Malaria in Feveria Centra in 2024, and only 25 suspected cases of Typhoid. 
+Using `tabyl()`, we can see that there were 533 suspected cases of
+Malaria in Feveria Centra in 2024, and only 25 suspected cases of
+Typhoid.
+
 ```{r eval=T}
 tabyl(data_notif, disease_notified)
 ```
 :::
 
-
 #### **Task B: Count the number of suspected cases by disease and district of residence**
 
-Use `tabyl()` to cross-tabulate the disease and district of residence columns. You can also add various `adorn` functions from the `{janitor}` package to build on your table to see percentage distributions, e.g. `adorn_percentages()`, `adorn_pct_formatting()`, and `adorn_ns()`
+**Use `tabyl()` to cross-tabulate the disease and district of residence
+columns.**
 
-Type the name of the function after a ? in your console (e.g. `?adorn_ns`) to see the relevant Help pages. 
+You can also add various `adorn` functions from the `{janitor}` package
+to build on your table to see percentage distributions, e.g.
+`adorn_percentages()`, `adorn_pct_formatting()`, and `adorn_ns()`
 
-:::: {.callout-note icon=false}
-# Questions 
+Type the name of the function after a ? in your console (e.g.
+`?adorn_ns`) to see the relevant Help pages.
+
+:::: {.callout-note icon="false"}
+# Questions
 
 ::: webex-check
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
@@ -945,15 +1205,19 @@ cat("Which district reported the most diarrhoeal disease in 2024 (cholera, typho
 
 
 ```
-
 :::
 ::::
 
-
-::: {.callout-caution icon=false collapse="true"}
+::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Using `tabyl()`, we can see that most cases of dengue, malaria, and yellow fever were located in Lake Minara - the lake area with higher density of mosquitoes and therefore vector-borne disease. Meanwhile the majority of cholera and typhoid were in Feveria Central, the over-populated urban area with water and sanitation infrastructure issues that result in higher risk of flooding and drinking water contamination during rainy weather. 
+Using `tabyl()`, we can see that most cases of dengue, malaria, and
+yellow fever were located in Lake Minara - the lake area with higher
+density of mosquitoes and therefore vector-borne disease. Meanwhile the
+majority of cholera and typhoid were in Feveria Central, the
+over-populated urban area with water and sanitation infrastructure
+issues that result in higher risk of flooding and drinking water
+contamination during rainy weather.
 
 ```{r eval=T}
 tabyl(data_notif, disease_notified, residential_district) |>
@@ -963,26 +1227,1102 @@ tabyl(data_notif, disease_notified, residential_district) |>
 ```
 :::
 
-## Step 5. Deduplicate and describe the laboratory data
+## Step 5. Clean, deduplicate, and describe the laboratory data
 
-From your earlier work in step 3, you have found that the laboratory data contains only testing data, and no patient information, with samples identified with a notification ID and Sample ID. This data is long, with several rows for Dengue tests, so will need some reshaping before being analysed. 
+From your earlier work in step 3, you have found that the laboratory
+data contains only testing data, and no patient information. The data is
+already very clean, so we will only standardise one column.
 
-The columns and contents are already clean, 
+### Step 5.1 Standardise the test results
 
-### Step 5.1 Deduplicate
+#### **Task A: Convert any value with "P" to "Positive", "N" to "Negative", and "I" to "Indeterminate.** 
 
-This will be done with either distinct() or slice() - need ot check
+Create a new object `data_lab`. This will allow a more straight forward
+analysis and interpretation of results.
 
-Need to create an object with one row per test
-Then one row per notification
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
-### Step 5.2 Describe
+Use `case_match()` to turn the different original values into
+"Positive", "Negative", or "Indeterminate":
 
-Look at numbers of tests and notifications by disease
-Count by lab also
+```{r eval=T}
+data_lab <- data_lab_raw |> 
+  mutate(value = case_match(value, 
+                            c("P", "PO1", "PO139", "P2") ~ "Positive",
+                            "N" ~ "Negative",
+                            "I" ~ "Indeterminate"))
+```
 
-## Step 6. Linkage
+You can then double-check that the new values look correct by tabulating
+and comparing the values in the original dataset and the clean one.
 
-## Step 7. Descriptive analysis of linked data
+```{r, eval=T}
+tabyl(data_lab_raw, value)
+```
+
+```{r, eval=T}
+tabyl(data_lab, value)
+```
+:::
+
+### Step 5.2 Deduplicate to one row per test
+
+#### **Task A: Review the number of samples with with multiple rows**
+
+We already know that some samples have multiple rows, and that this is
+because the Dengue test has three targets, with one row per target
+result.
+
+Now **find the number of samples with multiple rows**.
+
+Do this as you did with the notifiable disease surveillance data, using
+the `data_lab` object: first count the number of rows per sample, then
+create a table to show the distribution of row numbers. Keep in mind
+that each sample is identified by a sample ID.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "200", 
+  answer = "215",
+  "230"
+)
+
+cat("How many samples (unique `sample_id`s) are repeated across three rows?", longmcq(opts))
 
 
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+First, pipe from the lab data into the `count()` function, giving the
+`sample_id` column as the only argument. This creates a table that
+counts the number of rows per unique value of `sample_id`, shown in a
+new column `n`. You can see for example that the `sample_id` "000e8eee"
+has three rows, whereas the `sample_id` "001e1878" is only seen on one
+row.
+
+```{r, eval=F}
+
+data_lab |> 
+  count(sample_id) 
+```
+
+```{r, eval=T, echo=F}
+
+data_lab |> 
+  count(sample_id) |> 
+  head()
+```
+
+Then tabulate the new column `n` with the `tabyl()`.
+
+```{r, eval=T}
+
+data_lab |> 
+  count(sample_id) |> 
+  tabyl(n)
+```
+
+You can even double-check that this only applies to the Dengue tests by
+adding in the `disease` column to the calculation. You can see that it
+is only the Dengue test that has 3 rows per sample.
+
+```{r, eval=T}
+
+data_lab |> 
+  count(test, sample_id) |> 
+  tabyl(test, n)
+```
+:::
+
+#### **Task B: Deduplicate to one row per sample_id, prioritising positive results** 
+
+As you saw in section 3.2, your dengue PCR test provides results for
+three different markers: IgG, IgM, and NS.1. Each of these can be either
+Negative or Positive. However, to simplify and deduplicate your data,
+you want to assign a single Negative or Positive label to each sample,
+to indicate if the sample represents current infection.
+
+```{r eval=T, echo=F}
+data_lab |> 
+filter(test=="Dengue NS1/IgG/IgM RDT") |> 
+tabyl(target, value) |> flextable() |> autofit()
+```
+
+You ask your colleague Ben to help you. He says:
+
+-   A positive NS.1 result is a strong indicator of active viral
+    replication
+-   A positive IgM result suggests a primary infection that is either
+    acute (past early NS.1 window) or very recent/resolving
+-   A positive IgG result is either strongly indicative of acute or
+    recently resolved re-infection (in combination with positive IgM),
+    or indicative of immunity after a past resolved infection.
+
+Ben suggests to keep your code simple, and identify if a person is
+currently infected using only NS.1 and IgM, and to ignore the IgG
+results. You might accidentally identify some recently infected people
+as currently infected this way (as some IgM positives can be recent
+infections), but this is still acceptable to capture them as a case.
+
+Now you need to **deduplicate the Dengue test results to one row per
+test**. Use `filter()`, `arrange()`, and `slice()`, making sure any
+sample positive for NS.1 and IgM is considered positive for Dengue.
+Create a new object called `data_lab_tests`
+
+::: {.callout-tip collapse="true"}
+## Click to read a hint
+
+Try to apply the following to deduplicate according to his
+recommendation:
+
+1)  Remove IgG Results: filter out rows where the target is "IgG" using
+    `filter()` from `{dplyr}`.
+2)  Prioritize positive IgM/NS1results: Group by `sample_id` and arrange
+    rows with `arrange()` so any 'P' (Positive) result appears first
+3)  Filter to final status: Keep only the first row using `slice(1)` to
+    get the Positive or Negative result for the sample.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Here is the code to filter out the Dengue IgG results, and then
+deduplicate rows within each group of rows with the same `sample_id`,
+prioritising positive results. You need to specify `desc` within
+`arrange()`, as this means that the results will be in reverse
+alphabetical order, meaning P will be at the top. Also, add the
+`ungroup()` function at the end so that the new data is not grouped,
+which could confuse further analyses.
+
+```{r eval=T}
+data_lab_tests <- data_lab |> 
+  filter(target != "Dengue IgG") |> 
+  group_by(sample_id) |> 
+  arrange(desc(value)) |> 
+  slice(1) |> 
+  ungroup()
+```
+
+You can then double-check that the new object `data_lab_tests` has only
+one row per test, using the combination of `count()` and `tabyl()` like
+you did in Task A. This table shows you that all unique sample IDs are
+only present in one row each:
+
+```{r}
+data_lab_tests |> 
+  count(sample_id) |> 
+  tabyl(n)
+```
+:::
+
+#### **Task C: Deduplicate to one row per notification_id, prioritising positive results** 
+
+Next, you check the number of tests per notification ID in your new
+deduplicated data. You can see that there are some rows with the same
+notification id, but only among cases tested with whole blood microscopy
+for malaria.
+
+```{r, eval=T}
+data_lab_tests |> 
+  count(test, notification_id) |> 
+  tabyl(test, n)
+
+```
+
+You investigate further, looking at one example case with
+`notification_id` "043228". This shows you that this one case was tested
+twice, with two different samples, one week apart. The first result was
+positive, and the second result was negative.
+
+```{r, eval=T}
+data_lab_tests |> 
+  filter(notification_id == "043228")
+
+```
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "All cases of different diseases get retested", 
+  answer = "Some malaria cases get retested",
+  "All malaria cases get retested"
+)
+
+cat("Which statement about the lab data is correct?", longmcq(opts))
+
+opts <- c(
+  answer = "Yes - we need one row representing the lab result per case",
+  "No - the data is sufficiently deduplicated"
+)
+
+cat("Will you need to deduplicate the lab data again, to link with the notifiable disease surveillance data?", longmcq(opts))
+
+
+
+```
+:::
+::::
+
+If you answered that you need to deduplicate, you are correct!
+
+**Deduplicate your data to have one row per notification ID**, so that
+you can link to the notifiable disease surveillance data.
+
+To do this, follow a similar process as you did in Task B: group by
+`notification_id`, arrange by the test result value so that values
+starting with P are prioritised in the top row, followed by N
+(negative), and then I (indeterminate). Then keep the first row within
+each group of `notification_id`s, using `slice()`. Create a new object
+called `data_lab_cases`.
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Here is the code to deduplicate rows within each group of rows with the
+same `notification_id`, prioritising positive results. Once again you
+need to specify `desc` within `arrange()`. This works perfectly because
+the desired priority order for results — Positive, then Negative, then
+Inconclusive — happens to align with reverse alphabetical order (P comes
+before N, which comes before I, when sorted descending).
+
+If your priority order was more complex or didn't match alphabetical
+sorting (e.g., if "Inconclusive" needed to come before "Negative"),
+you'd have to convert the result column into a factor and explicitly
+define the desired order of its levels.
+
+```{r eval=T}
+data_lab_cases <- data_lab_tests |> 
+  group_by(notification_id) |> 
+  arrange(desc(value)) |> 
+  slice(1)
+```
+
+You can then double-check that the new object `data_lab_cases` has only
+one row per test, using the combination of `count()` and `tabyl()` like
+you did in Task A. This table shows you that all unique sample IDs are
+only present in one row each:
+
+```{r eval=T}
+data_lab_cases |> 
+  count(notification_id) |> 
+  tabyl(n)
+```
+:::
+
+### Step 5.3 Simple descriptive analysis
+
+#### **Task A: Count the number of disease-specific tests, positive results, and negative results in the 2024 data**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "215", 
+  answer = "503",
+  "88",
+  "190"
+)
+
+cat("How many tests were conducted to test for malaria (via whole blood microscopy)?", longmcq(opts))
+
+opts <- c(
+  "21%", 
+  "11%",
+  answer = "84%",
+  "87%"
+)
+
+cat("What proportion of tests for cholera (via stool culture) were positive?", longmcq(opts))
+
+opts <- c(
+  answer = "IgM ELISA (for Yellow Fever detection)",
+  "Stool Culture (for Cholera detection)", 
+  "Blood culture (for S. Typhi detection)"
+)
+
+cat("Which test had the highest proportion of indeterminate results?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Using `tabyl()`, we can see the number of positive, negative, and
+indeterminate results per test. You can add a series of `adorn()`
+functions to show percentages and totals.
+
+```{r eval=T}
+tabyl(data_lab_tests, test, value) |> 
+  adorn_totals(where = "col") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+#### **Task A: Count the number of cases tested the 2024 data**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "data_lab_raw", 
+  answer = "data_lab_cases",
+  "data_lab_tests",
+  "data_lab"
+)
+
+cat("Which dataset should you use to count the number of cases tested?", longmcq(opts))
+
+opts <- c(
+  answer = "858",
+  "1314",
+  "884"
+)
+
+cat("How many suspected cases were tested in the 2024 lab data?", longmcq(opts))
+
+opts <- c(
+  answer = "Notifiable disease surveillance data",
+  "Lab data"
+)
+
+cat("Are there more suspected cases in the notifiable disease surveillance data or the lab data?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+You can simply look at the number of rows in the `data_lab_cases`
+dataset to see the number of suspected cases who were tested. This is
+less than the number of suspected cases that were in the notifiable
+disease surveillance data (858 vs 987) - which suggests that not all
+suspected cases have been tested.
+
+```{r eval=T}
+nrow(data_lab_cases)
+```
+:::
+
+## Step 6. Linkage and final processing
+
+Now that both linelists are clean and have one row per suspected case,
+you can link them.
+
+### Step 6.1 Link the notifiable disease surveillance data and lab data
+
+#### **Task A: Conduct the linkage** 
+
+Create a new object called `data_linked`, using a `xxx_join()` function
+from `{dplyr}`.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "left_join(data_notif, data_lab_cases...",
+  "full_join(data_notif, data_lab_cases...",
+  "right_join(data_notif, data_lab_cases..."
+)
+
+cat("Which function is the correct approach if you want to retain all rows from your notifiable disease surveillance data and bring in results from your lab data?", longmcq(opts))
+
+opts <- c(
+  "sample_id", 
+  answer = "notification_id",
+  "sample_id and date of report",
+  "notification_id and date of report"
+)
+
+cat("What identifier should be used to link the two linelists?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+You are lucky to work with a straight-forward example of linkage! Both
+datasets have an identifier called `notification_id`, which is clean and
+formatted in the same way. Usually you would need to really clean and
+check this column.
+
+The staff in the clinics have been **fantastic** at consistently
+allocating notification IDs to each patient, including on the sample
+forms sent to the lab, and then the lab staff have been equally
+\*\*brilliant\* at recording the notification ID in their lab systems.
+
+Link the data using the `left_join()` function, with notifiable disease
+surveillance data as the main dataset on the left. This will keep all
+the rows from the this dataset, and will just bring in the test results
+from the lab data specified on the "right" of the function.
+
+```{r eval=T}
+
+data_linked <- left_join(data_notif, data_lab_cases, by = "notification_id")
+```
+:::
+
+#### **Task B: Check the linkage worked as expected**
+
+Now check your data and review a few things:
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "987",
+  "884",
+  "858"
+)
+
+cat("How many rows are in your new `data_linked` dataframe?", longmcq(opts))
+
+opts <- c(
+  "more rows than the original",
+  answer = "same number of rows",
+  "fewer rows"
+)
+
+cat("How does this compare to your original notifiable disease surveillance data?", longmcq(opts))
+
+
+opts <- c(
+  "many-to-one", 
+  answer = "one-to-many",
+  "many-to-many"
+)
+
+cat("What term best describes the linkage you just did?", longmcq(opts))
+
+opts <- c(
+  "30", 
+  "19",
+  answer = "0"
+)
+
+cat("How many lab results were NOT linked (hint: `use anti-join()`)?", longmcq(opts))
+
+opts <- c(
+  "What? Isn't all linkage this simple??",
+  answer = "Very! Usually some records don't match"
+)
+
+cat("How fortunate are you that your linkage is so successful?", longmcq(opts))
+
+
+opts <- c(
+  "There are typos in the columns used for linkage, so they are not recognised as matching",
+  "The lab data may contain additional cases from other clinics or regions",
+  "The lab data may include test samples",
+  "Notifications may have been accidentally missed in the surveillance data even though the sample was tested in the lab",
+  answer = "All of the above"
+)
+
+cat("What are typical reasons that lab data doesn't match to the notifiable diseases data?", longmcq(opts))
+
+
+opts <- c(
+  "83",
+  "100",
+  answer = "129"
+)
+
+cat("How many suspected cases do not have a result?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Check the number of rows in each dataset with the `nrow()` funtions, or
+by checking the information in your environment. You can see that this
+was simply a one-to-one merge, because each row had a unique
+notification_id, so one row in the notifiable disease surveillance data
+linked directly to one row in the labdata.
+
+```{r eval=T}
+
+nrow(data_notif)
+```
+
+```{r eval=T}
+nrow(data_linked)
+```
+
+You answered previously that the number of suspected cases in the
+`data_lab_cases` column was even less. You can also check with an
+`anti_join()` if there were any lab results that were not linked into
+the notifiable disease surveillance data. This time the `data_lab_cases`
+object is on the left, as the function assess how many rows from the
+left dataset were not found in the right dataset, matching by
+`notification_id`. Here you do not need to generate a new dataframe, you
+can simply pipe into an `nrow()` to count the number of rows. The output
+is 0, which shows there were no unlinked results - amazing!
+
+```{r eval=T}
+anti_join(data_lab_cases, data_notif, by = "notification_id") |> nrow()
+```
+
+Finally, to check the number of cases without a result, you can either
+conduct an anti_join in putting `data_notif` first:
+
+```{r eval=T}
+anti_join(data_notif, data_lab_cases, by = "notification_id") |> nrow()
+```
+
+Or, you can simply tabulate the number of values in the column `value`
+in data_linked which are missing. Both of these show that 129 are
+missing.
+
+```{r eval=T}
+tabyl(is.na(data_linked$value)) 
+```
+:::
+
+### Step 6.2: Label confirmed, discarded, and suspected cases
+
+#### **Task A: Create a final "case category" column**
+
+**Use `mutate()` to create a new column `case_category`**, updating the
+label of suspected cases according to their lab result. The categories
+should be as follows:
+
+-   If the result was positive: Confirmed
+-   If the result was negative: Discarded
+-   If the result was indeterminate or missing: Suspected
+
+This means that all cases in the notifiable disease surveillance data
+are initially suspected when reported, and then remain suspected if
+there is no conclusive test result.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "case_when()",
+  "if_else()",
+  "case_match()"
+)
+
+cat("Which is the most appropriate function for creating this new column?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+You should use `case_when()` to create the new column. This function is
+ideal for applying multiple logical conditions to create multiple
+values, whereas `case_when()` is better for replacing specific values,
+and `if_else()` is better if there are only two possible values.
+
+```{r eval=T}
+
+data_linked <- data_linked |> 
+  mutate(case_category = case_when(value=="Positive" ~ "Confirmed",
+                                   value=="Negative" ~ "Discarded",
+                                   value=="Indeterminate" | is.na(value) ~ "Suspected"))
+```
+:::
+
+### Step 6.3: Review the distribution of laboratory results among cases
+
+#### **Task A: Use `tabyl()` to cross-tabulate the case notifications with their test results**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "202",
+  "347",
+  "250"
+)
+
+cat("How many cases in the notifiable disease surveillance data did not have a positive or negative result?", longmcq(opts))
+
+opts <- c(
+  "858",
+  answer="785",
+  "800"
+)
+
+cat("How many cases in the notifiable disease surveillance data DID have a positive or negative result?", longmcq(opts))
+
+
+opts <- c(
+  answer = "Cholera",
+  "Malaria",
+  "Typhoid",
+  "Yellow Fever",
+  "Dengue"
+)
+
+cat("Which disease had the highest proportion of confirmed cases?", longmcq(opts))
+
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Once again you can use `tabyl()` to show the number of originally
+suspected cases of cholera, dengue, malaria, typhoid, and yellow fever,
+and their upgraded case category after linking with the lab data.
+
+This time you can specify that `where = "both"` inside the
+`adorn_totals()` function, so that you can see the total number of cases
+per disease but also by disease category.
+
+The total number of suspected cases, i.e. those with either no lab
+result at all or with an indeterminate result, is 202. This means 785
+cases had a definitive laboratory result.
+
+```{r eval=T}
+tabyl(data_linked, disease_notified, case_category) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+#### **Task B: Use `tabyl()` to assess the positive predictive value of the clinical definitions used to identify the notified cases**
+
+The positive predictive value is calculated by diving the number of
+Confirmed cases (i.e. those with a positive reuslt) over the number of
+suspected cases (i.e. those that were reported in the notifiable disease
+surveillance system)
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "86%",
+  answer = "41%",
+  "23%"
+)
+
+cat("What was the positive predictive value of the clinical malaria diagnosis?", longmcq(opts))
+
+opts <- c(
+  answer = "87%",
+  "41%",
+  "23%"
+)
+
+cat("What was the positive predictive value of the clinical dengue diagnosis?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+You can simply filter out the suspected cases from the cross-tabulation
+you did above, to see the proportion of cases that become confirmed or
+discarded among those with test results. You can see that almost all
+clinically diagnosed cholera cases were eventually confirmed, whereas
+only 23% of typhoid cases were confirmed.
+
+```{r eval=T}
+
+data_linked |> 
+  filter(case_category != "Suspected") |> 
+  tabyl(disease_notified, case_category) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+### Step 6.4: Create a linelist with just confirmed cases
+
+**Task A: Create a new linelist called `data_linked_confirmed`**.
+
+This is what you will use in official surveillance reporting.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "For more consistent, reliable, and robust reporting, if the positive predictive value of suspected cases is not so high and there is a lot of lab testing anyway",
+  "Because we want to hide the true number of cases"
+)
+
+cat("What is a valid reason to report only confirmed cases in our surveillance data?", longmcq(opts))
+
+opts <- c(
+  answer = "The positive predictive value of suspected cases is high so suspected cases are still reasonably accurate to report",
+  "Because we want to hide the true number of cases"
+)
+
+cat("What is a valid reason to also report the suspected cases in our surveillance data?", longmcq(opts))
+
+opts <- c(
+  "389",
+  answer = "438",
+  "858"
+)
+
+cat("How many rows are in this new dataset?", longmcq(opts))
+
+
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Your surveillance unit wants to only report on confirmed cases with this
+data. This is because discarded cases are not relevant, and many
+suspected cases eventually get their results, of which many are
+negative.
+
+The decision to publish information suspected cases may be different in
+other contexts however. For example, if the positive predictive value of
+a suspected case is very high (i.e. most of them are true cases if
+tested), and testing itself is not common, publishing suspected cases
+can be informative.
+
+Create the new linelist like this:
+
+```{r, eval=T, include=T, results="asis"}
+data_linked_confirmed <- data_linked |> 
+  filter(case_category=="Confirmed")
+```
+
+And check the number of rows by looking at the information in your
+RStudio environment, or with `nrow()`:
+
+```{r, eval=T, include=T, results="asis"}
+nrow(data_linked_confirmed)
+```
+:::
+
+## Step 7. Descriptive analysis of confirmed cases
+
+### Step 7.1 Describe cases by region
+
+#### **Task A: Produce a table of confirmed cases by region using `group_by()` and `summarize()`**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "199",
+  answer = "354",
+  "68"
+)
+
+cat("How many confirmed cases of malaria reported in 2024 were among Lake Minara residents?", longmcq(opts))
+
+opts <- c(
+  answer = "42",
+  "26",
+  "11"
+)
+
+cat("How many confirmed cases of cholera reported in 2024 were among residents of Feveria Central?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Again, because this is a cross-tabulation, we suggest you use `tabyl()`
+and the relevant `adorn` functions.
+
+```{r eval=T}
+
+data_linked |> 
+  tabyl(disease_notified, residential_district) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns() 
+```
+:::
+
+### Step 7.2 Describe cases over time
+
+You are going to work towards producing this epicurve, over the various
+tasks below.
+
+```{r eval=T, echo=F, fig.width=10, fig.height=7}
+data_linked_confirmed |> 
+  ggplot()+
+  geom_histogram((aes(x = date_report, fill = residential_district)), binwidth=7) +
+  facet_wrap(.~disease_notified, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District of residence",
+       x = "Date reported by clinic",
+       y = "Count",
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Central, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+```
+
+#### **Task A: Use `ggplot()` to produce a basic epicurve to show case counts by disease and week, with different colours by disease**
+
+We suggest you use `geom_histogram()`. Make sure you specify the
+argument `binwidth=7` so that each bar in the histogram represents the
+number of cases within a 7 day period.
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+```{r eval=T}
+data_linked_confirmed |> 
+  ggplot()+
+  geom_histogram((aes(x = date_report, fill = disease_notified)), binwidth=7)
+```
+:::
+
+#### **Task B: Use `ggplot()` to produce a basic epicurve to show case counts by week and region, faceted by disease**
+
+Use `facet_wrap()` to create several mini-plots, one per disease.
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Now you an see the an epicurve per disease, with the colouring
+reflecting the district the case is resident of.
+
+```{r eval=T}
+data_linked_confirmed |> 
+  ggplot()+
+  geom_histogram((aes(x = date_report, fill = residential_district)), binwidth=7) + 
+  facet_wrap(.~disease_notified)
+```
+:::
+
+#### **Task C: Add further formatting to your faceted plot so it is publication-ready**
+
+You can specify:
+
+-   The theme/appearance of the overall graph (e.g. background colour,
+    appearance of grid lines)
+-   The title and labels
+-   The colours of the bar (with `scale_fill_manual()`)
+-   The formatting and spacing of dates along the x axis (with
+    `scale_x_date`)
+-   Many other things!
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+Here is the fully formatted code. Note some other changes include
+specifying that we only want two columns of mini-plots within
+`facet_wrap()`, and that the date label along the x axis should only
+show day and month (not year, since all are in 2024 anyway).
+
+```{r eval=T}
+data_linked_confirmed |> 
+  ggplot()+
+  geom_histogram((aes(x = date_report, fill = residential_district)), binwidth=7) +
+  facet_wrap(.~disease_notified, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District of residence",
+       x = "Date reported by clinic",
+       y = "Count",
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Central, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+```
+:::
+
+#### **Task D: Produce table summarising dates**
+
+This time, use `group_by()` and `summarize()` to produce a table by
+region showing the minimum and maximum dates.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "18th January 2024",
+  answer = "17th January 2024",
+  "12th February 2024"
+)
+
+cat("When was the first Dengue case reported in Feveria Central?", longmcq(opts))
+
+opts <- c(
+  answer = "18th November 2024",
+  "23rd August 2024",
+  "25th December 2024"
+)
+
+cat("When was the last Dengue case reported in Feveria Central?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
+
+```{r eval=T}
+data_linked_confirmed |> 
+  group_by(disease_notified) |> 
+  summarize(first_reported = min(date_report), 
+            recent_reported = max(date_report))
+```
+:::
+
+## Conclusion
+
+ADD HERE
+
+Other things:
+
+-   More questions interpeting the epi? E.g. consider that they should
+    calculate rates (but dont have population data) to properly compare.
+    Also acknowledging not doing age/sex etc
+-   I need to clean up the disease names so that e.g. is "Yellow Fever"
+    and not yellow_fever - will do that in the original data
+-   Would be nice to add a screenshot somewhere showing what can be seen
+    in environment (as keep referring to it, e.g. in section 3.1)
+-   Add make-believe map?
+-   Need to decide on case study information/license stuff below
+
+## Case study information
+
+**Authorship**
+
+Original authors:Paula Blomquist and Alanah Jansen Data source:
+Fictional data provided by Applied Epi, with input from CDC DGHSP
+
+| Date      | Changes made | Version | Author                            |
+|-----------|:-------------|--------:|-----------------------------------|
+| June 2025 | First draft  |       1 | Paula Blomquist and Alanah Jansen |
+
+## Terms of Use
+
+**Disclaimer**: The information presented in this exercise and the
+associated data files have been deliberately changed so as to facilitate
+the acquisition of the learning objectives for fellows of EPIET, EUPHEM
+and EPIET-associated programmes. This case study was first introduced in
+2022 (see Copyright and Licence agreement for more information).
+
+You are free:
+
+-   to Share: to copy and distribute the work
+-   to Remix: to adapt and build upon the material
+
+Under the following conditions:
+
+-   Attribution: You must attribute the work in the manner specified by
+    the author or licensor (but not in any way that suggests that they
+    endorse you or your use of the work). The best way to do this is to
+    keep as it is the list of contributors: sources, authors and
+    reviewers.
+
+-   Share Alike: If you alter, transform, or build upon this work, you
+    may distribute the resulting work only under the same or similar
+    license to this one. Your changes must be documented. Under that
+    condition, you are allowed to add your name to the list of
+    contributors.
+
+-   Notification: If you use the work in the manner specified by the
+    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
+
+-   You cannot sell this work alone but you can use it as part of a
+    teaching.
+
+With the understanding that:
+
+-   Waiver: Any of the above conditions can be waived if you get
+    permission from the copyright holder.
+
+-   Public Domain: Where the work or any of its elements is in the
+    public domain under applicable law, that status is in no way
+    affected by the license.
+
+-   Other Rights: In no way are any of the following rights affected by
+    the license:
+
+    -   Your fair dealing or fair use rights, or other applicable
+        copyright exceptions and limitations;
+
+    -   The author's moral rights;
+
+    -   Rights other persons may have either in the work itself or in
+        how the work is used, such as publicity or privacy rights.
+
+-   Notice: For any reuse or distribution, you must make clear to others
+    the license terms of this work by keeping together this work and the
+    current license.
+
+This licence is based on
+<http://creativecommons.org/licenses/by-sa/3.0/>
