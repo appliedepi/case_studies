@@ -40,18 +40,17 @@ You are an epidemiologist working in a regional surveillance office in
 Feveria Metropolis, the largest region of the tropical country Feveria.
 There are three districts within Feveria Metropolis:
 
--   Feveria Central, the large over-populated downtown area. This is
-    also the oldest distict within the Metropolis, with less reliable
+-   **Feveria Central**: a large over-populated downtown area and oldest district in the Metropolis, with less reliable
     water and sanitation infrastructure.
--   Lake Minara, a populated lake area with good infrastructure but many
+-   **Lake Minara**: a populated lake area with good infrastructure but many
     mosquitoes in the warmer months of the year
--   Kasara, a more sub-urban area on the other side of Feveria central
+-   **Kasara**: a more sub-urban area on the other side of Feveria central
 
 **Map of districts within Feveria Metropolis, in the country Feveria**
 
 ![](/images/multi_disease_lab/map.png){width="70%"}
 
-It is January 2025, and your boss would like you to transfer the routine
+It is January 2025, and your supervisor would like you to transfer the routine
 processing of notifiable disease data into R. The processing currently
 uses Excel.
 
@@ -147,13 +146,8 @@ Next in your R script, you need to install and load the necessary R
 packages. This ensures that the functions you need are available for
 your analysis.
 
-[**Need to update packages below**]{style="color:blue"}
-
-You will need the following packages: `rio` (for importing data),
-`janitor` (for cleaning data), `lubridate` (for cleaning dates), `skimr`
-(for reviewing data), `epikit` (for epi-related tasks), `gtsummary` (for
-presentation-ready tables), `apyramid` (for age-sex pyramids), and
-`tidyverse` (for general data manipulation/science tasks).
+You will need the following packages: `rio` (for importing data),`skimr` (for reviewing data), 
+`janitor` (for cleaning data), `lubridate` (for cleaning dates),  `epikit` (for epi-related tasks), `gtsummary` (for summary statistics/tests and regression), `apyramid` (for age-sex pyramids), `tidyverse` (for general data manipulation/science tasks), `flextable` (for presentation-ready tables), and `naniar` (for evaluating missing data).
 
 As you start, your trusted colleague nudges you and whispers "I've heard
 that a great way to manage your packages is with the `pacman` package".
@@ -195,7 +189,7 @@ pacman::p_load(
   gtsummary,  # summary statistics, tests and regressions 
   apyramid,   # plotting age pyramids 
   tidyverse,  # data management and visualization
-  flextable, # Presentation ready tables
+  flextable,  # Presentation ready tables
   naniar      # Evaluating missingness of data
 )
 
@@ -214,7 +208,7 @@ containing data for 2024 and updated as of 15th January 2025:
 -   Test-level data (*"lab_data.csv"*) submitted by three laboratories
     conducting testing for the 5 health centres
 
-For this case study, you can access the data via AppliedEpi's very
+For this case study, you can access the data via Applied Epi's very
 useful data repository, which you can access using the
 `{appliedepidata}` package. So first you need to download these two
 files to your own computer, as follows:
@@ -243,7 +237,7 @@ remotes::install_github("appliedepi/appliedepidata")
 appliedepidata::save_data("notification_data",
                         path = "data")
 
-appliedepidata::save_data("data_lab",
+appliedepidata::save_data("lab_data",
                           path = "data")
 ```
 
@@ -252,10 +246,10 @@ appliedepidata::save_data("data_lab",
 Great! Thanks country office and Applied Epi! Now it's time to import
 the data from that folder into RStudio, so you can analyse it.
 
-#### **Task A:Import the two downloaded data files into your R environment.**
+#### **Task A: Import the two downloaded data files into your R environment.**
 
 Ideally you want to use one function for both datasets, despite one
-being a csv and the other an xlsx file.
+being a .csv and the other an .xlsx file.
 
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
@@ -280,7 +274,7 @@ suffix to distinguish this data from the cleaned versions we will make
 later.
 
 ```{r , echo=TRUE, eval=FALSE}
-# Import data  --------------
+# Import data
 
 # Notification data
 data_notif_raw <- import("data/notification_data.xlsx")
