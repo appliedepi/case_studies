@@ -329,7 +329,7 @@ The `ncol()` and `nrow()` functions to simply count the numbers of
 columns and rows in the data. Do you know what to put inside the
 brackets?
 
-Easiest of all though, is to look at the RStudio Environment. Remember
+Easiest of all though, is to look at the RStudio environment. Remember
 the object in your environment for the notification data is called
 `data_notif_raw`.
 
@@ -1667,7 +1667,7 @@ forms sent to the lab, and then the lab staff have been equally
 
 Link the data using the `left_join()` function, with notifiable disease
 surveillance data as the main dataset on the left. This will keep all
-the rows from the this dataset, and will just bring in the test results
+the rows from this dataset, and will just bring in the test results
 from the lab data specified on the "right" of the function.
 
 ```{r eval=T}
@@ -1838,7 +1838,7 @@ cat("Which is the most appropriate function for creating this new column?", long
 
 You should use `case_when()` to create the new column. This function is
 ideal for applying multiple logical conditions to create multiple
-values, whereas `case_when()` is better for replacing specific values,
+values, whereas `case_match()` is better for replacing specific values,
 and `if_else()` is better if there are only two possible values.
 
 ```{r eval=T}
@@ -1922,7 +1922,7 @@ tabyl(data_linked, disease_notified, case_category) |>
 The positive predictive value is calculated by diving the number of
 confirmed cases (i.e. those with a positive result) over the number of
 suspected cases (i.e. those that were reported in the notifiable disease
-surveillance system)
+surveillance system). Don't forget that we only want to consider cases that have a test result!
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1983,7 +1983,7 @@ This is what you will use in official surveillance reporting.
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
 opts <- c(
-  answer = "For more consistent, reliable, and robust reporting, if the positive predictive value of suspected cases is not so high and there is a lot of lab testing anyway",
+  answer = "Confirmed cases provide more consistent and reliable data when positive predictive value is not high and lab testing is routine",
   "Because we want to hide the true number of cases"
 )
 
@@ -2052,17 +2052,17 @@ nrow(data_linked_confirmed)
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
 opts <- c(
-  "199",
-  answer = "354",
-  "68"
+  "274",
+  answer = "109",
+  "354"
 )
 
 cat("How many confirmed cases of malaria reported in 2024 were among Lake Minara residents?", longmcq(opts))
 
 opts <- c(
-  answer = "42",
-  "26",
-  "11"
+  answer = "35",
+  "42",
+  "4"
 )
 
 cat("How many confirmed cases of cholera reported in 2024 were among residents of Feveria Central?", longmcq(opts))
@@ -2078,7 +2078,7 @@ and the relevant `adorn` functions.
 
 ```{r eval=T}
 
-data_linked |> 
+data_linked_confirmed |> 
   tabyl(disease_notified, residential_district) |> 
   adorn_totals(where = "both") |> 
   adorn_percentages() |> 
@@ -2132,8 +2132,8 @@ Use `facet_wrap()` to create several mini-plots, one per disease.
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Now you an see the an epicurve per disease, with the colouring
-reflecting the district the case is resident of.
+Now you can see an epicurve per disease, with the colouring
+reflecting the district the case is a resident of.
 
 ```{r eval=T}
 data_linked_confirmed |> 
@@ -2172,7 +2172,7 @@ data_linked_confirmed |>
   labs(fill = "District of residence",
        x = "Date reported by clinic",
        y = "Count",
-       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Central, 2024") +
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Metropolis, 2024") +
   scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
   scale_x_date(date_breaks = "1 month", 
                date_labels = "%d %b") +
@@ -2184,7 +2184,7 @@ data_linked_confirmed |>
 #### **Task D: Produce table summarising dates**
 
 This time, use `group_by()` and `summarize()` to produce a table by
-region showing the minimum and maximum dates.
+region showing the minimum and maximum dates. Then use `filter()` to look at one region at a time.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -2198,15 +2198,15 @@ opts <- c(
   "12th February 2024"
 )
 
-cat("When was the first Dengue case reported in Feveria Central?", longmcq(opts))
+cat("When was the first dengue case reported in **Feveria Metropolis**?", longmcq(opts))
 
 opts <- c(
-  answer = "18th November 2024",
-  "23rd August 2024",
+  answer = "22rd August 2024",
+  "18th November 2024",
   "25th December 2024"
 )
 
-cat("When was the last Dengue case reported in Feveria Central?", longmcq(opts))
+cat("When was the last dengue case reported in **Feveria Central**?", longmcq(opts))
 ```
 :::
 ::::
@@ -2214,29 +2214,40 @@ cat("When was the last Dengue case reported in Feveria Central?", longmcq(opts))
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
+Group the data by disease and then summarize by start and end date to look at the overall timeline in Feveria Metropolis.
+
 ```{r eval=T}
 data_linked_confirmed |> 
   group_by(disease_notified) |> 
   summarize(first_reported = min(date_report), 
-            recent_reported = max(date_report))
+            recent_reported = max(date_report)) |>
+  ungroup()
+```
+
+Use `filter()` to then look at the region you're interested in.
+
+```{r eval=T}
+data_linked_confirmed |> 
+  filter(residential_district == "Feveria Central") |> 
+  group_by(disease_notified) |> 
+  summarize(first_reported = min(date_report), 
+            recent_reported = max(date_report)) |>
+  ungroup()
 ```
 :::
 
 ## Conclusion
 
-ADD HERE
+Wow! You have made fantastic progress cleaning, linking, and preparing notifiable disease surveillance and laboratory data for analysis. The data is now much cleaner and more organized, and you have already begun to uncover meaningful insights.
 
-Other things:
+Throughout this process, you mastered key R functions to clean, reshape, and link datasets, creating new columns using logical conditions. You performed thorough data quality checks to ensure reliable results, and you compared disease trends across sources before and after linkage, gaining a deeper understanding of how the surveillance system is structured.
 
--   More questions interpeting the epi? E.g. consider that they should
-    calculate rates (but dont have population data) to properly compare.
-    Also acknowledging not doing age/sex etc
--   I need to clean up the disease names so that e.g. is "Yellow Fever" 
-    and not yellow_fever - will do that in the original data (AJ fixed this in the data)
--   Would be nice to add a screenshot somewhere showing what can be seen
-    in environment (as keep referring to it, e.g. in section 3.1)
--   Add make-believe map? (You already did this!)
--   Need to decide on case study information/license stuff below (updated the section below based off of Alex's recommendations)
+There is so much more potential ahead. You can explore disease patterns by age or sex, calculate disease rates with population data, and even analyze reporting delays by examining the different dates in your datasets.
+
+You have built a strong foundation and are well equipped to take your analysis to the next level. Keep going — exciting discoveries await!
+
+
+To learn more, check out the other case studies or dive into the [Epi R Handbook](https://www.epirhandbook.com).
 
 ## Case study information
 
