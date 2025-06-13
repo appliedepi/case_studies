@@ -60,7 +60,7 @@ following linelists:
 -   **2024 Notifiable Disease Surveillance Data:** This is the data your
     surveillance unit gets regularly from clinics throughout the Feveria
     Central region. It includes details about cases suspected of having
-    Dengue, Malaria, Cholera, Typhoid Fever, and Yellow Fever, all
+    dengue, malaria, cholera, typhoid fever, and yellow fever, all
     diagnosed by clinics based on the patients' symptoms.
 -   **2024 Laboratory Data:** This data comes from lab test results,
     specifically from three major labs in Feveria Central. These results
@@ -734,7 +734,7 @@ opts <- c(
   answer = "Dengue",
   "Yellow Fever",
   "Cholera",
-  "Typhoid"
+  "Typhoid Fever"
 )
 
 cat("Which test targets multiple targets (and therefore has multiple rows per sample)?", longmcq(opts))
@@ -789,7 +789,7 @@ You can inspect the different values within columns using `tabyl()`. In
 this example, we suggest you cross-tabulate `test` and `target` columns,
 by writing them the column names into the function as two separate
 arguments. The output shows that each test clearly aligns with one or
-more targets, and that it is only the Dengue test which targets more
+more targets, and that it is only the gengue test which targets more
 than one target (IgG, IgM, and NS.1). Tip: Experiment with changing the
 order of the column names to see the impact on the table.
 
@@ -1120,7 +1120,7 @@ opts <- c(
   "Cholera", 
   answer = "Malaria",
   "Dengue",
-  "Typhoid",
+  "Typhoid Fever",
   "Yellow Fever"
 )
 
@@ -1130,7 +1130,7 @@ opts <- c(
   "Cholera", 
   "Malaria",
   "Dengue",
-  answer = "Typhoid",
+  answer = "Typhoid Fever",
   "Yellow Fever"
 )
 
@@ -1144,8 +1144,8 @@ cat("Which disease was least commonly diagnosed by clinics in Feveria Central in
 ## Click to see the solution (try it yourself first!)
 
 Using `tabyl()`, we can see that there were 533 suspected cases of
-Malaria in Feveria Centra in 2024, and only 25 suspected cases of
-Typhoid.
+malaria in Feveria Centra in 2024, and only 25 suspected cases of
+typhoid fever.
 
 ```{r eval=T}
 tabyl(data_notif, disease_notified)
@@ -1184,7 +1184,7 @@ opts <- c(
   "Kasara"
 )
 
-cat("Which district reported the most diarrhoeal disease in 2024 (cholera, typhoid)?", longmcq(opts))
+cat("Which district reported the most diarrhoeal disease in 2024 (cholera, typhoid fever)?", longmcq(opts))
 
 
 ```
@@ -1197,7 +1197,7 @@ cat("Which district reported the most diarrhoeal disease in 2024 (cholera, typho
 Using `tabyl()`, we can see that most cases of dengue, malaria, and
 yellow fever were located in Lake Minara - the lake area with higher
 density of mosquitoes and therefore vector-borne disease. Meanwhile the
-majority of cholera and typhoid were in Feveria Central, the
+majority of cholera and typhoid fever were in Feveria Central, the
 over-populated urban area with water and sanitation infrastructure
 issues that result in higher risk of flooding and drinking water
 contamination during rainy weather.
@@ -1254,7 +1254,7 @@ tabyl(data_lab, value)
 #### **Task A: Review the number of samples with multiple rows**
 
 We already know that some samples have multiple rows, and that this is
-because the Dengue test has three targets, with one row per target
+because the dengue test has three targets, with one row per target
 result.
 
 Now **find the number of samples with multiple rows**.
@@ -1315,9 +1315,9 @@ data_lab |>
   tabyl(n)
 ```
 
-You can even double-check that this only applies to the Dengue tests by
+You can even double-check that this only applies to the dengue tests by
 adding in the `disease` column to the calculation. You can see that it
-is only the Dengue test that has 3 rows per sample.
+is only the dengue test that has 3 rows per sample.
 
 ```{r, eval=T}
 
@@ -1357,9 +1357,9 @@ results. You might accidentally identify some recently infected people
 as currently infected this way (as some IgM positives can be recent
 infections), but this is still acceptable to capture them as a case.
 
-Now you need to **deduplicate the Dengue test results to one row per
+Now you need to **deduplicate the dengue test results to one row per
 test**. Use `filter()`, `arrange()`, and `slice()`, making sure any
-sample positive for NS.1 and IgM is considered positive for Dengue.
+sample positive for NS.1 and IgM is considered positive for dengue.
 Create a new object called `data_lab_tests`
 
 ::: {.callout-tip collapse="true"}
@@ -1535,9 +1535,9 @@ opts <- c(
 cat("What proportion of tests for cholera (via stool culture) were positive?", longmcq(opts))
 
 opts <- c(
-  answer = "IgM ELISA (for Yellow Fever detection)",
-  "Stool Culture (for Cholera detection)", 
-  "Blood culture (for S. Typhi detection)"
+  answer = "IgM ELISA (for yellow fever detection)",
+  "Stool Culture (for cholera detection)", 
+  "Blood culture (for typhoid fever detection)"
 )
 
 cat("Which test had the highest proportion of indeterminate results?", longmcq(opts))
@@ -1880,7 +1880,7 @@ cat("How many cases in the notifiable disease surveillance data DID have a posit
 opts <- c(
   answer = "Cholera",
   "Malaria",
-  "Typhoid",
+  "Typhoid Fever",
   "Yellow Fever",
   "Dengue"
 )
@@ -1897,7 +1897,7 @@ cat("Which disease had the highest proportion of confirmed cases?", longmcq(opts
 ## Click to see the solution (try it yourself first!)
 
 Once again you can use `tabyl()` to show the number of originally
-suspected cases of cholera, dengue, malaria, typhoid, and yellow fever,
+suspected cases of cholera, dengue, malaria, typhoid fever, and yellow fever,
 and their upgraded case category after linking with the lab data.
 
 This time you can specify that `where = "both"` inside the
@@ -1956,7 +1956,7 @@ You can simply filter out the suspected cases from the cross-tabulation
 you did above, to see the proportion of cases that become confirmed or
 discarded among those with test results. You can see that almost all
 clinically diagnosed cholera cases were eventually confirmed, whereas
-only 23% of typhoid cases were confirmed.
+only 23% of typhoid fever cases were confirmed.
 
 ```{r eval=T}
 
@@ -2101,7 +2101,7 @@ data_linked_confirmed |>
   labs(fill = "District of residence",
        x = "Date reported by clinic",
        y = "Count",
-       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Central, 2024") +
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid fever, and yellow fever cases by week in Feveria Central, 2024") +
   scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
   scale_x_date(date_breaks = "1 month", 
                date_labels = "%d %b") +
@@ -2172,7 +2172,7 @@ data_linked_confirmed |>
   labs(fill = "District of residence",
        x = "Date reported by clinic",
        y = "Count",
-       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid, and yellow fever cases by week in Feveria Metropolis, 2024") +
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid fever, and yellow fever cases by week in Feveria Metropolis, 2024") +
   scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
   scale_x_date(date_breaks = "1 month", 
                date_labels = "%d %b") +
