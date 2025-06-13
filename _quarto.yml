@@ -4,19 +4,20 @@ project:
     - index.qmd      
  
     - pages/instructions.qmd
-    - pages/fulton.qmd          
-    - pages/r_practical.qmd
-    - pages/under_construction.qmd
-    - pages/tbe.qmd
-    - pages/stegen-en.qmd                
-    - pages/openxlsx2_tutorial-en_revised.qmd       
+    # - pages/fulton.qmd          
+    # - pages/r_practical.qmd
+    - pages/multi_disease_lab.qmd
+    # - pages/under_construction.qmd
+    # - pages/tbe.qmd
+    # - pages/stegen-en.qmd                
+    # - pages/openxlsx2_tutorial-en_revised.qmd       
     
     # Spanish
-    - pages/oswego.es.qmd
-    - pages/under_construction.es.qmd
+   # - pages/oswego.es.qmd
+   # - pages/under_construction.es.qmd
     
     # French
-    - pages/under_construction.fr.qmd
+   # - pages/under_construction.fr.qmd
     
 
 website:
