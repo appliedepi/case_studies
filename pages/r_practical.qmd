@@ -75,15 +75,8 @@ will make it easy to rerun your analysis whenever needed.
 -   Extra: Ensure your working language in RStudio is appropriate (e.g.
     English for this exercise)
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 -   Create a folder where all the work in this case study will go. For
     example, create 'mpox_analysis' on your computer desktop. Create
@@ -93,18 +86,10 @@ will make it easy to rerun your analysis whenever needed.
     code), `data` (for your data), and `outputs` (for your analytical
     outputs).
 
-</details>
+:::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Create a folder (e.g. 'mpox_analysis' on your Desktop) for your work. To
 create an Rstudio project in your new folder, click `New Project…` in
@@ -128,7 +113,7 @@ English report), you can change it to English by running
 needed, or skip it if your locale is usually appropriate. This is
 explained in more detail in the [How-to Guide](pages/instructions.qmd_).
 
-</details>
+:::
 
 ### 1.2 Install/load packages
 
@@ -147,16 +132,8 @@ that a great way to manage your packages is with the `pacman` package".
 
 Over to you!
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Use the function `p_load()` from `pacman` for this task. You provide the
 function with a list of packages that you want to use. It will take two
@@ -174,7 +151,7 @@ things), then R will use the function from the most recently loaded
 package. To prioritize functions from tidyverse, which are commonly used
 for data manipulation and visualization, load tidyverse last.
 
-</detail>
+
 
 ```{r, echo=TRUE, eval=TRUE}
 
@@ -195,6 +172,8 @@ pacman::p_load(
 )
 
 ```
+
+:::
 
 ## Step 2: Download and import the data
 
@@ -248,15 +227,8 @@ from that folder into RStudio, so you can analyse it.
 R environment. Ideally you want to use one function for both datasets,
 despite one being a csv and the other an xlsx file.
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 Use the `import` function from the `{rio}` package, which can recognize
 and import different file types. It replaces importing functions that
@@ -267,22 +239,17 @@ If you feel you need to know more about importing functions, read the
 [Import and export](https://epirhandbook.com/new_pages/importing.html)
 chapter of the EpiRhandbook.
 
-</details>
+:::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Below we use the import function to bring in both files. Note how we are
 assigning the imported data to two objects, one called
 *mpox_linelist_raw*, and one called *mpox_agg_raw*. We add the 'raw'
 suffix to distinguish this data from the cleaned versions we will make
 later.
+
 
 ```{r , echo=TRUE, eval=FALSE}
 # Import data  --------------
@@ -315,7 +282,7 @@ rm(mpox_linelist, mpox_aggregate_table)
 
 ```
 
-</details>
+:::
 
 ## Step 3: Explore the data
 
@@ -332,15 +299,8 @@ The data’s in, and now it’s time to see what story it tells. Take an initial
 -   How unknown or missing data is categorized in these columns. Do
     these values need to be standardized?
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 An efficient function for initial data exploring is `skim()` from the
 `{skimr}` package, as it gives you a lot of information on data
@@ -353,20 +313,10 @@ printed to your RStudio console.
 Also - we recommend just looking at the data itself! A good function for
 this is `view()`, a baseR function.
 
-</br>
+:::
 
-</details>
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Using the `skim` commands you can see the rows and columns of each
 dataset, and you can see how most of the columns in *mpox_linelist_raw*
@@ -434,9 +384,7 @@ Finally, as an alternative approach to `tabyl()`, you could use
 `tbl_summary()` from the `{gtsummary}` package. We will describe this
 later.
 
-</br>
-
-</details>
+:::
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -523,15 +471,8 @@ For example:
 -   Recode non-missing "outcome" categories into: "Alive" and "Dead". 
 -   Check that all changes have been made correctly
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 To convert all column names to lower case at once rather than renaming
 each column, use the function `clean_names()` from the `{janitor}`
@@ -554,20 +495,10 @@ If you want to know more about these functions, look that the section on
 values](https://epirhandbook.com/en/new_pages/cleaning.html#re-code-values)
 from the EpiRhandbook.
 
-</br>
+:::
 
-</details>
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Here we clean the data using a 'chain' of commands connected by pipes
 (%>%), which is the grammar of the functions in the {Tidyverse}. The
@@ -650,9 +581,7 @@ them wouldn't be appropriate (e.g., if 'unknown' meant the case was asked
 but didn't want to respond, while NA meant they weren't asked). Here, we
 assume no meaningful difference and want R to recognize them as missing. 
 
-</br>
-
-</details>
+:::
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -715,16 +644,8 @@ In a similar way, clean the aggregated data by:
 -   Creating a column called "week_date" with the week of reporting
     starting on Monday
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 We can first check the class of the DateRep column, which shows us that
 it was already recognized as a date column on import.
@@ -755,9 +676,7 @@ mpox_agg <- mpox_agg_raw %>%
 
 ```
 
-</br>
-
-</details>
+::: 
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -789,35 +708,18 @@ Now we’re getting to the heart of the investigation. Who is affected? Which lo
 
 **Task**: Using the mpox case linelist, create a table showing the total number of cases by country. This time, make the table more publication-friendly.
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 You could use `tabyl()` like before, but an easy way to produce
 publication-ready tables is with the function tbl_summary() from
 {gtsummary} package. This formats the table for you. It will print to
 your Viewer rather than the console.
 
-</br>
+:::
 
-</details>
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Create a new object with the table output - as this is a key output that you can then integrate into a document later rather than just viewing for now. 
 
@@ -836,9 +738,7 @@ cb_country_table
 
 ```
 
-</br>
-
-</details>
+:::
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -873,15 +773,8 @@ Okay so Country A has the most cases in total based on most recent data. But how
 -   Using the mpox case linelist, create a heat plot with the number of
     cases by country and week of notification.
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 Prepare your data for the epicurve first. You can create a "week_date" column using the
 function `floor_date()` from `{lubridate}`. Take a look at the
@@ -899,18 +792,10 @@ geom_tile() to create a heat plot. If you're unsure on how to do this,
 read the EpiRhanbook section on [Heat
 Plots](https://epirhandbook.com/en/new_pages/heatmaps.html)
 
-</details>
+:::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Prepare your data by creating the new column using `mutate()` and `floor_date()`:
 
@@ -1011,9 +896,7 @@ hp_mpox
 
 ```
 
-</br>
-
-</details>
+:::
 
 ### 5.3: Describe demographic characteristics
 
@@ -1024,16 +907,8 @@ Next, describe the age, gender, and sexual orientation of cases. What is interes
 -   Create a single table showing overall distribution of age, gender, and sexual orientation
 -   Create an age-gender pyramid showing age as 10-year age bands
 
-<details>
-
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
-
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function tbl_summary() from {gtsummary}.
 
@@ -1041,20 +916,10 @@ To create an age-gender pyramid, first create a new column with the function `ag
 from the `{epikit}` package. Then explore the function age_pyramid() from the {apyramid} package.You can find more about this function in the EpiRhandbook chapter [Demographic pyramids and
 Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
 
+:::
 
-</br>
-
-</details>
-
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 See below the code to quickly generate one table with the breakdown of different variables. The function `tbl_summary()` by default summarizes columns differently depending on their class:
 
@@ -1111,9 +976,7 @@ figure_agesex <- mpox_linelist %>%
 figure_agesex
 ```
 
-</br>
-
-</details>
+:::
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -1166,16 +1029,9 @@ The media is starting to call your office and are asking what symptoms the publi
 
 No hints! You should know this one by now!
 
-<details>
 
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 ```{r , echo=TRUE}
 
@@ -1196,9 +1052,7 @@ tab_outcome
 
 ```
 
-</br>
-
-</details>
+:::
 
 ## **Step 6: Reviewing data quality**
 
@@ -1216,15 +1070,9 @@ For example - is it possible that there are very different reporting delays betw
 -   Assess visually the number of cases by calendar period and type of
     date (onset, diagnosis and notification)
 
-<details>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
-
-</br>
 
 To plot together the different dates you may need to transform your data
 from "wide" to "long" form. What we call "pivoting" in R. The objective
@@ -1235,9 +1083,7 @@ data](https://epirhandbook.com/en/new_pages/pivoting.html) chapter of
 the EpiRhandbook. Then, try to plot with the daily values, but if that's
 not easy to interpret you may want to aggregate cases by week.
 
-</br>
-
-</details>
+:::
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Test yourself!**
@@ -1258,16 +1104,8 @@ cat("Is there a difference in the delay from diagnosis to notification by countr
 :::
 :::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 First create the required columns for this analysis. 
 ```{r , echo=TRUE}
@@ -1386,9 +1224,7 @@ plot_date_delay <-   ggplot(data = dates_longer_week,
 plot_date_delay
 ```
 
-</br>
-
-</details>
+:::
 
 ### 6.2: Compare case-based and aggregated data
 
@@ -1423,16 +1259,8 @@ cat("Which country is not reporting aggregated data?", longmcq(opts))
 :::
 :::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see a solution (try
-it yourself first!)
-
-</summary>
-
-</br>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 First, create a data frame of country totals from the aggregate data.
 
@@ -1509,7 +1337,7 @@ graph_comp
 
 Interesting! There are some differences - and this probably will be worth flagging with stakeholders and/or explaining in a footnote somewhere. 
 
-</details>
+:::
 
 ## Final thoughts
 
@@ -1539,60 +1367,4 @@ purposes\
 
 ## Terms of Use
 
-**Disclaimer**: The information presented in this exercise and the
-associated data files have been deliberately changed so as to facilitate
-the acquisition of the learning objectives for fellows of EPIET, EUPHEM
-and EPIET-associated programmes. This case study was first introduced in
-2022 (see Copyright and Licence agreement for more information).
-
-You are free:
-
--   to Share: to copy and distribute the work
--   to Remix: to adapt and build upon the material
-
-Under the following conditions:
-
--   Attribution: You must attribute the work in the manner specified by
-    the author or licensor (but not in any way that suggests that they
-    endorse you or your use of the work). The best way to do this is to
-    keep as it is the list of contributors: sources, authors and
-    reviewers.
-
--   Share Alike: If you alter, transform, or build upon this work, you
-    may distribute the resulting work only under the same or similar
-    license to this one. Your changes must be documented. Under that
-    condition, you are allowed to add your name to the list of
-    contributors.
-
--   Notification: If you use the work in the manner specified by the
-    author or licensor, [Walter\@rki.de](mailto:Walterj@rki.de)
-
--   You cannot sell this work alone but you can use it as part of a
-    teaching.
-
-With the understanding that:
-
--   Waiver: Any of the above conditions can be waived if you get
-    permission from the copyright holder.
-
--   Public Domain: Where the work or any of its elements is in the
-    public domain under applicable law, that status is in no way
-    affected by the license.
-
--   Other Rights: In no way are any of the following rights affected by
-    the license:
-
-    -   Your fair dealing or fair use rights, or other applicable
-        copyright exceptions and limitations;
-
-    -   The author's moral rights;
-
-    -   Rights other persons may have either in the work itself or in
-        how the work is used, such as publicity or privacy rights.
-
--   Notice: For any reuse or distribution, you must make clear to others
-    the license terms of this work by keeping together this work and the
-    current license.
-
-This licence is based on
-<http://creativecommons.org/licenses/by-sa/3.0/>
+**License**: This case study is under a derivation of the [CC BY-SA 3.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/r_practical_LICENSE.md)

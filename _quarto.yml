@@ -5,7 +5,7 @@ project:
  
     - pages/instructions.qmd
     # - pages/fulton.qmd          
-    # - pages/r_practical.qmd
+    - pages/r_practical.qmd
     - pages/multi_disease_lab.qmd
     # - pages/under_construction.qmd
     # - pages/tbe.qmd

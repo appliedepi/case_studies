@@ -2263,4 +2263,6 @@ To learn more, check out the other case studies or dive into the [Epi R Handbook
 
 **Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. 
 
-**License**: This case study is under a [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+**License**: This case study is under a [CC BY-NC-SA 4.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/multi_disease_lab_LICENSE.md). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+**Funding**: This case study was supported by Grant or Cooperative Agreement number NU2HGH00004 funded by the Centers for Disease Control and Prevention. Its contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for for Global Health, Inc. or TEPHINET. 
