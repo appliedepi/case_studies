@@ -242,8 +242,7 @@ appliedepidata::save_data("lab_data",
 
 ### 2.2 Import the data
 
-Great! Thanks country office and Applied Epi! Now it's time to import
-the data from that folder into RStudio, so you can analyse it.
+Great! Thanks country office and Applied Epi! Now it's time to import the data from that folder into RStudio, so you can analyse it.
 
 #### **Task A: Import the two downloaded data files into your R Studio environment**
 
