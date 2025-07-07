@@ -17,7 +17,7 @@ editor:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-# Linking and analysing notifiable disease surveillance data and laboratory data in R {#multi_disease_lab}
+# Linking and analysing notification data and laboratory data in R {#multi_disease_lab}
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Tool**: R \| **Technical complexity**: Intermediate \|
@@ -52,19 +52,18 @@ You are an epidemiologist working in the national surveillance office of Feveria
 ![](/images/multi_disease_lab/map.png){width="70%"}
 
 It is January 2025, and your supervisor would like you to transfer the routine
-processing of notifiable disease data from Excel into R, and conduct some analyses on the data. She wants to know at least:
+processing of notifiable disease data from Excel into R, and to conduct some analyses on the data. She wants to know at least:
 
 - How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?
 - What percentage of them ended up being confirmed?
-- How many confirmed cases of different notifiable diseass were reported in 2024, and which was most common?
+- How many confirmed cases of different notifiable diseases were reported in 2024, and which was most common?
 - How were confirmed cases geographically and temporally distributed in Feveria?
 
 She asks that you write code to import, clean, link, and analyse the
 following linelists:
 
--   **2024 Notifiable Disease Surveillance Data:** This is the data your
-    surveillance unit gets on a daily basis from clinics throughout Feveria, reported via submission to an online system every weekday. It includes details about cases **suspected** of having dengue, malaria, cholera, typhoid fever, and yellow fever, all diagnosed based on the patients' symptoms. 
--   **2024 Laboratory Data:** This data comes from lab test results, from three major labs in Feveria. These results are for samples taken from those suspected notifiable disease cases mentioned above.
+-   **2024 notifiable disease surveillance data:** Referred to also as "notification data", this is surveillance data on five notifiable diseases reported by clinics in Feveria: dengue, malaria, cholera, typhoid fever, and yellow fever. These are suspected cases, based on patients' symptoms. Clinicians enter each notification into an online system every weekday. 
+-   **2024 laboratory test result data:** This data comes from lab test results, from three major labs in Feveria. These results are for samples taken from those suspected notifiable disease cases mentioned above.
 
 Let's go!
 
@@ -125,7 +124,7 @@ the Epi R Handbook.
 
 Start a new R script by clicking `New File…` in the top left of your R
 Studio, then `R Script`. Save it immediately in the appropriate place,
-e.g. in a 'scripts' subfolder of your R Project.
+e.g. in a 'scripts' sub-folder of your R Project.
 
 At the top of your new R script, write some essential information like
 your name, the purpose of the file, and the date.
@@ -195,22 +194,21 @@ pacman::p_load(
 ```
 :::
 
-## Step 2: Download and import the data
+## Step 2. Download and import the data
 
 ### 2.1: Download the data
 
 Your office provides you with two files for your analysis, both
 containing data for 2024 and updated as of 15th January 2025:
 
--   A disease notification-level dataset (*"notification_data.xlsx"*) with case
+-   A disease notification-level dataset (*"multidisease_notifications.xlsx"*) with case
     information from 5 health centers
--   A laboratory test-level dataset (*"lab_data.csv"*) submitted by three laboratories
+-   A laboratory test-level dataset (*"multidisease_tests.csv"*) submitted by three laboratories
     conducting testing for the 5 health centers.
 
-For this case study, you can access the data via Applied Epi's very
+For this case study, you can download the data via Applied Epi's very
 useful data repository, which you can access using the
-`{appliedepidata}` package. So first you need to download these two
-files to your own computer, as follows:
+`{appliedepidata}` package. Follow these steps:
 
 1)  Install the `{appliedepidata}` package from GitHub using the
     `install_github()` function in the `{remotes}` package. Install
@@ -233,10 +231,10 @@ remotes::install_github("appliedepi/appliedepidata")
 
 ```{r , echo=TRUE, eval=FALSE}
 # Save down the two data files using the save_data() function from appliedepidata
-appliedepidata::save_data("notification_data",
+appliedepidata::save_data("multidisease_test",
                         path = "data")
 
-appliedepidata::save_data("lab_data",
+appliedepidata::save_data("multidisease_notifications",
                           path = "data")
 ```
 
@@ -275,10 +273,10 @@ later.
 # Import data
 
 # Notification data
-data_notif_raw <- import("data/notification_data.xlsx")
+data_notif_raw <- import("data/multidisease_notifications.xlsx")
 
 # Lab data
-data_lab_raw <- import("data/lab_data.csv")
+data_lab_raw <- import("data/multidisease_tests.csv")
 
 ```
 
@@ -309,12 +307,12 @@ data_lab_raw <- read_sheet("https://docs.google.com/spreadsheets/d/1Dgh-VLiAdZ3T
 ```
 :::
 
-## Step 3: Inspect the data
+## Step 3. Inspect the data
 
 The data’s in, and now it’s time to see what story it tells. Take an
 initial look at your two raw data frames to check their contents and quality.
 
-### Step 3.1: Inspect the surveillance data
+### Step 3.1 Inspect the surveillance data
 
 #### **Task A: First, inspect the *dimensions* and general contents of the notification data**
 
@@ -404,7 +402,7 @@ skim(data_notif_raw)
 
 Or, you could use `names()` to print out just the column names. Through
 either `skim()` or `names()` you will be able to see the types of
-information including: the health facility of the case, birthdate, sex, a flag indicating pregnancy, district of residence, onset date, and date reported by the clinic, and outcome information. There is also a `Notification ID` which appears to be a unique identifier for a case,
+information including: the health facility of the case, birth-date, sex, a flag indicating pregnancy, district of residence, onset date, and date reported by the clinic, and outcome information. There is also a `Notification ID` which appears to be a unique identifier for a case,
 but we would want to double check duplicates before we are sure. Note
 that there are NO test results in this data, as these notifications are
 from clinics diagnosing notifiable diseases based on clinical case
@@ -473,7 +471,7 @@ cat("What is the class of most columns in the raw notification data frame?", lon
 
 You can use `class` like the example below. The \$ is an operator used
 to select a specific column from the `data_notif_raw` data frame. Note
-that the backticks are used around Date of Birth because the column name
+that the back-ticks are used around Date of Birth because the column name
 contains spaces.
 
 ```{r}
@@ -560,7 +558,7 @@ tabyl(data_notif_raw, `Residential District`)
 
 You can see that each of the three locations (Feveria Central, Lake
 Minara, and Kasara) are spelled in different ways and with different
-capitalisation. This will need to be cleaned out if we want to analyse
+capitalization. This will need to be cleaned out if we want to analyse
 the geographic distribution of the notifiable diseases.
 
 Similarly, use the `tabyl()` function to tabulate the values within the
@@ -578,20 +576,20 @@ evaluates each cell within the column `Onset date`, returning TRUE for
 missing ones and FALSE for present ones. Running `tabyl()` on this
 TRUE/FALSE output then quickly gives you a clear count and percentage of
 both missing and non-missing values in that column. Remember, values
-like a space or the words "Unknown" or "Missing" will not be recognised
-by R as missing. R will only recognise true blanks as missing,
+like a space or the words "Unknown" or "Missing" will not be recognized
+by R as missing. R will only recognize true blanks as missing,
 represented by "NA".
 
 For `Onset date`, you can see that 70% of cases are missing onset date,
 suggesting that this column would not be particularly useful for
-analysing trends in disease over time.
+analyzing trends in disease over time.
 
 ```{r, eval=T}
 tabyl(is.na(data_notif_raw$`Onset date`))
 ```
 :::
 
-### Step 3.2: Inspect the laboratory data
+### Step 3.2 Inspect the laboratory data
 
 #### **Task A: Inspect the *dimensions* and general content of the lab data**
 
@@ -651,7 +649,7 @@ to look at the entire laboratory data frame with test results.
 This will also show you the different column names in the data, showing
 you that the lab data only contains information about the test and not
 about the patient. It does however also contain a notification ID, just
-like the notifiable disease surveillance data does.
+like the notification data does.
 
 ```{r}
 skim(data_lab_raw)
@@ -752,8 +750,7 @@ cat("What is NOT a possible test result for the stool culture test which detects
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-There is one date column in the laboratory data, and R does recognise it as a date. You can see this by running the function `class()`, which returns the value "character". This means R understands the order of
-values in this column (e.g. from oldest to newest) and trends over time can be inspected with this column.
+There is one date column in the laboratory data, and R does recognize it as a date. You can see this by running the function `class()`, which returns the value "IDate", which is a specific type of date class. The `import()` function from `{rio}` converts any column that looks like a date (in a csv file) into an IDate class. This is similar to the base R Date class, and means R recognizes the value as an actual date. This means it can arrange in date order, and you can use this column to inspect trends over time. 
 
 ```{r eval=T}
 class(data_lab_raw$date_test)
@@ -771,8 +768,7 @@ miss_var_summary(data_lab_raw)
 ```
 
 To see how many targets are detected by each test, you can cross-tabulate `test` and `target` columns with `tabyl()`. Write the column names into the function as two separate
-arguments. The output shows that each test clearly aligns with one or
-more targets, and only the Dengue RDT test detects more than one target (IgG, IgM, and NS.1). 
+arguments. The output shows that each test clearly aligns with one or more targets, and only the dengue test detects more than one target (IgG, IgM, and NS.1). 
 
 **Tip:** Experiment with changing the
 order of the column names in the function to see the impact on the table.
@@ -789,23 +785,23 @@ tabyl(data_lab_raw, test, value)
 ```
 :::
 
-## Step 4: Clean and describe the notifiable disease surveillance data
+## Step 4. Clean and describe the notification data
 
-You now know that the notifiable disease surveillance data (`data_notif_raw`) contains
+You now know that the notification data (`data_notif_raw`) contains
 information about suspected cases, alongside basic demographic
 information (age, sex, pregnancy, district of residence), and
 information about their onset date, date reported by the health facility,
 and outcome. Some columns need cleaning before further analysis, due to
 variations in spelling of categorical values and some date columns not
-being recognised as dates.
+being recognized as dates.
 
 You will now start writing longer chunks of code to clean data, using
 various `{dplyr}` functions chained together with pipes (which look like
 this: \|\>).
 
-**NOTE ON PIPES**: Pipes allow you to perform several operations in one smooth sequence, by "chaining" different functions together. The output from one function becomes the input for the next. If you need more information on piping, please refer to the [Epi R Handbook](https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline). Note that this exercise uses the base pipe (|>) rather than the magrittr pipe (%>%), because XXXXXXXX. 
+**NOTE ON PIPES**: Pipes allow you to perform several operations in one smooth sequence, by "chaining" different functions together. The output from one function becomes the input for the next. If you need more information on piping, please refer to the [Epi R Handbook](https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline). Note that this exercise uses the base pipe (|>) rather than the magrittr pipe (%>%), as it is faster and does not require package installation. Use the magrittr pipe if you prefer it. 
 
-### Step 4.1: Clean the data
+### Step 4.1 Clean the data
 
 #### **Task A: Clean your column names and select columns for analysis**
 
@@ -815,9 +811,9 @@ Due to quality and data storage issues, your team recommends that you create a c
 applying the following cleaning tasks:
 
 -   Rename columns to be more machine readable (remove spaces and
-    capitalisation) using `clean_names()` from the {janitor} package
+    capitalization) using `clean_names()` from the {janitor} package
 -   Use the `rename()` function from `{dplyr}` so that the column with
-    the date the case was reported is changed to a more conscise `date_report`.\
+    the date the case was reported is changed to a more concise `date_report`.\
 -   Select relevant columns for analysis with the `select()` function
     from the `{dplyr}` package.
 
@@ -868,15 +864,15 @@ data_notif <- data_notif_raw |>
 ```
 :::
 
-#### **Task B: Standardise categorical values**
+#### **Task B: Standardize categorical values**
 
 You already know from your data inspection that the values for district
-are not standardised.
+are not standardized.
 
 **Add a `mutate()` function to clean the `residential_district`
 column**, to:
 
--   Standardise the capitalisation of the column
+-   Standardize the capitalization of the column
 -   Replace the existing `residential_district` column with a clean
     column that only contains these district values: "Lake Minara",
     "Feveria Central", and "Kasara".
@@ -892,7 +888,7 @@ You can also use `case_match()` to specify different specific typos.
 
 Use the 'help' functionality of RStudio to see how to use these
 functions. For example, type `?case_match` in your console to get the
-help page. **NOTE** on `case_match()` - this is a very useful function for replacing or correcting values, and supercedes `recode()`.
+help page. **NOTE** on `case_match()` - this is a very useful function for replacing or correcting values, and supersedes `recode()`.
 :::
 
 ::: {.callout-caution icon="false" collapse="true"}
@@ -947,9 +943,9 @@ convert the column into a date class. We recommend you use one of the
 functions from the `{lubridate}` package: either `ymd()` (for converting
 dates written as year-month-date), `mdy()` (for dates written as
 month-day-year), or `dmy()` (for dates written as day-month-year). These
-functions will recognise any way of writing the date as long as it is
+functions will recognize any way of writing the date as long as it is
 the correct order, for example "21st August 2025" and "21-08-2024" would
-both be recognised by `dmy()`.
+both be recognized by `dmy()`.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1030,7 +1026,7 @@ suspected case. You now want to **create a table to check if
 
 opts <- c(answer = "Yes", "No")
 
-cat("Does one row in the notifiable disease surveillance data equate to one case?", longmcq(opts))
+cat("Does one row in the notification data equate to one case?", longmcq(opts))
 
 opts <- c("Yes", answer = "No")
 
@@ -1083,7 +1079,7 @@ data_notif |>
 ```
 :::
 
-### Step 4.2: Simple descriptive analysis
+### Step 4.2 Simple descriptive analysis
 
 You can now comfortably proceed with descriptive analyses of cases, as
 your data is clean and you know that one row equals one case. Use the
@@ -1185,7 +1181,7 @@ tabyl(data_notif, disease_notified, residential_district) |>
   adorn_percentages()
 ```
 
-For factors contributing to more diarrhoea - scroll up to earlier in the case study when the districts were first introduced!
+For factors contributing to more diarrhea - scroll up to earlier in the case study when the districts were first introduced!
 
 
 :::
@@ -1218,7 +1214,7 @@ tabyl(data_notif, disease_notified, residential_district) |>
 
 From your earlier work in step 3, you have found that the laboratory
 data contains only testing data, and no patient information. The data is
-already very clean, so we only need to standardise one column. We will also want to process the laboratory data frame to be one row per notification, so that it can be neatly linked to the notification data frame. 
+already very clean, so we only need to standardize one column. We will also want to process the laboratory data frame to be one row per notification, so that it can be neatly linked to the notification data frame. 
 
 ### Step 5.1 Standardise the test results
 
@@ -1263,7 +1259,7 @@ result.
 
 Now **find the number of samples with multiple rows**.
 
-Do this as you did with the notifiable disease surveillance data, using
+Do this as you did with the notification data, using
 the `data_lab` object: first count the number of rows per sample, then
 create a table to show the distribution of row numbers. Keep in mind
 that each sample is identified by a sample ID.
@@ -1331,9 +1327,9 @@ data_lab |>
 ```
 :::
 
-#### **Task B: Consolidate to one row per sample_id, prioritising positive results** 
+#### **Task B: Consolidate to one row per sample_id, prioritizing positive results** 
 
-As you saw in section 3.2, your dengue RDT provides results for
+As you saw in section 3.2, your dengue test provides results for
 three different targets: IgG, IgM, and NS.1. The results for each of these targets can be either
 negative or positive. However, to simplify and consolidate your data,
 you want to assign a single negative or positive label to each sample,
@@ -1341,7 +1337,7 @@ to indicate if the sample represents current infection.
 
 ```{r eval=T, echo=F}
 data_lab |> 
-filter(test=="Dengue NS1/IgG/IgM RDT") |> 
+filter(test=="Dengue NS1/IgG/IgM") |> 
 tabyl(target, value) |> flextable() |> autofit()
 ```
 
@@ -1372,7 +1368,7 @@ Try to apply the following to consolidate according to Ben's recommendation:
 
 Here is the code to filter out the dengue IgG results, and then
 consolidate the test result within each group of rows with the same `sample_id`,
-prioritising positive results. You need to specify `desc` within
+prioritizing positive results. You need to specify `desc` within
 `arrange()`, as this means that the results will be in reverse
 alphabetical order, meaning P will be at the top. Also, add the
 `ungroup()` function at the end so that the new data is not grouped,
@@ -1399,7 +1395,7 @@ data_lab_tests |>
 ```
 :::
 
-#### **Task C: Deduplicate to one row per notification_id, prioritising positive results** 
+#### **Task C: Deduplicate to one row per notification_id, prioritizing positive results** 
 
 Next, you check the number of tests per notification ID in your new
 consolidated data. You can see that there are 26 rows with the same
@@ -1443,7 +1439,7 @@ opts <- c(
   "No - the data is sufficiently deduplicated"
 )
 
-cat("Will you need to deduplicate the lab data, to link with the notifiable disease surveillance data?", longmcq(opts))
+cat("Will you need to deduplicate the lab data, to link with the notification data?", longmcq(opts))
 
 
 
@@ -1453,11 +1449,11 @@ cat("Will you need to deduplicate the lab data, to link with the notifiable dise
 
 If you answered that you need to deduplicate, you are correct!
 
-**Deduplicate your data to have one row per notification ID**, prioritizing positive results, so that you can link to the notifiable disease surveillance data.
+**Deduplicate your data to have one row per notification ID**, prioritizing positive results, so that you can link to the notification data.
 
 To do this, follow a similar process as you did in Task B, using the data frame produced by task B: 
 - Group by `notification_id`
-- Arrange by the test result value so that values starting with P are prioritised in the top row, followed by N (negative), and then I (indeterminate). 
+- Arrange by the test result value so that values starting with P are prioritized in the top row, followed by N (negative), and then I (indeterminate). 
 - Then keep the first row within each group of `notification_id`s, using `slice()`. 
 - When doing this, create a new object called `data_lab_cases`.
 
@@ -1465,7 +1461,7 @@ To do this, follow a similar process as you did in Task B, using the data frame 
 ## Click to see the solution (try it yourself first!)
 
 Here is the code to deduplicate rows within each group of rows with the
-same `notification_id`, prioritising positive results. Once again you
+same `notification_id`, prioritizing positive results. Once again you
 need to specify `desc` within `arrange()`. This works perfectly because
 the desired priority order for results — positive, then negative, then
 indeterminate — happens to align with reverse alphabetical order (P comes
@@ -1589,11 +1585,11 @@ opts <- c(
 cat("How many suspected cases were tested in the 2024 lab data?", longmcq(opts))
 
 opts <- c(
-  answer = "Notifiable disease surveillance data",
+  answer = "Notification data",
   "Lab data"
 )
 
-cat("Are there more suspected cases in the notifiable disease surveillance data or the lab data?", longmcq(opts))
+cat("Are there more suspected cases in the notification data or the lab data?", longmcq(opts))
 
 ```
 :::
@@ -1622,15 +1618,13 @@ nrow(data_notif)
 
 ## Step 6. Linkage and final processing
 
-Now that both linelists are clean and have one row per suspected case,
-you can link them to complete the analysis requested by your boss. 
+Now that both linelists are clean and have one row per suspected case, you can link them to enable the full analysis requested by your boss. 
 
-### Step 6.1 Link the notifiable disease surveillance data and lab data
+### Step 6.1 Link the notification data and lab data
 
 #### **Task A: Conduct the linkage** 
 
-Create a new object called `data_linked`, using a `xxx_join()` function
-from `{dplyr}`.
+Create a new object called `data_linked`, using a `xxx_join()` function from `{dplyr}`. You want to keep all notifications, but add on test results where available for each suspected case.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1644,7 +1638,7 @@ opts <- c(
   "right_join(data_notif, data_lab_cases..."
 )
 
-cat("Which function is the correct approach if you want to retain all rows from your notifiable disease surveillance data and bring in results from your lab data?", longmcq(opts))
+cat("Which function is the correct approach if you want to retain all rows from your notification data and bring in results from your lab data?", longmcq(opts))
 
 opts <- c(
   "sample_id", 
@@ -1663,30 +1657,23 @@ cat("What identifier should be used to link the two linelists?", longmcq(opts))
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-You are lucky to work with a straight-forward example of linkage! Both
-data frames have an identifier called `notification_id`, which is clean and
-formatted in the same way. Usually you would need to really clean and
-check this column.
-
-The staff in the clinics have been **fantastic** at consistently
-allocating notification IDs to each patient, including on the sample
-forms sent to the lab, and then the lab staff have been equally
-**brilliant** at recording the notification ID in their lab systems.
-
-Link the data using the `left_join()` function, with notifiable disease
-surveillance data as the main data frame on the left. This will keep all
-the rows from this data frame, and will just bring in the test results
-from the lab data specified on the "right" of the function.
+Link the data using the `left_join()` function, with notification data as the main data frame on the left. This will keep all the rows from this data frame, and will just bring in the test results from the lab data specified on the "right" of the function.
 
 ```{r eval=T}
 
-data_linked <- left_join(data_notif, data_lab_cases, by = "notification_id")
+data_linked <- left_join(data_notif, data_lab_cases, 
+                         by = "notification_id")
 ```
+
+You are linking on the `notification_id` column, which is present, complete, and clean in both linelists.
+
+**Note**: You are lucky to work with such a straight-forward example of linkage! Usually you would need to really clean and check the ID column, or link on other columns like name and date fo birth. In Feveria, clinic staff are _fantastic_ at consistently allocating notification IDs to each patient, including on the sample forms sent to the lab, and then the lab staff are equally _brilliant_ at recording the notification ID in their lab systems so that the results can be linked back to the case.
+
 :::
 
 #### **Task B: Check the linkage worked as expected**
 
-Now check your data and review a few things:
+Now check your data and review a few things.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1708,7 +1695,7 @@ opts <- c(
   "fewer rows"
 )
 
-cat("How does this compare to your original notifiable disease surveillance data?", longmcq(opts))
+cat("How does this compare to your original notification data?", longmcq(opts))
 
 
 opts <- c(
@@ -1737,7 +1724,7 @@ cat("How fortunate are you that your linkage is so successful?", longmcq(opts))
 
 opts <- c(
   "There are typos in the columns used for linkage, so they are not recognised as matching",
-  "The lab data may contain additional cases from other clinics or regions",
+  "The lab data may contain additional cases from other clinics or countries",
   "The lab data may include test samples",
   "Notifications may have been accidentally missed in the surveillance data even though the sample was tested in the lab",
   answer = "All of the above"
@@ -1765,22 +1752,21 @@ cat("How many suspected cases do not have a result?", longmcq(opts))
 Check the number of rows in each data frame with the `nrow()` function, or
 by checking the object information in your environment. You can see that this
 was simply a one-to-one merge, because each row had a unique
-notification_id, so one row in the notifiable disease surveillance data
+notification_id, so one row in the notification data
 linked directly to one row in the lab data.
 
+**Number of rows in notification data**
 ```{r eval=T}
 
 nrow(data_notif)
 ```
 
+**Number of rows in linked data**
 ```{r eval=T}
 nrow(data_linked)
 ```
 
-You answered previously that the number of suspected cases in the
-`data_lab_cases` column was even less. You can also check with an
-`anti_join()` if there were any lab results that were not linked into
-the notifiable disease surveillance data. This time the `data_lab_cases`
+To check if there were any lab result that were not linked to the notification data, you can use `anti_join()`. This time the `data_lab_cases`
 object is on the left, as the function assess how many rows from the
 left data frame were not found in the right data frame, matching by
 `notification_id`. Here you do not need to generate a new data frame, you
@@ -1788,25 +1774,29 @@ can simply pipe into an `nrow()` to count the number of rows. The output
 is 0, which shows there were no unlinked results - amazing!
 
 ```{r eval=T}
-anti_join(data_lab_cases, data_notif, by = "notification_id") |> nrow()
+anti_join(data_lab_cases, data_notif, 
+          by = "notification_id") |> nrow()
 ```
 
-Finally, to check the number of cases without a result, you can either
+Finally, to check the number of notifications without a result, you can either
 conduct an anti_join in putting `data_notif` first:
 
 ```{r eval=T}
-anti_join(data_notif, data_lab_cases, by = "notification_id") |> nrow()
+anti_join(data_notif, data_lab_cases, 
+          by = "notification_id") |> nrow()
 ```
 
 Or, you can simply tabulate the number of missing values in the `value` column
-in `data_linked`. Both of these show that 129 are missing.
+in `data_linked` (as the `value` column comes from the lab data). 
 
 ```{r eval=T}
 tabyl(is.na(data_linked$value)) 
 ```
+
+Both of these approaches show that 129 suspected cases do not have a lab test result. 
 :::
 
-### Step 6.2: Label confirmed, discarded, and suspected cases
+### Step 6.2 Label confirmed, discarded, and suspected cases
 
 #### **Task A: Create a final "case category" column**
 
@@ -1818,7 +1808,7 @@ should be as follows:
 -   If the result was negative: Discarded
 -   If the result was indeterminate or missing: Suspected
 
-This means that all cases in the notifiable disease surveillance data
+This means that all cases in the notification data
 are initially suspected when reported, and then remain suspected if
 there is no conclusive test result.
 
@@ -1857,9 +1847,11 @@ data_linked <- data_linked |>
 ```
 :::
 
-### Step 6.3: Review the distribution of laboratory results among cases
+### Step 6.3 Review the distribution of laboratory results among cases
 
-#### **Task A: Use `tabyl()` to cross-tabulate the case notifications with their test results**
+#### **Task A: Use `tabyl()` to tabulate case category**
+
+Use `tabyl()` overall, and also cross-tabulate by disease to answer the questions below. 
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1873,7 +1865,7 @@ opts <- c(
   "250"
 )
 
-cat("How many cases in the notifiable disease surveillance data did not have a positive or negative result?", longmcq(opts))
+cat("How many cases in the linked notification data did not have a positive or negative result?", longmcq(opts))
 
 opts <- c(
   "60.1%",
@@ -1881,19 +1873,28 @@ opts <- c(
   "92.2%"
 )
 
-cat("What proportion of cases in the notifiable disease surveillance data DID have a positive or negative result?", longmcq(opts))
+cat("What proportion of cases in the notification data DID have a positive or negative result?", longmcq(opts))
+
 
 
 opts <- c(
-  answer = "Cholera",
-  "Malaria",
-  "Typhoid Fever",
-  "Yellow Fever",
-  "Dengue"
+  answer="Suspected cases include notifications without a lab result and with an indeterminate lab result",
+  "There are additional suspected cases being brought in from the lab",
+  "There is an issue with the data"
 )
 
-cat("Which disease had the highest proportion of confirmed cases?", longmcq(opts))
+cat("Why are there more remaining suspected cases than there are unlinked notifications?", longmcq(opts))
 
+
+
+opts <- c(
+  "Cholera",
+  "Malaria",
+  "Dengue",
+  answer="Yellow fever"
+)
+
+cat("Which disease had the highest proportion of cases that remained suspected after linkage?", longmcq(opts))
 
 
 ```
@@ -1903,16 +1904,19 @@ cat("Which disease had the highest proportion of confirmed cases?", longmcq(opts
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Once again you can use `tabyl()` to show the number of originally
-suspected cases of cholera, dengue, malaria, typhoid fever, and yellow fever,
-and their upgraded case category after linking with the lab data.
+Once again you can use `tabyl()` to see the distribution of case categories across notifications. The total number of suspected cases, i.e. those with either no lab result at all or with an indeterminate result, is 202. This means 785 cases, i.e. 79.5%, did have a definitive laboratory result. 
 
-This time you can specify that `where = "both"` inside the
-`adorn_totals()` function, so that you can see the total number of cases
-per disease, displayed by disease category.
+```{r eval=T}
+tabyl(data_linked, case_category) 
+```
 
-The total number of suspected cases, i.e. those with either no lab
-result at all or with an indeterminate result, is 202. This means 785 cases, i.e. 79.5%, did have a definitive laboratory result.
+You can also cross-tabulate the original results (indeterminate/negative/positive) in the `value` column with the new `case_category` column, firstly to check your logic worked, and to see how the original values map to the new column values. This shows that in addition to the 129 notifications that were not linked (with `NA` in the `value` column), 73 had indeterminate results, so were categorized as suspected cases. 
+
+```{r eval=T}
+tabyl(data_linked, case_category, value) 
+```
+
+Finally, you can also cross-tabulate with the disease name to see the case categories by disease. Add additional `adorn_xxx()` functions for percentage formatting. The table shows you that 22% of yellow fever cases remained suspected, which was the highest percentage compared to the other diseases. 
 
 ```{r eval=T}
 tabyl(data_linked, disease_notified, case_category) |> 
@@ -1921,14 +1925,12 @@ tabyl(data_linked, disease_notified, case_category) |>
   adorn_pct_formatting() |> 
   adorn_ns()
 ```
+
 :::
 
-#### **Task B: Use `tabyl()` to assess the positive predictive value of the clinical definitions used to identify the notified cases**
+#### **Task B: Assess the proportion of suspected cases that are indeed true cases**
 
-The positive predictive value is calculated by dividing the number of
-confirmed cases (i.e. those with a positive result) over the number of
-suspected cases (i.e. those that were reported in the notifiable disease
-surveillance system). Don't forget that we only want to consider cases that have a test result!
+Use `tabyl()` for this once again, looking at the results by disease. Think about the correct denominator!
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1937,12 +1939,21 @@ surveillance system). Don't forget that we only want to consider cases that have
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
 opts <- c(
+  "44%",
+  answer = "56%",
+  "59%"
+)
+
+cat("What proportion of suspected cases reported in 2024 became confirmed?", longmcq(opts))
+
+
+opts <- c(
   "86%",
   answer = "41%",
   "23%"
 )
 
-cat("What was the positive predictive value of the clinical malaria diagnosis?", longmcq(opts))
+cat("What proportion of suspected malaria cases became confirmed?", longmcq(opts))
 
 opts <- c(
   answer = "87%",
@@ -1950,19 +1961,23 @@ opts <- c(
   "23%"
 )
 
-cat("What was the positive predictive value of the clinical dengue diagnosis?", longmcq(opts))
+cat("What proportion of suspected dengue cases became confirmed?", longmcq(opts))
 ```
 :::
 ::::
 
+::: {.callout-tip collapse="true"}
+## Click to read a hint
+
+Divide the number of confirmed cases (i.e. those with a positive result) by the number of confirmed plus discarded cases (i.e. those with either a positive or negative result). This gives a positivity rate, which approximates the proportion of suspected cases that were truly cases. Indeterminate results are excluded because they don't provide a clear outcome and would skew the positivity rate.
+:::
+
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-You can simply filter out the suspected cases from the cross-tabulation
-you did above, to see the proportion of cases that become confirmed or
-discarded among those with test results. You can see that almost all
-clinically diagnosed cholera cases were eventually confirmed, whereas
-only 23% of typhoid fever cases were confirmed.
+Filter out suspected cases and then cross-tabulate, to see the proportion of originally suspected cases that become confirmed or discarded, among those with valid test results. 
+
+Because there is a totals row, you can see that 56% of suspected cases overall became confirmed, among those with a valid result. You can also see that 41% and 87% of malaria and dengue cases respectively were confirmed. 
 
 ```{r eval=T}
 
@@ -1976,7 +1991,7 @@ data_linked |>
 ```
 :::
 
-### Step 6.4: Create a linelist with just confirmed cases
+### Step 6.4 Create a linelist with just confirmed cases
 
 **Task A: Create a new linelist called `data_linked_confirmed`**.
 
@@ -1989,18 +2004,20 @@ This is what you will use in official surveillance reporting.
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
 opts <- c(
-  answer = "Confirmed cases provide more consistent and reliable data when positive predictive value is not high and lab testing is routine",
+  answer = "Reporting confirmed cases can be more reliable and accurate when the proportion testing positive is low and lab testing is routine, thereby helping prevent over-estimation of disease burden",
+  "Reporting confirmed cases is slower, which gives us more time to be sure of what we are reporting",
   "Because we want to hide the true number of cases"
 )
 
-cat("What is a valid reason to report only confirmed cases in our surveillance data?", longmcq(opts))
+cat("Why are we opting to report only confirmed cases in our surveillance data?", longmcq(opts))
 
 opts <- c(
-  answer = "The positive predictive value of suspected cases is high so suspected cases are still reasonably accurate to report",
-  "Because we want to hide the true number of cases"
+  answer = "filter()",
+  "arrange()",
+  "mutate()"
 )
 
-cat("What is a valid reason to also report the suspected cases in our surveillance data?", longmcq(opts))
+cat("What function is important for creating the new linelist?", longmcq(opts))
 
 opts <- c(
   "389",
@@ -2011,8 +2028,6 @@ opts <- c(
 cat("How many rows are in this new data frame?", longmcq(opts))
 
 
-
-
 ```
 :::
 ::::
@@ -2020,15 +2035,12 @@ cat("How many rows are in this new data frame?", longmcq(opts))
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Your surveillance unit wants to focus on confirmed cases in reporting. This is because discarded cases are not relevant, and suspected cases eventually get their results, of which many are negative.
+Your surveillance unit wants to focus on confirmed cases in reporting. This is because lab testing is routine in Feveria, and so reporting suspected cases would be unnecessarily inaccurate, with a high proportion of suspected cases getting discarded.
 
 The decision to publish suspected cases may be different in
-other contexts. For example, if the positive predictive value of
-a suspected case is very high (i.e. most of them are true cases if
-tested), and testing itself is not common, publishing suspected cases
-can be informative.
+other contexts. For example, if the positivity rate is high (most cases are true cases if tested), and testing itself is not common, or testing takes a long time and would result in delayed reporting, this would suggest that suspected case trends are sufficiently accurate and also more timely than waiting for laboratory confirmation. 
 
-Create the new linelist like this:
+Create the new linelist with the `filter()` function:
 
 ```{r, eval=T, include=T, results="asis"}
 data_linked_confirmed <- data_linked |> 
@@ -2044,7 +2056,7 @@ nrow(data_linked_confirmed)
 
 ## Step 7. Descriptive analysis of confirmed cases
 
-Now that you have your linelist of confirmed notifiable diseases cases in 2024, you are ready to conduct your surveillance analysis of confirmed cases! Your primary tasks in your surveillance unit are to summarize the five notifiable diseases by geography and time. 
+Now that you have your linelist of confirmed notifiable disease cases reported in Feveria in 2024, you are ready to conduct the final part of your surveillance analysis! Namely, this is to summarize the five notifiable diseases by geography and time. 
 
 **Tip**: Typically surveillance analysis would also include analysis by person. You could expand on this case study by also analyzing by demographic variables.  
 
@@ -2070,7 +2082,7 @@ cat("Which notifiable disease was most commonly reported in 2024, when restricti
 opts <- c(
   "The sensitivity and specificity of the clinical diagnosis may differ by disease",
   "The performance of the tests used in the lab may differ by disease",
-  "There may be reporting biases"
+  "There may be reporting biases",
   answer = "All of the above!"
 )
 
@@ -2095,21 +2107,13 @@ opts <- c(
 cat("How many confirmed cases of cholera reported in 2024 were among residents of Feveria Central?", longmcq(opts))
 
 opts <- c(
-  "Lake Minara",
-  answer = "Feveria Central",
+  answer = "Lake Minara",
+  "Feveria Central",
   "Kasara"
 )
 
 cat("Which district reported the most confirmed malaria cases in 2024?", longmcq(opts))
 
-
-opts <- c(
-  "Yellow fever",
-  answer = "Dengue",
-  "Cholera"
-)
-
-cat("Overall, what notifiable disease is most reported in Feveria?", longmcq(opts))
 
 opts <- c(
   answer = "No - a different disease may be under-reported and/or not notifiable",
@@ -2127,14 +2131,17 @@ cat("Does this data confirm that dengue is the most common infectious disease in
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Again, because this is a cross-tabulation, we suggest you use `tabyl()` and the relevant `adorn_xxx()` functions.
+Using `tabyl()`, we can see that dengue was the most commonly reported disease in Feveria in 2024 when restricting to confirmed cases, with 186 cases. 
 
-We can see that dengue was the most commonly reported disease when restricting to confirmed cases, with 186 confirmed cases. Note that this is different from the suspected cases, where malaria was most commonly reported (with 533 suspected cases)! This was hinted at previously, when you saw that the positive predictive value for suspected dengue cases was higher than for suspected malaria cases. This can be for different reasons, for instance the clinical diagnosis method used for malaria may be less specific (so many of the suspected cases are actually other diseases), or the test used for dengue may be more sensitive.
+```{r eval=T}
 
-Like with the suspected cases, we can see that most confirmed cases of dengue, malaria, and yellow fever were located in Lake Minara - the lake area with higher density of mosquitoes and therefore vector-borne disease. The majority of confirmed cholera and typhoid fever cases were in Feveria Central, where there are water and sanitation issue.
+data_linked_confirmed |> 
+  tabyl(disease_notified) 
+```
 
-The data suggests that vector-borne disease (dengue and malaria) are a particular concern in this tropical country. However, we don't know for sure which is the most common disease and what the underlying patterns are - only five diseases are notifiable, and typically the reported cases only represent a fraction of true cases in the community. 
+Note that this is different from the suspected cases, where malaria was most commonly reported (with 533 suspected cases)! This was hinted at previously, when you saw that the positivity rate for suspected dengue cases was higher than for suspected malaria cases. This can be for different reasons, for instance the clinical diagnosis method used for malaria may be less specific (so many of the suspected cases are actually other diseases), or the test used for dengue may be more sensitive.
 
+To cross-tabulate with residential district, add the relevant `adorn_xxx()` functions.
 
 ```{r eval=T}
 
@@ -2145,6 +2152,11 @@ data_linked_confirmed |>
   adorn_pct_formatting() |> 
   adorn_ns() 
 ```
+
+Like with the suspected cases, we can see that most confirmed cases of dengue, malaria, and yellow fever were located in Lake Minara - the lake area with higher density of mosquitoes and therefore vector-borne disease. The majority of confirmed cholera and typhoid fever cases were in Feveria Central, where there are water and sanitation issue.
+
+The data suggests that vector-borne disease (dengue and malaria) are a particular concern in this tropical country. However, we don't know for sure which is the most common disease and what the underlying patterns are - only five diseases are notifiable, and typically the reported cases only represent a fraction of true cases in the community. 
+
 :::
 
 ### Step 7.2 Describe cases over time
@@ -2169,7 +2181,7 @@ data_linked_confirmed |>
         axis.text.x = element_text(angle=90)) 
 ```
 
-#### **Task A: Start by using `ggplot()` and `geom_histogram()` to produce one overall epicurve for Feveria, showing case counts by week with different colors stacked by disease**
+#### **Task A: Start by using `ggplot()` and `geom_histogram()` to produce one overall epicurve for Feveria, showing case counts by report week, with bars stacked and colored by disease**
 
 Make sure you specify the argument `binwidth=7` so that each bar in the histogram represents the number of cases within a 7 day period. 
 
@@ -2181,11 +2193,11 @@ Make sure you specify the argument `binwidth=7` so that each bar in the histogra
 
 opts <- c(
   "January 2024",
-  answer = "April 2024",
+  answer = "May 2024",
   "October 2024"
 )
 
-cat("When was the first case of typhoid fever in Feveria in 2024?", longmcq(opts))
+cat("When was the first case of typhoid fever reported in Feveria in 2024?", longmcq(opts))
 
 
 opts <- c(
@@ -2213,11 +2225,11 @@ data_linked_confirmed |>
 
 Refer to the [dates chapter in the Epi R Handbook](https://epirhandbook.com/en/new_pages/dates.html) if you want more specific date formatting, for instance so that each bar represents a Monday-Sunday week, or the x axis labels the week number (weeks 1 - 52). 
 
-Importantly - it is not straight forward to see the trends per disease when stacked this way! To see such temporal trends, you should produce plots per disease. 
+Importantly - it is not straight forward to see the trends per disease when stacked this way! To see such temporal trends, you should produce one histogram per disease. 
 
 :::
 
-#### **Task B: Use `ggplot()` to produce a basic epicurve showing case counts by week, faceted (and not stacked) by disease**
+#### **Task B: Use `ggplot()` to produce an epicurve showing case counts by report week, faceted (and not stacked) by disease**
 
 Use `facet_wrap()` to easily create several mini-plots, one per disease. To understand this further, you can look at the [facet section of the ggplot2 chapter in the Epi R Handbook](https://epirhandbook.com/en/new_pages/ggplot_basics.html#ggplot_basics_facet) 
 
@@ -2264,7 +2276,7 @@ data_linked_confirmed |>
 ```
 :::
 
-#### **Task C: Now add color to your faceted graph so that the bars are stacked by district**
+#### **Task C: Now add a fill color to your faceted graph so that the bars are stacked by district**
 
 
 :::: {.callout-note icon="false"}
@@ -2303,7 +2315,7 @@ cat("In what district was the first typhoid fever case reported in 2024?", longm
 Now you can see an epicurve per disease, with the coloring
 reflecting the district the case is a resident of.
 
-You can see that during the week where there were 15
+You can see that among the 15 dengue cases reported in a single week, they lived across the three different districts. You can also see that the first case of typhoid was reported in Feveria Central. 
 
 ```{r eval=T}
 data_linked_confirmed |> 
@@ -2377,14 +2389,16 @@ data_linked_confirmed |>
         axis.text.x = element_text(angle=90)) 
 ```
 
-We can also see from the epicurve that cholera and typhoid appear to be occuring as isolated outbreaks, rather than showing endemicity. Malaria and dengue however were present in Feveria throughout the year, peaking in the summer months. 
+We can also see from the epicurve that cholera and typhoid appear to be occurring as isolated outbreaks, rather than showing endemicity. Malaria and dengue however were present in Feveria throughout the year, with malaria more obviously peaking in the summer months. 
 
 :::
 
-#### **Task E: Produce table summarising dates**
+#### **Task E: Produce table summarizing dates**
 
 This time, use `group_by()` and `summarize()` to produce a table by
-region showing the minimum and maximum dates. Then use `filter()` to look at one region at a time.
+district showing the earliest and latest report dates. 
+
+You can adjust your table with a `filter()` function to create this table for one district at a time.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -2406,7 +2420,7 @@ opts <- c(
   "25th December 2024"
 )
 
-cat("When was the last dengue case reported in **Feveria Central**?", longmcq(opts))
+cat("When was the last dengue case reported in **Feveria Central** in 2024?", longmcq(opts))
 ```
 :::
 ::::
@@ -2414,13 +2428,13 @@ cat("When was the last dengue case reported in **Feveria Central**?", longmcq(op
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Group the data by disease and then summarize the first and most recent date to look at the overall timeline of each disease in Feveria.
+Group the data by disease and then summarize the first and last date to look at the overall timeline of each disease in Feveria.
 
 ```{r eval=T}
 data_linked_confirmed |> 
   group_by(disease_notified) |> 
   summarize(first_reported = min(date_report), 
-            recent_reported = max(date_report)) |>
+            last_reported = max(date_report)) |>
   ungroup()
 ```
 
@@ -2438,11 +2452,11 @@ data_linked_confirmed |>
 
 ## Conclusion
 
-Wow! You have made fantastic progress cleaning, linking, and preparing notifiable disease surveillance and laboratory data for analysis. The data is now much cleaner and more organized, and you have already begun to uncover meaningful insights. In response to your boss' original four questions, you can say:
+Wow! You have made fantastic progress cleaning, linking, and preparing notification and laboratory data for analysis. The data is now much cleaner and more organized, and you have already begun to uncover meaningful insights. In response to your boss' original four questions, you can say:
 
-- **How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?**: Malaria was the most common notifiable disease in Feveria in 2024, reported through the notifiable disease surveillance system: There were 533 suspected cases of malaria reported, 273 suspected cases of dengue, 100 yellow fever, 46 cholera, and 35 typhoid.
-- **What percentage of them ended up being confirmed?** Almost 80% of notifiable cases reported in 2024 had a laboratory test result by the time the linked dataset was created, with some variation by disease. In total, 56% of notified cases were eventually confirmed, but this ranged from only 23% for typhoid fever (7 confirmed of 31 suspected cases with test results), to 95% for cholera (38 confirmed of 40 suspected cases with rest results). Additionally, the positive predictive value for suspected dengue was higher than for suspected malaria (87% vs 41%).
-- **How many confirmed cases of different notifiable diseass were reported in 2024, and which was most common?** Confirmed cases followed a slightly different trend to suspected cases: the most commonly reported infection was dengue with 186 cases, followed by malaria (174), then cholera (38), yellow fever (33), and typhoid fever (7). 
+- **How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?** Malaria was the most common notifiable disease in Feveria in 2024, reported through the notifiable disease surveillance system: There were 533 suspected cases of malaria reported, 273 suspected cases of dengue, 100 yellow fever, 46 cholera, and 35 typhoid.
+- **What percentage of them ended up being confirmed?** Almost 80% of notifiable cases reported in 2024 had a laboratory test result by the time the linked dataset was created, with some variation by disease. In total, 56% of notified cases were eventually confirmed, but this ranged from only 23% for typhoid fever (7 confirmed of 31 suspected cases with test results), to 95% for cholera (38 confirmed of 40 suspected cases with rest results). Additionally, the positivity rate was higher for suspected dengue than for suspected malaria (87% vs 41%).
+- **How many confirmed cases of different notifiable diseases were reported in 2024, and which was most common?** Confirmed cases followed a slightly different trend to suspected cases: the most commonly reported infection was dengue with 186 cases, followed by malaria (174), then cholera (38), yellow fever (33), and typhoid fever (7). 
 - **How are confirmed cases geographically and temporally distributed in Feveria?** Feveria experienced dengue and malaria transmission throughout the year, peaking in the summer, and concentrated in the Laka Minara district. Feveria also experienced small and infrequent outbreaks of diarrhoeal disease, e.g. cholera and typhoid fever, particularly in the urban Feveria Central where there can be issues with water and sanitation. 
 
 Throughout this process, you practiced key R functions to clean, reshape, and link data frames, plus created new columns using logical conditions. You also created graphs and tables to investigate and describe your data. Finally, you performed thorough data quality checks to ensure reliable results, and you compared disease trends across sources before and after linkage, gaining a deeper understanding of how the surveillance system is structured.
@@ -2450,7 +2464,6 @@ Throughout this process, you practiced key R functions to clean, reshape, and li
 There is so much more potential ahead. You can explore disease patterns by age or sex, calculate disease rates with population data, and even analyze reporting delays by examining the different dates in your datasets.
 
 You have built a strong foundation and are well equipped to take your analysis to the next level. Keep going — exciting discoveries await!
-
 
 To learn more, check out the other case studies or dive into the [Epi R Handbook](https://www.epirhandbook.com).
 
