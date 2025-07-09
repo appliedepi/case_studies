@@ -23,10 +23,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 **Tool**: R \| **Technical complexity**: Intermediate \|
 **Methodological complexity**: Basic \| **Prior knowledge required:** [R
 basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
-Rstudio; R packages, functions and arguments, using pipes) as well as key tidyverse functions and ggplots) \| **Source:**
-
-
-Applied Epi, with technical support provided by the Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET. The contents are those of the author(s) and do not necessarily represent the official views of CDC or the US Department of Health and Human Services. \| **Funding:** This project was 100% supported by cooperative agreement #XXXXXXXXXXXXXX funded by the U.S. Centers for Disease Control (CDC) and Prevention (CDC).
+Rstudio; R packages, functions and arguments, using pipes) as well as key tidyverse functions and ggplots) \| **Source:** Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET. 
 :::
 
 For instructions on how to use our case studies, see our [How-to
@@ -144,11 +141,10 @@ Next in your R script, you need to install and load the necessary R
 packages. This ensures that the functions you need are available for
 your analysis.
 
-You will need the following packages: `rio` (for importing data),`skimr` (for reviewing data), 
-`janitor` (for cleaning data), `lubridate` (for cleaning dates),  `epikit` (for epi-related tasks), `gtsummary` (for summary statistics/tests and regression), `apyramid` (for age-sex pyramids), `tidyverse` (for general data manipulation/science tasks), `flextable` (for presentation-ready tables), and `naniar` (for evaluating missing data).
+You will need the following packages: `{rio}` (for importing data),`{skimr}` (for reviewing data), `{janitor}` (for cleaning data), `{lubridate}` (for cleaning dates),  `{epikit}` (for epi-related tasks), `{gtsummary}` (for summary statistics/tests and regression), `{apyramid}` (for age-sex pyramids), `{tidyverse}` (for general data manipulation/science tasks), `{flextable}` (for presentation-ready tables), and `{naniar}` (for evaluating missing data). You will also need the `{remotes}` package to download the data - which we will explain in the download section. 
 
 As you start, your trusted colleague nudges you and whispers "I've heard
-that a great way to manage your packages is with the `pacman` package".
+that a great way to manage your packages is with the `{pacman}` package".
 
 Over to you!
 
@@ -188,6 +184,7 @@ pacman::p_load(
   apyramid,   # plotting age pyramids 
   flextable,  # Presentation ready tables
   naniar,     # Evaluating missingness of data
+  remotes,    # Used to install package to download data
   tidyverse   # data management and visualization
 )
 
@@ -203,21 +200,15 @@ containing data for 2024 and updated as of 15th January 2025:
 
 -   A disease notification-level dataset (*"multidisease_notifications.xlsx"*) with case
     information from 5 health centers
--   A laboratory test-level dataset (*"multidisease_tests.csv"*) submitted by three laboratories
-    conducting testing for the 5 health centers.
+-   A laboratory test-level dataset (*"multidisease_tests.csv"*) submitted by three laboratories conducting testing for the 5 health centers.
 
 For this case study, you can download the data via Applied Epi's very
 useful data repository, which you can access using the
 `{appliedepidata}` package. Follow these steps:
 
-1)  Install the `{appliedepidata}` package from GitHub using the
-    `install_github()` function in the `{remotes}` package. Install
-    `{remotes}` if you need to first.
+1)  Install the `{appliedepidata}` package from GitHub using the `install_github()` function in the `{remotes}` package (which you installed previously)
 
 ```{r , echo=TRUE, eval=FALSE}
-# Install remotes if you need to (so you can install a package from GitHub)
-pacman::p_load("remotes")
-
 # Use the install_github function from remotes to install appliedepidata
 remotes::install_github("appliedepi/appliedepidata")
 ```
@@ -768,7 +759,7 @@ miss_var_summary(data_lab_raw)
 ```
 
 To see how many targets are detected by each test, you can cross-tabulate `test` and `target` columns with `tabyl()`. Write the column names into the function as two separate
-arguments. The output shows that each test clearly aligns with one or more targets, and only the dengue test detects more than one target (IgG, IgM, and NS.1). 
+arguments. The output shows that each test clearly aligns with one or more targets, and only the dengue assay detects more than one target (IgG, IgM, and NS.1). 
 
 **Tip:** Experiment with changing the
 order of the column names in the function to see the impact on the table.
@@ -1254,7 +1245,7 @@ tabyl(data_lab, value)
 #### **Task A: Review the number of samples with multiple rows**
 
 We already know that some samples have multiple rows, and that this is
-because the dengue test has three targets, with one row per target
+because the dengue assay has three targets, with one row per target
 result.
 
 Now **find the number of samples with multiple rows**.
@@ -1315,7 +1306,7 @@ data_lab |>
   tabyl(n)
 ```
 
-You can even double-check that this only applies to the dengue tests by
+You can even double-check that this only applies to the dengue assay by
 adding in the `disease` column to the calculation. You can see that it
 is only the dengue test that has 3 rows per sample.
 
@@ -2467,20 +2458,161 @@ You have built a strong foundation and are well equipped to take your analysis t
 
 To learn more, check out the other case studies or dive into the [Epi R Handbook](https://www.epirhandbook.com).
 
+## Data cleaning and analysis code
+
+See below a script of all data cleaning steps and descriptive analyses. Note how the analyses are combined at the end rather than interspersed in between cleaning steps. This is a tidier way to organize your script. 
+
+For brevity, the code below does not include all inspections and checks made along the way, but you may decide to create a sections with such checks.
+
+The top of your script should also contain information to help the reader understand what the script is for, as well as comments throughout. You will thank yourself later for adding these comments!
+
+::: {.callout-note icon="false" collapse="true"}
+#  Code to clean and analyse notification data and lab data from Feveria, 2024
+
+```{r}
+# Code to clean and analyse notification data and lab data from Feveria, 2024
+# Date:
+# Author:
+
+# Import data --------------------------------------------
+
+# Notification data
+data_notif_raw <- import("data/multidisease_notifications.xlsx")
+
+# Lab data
+data_lab_raw <- import("data/multidisease_tests.csv")
+
+# Clean notification data --------------------------------
+data_notif <- data_notif_raw |> 
+  clean_names() |> 
+  rename(date_report = date_reported_by_health_facility_community) |> 
+  select(notification_id, residential_district, disease_notified, date_report) |> 
+  mutate(residential_district = case_match(str_to_title(residential_district),
+                                           c("F Central", "Feveria C", "Feveria Central") ~ "Feveria Central",
+                                           c("Kasara", "Ksr") ~ "Kasara",
+                                           c("L Minara", "Lake Minara", "Lakeside") ~ "Lake Minara")) |> 
+  mutate(date_report = ymd(date_report)) 
+
+
+# Clean and consolidate lab data  ---------------------------------------
+# Clean values
+data_lab <- data_lab_raw |> 
+  mutate(value = case_match(value, 
+                            c("P", "PO1", "PO139") ~ "Positive",
+                            "N" ~ "Negative",
+                            "I" ~ "Indeterminate"))
+
+# Create test-level lab data
+data_lab_tests <- data_lab |> 
+  filter(target != "Dengue IgG") |> 
+  group_by(sample_id) |> 
+  arrange(desc(value)) |> 
+  slice(1) |> 
+  ungroup()
+
+# Create case-level lab data
+data_lab_cases <- data_lab_tests |> 
+  group_by(notification_id) |> 
+  arrange(desc(value)) |> 
+  slice(1)
+
+# Link notification and lab data  ---------------------------------------
+data_linked <- left_join(data_notif, data_lab_cases, by = "notification_id")
+
+# Clean data--------------------------------------------------------------
+data_linked <- data_linked |> 
+  mutate(case_category = case_when(value=="Positive" ~ "Confirmed",
+                                   value=="Negative" ~ "Discarded",
+                                   value=="Indeterminate" | is.na(value) ~ "Suspected"))
+
+data_linked_confirmed <- data_linked |> 
+  filter(case_category=="Confirmed")
+
+# ANALYSIS --------------------------------------------------------------
+
+# Distribution of suspected cases by district
+tabyl(data_notif, disease_notified, residential_district) |>
+  adorn_percentages() |>
+  adorn_pct_formatting() |>
+  adorn_ns()
+
+# Distribution of test results test
+tabyl(data_lab_tests, test, value) |> 
+    adorn_totals(where = "col") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution of case category by diseases, in linked data: all cases
+tabyl(data_linked, disease_notified, case_category) |> 
+    adorn_totals(where = "both") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution of case category by disease, in linked data: only cases with a valid result
+data_linked |> 
+    filter(case_category != "Suspected") |> 
+    tabyl(disease_notified, case_category) |> 
+    adorn_totals(where = "both") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution of confirmed cases by district
+data_linked_confirmed |> 
+  tabyl(disease_notified, residential_district) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns() 
+
+
+# Visualize confirmed cases over time
+data_linked_confirmed |> 
+  ggplot()+
+  geom_histogram((aes(x = date_report, fill = residential_district)), binwidth=7) +
+  facet_wrap(.~disease_notified, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District of residence",
+       x = "Date reported by clinic",
+       y = "Count",
+       subtitle = "Number of confirmed cholera, dengue, malaria, typhoid fever, and yellow fever cases by week in Feveria, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+
+
+# First and last report date per disease
+data_linked_confirmed |> 
+  group_by(disease_notified) |> 
+  summarize(first_reported = min(date_report), 
+            last_reported = max(date_report)) |>
+  ungroup()
+
+```
+:::
+
+
 ## Case study information
 
 ::: {.callout-note appearance="minimal" icon="false"}
-**Original authors**: Paula Blomquist and Alanah Jansen \| **Data source**: Fictional data provided by Applied Epi, with input from CDC DGHP GSLDSB 
+**Original authors**: Paula Blomquist and Alanah Jansen 
+
+**Data source**: Fictional data provided by Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET. 
+
 :::
 
-| Date      | Changes made | Version | Author                            |
-|-----------|:-------------|--------:|-----------------------------------|
-| July 2025 | First draft  |       1 | Paula Blomquist and Alanah Jansen |
+| Date      | Changes made | Version | Author                                         |
+|-----------|:-------------|--------:|------------------------------------------------|
+| July 2025 | First draft  |       1 | Paula Blomquist and Alanah Jansen, Applied Epi |
 
 ## Terms of Use
 
-**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. 
+**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. The contents are those of the author(s) and do not necessarily represent the official views of CDC or the US Department of Health and Human Services.
 
 **License**: This case study is under a [CC BY-NC-SA 4.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/multi_disease_lab_LICENSE.md). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-**Funding**: This case study was supported by Grant or Cooperative Agreement number NU2HGH00004 funded by the Centers for Disease Control and Prevention. Its contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for for Global Health, Inc. or TEPHINET. 
+**Funding**: This case study was 100% supported by Grant or Cooperative Agreement number NU2HGH000044 funded by the Centers for Disease Control and Prevention (CDC). Its contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for for Global Health, Inc. or TEPHINET. 
