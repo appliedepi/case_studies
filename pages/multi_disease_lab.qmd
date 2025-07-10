@@ -563,9 +563,7 @@ opts <- c(
  "The words Unknown and Uncertain"
 )
 
-
 cat("What does R recognise as a missing value?", longmcq(opts))
-
 
 opts <- c(
   "Yes, the missingness is low so this column is useful",
@@ -573,6 +571,11 @@ opts <- c(
 )
 
 cat("Based on the missingness of its values, is the `Onset date` column useful?", longmcq(opts))
+
+opts <- c(
+  "FIX THIS",
+ answer = "This one is the answer"
+)
 
 cat("Are the values in the `Disease notified` column standardised?", longmcq(opts))
 
@@ -588,7 +591,7 @@ opts <- c(
  "The clinician does not ask the patient the question during their consultation",
  "The patient might not know or want to share the answer",
  "The clinician might not have time to prioritise filling in that field in the data, even if they know the information",
- "All of the above, and many more reasons"
+ answer = "All of the above, and many more reasons"
 )
 
 cat("Why might some columns in the notification data have high missingness?", longmcq(opts))
