@@ -23,7 +23,10 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 **Tool**: R \| **Technical complexity**: Intermediate \|
 **Methodological complexity**: Basic \| **Prior knowledge required:** [R
 basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
-Rstudio; R packages, functions and arguments, using pipes) as well as key tidyverse functions and ggplots) \| **Source:** Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET. 
+Rstudio; R packages, functions and arguments, using pipes) as well as
+key tidyverse functions and ggplots) \| **Source:** Applied Epi, with
+technical support provided by the CDC Global Surveillance, Laboratory,
+and Data Systems Branch in collaboration with TEPHINET.
 :::
 
 For instructions on how to use our case studies, see our [How-to
@@ -36,31 +39,46 @@ Community](https://community.appliedepi.org/).
 
 ## Scenario
 
-You are an epidemiologist working in the national surveillance office of Feveria, a very small tropical country. There are three districts within Feveria:
+You are an epidemiologist working in the national surveillance office of
+Feveria, a very small tropical country. There are three districts within
+Feveria:
 
--   **Feveria Central**: an over-populated urban area, with sometimes unreliable
-    water and sanitation infrastructure.
+-   **Feveria Central**: an over-populated urban area, with sometimes
+    unreliable water and sanitation infrastructure.
 -   **Lake Minara**: a lake area with good infrastructure but many
     mosquitoes in the warmer months of the year.
--   **Kasara**: a more sub-urban area on the other side of Feveria Central.
+-   **Kasara**: a more sub-urban area on the other side of Feveria
+    Central.
 
 **Map of districts in the country Feveria**
 
 ![](/images/multi_disease_lab/map.png){width="70%"}
 
-It is January 2025, and your supervisor would like you to transfer the routine
-processing of notifiable disease data from Excel into R, and to conduct some analyses on the data. She wants to know at least:
+It is January 2025, and your supervisor would like you to transfer the
+routine processing of notifiable disease data from Excel into R, and to
+conduct some analyses on the data. She wants to know at least:
 
-- How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?
-- What percentage of them ended up being confirmed?
-- How many confirmed cases of different notifiable diseases were reported in 2024, and which was most common?
-- How were confirmed cases geographically and temporally distributed in Feveria?
+-   How many suspected cases of the different notifiable diseases were
+    reported in 2024, and which was most common?
+-   What percentage of them ended up being confirmed?
+-   How many confirmed cases of different notifiable diseases were
+    reported in 2024, and which was most common?
+-   How were confirmed cases geographically and temporally distributed
+    in Feveria?
 
 She asks that you write code to import, clean, link, and analyse the
 following linelists:
 
--   **2024 notifiable disease surveillance data:** Referred to also as "notification data", this is surveillance data on five notifiable diseases reported by clinics in Feveria: dengue, malaria, cholera, typhoid fever, and yellow fever. These are suspected cases, based on patients' symptoms. Clinicians enter each notification into an online system every weekday. 
--   **2024 laboratory test result data:** This data comes from lab test results, from three major labs in Feveria. These results are for samples taken from those suspected notifiable disease cases mentioned above.
+-   **2024 notifiable disease surveillance data:** Referred to also as
+    "notification data", this is surveillance data on five notifiable
+    diseases reported by clinics in Feveria: dengue, malaria, cholera,
+    typhoid fever, and yellow fever. These are suspected cases, based on
+    patients' symptoms. Clinicians enter each notification into an
+    online system every weekday.
+-   **2024 laboratory test result data:** This data comes from lab test
+    results, from three major labs in Feveria. These results are for
+    samples taken from those suspected notifiable disease cases
+    mentioned above.
 
 Let's go!
 
@@ -69,9 +87,11 @@ Let's go!
 In this case study you will:
 
 1.  Use key R functions to clean data, reshape datasets, link data
-    sources, and create new columns using logical conditions to
-    prepare data for analysis.
-2.  Conduct data inspections and data quality checks at multiple stages of the project and understand their importance for reliable analysis.
+    sources, and create new columns using logical conditions to prepare
+    data for analysis.
+2.  Conduct data inspections and data quality checks at multiple stages
+    of the project and understand their importance for reliable
+    analysis.
 3.  Perform basic descriptive analyses to compare disease trends across
     different data sources, before and after linkage.
 4.  Interpret differences in results across data sources and understand
@@ -140,10 +160,19 @@ Next in your R script, you need to install and load the necessary R
 packages. This ensures that the functions you need are available for
 your analysis.
 
-You will need the following packages: `{rio}` (for importing data),`{skimr}` (for reviewing data), `{janitor}` (for cleaning data), `{lubridate}` (for cleaning dates),  `{epikit}` (for epi-related tasks), `{gtsummary}` (for summary statistics/tests and regression), `{apyramid}` (for age-sex pyramids), `{tidyverse}` (for general data manipulation/science tasks), `{flextable}` (for presentation-ready tables), and `{naniar}` (for evaluating missing data). You will also need the `{remotes}` package to download the data - which we will explain in the download section. 
+You will need the following packages: `{rio}` (for importing
+data),`{skimr}` (for reviewing data), `{janitor}` (for cleaning data),
+`{lubridate}` (for cleaning dates), `{epikit}` (for epi-related tasks),
+`{gtsummary}` (for summary statistics/tests and regression),
+`{apyramid}` (for age-sex pyramids), `{tidyverse}` (for general data
+manipulation/science tasks), `{flextable}` (for presentation-ready
+tables), and `{naniar}` (for evaluating missing data). You will also
+need the `{remotes}` package to download the data - which we will
+explain in the download section.
 
 As you start, your trusted colleague nudges you and whispers "I've heard
-that a great way to manage your packages is with the `{pacman}` package".
+that a great way to manage your packages is with the `{pacman}`
+package".
 
 Over to you!
 
@@ -151,10 +180,10 @@ Over to you!
 ## Click to see the solution (try it yourself first!)
 
 Use the function `p_load()` from `pacman` for this task. You provide the
-function with a list of packages that you want to use. The function will undertake two
-steps per package: 1) Check if the package is installed on your
-computer, and install it if necessary, then 2) Load the package so it
-can be used during this R session.
+function with a list of packages that you want to use. The function will
+undertake two steps per package: 1) Check if the package is installed on
+your computer, and install it if necessary, then 2) Load the package so
+it can be used during this R session.
 
 If you don't already have `pacman` installed, you will need to install
 it the "traditional way" first, with `install.packages()`.
@@ -197,15 +226,20 @@ pacman::p_load(
 Your office provides you with two files for your analysis, both
 containing data for 2024 and updated as of 15th January 2025:
 
--   A disease notification-level dataset (*"multidisease_notifications.xlsx"*) with case
-    information from 5 health centers
--   A laboratory test-level dataset (*"multidisease_tests.csv"*) submitted by three laboratories conducting testing for the 5 health centers.
+-   A disease notification-level dataset
+    (*"multidisease_notifications.xlsx"*) with case information from 5
+    health centers
+-   A laboratory test-level dataset (*"multidisease_tests.csv"*)
+    submitted by three laboratories conducting testing for the 5 health
+    centers.
 
 For this case study, you can download the data via Applied Epi's very
 useful data repository, which you can access using the
 `{appliedepidata}` package. Follow these steps:
 
-1)  Install the `{appliedepidata}` package from GitHub using the `install_github()` function in the `{remotes}` package (which you installed previously)
+1)  Install the `{appliedepidata}` package from GitHub using the
+    `install_github()` function in the `{remotes}` package (which you
+    installed previously)
 
 ```{r , echo=TRUE, eval=FALSE}
 # Use the install_github function from remotes to install appliedepidata
@@ -221,7 +255,7 @@ remotes::install_github("appliedepi/appliedepidata")
 
 ```{r , echo=TRUE, eval=FALSE}
 # Save down the two data files using the save_data() function from appliedepidata
-appliedepidata::save_data("multidisease_test",
+appliedepidata::save_data("multidisease_tests",
                         path = "data")
 
 appliedepidata::save_data("multidisease_notifications",
@@ -230,12 +264,15 @@ appliedepidata::save_data("multidisease_notifications",
 
 ### 2.2 Import the data
 
-Great! Thanks country office and Applied Epi! Now it's time to import the data from that folder into RStudio, so you can analyse it.
+Great! Thanks country office and Applied Epi! Now it's time to import
+the data from that folder into RStudio, so you can analyse it.
 
 #### **Task A: Import the two downloaded data files into your R Studio environment**
 
-Ideally, you will use the same function for importing both datasets, despite one
-being a .csv and the other an .xlsx file. Note going forward we will simply say "environment" when we mean the environment pane in R Studio.
+Ideally, you will use the same function for importing both datasets,
+despite one being a .csv and the other an .xlsx file. Note going forward
+we will simply say "environment" when we mean the environment pane in R
+Studio.
 
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
@@ -254,10 +291,9 @@ chapter of the Epi R Handbook.
 ## Click to see the solution (try it yourself first!)
 
 Below we use the import function to bring in both files. Note how we are
-assigning the imported data to two objects, one called
-*data_notif_raw*, and one called *data_lab_raw*. We add the 'raw'
-suffix to distinguish this data from the cleaned versions we will make
-later.
+assigning the imported data to two objects, one called *data_notif_raw*,
+and one called *data_lab_raw*. We add the 'raw' suffix to distinguish
+this data from the cleaned versions we will make later.
 
 ```{r , echo=TRUE, eval=FALSE}
 # Import data
@@ -299,7 +335,8 @@ rm(multidisease_notifications, multidisease_tests)
 ## Step 3. Inspect the data
 
 The data’s in, and now it’s time to see what story it tells. Take an
-initial look at your two raw data frames to check their contents and quality.
+initial look at your two raw data frames to check their contents and
+quality.
 
 ### Step 3.1 Inspect the surveillance data
 
@@ -314,8 +351,8 @@ The `ncol()` and `nrow()` functions to simply count the numbers of
 columns and rows in the data. Do you know what to put inside the
 parentheses?
 
-Easiest of all though, is to look at the environment. Remember
-the object in your environment for the notification data is called
+Easiest of all though, is to look at the environment. Remember the
+object in your environment for the notification data is called
 `data_notif_raw`.
 
 Click on the solution box underneath the questions if you need help.
@@ -382,8 +419,9 @@ cat("What type of information can you NOT see in the notification data?", longmc
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Use `skim()` from the `{skimr}` package to look at a summary of the entire
-data frame, and `View()` to look at the whole data frame directly:
+Use `skim()` from the `{skimr}` package to look at a summary of the
+entire data frame, and `View()` to look at the whole data frame
+directly:
 
 ```{r}
 skim(data_notif_raw)
@@ -391,7 +429,10 @@ skim(data_notif_raw)
 
 Or, you could use `names()` to print out just the column names. Through
 either `skim()` or `names()` you will be able to see the types of
-information including: the health facility of the case, birth-date, sex, a flag indicating pregnancy, district of residence, onset date, and date reported by the clinic, and outcome information. There is also a `Notification ID` which appears to be a unique identifier for a case,
+information including: the health facility of the case, birth-date, sex,
+a flag indicating pregnancy, district of residence, onset date, and date
+reported by the clinic, and outcome information. There is also a
+`Notification ID` which appears to be a unique identifier for a case,
 but we would want to double check duplicates before we are sure. Note
 that there are NO test results in this data, as these notifications are
 from clinics diagnosing notifiable diseases based on clinical case
@@ -416,9 +457,9 @@ ncol(data_notif_raw)
 nrow(data_notif_raw)
 ```
 
-Otherwise, when you look at the environment you can see that the
-number of observations (which is the same as rows) and columns are
-listed next to the name of the data frame.
+Otherwise, when you look at the environment you can see that the number
+of observations (which is the same as rows) and columns are listed next
+to the name of the data frame.
 :::
 
 #### **Task B: Next, look at the classes of columns in your raw notification data frame**
@@ -460,26 +501,27 @@ cat("What is the class of most columns in the raw notification data frame?", lon
 
 You can use `class` like the example below. The \$ is an operator used
 to select a specific column from the `data_notif_raw` data frame. Note
-that the back-ticks are used around Date of Birth because the column name
-contains spaces.
+that the back-ticks are used around Date of Birth because the column
+name contains spaces.
 
 ```{r}
 class(data_notif_raw$`Date of Birth`)
 ```
 
-To look at class via the environment, click on the blue arrow
-next to the data frame name. The column names will appear, with the class
-next to it (e.g. it says "chr" to show character class).
+To look at class via the environment, click on the blue arrow next to
+the data frame name. The column names will appear, with the class next
+to it (e.g. it says "chr" to show character class).
 
-You can see the none of the columns that should be dates are recognized as dates. Instead, they are recognized as character values. 
+You can see the none of the columns that should be dates are recognized
+as dates. Instead, they are recognized as character values.
 :::
 
 #### **Task C: Inspect categorical values and missingness**
 
 **Use the `tabyl()` function to inspect the values within categorical
-columns**, specifying the data frame object in the first argument, and the
-column name in the second argument. For example, this code tabulates the
-values for the Sex column. The output shows that male and female are
+columns**, specifying the data frame object in the first argument, and
+the column name in the second argument. For example, this code tabulates
+the values for the Sex column. The output shows that male and female are
 inconsistently spelled across the data. This column would need further
 cleaning before analysis.
 
@@ -580,8 +622,8 @@ of rows by disease without further cleaning.
 tabyl(data_notif_raw, `Disease notified`)
 ```
 
-A different way of checking missingness is to tabulate the output of
-the function `is.na()`. In the example below, the function `is.na()`
+A different way of checking missingness is to tabulate the output of the
+function `is.na()`. In the example below, the function `is.na()`
 evaluates each cell within the column `Onset date`, returning TRUE for
 missing ones and FALSE for present ones. Running `tabyl()` on this
 TRUE/FALSE output then quickly gives you a clear count and percentage of
@@ -598,7 +640,12 @@ analyzing trends in disease over time.
 tabyl(is.na(data_notif_raw$`Onset date`))
 ```
 
-Missing or non-standardised data can arise for many reasons, including the design of the data collection tool (e.g. whether questions are mandatory or use free text vs. drop-downs), the processes and standards in place (such as which fields staff are instructed to prioritise), and contextual factors (like whether staff have sufficient time to gather the information) — among many others.
+Missing or non-standardised data can arise for many reasons, including
+the design of the data collection tool (e.g. whether questions are
+mandatory or use free text vs. drop-downs), the processes and standards
+in place (such as which fields staff are instructed to prioritise), and
+contextual factors (like whether staff have sufficient time to gather
+the information) — among many others.
 :::
 
 ### Step 3.2 Inspect the laboratory data
@@ -656,8 +703,8 @@ cat("Which of these columns are NOT in the lab data?", longmcq(opts))
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Just like in section 3.1, you can use `skim()` from the `{skimr}` package
-to look at the entire laboratory data frame with test results.
+Just like in section 3.1, you can use `skim()` from the `{skimr}`
+package to look at the entire laboratory data frame with test results.
 This will also show you the different column names in the data, showing
 you that the lab data only contains information about the test and not
 about the patient. It does however also contain a notification ID, just
@@ -675,7 +722,9 @@ ncol(data_lab_raw)
 nrow(data_lab_raw)
 ```
 
-This will print the numbers of columns and rows in your console, showing you that the lab data has more rows than the notification data you inspected earlier. 
+This will print the numbers of columns and rows in your console, showing
+you that the lab data has more rows than the notification data you
+inspected earlier.
 
 ```{r eval=T, echo=F}
 ncol(data_lab_raw)
@@ -683,9 +732,12 @@ nrow(data_lab_raw)
 ```
 
 There are often more records in the lab data than in the clinical data.
-If you inspect the data with `View(data_lab_raw)` and then click on the arrow at the top of the `notification_id` column to sort it alphabetically, you'll see that several rows share the same notification_id. This can happen when
-multiple targets are tested from the same sample (same sample ID), or
-when a case is retested (resulting in a different sample ID).
+If you inspect the data with `View(data_lab_raw)` and then click on the
+arrow at the top of the `notification_id` column to sort it
+alphabetically, you'll see that several rows share the same
+notification_id. This can happen when multiple targets are tested from
+the same sample (same sample ID), or when a case is retested (resulting
+in a different sample ID).
 
 ```{r}
 View(data_lab_raw)
@@ -696,7 +748,7 @@ flextable(head(data_lab_raw |> filter(str_detect(target,"Dengue")))) |> autofit(
 ```
 :::
 
-#### **Task B: Look at the classes, categorical values, and missingness** 
+#### **Task B: Look at the classes, categorical values, and missingness**
 
 As above, **use the `class()`, `skim()`, or `tabyl()` functions, or
 inspect the environment, to look at your columns in more detail.**
@@ -761,31 +813,46 @@ cat("What is NOT a possible test result for the stool culture test which detects
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-The laboratory data has one date column, recognized by R as an "IDate" class. This is a date class used by {rio}'s import() when reading csv files. Like base R's Date class, it allows sorting by date and analyzing trends over time.
+The laboratory data has one date column, recognized by R as an "IDate"
+class. This is a date class used by {rio}'s import() when reading csv
+files. Like base R's Date class, it allows sorting by date and analyzing
+trends over time.
 
 ```{r eval=T}
 class(data_lab_raw$date_test)
 ```
 
 Use of the `miss_var_summary()` function from the `{naniar}` package
-demonstrates that all columns in the laboratory data are actually complete. This may be because the laboratory systems use automated processes, so are much less likely to have human error. 
+demonstrates that all columns in the laboratory data are actually
+complete. This may be because the laboratory systems use automated
+processes, so are much less likely to have human error.
 
-(**Important point**: Note that in real life, the lab data would probably have some issues too!)
+(**Important point**: Note that in real life, the lab data would
+probably have some issues too!)
 
 ```{r eval=T}
 miss_var_summary(data_lab_raw)
 ```
 
-To see how many targets are detected by each test, you can cross-tabulate `test` and `target` columns with `tabyl()`. Write the column names into the function as two separate arguments. The output shows that each test clearly aligns with one or more targets, and only the dengue assay detects more than one target (IgG, IgM, and NS.1). 
+To see how many targets are detected by each test, you can
+cross-tabulate `test` and `target` columns with `tabyl()`. Write the
+column names into the function as two separate arguments. The output
+shows that each test clearly aligns with one or more targets, and only
+the dengue assay detects more than one target (IgG, IgM, and NS.1).
 
-**Tip:** Experiment with changing the order of the column names in the function to see the impact on the table.
+**Tip:** Experiment with changing the order of the column names in the
+function to see the impact on the table.
 
 ```{r eval=T}
 tabyl(data_lab_raw, target, test)
 ```
 
-Finally, you can inspect the different test result values in the column `value`, again using `tabyl()`. You can see that there are six possible results, including N for negative, P for positive, and I for
-indeterminate. Cholera specifically does not show P, but can show P01 and P0139, which in this case represent being positive for serogroups O1 or O139.
+Finally, you can inspect the different test result values in the column
+`value`, again using `tabyl()`. You can see that there are six possible
+results, including N for negative, P for positive, and I for
+indeterminate. Cholera specifically does not show P, but can show P01
+and P0139, which in this case represent being positive for serogroups O1
+or O139.
 
 ```{r eval=T}
 tabyl(data_lab_raw, test, value)
@@ -797,22 +864,32 @@ tabyl(data_lab_raw, test, value)
 You now know that the notification data (`data_notif_raw`) contains
 information about suspected cases, alongside basic demographic
 information (age, sex, pregnancy, district of residence), and
-information about their onset date, date reported by the health facility,
-and outcome. Some columns need cleaning before further analysis, due to
-variations in spelling of categorical values and some date columns not
-being recognized as dates.
+information about their onset date, date reported by the health
+facility, and outcome. Some columns need cleaning before further
+analysis, due to variations in spelling of categorical values and some
+date columns not being recognized as dates.
 
 You will now start writing longer chunks of code to clean data, using
 various `{dplyr}` functions chained together with pipes (which look like
 this: \|\>).
 
-**NOTE ON PIPES**: Pipes allow you to perform several operations in one smooth sequence, by "chaining" different functions together. The output from one function becomes the input for the next. If you need more information on piping, please refer to the [Epi R Handbook](https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline). Note that this exercise uses the base pipe (|>) rather than the magrittr pipe (%>%), as it is faster and does not require package installation. Use the magrittr pipe if you prefer it. 
+**NOTE ON PIPES**: Pipes allow you to perform several operations in one
+smooth sequence, by "chaining" different functions together. The output
+from one function becomes the input for the next. If you need more
+information on piping, please refer to the [Epi R
+Handbook](https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline).
+Note that this exercise uses the base pipe (\|\>) rather than the
+magrittr pipe (%\>%), as it is faster and does not require package
+installation. Use the magrittr pipe if you prefer it.
 
 ### Step 4.1 Clean the data
 
 #### **Task A: Clean your column names and select columns for analysis**
 
-Due to quality and data storage issues, your team recommends that you create a clean linelist that only contains information on the unique identifier, location of the case, disease, and the date the notification was reported to the surveillance system. 
+Due to quality and data storage issues, your team recommends that you
+create a clean linelist that only contains information on the unique
+identifier, location of the case, disease, and the date the notification
+was reported to the surveillance system.
 
 **Write R code to produce a new clean data frame called `data_notif`**,
 applying the following cleaning tasks:
@@ -820,7 +897,8 @@ applying the following cleaning tasks:
 -   Rename columns to be more machine readable (remove spaces and
     capitalization) using `clean_names()` from the {janitor} package
 -   Use the `rename()` function from `{dplyr}` so that the column with
-    the date the case was reported is changed to a more concise `date_report`.\
+    the date the case was reported is changed to a more concise
+    `date_report`.\
 -   Select relevant columns for analysis with the `select()` function
     from the `{dplyr}` package.
 
@@ -895,7 +973,8 @@ You can also use `case_match()` to specify different specific typos.
 
 Use the 'help' functionality of RStudio to see how to use these
 functions. For example, type `?case_match` in your console to get the
-help page. **NOTE** on `case_match()` - this is a very useful function for replacing or correcting values, and supersedes `recode()`.
+help page. **NOTE** on `case_match()` - this is a very useful function
+for replacing or correcting values, and supersedes `recode()`.
 :::
 
 ::: {.callout-caution icon="false" collapse="true"}
@@ -1126,10 +1205,10 @@ cat("Which disease was least commonly diagnosed by clinics in Feveria Central in
 
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
- 
+
 Using `tabyl()`, we can see that there were 533 suspected cases of
-malaria in Feveria in 2024, and only 35 suspected cases of
-typhoid fever.
+malaria in Feveria in 2024, and only 35 suspected cases of typhoid
+fever.
 
 ```{r eval=T}
 tabyl(data_notif, disease_notified)
@@ -1138,11 +1217,18 @@ tabyl(data_notif, disease_notified)
 
 #### **Task B: Count the number of suspected cases by disease and district of residence**
 
-**Use `tabyl()` to cross-tabulate the disease and district of residence columns.**
+**Use `tabyl()` to cross-tabulate the disease and district of residence
+columns.**
 
-Build on your table by adding various `adorn` functions from the `{janitor}` package, to see percentage distributions, e.g. `adorn_percentages()`, `adorn_pct_formatting()`, and `adorn_ns()`
+Build on your table by adding various `adorn` functions from the
+`{janitor}` package, to see percentage distributions, e.g.
+`adorn_percentages()`, `adorn_pct_formatting()`, and `adorn_ns()`
 
-Type the name of the function after a ? in your console (e.g. `?adorn_ns`) to see the relevant Help pages. You can also look at the [section about {janitor} in the Epi R Handbook](https://epirhandbook.com/en/new_pages/tables_descriptive.html#tbl_janitor) for more explanation of `adorn_xxx()` functions. 
+Type the name of the function after a ? in your console (e.g.
+`?adorn_ns`) to see the relevant Help pages. You can also look at the
+[section about {janitor} in the Epi R
+Handbook](https://epirhandbook.com/en/new_pages/tables_descriptive.html#tbl_janitor)
+for more explanation of `adorn_xxx()` functions.
 
 :::: {.callout-note icon="false"}
 # Questions
@@ -1182,32 +1268,35 @@ cat("What factors contribute to increased diarrhoeal disease in this specific di
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-Here is some code to get you started. It cross-tabulates `disease_notified` and `residential_district` with `tabyl()`, then adding `adorn_percentages()` converts these numbers to proportions with many decimals. You then need to pipe into `adorn_pct_formatting()` to convert into actual percentage formatting, and then `adorn_ns()` to add numbers back in in parentheses. Note that `adorn_xxx()` functions need to be applied in a specific order!
+Here is some code to get you started. It cross-tabulates
+`disease_notified` and `residential_district` with `tabyl()`, then
+adding `adorn_percentages()` converts these numbers to proportions with
+many decimals. You then need to pipe into `adorn_pct_formatting()` to
+convert into actual percentage formatting, and then `adorn_ns()` to add
+numbers back in in parentheses. Note that `adorn_xxx()` functions need
+to be applied in a specific order!
+
 ```{r}
 tabyl(data_notif, disease_notified, residential_district) |>
   adorn_percentages()
 ```
 
-For factors contributing to more diarrhea - scroll up to earlier in the case study when the districts were first introduced!
-
-
+For factors contributing to more diarrhea - scroll up to earlier in the
+case study when the districts were first introduced!
 :::
 
-
 :::
-
-
 
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Using `tabyl()`, we can see that most suspected cases of dengue, malaria, and
-yellow fever were located in Lake Minara - the lake area with higher
-density of mosquitoes and therefore vector-borne disease. Meanwhile the
-majority of cholera and typhoid fever were in Feveria Central, the
-over-populated urban area with water and sanitation infrastructure
-issues that result in higher risk of flooding and drinking water
-contamination during rainy weather.
+Using `tabyl()`, we can see that most suspected cases of dengue,
+malaria, and yellow fever were located in Lake Minara - the lake area
+with higher density of mosquitoes and therefore vector-borne disease.
+Meanwhile the majority of cholera and typhoid fever were in Feveria
+Central, the over-populated urban area with water and sanitation
+infrastructure issues that result in higher risk of flooding and
+drinking water contamination during rainy weather.
 
 ```{r eval=T}
 tabyl(data_notif, disease_notified, residential_district) |>
