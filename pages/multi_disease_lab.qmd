@@ -221,7 +221,7 @@ remotes::install_github("appliedepi/appliedepidata")
 
 ```{r , echo=TRUE, eval=FALSE}
 # Save down the two data files using the save_data() function from appliedepidata
-appliedepidata::save_data("multidisease_test",
+appliedepidata::save_data("multidisease_tests",
                         path = "data")
 
 appliedepidata::save_data("multidisease_notifications",
@@ -2626,12 +2626,12 @@ data_linked_confirmed |>
 
 | Date      | Changes made | Version | Author                                         |
 |-----------|:-------------|--------:|------------------------------------------------|
-| July 2025 | First draft  |       1 | Paula Blomquist and Alanah Jansen, Applied Epi |
+| July 2025 | First draft  |       1 | Paula Blomquist and Alanah Jansen, Applied Epi, with technical support by  the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET |
 
 ## Terms of Use
 
-**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. The contents are those of the author(s) and do not necessarily represent the official views of CDC or the US Department of Health and Human Services.
+**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. The contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for Global Health, Inc. or TEPHINET.
 
 **License**: This case study is under a [CC BY-NC-SA 4.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/multi_disease_lab_LICENSE.md). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-**Funding**: This case study was 100% supported by Grant or Cooperative Agreement number NU2HGH000044 funded by the Centers for Disease Control and Prevention (CDC). Its contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for for Global Health, Inc. or TEPHINET. 
+**Funding**: This case study was 100% supported by Grant or Cooperative Agreement number NU2HGH000044 funded by the Centers for Disease Control and Prevention (CDC). 
