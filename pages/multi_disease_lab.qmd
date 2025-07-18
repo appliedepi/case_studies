@@ -140,7 +140,7 @@ Next in your R script, you need to install and load the necessary R
 packages. This ensures that the functions you need are available for
 your analysis.
 
-You will need the following packages: `{rio}` (for importing data),`{skimr}` (for reviewing data), `{janitor}` (for cleaning data), `{lubridate}` (for cleaning dates),  `{epikit}` (for epi-related tasks), `{gtsummary}` (for summary statistics/tests and regression), `{apyramid}` (for age-sex pyramids), `{tidyverse}` (for general data manipulation/science tasks), `{flextable}` (for presentation-ready tables), and `{naniar}` (for evaluating missing data). You will also need the `{remotes}` package to download the data - which we will explain in the download section. 
+You will need the following packages: `{rio}` (for importing data),`{skimr}` (for reviewing data), `{janitor}` (for cleaning data), `{lubridate}` (for cleaning dates),  `{epikit}` (for epi-related tasks), `{gtsummary}` (for summary statistics/tests and regression), `{apyramid}` (for age-sex pyramids), `{flextable}` (for presentation-ready tables), `{naniar}` (for evaluating missing data), and `{tidyverse}` (for general data manipulation/science tasks). You will also need the `{remotes}` package to download the data - which we will explain in the download section. 
 
 As you start, your trusted colleague nudges you and whispers "I've heard
 that a great way to manage your packages is with the `{pacman}` package".
