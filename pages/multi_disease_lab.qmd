@@ -1180,7 +1180,7 @@ cat("What factors contribute to increased diarrhoeal disease in this specific di
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-Here is some code to get you started. It cross-tabulates `disease_notified` and `residential_district` with `tabyl()`, then adding `adorn_percentages()` converts these numbers to proportions with many decimals. You then need to pipe into `adorn_pct_formatting()` to convert into actual percentage formatting, and then `adorn_ns()` to add numbers back in in parentheses. Note that `adorn_xxx()` functions need to be applied in a specific order!
+Here is some code to get you started. It cross-tabulates `disease_notified` and `residential_district` with `tabyl()`, then adding `adorn_percentages()` converts these numbers to percentages with many decimals. You then need to pipe into `adorn_pct_formatting()` to convert into actual percentage formatting, and then `adorn_ns()` to add numbers back in in parentheses. Note that `adorn_xxx()` functions need to be applied in a specific order!
 ```{r}
 tabyl(data_notif, disease_notified, residential_district) |>
   adorn_percentages()
@@ -1532,7 +1532,7 @@ opts <- c(
   "87%"
 )
 
-cat("What proportion of tests for cholera (via stool culture) were positive?", longmcq(opts))
+cat("What percentage of tests for cholera (via stool culture) were positive?", longmcq(opts))
 
 opts <- c(
   answer = "IgM ELISA (for yellow fever detection)",
@@ -1540,7 +1540,7 @@ opts <- c(
   "Blood culture (for typhoid fever detection)"
 )
 
-cat("Which test had the highest proportion of indeterminate results?", longmcq(opts))
+cat("Which test had the highest percentage of indeterminate results?", longmcq(opts))
 
 ```
 :::
@@ -1876,7 +1876,7 @@ opts <- c(
   "92.2%"
 )
 
-cat("What proportion of cases in the notification data DID have a positive or negative result?", longmcq(opts))
+cat("What percentage of cases in the notification data DID have a positive or negative result?", longmcq(opts))
 
 
 
@@ -1897,7 +1897,7 @@ opts <- c(
   answer="Yellow fever"
 )
 
-cat("Which disease had the highest proportion of cases that remained suspected after linkage?", longmcq(opts))
+cat("Which disease had the highest percentage of cases that remained suspected after linkage?", longmcq(opts))
 
 
 ```
@@ -1931,7 +1931,7 @@ tabyl(data_linked, disease_notified, case_category) |>
 
 :::
 
-#### **Task B: Assess the proportion of suspected cases that are indeed true cases**
+#### **Task B: Assess the percentage of suspected cases that are indeed true cases**
 
 Use `tabyl()` for this once again, looking at the results by disease. Think about the correct denominator!
 
@@ -1947,7 +1947,7 @@ opts <- c(
   "59%"
 )
 
-cat("What proportion of suspected cases reported in 2024 became confirmed?", longmcq(opts))
+cat("What percentage of suspected cases reported in 2024 were true cases, according to their test results?", longmcq(opts))
 
 
 opts <- c(
@@ -1956,7 +1956,7 @@ opts <- c(
   "23%"
 )
 
-cat("What proportion of suspected malaria cases became confirmed?", longmcq(opts))
+cat("What percentage of suspected malaria cases were really malaria?", longmcq(opts))
 
 opts <- c(
   answer = "87%",
@@ -1964,7 +1964,7 @@ opts <- c(
   "23%"
 )
 
-cat("What proportion of suspected dengue cases became confirmed?", longmcq(opts))
+cat("What percentage of suspected dengue cases were really dengue?", longmcq(opts))
 ```
 :::
 ::::
@@ -1972,13 +1972,13 @@ cat("What proportion of suspected dengue cases became confirmed?", longmcq(opts)
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-Divide the number of confirmed cases (i.e. those with a positive result) by the number of confirmed plus discarded cases (i.e. those with either a positive or negative result). This gives a positivity rate, which approximates the proportion of suspected cases that were truly cases. Indeterminate results are excluded because they don't provide a clear outcome and would skew the positivity rate.
+Divide the number of confirmed cases (i.e. those with a positive result) by the number of confirmed plus discarded cases (i.e. those with either a positive or negative result). This gives a positivity rate, which approximates the percentage of suspected cases that were truly cases. Indeterminate results are excluded because they don't provide a clear outcome and would skew the positivity rate.
 :::
 
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Filter out suspected cases and then cross-tabulate, to see the proportion of originally suspected cases that become confirmed or discarded, among those with valid test results. 
+Filter out suspected cases and then cross-tabulate, to see the percentage of originally suspected cases that become confirmed or discarded, among those with valid test results. 
 
 Because there is a totals row, you can see that 56% of suspected cases overall became confirmed, among those with a valid result. You can also see that 41% and 87% of malaria and dengue cases respectively were confirmed. 
 
@@ -2007,7 +2007,7 @@ This is what you will use in official surveillance reporting.
 ```{r, eval=T, include=T, results="asis", echo=FALSE}
 
 opts <- c(
-  answer = "Reporting confirmed cases can be more reliable and accurate when the proportion testing positive is low and lab testing is routine, thereby helping prevent over-estimation of disease burden",
+  answer = "Reporting confirmed cases can be more reliable and accurate when the percentage testing positive is low and lab testing is routine, thereby helping prevent over-estimation of disease burden",
   "Reporting confirmed cases is slower, which gives us more time to be sure of what we are reporting",
   "Because we want to hide the true number of cases"
 )
@@ -2038,7 +2038,7 @@ cat("How many rows are in this new data frame?", longmcq(opts))
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Your surveillance unit wants to focus on confirmed cases in reporting. This is because lab testing is routine in Feveria, and so reporting suspected cases would be unnecessarily inaccurate, with a high proportion of suspected cases getting discarded.
+Your surveillance unit wants to focus on confirmed cases in reporting. This is because lab testing is routine in Feveria, and so reporting suspected cases would be unnecessarily inaccurate, with a high percentage of suspected cases getting discarded.
 
 The decision to publish suspected cases may be different in
 other contexts. For example, if the positivity rate is high (most cases are true cases if tested), and testing itself is not common, or testing takes a long time and would result in delayed reporting, this would suggest that suspected case trends are sufficiently accurate and also more timely than waiting for laboratory confirmation. 
@@ -2490,6 +2490,26 @@ The top of your script should also contain information to help the reader unders
 # Date:
 # Author:
 
+# Install packages -------------------------------------------------
+# Ensures the package "pacman" is installed
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# install (if necessary) from CRAN and load packages to be used
+pacman::p_load(
+  rio,        # importing data  
+  skimr,      # get overview of data
+  janitor,    # data cleaning and tables
+  lubridate,  # working with dates
+  epikit,     # to create age categories
+  gtsummary,  # summary statistics, tests and regressions 
+  apyramid,   # plotting age pyramids 
+  flextable,  # Presentation ready tables
+  naniar,     # Evaluating missingness of data
+  remotes,    # Used to install package to download data
+  tidyverse   # data management and visualization
+)
+
 # Import data --------------------------------------------
 
 # Notification data
@@ -2530,7 +2550,8 @@ data_lab_tests <- data_lab |>
 data_lab_cases <- data_lab_tests |> 
   group_by(notification_id) |> 
   arrange(desc(value)) |> 
-  slice(1)
+  slice(1) |> 
+  ungroup()
 
 # Link notification and lab data  ---------------------------------------
 data_linked <- left_join(data_notif, data_lab_cases, by = "notification_id")
@@ -2544,7 +2565,9 @@ data_linked <- data_linked |>
 data_linked_confirmed <- data_linked |> 
   filter(case_category=="Confirmed")
 
-# ANALYSIS --------------------------------------------------------------
+# ANALYSIS ---------------------------------------------------------
+# Number of suspected cases in Feveria
+tabyl(data_notif, disease_notified)
 
 # Distribution of suspected cases by district
 tabyl(data_notif, disease_notified, residential_district) |>
@@ -2552,12 +2575,15 @@ tabyl(data_notif, disease_notified, residential_district) |>
   adorn_pct_formatting() |>
   adorn_ns()
 
-# Distribution of test results test
+# Distribution of results per disease-specific test
 tabyl(data_lab_tests, test, value) |> 
     adorn_totals(where = "col") |> 
     adorn_percentages() |> 
     adorn_pct_formatting() |> 
     adorn_ns()
+
+# Distribution of case category, in linked data: all cases
+tabyl(data_linked, case_category) 
 
 # Distribution of case category by diseases, in linked data: all cases
 tabyl(data_linked, disease_notified, case_category) |> 
@@ -2615,9 +2641,9 @@ data_linked_confirmed |>
 ## Case study information
 
 ::: {.callout-note appearance="minimal" icon="false"}
-**Original authors**: Paula Blomquist and Alanah Jansen 
+**Original authors**: Paula Blomquist and Alanah Jansen, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET.
 
-**Data source**: Fictional data provided by Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET. 
+**Data source**: Fictional data provided by Applied Epi.
 
 :::
 
@@ -2627,8 +2653,8 @@ data_linked_confirmed |>
 
 ## Terms of Use
 
-**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. The contents are solely the responsibility of the authors and do not necessarily represent the official views of the Centers for Disease Control and Prevention, the Department of Health and Human Services, The Task for Global Health, Inc. or TEPHINET.
+**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. The contents are those of the author(s) and do not necessarily represent the official views of CDC, the US Department of Health and Human Services, or TEPHINET.
 
 **License**: This case study is under a [CC BY-NC-SA 4.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/multi_disease_lab_LICENSE.md). For more information about sharing and adapting this case study, see the [associated deed](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-**Funding**: This case study was 100% supported by Grant or Cooperative Agreement number NU2HGH000044 funded by the Centers for Disease Control and Prevention (CDC). 
+**Funding**: This case study was 100% supported by Cooperative Agreement number NU2HGH000044 funded by the US Centers for Disease Control and Prevention (CDC). 
