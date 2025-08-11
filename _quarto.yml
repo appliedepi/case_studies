@@ -38,6 +38,14 @@ website:
     background: primary
   sidebar:
     logo: "images/logos/Applied_Epi_logo.png"  
+  cookie-consent:
+    type: implied
+    style: simple
+    palette: dark
+  google-analytics:
+    tracking-id: "G-YBNGPHQ4MK"
+    storage: cookies
+    anonymize-ip: true
     
 format:
   html: 
