@@ -40,8 +40,8 @@ website:
     logo: "images/logos/Applied_Epi_logo.png"  
   cookie-consent:
     type: implied
-    style: simple
-    palette: dark
+    style: simple 
+    palette: light
   google-analytics:
     tracking-id: "G-YBNGPHQ4MK"
     storage: cookies
