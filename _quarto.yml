@@ -2,11 +2,10 @@ project:
   type: website
   render:
     - index.qmd      
- 
     - pages/instructions.qmd
     # - pages/fulton.qmd          
     - pages/r_practical.qmd
-    - pages/multidisease_surveillance_en.qmd
+    - pages/multidisease_surveillance.qmd
     - pages/under_construction.qmd
     # - pages/tbe.qmd
     # - pages/stegen-en.qmd                
@@ -14,15 +13,15 @@ project:
     
     # Spanish
     # - pages/oswego.es.qmd
-    - pages/multidisease_surveillance_es.qmd
+    - pages/multidisease_surveillance.es.qmd
     - pages/under_construction.es.qmd
     
     # French
-    - pages/multidisease_surveillance_fr.qmd
+    - pages/multidisease_surveillance.fr.qmd
     - pages/under_construction.fr.qmd
     
     # Portuguese
-    - pages/multidisease_surveillance_pt.qmd
+    - pages/multidisease_surveillance.pt.qmd
 
 website:
   title: "Applied Epi Open Case Study Repository"
