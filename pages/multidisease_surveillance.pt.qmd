@@ -17,7 +17,7 @@ editor:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-# Ligação e análise de dados de notificação e de dados laboratoriais em R {#multi_disease_lab}
+# Ligação e análise de dados de notificação e de dados laboratoriais em R {#multidisease_surveillance}
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Ferramenta**: R **Complexidade técnica**: Intermédiaria **Complexidade
@@ -1462,7 +1462,7 @@ dados_lab |>
 ```
 
 Pode até verificar se isto se aplica apenas ao exame de dengue
-adicionando a `doença` ao cálculo. Pode ver que é apenas o teste da
+adicionando a `exame` ao cálculo. Pode ver que é apenas o teste da
 dengue que tem 3 linhas por amostra.
 
 ```{r, eval=T}

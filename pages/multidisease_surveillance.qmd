@@ -17,7 +17,7 @@ editor:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-# Linking and analysing notification data and laboratory data in R {#multi_disease_lab}
+# Linking and analysing notification data and laboratory data in R {#multidisease_surveillance}
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Tool**: R **Technical complexity**: Intermediate **Methodological
@@ -144,7 +144,7 @@ the Epi R Handbook.
 
 Start a new R script by clicking `New File` in the top left of your R
 Studio, then `R Script`. Save it immediately in the appropriate place,
-e.g. in a 'scripts' sub-folder of your R Project.
+e.g. in a `scripts` sub-folder of your R Project.
 
 At the top of your new R script, write some essential information like
 your name, the purpose of the file, and the date.
@@ -1155,7 +1155,7 @@ use `tabyl()` to look at the distribution of these counts.
 
 First, pipe from the notification data into the `count()` function,
 giving the `notification_id` column as the only argument. This creates a
-table that counts the number of rows per unique value of `sample_id`,
+table that counts the number of rows per unique value of `notification_id`,
 shown in a new column `n`. You can see for example in this excerpt that
 there is only one row per each of these 6 `notification_id`s.
 
@@ -1435,7 +1435,7 @@ data_lab |>
 ```
 
 You can even double-check that this only applies to the dengue assay by
-adding in the `disease` column to the calculation. You can see that it
+adding in the `test` column to the calculation. You can see that it
 is only the dengue test that has 3 rows per sample.
 
 ```{r, eval=T}
@@ -1937,7 +1937,7 @@ anti_join(data_lab_cases, data_notif,
 ```
 
 Finally, to check the number of notifications without a result, you can
-either conduct an anti_join in putting `data_notif` first:
+either conduct an `anti_join` in putting `data_notif` first:
 
 ```{r eval=T}
 anti_join(data_notif, data_lab_cases, 
@@ -2660,7 +2660,7 @@ cat("When was the last dengue case reported in **Feveria Central** in 2024?", lo
 ::: {.callout-caution icon="false" collapse="true"}
 ## Click to see the solution (try it yourself first!)
 
-Group the data by disease and then summarize the first and last date to
+Group the data by disease and then `summarize` the first and last date to
 look at the overall timeline of each disease in Feveria.
 
 ```{r eval=T}

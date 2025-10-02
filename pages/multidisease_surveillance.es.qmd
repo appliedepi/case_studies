@@ -17,7 +17,7 @@ editor:
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-# Vinculación y análisis de datos de notificación y datos de laboratorio en R {#multi_disease_lab}
+# Vinculación y análisis de datos de notificación y datos de laboratorio en R {#multidisease_surveillance}
 
 ::: {.callout-note appearance="minimal" icon="false"}
 **Herramienta:** R **Complejidad técnica:** Intermedia **Complejidad
@@ -1488,7 +1488,7 @@ datos_lab |>
 ```
 
 Incluso se puede verificar que esto aplica únicamente al ensayo de
-dengue añadiendo la columna `disease` al cálculo. De esta manera, se
+dengue añadiendo la columna `prueba` al cálculo. De esta manera, se
 observa que solo la prueba de dengue presenta tres filas por muestra.
 
 ```{r, eval=T}
