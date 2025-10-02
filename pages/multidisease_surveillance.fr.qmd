@@ -1,0 +1,3094 @@
+---
+editor_options:
+  chunk_output_type: console
+execute:
+  warning: false
+  error: false
+format:
+  html:
+    css: webex.css
+    include-after-body: webex.js
+editor:
+  markdown:
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+# Jonction et analyse des données de notification et des données de laboratoire dans R {#multidisease_surveillance}
+
+::: {.callout-note appearance="minimal" icon="false"}
+**Outil:** R **Complexité technique:** Intermédiaire **Complexité
+méthodologique:** Basique
+
+**Connaissances préalables requises:** [bases de
+R](https://epirhandbook.com/fr/basics.fr.html) (Utilisation de Rstudio ;
+packages R, fonctions et arguments, utilisation de l'opérateur pipe)
+ainsi que les fonctions clés de tidyverse et de ggplots.
+
+**Source:** Applied Epi, avec le soutien technique du CDC Global
+Surveillance, Laboratory, and Data Systems Branch en collaboration avec
+TEPHINET.
+:::
+
+Pour savoir comment utiliser nos études de cas, consultez notre site web
+[Guide Pratique](instructions.html). Nous vous invitons à nous faire
+part de vos commentaires et suggestions à l'adresse
+[contact\@appliedepi.org](mailto:contact@appliedepi.org). Vous pouvez
+également discuter de l'étude de cas ou de sujets associés sur le [Forum
+communautaire d'Applied Epi](https://community.appliedepi.org/).
+
+## Scénario
+
+Vous êtes un épidémiologiste travaillant au bureau national de
+surveillance de Feveria, un tout petit pays tropical. Le pays compte
+trois districts :
+
+-   **Feveria Central**: une zone urbaine surpeuplée, avec des
+    infrastructures d'eau et d'assainissement parfois peu fiables.
+-   **Lac Minara**: une région lacustre dotée de bonnes infrastructures,
+    mais avec une forte présence de moustiques pendant les mois les plus
+    chauds de l'année.
+-   **Kasara**: une zone suburbaine de l'autre côté de Feveria Central.
+
+**Carte des districts du pays Feveria**
+
+![](/images/multidisease_surveillance/map_fr.png){width="70%"}
+
+Nous sommes en janvier 2025, et votre supérieure hiérarchique souhaite
+que vous transfériez le traitement de routine des données sur les
+maladies à déclaration obligatoire d'Excel à R, et d'effectuer quelques
+analyses sur ces données. Elle souhaite connaître au minimum:
+
+-   Combien de cas suspects des différentes maladies à déclaration
+    obligatoire ont été signalés en 2024, et quelle était la plus
+    représentée ?
+-   Parmi eux, quel était le pourcentage de cas confirmés ?
+-   Combien de cas confirmés des différentes maladies à déclaration
+    obligatoire ont été signalés en 2024, et quelle était la plus
+    représentée ?
+-   Comment se répartissaient géographiquement et temporellement les cas
+    confirmés dans la région de Feveria ?
+
+Elle vous demande d'écrire le code pour importer, nettoyer, joindre et
+analyser les listes linéaires suivantes :
+
+-   **Données de surveillance 2024 des maladies à déclaration
+    obligatoire :** Appelées également "données de notification", il
+    s'agit de données de surveillance sur cinq maladies à déclaration
+    obligatoire signalées par les cliniques de Feveria : la dengue, le
+    paludisme, le choléra, la fièvre typhoïde et la fièvre jaune. Il
+    s'agit de cas suspects, basés sur les symptômes des patients. Les
+    cliniciens saisissent chaque notification dans un système en ligne
+    tous les jours de la semaine.
+-   **Données 2024 sur les résultats des tests de laboratoire :** Ces
+    données sont issues des résultats des tests de laboratoire effectués
+    par trois grands laboratoires de Feveria. Ces résultats concernent
+    des échantillons prélevés sur les cas suspects de maladies à
+    déclaration obligatoire enregistrés dans la première base de données
+    ci-dessus.
+
+Allons-y !
+
+## Les objectifs
+
+Dans cette étude de cas, vous allez :
+
+1.  Utiliser des fonctions essentielles de R pour nettoyer des données,
+    remodeler des bases de données, fusionner différentes sources de
+    données et créer de nouvelles colonnes à l'aide de conditions
+    logiques pour préparer les données pour l'analyse.
+2.  Passer en revue les données et effectuer des contrôles de leur
+    qualité à plusieurs étapes du projet et comprendre l'importance de
+    ces actions pour une analyse fiable.
+3.  Conduire des analyses descriptives de base pour comparer les
+    tendances des maladies à partir de différentes sources de données,
+    avant et après la jointure.
+4.  Interpréter les différences de résultats selon les sources de
+    données et comprendre comment elles reflètent la structure et la
+    conception du système de surveillance dans son ensemble.
+
+## Étape 1. Mise en place
+
+### 1.1 Démarrer dans RStudio
+
+Commencez par la mise en place d'un flux de travail reproductible et
+bien organisé. Ce processus facilitera le renouvellement de votre
+analyse chaque fois que cela sera nécessaire.
+
+**Tâches :**
+
+-   Création d'un un projet RStudio
+-   Création d'une structure claire de sous-dossiers dans lesquels vous
+    placerez votre code, vos données et vos résultats / sorties.
+-   Création d'un script R, ou d'un fichier R Markdown si vous préférez.
+    Assurez-vous que que le but du script, la date et l'auteur sont
+    écrits sous forme de commentaires en haut du script.
+-   Additionnel : Assurez-vous que votre langue de travail dans RStudio
+    est appropriée (par ex. le français pour cet exercice)
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+-   Créez un dossier dans lequel vous placerez tous les travaux de cette
+    étude de cas. Par exemple, créez un dossier "Analyse_multi_maladies"
+    sur le bureau de votre ordinateur. Créez votre projet RStudio dans
+    ce dossier.
+
+-   Nous suggérons de créer les sous-dossiers suivants : `scripts` (pour
+    votre code), `donnees` (pour vos données), et `resultats` (pour vos
+    résultats d'analyse).
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Créez un dossier (par exemple "Analyse_multi_maladies" sur votre bureau)
+pour cet exercice. Pour créer un projet Rstudio dans votre nouveau
+dossier, cliquez sur l'icône `New Project` en haut à gauche de votre
+fenêtre R Studio (ou sur `File` puis `New Project`), puis
+sur`Existing Directory` puis `Browse` pour sélectionner votre nouveau
+dossier. Pour plus d'informations, consultez la section [Projets
+R](https://epirhandbook.com/fr/r_projects.fr.html) du Epi R Handbook.
+
+Ouvrez un nouveau script R en cliquant sur l'icône `New File` en haut à
+gauche de votre écran R Studio (ou sur `File` puis `New File`), puis
+`R Script`. Sauvegardez-le immédiatement à un endroit approprié, par
+exemple, dans le sous-dossier `scripts` de votre dossier de projet R.
+
+Au début de votre nouveau script R, écrivez sous forme de commentaires
+quelques informations essentielles telles que votre nom, le but du
+fichier et la date.
+
+Les paramètres R "locale" déterminent la langue et les paramètres
+régionaux utilisés pour les scripts R comme les formats de date et les
+traductions. Si vos paramètres régionaux sont différents de la langue
+que vous souhaitez utiliser pour votre rapport (par exemple, les
+paramètres anglophones au lieu des paramètres francophones), vous pouvez
+les remplacer par les francophones en exécutant la commande
+`Sys.setlocale("LC_ALL", "French")`. Incluez cette commande dans votre
+script si nécessaire, ou ignorez-la si vos paramètres sont appropriés.
+Ceci est expliqué plus en détail dans le [Guide
+pratique](pages/instructions.qmd_).
+:::
+
+### 1.2 Installer/charger des packages
+
+Dans votre script R, vous devez maintenant installer et charger les
+packages R nécessaires. Cela permet de s'assurer que les fonctions
+nécessaires sont disponibles pour votre analyse.
+
+Vous aurez besoin des packages suivants : `{rio}` (pour l'importation
+des données),`{skimr}` (pour l'examen des données), `{janitor}` (pour le
+nettoyage des données), `{lubridate}` (pour le nettoyage des dates),
+`{epikit}` (pour des tâches liées à l'épidémiologie), `{gtsummary}`
+(pour les statistiques descriptives / les tests et régressions),
+`{apyramid}` (pour les pyramides des âges et des sexes), `{flextable}`
+(pour des tableaux prêts à être présentés), `{naniar}` (pour l'analyse
+des données manquantes), et `{tidyverse}` (pour la manipulation générale
+des données et autres tâches scientifiques).
+
+Vous aurez également besoin du package`{remotes}` pour télécharger les
+données - ce que nous expliquerons dans la section sur le
+téléchargement.
+
+Alors que vous commencez, votre collègue expérimenté vous glisse : "J'ai
+entendu parler du package `{pacman}` pour facilement gérer l'instalation
+et le chargement des packages dans R".
+
+À vous de jouer !
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Utilisez la fonction `p_load()` de `pacman` pour cette tâche. Vous
+fournissez à la fonction une liste de packages que vous souhaitez
+utiliser. La fonction effectuera deux étapes pour chaque package :
+
+1)  Vérifier si le package est installé sur votre ordinateur, et
+    l'installer si nécessaire, puis
+
+2)  Charger le package pour qu'il pour qu'il puisse être utilisé pendant
+    cette session R.
+
+Si vous n'avez pas encore installé `pacman`, vous devrez d'abord
+l'installer de manière "traditionnelle", à l'aide de la fonction
+`install.packages()`.
+
+Notez que l'ordre des packages dans votre fonction `p_load` peut être
+important. Si deux packages possèdent une fonction avec un nom identique
+(par exemple `select()` dans le package `MASS` et `select()` dans
+`tidyverse` qui réalisent des tâches différentes), alors R utilisera la
+fonction du dernier package chargé. Pour donner la priorité aux
+fonctions de `tidyverse`, qui sont couramment utilisées pour la
+manipulation et la visualisation des données, chargez `tidyverse` en
+dernier.
+
+```{r, echo=TRUE, eval=TRUE}
+
+# Pour s'assurer que le package "pacman" est installé
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# Installation (si nécessaire) depuis le CRAN et chargement des packages à utiliser
+pacman::p_load(
+  rio,        # importation de données  
+  skimr,      # aperçu des données
+  janitor,    # nettoyage des données et tableaux descriptifs
+  lubridate,  # manipulation des dates
+  epikit,     # pour créer des catégories d'âge
+  gtsummary,  # statistiques descriptives, tests et régressions 
+  apyramid,   # tracé de pyramides des âges 
+  flextable,  # tableaux prêts à être présentés
+  naniar,     # analyse des données manquantes
+  remotes,    # pour installer le package permettant de télécharger les données
+  tidyverse   # gestion et visualisation des données
+)
+
+```
+:::
+
+## Étape 2. Télécharger et importer les données
+
+### 2.1 : Télécharger les données
+
+Votre bureau vous fournit deux fichiers pour votre analyse, tous deux
+contenant des données pour 2024 et mises à jour au 15 janvier 2025 :
+
+-   un ensemble de données de notification des maladies
+    (*"multi_maladies_notifications.xlsx"*) avec l'information sur les
+    cas de 5 centres de santé.
+-   Un ensemble de données au niveau des tests de laboratoire
+    (*"multi_maladies_tests.csv")* soumis par trois laboratoires
+    effectuant des tests pour les cinq centres de santé.
+
+Pour cette étude de cas, vous pouvez télécharger les données via le
+répertoire de données d'Applied Epi, auquel vous pouvez accéder grâce au
+package `{appliedepidata}`. Suivez les étapes suivantes :
+
+1)  Installez le package `{appliedepidata}` depuis GitHub à l'aide de la
+    fonction `install_github()` du package `{remotes}` (que vous avez
+    installé précédemment)
+
+```{r, echo=TRUE, eval=FALSE}
+# Use the install_github function from remotes to install appliedepidata
+remotes::install_github("appliedepi/appliedepidata")
+```
+
+2)  Enregistrez les deux ensembles de données dans un dossier spécifique
+    à l'aide de la fonction `save_data()` de `{appliedepidata}` en
+    exécutant le code ci-dessous. Dans l'exemple ci-dessous, les données
+    sont enregistrées dans un sous-dossier `donnees` du dossier de
+    projet RStudio. Notez que si vous ne spécifiez pas d'emplacement
+    spécifique avec l'argument `path` de la fonction, une fenêtre
+    s'ouvrira pour vous demander de sélectionner manuellement un
+    dossier.
+
+```{r, echo=TRUE, eval=FALSE}
+# Téléchargement des deux fichiers de données en utilisant la fonction save_data()de appliedepidata
+appliedepidata::save_data("multi_maladies_tests",
+                        path = "donnees")
+
+appliedepidata::save_data("multi_maladies_notifications",
+                          path = "donnees")
+```
+
+### 2.2 Importer les données
+
+Très bien ! Merci au bureau national et à Applied Epi ! Il est
+maintenant temps d'importer les données de ce dossier dans RStudio, afin
+de pouvoir les analyser.
+
+#### **Tâche A : Importer les deux fichiers de données téléchargés dans votre environnement R Studio**
+
+Idéalement, vous utiliserez la même fonction pour importer les deux
+ensembles de données, bien qu'un soit un fichier .csv et l'autre un
+fichier .xlsx. Notez qu'à l'avenir, nous dirons simplement
+"environnement" lorsque nous parlerons de la fenêtre environnement dans
+R Studio.
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Utiliser la fonction `import` du package `{rio}`, qui peut reconnaître
+et importer différents types de fichiers. Elle remplace les fonctions
+d'importation qui sont spécifiques à un type de fichier, telles que
+`read.csv()` de `{base}` pour les fichiers .csv et `read_excel()` de
+`{readxl}` pour importer des fichiers .xlsx.
+
+Pour en savoir plus sur les fonctions d'importation, lisez le chapitre
+[Importer et exporter des
+données](https://epirhandbook.com/fr/importing.fr.html) du Epi R
+Handbook.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Ci-dessous, nous utilisons la fonction d'importation pour importer les
+deux fichiers. Notez que nous assignons les données importées à deux
+objets, l'un appelé *data_notif_brut* et un autre appelé
+*data_lab_brut*. Nous ajoutons le suffixe "brut" pour distinguer ces
+données des versions nettoyées que nous créerons plus tard.
+
+```{r, echo=TRUE, eval=FALSE}
+# Importation des données
+
+# Données de notification
+data_notif_brut <- import("donnees/multi_maladies_notifications.xlsx")
+
+# Données de labo
+data_lab_brut <- import("donnees/multi_maladies_tests.csv")
+
+```
+
+```{r, eval=T, include=FALSE}
+# This code is actually run; the prior chunk is just for show for simplicity
+
+pacman::p_load("remotes")
+
+if (!requireNamespace("appliedepidata", quietly = TRUE)) {
+  remotes::install_github("appliedepi/appliedepidata")
+}
+
+appliedepidata::get_data(name = "multi_maladies_tests")
+appliedepidata::get_data("multi_maladies_notifications")
+
+data_notif_brut <- multi_maladies_notifications
+data_lab_brut <- multi_maladies_tests
+
+rm(multi_maladies_notifications, multi_maladies_tests)
+
+```
+:::
+
+## Étape 3. Inspecter les données
+
+Les données sont là, il est maintenant temps de voir ce qu'elles
+racontent. Jetez un premier coup d'oeil à vos deux ensembles de données
+brutes pour en vérifier le contenu et la qualité.
+
+### Étape 3.1 Inspecter les données de surveillance
+
+#### **Tâche A : Inspecter tout d'abord les *dimensions* et le contenu global des données de notification**
+
+**Utilisez `skim()` du package `{skimr}` package, ainsi que `names()`,
+`ncol()` et `nrow()` pour inspecter votre ensemble de données.**
+
+`skim()` vous donne de nombreuses informations sur la structure et le
+contenu des données, et `names()` vous fournira les différents noms de
+colonnes des données. Les fonctions `ncol()` et `nrow()` renvoient le
+nombre de colonnes ou de lignes dans les données. Savez-vous ce qu'il
+faut mettre entre les parenthèses ?
+
+Le plus simple est de regarder dans l'environnement. Rappelez-vous que
+l'objet de votre environnement contenant les données de notification
+s'appelle `data_notif_brut`.
+
+Cliquez sur la solution sous l'encart de questions si vous avez besoin
+d'aide.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+suppressMessages(pacman::p_load(webexercises))
+
+opts <- c(
+  "10",
+  "11",
+  answer = "12",
+  "13"
+)
+
+cat("Combien y a-t-il de colonnes dans les données de notification?", longmcq(opts))
+
+opts <- c(
+  "Date d'apparition",
+  "Date signalée par l'établissement de santé/la communauté",
+  "Date du résultat",
+  answer = "Date de test",
+  "Date de naissance"
+)
+
+cat("Laquelle de ces colonnes n'apparait PAS dans les données?", longmcq(opts))
+
+pacman::p_load(webexercises)
+
+opts <- c(
+  answer = "ID de notification",
+  "Test ID",
+  "Code de l'établissement de santé",
+  "Combinaison de ID de notification et Sexe"
+)
+
+cat("Quel est le nom de la / des colonne(s) permettant d'identifier chaque notification de cas?", longmcq(opts))
+
+opts <- c(
+  answer = "987",
+  "1314",
+  "950",
+  "778"
+)
+
+cat("Combien y a-t-il de lignes dans les données de notification?", longmcq(opts))
+
+opts <- c(
+  answer = "Le résultat du test de laboratoire",
+  "Le district de résidence",
+  "La date de naissance et le sexe",
+  "La structure de santé où a eu lieu la notification",
+  "L'issue de la maladie"
+)
+
+cat("A quel type d'information n'avez vous PAS accès dans les données de notification?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Utilisez `skim()` du package `{skimr}` pour obtenir un résumé de
+l'ensemble des données, et `View()` pour consulter directement
+l'ensemble de la base de données sous forme de tableur :
+
+```{r}
+skim(data_notif_brut)
+```
+
+Vous pouvez également utiliser `names()` pour imprimer uniquement les
+noms des colonnes. Par l'intermédiaire de `skim()` et `names()` vous
+aurez accès à différents type d'information, notamment : l'établissement
+de santé du cas, la date de naissance, le sexe, un indicateur de
+grossesse, le district de résidence, la date d'apparition et la date
+rapportée par la clinique, ainsi que des informations sur l'issue de la
+maladie.
+
+Il y a également `ID de notification` qui semble être un identifiant
+unique pour un cas, mais nous devrions vérifier les doublons avant d'en
+être sûrs.
+
+Notez qu'il n'y a AUCUN résultat de test dans ces données, car ces
+notifications proviennent des cliniques qui notifient les maladies à
+déclaration obligatoire sur la base de définitions de cas cliniques.
+
+```{r, eval=T}
+names(data_notif_brut)
+```
+
+Utilisez `ncol()` et `nrow()` pour imprimer le nombre de colonnes et de
+lignes, comme ceci :
+
+```{r}
+ncol(data_notif_brut)
+nrow(data_notif_brut)
+```
+
+Ceci imprimera le nombre de colonnes et de lignes dans votre console.
+
+```{r, eval=T, echo=F}
+ncol(data_notif_brut)
+nrow(data_notif_brut)
+```
+
+Par ailleurs, si l'on examine l'environnement, on constate que le nombre
+d'observations (qui sont les mêmes que les lignes) et de colonnes sont à
+côté du nom de la base de données.
+:::
+
+#### **Tâche B : Examinez ensuite les classes des colonnes de votre ensemble de données de notification brut**
+
+**Utilisez `skim()` du package `{skimr}` ou `class()` pour explorer les
+classes des colonnes.**
+
+Vous souvenez-vous de la façon de spécifier la colonne qui vous
+intéresse à l'intérieur de la fonction `class()` ? Vous pouvez également
+explorer les classes depuis l'environnement.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "0",
+  "2",
+  "4"
+)
+
+cat("Combien de colonnes dans l'ensemble de données de notification sont reconnues par R comme étant de classe date ?", longmcq(opts))
+
+opts <- c(
+  answer = "character",
+  "numeric",
+  "factor"
+)
+
+cat("Quelle est la classe de la plupart des colonnes dans les données brutes de notification?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous pouvez utiliser `class` comme dans l'exemple ci-dessous. Le `$` est
+un opérateur utilisé pour sélectionner une colonne spécifique de
+l'ensemble de données `data_notif_brut`.
+
+Notez l'utilisation d'apostrophes inversées (`` ` ``) autour de
+`Date de naissance` parce que le nom de la colonne contient des espaces.
+
+```{r}
+class(data_notif_brut$`Date de naissance`)
+```
+
+Pour consulter la classe via l'environnement, cliquez sur la flèche
+bleue à côté du nom de l'ensemble de données. Les noms des colonnes
+apparaissent, avec la classe à côté (par exemple, "chr" indique la
+classe texte / caractères).
+
+Vous pouvez voir qu'aucune des colonnes qui devraient être des dates
+n'est reconnue comme telle. Au lieu de cela, elles sont reconnues comme
+des valeurs texte.
+:::
+
+#### **Tâche C : Inspecter les valeurs catégorielles et les données manquantes**
+
+**Utiliser la fonction `tabyl()` pour inspecter les valeurs dans les
+colonnes qualitatives/catégorielles** en spécifiant le nom de la base de
+données comme premier argument, et le nom de la colonne comme second
+argument.
+
+Par exemple, ce code renvoie le contenu de la colonne Sexe. La sortie
+montre que masculin et féminin sont sont orthographiés de manière
+incohérente dans les données. Cette colonne devra faire l'objet d'un
+nettoyage avant de pouvoir être analysée.
+
+```{r, eval=T}
+tabyl(data_notif_brut, Sexe)
+
+```
+
+Pour analyser les données manquantes, vous pouvez utiliser la fonction
+`miss_var_summary()` du package `{naniar}` :
+
+```{r, eval=T}
+miss_var_summary(data_notif_brut)
+```
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "Non, elles doivent être nettoyées",
+  "Elles sont standardisées et prêtes à être utilisées dans l'analyse"
+)
+
+cat("Les valeurs dans la colonne `District résidentiel` sont-elles standardisées ?", longmcq(opts))
+
+opts <- c(
+  "Non, elles doivent être nettoyées",
+ answer = "Elles sont standardisées et prêtes à être utilisées dans l'analyse"
+)
+
+cat("Les valeurs dans la colonne `Maladie notifiee` sont-elles normalisées ?", longmcq(opts))
+
+opts <- c(
+  "Soit une absence de valeur, ou juste un espace ou un point",
+ answer = "Pas de valeur dans la cellule, représenté par NA",
+ "Les mots Inconnu et Indéterminé"
+)
+
+
+cat("Qu'est-ce que R reconnait comme une valeur manquante?", longmcq(opts))
+
+
+opts <- c(
+  "Oui, il y a peu de données manquantes, elle est donc utile",
+ answer = "Assez peu, au vu de la proportion de données manquantes"
+)
+
+cat("Selon l'analyse des données manquantes, est-ce que la colonne `Date d'apparition` vous paraît exploitable et utile?", longmcq(opts))
+
+opts <- c(
+  "Un bot brouille les données afin qu'elles soient moins identifiables",
+ answer = "Chaque clinique peut utiliser un logiciel configuré de manière légèrement différente, ou utiliser des entrées en texte libre, ce qui entraîne des variations orthographiques",
+ "Le logiciel du système de surveillance utilisé par les établissements cliniques comporte de nombreux bugs"
+)
+
+cat("Pourquoi certaines colonnes des données de notification peuvent présenter des orthographes différentes et des catégories non standardisées ?", longmcq(opts))
+
+opts <- c(
+ "The clinician does not ask the patient the question during their consultation",
+ "The patient might not know or want to share the answer",
+ "The clinician might not have time to prioritise filling in that field in the data, even if they know the information",
+ answer = "All of the above, and many more reasons"
+)
+
+cat("Why might some columns in the notification data have high missingness?", longmcq(opts))
+
+opts <- c(
+ "Le clinicien ne pose pas la question au patient pendant la consultation",
+ "Le patient peut ne pas connaître la réponse ou ne pas vouloir la partager",
+ "Le clinicien peut ne pas avoir le temps de remplir ce champ dans les données, même s'il connaît l'information",
+ answer = "Toutes les raisons ci-dessus, et bien d'autres encore"
+)
+
+cat("Pourquoi certaines colonnes de données de notification peuvent présenter une proportion élevée de données manquantes ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Utilisez la fonction `tabyl()` le résumé des valeurs de la colonne
+`District residentiel`. Là encore, le premier argument est le nom de
+l'ensemble de données et le deuxième argument est le nom de la colonne.
+
+```{r, eval=T}
+tabyl(data_notif_brut, `District residentiel`)
+```
+
+Vous pouvez constater que chacun des trois emplacements (Feveria
+Central, Lac Minara et Kasara) sont orthographiés de différentes
+manières et en lettres majuscules ou minuscules. Il faudra faire le
+ménage si l'on veut analyser la distribution géographique des maladies à
+déclaration obligatoire.
+
+De même, utilisez `tabyl()` résumer les valeurs contenues dans la
+colonne `Maladie notifiee`. Vous pouvez voir qu'elles sont écrites en
+toutes lettres de manière appropriée et cohérente, de sorte que vous
+pouvez déjà voir la distribution des maladie sans nettoyage
+supplémentaire.
+
+```{r, eval=T}
+tabyl(data_notif_brut, `Maladie notifiee`)
+```
+
+Une autre façon d'analyser les données manquantes est de résumer la
+sortie de la fonction `is.na()`. Dans l'exemple ci-dessous, la fonction
+`is.na()` évalue chaque cellule de la colonne `Date d'apparition` et
+renvoie TRUE pour pour les valeurs manquantes et FAUX pour les valeurs
+présentes.
+
+Appliquer `tabyl()` à cette série de TRUE/FALSE vous permet d'obtenir
+rapidement les effectifs et proportions de données manquantes dans cette
+colonne. N'oubliez pas que les valeurs comme un espace ou les mots
+"Inconnu" ou "Manquant" ne seront pas reconnues par R comme manquantes.
+R ne reconnaîtra que les cellules vides comme données manquantes,
+représentées par `NA`.
+
+Pour `Date d'apparition`, vous pouvez voir que 70 % des cas n'ont pas de
+valeur, ce qui suggère que cette colonne n'est pas particulièrement
+utile pour analyser des tendances de maladies au fil du temps.
+
+```{r, eval=T}
+tabyl(is.na(data_notif_brut$`Date d'apparition`))
+```
+
+Les données manquantes ou non standardisées peuvent être dues à de
+nombreuses raisons, notamment:
+
+-   la conception de l'outil de collecte de données (par exemple, si les
+    questions sont obligatoires ou si elles utilisent du texte libre
+    plutôt que des listes déroulantes),
+
+-   les processus et les normes en place (par exemple, des champs que le
+    personnel a pour instruction de prioriser), et
+
+-   les facteurs contextuels (par exemple, si le personnel dispose de
+    suffisamment de temps pour collecter les informations).
+:::
+
+### Étape 3.2 Inspecter les données de laboratoire
+
+#### **Tâche A : Inspecter les *dimensions* et le contenu global des données de laboratoire**
+
+Comme pour les données de surveillance, **utilisez `skim()`, `ncol()` et
+`nrow()`ou inspecter l'environnement pour inspecter les données de
+laboratoire.**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+pacman::p_load(webexercises)
+
+opts <- c(
+  "Les données de laboratoire",
+  answer = "Les données de surveillance",
+  "Elles ont le même nombre de colonnes"
+)
+
+cat("Quelle liste linéaire comporte le plus de colonnes : les données de surveillance ou les données de laboratoire ?", longmcq(opts))
+
+opts <- c(
+  answer = "Les données de laboratoire",
+  "Les données de surveillance",
+  "Elles ont le même nombre de lignes")
+
+
+cat("Quelle liste linéaire comporte le plus de lignes ?", longmcq(opts))
+
+opts <- c(
+  answer = "Il peut y avoir plusieurs tests ou cibles analysées par échantillon",
+  "Il y a de nombreux résultats de tests d'étalonnage dans les données",
+  "Toutes les notifications n'ont pas encore reçu de résultats de tests")
+
+
+cat("Inspectez les données de laboratoire avec `View()`. Pour quelle raison les données de laboratoire pourraient avoir plus d'enregistrements ?", longmcq(opts))
+
+opts <- c(
+  "ID de notification",
+  "ID d'échantillon",
+  "Type de test",
+  answer = "Date de naissance",
+  "Résultat du test")
+
+
+cat("Laquelle de ces informations ne figure PAS dans les données de laboratoire ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Comme dans la section 3.1, vous pouvez utiliser `skim()` du package
+`{skimr}` pour examiner l'ensemble de données de laboratoire avec les
+résultats des tests. Vous verrez également les différents noms de
+colonnes de données, montrant que les données de laboratoire ne
+contiennent que des informations sur le test et non sur le patient.
+Elles contiennent toutefois un identifiant de notification, comme les
+données de notification.
+
+```{r}
+skim(data_lab_brut)
+```
+
+Utiliser `ncol()` et `nrow()` pour imprimer le nombre de colonnes et de
+lignes, comme ceci :
+
+```{r}
+ncol(data_lab_brut)
+nrow(data_lab_brut)
+```
+
+Les nombres de colonnes et de lignes s'afficheront dans votre console,
+vous montrant que les données de laboratoire ont plus de lignes que les
+données de notification que vous avez inspectées plus tôt.
+
+```{r, eval=T, echo=F}
+ncol(data_lab_brut)
+nrow(data_lab_brut)
+```
+
+Il y a souvent plus d'enregistrements dans les données de laboratoire
+que dans les données cliniques. Si vous inspectez les données avec
+`View(data_lab_brut)` et que vous cliquez ensuite sur la flèche en haut
+de la colonne `id_notification` pour les trier par ordre alphabétique,
+vous verrez que plusieurs lignes partagent le même numéro de
+notification. Cela peut se produire lorsque plusieurs cibles sont
+testées à partir du même échantillon (même ID d'échantillon), ou
+lorsqu'un cas est retesté (ce qui donne un numéro d'identification
+d'échantillon différent).
+
+```{r}
+View(data_lab_brut)
+```
+
+```{r, eval=T, echo=F}
+flextable(head(data_lab_brut |> filter(str_detect(cible,"Dengue")))) |> autofit()
+```
+:::
+
+#### **Tâche B : Examiner les classes, les valeurs catégorielles et les données manquantes**
+
+Comme ci-dessus, **utilisez les fonctionc `class()`, `skim()` ou
+`tabyl()`, ou explorer l'environnement, pour examiner vos colonnes en
+détail.**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "0",
+  answer = "1",
+  "2"
+)
+
+cat("Combien de colonnes dans les données de laboratoire sont reconnues par R comme étant des colonnes de date ?", longmcq(opts))
+
+
+opts <- c(
+  "1",
+  "3",
+  answer = "7 (toutes!)"
+)
+
+cat("Combien de colonnes des données de laboratoire n'ont aucune donnée manquante ?", longmcq(opts))
+
+
+opts <- c(
+  "Paludisme",
+  answer = "Dengue",
+  "Fièvre jaune",
+  "Choléra",
+  "Fièvre typhoïde"
+)
+
+cat("Quel test détecte plusieurs cibles (et comporte donc plusieurs lignes par échantillon) ?", longmcq(opts))
+
+opts <- c(
+  answer = "5",
+  "3",
+  "4")
+
+
+cat("Combien de valeurs de résultats de test possibles y a-t-il dans la colonne `valeur` ?", longmcq(opts))
+
+opts <- c(
+  answer = "P",
+  "P01",
+  "P0139",
+  "N",
+  "I")
+
+
+cat("Quel résultat ne semble PAS être possible pour le test de culture des selles qui détecte la bactérie V.cholerae ?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Les données du laboratoire ont une colonne de date, reconnue par R comme
+une classe "IDate". Il s'agit d'une classe de date utilisée par
+`import()` de `{rio}` lors de l'importation de fichiers csv. Comme la
+classe Date native de R, elle permet de trier par date et d'analyser les
+tendances dans le temps.
+
+```{r, eval=T}
+class(data_lab_brut$date_test)
+```
+
+En utilisant la fonction `miss_var_summary()` du package `{naniar}`, on
+réalise que toutes les colonnes des données de laboratoire sont
+complètes. Cela peut s'expliquer par le fait que les laboratoires
+utilisent des processus automatisés et qu'il y a donc beaucoup moins de
+risques d'erreur humaine.
+
+(**Point important** : Notez que dans la vie réelle, les données de
+laboratoire présenteraient probablement des problèmes aussi !)
+
+```{r, eval=T}
+miss_var_summary(data_lab_brut)
+```
+
+Pour connaître le nombre de cibles détectées par chaque test, vous
+pouvez croiser les colonnes `test` et `cible` avec `tabyl()`. Ecrivez
+les noms des colonnes dans la fonction comme deux arguments distincts
+(et donc séparés par une virgule). Le résultat montre que chaque test
+correspond clairement à une ou plusieurs cibles, et que seul le test de
+la dengue détecte plus d'une cible (IgG, IgM et NS.1).
+
+**Conseil :** Essayez de modifier l'ordre des noms de colonnes dans
+`tabyl()` pour voir l'impact sur le tableau.
+
+```{r, eval=T}
+tabyl(data_lab_brut, cible, test)
+```
+
+Enfin, vous pouvez examiner les différentes valeurs des résultats du
+test dans la colonne `valeur` toujours à l'aide de la fonction
+`tabyl()`. Vous pouvez voir qu'il y a six résultats possibles, dont N
+pour négatif, P pour positif et I pour indéterminé. Seul le choléra ne
+présente aucun P, mais est le seul à présenter P01 et P0139, ce qui
+correspond à un résultat positif pour les sérogroupes O1 ou O139.
+
+```{r, eval=T}
+tabyl(data_lab_brut, test, valeur)
+```
+:::
+
+## Étape 4. Nettoyer et décrire les données de notification
+
+Vous savez maintenant que les données de notification
+(`data_notif_brut`) contiennent des des informations sur les cas
+suspects, ainsi que des données démographiques de base (âge, sexe,
+grossesse, district de résidence), et des informations sur la date
+d'apparition des symptômes, la date de notification par l'établissement
+de santé, et l'issue. Certaines colonnes doivent être nettoyées avant de
+poursuivre l'analyse, en raison des variations dans l'orthographe des
+valeurs catégorielles et de certaines colonnes non reconnues comme des
+dates.
+
+Vous allez maintenant commencer à écrire de plus longs morceaux de code
+pour nettoyer les données, à l'aide de plusieurs fonctions `{dplyr}`
+reliées à l'aide d'opérateurs "pipe" (qui ressemblent à ceci : \|\>).
+
+**NOTE SUR LES 'PIPES' :** Les "pipes" vous permettent d'effectuer
+plusieurs opérations en une seule commande fluide, en "enchaînant"
+différentes fonctions. La sortie d'une fonction devient l'entrée de la
+suivante. Si vous avez besoin de plus d'informations sur les pipes,
+veuillez vous référer au chapitre du [Epi R
+Handbook](https://epirhandbook.com/fr/cleaning.fr.html#méthodologie-de-nettoyage).
+
+Notez que cet exercice utilise le **pipe de base** (`|>`) plutôt que le
+**pipe magrittr** (`%>%`), car il est plus rapide et ne nécessite pas
+l'installation de packages. Utilisez le pipe magrittr si vous préférez.
+
+### Étape 4.1 Nettoyer les données
+
+#### **Tâche A : Nettoyez les noms de colonnes et sélectionnez les colonnes à analyser**
+
+Pour des raisons de qualité et de stockage des données, votre équipe
+vous recommande de créer une liste linéaire propre qui ne contienne que
+des informations sur l'identifiant unique, la localisation du cas, la
+maladie et la date de notification au système de surveillance.
+
+**Écrivez une commande R pour produire une nouvelle base de données
+propre appelée `data_notif`**, en appliquant les étapes de nettoyage
+suivantes:
+
+-   Renommer les colonnes pour qu'elles soient plus facilement lisibles
+    par la machine (supprimer les espaces et les majuscules) en
+    utilisant `clean_names()` du package `{janitor}`.
+-   Utiliser la fonction `rename()` de `{dplyr}` pour que:
+    -   le nom de la colonne avec la date à laquelle le cas a été
+        signalé soit remplacé par un nom plus concis `date_notif`.
+    -   le nom de la colonne d'identifiant de la notification soit plus
+        concis (`id_notification`).
+-   Sélectionnez les colonnes pertinentes pour l'analyse à l'aide de la
+    fonction `select()` du package `{dplyr}`.
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Commencez votre code par le nom du nouvel ensemble de données,
+l'opérateur d'assignation et le nom de l'objet contenant les données
+brutes. Ainsi le résultat du traitement des données brutes sera assigné
+à un nouvel objet appelé `data_notif`.
+
+```{r}
+data_notif <- data_notif_brut
+
+```
+
+Il faudra ensuite construire la commande de nettoyage en ajoutant des
+fonctions supplémentaires, liées à l'aide d'un pipe. Cela vous permet
+d'effectuer plusieurs opérations en une seule commande fluide. Tout
+d'abord, vous utiliserez `clean_names()` pour normaliser tous les noms
+de colonnes. Il remplace automatiquement les espaces et les caractères
+spéciaux par des traits de soulignement (underscore), supprime les
+accents et les apostrophes, et convertit tous les caractères en
+minuscules, ce qui rend les noms de colonnes plus facile à utiliser.
+Vous pouvez ensuite utiliser `rename()` pour donner à une colonne un
+nouveau nom. Rappelez-vous que lorsque vous utilisez `rename()`, la
+colonne aura déjà reçu le nom issu de `clean_names()`.
+
+```{r}
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(NOUVEAU_NOM = ANCIEN_NOM) |> 
+  select(VAR_NAMES)
+
+```
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Voici le code permettant de nettoyer les noms de colonnes et de
+sélectionner les bonnes colonnes pour l'analyse :
+
+```{r, eval=T}
+# Données propres
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(date_notif = date_signalee_par_letablissement_de_sante_la_communaute,
+         id_notification = id_de_notification) |> 
+  select(id_notification, district_residentiel, maladie_notifiee, date_notif)
+
+```
+:::
+
+#### **Tâche B : Normaliser les valeurs catégorielles**
+
+Vous savez déjà, grâce à l'inspection des données, que les valeurs de
+district ne sont pas normalisées.
+
+**Ajouter un `mutate()` pour nettoyer la colonne
+`district_residentiel`**, afin de:
+
+-   Normaliser l'utilisation d'écriture minuscule / majuscule dans la
+    colonne
+-   Remplacer la colonne `district_residentiel` existante par une
+    colonne qui ne contient que les valeurs pour les districts : "Lac
+    Minara", "Feveria Central" et "Kasara".
+
+Consultez l'indice pour savoir quelles fonctions vous pourriez utiliser.
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Essayez d'utiliser `str_to_title()` du package `{stringr}` de façon à ce
+que la première lettre de chaque mot soit en majuscule et que toutes les
+autres lettres soient en minuscule. Vous pouvez également utiliser
+`case_match()` pour spécifier différentes fautes de frappe spécifiques.
+Comme pour l'utilisation de `rename()` après `clean_names()`, prenez en
+compte que la fonction `str_to_title()` a modifié les valeurs des
+données fournies à la fonction`case_match()`.
+
+Utilisez le panneau d'aide ("Help") de RStudio pour savoir comment
+utiliser ces fonctions. Par exemple, tapez `?case_match` dans votre
+console pour obtenir la page d'aide. **NOTE** sur `case_match()` : il
+s'agit d'une fonction très utile pour remplacer ou corriger des valeurs,
+qui remplace la fonction `recode()`.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Votre code de nettoyage devrait maintenant ressembler à ceci :
+
+```{r, eval=T}
+# Données propres
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(date_notif = date_signalee_par_letablissement_de_sante_la_communaute,
+         id_notification = id_de_notification) |> 
+  select(id_notification, district_residentiel, maladie_notifiee, date_notif) |> 
+  mutate(district_residentiel = str_to_title(district_residentiel)) |> 
+  mutate(district_residentiel = case_match(district_residentiel,
+                                           c("F Central", "Feveria C", "Feveria Central") ~ "Feveria Central",
+                                           c("Kasara", "Ksr") ~ "Kasara",
+                                           c("L Minara", "Lac Minara", "Au Bord Du Lac") ~ "Lac Minara"))
+
+
+```
+
+Vous pouvez également directement insérer la fonction `str_to_title()`
+dans la fonction `case_match()` pour un code plus court, comme suit :
+
+```{r, eval=T}
+# Données propres
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(date_notif = date_signalee_par_letablissement_de_sante_la_communaute,
+         id_notification = id_de_notification) |> 
+  select(id_notification, district_residentiel, maladie_notifiee, date_notif) |> 
+  mutate(district_residentiel = case_match(str_to_title(district_residentiel),
+                                           c("F Central", "Feveria C", "Feveria Central") ~ "Feveria Central",
+                                           c("Kasara", "Ksr") ~ "Kasara",
+                                           c("L Minara", "Lac Minara", "Au Bord Du Lac") ~ "Lac Minara"))
+
+
+```
+:::
+
+#### **Tâche C : Gérer les dates**
+
+La colonne de la date de notification doit être transformée de manière à
+ce qu'elle soit reconnue comme une date dans R. Cela vous permettra
+d'analyser les tendances au fil du temps, y compris en utilisant un
+décompte par semaine ou par mois.
+
+**Examinez les valeurs de la colonne `date_notif`. Ajoutez ensuite une
+ligne à votre code de nettoyage pour modifier `date_notif` en une classe
+de date.**
+
+Connaître le format de date d'origine vous permettra d'utiliser la bonne
+fonction pour convertir la colonne en classe de date. Nous vous
+recommandons d'utiliser l'une des fonctions du package `{lubridate}` :
+soit `ymd()` (pour convertir les dates écrites sous la forme
+année-mois-jour), `mdy()` (pour les dates mois-jour-année), ou `dmy()`
+(pour les dates jour-mois-année). Ces fonctions reconnaîtront n'importe
+quelle façon d'écrire la date, à condition qu'elle soit organisée dans
+cet ordre. Par exemple "21 août 2025" (oui! oui! même en français) et
+"21-08-2024" seraient toutes deux reconnues par `dmy()`.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "jour-mois-année", 
+  answer = "année-mois-jour",
+  "mois-jour-année",
+  "année-jour-mois")
+
+
+cat("Comment les dates sont-elles actuellement formatées ?", longmcq(opts))
+
+opts <- c(
+  answer = "mutate(date_notif = ymd(date_notif))", 
+  "mutate(date_notif = dmy(date_notif))",
+  "mutate(date_notif = mdy(date_notif))"
+)
+
+cat("Quelle fonction `mutate()` devez-vous utiliser pour convertir la colonne date_notif en une classe de date ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous pouvez utiliser la fonction `head()` pour afficher les six
+premières lignes de données de la colonne `date_notif`. Vous pouvez voir
+qu'elles sont écrites avec d'abord l'année, puis le mois, puis le jour.
+
+```{r, eval=T}
+head(data_notif$date_notif)
+```
+
+Vous pouvez utiliser la fonction `ymd()` à l'intérieur de `mutate()`
+pour convertir la classe de la colonne `date_notif`. Vous pouvez
+vérifier que la classe est correcte en utilisant la fonction `class()`
+par la suite.
+
+Votre code de nettoyage devrait maintenant ressembler à ceci :
+
+```{r, eval=T}
+# Données propres
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(date_notif = date_signalee_par_letablissement_de_sante_la_communaute,
+         id_notification = id_de_notification) |> 
+  select(id_notification, district_residentiel, maladie_notifiee, date_notif) |> 
+  mutate(district_residentiel = case_match(str_to_title(district_residentiel),
+                                           c("F Central", "Feveria C", "Feveria Central") ~ "Feveria Central",
+                                           c("Kasara", "Ksr") ~ "Kasara",
+                                           c("L Minara", "Lac Minara", "Au Bord Du Lac") ~ "Lac Minara")) |> 
+  mutate(date_notif = ymd(date_notif)) 
+
+```
+
+Et vous pouvez vérifier la classe comme ceci :
+
+```{r, eval=T}
+class(data_notif$date_notif)
+```
+:::
+
+#### **Tâche D : Rechercher les doublons**
+
+Vos collègues vous disent que chaque `id_notification` représente un cas
+suspect unique. Vous souhaitez maintenant **créer une table pour
+vérifier s'il existe des doublons de `id_notification` sur plusieurs
+lignes de vos données**.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(answer = "Oui", "Non")
+
+cat("Une ligne dans les données de notification correspond-elle à un cas ?", longmcq(opts))
+
+opts <- c("Oui", answer = "Non")
+
+cat("Avez-vous besoin de dédupliquer vos données pour l'analyse épidémiologique des cas ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Il existe de nombreuses façons de procéder, mais essayez d'utiliser la
+fonction `count()` de `{dplyr}`. Elle créera un tableau qui comptera le
+nombre de lignes par valeur unique de la colonne que vous spécifiez dans
+la fonction. Ensuite, utiliser `tabyl()` pour examiner la distribution
+de ces effectifs.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Tout d'abord, il faut faire passer les données de surveillance dans la
+fonction `count()` en spécifiant à la fonction `id_notification` comme
+seul argument. Cela crée un tableau qui compte le nombre de lignes par
+valeur unique de `id_notification`, dans une nouvelle colonne `n`. Vous
+pouvez voir par exemple dans les premières lignes qu'il n'y a qu'une
+seule ligne pour chacune de ces 6 `id_notification`.
+
+```{r, eval=F}
+
+data_notif |> 
+  count(id_notification) 
+```
+
+```{r, eval=T, echo=F}
+
+data_notif |> 
+  count(id_notification) |> 
+  head()
+```
+
+Ensuite décrivez la nouvelle colonne `n` avec `tabyl()`, qui montrera
+qu'il n'y a qu'une ligne par `id_notification`. Cela signifie qu'une
+ligne correspond à un cas, et qu'aucune autre déduplication n'est
+nécessaire.
+
+```{r, eval=T}
+
+data_notif |> 
+  count(id_notification) |> 
+  tabyl(n)
+```
+:::
+
+### Étape 4.2 Analyse descriptive simple
+
+Vous pouvez maintenant procéder à une analyse descriptive des cas,
+puisque vos données sont propres et que vous savez qu'une ligne équivaut
+à un cas. Utilisez la fonction `tabyl()` pour réaliser les tâches
+suivantes.
+
+#### **Tâche A : Compter le nombre de cas suspects de chaque maladie diagnostiquée à Feveria en 2024**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "Choléra", 
+  answer = "Paludisme",
+  "Dengue",
+  "Fièvre typhoïde",
+  "Fièvre jaune")
+
+
+cat("Quelle maladie a été la plus fréquemment diagnostiquée par les cliniques de Feveria en 2024 ?", longmcq(opts))
+
+opts <- c(
+  "Choléra", 
+  "Paludisme",
+  "Dengue",
+  answer = "Fièvre typhoïde",
+  "Fièvre jaune")
+
+
+cat("Quelle maladie a été la moins fréquemment diagnostiquée par les cliniques de Feveria en 2024 ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+En utilisant `tabyl()` nous pouvons voir qu'il y a eu 533 cas suspects
+de paludisme à Feveria en 2024, et seulement 35 cas suspects de fièvre
+typhoïde.
+
+```{r, eval=T}
+tabyl(data_notif, maladie_notifiee)
+```
+:::
+
+#### **Tâche B : Compter le nombre de cas suspects par maladie et par district de résidence**
+
+**Utilisez `tabyl()` pour croiser les colonnes maladie et district de
+résidence.**
+
+Complétez votre tableau en ajoutant diverses fonctions `adorn` du
+package `{janitor}`, pour afficher la distribution en pourcentage. Par
+exemple `adorn_percentages()`, `adorn_pct_formatting()` et `adorn_ns()`.
+
+Tapez le nom de la fonction après un ? dans votre console (par ex.
+`?adorn_ns`) pour afficher les pages d'aide correspondantes. Vous pouvez
+également consulter la section [à propos de {janitor} dans le Epi R
+Handbook](hhttps://epirhandbook.com/fr/tables_descriptive.fr.html#tbl_janitor)
+pour plus d'explications sur les fonctions `adorn_xxx()`.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "Lac Minara",
+  "Feveria Central",
+  "Kasara")
+
+
+cat("Quel district a signalé le plus grand nombre de maladies vectorielles en 2024 (paludisme, dengue, fièvre jaune) ?", longmcq(opts))
+
+opts <- c(
+  "Lac Minara",
+  answer = "Feveria Central",
+  "Kasara")
+
+
+cat("Quel district a signalé le plus grand nombre de maladies diarrhéiques en 2024 (choléra, fièvre typhoïde) ?", longmcq(opts))
+
+
+opts <- c(
+  answer = "Infrastructures d'approvisionnement en eau et d'assainissement peu fiables",
+  "Surpopulation de moustiques",
+  "Nous ne savons pas")
+
+
+cat("Quels facteurs contribuent à l'augmentation des maladies diarrhéiques dans ce district spécifique (sélectionné dans la question précédente) ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Voici du code pour vous aider à démarrer. Il croise `maladie_notifiee`
+et `district_residentiel` avec `tabyl()`, puis en ajoutant
+`adorn_percentages()` convertit ces nombres en proportions avec de
+nombreuses décimales. Vous devrez ensuite rajouter
+`adorn_pct_formatting()` avec un autre pipe, pour convertir les
+proportions en pourcentages, et enfin `adorn_ns()` pour ajouter à
+nouveau les effectifs entre parenthèses. Notez que les fonctions
+`adorn_xxx()` doivent être appliquées dans un ordre spécifique !
+
+```{r}
+tabyl(data_notif, maladie_notifiee, district_residentiel) |>
+  adorn_percentages()
+```
+
+Pour les facteurs contribuant à l'augmentation des maladies
+diarrhéiques, revenez au début de l'étude de cas, à la partie présentant
+les districts!
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+En utlisant `tabyl()`, nous pouvons constater que la plupart des cas
+suspects de dengue, de paludisme et de fièvre jaune étaient localisés
+dans le district de Lac Minara - la zone lacustre avec une forte densité
+de moustiques et donc de maladies à transmission vectorielle. Dans le
+même temps, la majorité des cas de choléra et de fièvre typhoïde se
+trouvait à Feveria Central, la zone urbaine surpeuplée souffrant de
+problèmes d'infrastructures d'approvisionnement en eau et
+d'assainissement entraînant un risque accru d'inondation et de
+contamination de l'eau potable par temps de pluie.
+
+```{r, eval=T}
+tabyl(data_notif, maladie_notifiee, district_residentiel) |>
+  adorn_percentages() |>
+  adorn_pct_formatting() |>
+  adorn_ns()
+```
+:::
+
+## Étape 5. Nettoyer, consolider et décrire les données de laboratoire
+
+Le travail effectué à l'étape 3 vous a permis de constater que les
+données de laboratoire ne contiennent que des données sur les tests et
+aucune information sur les patients. Les données sont déjà très propres,
+nous n'avons à standardiser qu'une seule colonne. Nous voudrons
+également traiter l'ensemble de données du laboratoire de manière à ce
+qu'il y ait une ligne par notification, afin de pouvoir le lier
+proprement à l'ensemble de données de notification.
+
+### Étape 5.1 Normaliser les résultats des tests
+
+#### **Tâche A : Convertissez toute valeur contenant "P" en "Positif", "N" en "Négatif" et "I" en "Indéterminé".**
+
+Créez un nouvel objet `data_lab`. Cela permettra une analyse et une
+interprétation des résultats plus simples.
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Utilisez `case_match()` pour transformer les différentes valeurs
+originales en "Positif", "Négatif" ou "Indéterminé" :
+
+```{r, eval=T}
+data_lab <- data_lab_brut |> 
+  mutate(valeur = case_match(valeur, 
+                            c("P", "PO1", "PO139") ~ "Positif",
+                            "N" ~ "Négatif",
+                            "I" ~ "Indéterminé"))
+```
+
+Vous pouvez ensuite vérifier que les nouvelles valeurs sont correctes en
+résumant et en comparant les valeurs de la base de données originale et
+de la base de données nettoyée. Assurez-vous d'avoir utilisé la lettre
+"O" et non le chiffre "0"!
+
+```{r, eval=T}
+tabyl(data_lab_brut, valeur)
+```
+
+```{r, eval=T}
+tabyl(data_lab, valeur)
+```
+:::
+
+### Étape 5.2 Consolidation pour obtenir une ligne par test
+
+#### **Tâche A : Idenfier le nombre d'échantillons à lignes multiples**
+
+Nous savons déjà que certains échantillons se retrouvent sur plusieurs
+lignes, et que c'est dû au test de la dengue qui a trois cibles, avec
+une ligne par pour le résultat de chaque cible.
+
+Maintenant, **trouvez le nombre d'échantillons présentant plusieurs
+lignes**.
+
+Procédez de la même manière que pour les données de notification, en
+utilisant l'objet `data_lab`: comptez d'abord le nombre de lignes par
+échantillon, puis créer un tableau montrant la distribution des nombres
+de lignes. Il faut garder à l'esprit que que chaque échantillon est
+identifié par un `id_echantillon`.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "200", 
+  answer = "215",
+  "230"
+)
+
+cat("Combien d'échantillons (`id_echantillon` unique) sont répétés sur 3 lignes?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Tout d'abord, il faut faire passer (avec un pipe) les données du
+laboratoire à la fonction `count()` en donnant à la fonction
+`id_echantillon` comme seul argument. Cela crée un tableau qui compte le
+nombre de lignes par valeur unique de `id_echantillon`, affichée dans
+une nouvelle colonne `n`. Vous pouvez voir par exemple que le
+`id_echantillon` "000e8eee" est présent sur trois lignes, alors que le
+`id_echantillon` "001e1878" n'apparaît que sur une seule ligne.
+
+```{r, eval=F}
+
+data_lab |> 
+  count(id_echantillon) 
+```
+
+```{r, eval=T, echo=F}
+
+data_lab |> 
+  count(id_echantillon) |> 
+  head()
+```
+
+Puis résumez la nouvelle colonne `n` avec `tabyl()`.
+
+```{r, eval=T}
+
+data_lab |> 
+  count(id_echantillon) |> 
+  tabyl(n)
+```
+
+Vous pouvez même vérifier que cela ne s'applique qu'au test de la dengue
+en en ajoutant la colonne `test` dans la commande. Vous pouvez voir que
+seul le test de la dengue comporte 3 lignes par échantillon.
+
+```{r, eval=T}
+
+data_lab |> 
+  count(test, id_echantillon) |> 
+  tabyl(test, n)
+```
+:::
+
+#### **Tâche B : Consolider pour obtenir une ligne par `id_echantillon`, en donnant la priorité aux résultats positifs**
+
+Comme vous l'avez vu dans la section 3.2, votre test de dengue fournit
+des résultats pour trois cibles biologiques différentes : IgG, IgM et
+NS.1. Les résultats pour chacune de ces cibles peuvent être soit
+négatifs, soit positifs. Cependant, pour simplifier et consolider vos
+données, vous souhaitez attribuer une seule valeur "Négatif" ou
+"Positif" à chaque échantillon, pour indiquer si l'échantillon révélait
+une infection en cours.
+
+```{r, eval=T, echo=F}
+data_lab |> 
+filter(test=="Dengue NS1/IgG/IgM") |> 
+tabyl(cible, valeur) |> flextable() |> autofit()
+```
+
+Votre collègue Ben, qui travaille au laboratoire, vous conseille ce qui
+suit :
+
+-   Un échantillon peut être considéré comme positif si le NS.1 ou les
+    IgM sont positifs (les deux pouvant représenter une infection
+    aiguë).
+-   Vous pouvez ignorer les IgG (parce qu'un résultat positif en
+    l'absence de NS.1 ou d'IgM positifs indique une immunité après une
+    infection passée résolue).
+
+Vous devez maintenant **consolider les résultats du test de la dengue en
+une ligne par test, avec une valeur unique de résultat**. Utiliser
+`filter()`, `arrange()` et `slice()`, en veillant à ce que tout
+échantillon positif pour NS.1 ou IgM soit considéré comme positif pour
+la dengue. Créez un nouvel objet appelé `data_lab_tests`
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Essayez d'appliquer ce qui suit pour consolider selon la recommandation
+de Ben :
+
+1)  Supprimer les résultats IgG : filtrez les lignes où la cible est
+    "IgG" à l'aide de `filter()` de `{dplyr}`.
+2)  Donner la priorité aux résultats positifs pour les IgM/NS1 :
+    Regroupez par `id_echantillon` et réorganisez les lignes avec
+    `arrange()` afin que tout résultat "Positif" apparaisse en premier.
+3)  Filtrer pour obtenir le résultat final : Ne conservez que la
+    première ligne de chaque groupe en utilisant `slice(1)` pour obtenir
+    le résultat global positif ou négatif de l'échantillon.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Voici le code pour filtrer les résultats des IgG de la dengue, et
+ensuite consolider les résultats des tests à l'intérieur de chaque
+groupe de lignes ayant les mêmes `id_echantillon`, en donnant la
+priorité aux résultats positifs.
+
+Vous devez utiliser `desc` à l'intérieur de `arrange()` car cela
+signifie que les résultats seront listés par ordre alphabétique
+DESCendant, ce qui signifie que "Positif" sera en haut pour chaque
+identifiant.
+
+Ajoutez également la fonction `ungroup()` à la fin pour que les
+nouvelles données ne soient plus groupées, ce qui pourrait perturber les
+analyses ultérieures.
+
+```{r, eval=T}
+data_lab_tests <- data_lab |> 
+  filter(cible != "Dengue IgG") |> 
+  group_by(id_echantillon) |> 
+  arrange(desc(valeur)) |> 
+  slice(1) |> 
+  ungroup()
+```
+
+Vous pouvez alors vérifier que le nouvel objet `data_lab_tests` ne
+présente qu'une seule ligne par test, en utilisant la combinaison de
+`count()` et `tabyl()` comme vous l'avez fait pour la tâche A.
+
+Ce tableau vous montre que tous les ID d'échantillons uniques ne sont
+présents que dans une seule ligne chacun :
+
+```{r, eval=T}
+data_lab_tests |> 
+  count(id_echantillon) |> 
+  tabyl(n)
+```
+:::
+
+#### **Tâche C : Dédupliquer à une ligne par `id_notification`, en priorisant les résultats positifs.**
+
+Maintenant, vérifiez le nombre de tests par identifiant de notification
+dans vos nouvelles données consolidées.
+
+Vous pouvez voir qu'il y a 26 lignes avec le même `id_notification`,
+mais seulement parmi les cas testés par microscopie du sang total pour
+le paludisme.
+
+```{r, eval=T}
+data_lab_tests |> 
+  count(test, id_notification) |> 
+  tabyl(test, n)
+
+```
+
+Vous poursuivez vos recherches en examinant un exemple de cas avec le
+`id_notification` "043228". Cela vous apprend que ce cas a été testé
+deux fois, avec deux échantillons différents, à une semaine
+d'intervalle. Le premier résultat était positif, et le second résultat
+était négatif.
+
+```{r, eval=T}
+data_lab_tests |> 
+  filter(id_notification == "043228")
+
+```
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "Tous les cas des différentes maladies sont retestés", 
+  answer = "Certains cas de paludisme sont retestés",
+  "Tous les cas de paludisme sont retestés")
+
+
+cat("Quelle affirmation concernant les données de laboratoire est correcte ?", longmcq(opts))
+
+opts <- c(
+  answer = "Oui, nous avons besoin d'une unique ligne représentant le résultat de laboratoire par notification",
+  "Non, les données sont suffisamment dédupliquées")
+
+
+cat("Aurez-vous besoin de dédupliquer les données de laboratoire pour les relier aux données de notification ?", longmcq(opts))
+
+
+
+```
+:::
+::::
+
+Si vous avez répondu que vous devez dédupliquer, vous avez raison !
+
+**Dédupliquez vos données afin d'avoir une ligne par
+`id_notification`**, en priorisant les résultats positifs, afin de
+pouvoir établir un lien avec les données de notification.
+
+Pour ce faire, suivez un processus similaire à celui de la tâche B, en
+utilisant la base de données produite par la tâche B :
+
+-   Regrouper par `id_notification`
+-   Classer par valeur du résultat du test de manière à ce que les
+    valeurs commençant par P soient listées dans la première ligne,
+    suivies des N (Négatif), puis des I (Indéterminé).
+-   Conservez ensuite la première ligne de chaque groupe de
+    `id_notification`en utilisant `slice()`.
+-   Pour finir, assignez le résultat à un nouvel objet appelé
+    `data_lab_cas`.
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Voici le code pour dédupliquer les lignes à l'intérieur de chaque groupe
+de lignes avec un même `id_notification` en donnant la priorité aux
+résultats positifs. Une fois de plus, vous devez utiliser `desc` à
+l'intérieur de`arrange()`. Cela fonctionne parfaitement car l'ordre de
+priorité souhaité pour les résultats - positifs, puis négatifs, puis
+indéterminés - correspond à l'ordre alphabétique inversé (P vient à
+avant N, qui vient avant I, dans l'ordre alphabétique inversé).
+
+Si votre ordre de priorité était plus complexe ou ne correspondait pas à
+l'ordre alphabétique (par exemple, si "indéterminé" devait être placé
+avant "négatif"), vous devriez convertir la colonne de résultats en un
+facteur et fournir explicitement l'ordre souhaité de ses niveaux.
+N'oubliez pas de dégrouper à nouveau à la fin.
+
+```{r, eval=T}
+data_lab_cas <- data_lab_tests |> 
+  group_by(id_notification) |> 
+  arrange(desc(valeur)) |> 
+  slice(1) |>
+  ungroup()
+```
+
+Vous pouvez alors vérifier que le nouvel objet `data_lab_cas` n'a qu'une
+seule ligne par identifiant de notification, en utilisant la combinaison
+de `count()` et `tabyl()` comme dans la tâche A. Ce tableau vous montre
+que tous `id_notification` uniques sont ne sont présents que dans une
+seule ligne chacun:
+
+```{r, eval=T}
+data_lab_cas |> 
+  count(id_notification) |> 
+  tabyl(n)
+```
+:::
+
+### Étape 5.3 Analyse descriptive simple
+
+Nous disposons maintenant de deux objets que nous pouvons utiliser pour
+l'analyse des données de laboratoire : `data_lab_tests` et
+`data_lab_cas`.
+
+#### **Tâche A : Compter le nombre de tests spécifiques à une maladie, de résultats positifs et de résultats négatifs dans les données de laboratoire de 2024.**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "data_lab_tests",
+  "data_lab_cas",
+  "Aucun des deux")
+
+cat("Quel objet devez-vous utiliser pour analyser les tests ?", longmcq(opts))
+
+opts <- c(
+  "215", 
+  answer = "503",
+  "88",
+  "190")
+
+cat("Combien de tests ont été effectués pour dépister le paludisme (par microscopie du sang total) ?", longmcq(opts))
+
+opts <- c(
+  "21%", 
+  "11%",
+  answer = "84%",
+  "87%"
+)
+
+cat("Quel pourcentage de tests de dépistage du choléra (par culture de selles) s'est révélé positif ?", longmcq(opts))
+
+opts <- c(
+  answer = "IgM ELISA (pour la détection de la fièvre jaune)",
+  "Culture de selles (pour la détection du choléra)", 
+  "Hémoculture (pour la détection de la fièvre typhoïde)"
+)
+
+cat("Quel test a donné le pourcentage le plus élevé de résultats indéterminés ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+En utilisant `tabyl()` nous pouvons voir le nombre de résultats
+positifs, négatifs et indéterminés par test. Vous pouvez ajouter une
+série de `adorn()` pour afficher les pourcentages et les totaux.
+
+```{r, eval=T}
+tabyl(data_lab_tests, test, valeur) |> 
+  adorn_totals(where = "col") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+#### **Tâche B : Compter le nombre de cas suspects testés dans les données de 2024**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "data_lab_brut", 
+  answer = "data_lab_cas",
+  "data_lab_tests",
+  "data_lab"
+)
+
+cat("Quelle base de données de laboratoire devez-vous utiliser pour compter le nombre de cas suspects testés ?", longmcq(opts))
+
+opts <- c(
+  answer = "858",
+  "1314",
+  "884"
+)
+
+cat("Combien de cas suspects ont été testés dans les données de laboratoire de 2024 ?", longmcq(opts))
+
+opts <- c(
+  answer = "Données de notification",
+  "Données de laboratoire")
+
+
+cat("Y a-t-il plus de cas suspects dans les données de notification ou dans les données de laboratoire ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous pouvez simplement regarder le nombre de lignes dans le fichier
+`data_lab_cas` pour connaître le nombre de cas suspects qui ont été
+testés.
+
+```{r, eval=T}
+nrow(data_lab_cas)
+```
+
+Ce nombre est inférieur au nombre de cas suspects figurant dans la base
+de données des maladies à déclaration obligatoire (`data_notif`); ce qui
+suggère qu'une partie seulement des cas suspect notifié en 2024 avait
+été testée au moment où ces données étaient rendues disponibles.
+
+```{r, eval=T}
+nrow(data_notif)
+```
+:::
+
+## Étape 6. Jonction et traitement final
+
+Maintenant que les deux listes linéaires sont nettoyées et qu'elles
+comportent une ligne par cas suspect, vous pouvez les joindre pour
+permettre l'analyse complète demandée par votre patron.
+
+### Étape 6.1 Joindre les données de notification et les données de laboratoire
+
+#### **Tâche A : Effectuer la jointure**
+
+Créer un nouvel objet appelé `data_jointes` en utilisant une fonction
+`xxx_join()` de `{dplyr}`. Vous souhaitez conserver toutes les
+notifications, mais ajouter les résultats de tests lorsqu'ils sont
+disponibles pour chaque cas suspect.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "left_join(data_notif, data_lab_cas...",
+  "full_join(data_notif, data_lab_cas...",
+  "right_join(data_notif, data_lab_cas..."
+)
+
+cat("Quelle fonction permet la bonne approche si vous souhaitez conserver toutes les lignes de vos données de notification et intégrer les résultats de vos données de laboratoire ?", longmcq(opts))
+
+opts <- c(
+  "id_echantillon", 
+  answer = "id_notification",
+  "id_echantillon et date_notif",
+  "id_notification et date_notif")
+
+
+cat("Quel identifiant doit être utilisé pour joindre les deux listes linéaires ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Reliez les données à l'aide de la fonction `left_join()` avec les
+données de notification comme ensemble de données principal à gauche.
+Toutes les lignes de cet ensemble de données seront conservées et seuls
+les résultats des tests provenant de l'ensemble de données de
+laboratoire renseigné à "droite" de la fonction seront ajoutés.
+
+```{r, eval=T}
+
+data_jointes <- left_join(data_notif, data_lab_cas, 
+                         by = "id_notification")
+```
+
+Vous créez la jointure avec la colonne `id_notification` qui est
+présente, complète et propre dans les deux base de données.
+
+**Note**: Vous avez de la chance de travailler avec un exemple de
+jointure aussi simple ! D'habitude, il faut vraiment nettoyer et
+vérifier la colonne d'identifiant, ou établir un lien avec d'autres
+colonnes comme le nom et la date de naissance. À Feveria, le personnel
+de la clinique est *fantastique* pour attribuer systématiquement des
+identifiants de notification à chaque patient, et de les renseigner sur
+les formulaires d'échantillon envoyés au laboratoire, et le personnel du
+laboratoire est tout aussi *brillant* pour enregistrer l'identifiant de
+notification dans leur système informatique afin que les résultats
+puissent être reliés au cas.
+:::
+
+#### **Tâche B : Vérifier que la jointure a fonctionné comme prévu**
+
+Vérifiez maintenant vos données et examinez quelques points.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "987",
+  "884",
+  "858")
+
+
+cat("Combien de lignes contient votre nouvelle base de données `data_jointes` ?", longmcq(opts))
+
+opts <- c(
+  "plus de lignes que l'original",
+  answer = "même nombre de lignes",
+  "moins de lignes")
+
+
+cat("Et par rapport à vos données de notification d'origine ?", longmcq(opts))
+
+
+opts <- c(
+  "plusieurs-à-un", 
+  answer = "un-à-un",
+  "plusieurs-à-plusieurs"
+)
+
+cat("Quel terme décrit le mieux la jointure que vous venez de réaliser?", longmcq(opts))
+
+opts <- c(
+  "30", 
+  "19",
+  answer = "0")
+
+
+cat("Combien de résultats de laboratoire n'ont PAS été joints aux données de notification (indice : utilisez la fonction `anti_join()`) ?", longmcq(opts))
+
+opts <- c(
+  "Quoi ? Toutes les jointures ne sont-ils pas aussi simples que cela ?",
+  answer = "Tout à fait ! En général, certains enregistrements ne trouvent pas de correspondance")
+
+
+cat("Avez-vous de la chance que votre jointure soit si réussi ?", longmcq(opts))
+
+
+opts <- c(
+  "Il y a des fautes de frappe dans les colonnes utilisées pour la correspondance, elles ne sont donc pas reconnues comme correspondant",
+  "Les données de laboratoire peuvent contenir des cas supplémentaires provenant d'autres cliniques ou pays",
+  "Les données de laboratoire peuvent inclure des échantillons de test",
+  "Des notifications peuvent avoir été accidentellement omises dans les données de surveillance même si l'échantillon a été testé en laboratoire",
+  answer = "Toutes les réponses ci-dessus"
+)
+
+cat("Quelles sont les raisons typiques pour lesquelles il n'y a pas de correspondance trouvé pour des données de laboratoire et des données sur les maladies à déclaration obligatoire ?", longmcq(opts))
+
+
+opts <- c(
+  "83",
+  "100",
+  answer = "129")
+
+
+cat("Combien de cas suspects n'ont pas de résultat ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vérifiez le nombre de lignes dans chaque ensemble de données à l'aide de
+la fonction `nrow()` ou en vérifiant les informations relatives à
+l'objet dans votre environnement. Vous pouvez constater l'opération
+était une jointure un-à-un, car chaque ligne avait un `id_notification`
+unique, de sorte qu'une ligne dans les données de notification était
+directement liée à une ligne dans les données de laboratoire.
+
+**Nombre de lignes dans les données de notification**
+
+```{r, eval=T}
+
+nrow(data_notif)
+```
+
+**Nombre de lignes dans les données jointes**
+
+```{r, eval=T}
+nrow(data_jointes)
+```
+
+Pour vérifier si des résultats de laboratoire n'ont pas été reliés à des
+données de notification, vous pouvez utiliser la fonction `anti_join()`.
+Cette fois, `data_lab_cas` est à gauche, car la fonction évalue le
+nombre de lignes de l'objet de gauche qui n'ont pas été trouvées dans
+l'ensemble de données de droite, en les faisant correspondre par
+`id_notification`. Ici, il n'est pas nécessaire de créer un nouvel
+objet, vous pouvez simplement faire passer le résultat à `nrow()` avec
+un pipe pour compter le nombre de lignes. Le résultat est 0, ce qui
+montre qu'il n'y a pas eu de résultats de labo non reliés - incroyable !
+
+```{r, eval=T}
+anti_join(data_lab_cas, data_notif, 
+          by = "id_notification") |> nrow()
+```
+
+Enfin, pour vérifier le nombre de notifications sans résultat, vous
+pouvez soit réaliser un `anti_join()` en mettant `data_notif` d'abord :
+
+```{r, eval=T}
+anti_join(data_notif, data_lab_cas, 
+          by = "id_notification") |> nrow()
+```
+
+Ou vous pouvez aussi simplement évaluer le nombre de valeurs manquantes
+dans la colonne `valeur` dans `data_jointes` (puisque `valeur` provient
+des données de laboratoire).
+
+```{r, eval=T}
+tabyl(is.na(data_jointes$valeur)) 
+```
+
+Ces deux approches montrent que 129 cas suspects ne présentent pas de
+résultat de laboratoire.
+:::
+
+### Étape 6.2 Étiqueter les cas confirmés, écartés et suspects
+
+#### **Tâche A : Créer une dernière colonne de "catégorie de cas".**
+
+**Utiliser `mutate()` pour créer une nouvelle colonne `cas_categorie`**,
+afin de mettre à jour le status de cas suspect en fonction de leurs
+résultats de laboratoire. Les catégories devraient être les suivantes :
+
+-   Si le résultat est positif : Confirmé
+-   Si le résultat est négatif : Ecarté
+-   Si le résultat est indéterminé ou manquant : Suspect
+
+Cela signifie que tous les cas figurant dans les données de notification
+sont d'abord "Suspect" lorsqu'ils sont déclarés, puis restent "Suspect"
+en l'absence d'un résultat de test concluant.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "case_when()",
+  "if_else()",
+  "case_match()"
+)
+
+cat("Quelle est la fonction la plus appropriée pour créer cette nouvelle colonne?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous devez utiliser `case_when()` pour créer la nouvelle colonne. Cette
+fonction est idéale pour appliquer plusieurs conditions logiques afin
+d'attribuer de multiples valeurs différentes, alors que `case_match()`
+est plus adapté pour remplacer des valeurs spécifiques, et `if_else()`
+est préférable s'il n'y a que deux valeurs possibles.
+
+```{r, eval=T}
+
+data_jointes <- data_jointes |> 
+  mutate(cas_categorie = case_when(valeur=="Positif" ~ "Confirmé",
+                                   valeur=="Négatif" ~ "Ecarté",
+                                   valeur=="Indéterminé" | is.na(valeur) ~ "Suspect"))
+```
+:::
+
+### Étape 6.3 Examiner la distribution des résultats de laboratoire entre les cas
+
+#### **Tâche A : Utiliser `tabyl()` pour établir un tableau des catégories de cas**
+
+Utilisez `tabyl()` directement, et aussi en croisant avec les maladies
+pour répondre aux questions ci-dessous.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "202",
+  "347",
+  "250")
+
+
+cat("Combien de cas dans les données de notification jointes n'ont pas de résultat positif ou négatif ?", longmcq(opts))
+
+opts <- c(
+  "60,1 %",
+  answer="79,5 %",
+  "92,2 %")
+
+
+cat("Quel pourcentage de cas dans les données de notification ONT un résultat positif ou négatif ?", longmcq(opts))
+
+
+
+opts <- c(
+  answer="Les cas suspects comprennent les notifications sans résultat de laboratoire et avec un résultat de laboratoire indéterminé",
+  "Il y a des cas suspects supplémentaires provenant du laboratoire",
+  "Il y a un problème avec les données")
+
+
+cat("Pourquoi y a-t-il plus de cas suspects restants que de notifications sans résultat de laboratoire relié?", longmcq(opts))
+
+
+
+opts <- c(
+  "Choléra",
+  "Paludisme",
+  "Dengue",
+  answer = "Fièvre jaune")
+
+
+cat("Quelle maladie présentait le pourcentage le plus élevé de cas restés suspects après la jointure?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Une fois de plus, vous pouvez utiliser `tabyl()` pour voir la
+répartition des catégories de cas entre les notifications. Le nombre
+total de cas suspects, c'est-à-dire ceux pour lesquels aucun résultat de
+laboratoire n'a été obtenu ou pour lesquels le résultat est indéterminé,
+est de 202. Cela signifie que 785 cas, soit 79,5 %, ont obtenu un
+résultat de laboratoire définitif.
+
+```{r, eval=T}
+tabyl(data_jointes, cas_categorie) 
+```
+
+Vous pouvez également croiser les résultats originaux
+(indéterminé/négatif/positif) de `valeur` avec la nouvelle colonne
+`cas_categorie`, pour vérifier que votre logique a fonctionné et pour
+voir comment les valeurs originales correspondent aux valeurs de la
+nouvelle colonne. Cela montre qu'en plus des 129 notifications qui n'ont
+pas été reliées à un résultat de test (avec `NA` dans la colonne
+`valeur`), 73 avaient des résultats indéterminés et ont donc été
+classées dans la catégorie des cas suspects.
+
+```{r, eval=T}
+tabyl(data_jointes, cas_categorie, valeur) 
+```
+
+Enfin, vous pouvez également croiser les catégories avec les noms de
+maladie pour voir les catégories de cas par maladie. Ajoutez des
+fonctions `adorn_xxx()` pour ajouter et mettre en forme des
+pourcentages. Le tableau montre ainsi que 22 % des cas de fièvre jaune
+sont restés suspects, ce qui représente le pourcentage le plus élevé par
+rapport aux autres maladies.
+
+```{r, eval=T}
+tabyl(data_jointes, maladie_notifiee, cas_categorie) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+#### **Tâche B : Évaluer le pourcentage de cas suspects qui sont effectivement des cas réels**
+
+Utilisez `tabyl()` à nouveau, en examinant les résultats par maladie.
+Réfléchissez au dénominateur adéquat !
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "44%",
+  answer = "56%",
+  "59%"
+)
+
+cat("Quel pourcentage de cas suspects notifié en 2024 étaient de vrais cas selon leurs résultats de test?", longmcq(opts))
+
+
+opts <- c(
+  "86%",
+  answer = "41%",
+  "23%"
+)
+
+cat("Quel pourcentage de cas supects de paludisme étaient effectivement atteint de paludisme?", longmcq(opts))
+
+opts <- c(
+  answer = "87%",
+  "41%",
+  "23%"
+)
+
+cat("Quel pourcentage de cas supects de dengue étaient effectivement atteint de dengue?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-tip collapse="true"}
+## Cliquez pour lire un indice
+
+Diviser le nombre de cas confirmés (c'est-à-dire ceux dont le résultat
+est positif) par le nombre de cas confirmés plus les cas écartés
+(c'est-à-dire ceux dont le résultat est soit positif, soit négatif). On
+obtient ainsi un taux de positivité, qui correspond approximativement au
+pourcentage de cas suspects qui étaient réellement des cas. Les
+résultats indéterminés sont exclus du dénominateur car ils ne
+fournissent pas de résultat clair et fausseraient le taux de positivité.
+:::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Filtrez les cas toujours suspects, puis réalisez un tableau croisé pour
+connaître le pourcentage de cas initialement suspectés qui ont été ou
+confirmés ou écartés, parmi ceux dont les résultats de test sont
+valides.
+
+Avec la ligne de totaux, vous pouvez voir que 56 % des cas suspects ont
+été confirmés parmi ceux dont les résultats étaient valides. Vous pouvez
+également voir que 41 % et 87 % des cas de paludisme et de dengue,
+respectivement, ont été confirmés.
+
+```{r, eval=T}
+
+data_jointes |> 
+  filter(cas_categorie != "Suspect") |> 
+  tabyl(maladie_notifiee, cas_categorie) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns()
+```
+:::
+
+### Étape 6.4 Création d'une liste linéaire contenant uniquement les cas confirmés
+
+**Tâche A : Créer une nouvelle liste linéaire appelée
+`data_jointes_confirme`**.
+
+C'est ce que vous utiliserez dans les rapports de surveillance
+officiels.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer = "La déclaration des cas confirmés peut être plus fiable et précise lorsque le pourcentage de tests positifs est faible et que les tests en laboratoire sont systématiques, ce qui permet d'éviter une surestimation de la morbidité",
+  "La déclaration des cas confirmés est plus lente, ce qui nous donne plus de temps pour nous assurer de l'exactitude de nos déclarations",
+  "Parce que nous voulons cacher le nombre réel de cas"
+)
+
+cat("Pourquoi choisissons-nous de ne signaler que les cas confirmés dans nos données de surveillance ?", longmcq(opts))
+
+opts <- c(
+  answer = "filter()",
+  "arrange()",
+  "mutate()"
+)
+
+cat("Quelle fonction est importante pour créer la nouvelle liste linéaire ?", longmcq(opts))
+
+opts <- c(
+  "389",
+  answer = "438",
+  "858")
+
+
+cat("Combien de lignes contient ce nouvel ensemble de données ?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Votre équipe de surveillance souhaite se concentrer sur les cas
+confirmés dans ses rapports. En effet, les tests de laboratoire sont
+intégrés dans les activités de routine à Feveria, et la déclaration des
+cas suspects serait inutilement imprécise, un pourcentage élevé de cas
+suspects étant écartés.
+
+La décision de publier les cas suspects peut être différente dans dans
+d'autres contextes. Par exemple, si le taux de positivité est élevé (la
+plupart des cas sont des cas réels s'ils sont testés) et que le test
+lui-même n'est pas courant, ou que le test prend beaucoup de temps et
+entraînerait un retard dans le rapportage, cela suggérerait que les
+tendances des cas suspects sont suffisamment précises et également plus
+opportunes que l'attente d'une confirmation en laboratoire.
+
+Créez la nouvelle liste linéaire à l'aide de la fonction `filter()` :
+
+```{r, eval=T, include=T, results="asis"}
+data_jointes_confirme <- data_jointes |> 
+  filter(cas_categorie=="Confirmé")
+```
+
+Et vérifiez le nombre de lignes en consultant les informations dans
+votre environnement, ou avec `nrow()`:
+
+```{r, eval=T, include=T, results="asis"}
+nrow(data_jointes_confirme)
+```
+:::
+
+## Étape 7. Analyse descriptive des cas confirmés
+
+Maintenant que vous disposez de la liste des cas confirmés de maladies à
+déclaration obligatoire signalés à Feveria en 2024, vous êtes prêt à
+effectuer la dernière partie de votre analyse de surveillance ! Il
+s'agit de décrire les cinq maladies à déclaration obligatoire par zone
+géographique et par période.
+
+**Conseil**: L'analyse des données de surveillance comprend généralement
+une analyse par personne. Vous pourriez développer cette étude de cas en
+procédant à une analyse selon les variables démographiques.
+
+### Étape 7.1 Décrire les cas par district
+
+#### **Tâche A : Produire un tableau des cas confirmés par district à l'aide des fonctions `tabyl()` et `adorn_xxx()`, incluant les totaux**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+
+opts <- c(  
+ answer = "Dengue",
+ "Paludisme",   
+"Fièvre jaune"  )
+  
+
+cat("Quelle maladie à déclaration obligatoire a été la plus souvent notifiée en 2024, en se limitant aux seuls cas confirmés ?", longmcq(opts))
+
+opts <- c(
+  "La sensibilité et la spécificité du diagnostic clinique peuvent varier selon la maladie",
+  "Les performances des tests utilisés en laboratoire peuvent varier selon la maladie",
+  "Il peut y avoir des biais de notification",
+  answer = "Toutes les réponses ci-dessus !"
+)
+
+cat("Pourquoi la maladie la plus fréquemment signalée diffère-t-elle entre les cas confirmés et les cas suspects ?", longmcq(opts))
+
+
+
+opts <- c(
+  "Lac Minara",
+  answer = "Feveria Central",
+  "Kasara"
+)
+
+cat("Quel district a signalé le plus grand nombre de cas confirmés de choléra en 2024 ?", longmcq(opts))
+
+opts <- c(
+  answer = "35",
+  "42",
+  "4"
+)
+
+cat("Combien de cas confirmés de choléra signalés en 2024 concernaient des résidents de Feveria Central ?", longmcq(opts))  
+
+opts <- c(   
+answer = "Lac Minara",  
+  "Feveria Central",  
+  "Kasara"  
+)
+
+cat("Quel district a signalé le plus grand nombre de cas confirmés de paludisme en 2024 ?", longmcq(opts))
+
+
+opts <- c(
+  answer = "Non, une autre maladie peut être sous-déclarée et/ou non systématiquement notifiée",
+  "Oui, si c'est la maladie la plus notifiée, c'est qu'elle doit être la plus courante"
+)
+
+cat("Ces données confirment-elles que la dengue est la maladie infectieuse la plus courante à Feveria ?", longmcq(opts))
+
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+En utilisant `tabyl()` nous pouvons voir que la dengue était la maladie
+la plus fréquemment notifiée à Feveria en 2024, en se limitant aux cas
+confirmés, avec 186 cas.
+
+```{r, eval=T}
+
+data_jointes_confirme |> 
+  tabyl(maladie_notifiee) 
+```
+
+Notez que cela diffère des cas suspects, où le paludisme a été le plus
+notifié (avec 533 cas suspects) ! Il y avait déjà des indices, avec un
+taux de positivité pour les cas suspects de dengue plus élevé que pour
+les cas suspects de paludisme. Cela peut s'expliquer par différentes
+raisons, par exemple la méthode de diagnostic clinique utilisée pour le
+paludisme peut être moins spécifique (de nombreux cas suspects sont en
+fait d'autres maladies), ou le test utilisé pour la dengue peut être
+plus sensible.
+
+Croisez les données avec celles du district résidentiel, puis ajoutez
+les fonctions `adorn_xxx()` pertinentes.
+
+```{r, eval=T}
+
+data_jointes_confirme |> 
+  tabyl(maladie_notifiee, district_residentiel) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns() 
+```
+
+Comme pour les cas suspects, on constate que la plupart des cas
+confirmés de dengue, de paludisme et de fièvre jaune se situent à Lac
+Minara, zone lacustre où la densité de moustiques et donc de maladies à
+transmission vectorielle est la plus élevée. La majorité des cas
+confirmés de choléra et de fièvre typhoïde se trouvaient à Feveria
+Central, sujet à des problèmes d'eau et d'assainissement.
+
+Les données suggèrent que les maladies à transmission vectorielle
+(dengue et paludisme) sont particulièrement préoccupantes dans ce pays
+tropical. Cependant, nous ne savons pas avec certitude quelle est la
+maladie la plus fréquente et quels sont les schémas sous-jacents -
+seules cinq maladies sont à déclaration obligatoire et les cas notifiés
+ne représentent généralement qu'une fraction des cas réels au sein de la
+communauté.
+:::
+
+### Étape 7.2 Décrire les cas au cours le temps
+
+Vous allez travailler à la réalisation de cette courbe épidémique, à
+travers les tâches ci-dessous.
+
+```{r, eval=T, echo=F, fig.width=10, fig.height=7}
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif, fill = district_residentiel)), binwidth=7) +
+  facet_wrap(.~maladie_notifiee, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District de résidence",
+       x = "Date de notification par la clinique",
+       y = "Nombre",
+       subtitle = "Nombres de cas confirmés de choléra, de dengue, de paludisme de fièvre typhoïde et de fièvre jaune par semaine à Feveria, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+```
+
+#### **Tâche A : Commencez par utiliser `ggplot()` et `geom_histogram()` pour produire une courbe épidémique globale pour Feveria, montrant le nombre de cas par semaine de notification, avec des barres empilées et colorées par maladie.**
+
+Veillez à spécifier l'argument `binwidth=7` afin que chaque barre de
+l'histogramme représente le nombre de cas sur une période de 7 jours.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "Janvier 2024",
+  answer = "Mai 2024",
+  "Octobre 2024"
+)
+
+cat("Quand a été notifié le premier cas de fièvre typhoïde de 2024 à Feveria?", longmcq(opts))
+
+
+opts <- c(
+  "10",
+  "20",
+  "30",
+  answer = "Difficile à dire avec ce graphique empilé!"
+)
+
+cat("D'après ce graphique, quel a été le plus grand nombre de cas de dengue notifiés en une seule semaine en 2024?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Voici un code simple pour produire la courbe épidémique. Notez que vous
+ne contrôlez pas encore les couleurs, ni ne spécifiez le jour de la
+semaine où commence chaque période de 7 jours.
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif, fill = maladie_notifiee)), binwidth=7)
+```
+
+Reportez-vous au [chapitre sur les dates du Epi R
+Handbook](https://epirhandbook.com/fr/dates.fr.html) si vous souhaitez
+réaliser un formatage plus spécifique des dates, par exemple pour que
+chaque barre représente une semaine du lundi au dimanche, ou que l'axe
+des x indique le numéro de la semaine épidémiologique (semaines 1 à 52).
+
+Il est important de noter qu'il n'est pas facile de voir les tendances
+par maladie lorsqu'elles sont empilées de cette manière ! Pour analyser
+ces tendances temporelles, vous devez produire un histogramme par
+maladie.
+:::
+
+#### **Tâche B : Utiliser `ggplot()` pour produire une courbe épidémique montrant le nombre de cas par semaine de rapport, stratifiée / facettée (et non empilée) par maladie.**
+
+Utilisez `facet_wrap()` pour créer facilement plusieurs mini-graphiques,
+un par maladie. Pour en savoir plus, vous pouvez consulter le [chapitre
+sur les facettes avec ggplot2 du Epi R
+Handbook](https://epirhandbook.com/fr/ggplot_basics.fr.html#ggplot_basics_facet)
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "11",
+  answer = "15",
+  "29",
+  "Je ne peux toujours rien en dire!"
+)
+
+cat("D'après ce graphique stratifié, quel a été le nombre le plus élevé de cas de dengue signalés en une seule semaine en 2024 ?", longmcq(opts))
+
+
+opts <- c(
+  "Les trois districts",
+  "Feveria Central",
+  "Kasara",
+  "Lac Minara",
+  answer = "Ce graphique ne montre pas cette information")
+
+
+cat("Parmi les cas de dengue signalés cette semaine-là, dans quels districts vivaient les personnes concernées ?", longmcq(opts))
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous pouvez maintenant admirer une courbe épidémique par maladie ! Et
+vous pouvez voir qu'au cours d'une semaine de juillet, 15 cas de dengue
+ont été signalés. Cependant, ce graphique ne contient pas encore
+d'informations géographiques.
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif)), binwidth=7) + 
+  facet_wrap(.~maladie_notifiee)
+```
+:::
+
+#### **Tâche C : Ajoutez maintenant une couleur de remplissage à votre graphique à facettes selon le district de résidence afin d'avoir des barres empilées colorées par district.**
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  answer= "Les trois districts",
+  "Feveria Central",
+  "Kasara",
+  "Lac Minara"
+)
+
+cat("Dans quel(s) district(s) vivaient les 15 cas de dengue notifiés en une semaine en juillet 2024?", longmcq(opts))
+
+
+opts <- c(
+  "Kasara",
+  answer = "Feveria Central",
+  "Lac Minara",
+  "Je ne peux pas encore le savoir!"
+)
+
+cat("Dans quel district vivait le premier cas de fièvre typhoïde notifié en 2024?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Vous pouvez maintenant observer une épicurve par maladie, avec des
+couleurs reflétant le district dans lequel le cas résidait.
+
+Vous pouvez voir que les 15 cas de dengue signalés au cours d'une seule
+semaine résidaient dans trois districts différents. Vous pouvez
+également voir que le premier cas de typhoïde a été signalé à Feveria
+Central.
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif, fill = district_residentiel)), binwidth=7) + 
+  facet_wrap(.~maladie_notifiee)
+```
+:::
+
+#### **Tâche D : Améliorer l'apparence et le formatage de votre graphique à facettes pour qu'il soit prêt à être publié.**
+
+Vous pouvez ajouter, préciser ou modifier :
+
+-   Le thème/l'apparence de l'ensemble du graphique (par exemple, la
+    couleur d'arrière-plan ou l'apparence des lignes de la grille)
+-   Le titre, sous-titre... et les étiquettes des axes
+-   Les couleurs des barres (avec `scale_fill_manual()`)
+-   Le formatage et l'espacement des dates le long de l'axe des x (avec
+    `scale_x_date`)
+-   Beaucoup d'autres choses !
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(  
+  answer= "Non, les données suggèrent des épidémies occasionnelles de faible ampleur",
+  "Oui, ils sont tous deux endémiques"  )
+  
+
+cat("Le choléra et la fièvre typhoïde semblent-ils endémiques ?", longmcq(opts))
+
+
+opts <- c(
+  "Oui, vers novembre/décembre",
+  answer = "Oui, vers juillet/août (été)",
+  "Non, le nombre de cas est constamment élevée")
+
+
+cat("Y a-t-il une période particulière de l'année où le paludisme a atteint un pic en 2024 ?", longmcq(opts))
+
+
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Voici le code pour un formatage complet. Notez que d'autres changements
+ont été apportés, notamment la spécification que nous ne voulons que
+deux colonnes de mini-graphiques dans `facet_wrap()` et que l'étiquette
+de la date le long de l'axe des x ne doit indiquer que le jour et le
+mois (et non l'année, puisque tous les cas sont en 2024 de toute façon).
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif, fill = district_residentiel)), binwidth=7) +
+  facet_wrap(.~maladie_notifiee, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District de résidence",
+       x = "Date de notification par la clinique",
+       y = "Nombre",
+       subtitle = "Nombres de cas confirmés de choléra, de dengue, de paludisme de fièvre typhoïde et de fièvre jaune par semaine à Feveria, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+```
+
+Les courbes épidémiques montrent également que le choléra et la typhoïde
+semblent se manifester sous la forme de flambées isolées, plutôt que de
+présenter un caractère endémique. Le paludisme et la dengue ont par
+contre présenté une circulation à Feveria tout au long de l'année, le
+paludisme atteignant un pic assez net pendant les mois d'été.
+:::
+
+#### **Tâche E : Produire un tableau résumant des dates clés**
+
+Cette fois, utilisez `group_by()` et `summarize()` pour produire un
+tableau par district indiquant les dates de notifications les plus
+anciennes et les plus récentes.
+
+A l'aide d'une fontion `filter()`, vous pourrez générer ce tableau pour
+un district à la fois.
+
+:::: {.callout-note icon="false"}
+# Questions
+
+::: webex-check
+```{r, eval=T, include=T, results="asis", echo=FALSE}
+
+opts <- c(
+  "18 janvier 2024",
+  answer = "17 janvier 2024",
+  "12 février 2024")
+
+
+cat("Quand le premier cas de dengue a-t-il été signalé à **Feveria** en 2024 ?", longmcq(opts))
+
+opts <- c(
+  answer = "22 août 2024",
+  "18 novembre 2024",
+  "25 décembre 2024")
+
+
+cat("Quand le dernier cas de dengue a-t-il été signalé à **Feveria Central** en 2024 ?", longmcq(opts))
+```
+:::
+::::
+
+::: {.callout-caution icon="false" collapse="true"}
+## Cliquez pour voir la solution (essayez d'abord par vous-même !)
+
+Regroupez les données par maladie, puis, dans une fonction
+`summarize()`, définissez la première et la dernière date pour obtenir
+la chronologie globale de chaque maladie à Feveria.
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  group_by(maladie_notifiee) |> 
+  summarize(prem_notif = min(date_notif), 
+            der_notif = max(date_notif)) |>
+  ungroup()
+```
+
+Ajouter un `filter()` au code pour consulter les dates de la première
+notification et de la notification la plus récente pour le district qui
+vous intéresse.
+
+```{r, eval=T}
+data_jointes_confirme |> 
+  filter(district_residentiel == "Feveria Central") |> 
+  group_by(maladie_notifiee) |> 
+  summarize(prem_notif = min(date_notif), 
+            der_notif = max(date_notif)) |>
+  ungroup()
+```
+:::
+
+## Conclusion
+
+Superbe ! Conformément aux objectifs de cette étude de cas, vous avez
+fait ce qui suit :
+
+1.  Vous avez utilisé des fonctions clés de R pour nettoyer, remodeler
+    et joindre des ensembles de données, et vous avez créé de nouvelles
+    colonnes à l'aide de conditions logiques.
+
+2.  Pour obtenir des informations sur le traitement des données, vous
+    avez procédé à des analyses exploratoires et à des vérifications des
+    données tout au long du processus.
+
+3.  Vous avez effectué une analyse descriptive approfondie pour
+    comprendre les données de laboratoire et de notification, avant et
+    après la jointure. En réponse aux quatre questions initiales de
+    votre superviseur, vous pouvez dire :
+
+    -   **Combien de cas suspects des différentes maladies à déclaration
+        obligatoire ont été signalés en 2024, et lesquels étaient les
+        plus fréquents ?** Le paludisme était la maladie à déclaration
+        obligatoire la plus courante à Feveria en 2024. Selon le système
+        de surveillance des maladies à déclaration obligatoire : Il y a
+        eu 533 cas suspects de paludisme, 273 cas suspects de dengue,
+        100 cas de fièvre jaune, 46 cas de choléra et 35 cas de
+        typhoïde.
+    -   **Quel pourcentage de ces cas a été confirmé ?** Près de 80 %
+        des cas à déclaration obligatoire signalés en 2024 avaient donné
+        lieu à un résultat de test de laboratoire au moment de la
+        jointure des données, avec quelques variations selon les
+        maladies. Au total, 56 % des cas notifiés ont finalement été
+        confirmés, mais ce pourcentage variait de 23 % seulement pour la
+        fièvre typhoïde (7 cas confirmés sur 31 cas suspects avec
+        résultats de tests) à 95 % pour le choléra (38 cas confirmés sur
+        40 cas suspects avec résultats de tests). En outre, le taux de
+        positivité était plus élevé pour les cas présumés de dengue que
+        pour les cas présumés de paludisme (87 % contre 41 %).
+    -   **Combien de cas confirmés de différentes maladies à déclaration
+        obligatoire ont été signalés en 2024, et laquelle était la plus
+        fréquente ?** Les cas confirmés ont suivi une tendance
+        légèrement différente de celle des cas suspects : l'infection la
+        plus fréquemment signalée était la dengue avec 186 cas, suivie
+        du paludisme (174), puis du choléra (38), de la fièvre
+        jaune (33) et de la fièvre typhoïde (7).
+    -   **Comment les cas confirmés se répartissent-ils géographiquement
+        et temporellement dans la région de Feveria ?** Feveria a connu
+        une transmission de la dengue et du paludisme tout au long de
+        l'année, avec un pic en été, et concentrée dans le district de
+        Lac Minara. Feveria a également connu de petites et rares
+        épidémies de maladies diarrhéiques, telles que le choléra et la
+        fièvre typhoïde, en particulier dans la zone urbaine de Feveria
+        Central, où l'eau et l'assainissement peuvent poser problème.
+
+4.  Enfin, vous avez pu réfléchir à la manière dont les processus des
+    systèmes de surveillance des maladies à déclaration obligatoire et
+    ceux des tests de diagnostique de laboratoire, par exemple le
+    transfert des données entre les cliniques et les laboratoires,
+    peuvent affecter la qualité et l'exhaustivité des données, et donc
+    vos résultats.
+
+Il reste encore beaucoup de possibilités. Vous pouvez explorer les
+distributions des maladies par âge ou par sexe, calculer des taux
+d'incidence ou de prévalence des maladies à l'aide de données
+démographiques et même analyser les délais de déclaration en examinant
+les différentes dates de vos ensembles de données.
+
+Vous avez acquis de solides bases et vous êtes bien équipé pour passer à
+l'étape suivante de votre analyse. Continuez, des découvertes
+passionnantes vous attendent !
+
+Pour en savoir plus, consultez les autres études de cas ou plongez dans
+le [Epi R Handbook](https://epirhandbook.com/fr/index.fr.html).
+
+## Code de nettoyage et d'analyse des données
+
+Vous trouverez ci-dessous un script de toutes les étapes de nettoyage
+des données et des analyses descriptives. Notez que les analyses sont
+combinées à la fin plutôt qu'intercalées entre les étapes de nettoyage.
+Il s'agit d'une façon plus ordonnée d'organiser votre script.
+
+Par souci de concision, le code ci-dessous n'inclut pas toutes les
+inspections et vérifications effectuées en cours de route, mais vous
+pouvez décider de créer des sections avec de telles vérifications.
+
+Le début de votre script doit également contenir des informations pour
+aider le lecteur à comprendre à quoi sert le script, ainsi que des
+commentaires tout au long du script. Vous vous remercierez plus tard
+d'avoir ajouté ces commentaires !
+
+::: {.callout-note icon="false" collapse="true"}
+# Code pour nettoyer et analyser les données de notification et les données de laboratoire de Feveria, 2024
+
+```{r}
+# Code pour nettoyer et analyser les données de notification et les données de laboratoire de Feveria, 2024
+# Date:
+# Author:
+
+# Installation des packages --------------------------------
+# Pour s'assurer que le package "pacman" est installé
+if (!require("pacman")) {
+     install.packages("pacman") }
+
+# Installation (si nécessaire) depuis le CRAN et chargement des packages à utiliser
+pacman::p_load(
+  rio,        # importation de données  
+  skimr,      # aperçu des données
+  janitor,    # nettoyage des données et tableaux descriptifs
+  lubridate,  # manipulation des dates
+  epikit,     # pour créer des catégories d'âge
+  gtsummary,  # statistiques descriptives, tests et régressions 
+  apyramid,   # tracé de pyramides des âges 
+  flextable,  # tableaux prêts à être présentés
+  naniar,     # analyse des données manquantes
+  remotes,    # pour installer le package permettant de télécharger les données
+  tidyverse   # gestion et visualisation des données
+)
+
+# Importation des données --------------------------------------------
+
+# Données de notification
+data_notif_brut <- import("donnees/multi_maladies_notifications.xlsx")
+
+# Données de labo
+data_lab_brut <- import("donnees/multi_maladies_tests.csv")
+
+# Nettoyage des données de notification --------------------------------
+data_notif <- data_notif_brut |> 
+  clean_names() |> 
+  rename(date_notif = date_signalee_par_letablissement_de_sante_la_communaute,
+         id_notification = id_de_notification) |> 
+  select(id_notification, district_residentiel, maladie_notifiee, date_notif) |> 
+  mutate(district_residentiel = case_match(str_to_title(district_residentiel),
+                                           c("F Central", "Feveria C", "Feveria Central") ~ "Feveria Central",
+                                           c("Kasara", "Ksr") ~ "Kasara",
+                                           c("L Minara", "Lac Minara", "Au Bord Du Lac") ~ "Lac Minara")) |> 
+  mutate(date_notif = ymd(date_notif)) 
+
+
+# Nettoyage et consolidation des données de labo -----------------------
+# Nettoyage des valeurs
+data_lab <- data_lab_brut |> 
+  mutate(valeur = case_match(valeur, 
+                            c("P", "PO1", "PO139") ~ "Positif",
+                            "N" ~ "Négatif",
+                            "I" ~ "Indéterminé"))
+
+# Création de la base de données de labo orientée tests
+data_lab_tests <- data_lab |> 
+  filter(cible != "Dengue IgG") |> 
+  group_by(id_echantillon) |> 
+  arrange(desc(valeur)) |> 
+  slice(1) |> 
+  ungroup()
+
+# Création de la base de données de labo orientée cas
+data_lab_cas <- data_lab_tests |> 
+  group_by(id_notification) |> 
+  arrange(desc(valeur)) |> 
+  slice(1) |> 
+  ungroup()
+
+# Jointure des données de notification et de labo -----------------
+data_jointes <- left_join(data_notif, data_lab_cas, by = "id_notification")
+
+# Nettoyage des données jointes -----------------------------------
+data_jointes <- data_jointes |> 
+  mutate(cas_categorie = case_when(valeur=="Positif" ~ "Confirmé",
+                                   valeur=="Négatif" ~ "Ecarté",
+                                   valeur=="Indéterminé" | is.na(valeur) ~ "Suspect"))
+
+data_jointes_confirme <- data_jointes |> 
+  filter(cas_categorie=="Confirmé")
+
+# ANALYSE ---------------------------------------------------------
+# Nombre de cas suspects à Feveria
+tabyl(data_notif, maladie_notifiee)
+
+# Distribution des cas suspects par district
+tabyl(data_notif, maladie_notifiee, district_residentiel) |>
+  adorn_percentages() |>
+  adorn_pct_formatting() |>
+  adorn_ns()
+
+# Distribution des résultats de test par type de test
+tabyl(data_lab_tests, test, valeur) |> 
+    adorn_totals(where = "col") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution des catégories de cas dans les données jointes
+tabyl(data_jointes, cas_categorie) 
+
+# Distribution des catégories de cas par maladie dans les données jointes
+tabyl(data_jointes, maladie_notifiee, cas_categorie) |> 
+    adorn_totals(where = "both") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution des catégories de cas par maladie dans les données jointes, uniquement pour les cas avec un résultat de test valide
+data_jointes |> 
+    filter(cas_categorie != "Suspect") |> 
+    tabyl(maladie_notifiee, cas_categorie) |> 
+    adorn_totals(where = "both") |> 
+    adorn_percentages() |> 
+    adorn_pct_formatting() |> 
+    adorn_ns()
+
+# Distribution des cas confirmés par district
+data_jointes_confirme |> 
+  tabyl(maladie_notifiee, district_residentiel) |> 
+  adorn_totals(where = "both") |> 
+  adorn_percentages() |> 
+  adorn_pct_formatting() |> 
+  adorn_ns() 
+
+
+# Visualisation de l'évolution temporelle de le nombre de cas confirmé par district
+data_jointes_confirme |> 
+  ggplot()+
+  geom_histogram((aes(x = date_notif, fill = district_residentiel)), binwidth=7) +
+  facet_wrap(.~maladie_notifiee, ncol=2) +
+  theme_minimal() + 
+  labs(fill = "District de résidence",
+       x = "Date de notification par la clinique",
+       y = "Nombre",
+       subtitle = "Nombres de cas confirmés de choléra, de dengue, de paludisme de fièvre typhoïde et de fièvre jaune par semaine à Feveria, 2024") +
+  scale_fill_manual(values = c("navy", "lightblue", "seagreen")) +
+  scale_x_date(date_breaks = "1 month", 
+               date_labels = "%d %b") +
+  theme(legend.position="bottom",
+        axis.text.x = element_text(angle=90)) 
+
+
+# Première et dernière date de notification de cas confirmé par maladie
+data_jointes_confirme |> 
+  group_by(maladie_notifiee) |> 
+  summarize(prem_notif = min(date_notif), 
+            der_notif = max(date_notif)) |>
+  ungroup()
+
+```
+:::
+
+## Informations sur l'étude de cas
+
+::: {.callout-note appearance="minimal" icon="false"}
+**Auteurs originaux** Paula Blomquist et Alanah Jansen, avec le soutien
+technique du CDC Global Surveillance, Laboratory, and Data Systems
+Branch en collaboration avec TEPHINET.
+
+**Source des données** Données fictives fournies par Applied Epi.
+:::
+
+| Date | Modifications apportées | Version | Auteur |
+|---------|:--------|--------:|----------------------------------------------|
+| Juillet 2025 | Première version | 1 | Paula Blomquist et Alanah Jansen, Applied Epi, avec le soutien technique du CDC Global Surveillance, Laboratory, and Data Systems Branch en collaboration avec TEPHINET. |
+| Août 2025 | Traduction française | 1 | Laurent LeHot et Olivia Boyd |
+
+## Conditions d'utilisation
+
+**Clause de non-responsabilité** Les informations présentées dans cet
+exercice et les fichiers de données associés ont été développés pour
+aider les apprenants à atteindre les objectifs d'apprentissage prévus.
+Le contenu est celui de l'auteur ou des auteurs et ne représente pas
+nécessairement les opinions officielles du CDC, du US Department of
+Health and Human Services ou de TEPHINET.
+
+**Licence d'utilisation** Licence : Cette étude de cas est sous licence
+[licence CC BY-NC-SA
+4.0](https://github.com/appliedepi/case_studies/tree/master/licenses/multi_disease_lab_LICENSE.md).
+Pour plus d'informations sur le partage et l'adaptation de cette étude
+de cas, voir le [certificat
+associé](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+**Financement** Cette étude de cas a été soutenue à 100 % par l'accord
+de coopération numéro NU2HGH000044 financé par le US Centers for Disease
+Control and Prevention (CDC)

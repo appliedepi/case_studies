@@ -18,14 +18,7 @@ pacman::p_load(
 
 ## Welcome to our Open Case Study Repository!
 
-::: {.callout-important title="WEBSITE UNDER CONSTRUCTION"}
-This is a draft version of this page. The content and URL will change.
-:::
-
-
-Here, you can practice technical and analytical skills with real-life scenarios. The case studies, shared by FETPs and health ministries, use training data that’s either generated or anonymized.
-
-A case study is a fun, interactive way to learn—guiding you through scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. You can filter and order the rows to pick the one that fits you best. Click the link corresponding to your preferred language to open it up.
+A case study is a fun, interactive way to learn—guiding you through real-life scenarios with tasks and questions. You’ll find a variety of topics, skill levels, and diseases below, most of which take just a few hours to complete. You can filter and order the rows to pick the one that fits you best. Click the link corresponding to your preferred language to open it up. The data used in the case studies is either generated or anonymized. 
 
 For more information on how to use the case studies, click the [How-to
 Guide](pages/instructions.html). 
@@ -60,7 +53,8 @@ table <- table_raw %>%
   # recode language and country 
   mutate(language = matchmaker::match_vec(language, 
                                                dictionary = ISOcodes::ISO_639_3, 
-                                               from = "Part1", to = curr_lang_iso3), 
+                                               from = "Part1", to = curr_lang_iso3),
+         language = sub("\\(.*", "", language), 
          country = toupper(country),
          country = matchmaker::match_vec(country, 
                                          dictionary = ISOcodes::ISO_3166_1, 

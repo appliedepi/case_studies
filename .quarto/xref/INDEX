@@ -43,5 +43,20 @@
   },
   "pages/multi_disease_lab.qmd": {
     "multi_disease_lab.html": "2002a9f9"
+  },
+  "index.es.qmd": {
+    "index.es.html": "bc9b982a"
+  },
+  "pages/multidisease_surveillance.qmd": {
+    "multidisease_surveillance.html": "2bafc59d"
+  },
+  "pages/multidisease_surveillance.es.qmd": {
+    "multidisease_surveillance.es.html": "5f9eb0ba"
+  },
+  "pages/multidisease_surveillance.fr.qmd": {
+    "multidisease_surveillance.fr.html": "64dfc822"
+  },
+  "pages/multidisease_surveillance.pt.qmd": {
+    "multidisease_surveillance.pt.html": "8f736170"
   }
 }

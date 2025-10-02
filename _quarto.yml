@@ -1,24 +1,28 @@
 project:
   type: website
   render:
-    - index.qmd      
- 
+    - index.qmd
+    - index.es.qmd
     - pages/instructions.qmd
     # - pages/fulton.qmd          
     - pages/r_practical.qmd
-    - pages/multi_disease_lab.qmd
+    - pages/multidisease_surveillance.qmd
     - pages/under_construction.qmd
     # - pages/tbe.qmd
     # - pages/stegen-en.qmd                
     # - pages/openxlsx2_tutorial-en_revised.qmd       
     
     # Spanish
-   # - pages/oswego.es.qmd
+    # - pages/oswego.es.qmd
+    - pages/multidisease_surveillance.es.qmd
     - pages/under_construction.es.qmd
     
     # French
+    - pages/multidisease_surveillance.fr.qmd
     - pages/under_construction.fr.qmd
     
+    # Portuguese
+    - pages/multidisease_surveillance.pt.qmd
 
 website:
   title: "Applied Epi Open Case Study Repository"

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>multi_disease_lab – Applied Epi Open Case Study Repository</title>
+<title>multidisease_surveillance – Applied Epi Open Case Study Repository</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
   "consent_type":"implied",
-  "palette":"dark",
+  "palette":"light",
   "language":"en",
   "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
   "notice_banner_reject_button_hide":false,
@@ -202,7 +202,7 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#multi_disease_lab" id="toc-multi_disease_lab" class="nav-link active" data-scroll-target="#multi_disease_lab">Linking and analysing notification data and laboratory data in R</a>
+  <li><a href="#multidisease_surveillance" id="toc-multidisease_surveillance" class="nav-link active" data-scroll-target="#multidisease_surveillance">Linking and analysing notification data and laboratory data in R</a>
   <ul class="collapse">
   <li><a href="#scenario" id="toc-scenario" class="nav-link" data-scroll-target="#scenario">Scenario</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
@@ -218,7 +218,7 @@ cookieconsent.run({
   </ul></li>
   <li><a href="#step-3.-inspect-the-data" id="toc-step-3.-inspect-the-data" class="nav-link" data-scroll-target="#step-3.-inspect-the-data">Step 3. Inspect the data</a>
   <ul class="collapse">
-  <li><a href="#step-3.1-inspect-the-surveillance-data" id="toc-step-3.1-inspect-the-surveillance-data" class="nav-link" data-scroll-target="#step-3.1-inspect-the-surveillance-data">Step 3.1 Inspect the surveillance data</a></li>
+  <li><a href="#step-3.1-inspect-the-notification-data" id="toc-step-3.1-inspect-the-notification-data" class="nav-link" data-scroll-target="#step-3.1-inspect-the-notification-data">Step 3.1 Inspect the notification data</a></li>
   <li><a href="#step-3.2-inspect-the-laboratory-data" id="toc-step-3.2-inspect-the-laboratory-data" class="nav-link" data-scroll-target="#step-3.2-inspect-the-laboratory-data">Step 3.2 Inspect the laboratory data</a></li>
   </ul></li>
   <li><a href="#step-4.-clean-and-describe-the-notification-data" id="toc-step-4.-clean-and-describe-the-notification-data" class="nav-link" data-scroll-target="#step-4.-clean-and-describe-the-notification-data">Step 4. Clean and describe the notification data</a>
@@ -262,7 +262,7 @@ cookieconsent.run({
 
 
 
-<section id="multi_disease_lab" class="level1">
+<section id="multidisease_surveillance" class="level1">
 <h1>Linking and analysing notification data and laboratory data in R</h1>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -270,7 +270,9 @@ cookieconsent.run({
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p><strong>Tool</strong>: R | <strong>Technical complexity</strong>: Intermediate | <strong>Methodological complexity</strong>: Basic | <strong>Prior knowledge required:</strong> <a href="https://epirhandbook.com/en/new_pages/basics.html">R basics</a> (Using Rstudio; R packages, functions and arguments, using pipes) as well as key tidyverse functions and ggplots) | <strong>Source:</strong> Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET.</p>
+<p><strong>Tool</strong>: R <strong>Technical complexity</strong>: Intermediate <strong>Methodological complexity</strong>: Basic</p>
+<p><strong>Prior knowledge required:</strong> <a href="https://epirhandbook.com/en/new_pages/basics.html">R basics</a> (Using Rstudio; R packages, functions and arguments, using pipes) as well as key tidyverse functions and ggplots).</p>
+<p><strong>Source:</strong> Applied Epi, with technical support provided by the CDC Global Surveillance, Laboratory, and Data Systems Branch in collaboration with TEPHINET.</p>
 </div>
 </div>
 </div>
@@ -285,7 +287,7 @@ cookieconsent.run({
 <li><strong>Kasara</strong>: a more sub-urban area on the other side of Feveria Central.</li>
 </ul>
 <p><strong>Map of districts in the country Feveria</strong></p>
-<p><img src="..\images/multi_disease_lab/map.png" class="img-fluid" style="width:70.0%"></p>
+<p><img src="..\images/multidisease_surveillance/map_en.png" class="img-fluid" style="width:70.0%"></p>
 <p>It is January 2025, and your supervisor would like you to transfer the routine processing of notifiable disease data from Excel into R, and to conduct some analyses on the data. She wants to know at least:</p>
 <ul>
 <li>How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?</li>
@@ -354,7 +356,7 @@ Click to see the solution (try it yourself first!)
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Create a folder (e.g.&nbsp;‘multi_disease_lab’ on your Desktop) for your work. To create an Rstudio project in your new folder, click <code>New Project…</code> in the top left of your R Studio, then <code>Existing Directory</code>, then <code>Browse</code> to select your new folder. For more information, look at the <a href="https://epirhandbook.com/new_pages/r_projects.html">R projects</a> section of the Epi R Handbook.</p>
-<p>Start a new R script by clicking <code>New File…</code> in the top left of your R Studio, then <code>R Script</code>. Save it immediately in the appropriate place, e.g.&nbsp;in a ‘scripts’ sub-folder of your R Project.</p>
+<p>Start a new R script by clicking <code>New File</code> in the top left of your R Studio, then <code>R Script</code>. Save it immediately in the appropriate place, e.g.&nbsp;in a <code>scripts</code> sub-folder of your R Project.</p>
 <p>At the top of your new R script, write some essential information like your name, the purpose of the file, and the date.</p>
 <p>Your R locale determines the language and regional settings used for things like date formats and translations. If your locale is different from the language you want for your report (e.g., a French locale vs.&nbsp;an English report), you can change it to English by running <code>Sys.setlocale("LC_ALL", "English")</code>. Include this in your script if needed, or skip it if your locale is usually appropriate. This is explained in more detail in the <a href="pages/instructions.qmd_">How-to Guide</a>.</p>
 </div>
@@ -364,7 +366,8 @@ Click to see the solution (try it yourself first!)
 <section id="installload-packages" class="level3">
 <h3 class="anchored" data-anchor-id="installload-packages">1.2 Install/load packages</h3>
 <p>Next in your R script, you need to install and load the necessary R packages. This ensures that the functions you need are available for your analysis.</p>
-<p>You will need the following packages: <code>{rio}</code> (for importing data),<code>{skimr}</code> (for reviewing data), <code>{janitor}</code> (for cleaning data), <code>{lubridate}</code> (for cleaning dates), <code>{epikit}</code> (for epi-related tasks), <code>{gtsummary}</code> (for summary statistics/tests and regression), <code>{apyramid}</code> (for age-sex pyramids), <code>{flextable}</code> (for presentation-ready tables), <code>{naniar}</code> (for evaluating missing data), and <code>{tidyverse}</code> (for general data manipulation/science tasks). You will also need the <code>{remotes}</code> package to download the data - which we will explain in the download section.</p>
+<p>You will need the following packages: <code>{rio}</code> (for importing data),<code>{skimr}</code> (for reviewing data), <code>{janitor}</code> (for cleaning data), <code>{lubridate}</code> (for cleaning dates), <code>{epikit}</code> (for epi-related tasks), <code>{gtsummary}</code> (for summary statistics/tests and regression), <code>{apyramid}</code> (for age-sex pyramids), <code>{flextable}</code> (for presentation-ready tables), <code>{naniar}</code> (for evaluating missing data), and <code>{tidyverse}</code> (for general data manipulation/science tasks).</p>
+<p>You will also need the <code>{remotes}</code> package to download the data - which we will explain in the download section.</p>
 <p>As you start, your trusted colleague nudges you and whispers “I’ve heard that a great way to manage your packages is with the <code>{pacman}</code> package”.</p>
 <p>Over to you!</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
@@ -379,9 +382,13 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Use the function <code>p_load()</code> from <code>pacman</code> for this task. You provide the function with a list of packages that you want to use. The function will undertake two steps per package: 1) Check if the package is installed on your computer, and install it if necessary, then 2) Load the package so it can be used during this R session.</p>
+<p>Use the function <code>p_load()</code> from <code>pacman</code> for this task. You provide the function with a list of packages that you want to use. The function will undertake two steps per package:</p>
+<ol type="1">
+<li><p>Check if the package is installed on your computer, and install it if necessary.</p></li>
+<li><p>Load the package so it can be used during this R session.</p></li>
+</ol>
 <p>If you don’t already have <code>pacman</code> installed, you will need to install it the “traditional way” first, with <code>install.packages()</code>.</p>
-<p>Note that the order of packages in your p_load function can be important. If two packages have the same function names (e.g.&nbsp;<code>select()</code> in the package <code>MASS</code> and <code>select()</code> in <code>tidyverse</code>, which do different things), then R will use the function from the most recently loaded package. To prioritize functions from tidyverse, which are commonly used for data manipulation and visualization, load tidyverse last.</p>
+<p>Note that the order of packages in your p_load function can be important. If two packages have the same function names (e.g.&nbsp;<code>select()</code> in the package <code>MASS</code> and <code>select()</code> in <code>tidyverse</code>, which do different things), then R will use the function from the most recently loaded package. To prioritize functions from <code>tidyverse</code>, which are commonly used for data manipulation and visualization, load <code>tidyverse</code> last.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensures the package "pacman" is installed</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"pacman"</span>)) {</span>
@@ -425,7 +432,7 @@ Click to see the solution (try it yourself first!)
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"appliedepi/appliedepidata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="1">
-<li>Save the two datasets into a specific folder using the <code>save_data()</code> function from <code>{appliedepidata}</code>, by running the code below. The example below saves the data into a ‘data’ subfolder within the RStudio project. Note that if you do not specify a location within the ‘path’ argument of the function, a window will pop up asking you to manually select a folder.</li>
+<li>Save the two datasets into a specific folder using the <code>save_data()</code> function from <code>{appliedepidata}</code>, by running the code below. The example below saves the data into a <code>data</code> subfolder within the RStudio project. Note that if you do not specify a location within the <code>path</code> argument of the function, a window will pop up asking you to manually select a folder.</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save down the two data files using the save_data() function from appliedepidata</span></span>
@@ -490,8 +497,8 @@ Click to see the solution (try it yourself first!)
 <section id="step-3.-inspect-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="step-3.-inspect-the-data">Step 3. Inspect the data</h2>
 <p>The data’s in, and now it’s time to see what story it tells. Take an initial look at your two raw data frames to check their contents and quality.</p>
-<section id="step-3.1-inspect-the-surveillance-data" class="level3">
-<h3 class="anchored" data-anchor-id="step-3.1-inspect-the-surveillance-data">Step 3.1 Inspect the surveillance data</h3>
+<section id="step-3.1-inspect-the-notification-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-3.1-inspect-the-notification-data">Step 3.1 Inspect the notification data</h3>
 <section id="task-a-first-inspect-the-dimensions-and-general-contents-of-the-notification-data" class="level4">
 <h4 class="anchored" data-anchor-id="task-a-first-inspect-the-dimensions-and-general-contents-of-the-notification-data"><strong>Task A: First, inspect the <em>dimensions</em> and general contents of the notification data</strong></h4>
 <p><strong>Use <code>skim()</code> from the <code>{skimr}</code> package, <code>names()</code>, <code>ncol()</code>, and <code>nrow()</code> to inspect your data frame.</strong></p>
@@ -510,24 +517,24 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many columns are there in the notification data?
-<div id="radio_UNGGVONZQA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UNGGVONZQA" value=""> <span>10</span></label><label><input type="radio" autocomplete="off" name="radio_UNGGVONZQA" value=""> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_UNGGVONZQA" value="answer"> <span>12</span></label><label><input type="radio" autocomplete="off" name="radio_UNGGVONZQA" value=""> <span>13</span></label>
+<div id="radio_XRAXEUPGFL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XRAXEUPGFL" value=""> <span>10</span></label><label><input type="radio" autocomplete="off" name="radio_XRAXEUPGFL" value=""> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_XRAXEUPGFL" value="answer"> <span>12</span></label><label><input type="radio" autocomplete="off" name="radio_XRAXEUPGFL" value=""> <span>13</span></label>
 </div>
 Which of these columns are NOT in the data?
-<div id="radio_SFISFHLOZH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SFISFHLOZH" value=""> <span>Onset date</span></label><label><input type="radio" autocomplete="off" name="radio_SFISFHLOZH" value=""> <span>Date reported by Health Facility/Community</span></label><label><input type="radio" autocomplete="off" name="radio_SFISFHLOZH" value=""> <span>Date of outcome</span></label><label><input type="radio" autocomplete="off" name="radio_SFISFHLOZH" value="answer"> <span>Date of test</span></label><label><input type="radio" autocomplete="off" name="radio_SFISFHLOZH" value=""> <span>Date of birth</span></label>
+<div id="radio_ALCMXZSBHO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ALCMXZSBHO" value=""> <span>Onset date</span></label><label><input type="radio" autocomplete="off" name="radio_ALCMXZSBHO" value=""> <span>Date reported by Health Facility/Community</span></label><label><input type="radio" autocomplete="off" name="radio_ALCMXZSBHO" value=""> <span>Date of outcome</span></label><label><input type="radio" autocomplete="off" name="radio_ALCMXZSBHO" value="answer"> <span>Date of test</span></label><label><input type="radio" autocomplete="off" name="radio_ALCMXZSBHO" value=""> <span>Date of birth</span></label>
 </div>
 What is the name of the column in the notification data that identifies each notification?
-<div id="radio_FILISKLWYY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FILISKLWYY" value="answer"> <span>Notification ID</span></label><label><input type="radio" autocomplete="off" name="radio_FILISKLWYY" value=""> <span>Test ID</span></label><label><input type="radio" autocomplete="off" name="radio_FILISKLWYY" value=""> <span>Health facility code</span></label><label><input type="radio" autocomplete="off" name="radio_FILISKLWYY" value=""> <span>Combination of Notification ID and Sex</span></label>
+<div id="radio_BDPUXCBDNF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BDPUXCBDNF" value="answer"> <span>Notification ID</span></label><label><input type="radio" autocomplete="off" name="radio_BDPUXCBDNF" value=""> <span>Test ID</span></label><label><input type="radio" autocomplete="off" name="radio_BDPUXCBDNF" value=""> <span>Health facility code</span></label><label><input type="radio" autocomplete="off" name="radio_BDPUXCBDNF" value=""> <span>Combination of Notification ID and Sex</span></label>
 </div>
 How many rows are there in the notification data?
-<div id="radio_WLUFONDTTK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WLUFONDTTK" value="answer"> <span>987</span></label><label><input type="radio" autocomplete="off" name="radio_WLUFONDTTK" value=""> <span>1314</span></label><label><input type="radio" autocomplete="off" name="radio_WLUFONDTTK" value=""> <span>950</span></label><label><input type="radio" autocomplete="off" name="radio_WLUFONDTTK" value=""> <span>778</span></label>
+<div id="radio_HJCDPCIHRG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HJCDPCIHRG" value="answer"> <span>987</span></label><label><input type="radio" autocomplete="off" name="radio_HJCDPCIHRG" value=""> <span>1314</span></label><label><input type="radio" autocomplete="off" name="radio_HJCDPCIHRG" value=""> <span>950</span></label><label><input type="radio" autocomplete="off" name="radio_HJCDPCIHRG" value=""> <span>778</span></label>
 </div>
 What type of information can you NOT see in the notification data?
-<div id="radio_TXADBLICKY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TXADBLICKY" value="answer"> <span>Laboratory test results</span></label><label><input type="radio" autocomplete="off" name="radio_TXADBLICKY" value=""> <span>District of residence</span></label><label><input type="radio" autocomplete="off" name="radio_TXADBLICKY" value=""> <span>Birthday and sex</span></label><label><input type="radio" autocomplete="off" name="radio_TXADBLICKY" value=""> <span>Health facility in which the case was diagnosed</span></label><label><input type="radio" autocomplete="off" name="radio_TXADBLICKY" value=""> <span>Outcome</span></label>
+<div id="radio_HLLFVMSRFH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HLLFVMSRFH" value="answer"> <span>Laboratory test results</span></label><label><input type="radio" autocomplete="off" name="radio_HLLFVMSRFH" value=""> <span>District of residence</span></label><label><input type="radio" autocomplete="off" name="radio_HLLFVMSRFH" value=""> <span>Birthday and sex</span></label><label><input type="radio" autocomplete="off" name="radio_HLLFVMSRFH" value=""> <span>Health facility in which the case was diagnosed</span></label><label><input type="radio" autocomplete="off" name="radio_HLLFVMSRFH" value=""> <span>Outcome</span></label>
 </div>
 </div>
 </div>
@@ -548,7 +555,9 @@ Click to see the solution (try it yourself first!)
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_notif_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Or, you could use <code>names()</code> to print out just the column names. Through either <code>skim()</code> or <code>names()</code> you will be able to see the types of information including: the health facility of the case, birth-date, sex, a flag indicating pregnancy, district of residence, onset date, and date reported by the clinic, and outcome information. There is also a <code>Notification ID</code> which appears to be a unique identifier for a case, but we would want to double check duplicates before we are sure. Note that there are NO test results in this data, as these notifications are from clinics diagnosing notifiable diseases based on clinical case definitions.</p>
+<p>Or, you could use <code>names()</code> to print out just the column names. Through either <code>skim()</code> or <code>names()</code> you will be able to see the types of information including: the health facility of the case, birth-date, sex, a flag indicating pregnancy, district of residence, onset date, and date reported by the clinic, and outcome information.</p>
+<p>There is also a <code>Notification ID</code> which appears to be a unique identifier for a case, but we would want to double check duplicates before we are sure.</p>
+<p>Note that there are NO test results in this data, as these notifications are from clinics diagnosing notifiable diseases based on clinical case definitions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_notif_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -601,12 +610,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many columns in the notification data frame are recognised by R to be date columns?
-<div id="radio_RPZBGESQYM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RPZBGESQYM" value="answer"> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_RPZBGESQYM" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_RPZBGESQYM" value=""> <span>4</span></label>
+<div id="radio_KAHEPLWCVF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KAHEPLWCVF" value="answer"> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_KAHEPLWCVF" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_KAHEPLWCVF" value=""> <span>4</span></label>
 </div>
 What is the class of most columns in the raw notification data frame?
-<div id="radio_CDANBBPTYQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CDANBBPTYQ" value="answer"> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_CDANBBPTYQ" value=""> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_CDANBBPTYQ" value=""> <span>factor</span></label>
+<div id="radio_LRBPPBXVPR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LRBPPBXVPR" value="answer"> <span>character</span></label><label><input type="radio" autocomplete="off" name="radio_LRBPPBXVPR" value=""> <span>numeric</span></label><label><input type="radio" autocomplete="off" name="radio_LRBPPBXVPR" value=""> <span>factor</span></label>
 </div>
 </div>
 </div>
@@ -623,7 +632,8 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You can use <code>class</code> like the example below. The $ is an operator used to select a specific column from the <code>data_notif_raw</code> data frame. Note that the back-ticks are used around Date of Birth because the column name contains spaces.</p>
+<p>You can use <code>class</code> like the example below. The <code>$</code> is an operator used to select a specific column from the <code>data_notif_raw</code> data frame.</p>
+<p>Note that the back-ticks (<code>`</code>) are used around <code>Date of Birth</code> because the column name contains spaces.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(data_notif_raw<span class="sc">$</span><span class="st">`</span><span class="at">Date of Birth</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -635,7 +645,8 @@ Click to see the solution (try it yourself first!)
 </section>
 <section id="task-c-inspect-categorical-values-and-missingness" class="level4">
 <h4 class="anchored" data-anchor-id="task-c-inspect-categorical-values-and-missingness"><strong>Task C: Inspect categorical values and missingness</strong></h4>
-<p><strong>Use the <code>tabyl()</code> function to inspect the values within categorical columns</strong>, specifying the data frame object in the first argument, and the column name in the second argument. For example, this code tabulates the values for the Sex column. The output shows that male and female are inconsistently spelled across the data. This column would need further cleaning before analysis.</p>
+<p><strong>Use the <code>tabyl()</code> function to inspect the values within categorical columns</strong>, specifying the data frame object in the first argument, and the column name in the second argument.</p>
+<p>For example, this code tabulates the values for the <code>Sex</code> column. The output shows that male and female are inconsistently spelled across the data. This column would need further cleaning before analysis.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(data_notif_raw, Sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -651,7 +662,7 @@ Click to see the solution (try it yourself first!)
    &lt;NA&gt; 125 0.12664640            NA</code></pre>
 </div>
 </div>
-<p>To inspect missingness, you can use the <code>miss_var_summary()</code> function from the {naniar} package:</p>
+<p>To inspect missingness, you can use the <code>miss_var_summary()</code> function from the <code>{naniar}</code> package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">miss_var_summary</span>(data_notif_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -684,28 +695,28 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Are the values in the <code>Residential District</code> column standardized?
-<div id="radio_PJCXSESANS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PJCXSESANS" value="answer"> <span>No - they need cleaning</span></label><label><input type="radio" autocomplete="off" name="radio_PJCXSESANS" value=""> <span>They are standardized and are ready to be used for analysis</span></label>
+<div id="radio_LBGBXUKPSJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LBGBXUKPSJ" value="answer"> <span>No - they need cleaning</span></label><label><input type="radio" autocomplete="off" name="radio_LBGBXUKPSJ" value=""> <span>They are standardized and are ready to be used for analysis</span></label>
 </div>
 Are the values in the <code>Disease notified</code> column standardized?
-<div id="radio_XUKYCUNJFZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XUKYCUNJFZ" value=""> <span>No - they need cleaning</span></label><label><input type="radio" autocomplete="off" name="radio_XUKYCUNJFZ" value="answer"> <span>They are standardized and are ready to be used for analysis</span></label>
+<div id="radio_BXZUISAYOO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BXZUISAYOO" value=""> <span>No - they need cleaning</span></label><label><input type="radio" autocomplete="off" name="radio_BXZUISAYOO" value="answer"> <span>They are standardized and are ready to be used for analysis</span></label>
 </div>
 What does R recognise as a missing value?
-<div id="radio_WYHXCBAIPS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WYHXCBAIPS" value=""> <span>Either no value, or just a space, or just a dot</span></label><label><input type="radio" autocomplete="off" name="radio_WYHXCBAIPS" value="answer"> <span>No value in a cell, represented with NA</span></label><label><input type="radio" autocomplete="off" name="radio_WYHXCBAIPS" value=""> <span>The words Unknown and Uncertain</span></label>
+<div id="radio_TUVQZIDBAA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TUVQZIDBAA" value=""> <span>Either no value, or just a space, or just a dot</span></label><label><input type="radio" autocomplete="off" name="radio_TUVQZIDBAA" value="answer"> <span>No value in a cell, represented with NA</span></label><label><input type="radio" autocomplete="off" name="radio_TUVQZIDBAA" value=""> <span>The words Unknown and Uncertain</span></label>
 </div>
 Based on the missingness of its values, is the <code>Onset date</code> column useful?
-<div id="radio_VFEKEIVVNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VFEKEIVVNG" value=""> <span>Yes, the missingness is low so this column is useful</span></label><label><input type="radio" autocomplete="off" name="radio_VFEKEIVVNG" value="answer"> <span>Minimally, as the missingness is too high</span></label>
+<div id="radio_ZFNWANBTYT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZFNWANBTYT" value=""> <span>Yes, the missingness is low so this column is useful</span></label><label><input type="radio" autocomplete="off" name="radio_ZFNWANBTYT" value="answer"> <span>Minimally, as the missingness is too high</span></label>
 </div>
 Why might some columns in the notification data have different spellings and non-standardized categories?
-<div id="radio_MHEJSQIEAE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MHEJSQIEAE" value=""> <span>A bot scrambles the data so it becomes less identifiable</span></label><label><input type="radio" autocomplete="off" name="radio_MHEJSQIEAE" value="answer"> <span>Each clinic might use software that is configured slightly differently, or use free-text entries, so there are variations in spelling</span></label><label><input type="radio" autocomplete="off" name="radio_MHEJSQIEAE" value=""> <span>The surveillance system software used by the clinical settings has lots of bugs</span></label>
+<div id="radio_EEUWPQSQDB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EEUWPQSQDB" value=""> <span>A bot scrambles the data so it becomes less identifiable</span></label><label><input type="radio" autocomplete="off" name="radio_EEUWPQSQDB" value="answer"> <span>Each clinic might use software that is configured slightly differently, or use free-text entries, so there are variations in spelling</span></label><label><input type="radio" autocomplete="off" name="radio_EEUWPQSQDB" value=""> <span>The surveillance system software used by the clinical settings has lots of bugs</span></label>
 </div>
 Why might some columns in the notification data have high missingness?
-<div id="radio_NZCTSUOASX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NZCTSUOASX" value=""> <span>The clinician does not ask the patient the question during their consultation</span></label><label><input type="radio" autocomplete="off" name="radio_NZCTSUOASX" value=""> <span>The patient might not know or want to share the answer</span></label><label><input type="radio" autocomplete="off" name="radio_NZCTSUOASX" value=""> <span>The clinician might not have time to prioritise filling in that field in the data, even if they know the information</span></label><label><input type="radio" autocomplete="off" name="radio_NZCTSUOASX" value="answer"> <span>All of the above, and many more reasons</span></label>
+<div id="radio_WBXWRCULPI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WBXWRCULPI" value=""> <span>The clinician does not ask the patient the question during their consultation</span></label><label><input type="radio" autocomplete="off" name="radio_WBXWRCULPI" value=""> <span>The patient might not know or want to share the answer</span></label><label><input type="radio" autocomplete="off" name="radio_WBXWRCULPI" value=""> <span>The clinician might not have time to prioritise filling in that field in the data, even if they know the information</span></label><label><input type="radio" autocomplete="off" name="radio_WBXWRCULPI" value="answer"> <span>All of the above, and many more reasons</span></label>
 </div>
 </div>
 </div>
@@ -722,7 +733,7 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Use the <code>tabyl()</code> function to tabulate the values within the Residential district column. Again, the first argument is the name of the data frame object, and the second argument is the name of the column.</p>
+<p>Use the <code>tabyl()</code> function to tabulate the values within the <code>Residential District</code> column. Again, the first argument is the name of the data frame object, and the second argument is the name of the column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(data_notif_raw, <span class="st">`</span><span class="at">Residential District</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -752,10 +763,11 @@ Click to see the solution (try it yourself first!)
            dengue 273 0.27659574
           malaria 533 0.54002026
           typhoid  35 0.03546099
-     yellow_fever 100 0.10131712</code></pre>
+     yellow fever 100 0.10131712</code></pre>
 </div>
 </div>
-<p>A different way of checking missingness is to tabulate the output of the function <code>is.na()</code>. In the example below, the function <code>is.na()</code> evaluates each cell within the column <code>Onset date</code>, returning TRUE for missing ones and FALSE for present ones. Running <code>tabyl()</code> on this TRUE/FALSE output then quickly gives you a clear count and percentage of both missing and non-missing values in that column. Remember, values like a space or the words “Unknown” or “Missing” will not be recognized by R as missing. R will only recognize true blanks as missing, represented by “NA”.</p>
+<p>A different way of checking missingness is to tabulate the output of the function <code>is.na()</code>. In the example below, the function <code>is.na()</code> evaluates each cell within the column <code>Onset date</code>, returning TRUE for missing ones and FALSE for present ones.</p>
+<p>Running <code>tabyl()</code> on this TRUE/FALSE output then quickly gives you a clear count and percentage of both missing and non-missing values in that column. Remember, values like a space or the words “Unknown” or “Missing” will not be recognized by R as missing. R will only recognize true blanks as missing, represented by <code>NA</code>.</p>
 <p>For <code>Onset date</code>, you can see that 70% of cases are missing onset date, suggesting that this column would not be particularly useful for analyzing trends in disease over time.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(<span class="fu">is.na</span>(data_notif_raw<span class="sc">$</span><span class="st">`</span><span class="at">Onset date</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -765,7 +777,12 @@ Click to see the solution (try it yourself first!)
                                TRUE 691 0.7001013</code></pre>
 </div>
 </div>
-<p>Missing or non-standardized data can arise for many reasons, including the design of the data collection tool (e.g.&nbsp;whether questions are mandatory or use free text vs.&nbsp;drop-downs), the processes and standards in place (such as which fields staff are instructed to prioritise), and contextual factors (like whether staff have sufficient time to gather the information) — among many others.</p>
+<p>Missing or non-standardized data can arise for many reasons, including:</p>
+<ul>
+<li><p>the design of the data collection tool (e.g.&nbsp;whether questions are mandatory or use free text vs.&nbsp;drop-downs),</p></li>
+<li><p>the processes and standards in place (such as which fields staff are instructed to prioritise), and</p></li>
+<li><p>contextual factors (like whether staff have sufficient time to gather the information).</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -775,7 +792,7 @@ Click to see the solution (try it yourself first!)
 <h3 class="anchored" data-anchor-id="step-3.2-inspect-the-laboratory-data">Step 3.2 Inspect the laboratory data</h3>
 <section id="task-a-inspect-the-dimensions-and-general-content-of-the-lab-data" class="level4">
 <h4 class="anchored" data-anchor-id="task-a-inspect-the-dimensions-and-general-content-of-the-lab-data"><strong>Task A: Inspect the <em>dimensions</em> and general content of the lab data</strong></h4>
-<p>Like with the surveillance data, <strong>use <code>skim()</code>, <code>ncol()</code>, and <code>nrow()</code> functions or check the environment to inspect the lab data.</strong></p>
+<p>Like with the notification data, <strong>use <code>skim()</code>, <code>ncol()</code>, and <code>nrow()</code> functions or check the environment to inspect the lab data.</strong></p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -787,21 +804,21 @@ Questions
 </div>
 <div class="callout-body-container callout-body">
 <div class="webex-check">
-Which linelist has more columns - the surveillance data or the laboratory data?
-<div id="radio_SNYEVONVEW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SNYEVONVEW" value=""> <span>Lab data</span></label><label><input type="radio" autocomplete="off" name="radio_SNYEVONVEW" value="answer"> <span>Surveillance data</span></label><label><input type="radio" autocomplete="off" name="radio_SNYEVONVEW" value=""> <span>They have the same number of columns</span></label>
+Which linelist has more columns - the notification data or the laboratory data?
+<div id="radio_KJKXMRBOUV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KJKXMRBOUV" value=""> <span>Lab data</span></label><label><input type="radio" autocomplete="off" name="radio_KJKXMRBOUV" value="answer"> <span>Notification data</span></label><label><input type="radio" autocomplete="off" name="radio_KJKXMRBOUV" value=""> <span>They have the same number of columns</span></label>
 </div>
 Which linelist has more rows?
-<div id="radio_YUWIUFSMWN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YUWIUFSMWN" value="answer"> <span>Lab data</span></label><label><input type="radio" autocomplete="off" name="radio_YUWIUFSMWN" value=""> <span>Surveillance data</span></label><label><input type="radio" autocomplete="off" name="radio_YUWIUFSMWN" value=""> <span>They have the same number of rows</span></label>
+<div id="radio_JDIGGYXDOU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JDIGGYXDOU" value="answer"> <span>Lab data</span></label><label><input type="radio" autocomplete="off" name="radio_JDIGGYXDOU" value=""> <span>Notification data</span></label><label><input type="radio" autocomplete="off" name="radio_JDIGGYXDOU" value=""> <span>They have the same number of rows</span></label>
 </div>
 Inspect the lab data with <code>View()</code>. Why might the lab data have more records?
-<div id="radio_KVGUOSATGT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KVGUOSATGT" value="answer"> <span>There may be several tests or targets per sample</span></label><label><input type="radio" autocomplete="off" name="radio_KVGUOSATGT" value=""> <span>There are so many trial test results in the data</span></label><label><input type="radio" autocomplete="off" name="radio_KVGUOSATGT" value=""> <span>Not all the notifications have test results yet</span></label>
+<div id="radio_UGKRMANMGK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UGKRMANMGK" value="answer"> <span>There may be several tests or targets per sample</span></label><label><input type="radio" autocomplete="off" name="radio_UGKRMANMGK" value=""> <span>There are so many trial test results in the data</span></label><label><input type="radio" autocomplete="off" name="radio_UGKRMANMGK" value=""> <span>Not all the notifications have test results yet</span></label>
 </div>
 Which of these columns are NOT in the lab data?
-<div id="radio_POBRZXNRCY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_POBRZXNRCY" value=""> <span>Notification ID</span></label><label><input type="radio" autocomplete="off" name="radio_POBRZXNRCY" value=""> <span>Sample ID</span></label><label><input type="radio" autocomplete="off" name="radio_POBRZXNRCY" value=""> <span>Test type</span></label><label><input type="radio" autocomplete="off" name="radio_POBRZXNRCY" value="answer"> <span>Date of birth</span></label><label><input type="radio" autocomplete="off" name="radio_POBRZXNRCY" value=""> <span>Test result</span></label>
+<div id="radio_LUAFETMQGZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LUAFETMQGZ" value=""> <span>Notification ID</span></label><label><input type="radio" autocomplete="off" name="radio_LUAFETMQGZ" value=""> <span>Sample ID</span></label><label><input type="radio" autocomplete="off" name="radio_LUAFETMQGZ" value=""> <span>Test type</span></label><label><input type="radio" autocomplete="off" name="radio_LUAFETMQGZ" value="answer"> <span>Date of birth</span></label><label><input type="radio" autocomplete="off" name="radio_LUAFETMQGZ" value=""> <span>Test result</span></label>
 </div>
 </div>
 </div>
@@ -818,7 +835,7 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Just like in section 3.1, you can use <code>skim()</code> from the <code>{skimr}</code> package to look at the entire laboratory data frame with test results. This will also show you the different column names in the data, showing you that the lab data only contains information about the test and not about the patient. It does however also contain a notification ID, just like the notification data does.</p>
+<p>Just like in section 3.1, you can use <code>skim()</code> from the <code>{skimr}</code> package to look at the entire laboratory data frame with test results. This will also show you the different column names in the data, showing you that the lab data only contains information about the test and not about the patient. It does however also contain a <strong>notification ID</strong>, just like the notification data does.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(data_lab_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -836,13 +853,13 @@ Click to see the solution (try it yourself first!)
 <pre><code>[1] 1314</code></pre>
 </div>
 </div>
-<p>There are often more records in the lab data than in the clinical data. If you inspect the data with <code>View(data_lab_raw)</code> and then click on the arrow at the top of the <code>notification_id</code> column to sort it alphabetically, you’ll see that several rows share the same notification_id. This can happen when multiple targets are tested from the same sample (same sample ID), or when a case is retested (resulting in a different sample ID).</p>
+<p>There are often more records in the lab data than in the clinical data. If you inspect the data with <code>View(data_lab_raw)</code> and then click on the arrow at the top of the <code>notification_id</code> column to sort it alphabetically, you’ll see that several rows share the same <code>notification_id</code>. This can happen when multiple targets are tested from the same sample (same sample ID), or when a case is retested (resulting in a different sample ID).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(data_lab_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-4ada8f16{}.cl-4acbea9c{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-4ad1ecee{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-4ad1ecf8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-4ad22682{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad22696{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226a0{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226a1{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226aa{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226ab{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226b4{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226b5{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226be{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226bf{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226c8{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226d2{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226d3{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226d4{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226dc{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226dd{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226e6{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226e7{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226f0{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226f1{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4ad226fa{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-4ada8f16"><thead><tr style="overflow-wrap:break-word;"><th class="cl-4ad22682"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">laboratory_name</span></p></th><th class="cl-4ad22696"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">notification_id</span></p></th><th class="cl-4ad226a0"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">sample_id</span></p></th><th class="cl-4ad226a1"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">date_test</span></p></th><th class="cl-4ad226aa"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">test</span></p></th><th class="cl-4ad226ab"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">target</span></p></th><th class="cl-4ad226b4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-4ad226b5"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226be"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">f21708</span></p></td><td class="cl-4ad226bf"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">48b00313</span></p></td><td class="cl-4ad226c8"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-07</span></p></td><td class="cl-4ad226d2"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226d3"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS.1</span></p></td><td class="cl-4ad226d4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4ad226b5"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226be"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">f21708</span></p></td><td class="cl-4ad226bf"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">48b00313</span></p></td><td class="cl-4ad226c8"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-07</span></p></td><td class="cl-4ad226d2"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226d3"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue IgG</span></p></td><td class="cl-4ad226d4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4ad226b5"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226be"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">f21708</span></p></td><td class="cl-4ad226bf"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">48b00313</span></p></td><td class="cl-4ad226c8"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-07</span></p></td><td class="cl-4ad226d2"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226d3"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue IgM</span></p></td><td class="cl-4ad226d4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">P</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4ad226b5"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226be"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">6a47a3</span></p></td><td class="cl-4ad226bf"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">ca5e865b</span></p></td><td class="cl-4ad226c8"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-15</span></p></td><td class="cl-4ad226d2"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226d3"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS.1</span></p></td><td class="cl-4ad226d4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4ad226b5"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226be"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">6a47a3</span></p></td><td class="cl-4ad226bf"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">ca5e865b</span></p></td><td class="cl-4ad226c8"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-15</span></p></td><td class="cl-4ad226d2"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226d3"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue IgG</span></p></td><td class="cl-4ad226d4"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4ad226dc"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Feveria General Hospital</span></p></td><td class="cl-4ad226dd"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">6a47a3</span></p></td><td class="cl-4ad226e6"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">ca5e865b</span></p></td><td class="cl-4ad226e7"><p class="cl-4ad1ecf8"><span class="cl-4acbea9c">2024-06-15</span></p></td><td class="cl-4ad226f0"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue NS1/IgG/IgM</span></p></td><td class="cl-4ad226f1"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">Dengue IgM</span></p></td><td class="cl-4ad226fa"><p class="cl-4ad1ecee"><span class="cl-4acbea9c">P</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-f8f0179c{}.cl-f8df3440{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-f8e76bb0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f8e76bba{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f8e7a3e6{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a3f0{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a3fa{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a3fb{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a404{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a405{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a418{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a422{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a423{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a424{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a42c{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a436{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a437{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a438{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a440{width:1.975in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a44a{width:1.219in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a44b{width:0.982in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a454{width:1.067in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a45e{width:1.746in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a45f{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f8e7a460{width:0.65in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-f8f0179c"><thead><tr style="overflow-wrap:break-word;"><th class="cl-f8e7a3e6"><p class="cl-f8e76bb0"><span class="cl-f8df3440">laboratory_name</span></p></th><th class="cl-f8e7a3f0"><p class="cl-f8e76bb0"><span class="cl-f8df3440">notification_id</span></p></th><th class="cl-f8e7a3fa"><p class="cl-f8e76bb0"><span class="cl-f8df3440">sample_id</span></p></th><th class="cl-f8e7a3fb"><p class="cl-f8e76bba"><span class="cl-f8df3440">date_test</span></p></th><th class="cl-f8e7a404"><p class="cl-f8e76bb0"><span class="cl-f8df3440">test</span></p></th><th class="cl-f8e7a405"><p class="cl-f8e76bb0"><span class="cl-f8df3440">target</span></p></th><th class="cl-f8e7a418"><p class="cl-f8e76bb0"><span class="cl-f8df3440">value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a422"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a423"><p class="cl-f8e76bb0"><span class="cl-f8df3440">f21708</span></p></td><td class="cl-f8e7a424"><p class="cl-f8e76bb0"><span class="cl-f8df3440">48b00313</span></p></td><td class="cl-f8e7a42c"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-07</span></p></td><td class="cl-f8e7a436"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a437"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS.1</span></p></td><td class="cl-f8e7a438"><p class="cl-f8e76bb0"><span class="cl-f8df3440">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a422"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a423"><p class="cl-f8e76bb0"><span class="cl-f8df3440">f21708</span></p></td><td class="cl-f8e7a424"><p class="cl-f8e76bb0"><span class="cl-f8df3440">48b00313</span></p></td><td class="cl-f8e7a42c"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-07</span></p></td><td class="cl-f8e7a436"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a437"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue IgG</span></p></td><td class="cl-f8e7a438"><p class="cl-f8e76bb0"><span class="cl-f8df3440">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a422"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a423"><p class="cl-f8e76bb0"><span class="cl-f8df3440">f21708</span></p></td><td class="cl-f8e7a424"><p class="cl-f8e76bb0"><span class="cl-f8df3440">48b00313</span></p></td><td class="cl-f8e7a42c"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-07</span></p></td><td class="cl-f8e7a436"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a437"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue IgM</span></p></td><td class="cl-f8e7a438"><p class="cl-f8e76bb0"><span class="cl-f8df3440">P</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a422"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a423"><p class="cl-f8e76bb0"><span class="cl-f8df3440">6a47a3</span></p></td><td class="cl-f8e7a424"><p class="cl-f8e76bb0"><span class="cl-f8df3440">ca5e865b</span></p></td><td class="cl-f8e7a42c"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-15</span></p></td><td class="cl-f8e7a436"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a437"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS.1</span></p></td><td class="cl-f8e7a438"><p class="cl-f8e76bb0"><span class="cl-f8df3440">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a422"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a423"><p class="cl-f8e76bb0"><span class="cl-f8df3440">6a47a3</span></p></td><td class="cl-f8e7a424"><p class="cl-f8e76bb0"><span class="cl-f8df3440">ca5e865b</span></p></td><td class="cl-f8e7a42c"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-15</span></p></td><td class="cl-f8e7a436"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a437"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue IgG</span></p></td><td class="cl-f8e7a438"><p class="cl-f8e76bb0"><span class="cl-f8df3440">N</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f8e7a440"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Feveria General Hospital</span></p></td><td class="cl-f8e7a44a"><p class="cl-f8e76bb0"><span class="cl-f8df3440">6a47a3</span></p></td><td class="cl-f8e7a44b"><p class="cl-f8e76bb0"><span class="cl-f8df3440">ca5e865b</span></p></td><td class="cl-f8e7a454"><p class="cl-f8e76bba"><span class="cl-f8df3440">2024-06-15</span></p></td><td class="cl-f8e7a45e"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue NS1/IgG/IgM</span></p></td><td class="cl-f8e7a45f"><p class="cl-f8e76bb0"><span class="cl-f8df3440">Dengue IgM</span></p></td><td class="cl-f8e7a460"><p class="cl-f8e76bb0"><span class="cl-f8df3440">P</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -864,24 +881,24 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many columns in the laboratory data frame are recognised by R to be date columns?
-<div id="radio_YFEHRVKOPK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YFEHRVKOPK" value=""> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_YFEHRVKOPK" value="answer"> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_YFEHRVKOPK" value=""> <span>2</span></label>
+<div id="radio_ZDJDPMOHDW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZDJDPMOHDW" value=""> <span>0</span></label><label><input type="radio" autocomplete="off" name="radio_ZDJDPMOHDW" value="answer"> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_ZDJDPMOHDW" value=""> <span>2</span></label>
 </div>
 How many columns in the laboratory data frame have complete data?
-<div id="radio_JCNYOUIXEC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JCNYOUIXEC" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_JCNYOUIXEC" value=""> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_JCNYOUIXEC" value="answer"> <span>7 (all of them!)</span></label>
+<div id="radio_XLIKQNRANU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XLIKQNRANU" value=""> <span>1</span></label><label><input type="radio" autocomplete="off" name="radio_XLIKQNRANU" value=""> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_XLIKQNRANU" value="answer"> <span>7 (all of them!)</span></label>
 </div>
 Which test detects multiple targets (and therefore has multiple rows per sample)?
-<div id="radio_DXYLBWZQJE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DXYLBWZQJE" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_DXYLBWZQJE" value="answer"> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_DXYLBWZQJE" value=""> <span>Yellow Fever</span></label><label><input type="radio" autocomplete="off" name="radio_DXYLBWZQJE" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_DXYLBWZQJE" value=""> <span>Typhoid Fever</span></label>
+<div id="radio_VGVUVVWMPD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VGVUVVWMPD" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_VGVUVVWMPD" value="answer"> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_VGVUVVWMPD" value=""> <span>Yellow Fever</span></label><label><input type="radio" autocomplete="off" name="radio_VGVUVVWMPD" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_VGVUVVWMPD" value=""> <span>Typhoid Fever</span></label>
 </div>
 How many possible test result values are there in the column <code>value</code>?
-<div id="radio_TXHWVNBJWZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TXHWVNBJWZ" value="answer"> <span>5</span></label><label><input type="radio" autocomplete="off" name="radio_TXHWVNBJWZ" value=""> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_TXHWVNBJWZ" value=""> <span>4</span></label>
+<div id="radio_PFGFMJZRZR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFGFMJZRZR" value="answer"> <span>5</span></label><label><input type="radio" autocomplete="off" name="radio_PFGFMJZRZR" value=""> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_PFGFMJZRZR" value=""> <span>4</span></label>
 </div>
-What is NOT a possible test result for the stool culture test which detects V. cholerae bacteria’?)
-<div id="radio_OQNXVMQACQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OQNXVMQACQ" value="answer"> <span>P</span></label><label><input type="radio" autocomplete="off" name="radio_OQNXVMQACQ" value=""> <span>P01</span></label><label><input type="radio" autocomplete="off" name="radio_OQNXVMQACQ" value=""> <span>P0139</span></label><label><input type="radio" autocomplete="off" name="radio_OQNXVMQACQ" value=""> <span>N</span></label><label><input type="radio" autocomplete="off" name="radio_OQNXVMQACQ" value=""> <span>I</span></label>
+What is NOT a possible test result for the stool culture test which detects V. cholerae bacteria?
+<div id="radio_IFVPTTMACT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IFVPTTMACT" value="answer"> <span>P</span></label><label><input type="radio" autocomplete="off" name="radio_IFVPTTMACT" value=""> <span>P01</span></label><label><input type="radio" autocomplete="off" name="radio_IFVPTTMACT" value=""> <span>P0139</span></label><label><input type="radio" autocomplete="off" name="radio_IFVPTTMACT" value=""> <span>N</span></label><label><input type="radio" autocomplete="off" name="radio_IFVPTTMACT" value=""> <span>I</span></label>
 </div>
 </div>
 </div>
@@ -967,7 +984,9 @@ Click to see the solution (try it yourself first!)
 <h2 class="anchored" data-anchor-id="step-4.-clean-and-describe-the-notification-data">Step 4. Clean and describe the notification data</h2>
 <p>You now know that the notification data (<code>data_notif_raw</code>) contains information about suspected cases, alongside basic demographic information (age, sex, pregnancy, district of residence), and information about their onset date, date reported by the health facility, and outcome. Some columns need cleaning before further analysis, due to variations in spelling of categorical values and some date columns not being recognized as dates.</p>
 <p>You will now start writing longer chunks of code to clean data, using various <code>{dplyr}</code> functions chained together with pipes (which look like this: |&gt;).</p>
-<p><strong>NOTE ON PIPES</strong>: Pipes allow you to perform several operations in one smooth sequence, by “chaining” different functions together. The output from one function becomes the input for the next. If you need more information on piping, please refer to the <a href="https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline">Epi R Handbook</a>. Note that this exercise uses the base pipe (|&gt;) rather than the magrittr pipe (%&gt;%), as it is faster and does not require package installation. Use the magrittr pipe if you prefer it.</p>
+<p><strong>NOTE ON PIPES</strong>: Pipes allow you to perform several operations in one smooth sequence, by “chaining” different functions together. The output from one function becomes the input for the next.</p>
+<p>If you need more information on piping, please refer to the <a href="https://www.epirhandbook.com/en/new_pages/cleaning.html#cleaning-pipeline">Epi R Handbook</a>.</p>
+<p>Note that this exercise uses the <strong>base pipe</strong> (<code>|&gt;</code>) rather than the <strong>magrittr pipe</strong> (<code>%&gt;%</code>), as it is faster and does not require package installation. Use the magrittr pipe if you prefer it.</p>
 <section id="step-4.1-clean-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="step-4.1-clean-the-data">Step 4.1 Clean the data</h3>
 <section id="task-a-clean-your-column-names-and-select-columns-for-analysis" class="level4">
@@ -996,7 +1015,7 @@ Click to read a hint
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data_notif <span class="ot">&lt;-</span> data_notif_raw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then build on this code by adding in additional functions, chained together with a pipe. This lets you perform several operations in one smooth sequence. First, you’ll use <code>clean_names()</code> to standardize all your column names. It automatically replaces spaces and special characters with underscores and converts everything to lowercase, making names easier to work with. Then, you can use <code>rename()</code> to give a column a new name. Just remember, when you use rename(), the column will already have its <code>clean_names()</code> version.</p>
+<p>Then build on this code by adding in additional functions, chained together with a pipe. This lets you perform several operations in one smooth sequence. First, you’ll use <code>clean_names()</code> to standardize all your column names. It automatically replaces spaces and special characters with underscores and converts everything to lowercase, making names easier to work with. Then, you can use <code>rename()</code> to give a column a new name. Just remember, when you use <code>rename()</code>, the column will already have its <code>clean_names()</code> version.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data_notif <span class="ot">&lt;-</span> data_notif_raw <span class="sc">|&gt;</span> </span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">|&gt;</span> </span>
@@ -1114,12 +1133,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How are the dates currently formatted?
-<div id="radio_DYONJPNUUG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DYONJPNUUG" value=""> <span>day-month-year</span></label><label><input type="radio" autocomplete="off" name="radio_DYONJPNUUG" value="answer"> <span>year-month-day</span></label><label><input type="radio" autocomplete="off" name="radio_DYONJPNUUG" value=""> <span>month-day-year</span></label><label><input type="radio" autocomplete="off" name="radio_DYONJPNUUG" value=""> <span>year-day-month</span></label>
+<div id="radio_OLXAGZYPBZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OLXAGZYPBZ" value=""> <span>day-month-year</span></label><label><input type="radio" autocomplete="off" name="radio_OLXAGZYPBZ" value="answer"> <span>year-month-day</span></label><label><input type="radio" autocomplete="off" name="radio_OLXAGZYPBZ" value=""> <span>month-day-year</span></label><label><input type="radio" autocomplete="off" name="radio_OLXAGZYPBZ" value=""> <span>year-day-month</span></label>
 </div>
 Which <code>mutate()</code> function should you use to convert the date_report column into a date class?
-<div id="radio_EMNLILQIZA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EMNLILQIZA" value="answer"> <span>mutate(date_report = ymd(date_report))</span></label><label><input type="radio" autocomplete="off" name="radio_EMNLILQIZA" value=""> <span>mutate(date_report = dmy(date_report))</span></label><label><input type="radio" autocomplete="off" name="radio_EMNLILQIZA" value=""> <span>mutate(date_report = mdy(date_report))</span></label>
+<div id="radio_ULXVAGJNPE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ULXVAGJNPE" value="answer"> <span>mutate(date_report = ymd(date_report))</span></label><label><input type="radio" autocomplete="off" name="radio_ULXVAGJNPE" value=""> <span>mutate(date_report = dmy(date_report))</span></label><label><input type="radio" autocomplete="off" name="radio_ULXVAGJNPE" value=""> <span>mutate(date_report = mdy(date_report))</span></label>
 </div>
 </div>
 </div>
@@ -1171,7 +1190,7 @@ Click to see the solution (try it yourself first!)
 </section>
 <section id="task-d-check-for-duplicates" class="level4">
 <h4 class="anchored" data-anchor-id="task-d-check-for-duplicates"><strong>Task D: Check for duplicates</strong></h4>
-<p>Your colleagues tell you that each notification_id represents one suspected case. You now want to <strong>create a table to check if <code>notification_id</code> is duplicated across rows in you data</strong>.</p>
+<p>Your colleagues tell you that each <code>notification_id</code> represents one suspected case. You now want to <strong>create a table to check if <code>notification_id</code> is duplicated across rows in you data</strong>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1184,12 +1203,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Does one row in the notification data equate to one case?
-<div id="radio_SIKLHYBFNE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SIKLHYBFNE" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_SIKLHYBFNE" value=""> <span>No</span></label>
+<div id="radio_ALXIOGDMWZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ALXIOGDMWZ" value="answer"> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_ALXIOGDMWZ" value=""> <span>No</span></label>
 </div>
 Do you need to deduplicate your data for epidemiological analysis of cases?
-<div id="radio_LJDTMVTGCU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LJDTMVTGCU" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_LJDTMVTGCU" value="answer"> <span>No</span></label>
+<div id="radio_MZMEXEZFMR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MZMEXEZFMR" value=""> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_MZMEXEZFMR" value="answer"> <span>No</span></label>
 </div>
 </div>
 </div>
@@ -1222,7 +1241,7 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>First, pipe from the surveillance data into the <code>count()</code> function, giving the <code>notification_id</code> column as the only argument. This creates a table that counts the number of rows per unique value of <code>sample_id</code>, shown in a new column <code>n</code>. You can see for example in this excerpt that there is only one row per each of these 6 <code>notification_id</code>s.</p>
+<p>First, pipe from the notification data into the <code>count()</code> function, giving the <code>notification_id</code> column as the only argument. This creates a table that counts the number of rows per unique value of <code>notification_id</code>, shown in a new column <code>n</code>. You can see for example in this excerpt that there is only one row per each of these 6 <code>notification_id</code>s.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data_notif <span class="sc">|&gt;</span> </span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(notification_id) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1238,7 +1257,7 @@ Click to see the solution (try it yourself first!)
 6          019045 1</code></pre>
 </div>
 </div>
-<p>Then tabulate the new column <code>n</code> with the <code>tabyl()</code>, which shows that there is only one row per unique notification_id. This means that one row equates to one case, and no further deduplication is needed.</p>
+<p>Then tabulate the new column <code>n</code> with the <code>tabyl()</code>, which shows that there is only one row per unique <code>notification_id</code>. This means that one row equates to one case, and no further deduplication is needed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>data_notif <span class="sc">|&gt;</span> </span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(notification_id) <span class="sc">|&gt;</span> </span>
@@ -1270,12 +1289,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which disease was most commonly diagnosed by clinics in Feveria in 2024?
-<div id="radio_ZFMQIPCUHE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZFMQIPCUHE" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_ZFMQIPCUHE" value="answer"> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_ZFMQIPCUHE" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_ZFMQIPCUHE" value=""> <span>Typhoid Fever</span></label><label><input type="radio" autocomplete="off" name="radio_ZFMQIPCUHE" value=""> <span>Yellow Fever</span></label>
+<div id="radio_XEPFLINWUZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XEPFLINWUZ" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_XEPFLINWUZ" value="answer"> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_XEPFLINWUZ" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_XEPFLINWUZ" value=""> <span>Typhoid Fever</span></label><label><input type="radio" autocomplete="off" name="radio_XEPFLINWUZ" value=""> <span>Yellow Fever</span></label>
 </div>
 Which disease was least commonly diagnosed by clinics in Feveria in 2024?
-<div id="radio_UGKYJZDIGS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UGKYJZDIGS" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_UGKYJZDIGS" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_UGKYJZDIGS" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_UGKYJZDIGS" value="answer"> <span>Typhoid Fever</span></label><label><input type="radio" autocomplete="off" name="radio_UGKYJZDIGS" value=""> <span>Yellow Fever</span></label>
+<div id="radio_RHIPIVMAGK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RHIPIVMAGK" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_RHIPIVMAGK" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_RHIPIVMAGK" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_RHIPIVMAGK" value="answer"> <span>Typhoid Fever</span></label><label><input type="radio" autocomplete="off" name="radio_RHIPIVMAGK" value=""> <span>Yellow Fever</span></label>
 </div>
 </div>
 </div>
@@ -1301,7 +1320,7 @@ Click to see the solution (try it yourself first!)
            dengue 273 0.27659574
           malaria 533 0.54002026
           typhoid  35 0.03546099
-     yellow_fever 100 0.10131712</code></pre>
+     yellow fever 100 0.10131712</code></pre>
 </div>
 </div>
 </div>
@@ -1311,8 +1330,8 @@ Click to see the solution (try it yourself first!)
 <section id="task-b-count-the-number-of-suspected-cases-by-disease-and-district-of-residence" class="level4">
 <h4 class="anchored" data-anchor-id="task-b-count-the-number-of-suspected-cases-by-disease-and-district-of-residence"><strong>Task B: Count the number of suspected cases by disease and district of residence</strong></h4>
 <p><strong>Use <code>tabyl()</code> to cross-tabulate the disease and district of residence columns.</strong></p>
-<p>Build on your table by adding various <code>adorn</code> functions from the <code>{janitor}</code> package, to see percentage distributions, e.g.&nbsp;<code>adorn_percentages()</code>, <code>adorn_pct_formatting()</code>, and <code>adorn_ns()</code></p>
-<p>Type the name of the function after a ? in your console (e.g.&nbsp;<code>?adorn_ns</code>) to see the relevant Help pages. You can also look at the <a href="https://epirhandbook.com/en/new_pages/tables_descriptive.html#tbl_janitor">section about {janitor} in the Epi R Handbook</a> for more explanation of <code>adorn_xxx()</code> functions.</p>
+<p>Build on your table by adding various <code>adorn</code> functions from the <code>{janitor}</code> package, to see percentage distributions, e.g. <code>adorn_percentages()</code>, <code>adorn_pct_formatting()</code>, and <code>adorn_ns()</code></p>
+<p>Type the name of the function after a ? in your console (e.g. <code>?adorn_ns</code>) to see the relevant Help pages. You can also look at the <a href="https://epirhandbook.com/en/new_pages/tables_descriptive.html#tbl_janitor">section about {janitor} in the Epi R Handbook</a> for more explanation of <code>adorn_xxx()</code> functions.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1325,16 +1344,16 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which district reported the most vector-borne disease in 2024 (malaria, dengue, yellow fever)?
-<div id="radio_HQEUDSSLEQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HQEUDSSLEQ" value="answer"> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_HQEUDSSLEQ" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_HQEUDSSLEQ" value=""> <span>Kasara</span></label>
+<div id="radio_QIWAITFFVS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QIWAITFFVS" value="answer"> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_QIWAITFFVS" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_QIWAITFFVS" value=""> <span>Kasara</span></label>
 </div>
 Which district reported the most diarrhoeal disease in 2024 (cholera, typhoid fever)?
-<div id="radio_VTAXZPLSJE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VTAXZPLSJE" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_VTAXZPLSJE" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_VTAXZPLSJE" value=""> <span>Kasara</span></label>
+<div id="radio_QOGXAKVEQT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QOGXAKVEQT" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_QOGXAKVEQT" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_QOGXAKVEQT" value=""> <span>Kasara</span></label>
 </div>
 What factors contribute to increased diarrhoeal disease in this specific district (selected in previous question)?
-<div id="radio_TTZLAAYJZC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TTZLAAYJZC" value="answer"> <span>Unreliable water and sanitation infrastructure</span></label><label><input type="radio" autocomplete="off" name="radio_TTZLAAYJZC" value=""> <span>Overcrowding of mosquitoes</span></label><label><input type="radio" autocomplete="off" name="radio_TTZLAAYJZC" value=""> <span>We don't know</span></label>
+<div id="radio_ILBUQFTINE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ILBUQFTINE" value="answer"> <span>Unreliable water and sanitation infrastructure</span></label><label><input type="radio" autocomplete="off" name="radio_ILBUQFTINE" value=""> <span>Overcrowding of mosquitoes</span></label><label><input type="radio" autocomplete="off" name="radio_ILBUQFTINE" value=""> <span>We don't know</span></label>
 </div>
 </div>
 </div>
@@ -1351,7 +1370,8 @@ Click to read a hint
 </div>
 <div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Here is some code to get you started. It cross-tabulates <code>disease_notified</code> and <code>residential_district</code> with <code>tabyl()</code>, then adding <code>adorn_percentages()</code> converts these numbers to percentages with many decimals. You then need to pipe into <code>adorn_pct_formatting()</code> to convert into actual percentage formatting, and then <code>adorn_ns()</code> to add numbers back in in parentheses. Note that <code>adorn_xxx()</code> functions need to be applied in a specific order!</p>
+<p>Here is some code to get you started. It cross-tabulates <code>disease_notified</code> and <code>residential_district</code> with <code>tabyl()</code>, then adding <code>adorn_percentages()</code> converts these numbers to percentages with many decimals. You then need to pipe into <code>adorn_pct_formatting()</code> to convert into actual percentage formatting, and then <code>adorn_ns()</code> to add numbers back in in parentheses.</p>
+<p>Note that <code>adorn_xxx()</code> functions need to be applied in a specific order!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabyl</span>(data_notif, disease_notified, residential_district) <span class="sc">|&gt;</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">adorn_percentages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1384,7 +1404,7 @@ Click to see the solution (try it yourself first!)
            dengue       9.5% (26) 17.6%  (48) 72.9% (199)
           malaria      13.7% (73) 19.9% (106) 66.4% (354)
           typhoid      68.6% (24) 31.4%  (11)  0.0%   (0)
-     yellow_fever      11.0% (11) 21.0%  (21) 68.0%  (68)</code></pre>
+     yellow fever      11.0% (11) 21.0%  (21) 68.0%  (68)</code></pre>
 </div>
 </div>
 </div>
@@ -1453,7 +1473,7 @@ Click to see the solution (try it yourself first!)
 <h4 class="anchored" data-anchor-id="task-a-review-the-number-of-samples-with-multiple-rows"><strong>Task A: Review the number of samples with multiple rows</strong></h4>
 <p>We already know that some samples have multiple rows, and that this is because the dengue assay has three targets, with one row per target result.</p>
 <p>Now <strong>find the number of samples with multiple rows</strong>.</p>
-<p>Do this as you did with the notification data, using the <code>data_lab</code> object: first count the number of rows per sample, then create a table to show the distribution of row numbers. Keep in mind that each sample is identified by a sample ID.</p>
+<p>Do this as you did with the notification data, using the <code>data_lab</code> object: first count the number of rows per sample, then create a table to show the distribution of row numbers. Keep in mind that each sample is identified by a <code>sample_ID</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1466,8 +1486,8 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many samples (unique <code>sample_id</code>s) are repeated across three rows?
-<div id="radio_OQWRMVHZGG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OQWRMVHZGG" value=""> <span>200</span></label><label><input type="radio" autocomplete="off" name="radio_OQWRMVHZGG" value="answer"> <span>215</span></label><label><input type="radio" autocomplete="off" name="radio_OQWRMVHZGG" value=""> <span>230</span></label>
+<div id="radio_NRABXOZXCK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NRABXOZXCK" value=""> <span>200</span></label><label><input type="radio" autocomplete="off" name="radio_NRABXOZXCK" value="answer"> <span>215</span></label><label><input type="radio" autocomplete="off" name="radio_NRABXOZXCK" value=""> <span>230</span></label>
 </div>
 </div>
 </div>
@@ -1511,7 +1531,7 @@ Click to see the solution (try it yourself first!)
  3 215 0.2432127</code></pre>
 </div>
 </div>
-<p>You can even double-check that this only applies to the dengue assay by adding in the <code>disease</code> column to the calculation. You can see that it is only the dengue test that has 3 rows per sample.</p>
+<p>You can even double-check that this only applies to the dengue assay by adding in the <code>test</code> column to the calculation. You can see that it is only the dengue test that has 3 rows per sample.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>data_lab <span class="sc">|&gt;</span> </span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(test, sample_id) <span class="sc">|&gt;</span> </span>
@@ -1530,11 +1550,11 @@ Click to see the solution (try it yourself first!)
 </div>
 </section>
 <section id="task-b-consolidate-to-one-row-per-sample_id-prioritizing-positive-results" class="level4">
-<h4 class="anchored" data-anchor-id="task-b-consolidate-to-one-row-per-sample_id-prioritizing-positive-results"><strong>Task B: Consolidate to one row per sample_id, prioritizing positive results</strong></h4>
+<h4 class="anchored" data-anchor-id="task-b-consolidate-to-one-row-per-sample_id-prioritizing-positive-results"><strong>Task B: Consolidate to one row per <code>sample_id</code>, prioritizing positive results</strong></h4>
 <p>As you saw in section 3.2, your dengue test provides results for three different targets: IgG, IgM, and NS.1. The results for each of these targets can be either negative or positive. However, to simplify and consolidate your data, you want to assign a single negative or positive label to each sample, to indicate if the sample represents current infection.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-4c7bcccc{}.cl-4c6ef3a8{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-4c741ef0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-4c741f04{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-4c745000{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c74500a{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745014{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c74501e{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c74501f{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745028{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745029{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745032{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c74503c{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c74503d{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745046{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4c745047{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-4c7bcccc"><thead><tr style="overflow-wrap:break-word;"><th class="cl-4c745000"><p class="cl-4c741ef0"><span class="cl-4c6ef3a8">target</span></p></th><th class="cl-4c74500a"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">Negative</span></p></th><th class="cl-4c745014"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">Positive</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-4c74501e"><p class="cl-4c741ef0"><span class="cl-4c6ef3a8">Dengue IgG</span></p></td><td class="cl-4c74501f"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">110</span></p></td><td class="cl-4c745028"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">105</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4c745029"><p class="cl-4c741ef0"><span class="cl-4c6ef3a8">Dengue IgM</span></p></td><td class="cl-4c745032"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">105</span></p></td><td class="cl-4c74503c"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">110</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4c74503d"><p class="cl-4c741ef0"><span class="cl-4c6ef3a8">Dengue NS.1</span></p></td><td class="cl-4c745046"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">139</span></p></td><td class="cl-4c745047"><p class="cl-4c741f04"><span class="cl-4c6ef3a8">76</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-fa93e48e{}.cl-fa852322{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-fa8b24d4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-fa8b24e8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-fa8b6a2a{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a3e{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a48{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a49{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a52{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a5c{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a5d{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a66{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a70{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a71{width:1.202in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a7a{width:0.888in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fa8b6a7b{width:0.82in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-fa93e48e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-fa8b6a2a"><p class="cl-fa8b24d4"><span class="cl-fa852322">target</span></p></th><th class="cl-fa8b6a3e"><p class="cl-fa8b24e8"><span class="cl-fa852322">Negative</span></p></th><th class="cl-fa8b6a48"><p class="cl-fa8b24e8"><span class="cl-fa852322">Positive</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-fa8b6a49"><p class="cl-fa8b24d4"><span class="cl-fa852322">Dengue IgG</span></p></td><td class="cl-fa8b6a52"><p class="cl-fa8b24e8"><span class="cl-fa852322">110</span></p></td><td class="cl-fa8b6a5c"><p class="cl-fa8b24e8"><span class="cl-fa852322">105</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-fa8b6a5d"><p class="cl-fa8b24d4"><span class="cl-fa852322">Dengue IgM</span></p></td><td class="cl-fa8b6a66"><p class="cl-fa8b24e8"><span class="cl-fa852322">105</span></p></td><td class="cl-fa8b6a70"><p class="cl-fa8b24e8"><span class="cl-fa852322">110</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-fa8b6a71"><p class="cl-fa8b24d4"><span class="cl-fa852322">Dengue NS.1</span></p></td><td class="cl-fa8b6a7a"><p class="cl-fa8b24e8"><span class="cl-fa852322">139</span></p></td><td class="cl-fa8b6a7b"><p class="cl-fa8b24e8"><span class="cl-fa852322">76</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 <p>Your colleague Ben, who works in the lab, advises you on the cleaning as follows:</p>
@@ -1576,7 +1596,9 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Here is the code to filter out the dengue IgG results, and then consolidate the test result within each group of rows with the same <code>sample_id</code>, prioritizing positive results. You need to specify <code>desc</code> within <code>arrange()</code>, as this means that the results will be in reverse alphabetical order, meaning P will be at the top. Also, add the <code>ungroup()</code> function at the end so that the new data is not grouped, which could confuse further analyses.</p>
+<p>Here is the code to filter out the dengue IgG results, and then consolidate the test result within each group of rows with the same <code>sample_id</code>, prioritizing positive results.</p>
+<p>You need to specify <code>desc</code> within <code>arrange()</code>, as this means that the results will be in reverse alphabetical order, meaning P will be at the top.</p>
+<p>Also, add the <code>ungroup()</code> function at the end so that the new data is not grouped, which could confuse further analyses.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>data_lab_tests <span class="ot">&lt;-</span> data_lab <span class="sc">|&gt;</span> </span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(target <span class="sc">!=</span> <span class="st">"Dengue IgG"</span>) <span class="sc">|&gt;</span> </span>
@@ -1585,7 +1607,8 @@ Click to see the solution (try it yourself first!)
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can then double-check that the new object <code>data_lab_tests</code> has only one row per test, using the combination of <code>count()</code> and <code>tabyl()</code> like you did in Task A. This table shows you that all unique sample IDs are only present in one row each:</p>
+<p>You can then double-check that the new object <code>data_lab_tests</code> has only one row per test, using the combination of <code>count()</code> and <code>tabyl()</code> like you did in Task A.</p>
+<p>This table shows you that all unique sample IDs are only present in one row each:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>data_lab_tests <span class="sc">|&gt;</span> </span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sample_id) <span class="sc">|&gt;</span> </span>
@@ -1600,8 +1623,9 @@ Click to see the solution (try it yourself first!)
 </div>
 </section>
 <section id="task-c-deduplicate-to-one-row-per-notification_id-prioritizing-positive-results" class="level4">
-<h4 class="anchored" data-anchor-id="task-c-deduplicate-to-one-row-per-notification_id-prioritizing-positive-results"><strong>Task C: Deduplicate to one row per notification_id, prioritizing positive results</strong></h4>
-<p>Next, you check the number of tests per notification ID in your new consolidated data. You can see that there are 26 rows with the same notification id as another row, but only among cases tested with whole blood microscopy for malaria.</p>
+<h4 class="anchored" data-anchor-id="task-c-deduplicate-to-one-row-per-notification_id-prioritizing-positive-results"><strong>Task C: Deduplicate to one row per <code>notification_id</code>, prioritizing positive results</strong></h4>
+<p>Next, you check the number of tests per notification ID in your new consolidated data.</p>
+<p>You can see that there are 26 rows with the same <code>notification_id</code> as another row, but only among cases tested with whole blood microscopy for malaria.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>data_lab_tests <span class="sc">|&gt;</span> </span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(test, notification_id) <span class="sc">|&gt;</span> </span>
@@ -1639,19 +1663,25 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which statement about the lab data is correct?
-<div id="radio_CMGWQGWOEJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CMGWQGWOEJ" value=""> <span>All cases of different diseases get retested</span></label><label><input type="radio" autocomplete="off" name="radio_CMGWQGWOEJ" value="answer"> <span>Some malaria cases get retested</span></label><label><input type="radio" autocomplete="off" name="radio_CMGWQGWOEJ" value=""> <span>All malaria cases get retested</span></label>
+<div id="radio_FICKTZZRPR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FICKTZZRPR" value=""> <span>All cases of different diseases get retested</span></label><label><input type="radio" autocomplete="off" name="radio_FICKTZZRPR" value="answer"> <span>Some malaria cases get retested</span></label><label><input type="radio" autocomplete="off" name="radio_FICKTZZRPR" value=""> <span>All malaria cases get retested</span></label>
 </div>
 Will you need to deduplicate the lab data, to link with the notification data?
-<div id="radio_UOFAGKGKAC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UOFAGKGKAC" value="answer"> <span>Yes - we need one row representing the lab result per notification</span></label><label><input type="radio" autocomplete="off" name="radio_UOFAGKGKAC" value=""> <span>No - the data is sufficiently deduplicated</span></label>
+<div id="radio_YVFCCZHVWY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YVFCCZHVWY" value="answer"> <span>Yes - we need one row representing the lab result per notification</span></label><label><input type="radio" autocomplete="off" name="radio_YVFCCZHVWY" value=""> <span>No - the data is sufficiently deduplicated</span></label>
 </div>
 </div>
 </div>
 </div>
 <p>If you answered that you need to deduplicate, you are correct!</p>
-<p><strong>Deduplicate your data to have one row per notification ID</strong>, prioritizing positive results, so that you can link to the notification data.</p>
-<p>To do this, follow a similar process as you did in Task B, using the data frame produced by task B: - Group by <code>notification_id</code> - Arrange by the test result value so that values starting with P are prioritized in the top row, followed by N (negative), and then I (indeterminate). - Then keep the first row within each group of <code>notification_id</code>s, using <code>slice()</code>. - When doing this, create a new object called <code>data_lab_cases</code>.</p>
+<p><strong>Deduplicate your data to have one row per <code>notification ID</code></strong>, prioritizing positive results, so that you can link to the notification data.</p>
+<p>To do this, follow a similar process as you did in Task B, using the data frame produced by task B:</p>
+<ul>
+<li>Group by <code>notification_id</code></li>
+<li>Arrange by the test result value so that values starting with P are prioritized in the top row, followed by N (negative), and then I (indeterminate).</li>
+<li>Then keep the first row within each group of <code>notification_id</code>s, using <code>slice()</code>.</li>
+<li>When doing this, create a new object called <code>data_lab_cases</code>.</li>
+</ul>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1705,20 +1735,20 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which object should you use to analyse tests?
-<div id="radio_YASOIXSTBC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YASOIXSTBC" value="answer"> <span>data_lab_tests</span></label><label><input type="radio" autocomplete="off" name="radio_YASOIXSTBC" value=""> <span>data_lab_cases</span></label><label><input type="radio" autocomplete="off" name="radio_YASOIXSTBC" value=""> <span>neither</span></label>
+<div id="radio_MJQQXJDNAH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MJQQXJDNAH" value="answer"> <span>data_lab_tests</span></label><label><input type="radio" autocomplete="off" name="radio_MJQQXJDNAH" value=""> <span>data_lab_cases</span></label><label><input type="radio" autocomplete="off" name="radio_MJQQXJDNAH" value=""> <span>neither</span></label>
 </div>
 How many tests were conducted to test for malaria (via whole blood microscopy)?
-<div id="radio_RFXHPZGNOB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RFXHPZGNOB" value=""> <span>215</span></label><label><input type="radio" autocomplete="off" name="radio_RFXHPZGNOB" value="answer"> <span>503</span></label><label><input type="radio" autocomplete="off" name="radio_RFXHPZGNOB" value=""> <span>88</span></label><label><input type="radio" autocomplete="off" name="radio_RFXHPZGNOB" value=""> <span>190</span></label>
+<div id="radio_YSXQBLDMDE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YSXQBLDMDE" value=""> <span>215</span></label><label><input type="radio" autocomplete="off" name="radio_YSXQBLDMDE" value="answer"> <span>503</span></label><label><input type="radio" autocomplete="off" name="radio_YSXQBLDMDE" value=""> <span>88</span></label><label><input type="radio" autocomplete="off" name="radio_YSXQBLDMDE" value=""> <span>190</span></label>
 </div>
 What percentage of tests for cholera (via stool culture) were positive?
-<div id="radio_HFLQWRFNUI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HFLQWRFNUI" value=""> <span>21%</span></label><label><input type="radio" autocomplete="off" name="radio_HFLQWRFNUI" value=""> <span>11%</span></label><label><input type="radio" autocomplete="off" name="radio_HFLQWRFNUI" value="answer"> <span>84%</span></label><label><input type="radio" autocomplete="off" name="radio_HFLQWRFNUI" value=""> <span>87%</span></label>
+<div id="radio_EHYTAHPMLL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EHYTAHPMLL" value=""> <span>21%</span></label><label><input type="radio" autocomplete="off" name="radio_EHYTAHPMLL" value=""> <span>11%</span></label><label><input type="radio" autocomplete="off" name="radio_EHYTAHPMLL" value="answer"> <span>84%</span></label><label><input type="radio" autocomplete="off" name="radio_EHYTAHPMLL" value=""> <span>87%</span></label>
 </div>
 Which test had the highest percentage of indeterminate results?
-<div id="radio_RJLCOIXYDX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RJLCOIXYDX" value="answer"> <span>IgM ELISA (for yellow fever detection)</span></label><label><input type="radio" autocomplete="off" name="radio_RJLCOIXYDX" value=""> <span>Stool Culture (for cholera detection)</span></label><label><input type="radio" autocomplete="off" name="radio_RJLCOIXYDX" value=""> <span>Blood culture (for typhoid fever detection)</span></label>
+<div id="radio_TOQXUTLNKI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TOQXUTLNKI" value="answer"> <span>IgM ELISA (for yellow fever detection)</span></label><label><input type="radio" autocomplete="off" name="radio_TOQXUTLNKI" value=""> <span>Stool Culture (for cholera detection)</span></label><label><input type="radio" autocomplete="off" name="radio_TOQXUTLNKI" value=""> <span>Blood culture (for typhoid fever detection)</span></label>
 </div>
 </div>
 </div>
@@ -1769,16 +1799,16 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which lab data frame should you use to count the number of suspected cases tested?
-<div id="radio_CXJZKTURZY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CXJZKTURZY" value=""> <span>data_lab_raw</span></label><label><input type="radio" autocomplete="off" name="radio_CXJZKTURZY" value="answer"> <span>data_lab_cases</span></label><label><input type="radio" autocomplete="off" name="radio_CXJZKTURZY" value=""> <span>data_lab_tests</span></label><label><input type="radio" autocomplete="off" name="radio_CXJZKTURZY" value=""> <span>data_lab</span></label>
+<div id="radio_OQUFXCYRWZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OQUFXCYRWZ" value=""> <span>data_lab_raw</span></label><label><input type="radio" autocomplete="off" name="radio_OQUFXCYRWZ" value="answer"> <span>data_lab_cases</span></label><label><input type="radio" autocomplete="off" name="radio_OQUFXCYRWZ" value=""> <span>data_lab_tests</span></label><label><input type="radio" autocomplete="off" name="radio_OQUFXCYRWZ" value=""> <span>data_lab</span></label>
 </div>
 How many suspected cases were tested in the 2024 lab data?
-<div id="radio_KKRWZZYHEF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KKRWZZYHEF" value="answer"> <span>858</span></label><label><input type="radio" autocomplete="off" name="radio_KKRWZZYHEF" value=""> <span>1314</span></label><label><input type="radio" autocomplete="off" name="radio_KKRWZZYHEF" value=""> <span>884</span></label>
+<div id="radio_ANMMPLFVDW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ANMMPLFVDW" value="answer"> <span>858</span></label><label><input type="radio" autocomplete="off" name="radio_ANMMPLFVDW" value=""> <span>1314</span></label><label><input type="radio" autocomplete="off" name="radio_ANMMPLFVDW" value=""> <span>884</span></label>
 </div>
 Are there more suspected cases in the notification data or the lab data?
-<div id="radio_WDWDIZTYGB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WDWDIZTYGB" value="answer"> <span>Notification data</span></label><label><input type="radio" autocomplete="off" name="radio_WDWDIZTYGB" value=""> <span>Lab data</span></label>
+<div id="radio_MUOECLWTEG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MUOECLWTEG" value="answer"> <span>Notification data</span></label><label><input type="radio" autocomplete="off" name="radio_MUOECLWTEG" value=""> <span>Lab data</span></label>
 </div>
 </div>
 </div>
@@ -1835,12 +1865,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which function is the correct approach if you want to retain all rows from your notification data and bring in results from your lab data?
-<div id="radio_BFMYUSOEPA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BFMYUSOEPA" value="answer"> <span>left_join(data_notif, data_lab_cases…</span></label><label><input type="radio" autocomplete="off" name="radio_BFMYUSOEPA" value=""> <span>full_join(data_notif, data_lab_cases…</span></label><label><input type="radio" autocomplete="off" name="radio_BFMYUSOEPA" value=""> <span>right_join(data_notif, data_lab_cases…</span></label>
+<div id="radio_XQQBCZAZIS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XQQBCZAZIS" value="answer"> <span>left_join(data_notif, data_lab_cases…</span></label><label><input type="radio" autocomplete="off" name="radio_XQQBCZAZIS" value=""> <span>full_join(data_notif, data_lab_cases…</span></label><label><input type="radio" autocomplete="off" name="radio_XQQBCZAZIS" value=""> <span>right_join(data_notif, data_lab_cases…</span></label>
 </div>
 What identifier should be used to link the two linelists?
-<div id="radio_YLJOUJEGNW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YLJOUJEGNW" value=""> <span>sample_id</span></label><label><input type="radio" autocomplete="off" name="radio_YLJOUJEGNW" value="answer"> <span>notification_id</span></label><label><input type="radio" autocomplete="off" name="radio_YLJOUJEGNW" value=""> <span>sample_id and date of report</span></label><label><input type="radio" autocomplete="off" name="radio_YLJOUJEGNW" value=""> <span>notification_id and date of report</span></label>
+<div id="radio_HYXTDQDEWN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HYXTDQDEWN" value=""> <span>sample_id</span></label><label><input type="radio" autocomplete="off" name="radio_HYXTDQDEWN" value="answer"> <span>notification_id</span></label><label><input type="radio" autocomplete="off" name="radio_HYXTDQDEWN" value=""> <span>sample_id and date of report</span></label><label><input type="radio" autocomplete="off" name="radio_HYXTDQDEWN" value=""> <span>notification_id and date of report</span></label>
 </div>
 </div>
 </div>
@@ -1883,32 +1913,32 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many rows are in your new <code>data_linked</code> data frame?
-<div id="radio_UUMPSFDXDA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UUMPSFDXDA" value="answer"> <span>987</span></label><label><input type="radio" autocomplete="off" name="radio_UUMPSFDXDA" value=""> <span>884</span></label><label><input type="radio" autocomplete="off" name="radio_UUMPSFDXDA" value=""> <span>858</span></label>
+<div id="radio_WGIOIEQABO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WGIOIEQABO" value="answer"> <span>987</span></label><label><input type="radio" autocomplete="off" name="radio_WGIOIEQABO" value=""> <span>884</span></label><label><input type="radio" autocomplete="off" name="radio_WGIOIEQABO" value=""> <span>858</span></label>
 </div>
 How does this compare to your original notification data?
-<div id="radio_PZKPFZOPUQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PZKPFZOPUQ" value=""> <span>more rows than the original</span></label><label><input type="radio" autocomplete="off" name="radio_PZKPFZOPUQ" value="answer"> <span>same number of rows</span></label><label><input type="radio" autocomplete="off" name="radio_PZKPFZOPUQ" value=""> <span>fewer rows</span></label>
+<div id="radio_GMEYCZGFUD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GMEYCZGFUD" value=""> <span>more rows than the original</span></label><label><input type="radio" autocomplete="off" name="radio_GMEYCZGFUD" value="answer"> <span>same number of rows</span></label><label><input type="radio" autocomplete="off" name="radio_GMEYCZGFUD" value=""> <span>fewer rows</span></label>
 </div>
 What term best describes the linkage you just did?
-<div id="radio_BSNJEZPVXO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BSNJEZPVXO" value=""> <span>many-to-one</span></label><label><input type="radio" autocomplete="off" name="radio_BSNJEZPVXO" value="answer"> <span>one-to-one</span></label><label><input type="radio" autocomplete="off" name="radio_BSNJEZPVXO" value=""> <span>many-to-many</span></label>
+<div id="radio_EMMQCJQIXH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EMMQCJQIXH" value=""> <span>many-to-one</span></label><label><input type="radio" autocomplete="off" name="radio_EMMQCJQIXH" value="answer"> <span>one-to-one</span></label><label><input type="radio" autocomplete="off" name="radio_EMMQCJQIXH" value=""> <span>many-to-many</span></label>
 </div>
 How many lab results were NOT linked (hint: <code>use anti-join()</code>)?
-<div id="radio_PNXATKJAIL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PNXATKJAIL" value=""> <span>30</span></label><label><input type="radio" autocomplete="off" name="radio_PNXATKJAIL" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_PNXATKJAIL" value="answer"> <span>0</span></label>
+<div id="radio_FPCNDNQUPB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FPCNDNQUPB" value=""> <span>30</span></label><label><input type="radio" autocomplete="off" name="radio_FPCNDNQUPB" value=""> <span>19</span></label><label><input type="radio" autocomplete="off" name="radio_FPCNDNQUPB" value="answer"> <span>0</span></label>
 </div>
 How fortunate are you that your linkage is so successful?
-<div id="radio_KUHFPDWLVB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KUHFPDWLVB" value=""> <span>What? Isn't all linkage this simple??</span></label><label><input type="radio" autocomplete="off" name="radio_KUHFPDWLVB" value="answer"> <span>Very! Usually some records don't match</span></label>
+<div id="radio_NGQGOXTJES" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NGQGOXTJES" value=""> <span>What? Isn't all linkage this simple??</span></label><label><input type="radio" autocomplete="off" name="radio_NGQGOXTJES" value="answer"> <span>Very! Usually some records don't match</span></label>
 </div>
 What are typical reasons that lab data doesn’t match to the notifiable diseases data?
-<div id="radio_TWJRPXKIPL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TWJRPXKIPL" value=""> <span>There are typos in the columns used for linkage, so they are not recognised as matching</span></label><label><input type="radio" autocomplete="off" name="radio_TWJRPXKIPL" value=""> <span>The lab data may contain additional cases from other clinics or countries</span></label><label><input type="radio" autocomplete="off" name="radio_TWJRPXKIPL" value=""> <span>The lab data may include test samples</span></label><label><input type="radio" autocomplete="off" name="radio_TWJRPXKIPL" value=""> <span>Notifications may have been accidentally missed in the surveillance data even though the sample was tested in the lab</span></label><label><input type="radio" autocomplete="off" name="radio_TWJRPXKIPL" value="answer"> <span>All of the above</span></label>
+<div id="radio_MMWMJMMNIR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MMWMJMMNIR" value=""> <span>There are typos in the columns used for linkage, so they are not recognised as matching</span></label><label><input type="radio" autocomplete="off" name="radio_MMWMJMMNIR" value=""> <span>The lab data may contain additional cases from other clinics or countries</span></label><label><input type="radio" autocomplete="off" name="radio_MMWMJMMNIR" value=""> <span>The lab data may include test samples</span></label><label><input type="radio" autocomplete="off" name="radio_MMWMJMMNIR" value=""> <span>Notifications may have been accidentally missed in the notification data even though the sample was tested in the lab</span></label><label><input type="radio" autocomplete="off" name="radio_MMWMJMMNIR" value="answer"> <span>All of the above</span></label>
 </div>
 How many suspected cases do not have a result?
-<div id="radio_RLUWCCUHWI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RLUWCCUHWI" value=""> <span>83</span></label><label><input type="radio" autocomplete="off" name="radio_RLUWCCUHWI" value=""> <span>100</span></label><label><input type="radio" autocomplete="off" name="radio_RLUWCCUHWI" value="answer"> <span>129</span></label>
+<div id="radio_PSKXWNDQTO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PSKXWNDQTO" value=""> <span>83</span></label><label><input type="radio" autocomplete="off" name="radio_PSKXWNDQTO" value=""> <span>100</span></label><label><input type="radio" autocomplete="off" name="radio_PSKXWNDQTO" value="answer"> <span>129</span></label>
 </div>
 </div>
 </div>
@@ -1925,7 +1955,7 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-44" class="callout-44-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Check the number of rows in each data frame with the <code>nrow()</code> function, or by checking the object information in your environment. You can see that this was simply a one-to-one merge, because each row had a unique notification_id, so one row in the notification data linked directly to one row in the lab data.</p>
+<p>Check the number of rows in each data frame with the <code>nrow()</code> function, or by checking the object information in your environment. You can see that this was simply a one-to-one merge, because each row had a unique <code>notification_id</code>, so one row in the notification data linked directly to one row in the lab data.</p>
 <p><strong>Number of rows in notification data</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(data_notif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1948,7 +1978,7 @@ Click to see the solution (try it yourself first!)
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
-<p>Finally, to check the number of notifications without a result, you can either conduct an anti_join in putting <code>data_notif</code> first:</p>
+<p>Finally, to check the number of notifications without a result, you can either conduct an <code>anti_join</code> in putting <code>data_notif</code> first:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(data_notif, data_lab_cases, </span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="st">"notification_id"</span>) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1994,8 +2024,8 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which is the most appropriate function for creating this new column?
-<div id="radio_JSDESUPQOU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JSDESUPQOU" value="answer"> <span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_JSDESUPQOU" value=""> <span>if_else()</span></label><label><input type="radio" autocomplete="off" name="radio_JSDESUPQOU" value=""> <span>case_match()</span></label>
+<div id="radio_JBVNUBGNQL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JBVNUBGNQL" value="answer"> <span>case_when()</span></label><label><input type="radio" autocomplete="off" name="radio_JBVNUBGNQL" value=""> <span>if_else()</span></label><label><input type="radio" autocomplete="off" name="radio_JBVNUBGNQL" value=""> <span>case_match()</span></label>
 </div>
 </div>
 </div>
@@ -2041,20 +2071,20 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 How many cases in the linked notification data did not have a positive or negative result?
-<div id="radio_FXJTWZICPQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FXJTWZICPQ" value="answer"> <span>202</span></label><label><input type="radio" autocomplete="off" name="radio_FXJTWZICPQ" value=""> <span>347</span></label><label><input type="radio" autocomplete="off" name="radio_FXJTWZICPQ" value=""> <span>250</span></label>
+<div id="radio_PMKNXIBGPH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PMKNXIBGPH" value="answer"> <span>202</span></label><label><input type="radio" autocomplete="off" name="radio_PMKNXIBGPH" value=""> <span>347</span></label><label><input type="radio" autocomplete="off" name="radio_PMKNXIBGPH" value=""> <span>250</span></label>
 </div>
 What percentage of cases in the notification data DID have a positive or negative result?
-<div id="radio_CWYGDXABKQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CWYGDXABKQ" value=""> <span>60.1%</span></label><label><input type="radio" autocomplete="off" name="radio_CWYGDXABKQ" value="answer"> <span>79.5%</span></label><label><input type="radio" autocomplete="off" name="radio_CWYGDXABKQ" value=""> <span>92.2%</span></label>
+<div id="radio_XCNENGVYSJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XCNENGVYSJ" value=""> <span>60.1%</span></label><label><input type="radio" autocomplete="off" name="radio_XCNENGVYSJ" value="answer"> <span>79.5%</span></label><label><input type="radio" autocomplete="off" name="radio_XCNENGVYSJ" value=""> <span>92.2%</span></label>
 </div>
 Why are there more remaining suspected cases than there are unlinked notifications?
-<div id="radio_BCSJQBJXAZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BCSJQBJXAZ" value="answer"> <span>Suspected cases include notifications without a lab result and with an indeterminate lab result</span></label><label><input type="radio" autocomplete="off" name="radio_BCSJQBJXAZ" value=""> <span>There are additional suspected cases being brought in from the lab</span></label><label><input type="radio" autocomplete="off" name="radio_BCSJQBJXAZ" value=""> <span>There is an issue with the data</span></label>
+<div id="radio_CQAKAVWLWZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CQAKAVWLWZ" value="answer"> <span>Suspected cases include notifications without a lab result and with an indeterminate lab result</span></label><label><input type="radio" autocomplete="off" name="radio_CQAKAVWLWZ" value=""> <span>There are additional suspected cases being brought in from the lab</span></label><label><input type="radio" autocomplete="off" name="radio_CQAKAVWLWZ" value=""> <span>There is an issue with the data</span></label>
 </div>
 Which disease had the highest percentage of cases that remained suspected after linkage?
-<div id="radio_CBIUQNDFYM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CBIUQNDFYM" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_CBIUQNDFYM" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_CBIUQNDFYM" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_CBIUQNDFYM" value="answer"> <span>Yellow fever</span></label>
+<div id="radio_CRSUNAUKFI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CRSUNAUKFI" value=""> <span>Cholera</span></label><label><input type="radio" autocomplete="off" name="radio_CRSUNAUKFI" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_CRSUNAUKFI" value=""> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_CRSUNAUKFI" value="answer"> <span>Yellow fever</span></label>
 </div>
 </div>
 </div>
@@ -2104,7 +2134,7 @@ Click to see the solution (try it yourself first!)
            dengue 68.1% (186) 10.6%  (29) 21.2%  (58) 100.0% (273)
           malaria 32.6% (174) 46.3% (247) 21.0% (112) 100.0% (533)
           typhoid 20.0%   (7) 68.6%  (24) 11.4%   (4) 100.0%  (35)
-     yellow_fever 33.0%  (33) 45.0%  (45) 22.0%  (22) 100.0% (100)
+     yellow fever 33.0%  (33) 45.0%  (45) 22.0%  (22) 100.0% (100)
             Total 44.4% (438) 35.2% (347) 20.5% (202) 100.0% (987)</code></pre>
 </div>
 </div>
@@ -2127,16 +2157,16 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 What percentage of suspected cases reported in 2024 were true cases, according to their test results?
-<div id="radio_UKKPRWQFLL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UKKPRWQFLL" value=""> <span>44%</span></label><label><input type="radio" autocomplete="off" name="radio_UKKPRWQFLL" value="answer"> <span>56%</span></label><label><input type="radio" autocomplete="off" name="radio_UKKPRWQFLL" value=""> <span>59%</span></label>
+<div id="radio_TPSATEWDQE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TPSATEWDQE" value=""> <span>44%</span></label><label><input type="radio" autocomplete="off" name="radio_TPSATEWDQE" value="answer"> <span>56%</span></label><label><input type="radio" autocomplete="off" name="radio_TPSATEWDQE" value=""> <span>59%</span></label>
 </div>
 What percentage of suspected malaria cases were really malaria?
-<div id="radio_BMNDHAYDWC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BMNDHAYDWC" value=""> <span>86%</span></label><label><input type="radio" autocomplete="off" name="radio_BMNDHAYDWC" value="answer"> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_BMNDHAYDWC" value=""> <span>23%</span></label>
+<div id="radio_UPUJHGVDPG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UPUJHGVDPG" value=""> <span>86%</span></label><label><input type="radio" autocomplete="off" name="radio_UPUJHGVDPG" value="answer"> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_UPUJHGVDPG" value=""> <span>23%</span></label>
 </div>
 What percentage of suspected dengue cases were really dengue?
-<div id="radio_CTYMVHSJZU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CTYMVHSJZU" value="answer"> <span>87%</span></label><label><input type="radio" autocomplete="off" name="radio_CTYMVHSJZU" value=""> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_CTYMVHSJZU" value=""> <span>23%</span></label>
+<div id="radio_CWVDIADHHZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CWVDIADHHZ" value="answer"> <span>87%</span></label><label><input type="radio" autocomplete="off" name="radio_CWVDIADHHZ" value=""> <span>41%</span></label><label><input type="radio" autocomplete="off" name="radio_CWVDIADHHZ" value=""> <span>23%</span></label>
 </div>
 </div>
 </div>
@@ -2185,7 +2215,7 @@ Click to see the solution (try it yourself first!)
            dengue 86.5% (186) 13.5%  (29) 100.0% (215)
           malaria 41.3% (174) 58.7% (247) 100.0% (421)
           typhoid 22.6%   (7) 77.4%  (24) 100.0%  (31)
-     yellow_fever 42.3%  (33) 57.7%  (45) 100.0%  (78)
+     yellow fever 42.3%  (33) 57.7%  (45) 100.0%  (78)
             Total 55.8% (438) 44.2% (347) 100.0% (785)</code></pre>
 </div>
 </div>
@@ -2210,16 +2240,16 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Why are we opting to report only confirmed cases in our surveillance data?
-<div id="radio_MQSLXKURRU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MQSLXKURRU" value="answer"> <span>Reporting confirmed cases can be more reliable and accurate when the percentage testing positive is low and lab testing is routine, thereby helping prevent over-estimation of disease burden</span></label><label><input type="radio" autocomplete="off" name="radio_MQSLXKURRU" value=""> <span>Reporting confirmed cases is slower, which gives us more time to be sure of what we are reporting</span></label><label><input type="radio" autocomplete="off" name="radio_MQSLXKURRU" value=""> <span>Because we want to hide the true number of cases</span></label>
+<div id="radio_SVTQQETXKN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SVTQQETXKN" value="answer"> <span>Reporting confirmed cases can be more reliable and accurate when the percentage testing positive is low and lab testing is routine, thereby helping prevent over-estimation of disease burden</span></label><label><input type="radio" autocomplete="off" name="radio_SVTQQETXKN" value=""> <span>Reporting confirmed cases is slower, which gives us more time to be sure of what we are reporting</span></label><label><input type="radio" autocomplete="off" name="radio_SVTQQETXKN" value=""> <span>Because we want to hide the true number of cases</span></label>
 </div>
 What function is important for creating the new linelist?
-<div id="radio_NUZPKHPICK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NUZPKHPICK" value="answer"> <span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_NUZPKHPICK" value=""> <span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_NUZPKHPICK" value=""> <span>mutate()</span></label>
+<div id="radio_SFSNKOKPKJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SFSNKOKPKJ" value="answer"> <span>filter()</span></label><label><input type="radio" autocomplete="off" name="radio_SFSNKOKPKJ" value=""> <span>arrange()</span></label><label><input type="radio" autocomplete="off" name="radio_SFSNKOKPKJ" value=""> <span>mutate()</span></label>
 </div>
 How many rows are in this new data frame?
-<div id="radio_ITTJAONNSR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ITTJAONNSR" value=""> <span>389</span></label><label><input type="radio" autocomplete="off" name="radio_ITTJAONNSR" value="answer"> <span>438</span></label><label><input type="radio" autocomplete="off" name="radio_ITTJAONNSR" value=""> <span>858</span></label>
+<div id="radio_PPAITIGDET" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PPAITIGDET" value=""> <span>389</span></label><label><input type="radio" autocomplete="off" name="radio_PPAITIGDET" value="answer"> <span>438</span></label><label><input type="radio" autocomplete="off" name="radio_PPAITIGDET" value=""> <span>858</span></label>
 </div>
 </div>
 </div>
@@ -2269,28 +2299,28 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Which notifiable disease was most commonly reported in 2024, when restricting to only confirmed cases?
-<div id="radio_DJWDCSEEPM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DJWDCSEEPM" value="answer"> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_DJWDCSEEPM" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_DJWDCSEEPM" value=""> <span>Yellow Fever</span></label>
+<div id="radio_RQWDYRSODC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RQWDYRSODC" value="answer"> <span>Dengue</span></label><label><input type="radio" autocomplete="off" name="radio_RQWDYRSODC" value=""> <span>Malaria</span></label><label><input type="radio" autocomplete="off" name="radio_RQWDYRSODC" value=""> <span>Yellow Fever</span></label>
 </div>
 Why is the most commonly reported disease different when looking at confirmed and suspected cases?
-<div id="radio_XXAOBTAWEL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XXAOBTAWEL" value=""> <span>The sensitivity and specificity of the clinical diagnosis may differ by disease</span></label><label><input type="radio" autocomplete="off" name="radio_XXAOBTAWEL" value=""> <span>The performance of the tests used in the lab may differ by disease</span></label><label><input type="radio" autocomplete="off" name="radio_XXAOBTAWEL" value=""> <span>There may be reporting biases</span></label><label><input type="radio" autocomplete="off" name="radio_XXAOBTAWEL" value="answer"> <span>All of the above!</span></label>
+<div id="radio_CNBQBNSBVL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CNBQBNSBVL" value=""> <span>The sensitivity and specificity of the clinical diagnosis may differ by disease</span></label><label><input type="radio" autocomplete="off" name="radio_CNBQBNSBVL" value=""> <span>The performance of the tests used in the lab may differ by disease</span></label><label><input type="radio" autocomplete="off" name="radio_CNBQBNSBVL" value=""> <span>There may be reporting biases</span></label><label><input type="radio" autocomplete="off" name="radio_CNBQBNSBVL" value="answer"> <span>All of the above!</span></label>
 </div>
 Which district reported the most confirmed cholera cases in 2024?
-<div id="radio_VNQAUMAERF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VNQAUMAERF" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_VNQAUMAERF" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_VNQAUMAERF" value=""> <span>Kasara</span></label>
+<div id="radio_UXAPVGOOGI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UXAPVGOOGI" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_UXAPVGOOGI" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_UXAPVGOOGI" value=""> <span>Kasara</span></label>
 </div>
 How many confirmed cases of cholera reported in 2024 were among residents of Feveria Central?
-<div id="radio_KQLMLTFTZM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KQLMLTFTZM" value="answer"> <span>35</span></label><label><input type="radio" autocomplete="off" name="radio_KQLMLTFTZM" value=""> <span>42</span></label><label><input type="radio" autocomplete="off" name="radio_KQLMLTFTZM" value=""> <span>4</span></label>
+<div id="radio_XXDODSYOEO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XXDODSYOEO" value="answer"> <span>35</span></label><label><input type="radio" autocomplete="off" name="radio_XXDODSYOEO" value=""> <span>42</span></label><label><input type="radio" autocomplete="off" name="radio_XXDODSYOEO" value=""> <span>4</span></label>
 </div>
 Which district reported the most confirmed malaria cases in 2024?
-<div id="radio_UYNRYNZJAC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UYNRYNZJAC" value="answer"> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_UYNRYNZJAC" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_UYNRYNZJAC" value=""> <span>Kasara</span></label>
+<div id="radio_NIWZXMJGED" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NIWZXMJGED" value="answer"> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_NIWZXMJGED" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_NIWZXMJGED" value=""> <span>Kasara</span></label>
 </div>
 Does this data confirm that dengue is the most common infectious disease in Feveria?
-<div id="radio_ISFXTWLEQF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ISFXTWLEQF" value="answer"> <span>No - a different disease may be under-reported and/or not notifiable</span></label><label><input type="radio" autocomplete="off" name="radio_ISFXTWLEQF" value=""> <span>Yes - if it's most reported then it must be most common</span></label>
+<div id="radio_ZJQZATSMAK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZJQZATSMAK" value="answer"> <span>No - a different disease may be under-reported and/or not notifiable</span></label><label><input type="radio" autocomplete="off" name="radio_ZJQZATSMAK" value=""> <span>Yes - if it's most reported then it must be most common</span></label>
 </div>
 </div>
 </div>
@@ -2317,7 +2347,7 @@ Click to see the solution (try it yourself first!)
            dengue 186 0.42465753
           malaria 174 0.39726027
           typhoid   7 0.01598174
-     yellow_fever  33 0.07534247</code></pre>
+     yellow fever  33 0.07534247</code></pre>
 </div>
 </div>
 <p>Note that this is different from the suspected cases, where malaria was most commonly reported (with 533 suspected cases)! This was hinted at previously, when you saw that the positivity rate for suspected dengue cases was higher than for suspected malaria cases. This can be for different reasons, for instance the clinical diagnosis method used for malaria may be less specific (so many of the suspected cases are actually other diseases), or the test used for dengue may be more sensitive.</p>
@@ -2335,7 +2365,7 @@ Click to see the solution (try it yourself first!)
            dengue       8.6% (16) 17.2% (32) 74.2% (138) 100.0% (186)
           malaria      14.9% (26) 22.4% (39) 62.6% (109) 100.0% (174)
           typhoid      71.4%  (5) 28.6%  (2)  0.0%   (0) 100.0%   (7)
-     yellow_fever       0.0%  (0) 18.2%  (6) 81.8%  (27) 100.0%  (33)
+     yellow fever       0.0%  (0) 18.2%  (6) 81.8%  (27) 100.0%  (33)
             Total      18.7% (82) 18.7% (82) 62.6% (274) 100.0% (438)</code></pre>
 </div>
 </div>
@@ -2353,7 +2383,7 @@ Click to see the solution (try it yourself first!)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="multi_disease_lab_files/figure-html/unnamed-chunk-91-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="multidisease_surveillance_files/figure-html/unnamed-chunk-91-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2373,12 +2403,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 When was the first case of typhoid fever reported in Feveria in 2024?
-<div id="radio_OIUMHOISZT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OIUMHOISZT" value=""> <span>January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_OIUMHOISZT" value="answer"> <span>May 2024</span></label><label><input type="radio" autocomplete="off" name="radio_OIUMHOISZT" value=""> <span>October 2024</span></label>
+<div id="radio_VHOHSYYHRB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VHOHSYYHRB" value=""> <span>January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_VHOHSYYHRB" value="answer"> <span>May 2024</span></label><label><input type="radio" autocomplete="off" name="radio_VHOHSYYHRB" value=""> <span>October 2024</span></label>
 </div>
 According to this graph, what was the highest number of dengue cases reported in a single week in 2024?
-<div id="radio_SXTROYNUPM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SXTROYNUPM" value=""> <span>10</span></label><label><input type="radio" autocomplete="off" name="radio_SXTROYNUPM" value=""> <span>20</span></label><label><input type="radio" autocomplete="off" name="radio_SXTROYNUPM" value=""> <span>30</span></label><label><input type="radio" autocomplete="off" name="radio_SXTROYNUPM" value="answer"> <span>It's very hard to tell from this stacked graph!</span></label>
+<div id="radio_HZXPPBJJTR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HZXPPBJJTR" value=""> <span>10</span></label><label><input type="radio" autocomplete="off" name="radio_HZXPPBJJTR" value=""> <span>20</span></label><label><input type="radio" autocomplete="off" name="radio_HZXPPBJJTR" value=""> <span>30</span></label><label><input type="radio" autocomplete="off" name="radio_HZXPPBJJTR" value="answer"> <span>It's very hard to tell from this stacked graph!</span></label>
 </div>
 </div>
 </div>
@@ -2403,7 +2433,7 @@ Click to see the solution (try it yourself first!)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="multi_disease_lab_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="multidisease_surveillance_files/figure-html/unnamed-chunk-93-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2429,12 +2459,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 According to this faceted graph, what was the highest number of dengue cases reported in a single week in 2024?
-<div id="radio_SVGQLXRARO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SVGQLXRARO" value=""> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_SVGQLXRARO" value="answer"> <span>15</span></label><label><input type="radio" autocomplete="off" name="radio_SVGQLXRARO" value=""> <span>29</span></label><label><input type="radio" autocomplete="off" name="radio_SVGQLXRARO" value=""> <span>I still can't tell!</span></label>
+<div id="radio_ACZGWESXVK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ACZGWESXVK" value=""> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_ACZGWESXVK" value="answer"> <span>15</span></label><label><input type="radio" autocomplete="off" name="radio_ACZGWESXVK" value=""> <span>29</span></label><label><input type="radio" autocomplete="off" name="radio_ACZGWESXVK" value=""> <span>I still can't tell!</span></label>
 </div>
 Among the dengue cases reported that week, what districts did they live in?
-<div id="radio_NFWYYVFOMY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NFWYYVFOMY" value=""> <span>All three districts</span></label><label><input type="radio" autocomplete="off" name="radio_NFWYYVFOMY" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_NFWYYVFOMY" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_NFWYYVFOMY" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_NFWYYVFOMY" value="answer"> <span>This graph does not show this information</span></label>
+<div id="radio_MPDCXWLHZX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MPDCXWLHZX" value=""> <span>All three districts</span></label><label><input type="radio" autocomplete="off" name="radio_MPDCXWLHZX" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_MPDCXWLHZX" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_MPDCXWLHZX" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_MPDCXWLHZX" value="answer"> <span>This graph does not show this information</span></label>
 </div>
 </div>
 </div>
@@ -2460,7 +2490,7 @@ Click to see the solution (try it yourself first!)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="multi_disease_lab_files/figure-html/unnamed-chunk-95-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="multidisease_surveillance_files/figure-html/unnamed-chunk-95-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2483,12 +2513,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Among the 15 dengue cases reported in one week in July 2024, what districts did they live in?
-<div id="radio_INZFBHCLTL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_INZFBHCLTL" value="answer"> <span>All three districts</span></label><label><input type="radio" autocomplete="off" name="radio_INZFBHCLTL" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_INZFBHCLTL" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_INZFBHCLTL" value=""> <span>Lake Minara</span></label>
+<div id="radio_RQXKCXZEAH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RQXKCXZEAH" value="answer"> <span>All three districts</span></label><label><input type="radio" autocomplete="off" name="radio_RQXKCXZEAH" value=""> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_RQXKCXZEAH" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_RQXKCXZEAH" value=""> <span>Lake Minara</span></label>
 </div>
 In what district was the first typhoid fever case reported in 2024?
-<div id="radio_CRRBHPOKPK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CRRBHPOKPK" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_CRRBHPOKPK" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_CRRBHPOKPK" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_CRRBHPOKPK" value=""> <span>I still can't tell!</span></label>
+<div id="radio_EAGBVOSCVU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EAGBVOSCVU" value=""> <span>Kasara</span></label><label><input type="radio" autocomplete="off" name="radio_EAGBVOSCVU" value="answer"> <span>Feveria Central</span></label><label><input type="radio" autocomplete="off" name="radio_EAGBVOSCVU" value=""> <span>Lake Minara</span></label><label><input type="radio" autocomplete="off" name="radio_EAGBVOSCVU" value=""> <span>I still can't tell!</span></label>
 </div>
 </div>
 </div>
@@ -2515,7 +2545,7 @@ Click to see the solution (try it yourself first!)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="multi_disease_lab_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="multidisease_surveillance_files/figure-html/unnamed-chunk-97-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2546,12 +2576,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 Do cholera and typhoid fever appear endemic?
-<div id="radio_YYBBRTNFJD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YYBBRTNFJD" value="answer"> <span>No - the data suggests smaller occasional outbreaks</span></label><label><input type="radio" autocomplete="off" name="radio_YYBBRTNFJD" value=""> <span>Yes they are both endemic</span></label>
+<div id="radio_LETOTGEWPL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LETOTGEWPL" value="answer"> <span>No - the data suggests smaller occasional outbreaks</span></label><label><input type="radio" autocomplete="off" name="radio_LETOTGEWPL" value=""> <span>Yes they are both endemic</span></label>
 </div>
 Is there a particular time of the year when malaria peaked in 2024?
-<div id="radio_IVOASBFILJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IVOASBFILJ" value=""> <span>Yes - around November/December time</span></label><label><input type="radio" autocomplete="off" name="radio_IVOASBFILJ" value="answer"> <span>Yes - around July/August (summer) time</span></label><label><input type="radio" autocomplete="off" name="radio_IVOASBFILJ" value=""> <span>No, it is consistently high</span></label>
+<div id="radio_NHLNGWODKR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NHLNGWODKR" value=""> <span>Yes - around November/December time</span></label><label><input type="radio" autocomplete="off" name="radio_NHLNGWODKR" value="answer"> <span>Yes - around July/August (summer) time</span></label><label><input type="radio" autocomplete="off" name="radio_NHLNGWODKR" value=""> <span>No, it is consistently high</span></label>
 </div>
 </div>
 </div>
@@ -2587,7 +2617,7 @@ Click to see the solution (try it yourself first!)
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="multi_disease_lab_files/figure-html/unnamed-chunk-99-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="multidisease_surveillance_files/figure-html/unnamed-chunk-99-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2613,12 +2643,12 @@ Questions
 <div class="callout-body-container callout-body">
 <div class="webex-check">
 When was the first dengue case reported in <strong>Feveria</strong> in 2024?
-<div id="radio_VQTPRWDPIZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VQTPRWDPIZ" value=""> <span>18th January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_VQTPRWDPIZ" value="answer"> <span>17th January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_VQTPRWDPIZ" value=""> <span>12th February 2024</span></label>
+<div id="radio_LEBVJTFEMQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LEBVJTFEMQ" value=""> <span>18th January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_LEBVJTFEMQ" value="answer"> <span>17th January 2024</span></label><label><input type="radio" autocomplete="off" name="radio_LEBVJTFEMQ" value=""> <span>12th February 2024</span></label>
 </div>
 When was the last dengue case reported in <strong>Feveria Central</strong> in 2024?
-<div id="radio_XFQLVYQUJA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XFQLVYQUJA" value="answer"> <span>22nd August 2024</span></label><label><input type="radio" autocomplete="off" name="radio_XFQLVYQUJA" value=""> <span>18th November 2024</span></label><label><input type="radio" autocomplete="off" name="radio_XFQLVYQUJA" value=""> <span>25th December 2024</span></label>
+<div id="radio_QRIJYZTEAI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QRIJYZTEAI" value="answer"> <span>22nd August 2024</span></label><label><input type="radio" autocomplete="off" name="radio_QRIJYZTEAI" value=""> <span>18th November 2024</span></label><label><input type="radio" autocomplete="off" name="radio_QRIJYZTEAI" value=""> <span>25th December 2024</span></label>
 </div>
 </div>
 </div>
@@ -2635,7 +2665,7 @@ Click to see the solution (try it yourself first!)
 </div>
 <div id="callout-65" class="callout-65-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Group the data by disease and then summarize the first and last date to look at the overall timeline of each disease in Feveria.</p>
+<p>Group the data by disease and then <code>summarize</code> the first and last date to look at the overall timeline of each disease in Feveria.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>data_linked_confirmed <span class="sc">|&gt;</span> </span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(disease_notified) <span class="sc">|&gt;</span> </span>
@@ -2650,7 +2680,7 @@ Click to see the solution (try it yourself first!)
 2 dengue           2024-01-17     2024-11-18   
 3 malaria          2024-01-08     2024-12-25   
 4 typhoid          2024-05-02     2024-11-07   
-5 yellow_fever     2024-03-08     2024-08-23   </code></pre>
+5 yellow fever     2024-03-08     2024-08-23   </code></pre>
 </div>
 </div>
 <p>Add a <code>filter()</code> to the code to look at first and most recent report dates for the district you’re interested in.</p>
@@ -2688,7 +2718,7 @@ Click to see the solution (try it yourself first!)
 <li><strong>How many suspected cases of the different notifiable diseases were reported in 2024, and which was most common?</strong> Malaria was the most common notifiable disease in Feveria in 2024, reported through the notifiable disease surveillance system: There were 533 suspected cases of malaria reported, 273 suspected cases of dengue, 100 yellow fever, 46 cholera, and 35 typhoid.</li>
 <li><strong>What percentage of them ended up being confirmed?</strong> Almost 80% of notifiable cases reported in 2024 had a laboratory test result by the time the linked dataset was created, with some variation by disease. In total, 56% of notified cases were eventually confirmed, but this ranged from only 23% for typhoid fever (7 confirmed of 31 suspected cases with test results), to 95% for cholera (38 confirmed of 40 suspected cases with rest results). Additionally, the positivity rate was higher for suspected dengue than for suspected malaria (87% vs 41%).</li>
 <li><strong>How many confirmed cases of different notifiable diseases were reported in 2024, and which was most common?</strong> Confirmed cases followed a slightly different trend to suspected cases: the most commonly reported infection was dengue with 186 cases, followed by malaria (174), then cholera (38), yellow fever (33), and typhoid fever (7).</li>
-<li><strong>How are confirmed cases geographically and temporally distributed in Feveria?</strong> Feveria experienced dengue and malaria transmission throughout the year, peaking in the summer, and concentrated in the Laka Minara district. Feveria also experienced small and infrequent outbreaks of diarrhoeal disease, e.g.&nbsp;cholera and typhoid fever, particularly in the urban Feveria Central where there can be issues with water and sanitation.</li>
+<li><strong>How are confirmed cases geographically and temporally distributed in Feveria?</strong> Feveria experienced dengue and malaria transmission throughout the year, peaking in the summer, and concentrated in the Lake Minara district. Feveria also experienced small and infrequent outbreaks of diarrhoeal disease, e.g.&nbsp;cholera and typhoid fever, particularly in the urban Feveria Central where there can be issues with water and sanitation.</li>
 </ul></li>
 <li><p>Finally, you have reflected on how the processes involved in notifiable disease surveillance systems and lab testing, for instance the transfer of data between clinics to labs, can affect data quality and completeness, and therefore your results.</p></li>
 </ol>
@@ -2881,10 +2911,10 @@ Code to clean and analyse notification data and lab data from Feveria, 2024
 </div>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 17%">
-<col style="width: 10%">
-<col style="width: 58%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
