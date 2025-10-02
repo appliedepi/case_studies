@@ -27,25 +27,16 @@ There are several ways to get help:
 
 1)  Look for the hints and solutions. They look like this:
 
-<details>
 
-<summary style="text-decoration: underline; color: darkgreen;">
-
-`r fontawesome::fa("lightbulb", fill = "gold")` Click to read a hint
-
-</summary>
+::: {.callout-tip collapse="true"}
+## Click to read a hint
 
 Here you will see a helpful hint!
 
-</details>
+:::
 
-<details>
-
-<summary style="text-decoration: underline; color: red;">
-
-`r fontawesome::fa("check", fill = "red")`Click to see the solution
-
-</summary>
+::: {.callout-caution icon="false" collapse="true"}
+## Click to see the solution (try it yourself first!)
 
 Here you will see the solution! It will typically be the actual code or technical answer required for the task. 
 
@@ -59,7 +50,11 @@ ebola_linelist %>%
   )
 ```
 
-</details>
+
+:::
+
+
+
 
 2)  Take a look at the [EpiRHandbook](https://www.epirhandbook.com/en/)
 3)  Post a question in [Applied Epi
