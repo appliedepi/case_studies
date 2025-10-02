@@ -53,7 +53,8 @@ table <- table_raw %>%
   # recode language and country 
   mutate(language = matchmaker::match_vec(language, 
                                                dictionary = ISOcodes::ISO_639_3, 
-                                               from = "Part1", to = curr_lang_iso3), 
+                                               from = "Part1", to = curr_lang_iso3),
+         language = sub("\\(.*", "", language), 
          country = toupper(country),
          country = matchmaker::match_vec(country, 
                                          dictionary = ISOcodes::ISO_3166_1, 
