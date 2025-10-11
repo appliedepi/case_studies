@@ -31,6 +31,8 @@ ainsi que les fonctions clés de tidyverse et de ggplots.
 **Source:** Applied Epi, avec le soutien technique du CDC Global
 Surveillance, Laboratory, and Data Systems Branch en collaboration avec
 TEPHINET.
+
+**Durée estimée:** 4 heures
 :::
 
 Pour savoir comment utiliser nos études de cas, consultez notre site web
@@ -3069,7 +3071,7 @@ Branch en collaboration avec TEPHINET.
 :::
 
 | Date | Modifications apportées | Version | Auteur |
-|---------|:--------|--------:|----------------------------------------------|
+|------------|:-----------|-----------:|-------------------------------------|
 | Juillet 2025 | Première version | 1 | Paula Blomquist et Alanah Jansen, Applied Epi, avec le soutien technique du CDC Global Surveillance, Laboratory, and Data Systems Branch en collaboration avec TEPHINET. |
 | Août 2025 | Traduction française | 1 | Laurent LeHot et Olivia Boyd |
 

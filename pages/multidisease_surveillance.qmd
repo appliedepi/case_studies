@@ -2922,6 +2922,8 @@ support provided by the CDC Global Surveillance, Laboratory, and Data
 Systems Branch in collaboration with TEPHINET.
 
 **Data source**: Fictional data provided by Applied Epi.
+
+**Estimated duration:** 4 hours
 :::
 
 | Date | Changes made | Version | Author |
