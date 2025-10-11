@@ -24,6 +24,8 @@ basics](https://epirhandbook.com/en/basics.html) (Using
 Rstudio; R packages, functions and arguments, using pipes)
 
 **Source:** European Centre for Disease Prevention and Control Epidemic Intelligence Group (simulated data)
+
+**Estimated duration:** 2 hours
 :::
 
 For instructions on how to use our case studies, see our [How-to
