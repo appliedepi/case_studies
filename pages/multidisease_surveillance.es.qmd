@@ -31,6 +31,8 @@ funciones clave de tidyverse y ggplot2.
 **Fuente:** Applied Epi, con el apoyo técnico de la Subdivisión de
 Vigilancia Mundial, Laboratorios y Sistemas de Datos de los CDC, en
 colaboración con TEPHINET.
+
+**Duración estimada:** 4 horas
 :::
 
 Para obtener instrucciones sobre cómo utilizar nuestros estudios de

@@ -31,6 +31,8 @@ principais funções tidyverse e ggplots)
 **Fonte:** Applied Epi, com apoio técnico fornecido pelo CDC Global
 Surveillance, Laboratory, and Data Systems Branch em colaboração com a
 TEPHINET.
+
+**Duração estimada:** 4 horas
 :::
 
 Para obter instruções sobre como utilizar os nossos estudos de caso,
