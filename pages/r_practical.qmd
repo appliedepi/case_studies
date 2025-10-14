@@ -17,12 +17,15 @@ editor:
 # Descriptive analysis of the 2022 Mpox outbreak in Europe {#sec-rpractical}
 
 ::: {.callout-note appearance="minimal" icon="false"}
-**Tool**: R \| **Technical complexity**: Basic \| **Methodological
-complexity**: Basic\
-**Source:** ECDC EI Group (simulated data)\
+**Tool**: R  **Technical complexity**: Basic    **Methodological complexity**: Basic
+
 **Prior knowledge required:** [R
-basics](https://epirhandbook.com/en/new_pages/basics.html) (Using
+basics](https://epirhandbook.com/en/basics.html) (Using
 Rstudio; R packages, functions and arguments, using pipes)
+
+**Source:** European Centre for Disease Prevention and Control Epidemic Intelligence Group (simulated data)
+
+**Estimated duration:** 2 hours
 :::
 
 For instructions on how to use our case studies, see our [How-to
@@ -95,7 +98,7 @@ Create a folder (e.g. 'mpox_analysis' on your Desktop) for your work. To
 create an Rstudio project in your new folder, click `New Project…` in
 the top left of your R Studio, then `Existing Directory`, then `Browse`
 to select your new folder. For more information, look at the [R
-projects](https://epirhandbook.com/new_pages/r_projects.html) section of
+projects](https://epirhandbook.com/r_projects.html) section of
 the Epi R Handbook.
 
 Start a new R script by clicking `New File…` in the top left of your R
@@ -204,9 +207,9 @@ remotes::install_github("appliedepi/appliedepidata")
 
 2)  Save the two datasets into a specific folder using the `save_data()`
     function from `{appliedepidata}`, by running the code below. The
-    example below saves the data into a 'data' subfolder within the
+    example below saves the data into a `data` subfolder within the
     RStudio project. Note that if you do not specify a location within
-    the 'path' argument of the function, a window will pop up asking you
+    the `path` argument of the function, a window will pop up asking you
     to manually select a folder.
 
 ```{r , echo=TRUE, eval=FALSE}
@@ -236,8 +239,8 @@ are specific to the file type, such as `read.csv()` from `{base}` for
 .csv files and `read_excel()` from `{readxl}` to import .xlsx files.
 
 If you feel you need to know more about importing functions, read the
-[Import and export](https://epirhandbook.com/new_pages/importing.html)
-chapter of the EpiRhandbook.
+[Import and export](https://epirhandbook.com/importing.html)
+chapter of the Epi R Handbook.
 
 :::
 
@@ -351,7 +354,7 @@ missing clinical information and that many cases have a mix of symptoms.
 
 ```{r , echo=TRUE}
 
-tabyl(mpox_linelist_raw, HIVStatus)  
+tabyl(mpox_linelist_raw, ClinicalSymptoms)  
 ```
 
 You can explore further columns one by one (results not shown):
@@ -360,7 +363,7 @@ You can explore further columns one by one (results not shown):
 # Explore the values of different categorical columns in the mpox linelist: with tabyl
 tabyl(mpox_linelist_raw, Gender)
 
-tabyl(mpox_linelist_raw, ClinicalSymptoms)
+tabyl(mpox_linelist_raw, HIVStatus)
 
 tabyl(mpox_linelist_raw, Outcome)
 
@@ -390,7 +393,7 @@ later.
 **Test yourself!**
 
 ::: webex-check
-```{r, results="asis", echo=FALSE}
+```{r, eval=T, include=T, results="asis", echo=FALSE}
 pacman::p_load(webexercises)
 
 opts <- c(
@@ -428,7 +431,7 @@ opts <- c(
 )
 
 
-cat("For how many cases is the HIV status Unknown or missing?", longmcq(opts))
+cat("For how many cases is the HIV status unknown or missing?", longmcq(opts))
 
 ```
 :::
@@ -482,18 +485,18 @@ Use `{lubridate}` functions to transform date columns into "Date" class.
 You can do this one by one, or you could do all at the same time using
 the `across()` function from `{dplyr}.` If you feel you need to know
 more about transforming dates read the chapter [Working with
-Dates](https://epirhandbook.com/en/new_pages/dates.html) from the
-EpiRhandbook. If you are not sure how to use the across() function, you
+Dates](https://epirhandbook.com/en/dates.html) from the
+Epi R Handbook. If you are not sure how to use the across() function, you
 can also read the section on [Transform multiple
-columns](https://epirhandbook.com/en/new_pages/cleaning.html#clean_across).
+columns](https://epirhandbook.com/en/cleaning.html#clean_across).
 
 There are different functions that we can use to recode values. We
 propose three: The function `recode()` from `{dplyr}`, the function
 `ifelse()` from `{base}` and the function `case_when()` from `{dplyr}`.
 If you want to know more about these functions, look that the section on
 [Re-code
-values](https://epirhandbook.com/en/new_pages/cleaning.html#re-code-values)
-from the EpiRhandbook.
+values](https://epirhandbook.com/en/cleaning.html#re-code-values)
+from the Epi R Handbook.
 
 :::
 
@@ -501,7 +504,7 @@ from the EpiRhandbook.
 ## Click to see the solution (try it yourself first!)
 
 Here we clean the data using a 'chain' of commands connected by pipes
-(%>%), which is the grammar of the functions in the {Tidyverse}. The
+(%>%), which is the grammar of the functions in the `{Tidyverse}`. The
 output is assigned to a new object called mpox_linelist to differentiate
 it from the raw data. It can be helpful to have both the cleaned and raw
 data available in the environment to compare to the original data if
@@ -547,9 +550,9 @@ mpox_linelist <- mpox_linelist_raw %>%
 ```
 
 You can then review your data by tabulating across all the different
-columns you have cleaned. See the preview of the HIV table below - it
+columns you have cleaned. See the preview of the `hiv_status` table below - it
 looks tidier now with more understandable categories, and all missing
-data is classified as 'Unknown'.
+data is classified as 'unknown'.
 
 ```{r , echo=TRUE, results = 'hide'}
 
@@ -625,7 +628,7 @@ pacman::p_load(webexercises)
 
 opts <- c(
   answer = "1405",
-  "None",
+  "0",
   "595"
 )
 
@@ -712,8 +715,8 @@ Now we’re getting to the heart of the investigation. Who is affected? Which lo
 ## Click to read a hint
 
 You could use `tabyl()` like before, but an easy way to produce
-publication-ready tables is with the function tbl_summary() from
-{gtsummary} package. This formats the table for you. It will print to
+publication-ready tables is with the function `tbl_summary()` from
+`{gtsummary}` package. This formats the table for you. It will print to
 your Viewer rather than the console.
 
 :::
@@ -781,16 +784,16 @@ function `floor_date()` from `{lubridate}`. Take a look at the
 documentation to understand how it works and how to pick the starting day of the week.
 
 To create the epicurve, you can use `ggplot()` and `geom_bar()`, which visualizes the number of rows within a group - e.g. number of cases per week. To compare trends in different countries, consider using the `facet_wrap()` function. If you are unsure on how
-`ggplot()` works, read the EpiRhandbook chapter on [Epidemic
-curves](https://epirhandbook.com/en/new_pages/epicurves.html).
+`ggplot()` works, read the Epi R Handbook chapter on [Epidemic
+curves](https://epirhandbook.com/en/epicurves.html).
 
 To create a heatmap, you will need to create a table of counts by country and
 week of notification. You can do this using the functions `group_by()` and
 `summarise()` from `{dplyr}`. If you are unsure on how to do this, review
-the Grouping data chapter of the EpiRhandbook. Then, use the geom
-geom_tile() to create a heat plot. If you're unsure on how to do this,
+the Grouping data chapter of the Epi R Handbook. Then, use the geom
+`geom_tile()` to create a heat plot. If you're unsure on how to do this,
 read the EpiRhanbook section on [Heat
-Plots](https://epirhandbook.com/en/new_pages/heatmaps.html)
+Plots](https://epirhandbook.com/en/heatmaps.html)
 
 :::
 
@@ -836,7 +839,7 @@ epicurve_mpox
 
 To examine how the outbreak spread by country, add `facet_wrap()` to your ggplot code. This splits the graph into multiple smaller ones. As shown below, you can even simply add the function to the national epicurve object.
 
-An alternative approach would be to create a stacked epicurve, i.e. retain the single epicurve but split each bar into colors per country. You would do this by adding `fill = country` to the aes() in the epicurve code. However, we don't recommend this for comparing trends, as stacked bars make it harder to see individual patterns.
+An alternative approach would be to create a stacked epicurve, i.e. retain the single epicurve but split each bar into colors per country. You would do this by adding `fill = country` to the `aes()` in the epicurve code. However, we don't recommend this for comparing trends, as stacked bars make it harder to see individual patterns.
 
 ```{r , echo=TRUE}
 epicurve_epox_country <- epicurve_mpox + 
@@ -849,7 +852,7 @@ epicurve_epox_country <- epicurve_mpox +
 epicurve_epox_country
 ```
 
-Finally, if you want to demonstrate this as a weekly heatmap, you can use geom_tile(). First, aggregate the data by week. Then pipe into a ggplot(), as shown below.
+Finally, if you want to demonstrate this as a weekly heatmap, you can use `geom_tile()`. First, aggregate the data by week. Then pipe into a `ggplot()`, as shown below.
 
 ```{r , echo=TRUE}
 
@@ -910,11 +913,11 @@ Next, describe the age, gender, and sexual orientation of cases. What is interes
 ::: {.callout-tip collapse="true"}
 ## Click to read a hint
 
-To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function tbl_summary() from {gtsummary}.
+To quickly create a presentation-ready table showing the breakdowns for three different columns, consider using the function `tbl_summary()` from `{gtsummary}`.
 
 To create an age-gender pyramid, first create a new column with the function `age_categories()`
-from the `{epikit}` package. Then explore the function age_pyramid() from the {apyramid} package.You can find more about this function in the EpiRhandbook chapter [Demographic pyramids and
-Likert-scales](https://epirhandbook.com/en/new_pages/age_pyramid.html)
+from the `{epikit}` package. Then explore the function `age_pyramid()` from the `{apyramid}` package.You can find more about this function in the Epi R Handbook chapter [Demographic pyramids and
+Likert-scales](https://epirhandbook.com/en/age_pyramid.html)
 
 :::
 
@@ -1079,8 +1082,8 @@ from "wide" to "long" form. What we call "pivoting" in R. The objective
 is to have a column with the different date categories (onset, diagnosis
 and notification) and another column with their date value. If you are
 unsure on how to do this, have a look at the [Pivoting
-data](https://epirhandbook.com/en/new_pages/pivoting.html) chapter of
-the EpiRhandbook. Then, try to plot with the daily values, but if that's
+data](https://epirhandbook.com/en/pivoting.html) chapter of
+the Epi R Handbook. Then, try to plot with the daily values, but if that's
 not easy to interpret you may want to aggregate cases by week.
 
 :::
@@ -1131,7 +1134,7 @@ summary(delay_db$delay_diag)
 summary(delay_db$delay_not)
 ```
 
-Use group_by() and summarize() to create a table with median delays per country. 
+Use `group_by()` and `summarize()` to create a table with median delays per country. 
 
 ```{r , echo=TRUE}
 delay_country <- delay_db %>% 
@@ -1228,9 +1231,9 @@ plot_date_delay
 
 ### 6.2: Compare case-based and aggregated data
 
-Finally, you remember that all-along you've had these aggregate counts from routine surveillance. You find out that these numbers are actually already being published.
+Finally, you remember that all along you've had these aggregate counts from routine surveillance. You find out that these numbers are actually already being published.
 
-Before you share your own numbers, you'd better check how different they are from already-published statistics!
+Before you share your own numbers, you'd better check how different they are from already published statistics!
 
 **Task**: Create a plot comparing the number of cases reported to
 through the case-based flow and through the aggregated flow in each country.
@@ -1339,7 +1342,7 @@ Interesting! There are some differences - and this probably will be worth flaggi
 
 :::
 
-## Final thoughts
+## Conclusion
 
 Well done! Through your analysis you now understand the magnitude of the outbreak so far, where and when it spread, which demographic groups are most affected, and how the disease actually manifests in terms of symptoms and severity. ECDC is very happy with your work.
 
@@ -1348,16 +1351,15 @@ By coding this up in R, this analysis should be reproducible, meaning you can qu
 Of course, the above data is not real. If you want to see a paper on the actual outbreak that occured in Europe in 2022, you can take a look at this [Eurosurveillance paper](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2022.27.36.2200620). This [ECDC page on Mpox](https://www.ecdc.europa.eu/en/mpox) also publishes updates on the status of mpox in Europe. 
 
 
-To further practise reproducible reports, \[link to
-RMarkdown\].
+To further practise reproducible reports, see the [Reports with R Markdown](https://epirhandbook.com/en/new_pages/rmarkdown.html) chapter in the Epi R Handbook.
 
 ## Case study information
 
-**Authorship**
+::: {.callout-note appearance="minimal" icon="false"}
+**Original authors:** Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)
 
-Original authors: Xanthi Andrianou, Gianfranco Spiteri (ECDC EI Group)\
-Data source: Fictional data provided by ECDC EI Group for training
-purposes\
+**Data source:** Fictional data provided by European Centre for Disease Prevention and Control Epidemic Intelligence (ECDC EI) Group for training purposes
+:::
 
 | Date         | Changes made                   | Version | Author                 |
 |------------------|:------------------|-----------------:|------------------|
@@ -1366,5 +1368,7 @@ purposes\
 | September 2024    | Revise for case study repository |     1.2 | Paula Blomquist and Alanah Jansen |
 
 ## Terms of Use
+
+**Disclaimer**: The information presented in this exercise and the associated data files have been developed to help learners achieve the intended learning objectives. 
 
 **License**: This case study is under a derivation of the [CC BY-SA 3.0 license](https://github.com/appliedepi/case_studies/tree/master/licenses/r_practical_LICENSE.md)
