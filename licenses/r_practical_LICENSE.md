@@ -1,8 +1,7 @@
 The information presented in this exercise and the
 associated data files have been deliberately changed so as to facilitate
 the acquisition of the learning objectives for fellows of EPIET, EUPHEM
-and EPIET-associated programmes. This case study was first introduced in
-2022 (see Copyright and Licence agreement for more information).
+and EPIET-associated programmes. See Copyright and Licence agreement for more information.
 
 You are free:
 
