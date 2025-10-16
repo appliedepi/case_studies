@@ -25,7 +25,7 @@ project:
     - pages/multidisease_surveillance.pt.qmd
 
 website:
-  title: "Applied Epi Open Case Study Repository"
+  title: "Applied Epi Case Study Repository"
   navbar:
     left:
       - href: index.qmd
